@@ -1,1 +1,1 @@
-  export const fileRouter = require('./rollup-plugin-filerouter')
+module.exports.fileRouter = require('./rollup-plugin-filerouter')

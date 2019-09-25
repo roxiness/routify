@@ -29,12 +29,16 @@ async function getFiles(absoluteDir, extensions, _path = '', _nested = false, la
     const files = await fs.readdirSync(absoluteDir)
     const sortedFiles = moveToFront(files, ['_layout.svelte'])
     await asyncForEach(sortedFiles, async filename => {
+
+
         const _filepath = path.resolve(absoluteDir + '/' + filename)
         const isDir = await fs.statSync(_filepath).isDirectory()
-
         const [noExtName, ext] = splitString(filename, '.')
+
         const isLayout = noExtName === '_layout'
         const filepath = _path + '/' + filename
+
+        if (!isLayout && filename.match(/^_/)) return //skip underscore prefixed files that aren't layout
 
         if (isLayout) layouts.push(filepath)
 
