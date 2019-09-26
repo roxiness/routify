@@ -38,6 +38,8 @@ fileRouter accepters the following parameters:
 
 ``pages: path/to/pages`` (defaults to ./src/pages)
 
+``ignore: ['ignoreme'] (can be string or array. Interpreted as regular expression)
+
 
 ## Guide
 
