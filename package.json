@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "svelte": "src/Router.svelte",
+    "svelte": "src/components.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jakobrosenberg/svelte-filerouter.git"

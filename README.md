@@ -16,7 +16,7 @@
 <!--App.svelte-->
 
 <script>
-    import Router from "svelte-filerouter";
+    import { Router } from "svelte-filerouter";
 </script>
 
 <Router />
