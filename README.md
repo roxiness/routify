@@ -1,4 +1,4 @@
-# svelte-filerouter [WiP]
+# svelte-filerouter
 
 ###### Minimalist file router inspired by [Sapper router.](https://sapper.svelte.dev/docs#File_naming_rules)
 
@@ -62,3 +62,6 @@ Layout files are named ``_layout.svelte`` and apply to all adjacent and nested s
 <div>Business: {route.params.business}</div>
 <div>Project: {route.params.project}</div>
 ```
+
+## Issues
+Feel free to open an issue or a pull request, if there's anything you think could be improved.
