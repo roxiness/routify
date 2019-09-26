@@ -4,17 +4,18 @@ const fs = require('fs')
 
 const MATCH_BRACKETS = RegExp(/\[[^\[\]]+\]/g);
 
-module.exports = async function filesToRoutes(path) {
-    const files = await getFiles(path, ['html', 'svelte'])
+module.exports = async function filesToRoutes({ pages, ignore }) {
+    ignore = Array.isArray(ignore) ? ignore : [ignore]
+    const files = await getFiles(pages, ['html', 'svelte'], ignore)
     const routes = _filesToRoutes(files)
 
-    let lines = routes.map(route => `import ${route.component} from './pages${route.filepath}'`)
+    let lines = routes.map(route => `import ${route.component} from './src/pages${route.filepath}'`)
 
     routes.forEach(route => delete route.filepath)
     routes.forEach(route => delete route.isLayout)
 
     lines.push(
-        `\n\n const __routes = [`,
+        `\n\n export const routes = [`,
         routes
         .filter(r => r.name) //layouts don't have names
         .map(f => partialStringify(f, ['component', 'layouts']))
@@ -24,11 +25,13 @@ module.exports = async function filesToRoutes(path) {
     return lines.join("\n")
 }
 
-async function getFiles(absoluteDir, extensions, _path = '', _nested = false, layouts = []) {
+async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = false, layouts = []) {
     const list = []
     const files = await fs.readdirSync(absoluteDir)
     const sortedFiles = moveToFront(files, ['_layout.svelte'])
     await asyncForEach(sortedFiles, async filename => {
+        const ignoreFile = ignore.filter(ignoreStr => filename.match(ignoreStr)).length
+        if (ignoreFile) return;
 
 
         const _filepath = path.resolve(absoluteDir + '/' + filename)
@@ -43,7 +46,7 @@ async function getFiles(absoluteDir, extensions, _path = '', _nested = false, la
         if (isLayout) layouts.push(filepath)
 
         if (isDir) {
-            const nestedList = await getFiles(_filepath, extensions, filepath, true, [...layouts])
+            const nestedList = await getFiles(_filepath, extensions, ignore, filepath, true, [...layouts])
             list.push(...nestedList)
         }
 
