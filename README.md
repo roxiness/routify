@@ -32,6 +32,11 @@ import { fileRouter } from 'svelte-filerouter'
 ...
 
 ```
+fileRouter takes the following options:
+
+``appFile: path/to/App.svelte`` (defaults to ./src/App.svelte)
+
+``pages: path/to/pages`` (defaults to ./src/pages)
 
 
 ## Guide
