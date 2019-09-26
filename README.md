@@ -32,7 +32,7 @@ import { fileRouter } from 'svelte-filerouter'
 ...
 
 ```
-fileRouter takes the following options:
+fileRouter accepters the following parameters:
 
 ``appFile: path/to/App.svelte`` (defaults to ./src/App.svelte)
 
