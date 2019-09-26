@@ -65,7 +65,7 @@ Layout files are named ``_layout.svelte`` and apply to all adjacent and nested s
 ```
 
 ## Notes
-- <a href="my/path"> tags are handled by svelte-router
+- ``<a href="my/path">`` tags are handled by svelte-router
 
 ## Roadmap
 - ``<link path="pathname" params={params}>`` or similar for normalized link handling. As well as helper script to generate url from pathname and parameters.
