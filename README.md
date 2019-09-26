@@ -58,7 +58,7 @@ Layout files are named ``_layout.svelte`` and apply to all adjacent and nested s
 #### Accessing route and parameters
 
 ```html
-<!-- src/pages/admin/[business]/[project]-->
+<!-- src/pages/admin/[business]/[project].svelte-->
 <script>
 	export let route
 </script>
