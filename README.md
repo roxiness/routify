@@ -34,11 +34,11 @@ import { fileRouter } from 'svelte-filerouter'
 ```
 fileRouter accepters the following parameters:
 
-``appFile: path/to/App.svelte`` (defaults to ./src/App.svelte)
+``appFile: path/to/App.svelte`` (Defaults to ./src/App.svelte)
 
-``pages: path/to/pages`` (defaults to ./src/pages)
+``pages: path/to/pages`` (Defaults to ./src/pages)
 
-``ignore: ['ignoreme'] (can be string or array. Interpreted as regular expression)
+``ignore: ['ignoreme']`` (Files and dirs. Can be string or array. Interpreted as regular expression)
 
 
 ## Guide
