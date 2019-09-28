@@ -9,6 +9,8 @@ module.exports = async function filesToRoutes({ pages, ignore }) {
     const files = await getFiles(pages, ['html', 'svelte'], ignore)
     const routes = _filesToRoutes(files)
 
+    if (!routes.length) console.log('no routes found in ' + pages)
+
     let lines = routes.map(route => `import ${route.component} from './src/pages${route.filepath}'`)
 
     routes.forEach(route => delete route.filepath)
