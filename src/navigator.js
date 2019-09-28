@@ -1,5 +1,5 @@
+const store = require('./store')
 module.exports = function(routes, cb) {
-
     addEventListener('popstate', updatePage);
     addEventListener('replacestate', updatePage);
     addEventListener('pushstate', updatePage);
@@ -41,6 +41,11 @@ module.exports = function(routes, cb) {
         }
 
         route = { ...route, params };
+
+        //set the route in the store
+        store.route.set(route)
+
+        //run callback from Router.svelte
         cb({ components, route })
     }
     updatePage()

@@ -58,6 +58,7 @@ fileRouter accepters the following parameters:
 Layout files are named ``_layout.svelte`` and apply to all adjacent and nested svelte files. A file can have multiple layouts if multiple layouts are recursively present in parent folders.
 
 #### Accessing route and parameters
+Both examples below are reactive
 
 ```html
 <!-- src/pages/admin/[business]/[project].svelte-->
@@ -70,6 +71,23 @@ Layout files are named ``_layout.svelte`` and apply to all adjacent and nested s
 <div>Business: {route.params.business}</div>
 <div>Project: {route.params.project}</div>
 ```
+
+```html
+<!-- alternatively, the current route can also imported as a store object -->
+<script>
+    import { route } from "svelte-filerouter";
+    $: params = $route.params;
+</script>
+
+<a href="my/path">go somewhere</a>
+
+<div>Business: {$route.params.business}</div>
+<div>Project: {$route.params.project}</div>
+```
+
+
+``route`` can also be imported from this package
+
 
 ## Notes
 - ``<a href="my/path">`` tags are handled by svelte-router
