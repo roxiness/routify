@@ -85,8 +85,28 @@ Both examples below are reactive
 <div>Project: {$route.params.project}</div>
 ```
 
+## Props
+Props can be passed through the ``scopes`` prop.
+```html
+<!-- src/pages/posts/_layout.svelte -->
+<script>
+    import posts from posts.js
+    export let route;
+    $: { postId } = route.params;
+    $: post = posts[postId]
+</script>
+<slot scoped={{post}} />
+```
+Props passed through ``scopes`` are available to all nested components served by the router. Props can be accessed directly or through the ``scoped`` prop.
+```html
+<!-- src/pages/posts/[postId]/index.svelte -->
+<script>
+    export let post
+</script>
+<h1>{post.title}</h1>
+<div>{body}</div>
+```
 
-``route`` can also be imported from this package
 
 
 ## Notes
