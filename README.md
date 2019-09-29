@@ -107,7 +107,8 @@ Props passed through ``scopes`` are available to all nested components served by
 <div>{body}</div>
 ```
 
-
+## Examples
+https://github.com/jakobrosenberg/svelte-filerouter-example
 
 ## Notes
 - ``<a href="my/path">`` tags are handled by svelte-router
