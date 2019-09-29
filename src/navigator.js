@@ -40,12 +40,12 @@ module.exports = function(routes, cb) {
             });
         }
 
-        route = { ...route, params };
+        route.params = params
 
         //set the route in the store
         store.route.set(route)
 
-        //run callback from Router.svelte
+        //run callback in Router.svelte
         cb({ components, route })
     }
     updatePage()

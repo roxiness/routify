@@ -1,8 +1,10 @@
 <script>
   export let components = [];
   export let route;
-  export let parentScope = {};
-  let layoutScope = {};
+  export let rootScope = {};
+  export let layoutScope = {};
+
+  rootScope = Object.assign({}, layoutScope, rootScope);
 
   $: component = components.shift();
 
@@ -20,13 +22,10 @@
   this={component}
   {route}
   let:scoped={layoutScope}
-  scoped={parentScope}
-  {...parentScope}
+  scoped={rootScope}
+  {...rootScope}
   }>
   {#if components.length && isObject(layoutScope)}
-    <svelte:self
-      {components}
-      {route}
-      parentScope={{ ...layoutScope, ...parentScope }} />
+    <svelte:self {components} {route} {layoutScope} {rootScope} />
   {/if}
 </svelte:component>
