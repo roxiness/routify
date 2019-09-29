@@ -85,7 +85,7 @@ Both examples below are reactive
 <div>Project: {$route.params.project}</div>
 ```
 
-## Props
+### Props
 Props can be passed through the ``scopes`` prop.
 ```html
 <!-- src/pages/posts/_layout.svelte -->
