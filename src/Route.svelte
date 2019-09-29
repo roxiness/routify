@@ -4,9 +4,10 @@
   export let rootScope = {};
   export let layoutScope = {};
 
-  rootScope = Object.assign({}, layoutScope, rootScope);
+  $: rootScope = Object.assign({}, rootScope, layoutScope);
 
   $: component = components.shift();
+  $: components = components.slice(0); //clone or components starts disappearing on every layoutScope update
 
   function isObject(obj) {
     const isObj = Object.prototype.toString.call(obj) === "[object Object]";
