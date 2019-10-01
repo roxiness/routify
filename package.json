@@ -16,5 +16,8 @@
     "bugs": {
         "url": "https://github.com/jakobrosenberg/svelte-filerouter/issues"
     },
-    "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme"
+    "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme",
+    "devDependencies": {
+        "rollup-pluginutils": "^2.8.2"
+    }
 }
