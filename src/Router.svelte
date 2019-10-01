@@ -3,8 +3,7 @@
   import init from "./navigator.js";
   import { routes } from "generatedRoutes.js";
 
-  let components = [];
-  let route = {};
+  let components, route;
   init(routes, update => ({ components, route } = update));
 </script>
 

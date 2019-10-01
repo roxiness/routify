@@ -7,7 +7,7 @@ const MATCH_BRACKETS = RegExp(/\[[^\[\]]+\]/g);
 module.exports = async function filesToRoutes({ pages, ignore }) {
     ignore = Array.isArray(ignore) ? ignore : [ignore]
     const files = await getFiles(pages, ['html', 'svelte'], ignore)
-    const routes = _filesToRoutes(files)
+    const routes = convertToRoutes(files)
 
     if (!routes.length) console.log('no routes found in ' + pages)
 
@@ -63,7 +63,7 @@ async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = f
     return list
 };
 
-function _filesToRoutes(files) {
+function convertToRoutes(files) {
     return files
 
         .map(route => {
