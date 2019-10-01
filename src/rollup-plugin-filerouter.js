@@ -20,19 +20,6 @@ module.exports = function fileRouter(options = {}) {
 
         resolveId(id) { return id === ROUTES_FILE ? id : null },
 
-        async load(id) { return await id === ROUTES_FILE ? filesToRoutes(options) : null },
-
-        async transform(code, id) {
-            if (id === options.appFile) {
-
-                // enhance the Router tag in App.svelte to include 'routes={__routes}'
-                code = code.replace(/(< *Router)([^\w])/, '$1 routes={__routes} $2')
-
-                // import generated routes into App.svelte
-                code = code.replace(/(< *script[^<>]*>)/, '$1\nimport { routes as __routes } from "generatedRoutes.js";\n\n')
-
-                return { code, map: { mappings: '' } }
-            }
-        }
+        async load(id) { return await id === ROUTES_FILE ? filesToRoutes(options) : null }
     }
 }

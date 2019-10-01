@@ -1,10 +1,11 @@
 <script>
   import Route from "./Route.svelte";
   import init from "./navigator.js";
-  export let routes;
+  import { routes } from "generatedRoutes.js";
 
-  let componentsAndRoute = { components: [], route: {} };
-  init(routes, update => (componentsAndRoute = update));
+  let components = [];
+  let route = {};
+  init(routes, update => ({ components, route } = update));
 </script>
 
-<Route {...componentsAndRoute} />
+<Route {components} {route} {routes} />

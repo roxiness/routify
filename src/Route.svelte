@@ -1,6 +1,7 @@
 <script>
   export let components = [];
   export let route;
+  export let routes;
   export let rootScope = {};
   export let layoutScope = {};
 
@@ -22,11 +23,12 @@
 <svelte:component
   this={component}
   {route}
+  {routes}
   let:scoped={layoutScope}
   scoped={rootScope}
   {...rootScope}
   }>
   {#if components.length && isObject(layoutScope)}
-    <svelte:self {components} {route} {layoutScope} {rootScope} />
+    <svelte:self {components} {route} {routes} {layoutScope} {rootScope} />
   {/if}
 </svelte:component>
