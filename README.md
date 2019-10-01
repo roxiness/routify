@@ -63,7 +63,8 @@ Both examples below are reactive
 ```html
 <!-- src/pages/admin/[business]/[project].svelte-->
 <script>
-	export let route
+    export let route //current route
+    export let routes //all routes
 </script>
 
 <a href="my/path">go somewhere</a>
@@ -72,12 +73,10 @@ Both examples below are reactive
 <div>Project: {route.params.project}</div>
 ```
 
-```html
-<!-- alternatively, the current route can also imported as a store object -->
-<script>
-    import { route } from "svelte-filerouter";
-    $: params = $route.params;
-</script>
+route(s) can also be accessed like this
+``import { route, routes } from "svelte-filerouter"``
+(``route`` is reactive)
+
 
 <a href="my/path">go somewhere</a>
 
