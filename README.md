@@ -77,13 +77,6 @@ route(s) can also be accessed like this
 ``import { route, routes } from "svelte-filerouter"``
 (``route`` is reactive)
 
-
-<a href="my/path">go somewhere</a>
-
-<div>Business: {$route.params.business}</div>
-<div>Project: {$route.params.project}</div>
-```
-
 ### Props
 Props can be passed through the ``scopes`` prop.
 ```html
