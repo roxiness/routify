@@ -51,11 +51,11 @@ module.exports = function(routes, cb) {
     updatePage()
 
     function click(event) {
-        const tag = event.target.closest('a')
-        const href = tag && tag.getAttribute('href')
+        const el = event.target.closest('a')
+        const href = el && el.getAttribute('href')
 
         if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.button || event.defaultPrevented) return;
-        if (!href || tag.target || tag.host !== location.host) return;
+        if (!href || el.target || el.host !== location.host) return;
 
         event.preventDefault();
         history.pushState({}, '', href)
