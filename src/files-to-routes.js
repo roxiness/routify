@@ -75,6 +75,7 @@ function convertToRoutes(files) {
                 route.regex = route.isLayout ? null : getRegex(route.path)
                 route.name = route.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
                 route.ranking = route.path.split('/').map(str => str.match(/\[|\]/) ? 'A' : 'Z').join('')
+                route.url = route.path.replace(/\[([^\]]+)\]/, ':$1')
             }
             return route
         })
