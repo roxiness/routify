@@ -27,6 +27,8 @@ module.exports = function(routes, cb) {
             routes.filter(route => urlWithIndex.match(route.regex))[0] ||
             routes.filter(route => url.match(route.regex))[0];
 
+        if(!route) throw new Error (`Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`)
+        
         const components = [...route.layouts, route.component];
 
         const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : url
