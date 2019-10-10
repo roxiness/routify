@@ -18,17 +18,15 @@
         `"${obj}" is not an object. "scoped" prop must an object`
       );
   }
+  
+  $: componentProps = { route, routes, scoped: { rootScope }, ...rootScope };
 </script>
 
-<svelte:component
-  this={component}
-  {route}
-  {routes}
-  let:scoped={layoutScope}
-  scoped={rootScope}
-  {...rootScope}
-  }>
-  {#if components.length && isObject(layoutScope)}
-    <svelte:self {components} {route} {routes} {layoutScope} {rootScope} />
-  {/if}
-</svelte:component>
+  <svelte:component
+    this={component}
+    {...componentProps}
+    let:scoped={layoutScope}>
+    {#if components.length && isObject(layoutScope)}
+      <svelte:self {components} {route} {routes} {layoutScope} {rootScope} />
+    {/if}
+  </svelte:component>
