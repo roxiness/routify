@@ -11,12 +11,12 @@ module.exports = async function filesToRoutes({ pages, ignore }) {
 
     if (!routes.length) console.log('no routes found in ' + pages)
 
-    return convertToCodeString(routes)
+    return convertToCodeString(routes, pages)
 }
 
 
-function convertToCodeString(routes) {
-    let lines = routes.map(route => `import ${route.component} from './src/pages${route.filepath}'`)
+function convertToCodeString(routes, pages) {
+    let lines = routes.map(route => `import ${route.component} from '${pages}${route.filepath}'`)
 
     routes.forEach(route => delete route.filepath)
     routes.forEach(route => delete route.isLayout)

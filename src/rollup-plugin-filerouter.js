@@ -5,7 +5,7 @@ const ROUTES_FILE = 'generatedRoutes.js'
 
 module.exports = function fileRouter(options = {}) {
     options.appFile = path.resolve(options.appFile || './src/App.svelte')
-    options.pages = path.resolve(options.pages || './src/pages')
+    options.pages = options.pages || './src/pages'
     options.ignore = options.ignore || []
 
     return {
