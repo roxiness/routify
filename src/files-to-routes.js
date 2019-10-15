@@ -109,7 +109,7 @@ function moveToFront(array, names) {
     names.forEach(name => {
         const pos = array.indexOf(name)
         if (pos !== -1)
-            sortedArray.push(array.splice(pos, pos + 1)[0])
+            sortedArray.push(array.splice(pos, 1)[0])
     })
     sortedArray.push(...array)
     return sortedArray
