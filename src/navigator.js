@@ -1,5 +1,8 @@
 const store = require('./store')
-module.exports = function(routes, cb) {
+module.exports = function (routes, cb) {
+    const fallbacks = routes.filter(route => route.isFallback)
+    routes = routes.filter(route => !route.isFallback)
+
     addEventListener('popstate', updatePage);
     addEventListener('replacestate', updatePage);
     addEventListener('pushstate', updatePage);
@@ -24,11 +27,13 @@ module.exports = function(routes, cb) {
             (url + "/index").replace(/\/+/g, "/"); //remove duplicate slashes
 
         let route =
-            routes.filter(route => urlWithIndex.match(route.regex))[0] ||
-            routes.filter(route => url.match(route.regex))[0];
+            routes.filter(route => urlWithIndex.match(route.regex))[0]
+            || routes.filter(route => url.match(route.regex))[0]
+            || fallbacks.filter(route => url.match(route.regex))[0]
 
-        if(!route) throw new Error (`Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`)
-        
+        if (!route) throw new Error(`Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`)
+
+
         const components = [...route.layouts, route.component];
 
         const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : url

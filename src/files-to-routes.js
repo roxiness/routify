@@ -46,9 +46,10 @@ async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = f
         const [noExtName, ext] = splitString(filename, '.')
 
         const isLayout = noExtName === '_layout'
+        const isFallback = noExtName === '_fallback'
         const filepath = _path + '/' + filename
 
-        if (!isLayout && filename.match(/^_/)) return //skip underscore prefixed files that aren't layout
+        if (!isLayout && !isFallback && filename.match(/^_/)) return //skip underscore prefixed files that aren't layout
 
         if (isLayout) layouts.push(filepath)
 
@@ -58,7 +59,7 @@ async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = f
         }
 
         if (extensions.includes(ext))
-            list.push({ filepath, layouts, isLayout })
+            list.push({ filepath, layouts, isLayout, isFallback })
     })
     return list
 };
@@ -71,8 +72,8 @@ function convertToRoutes(files) {
             route.component = makeLegalIdentifier(route.path)
             if (!route.isLayout) {
                 route.layouts = route.layouts.map(layout => makeLegalIdentifier(stripExtension(layout)))
-                route.paramKeys = getParams(route.path)
-                route.regex = route.isLayout ? null : getRegex(route.path)
+                route.paramKeys = getParams(route.path)                
+                route.regex = getRegex(route.path)
                 route.name = route.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
                 route.ranking = route.path.split('/').map(str => str.match(/\[|\]/) ? 'A' : 'Z').join('')
                 route.url = route.path.replace(/\[([^\]]+)\]/, ':$1')
@@ -116,8 +117,9 @@ function moveToFront(array, names) {
 }
 
 function getRegex(str) {
-    return '^' + str.replace(MATCH_BRACKETS, '([^/]+)')
-
+    str = str.replace(/\/_fallback_?$/, '/')
+    str = '^' + str.replace(MATCH_BRACKETS, '([^/]+)')
+    return str
 }
 
 function getParams(string) {
