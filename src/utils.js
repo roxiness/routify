@@ -29,7 +29,7 @@ export const url = (path, params) => {
             path = newPath.url.replace(/\/index$/, '')
     }
 
-    params = Object.assign(get(route).params, params)
+    params = Object.assign({}, get(route).params, params)
     for (let [key, value] of Object.entries(params)) {
         path = path.replace(`:${key}`, value)
     }
