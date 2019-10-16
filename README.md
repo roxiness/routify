@@ -105,7 +105,7 @@ Props passed through ``scopes`` are available to all nested components served by
 ```
 
 ### Helpers
-#### url(path, params)
+#### url ( path, params )
 Can be imported with ``export let url``.
 
 **path**:string -
@@ -118,7 +118,7 @@ Examples
  ```html
 <!-- src/pages/companies/[companyId]/index.svelte -->
 <script>
-export let url
+  export let url
 </script>
 
 <!-- absolute routes -->
