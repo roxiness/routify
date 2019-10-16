@@ -38,7 +38,9 @@ fileRouter accepters the following parameters:
 
 ``pages: path/to/pages`` (Defaults to ./src/pages)
 
-``ignore: ['ignoreme']`` (Files and dirs. Can be string or array. Interpreted as regular expression)
+``ignore: ['widget.svelte']`` (Files and dirs. Can be string or array. Interpreted as regular expression)
+
+``unknownPropWarnings: true`` (Defaults to true. Disable to hide warnings about props passed by filerouter)
 
 
 # **Guide**
