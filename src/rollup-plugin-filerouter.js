@@ -1,12 +1,17 @@
 const path = require('path')
 const fs = require('fs')
+const scripts = require('./scripts')
 const filesToRoutes = require('./files-to-routes')
 const ROUTES_FILE = 'generatedRoutes.js'
 
 module.exports = function fileRouter(options = {}) {
-    options.appFile = path.resolve(options.appFile || './src/App.svelte')
-    options.pages = options.pages || './src/pages'
-    options.ignore = options.ignore || []
+    options = Object.assign({
+        appFile: './src/App.svelte',
+        pages: './src/pages',
+        ignore: [],
+        unknownPropWarnings: true
+    }, options)
+    
 
     return {
         name: 'file-router',
@@ -20,6 +25,16 @@ module.exports = function fileRouter(options = {}) {
 
         resolveId(id) { return id === ROUTES_FILE ? id : null },
 
-        async load(id) { return await id === ROUTES_FILE ? filesToRoutes(options) : null }
+        async load(id) { return await id === ROUTES_FILE ? createGeneratedRoutes(options) : null }
     }
+}
+
+async function createGeneratedRoutes(options){    
+    let str = await filesToRoutes(options)
+
+    if(!options.unknownPropWarnings){
+        str += `\n\n const suppressWarnings = ${scripts.suppressWarnings.toString()}`
+        str += `\n suppressWarnings()`
+    }
+    return str
 }
