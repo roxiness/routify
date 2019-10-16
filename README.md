@@ -105,7 +105,7 @@ Props passed through ``scopes`` are available to all nested components served by
 ```
 
 ### Helpers
-####url####
+#### url
 Can be imported with ``export let url``.
 
 url(path, params)
@@ -113,7 +113,7 @@ url(path, params)
 **params:object** Parameters. If parameters already exist within the current route, these are merged. In other words, if parameters are included in the current route, you do not need to specify them again.
 
 Examples
-    ```html
+ ```html
 <!-- src/pages/companies/[companyId]/index.svelte -->
 <script>
 export let url
