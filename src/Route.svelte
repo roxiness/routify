@@ -1,5 +1,6 @@
 <script>
   export let components = [];
+  export let url;
   export let route;
   export let routes;
   export let rootScope = {};
@@ -10,7 +11,7 @@
   $: component = components.shift();
   $: components = components.slice(0); //clone or components starts disappearing on every layoutScope update
 
-  function isObject(obj) {
+  function demandObject(obj) {
     const isObj = Object.prototype.toString.call(obj) === "[object Object]";
     if (isObj || !obj) return true;
     else
@@ -19,11 +20,12 @@
       );
   }
 
-  $: componentProps = { route, routes, scoped: { ...rootScope }, ...rootScope };
+  $: props = { url, route, routes, scoped: { ...rootScope }, ...rootScope };
+  $: childProps = { url, route, routes, rootScope, components };
 </script>
 
-<svelte:component this={component} {...componentProps} let:scoped={layoutScope}>
-  {#if components.length && isObject(layoutScope)}
-    <svelte:self {components} {route} {routes} {layoutScope} {rootScope} />
+<svelte:component this={component} {...props} let:scoped={layoutScope}>
+  {#if components.length && demandObject(layoutScope)}
+    <svelte:self {...childProps} {layoutScope} />
   {/if}
 </svelte:component>

@@ -63,7 +63,7 @@ Layout files are named ``_layout.svelte`` and apply to all adjacent and nested s
 404s can be caught with _fallback.svelte. The first _fallback.svelte that's found while traversing back through parent folders will be used.
 
 ### Accessing route and parameters
-Both examples below are reactive
+Examples below is reactive
 
 ```html
 <!-- src/pages/admin/[business]/[project].svelte-->
@@ -103,6 +103,49 @@ Props passed through ``scopes`` are available to all nested components served by
 <h1>{post.title}</h1>
 <div>{body}</div>
 ```
+
+### Helpers
+####url####
+Can be imported with ``export let url``.
+
+url(path, params)
+**path:string** An absolute, relative or named path. Parameters are prefixed with colon. Absolute paths starts with ``/``. Relative paths starts with ``./`` or ``../``. Paths that aren't prefixed we be considered named paths. A route is named by it's parent dir and filename (without extension). E.g. the file ``src/pages/companies/[companyId]/index.svelte`` will have the name ``companyId/index``
+**params:object** Parameters. If parameters already exist within the current route, these are merged. In other words, if parameters are included in the current route, you do not need to specify them again.
+
+Examples
+    ```html
+<!-- src/pages/companies/[companyId]/index.svelte -->
+<script>
+export let url
+</script>
+
+<!-- absolute routes -->
+<a href={url('/')}>Frontpage</a>
+<a href={url('/companies/')}>Company index</a>
+<a href={url('/companies/:companyId')}>Current company/page</a>
+<a href={url('/companies/:companyId/products')}>Products</a>
+<a href={url('/companies/:companyId/products/:productId'), {productId: 123}}>Product no. 123</a>
+<a href={url('/companies/:companyId'), {companyId: 456}}>Different company</a>
+
+<!-- relative routes -->
+<a href={url('../../')}>Frontpage</a>
+<a href={url('../')}>Company index</a>
+<a href={url('./')}>Current company/page</a>
+<a href={url('./products')}>Products</a>
+<a href={url('./products/:productId', {productId: 123})}>Product no. 123</a>
+<a href={url('./', {companyId: 123})}>Different company</a>
+
+<!-- named routes -->
+<a href={url('/index')}>Frontpage</a>
+<a href={url('company/index')}>Company index</a>
+<a href={url('companyId/index')}>Current company/page</a>
+<a href={url('products/index')}>Products</a>
+<a href={url('productId/index') , {productId: 123}}>Product no. 123</a>
+<a href={url('companyId/index'), {companyId: 123}}>Different company</a>
+```
+
+
+
 
 # Examples
 https://github.com/jakobrosenberg/svelte-filerouter-example
