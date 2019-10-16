@@ -114,7 +114,7 @@ url(path, params)
 An absolute, relative or named path. Parameters are prefixed with colon. Absolute paths starts with ``/``. Relative paths starts with ``./`` or ``../``. Paths that aren't prefixed we be considered named paths. A route is named by it's parent dir and filename (without extension). E.g. the file ``src/pages/companies/[companyId]/index.svelte`` will have the name ``companyId/index``
 
 **params**:object - 
-Parameters. If parameters already exist within the current route, these are merged. In other words, if parameters are included in the current route, you do not need to specify them again.
+Parameters. If parameters already exist within the current route, these are merged. Therefore, parameters included in the current route, do not need to be specified again.
 
 Examples
  ```html
