@@ -7,7 +7,7 @@
 
 
 
-## To install
+# To install
 
 ``npm i -D svelte-filerouter``
 
@@ -41,23 +41,26 @@ fileRouter accepters the following parameters:
 ``ignore: ['ignoreme']`` (Files and dirs. Can be string or array. Interpreted as regular expression)
 
 
-## Guide
+# **Guide**
 
-#### File scheme
+### File scheme
 
-###### Basic
+##### Basic
 ``src/pages/about.svelte`` corresponds to ``/about``
 
-###### Parameters
+##### Parameters
 ``src/pages/admin/[business].svelte`` corresponds to ``/admin/:business``
 
-###### To exclude
+##### To exclude
 ``src/admin/_navbar.svelte`` corresponds to nothing as _prefixed files are ignored.
 
-###### Layouts
+##### Layouts
 Layout files are named ``_layout.svelte`` and apply to all adjacent and nested svelte files. A file can have multiple layouts if multiple layouts are recursively present in parent folders.
 
-#### Accessing route and parameters
+##### 404 and fallbacks
+404s can be caught with _fallback.svelte. The first _fallback.svelte that's found while traversing back through parent folders will be used.
+
+### Accessing route and parameters
 Both examples below are reactive
 
 ```html
@@ -99,13 +102,13 @@ Props passed through ``scopes`` are available to all nested components served by
 <div>{body}</div>
 ```
 
-## Examples
+# Examples
 https://github.com/jakobrosenberg/svelte-filerouter-example
 
-## Notes
+# Notes
 - ``<a href="my/path">`` tags are handled by svelte-router
 
-## Roadmap
+# Roadmap
 - ``<link path="pathname" params={params}>`` or similar for normalized link handling. As well as helper script to generate url from pathname and parameters.
 - Example project
 
