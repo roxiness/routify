@@ -101,7 +101,7 @@ Props passed through ``scopes`` are available to all nested components served by
     export let post
 </script>
 <h1>{post.title}</h1>
-<div>{body}</div>
+<div>{post.body}</div>
 ```
 
 ### Helpers
