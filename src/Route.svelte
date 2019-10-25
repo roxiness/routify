@@ -1,8 +1,8 @@
 <script>
+  import { demandObject, suppressWarnings } from "./scripts.js";
+  import { options } from "generatedRoutes.js";
+  export let url, route, routes;
   export let components = [];
-  export let url;
-  export let route;
-  export let routes;
   export let rootScope = {};
   export let layoutScope = {};
 
@@ -11,17 +11,10 @@
   $: component = components.shift();
   $: components = components.slice(0); //clone or components starts disappearing on every layoutScope update
 
-  function demandObject(obj) {
-    const isObj = Object.prototype.toString.call(obj) === "[object Object]";
-    if (isObj || !obj) return true;
-    else
-      throw new Error(
-        `"${obj}" is not an object. "scoped" prop must an object`
-      );
-  }
-
   $: props = { url, route, routes, scoped: { ...rootScope }, ...rootScope };
   $: childProps = { url, route, routes, rootScope, components };
+
+  $: if (!options.unknownPropWarnings) suppressWarnings(Object.keys(props));
 </script>
 
 <svelte:component this={component} {...props} let:scoped={layoutScope}>

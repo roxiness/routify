@@ -11,7 +11,7 @@ module.exports = function fileRouter(options = {}) {
         ignore: [],
         unknownPropWarnings: true
     }, options)
-    
+
 
     return {
         name: 'file-router',
@@ -29,12 +29,9 @@ module.exports = function fileRouter(options = {}) {
     }
 }
 
-async function createGeneratedRoutes(options){    
+async function createGeneratedRoutes(options) {
+    clientOptions = { unknownPropWarnings: options.unknownPropWarnings }
     let str = await filesToRoutes(options)
-
-    if(!options.unknownPropWarnings){
-        str += `\n\n const suppressWarnings = ${scripts.suppressWarnings.toString()}`
-        str += `\n suppressWarnings()`
-    }
+    str += `\n\n export const options = ${JSON.stringify(clientOptions)}`
     return str
 }
