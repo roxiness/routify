@@ -8,17 +8,19 @@
 
   $: rootScope = Object.assign({}, rootScope, layoutScope);
 
-  $: component = components.shift();
-  $: components = components.slice(0); //clone or components starts disappearing on every layoutScope update
+  $: getComponent = components[0]
+  $: remainingComponents = components.slice(1)
 
   $: props = { url, route, routes, scoped: { ...rootScope }, ...rootScope };
-  $: childProps = { url, route, routes, rootScope, components };
+  $: childProps = { url, route, routes, rootScope, components: remainingComponents };
 
   $: if (!options.unknownPropWarnings) suppressWarnings(Object.keys(props));
 </script>
 
-<svelte:component this={component} {...props} let:scoped={layoutScope}>
-  {#if components.length && demandObject(layoutScope)}
-    <svelte:self {...childProps} {layoutScope} />
-  {/if}
-</svelte:component>
+{#await getComponent() then cmp}
+  <svelte:component this={cmp} {...props} let:scoped={layoutScope}>
+    {#if remainingComponents.length && demandObject(layoutScope)}
+      <svelte:self {...childProps} {layoutScope} />
+    {/if}
+  </svelte:component>
+{/await}
