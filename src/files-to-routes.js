@@ -35,7 +35,7 @@ function convertToCodeString(routes, pages) {
 async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = false, layouts = []) {
     const list = []
     const files = await fs.readdirSync(absoluteDir)
-    const sortedFiles = moveToFront(files, ['_layout.svelte'])
+    const sortedFiles = moveToFront(files, ['_layout.svelte', '_reset.svelte'])
     await asyncForEach(sortedFiles, async filename => {
         const ignoreFile = ignore.filter(ignoreStr => filename.match(ignoreStr)).length
         if (ignoreFile) return;
@@ -45,11 +45,14 @@ async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = f
         const isDir = await fs.statSync(_filepath).isDirectory()
         const [noExtName, ext] = splitString(filename, '.')
 
-        const isLayout = noExtName === '_layout'
+        const isLayout = ['_layout', '_reset'].includes(noExtName)
+        const isReset = ['_reset'].includes(noExtName)
         const isFallback = noExtName === '_fallback'
         const filepath = _path + '/' + filename
 
         if (!isLayout && !isFallback && filename.match(/^_/)) return //skip underscore prefixed files that aren't layout
+
+        if(isReset) layouts = []
 
         if (isLayout) layouts.push(filepath)
 
