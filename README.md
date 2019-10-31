@@ -59,6 +59,9 @@ fileRouter accepters the following parameters:
 ##### Layouts
 Layout files are named ``_layout.svelte`` and apply to all adjacent and nested svelte files. A file can have multiple layouts if multiple layouts are recursively present in parent folders.
 
+#### Resets
+Reset files are named ``_reset.svelte``. They function exactly like layout files, but do no inherit parent layouts.
+
 ##### 404 and fallbacks
 404s can be caught with _fallback.svelte. The first _fallback.svelte that's found while traversing back through parent folders will be used.
 
@@ -158,6 +161,9 @@ https://github.com/jakobrosenberg/svelte-filerouter-example
 # Roadmap
 - ``<link path="pathname" params={params}>`` or similar for normalized link handling. As well as helper script to generate url from pathname and parameters.
 - Example project
+
+# Caveats
+Restart of Rollup is required to update the routes map.
 
 ## Issues
 Feel free to open an issue or a pull request, if there's anything you think could be improved.
