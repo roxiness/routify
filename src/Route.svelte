@@ -11,7 +11,7 @@
   $: component = components.shift();
   $: components = components.slice(0); //clone or components starts disappearing on every layoutScope update
 
-  $: props = { url, route, routes, scoped: { ...rootScope }, ...rootScope };
+  $: props = Object.assign({ url, route, routes, scoped: Object.assign({}, rootScope)}, rootScope);
   $: childProps = { url, route, routes, rootScope, components };
 
   $: if (!options.unknownPropWarnings) suppressWarnings(Object.keys(props));
