@@ -42,6 +42,8 @@ fileRouter accepters the following parameters:
 
 ``unknownPropWarnings: true`` (Defaults to true. Disable to hide warnings about props passed by filerouter)
 
+``dynamicImports: false`` (Experimental code splitting. Defaults to false.)
+
 
 # **Guide**
 
