@@ -4,31 +4,47 @@ const fs = require('fs')
 
 const MATCH_BRACKETS = RegExp(/\[[^\[\]]+\]/g);
 
-module.exports = async function filesToRoutes({ pages, ignore }) {
+module.exports = async function filesToRoutes({ pages, ignore, dynamicImports }) {
     ignore = Array.isArray(ignore) ? ignore : [ignore]
     const files = await getFiles(pages, ['html', 'svelte'], ignore)
     const routes = convertToRoutes(files)
 
     if (!routes.length) console.log('no routes found in ' + pages)
 
-    return convertToCodeString(routes, pages)
+    return convertToCodeString(routes, pages, { dynamicImports })
 }
 
 
-function convertToCodeString(routes, pages) {
-    let lines = routes.map(route => `import ${route.component} from '${pages}${route.filepath}'`)
-
-    routes.forEach(route => delete route.filepath)
-    routes.forEach(route => delete route.isLayout)
+function convertToCodeString(routes, pages, { dynamicImports }) {
+    const imports = dynamicImports ? [] : routes
+    const lines = imports.map(
+        route => `import ${route.component} from '${pages}${route.filepath}'`
+    )
 
     lines.push(
         `\n\n export const routes = [`,
         routes
-        .filter(r => r.name) //layouts don't have names
-        .map(f => partialStringify(f, ['component', 'layouts']))
-        .join(`,\n`),
+            .filter(r => r.name) //layouts don't have names
+            .map(({ filepath, isLayout, component, layouts, ...route }) => ({
+                ...route,
+                component:
+                    dynamicImports
+                        ? `() => import('${pages}${filepath}').then(m => m.default)`
+                        : `() => ${component}`,
+                layouts: layouts.map(n =>
+                    dynamicImports
+                        ? `() => import('${pages}${routes.filter(r => r.component === n)[0].filepath}').then(m => m.default)`
+                        : `() => ${n}`
+                )
+            }))
+            .map(f => partialStringify(f, ['component', 'layouts']))
+            .join(`,\n`),
         ']'
     )
+
+    routes.forEach(route => delete route.filepath)
+    routes.forEach(route => delete route.isLayout)
+
     return lines.join("\n")
 }
 
@@ -52,7 +68,7 @@ async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = f
 
         if (!isLayout && !isFallback && filename.match(/^_/)) return //skip underscore prefixed files that aren't layout
 
-        if(isReset) layouts = []
+        if (isReset) layouts = []
 
         if (isLayout) layouts.push(filepath)
 
@@ -75,7 +91,7 @@ function convertToRoutes(files) {
             route.component = makeLegalIdentifier(route.path)
             if (!route.isLayout) {
                 route.layouts = route.layouts.map(layout => makeLegalIdentifier(stripExtension(layout)))
-                route.paramKeys = getParams(route.path)                
+                route.paramKeys = getParams(route.path)
                 route.regex = getRegex(route.path)
                 route.name = route.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
                 route.ranking = route.path.split('/').map(str => str.match(/\[|\]/) ? 'A' : 'Z').join('')

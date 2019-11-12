@@ -9,7 +9,8 @@ module.exports = function fileRouter(options = {}) {
         appFile: './src/App.svelte',
         pages: './src/pages',
         ignore: [],
-        unknownPropWarnings: true
+        unknownPropWarnings: true,
+        dynamicImports: false
     }, options)
 
 
