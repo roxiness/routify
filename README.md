@@ -1,6 +1,6 @@
 # svelte-filerouter
 
-###### Minimalist file router inspired by [Sapper router.](https://sapper.svelte.dev/docs#File_naming_rules)
+###### Minimalist SPA file router inspired by [Sapper router.](https://sapper.svelte.dev/docs#File_naming_rules)
 
 
 
