@@ -2,9 +2,17 @@
 
 ###### Minimalist SPA file router inspired by [Sapper router.](https://sapper.svelte.dev/docs#File_naming_rules)
 
+While svelte-filerouter and Sapper's router should work interchangeably, there are some key differences.
 
-
-
+|Differences|Sapper router|svelte-filerouter|
+| - | -------------- | ------------- |
+|SSR   | +           | -             |
+|SPA   | -           | +             |
+|Resets| -           | +             |
+|Scoped variables| - | +             |
+|Route props | - | + |
+|Helpers | - | + |
+|Fast dev builds| - | + |
 
 
 # To install
