@@ -1,6 +1,12 @@
 const { makeLegalIdentifier } = require('rollup-pluginutils')
 const path = require('path')
 const fs = require('fs')
+const { promisify } = require('util')
+
+const fsa = {
+  readdir: promisify(fs.readdir),
+  stat: promisify(fs.stat),
+}
 
 const MATCH_BRACKETS = RegExp(/\[[^\[\]]+\]/g);
 
@@ -50,7 +56,7 @@ function convertToCodeString(routes, pages, { dynamicImports }) {
 
 async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = false, layouts = []) {
     const list = []
-    const files = await fs.readdirSync(absoluteDir)
+    const files = await fsa.readdir(absoluteDir)
     const sortedFiles = moveToFront(files, ['_layout.svelte', '_reset.svelte'])
     await asyncForEach(sortedFiles, async filename => {
         const ignoreFile = ignore.filter(ignoreStr => filename.match(ignoreStr)).length
@@ -58,7 +64,7 @@ async function getFiles(absoluteDir, extensions, ignore, _path = '', _nested = f
 
 
         const _filepath = path.resolve(absoluteDir + '/' + filename)
-        const isDir = await fs.statSync(_filepath).isDirectory()
+        const isDir = (await fsa.stat(_filepath)).isDirectory()
         const [noExtName, ext] = splitString(filename, '.')
 
         const isLayout = ['_layout', '_reset'].includes(noExtName)
