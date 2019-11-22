@@ -1,5 +1,6 @@
-const store = require('./store')
-module.exports = function (routes, cb) {
+import * as store from './store'
+
+export default function (routes, cb) {
     const fallbacks = routes.filter(route => route.isFallback)
     routes = routes.filter(route => !route.isFallback)
 
