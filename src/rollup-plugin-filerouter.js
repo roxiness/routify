@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const scripts = require('./scripts')
 const filesToRoutes = require('./files-to-routes')
 const ROUTES_FILE = 'generatedRoutes.js'
 
