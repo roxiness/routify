@@ -1,5 +1,5 @@
 
-export const suppressWarnings = (function () {
+module.exports.suppressWarnings = (function () {
     const _ignoreList = []
     let initialized = false
     const _warn = console.warn
@@ -22,7 +22,7 @@ export const suppressWarnings = (function () {
     }
 })()
 
-export const demandObject = function (obj) {
+module.exports.demandObject = function (obj) {
     const isObj = Object.prototype.toString.call(obj) === "[object Object]";
     if (isObj || !obj) return true;
     else
