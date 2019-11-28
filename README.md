@@ -174,6 +174,7 @@ https://github.com/jakobrosenberg/svelte-filerouter-example
 
 # Caveats
 Restart of Rollup is required to update the routes map.
+This is fixed in v1.4.0 - To try it run ``npm i svelte-filerouter@beta`` (yes, @next wold have made more sense)
 
 ## Issues
 Feel free to open an issue or a pull request, if there's anything you think could be improved.
