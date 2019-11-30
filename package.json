@@ -21,6 +21,10 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "cheap-watch": "^1.0.2"
+        "cheap-watch": "^1.0.2",
+        "commander": "^4.0.1"
+    },
+    "bin": {
+        "routify": "./lib/cli.js --p src/pages"
     }
 }
