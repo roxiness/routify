@@ -26,10 +26,12 @@ export default function (routes, cb) {
         const urlWithIndex = url.match(/\/index\/?$/) ?
             url :
             (url + "/index").replace(/\/+/g, "/"); //remove duplicate slashes
+        const urlWithSlash = (url + '/').replace(/\/+/g, "/")
 
         let route =
             routes.filter(route => urlWithIndex.match(route.regex))[0]
             || routes.filter(route => url.match(route.regex))[0]
+            || fallbacks.filter(route => urlWithSlash.match(route.regex))[0]
             || fallbacks.filter(route => url.match(route.regex))[0]
 
         if (!route) throw new Error(`Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`)
