@@ -25,6 +25,6 @@
         "commander": "^4.0.1"
     },
     "bin": {
-        "routify": "./lib/cli.js --p src/pages"
+        "routify": "./lib/cli.js"
     }
 }
