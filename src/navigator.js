@@ -1,9 +1,7 @@
+import { matchRoute } from './utils'
 import * as store from './store'
 
 export default function (routes, cb) {
-    const fallbacks = routes.filter(route => route.isFallback)
-    routes = routes.filter(route => !route.isFallback)
-
     addEventListener('popstate', updatePage);
     addEventListener('replacestate', updatePage);
     addEventListener('pushstate', updatePage);
@@ -22,38 +20,9 @@ export default function (routes, cb) {
     })
 
     function updatePage() {
-        const url = window.location.pathname
-        const urlWithIndex = url.match(/\/index\/?$/) ?
-            url :
-            (url + "/index").replace(/\/+/g, "/"); //remove duplicate slashes
-        const urlWithSlash = (url + '/').replace(/\/+/g, "/")
-
-        let route =
-            routes.filter(route => urlWithIndex.match(route.regex))[0]
-            || routes.filter(route => url.match(route.regex))[0]
-            || fallbacks.filter(route => urlWithSlash.match(route.regex))[0]
-            || fallbacks.filter(route => url.match(route.regex))[0]
-
-        if (!route) throw new Error(`Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`)
-
-
+        const match = matchRoute(location.pathname, routes);
+        const route = { ...match.route, params: match.params };
         const components = [...route.layouts, route.component];
-
-        const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : url
-
-        const params = {};
-        if (route.paramKeys) {
-            regexUrl.match(route.regex).forEach((match, i) => {
-                if (i === 0) return;
-                const key = route.paramKeys[i - 1];
-                params[key] = match;
-            });
-        }
-
-        route.params = params
-
-        //set the route in the store
-        store.route.set(route)
 
         //run callback in Router.svelte
         cb({ components, route })

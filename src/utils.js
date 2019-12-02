@@ -35,3 +35,53 @@ export const url = (path, params) => {
     }
     return path
 }
+
+export const matchRoute = (url, routes)=> {
+    const urlWithIndex = url.match(/\/index\/?$/) ? url : (
+        (url + "/index").replace(/\/+/g, "/") //remove duplicate slashes
+    )
+
+    let route, match, fallback, fallbackMatch
+
+    for (let i = 0, len = routes.length; i < len; i++) {
+        const { [i]: r } = routes
+
+        if (r.isFallback) {
+            if (fallback) {
+                continue
+            } else if (fallbackMatch = urlWithIndex.match(r.regex)) {
+                fallback = r
+                url = urlWithIndex
+            } else if (fallbackMatch = url.match(r.regex)) {
+                fallback = r
+            }
+        } else if (match = urlWithIndex.match(r.regex)) {
+            route = r
+            url = urlWithIndex
+        } else if (match = url.match(r.regex)) {
+            route = r
+        }
+
+        if (route) break
+    }
+
+    if (!route) {
+        if (!fallback) throw new Error(
+            `Route could not be found. Make sure ${url}.svelte, ${url}/index.svelte or a fallback exists. A restart may be required.`
+        )
+
+        route = fallback
+        match = fallbackMatch
+    }
+
+    const params = {}
+
+    if (route.paramKeys) {
+        for (let i = 0, len = route.paramKeys.length; i < len; i++) {
+            const { [i]: key } = route.paramKeys
+            params[key] = match[i + 1]
+        }
+    }
+
+    return { url, match, params, route }
+}
