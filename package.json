@@ -14,13 +14,11 @@
         "url": "https://github.com/jakobrosenberg/svelte-filerouter/issues"
     },
     "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme",
-    "devDependencies": {
-        "rollup-pluginutils": "^2.8.2"
-    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
+        "rollup-pluginutils": "^2.8.2",
         "cheap-watch": "^1.0.2",
         "commander": "^4.0.1"
     },
