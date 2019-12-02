@@ -1,6 +1,5 @@
 <script>
   import { demandObject, suppressWarnings } from "./scripts.js";
-  
   export let url, route, routes;
   export let components = [];
   export let rootScope = {};
