@@ -1,14 +1,14 @@
 <script>
-  import {url} from './utils'
+  import * as utils from './utils'
   import Route from "./Route.svelte";
   import init from "./navigator.js";
-  import { options as _routeOptions, routes as defaultRoutes } from "../dist/routes.js";
   export let routes
+  export let options
 
-  routes = routes || defaultRoutes
+  const url = (path, params) => utils.url(path, params, routes);
 
   let components, route;
   init(routes, update => ({ components, route } = update));
 </script>
 
-<Route {components} {route} {routes} {_routeOptions} {url} rootScope={{}} />
+<Route {components} {route} {routes} _routeOptions={options} {url} rootScope={{}} />

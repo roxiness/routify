@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
 import { route } from './store'
-import { routes } from '../dist/routes'
 
-export const url = (path, params) => {
+export const url = (path, params, routes) => {
 
     if (path.match(/^\.\.?\//)) {
         //RELATIVE PATH
