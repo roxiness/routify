@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const { generateRoutes } = require('./watcher')
+// const { generateRoutes } = require('./watcher')
+const { start } = require('../lib/services/interface')
 
 program
     .option('-d, --debug', 'extra debugging')
@@ -14,4 +15,4 @@ program
 
 program.parse(process.argv)
 
-generateRoutes(program)
+start(program)

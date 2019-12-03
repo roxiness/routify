@@ -23,6 +23,6 @@
         "commander": "^4.0.1"
     },
     "bin": {
-        "routify": "./lib/cli.js"
+        "routify": "./plugins/cli.js"
     }
 }
