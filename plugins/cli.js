@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-// const { generateRoutes } = require('./watcher')
 const { start } = require('../lib/services/interface')
 
 program
