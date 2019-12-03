@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { route } from './store'
-import { routes } from 'generatedRoutes.js'
+import { routes } from '../tmp/routes'
 
 export const url = (path, params) => {
 

@@ -1,25 +1,27 @@
 <script>
   import { demandObject, suppressWarnings } from "./scripts.js";
-  import { options } from "generatedRoutes.js";
+  
   export let url, route, routes;
   export let components = [];
   export let rootScope = {};
   export let layoutScope = {};
+  export let _routeOptions = {};
 
   $: rootScope = Object.assign({}, rootScope, layoutScope);
 
   $: [getComponent, ...remainingComponents] = components
 
-  $: props = Object.assign({ url, route, routes, scoped: Object.assign({}, rootScope )}, rootScope );
-  $: childProps = { url, route, routes, rootScope, components: remainingComponents };
+  $: routerProps = {url, route, routes, _routeOptions}
 
-  $: if (!options.unknownPropWarnings) suppressWarnings(Object.keys(props));
+  $: props = Object.assign({}, routerProps, {scoped: Object.assign({}, rootScope )}, rootScope );
+  
+  $: if (!_routeOptions.unknownPropWarnings) suppressWarnings(Object.keys(props));
 </script>
 
 {#await getComponent() then cmp}
   <svelte:component this={cmp} {...props} let:scoped={layoutScope}>
     {#if remainingComponents.length && demandObject(layoutScope)}
-      <svelte:self {...childProps} {layoutScope} />
+      <svelte:self {...routerProps} components={remainingComponents} {layoutScope} />
     {/if}
   </svelte:component>
 {/await}
