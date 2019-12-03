@@ -1,6 +1,6 @@
 {
     "name": "svelte-filerouter",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "description": "",
     "main": "lib/index.js",
     "svelte": "src/index.js",
