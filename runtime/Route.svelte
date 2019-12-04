@@ -1,39 +1,28 @@
 <script>
   import { setContext, getContext } from "svelte";
+  import * as internals from "svelte/internal";
   import { demandObject, suppressWarnings } from "./scripts.js";
 
-  export let url, route, routes;
-  export let components = [];
-  export let rootScope = {};
-  export let layoutScope = {};
-  export let _routeOptions = {};
+  export let layouts = [],
+    scopeFromParent = {};
+  let scopeToChild;
 
-  $:console.log($$props)
+  $: scoped = Object.assign({}, scopeFromParent, scopeToChild);
+  $: [layout, ...remainingLayouts] = layouts;
 
-  $: rootScope = Object.assign({}, rootScope, layoutScope);
+  $: console.log("layout", layout);
 
-  $: [getComponent, ...remainingComponents] = components;
-
-  $: routerProps = { url, route, routes, _routeOptions };
-
-  $: props = Object.assign(
-    {},
-    routerProps,
-    { scoped: Object.assign({}, rootScope) },
-    rootScope
-  );
-
-  $: if (!_routeOptions.unknownPropWarnings)
-    suppressWarnings(Object.keys(props));
+  $: routify = getContext("routify") || {};
+  $: routify.route = layout;
+  $: setContext("routify", routify);
 </script>
 
-{#await getComponent() then cmp}
-  <svelte:component this={cmp} {...props} let:scoped={layoutScope}>
-    {#if remainingComponents.length && demandObject(layoutScope)}
+{#await layout.component() then cmp}
+  <svelte:component this={cmp} let:scoped={scopeToChild} {scoped}>
+    {#if remainingLayouts.length}
       <svelte:self
-        {...routerProps}
-        components={remainingComponents}
-        {layoutScope} />
+        layouts={remainingLayouts}
+        scopeFromParent={{ ...scopeFromParent, ...scopeToChild }} />
     {/if}
   </svelte:component>
 {/await}

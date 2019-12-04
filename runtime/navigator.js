@@ -1,4 +1,5 @@
 import * as store from './store'
+import { setContext, getContext } from 'svelte'
 
 export default function (routes, cb) {
     const fallbacks = routes.filter(route => route.isFallback)
@@ -12,7 +13,7 @@ export default function (routes, cb) {
     // create events for pushState and replaceState
     ['pushState', 'replaceState'].forEach(eventName => {
         const fn = history[eventName]
-        history[eventName] = function(state, title, url) {
+        history[eventName] = function (state, title, url) {
             const event = Object.assign(new Event(eventName.toLowerCase(), { state, title, url }))
             Object.assign(event, { state, title, url })
 
@@ -37,7 +38,7 @@ export default function (routes, cb) {
         if (!route) throw new Error(`Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`)
 
 
-        const components = [...route.layouts, route.component];
+        const layouts = [...route.layouts, { component: route.component }];
 
         const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : url
 
@@ -52,11 +53,16 @@ export default function (routes, cb) {
 
         route.params = params
 
+        // set the route in context
+        const context = getContext('routify') || {}
+        context.route = route
+        setContext('routify', context)
+
         //set the route in the store
         store.route.set(route)
 
         //run callback in Router.svelte
-        cb({ components, route })
+        cb({ layouts, route })
     }
     updatePage()
 
