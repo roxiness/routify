@@ -3,7 +3,7 @@
     "version": "1.4.6",
     "description": "",
     "main": "lib/index.js",
-    "svelte": "src/index.js",
+    "svelte": "runtime/index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jakobrosenberg/svelte-filerouter.git"
