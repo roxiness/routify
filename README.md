@@ -1,4 +1,4 @@
-# svelte-filerouter
+![](./routify.png)
 
 ###### Minimalist SPA file router inspired by [Sapper router.](https://sapper.svelte.dev/docs#File_naming_rules)
 
