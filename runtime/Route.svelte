@@ -10,19 +10,20 @@
   $: scoped = Object.assign({}, scopeFromParent, scopeToChild);
   $: [layout, ...remainingLayouts] = layouts;
 
-  $: console.log("layout", layout);
+  $: layout && updateContext();
 
-  $: routify = getContext("routify") || {};
-  $: routify.route = layout;
-  $: setContext("routify", routify);
+  function updateContext() {
+    const _routify = getContext("routify");
+    const routify = JSON.parse(JSON.stringify(_routify));
+    routify.component = layout;
+    setContext("routify", routify);
+  }
 </script>
 
-{#await layout.component() then cmp}
-  <svelte:component this={cmp} let:scoped={scopeToChild} {scoped}>
-    {#if remainingLayouts.length}
-      <svelte:self
-        layouts={remainingLayouts}
-        scopeFromParent={{ ...scopeFromParent, ...scopeToChild }} />
-    {/if}
-  </svelte:component>
-{/await}
+<svelte:component this={layout.component()} let:scoped={scopeToChild} {scoped}>
+  {#if remainingLayouts.length}
+    <svelte:self
+      layouts={remainingLayouts}
+      scopeFromParent={{ ...scopeFromParent, ...scopeToChild }} />
+  {/if}
+</svelte:component>
