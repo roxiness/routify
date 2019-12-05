@@ -37,8 +37,7 @@ export default function (routes, cb) {
 
         if (!route) throw new Error(`Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`)
 
-
-        const layouts = [...route.layouts, { component: route.component }];
+        const layouts = [...route.layouts, route];
 
         const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : url
 
@@ -52,11 +51,6 @@ export default function (routes, cb) {
         }
 
         route.params = params
-
-        // set the route in context
-        const context = getContext('routify') || {}
-        context.route = route
-        setContext('routify', context)
 
         //set the route in the store
         store.route.set(route)
