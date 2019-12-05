@@ -1,28 +1,32 @@
 {
-    "name": "svelte-filerouter",
-    "version": "1.4.6",
-    "description": "",
-    "main": "lib/index.js",
-    "svelte": "runtime/index.js",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/jakobrosenberg/svelte-filerouter.git"
-    },
-    "author": "jakobrosenberg@gmail.com",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/jakobrosenberg/svelte-filerouter/issues"
-    },
-    "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-        "rollup-pluginutils": "^2.8.2",
-        "cheap-watch": "^1.0.2",
-        "commander": "^4.0.1"
-    },
-    "bin": {
-        "routify": "./plugins/cli.js"
-    }
+  "name": "@sveltech/routify",
+  "version": "1.0.0",
+  "description": "![](./routify.png)",
+  "main": "lib/index.js",
+  "svelte": "runtime/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakobrosenberg/svelte-filerouter.git"
+  },
+  "author": "jakobrosenberg@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakobrosenberg/svelte-filerouter/issues"
+  },
+  "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "rollup-pluginutils": "^2.8.2",
+    "cheap-watch": "^1.0.2",
+    "commander": "^4.0.1"
+  },
+  "bin": {
+    "routify": "./plugins/cli.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {}
 }
