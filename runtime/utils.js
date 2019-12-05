@@ -1,31 +1,32 @@
+import { getContext } from 'svelte'
 import { get } from 'svelte/store'
 import { route } from './store'
-import { routes } from '../tmp/routes'
+// import { routes } from '../tmp/routes'
 
 export const url = (path, params) => {
 
     if (path.match(/^\.\.?\//)) {
         //RELATIVE PATH
-        // strip component from existing route
-        let url = get(route).url.replace(/[^\/]+$/, '')
+        // get component's dir
+        let dir = getContext('routify').component.path.replace(/[^\/]+$/, '')
 
         // traverse through parents if needed
         const traverse = path.match(/\.\.\//g)
         if (traverse)
             for (let i = 1; i <= traverse.length; i++) {
-                url = url.replace(/[^\/]+\/$/, '')
+                dir = dir.replace(/[^\/]+\/$/, '')
             }
 
         // strip leading periods and slashes
         path = path.replace(/^[\.\/]+/, '')
-        path = url + path
+        path = dir + path
     } else if (path.match(/^\//)) {
         // ABSOLUTE PATH
     } else {
         // NAMED PATH        
         let newPath = routes.filter(r => r.name === path)[0]
         if (!newPath) console.error(`a path named '${path}' does not exist`)
-        else 
+        else
             path = newPath.url.replace(/\/index$/, '')
     }
 
