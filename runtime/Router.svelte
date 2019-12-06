@@ -1,11 +1,11 @@
 <script>
-  import { setContext } from "svelte"
-  import Route from "./Route.svelte"
-  import init from "./navigator.js"
+  import { setContext } from 'svelte'
+  import Route from './Route.svelte'
+  import init from './navigator.js'
 
   export let routes
 
-  setContext("routify", {
+  setContext('routify', {
     routes,
     component: false,
   })

@@ -1,22 +1,22 @@
 <script>
-  import { setContext, getContext } from "svelte";
-  import * as internals from "svelte/internal";
-  import { demandObject, suppressWarnings } from "./scripts.js";
+  import { setContext, getContext } from 'svelte'
+  import * as internals from 'svelte/internal'
+  import { demandObject, suppressWarnings } from './scripts.js'
 
   export let layouts = [],
-    scopeFromParent = {};
-  let scopeToChild;
+    scopeFromParent = {}
+  let scopeToChild
 
-  $: scoped = Object.assign({}, scopeFromParent, scopeToChild);
-  $: [layout, ...remainingLayouts] = layouts;
+  $: scoped = Object.assign({}, scopeFromParent, scopeToChild)
+  $: [layout, ...remainingLayouts] = layouts
 
-  $: layout && updateContext();
+  $: layout && updateContext()
 
   function updateContext() {
-    const _routify = getContext("routify");
-    const routify = JSON.parse(JSON.stringify(_routify));
-    routify.component = layout;
-    setContext("routify", routify);
+    const _routify = getContext('routify')
+    const routify = JSON.parse(JSON.stringify(_routify))
+    routify.component = layout
+    setContext('routify', routify)
   }
 </script>
 
