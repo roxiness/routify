@@ -7,7 +7,7 @@
 
   setContext("routify", {
     routes,
-    component: false
+    component: 'Root'
   });
 
   let layouts, route;
