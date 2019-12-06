@@ -1,14 +1,23 @@
 import { getContext } from 'svelte'
 import { get } from 'svelte/store'
-import { route } from './store'
-// import { routes } from '../tmp/routes'
+import { route } from './runtime/store'
 
 export const url = (path, params) => {
+    if(path)
+        return _url(path, params)
+    else {
+        
+        return _url.bind({context : getContext('routify')})
+    }
+}
 
+function _url(path, params) {
     if (path.match(/^\.\.?\//)) {
         //RELATIVE PATH
         // get component's dir
-        let dir = getContext('routify').component.path.replace(/[^\/]+$/, '')
+        const context = (this && this.context) || getContext('routify')
+        if (!context) throw new Error('url helper can only handle relative paths during component instantiation')
+        let dir = context.component.path.replace(/[^\/]+$/, '')
 
         // traverse through parents if needed
         const traverse = path.match(/\.\.\//g)
