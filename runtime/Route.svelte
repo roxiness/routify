@@ -10,14 +10,10 @@
   $: scoped = Object.assign({}, scopeFromParent, scopeToChild);
   $: [layout, ...remainingLayouts] = layouts;
 
-  $: layout && updateContext();
+  const { component, ...context } = getContext("routify");
+  setContext("routify", context);
+  $: context.component = layout;
 
-  function updateContext() {
-    const _routify = getContext("routify");
-    const routify = JSON.parse(JSON.stringify(_routify));
-    routify.component = layout;
-    setContext("routify", routify);
-  }
 </script>
 
 <svelte:component this={layout.component()} let:scoped={scopeToChild} {scoped}>
