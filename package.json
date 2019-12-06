@@ -17,7 +17,8 @@
   "scripts": {
     "eslint": "eslint lib plugins runtime",
     "prettier": "prettier '{lib,plugins,runtime}/**/*.{js,svelte}'",
-    "autostyle": "npm run prettier -- --write && npm run eslint -- --fix",
+    "lint": "npm run eslint",
+    "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

@@ -13,3 +13,6 @@ overrides:
   - files: ["runtime/**/*"]
     env:
       browser: true
+
+rules:
+  require-atomic-updates: off

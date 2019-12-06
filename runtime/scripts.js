@@ -1,6 +1,7 @@
 export const suppressWarnings = (function() {
   const _ignoreList = []
   let initialized = false
+  // eslint-disable-next-line no-console
   const _warn = console.warn
 
   return function(newIgnores = []) {
@@ -10,6 +11,7 @@ export const suppressWarnings = (function() {
 
     if (!initialized) {
       initialized = true
+      // eslint-disable-next-line no-console
       console.warn = function(...params) {
         const msg = params[0]
         const match = _ignoreList.filter(prop =>

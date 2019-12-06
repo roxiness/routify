@@ -1,5 +1,4 @@
 import * as store from './store'
-import { setContext, getContext } from 'svelte'
 
 export default function(routes, cb) {
   const fallbacks = routes.filter(route => route.isFallback)
