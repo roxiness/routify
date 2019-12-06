@@ -15,7 +15,6 @@
   function updateContext() {
     const _routify = getContext("routify");
     const routify = JSON.parse(JSON.stringify(_routify));
-    routify.parent = _routify;
     routify.component = layout;
     setContext("routify", routify);
   }
