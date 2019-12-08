@@ -1,19 +1,15 @@
+/* eslint-env node */
+
 import svelte from 'rollup-plugin-svelte-hot'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 import hmr, { autoCreate } from 'rollup-plugin-hot'
+import routify from '@sveltech/routify/plugins/rollup'
 
-// Set this to true to pass the --single flag to sirv (this serves your
-// index.html for any unmatched route, which is a requirement for SPA
-// routers using History API / pushState)
-//
-// NOTE This will have no effect when running with Nollup. For Nollup, you'd
-// have to add the --history-api-fallback yourself in your package.json
-// scripts (see: https://github.com/PepsRyuu/nollup/#nollup-options)
-//
-const spa = false
+// Routify needs SPA support from server
+const spa = true
 
 // NOTE The NOLLUP env variable is picked by various HMR plugins to switch
 // in compat mode. You should not change its name (and set the env variable
@@ -27,8 +23,10 @@ const production = !dev
 
 const hot = watch && !useLiveReload
 
+const src = process.env.NODE_ENV === 'test' ? 'src.test' : 'src'
+
 export default {
-  input: 'src/main.js',
+  input: `${src}/main.js`,
   output: {
     sourcemap: true,
     format: 'iife',
@@ -36,6 +34,11 @@ export default {
     file: nollup ? 'build/bundle.js' : 'public/build/bundle.js',
   },
   plugins: [
+    routify({
+      dynamicImport: true,
+      pages: `${src}/pages`,
+    }),
+
     svelte({
       // enable run-time checks when not in production
       dev: !production,
@@ -69,7 +72,7 @@ export default {
 
     // In dev mode, call `npm run start:dev` once
     // the bundle has been generated
-    dev && !nollup && serve(),
+    dev && !nollup && serve({ spa }),
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
@@ -82,17 +85,19 @@ export default {
     // Automatically create missing imported files. This helps keeping
     // the HMR server alive, because Rollup watch tends to crash and
     // hang indefinitely after you've tried to import a missing file.
-    hot && autoCreate({
-      include: 'src/**/*',
-      // Set false to prevent recreating a file that has just been
-      // deleted (Rollup watch will crash when you do that though).
-      recreate: true,
-    }),
+    hot &&
+      autoCreate({
+        include: 'src/**/*',
+        // Set false to prevent recreating a file that has just been
+        // deleted (Rollup watch will crash when you do that though).
+        recreate: true,
+      }),
 
-    hot && hmr({
-      public: 'public',
-      inMemory: true
-    }),
+    hot &&
+      hmr({
+        public: 'public',
+        inMemory: true,
+      }),
   ],
   watch: {
     clearScreen: false,
