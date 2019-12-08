@@ -11,5 +11,11 @@ module.exports = function svelteFileRouter(inputOptions) {
     async buildStart() {
       await firstBuildPromise
     },
+    ...process.env.NODE_ENV === 'test' && {
+      async _close() {
+        const { close } = await firstBuildPromise
+        return close()
+      }
+    }
   }
 }
