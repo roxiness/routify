@@ -1,0 +1,18 @@
+extends:
+  - '@rixo/svelte'
+
+# settings:
+#   svelte3/enabled: true
+#   svelte3/ignore-warnings: false
+#   svelte3/lint-template: false
+
+overrides:
+  - files: ["lib/**/*", "plugins/**/*"]
+    env:
+      node: true
+  - files: ["runtime/**/*"]
+    env:
+      browser: true
+
+rules:
+  require-atomic-updates: off
