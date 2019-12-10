@@ -25,9 +25,7 @@ describe('navigation in-page', () => {
 
     Index page
 
-    ${expectNoPageLoad()}
-
-    ${click('a[href="/about"]')}
+    ${[expectNoPageLoad(), click('a[href="/about"]')]}
 
     About page
 
