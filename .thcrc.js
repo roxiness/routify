@@ -27,8 +27,6 @@ module.exports = {
         import { routes } from './.tmp/routes.js'
       </script>
 
-      console.log('routes', routes)
-
       <Router {routes} />
     `,
   },

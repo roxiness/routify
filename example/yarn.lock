@@ -1070,24 +1070,9 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-nollup@>=0.8.4:
+nollup@>=0.8.4, nollup@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/nollup/-/nollup-0.9.0.tgz#b57fd938b9e4f8c7b797ce2b5ac49bbd7019e066"
-  dependencies:
-    acorn "^7.0.0"
-    chokidar "^2.0.2"
-    convert-source-map "^1.5.1"
-    express "^4.16.3"
-    express-history-api-fallback "^2.2.1"
-    express-http-proxy "^1.5.1"
-    express-ws "^4.0.0"
-    magic-string "^0.24.0"
-    mime-types "^2.1.24"
-    source-map "^0.5.6"
-
-nollup@^0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/nollup/-/nollup-0.8.5.tgz#d3fa97e3b843959e7cab6a413e1aba58ef506ff9"
   dependencies:
     acorn "^7.0.0"
     chokidar "^2.0.2"
@@ -1347,18 +1332,9 @@ rollup-plugin-commonjs@^10.0.0:
     resolve "^1.11.0"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-hot@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-hot/-/rollup-plugin-hot-0.0.6.tgz#50601aca061d0905e44b226bfd834235a52c44ba"
-  dependencies:
-    cors "^2.8.5"
-    express "^4.17.1"
-    rollup-pluginutils "^2.8.2"
-    ws "^7.1.2"
-
-rollup-plugin-hot@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-hot/-/rollup-plugin-hot-0.0.8.tgz#e84b14b1be4acf3aeec55d47f277e15b4828c6b6"
+rollup-plugin-hot@^0.0.9-0:
+  version "0.0.9-0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-hot/-/rollup-plugin-hot-0.0.9-0.tgz#79d632730c80eda75d425b5a28f16a8aa199746e"
   dependencies:
     cors "^2.8.5"
     express "^4.17.1"
@@ -1381,12 +1357,12 @@ rollup-plugin-node-resolve@^5.2.0:
     resolve "^1.11.1"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-svelte-hot@^0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-svelte-hot/-/rollup-plugin-svelte-hot-0.0.11.tgz#da72a983bff967cdc0638446c3b261e40c7ec2bf"
+rollup-plugin-svelte-hot@^0.1.1-0:
+  version "0.1.1-0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-svelte-hot/-/rollup-plugin-svelte-hot-0.1.1-0.tgz#b16702754bda2b0bdff52b44d8fa9482b612e302"
   dependencies:
     require-relative "^0.8.7"
-    rollup-plugin-hot "^0.0.6"
+    rollup-plugin-hot "^0.0.9-0"
     rollup-pluginutils "^2.8.2"
     sourcemap-codec "^1.4.4"
     svelte-hmr "^0.1.1"

@@ -31,12 +31,18 @@ export default {
     sourcemap: true,
     format: 'iife',
     name: 'app',
-    file: nollup ? 'build/bundle.js' : 'public/build/bundle.js',
+    ...nollup ? {
+      dir: 'public/build',
+      entryFileNames: 'build/bundle.js',
+    } : {
+      file: nollup ? 'build/bundle.js' : 'public/build/bundle.js',
+    }
   },
   plugins: [
     routify({
       dynamicImport: true,
       pages: `${src}/pages`,
+      outputFile: `${src}/.tmp/routes.js`
     }),
 
     svelte({
