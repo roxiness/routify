@@ -19,12 +19,13 @@
     "prettier": "prettier '{lib,plugins,runtime}/**/*.{js,svelte}'",
     "lint": "npm run eslint",
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:nollup": "thc --nollup",
+    "test": "thc"
   },
   "dependencies": {
-    "rollup-pluginutils": "^2.8.2",
     "cheap-watch": "^1.0.2",
-    "commander": "^4.0.1"
+    "commander": "^4.0.1",
+    "rollup-pluginutils": "^2.8.2"
   },
   "bin": {
     "routify": "./plugins/cli.js"
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "@rixo/eslint-config-svelte": "^0.7.1-alpha.0",
-    "svelte": "^3.16.0"
+    "svelte": "^3.16.0",
+    "test-hmr": "0.1.0-4"
   }
 }

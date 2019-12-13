@@ -1,12 +1,26 @@
 import { getContext } from 'svelte'
 import { get, writable } from 'svelte/store'
-import { route } from './runtime/store'
+import { route } from './store'
 
 export const url = {
     subscribe(listener) {
         listener( _url.bind({ context: getContext('routify') }) )
         return () => {}
     }
+}
+
+export const goto = {
+    subscribe(listener) {
+        listener( _goto.bind({ context: getContext('routify') }) )
+        return () => {}
+    }
+}
+
+
+function _goto(path, params){
+    const urlFn = _url.bind({ context: getContext('routify') })
+    const url = urlFn(path, params)
+    history.pushState({}, null, url)
 }
 
 function _url(path, params) {
