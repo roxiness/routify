@@ -41,16 +41,10 @@ function _url(path, params) {
         path = dir + path
     } else if (path.match(/^\//)) {
         // ABSOLUTE PATH
-    } else {
-        // NAMED PATH        
-        let newPath = routes.filter(r => r.name === path)[0]
-        if (!newPath) console.error(`a path named '${path}' does not exist`)
-        else
-            path = newPath.url.replace(/\/index$/, '')
     }
 
     params = Object.assign({}, get(route).params, params)
-    for (let [key, value] of Object.entries(params)) {
+    for (const [key, value] of Object.entries(params)) {
         path = path.replace(`:${key}`, value)
     }
     return path
