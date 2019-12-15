@@ -4,22 +4,21 @@
   import { demandObject, suppressWarnings } from './scripts.js'
 
   export let layouts = [],
-    scopeFromParent = {}
+    scoped = {}
   let scopeToChild
 
-  $: scoped = Object.assign({}, scopeFromParent, scopeToChild)
+  
   $: [layout, ...remainingLayouts] = layouts
 
-  const { component, ...context } = getContext("routify");
-  setContext("routify", context);
-  $: context.component = layout;
-
+  const { ...context } = getContext('routify')
+  setContext('routify', context)
+  $: context.component = layout
 </script>
 
 <svelte:component this={layout.component()} let:scoped={scopeToChild} {scoped}>
   {#if remainingLayouts.length}
     <svelte:self
       layouts={remainingLayouts}
-      scopeFromParent={{ ...scopeFromParent, ...scopeToChild }} />
+      scoped={{ ...scoped, ...scopeToChild }} />
   {/if}
 </svelte:component>
