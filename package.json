@@ -34,7 +34,6 @@
     "lib": "lib"
   },
   "devDependencies": {
-    "@rixo/eslint-config-svelte": "^0.7.1-alpha.0",
     "svelte": "^3.16.0",
     "test-hmr": "0.1.0-4"
   }
