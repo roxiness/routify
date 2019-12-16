@@ -2,6 +2,8 @@ import { getContext } from 'svelte'
 import { get, derived, writable } from 'svelte/store'
 import { route } from './store'
 
+export const params = derived(route, route => route.params )
+
 export const url = {
     subscribe(listener) {
         return derived(getContext('routify'),
@@ -17,7 +19,6 @@ export const goto = {
         ).subscribe(listener)
     }
 }
-
 
 export function _goto(context) {
     const urlFn = _url(context)
@@ -36,7 +37,6 @@ export function _url(context) {
             let dir = context.path
             // traverse through parents if needed
             const traverse = path.match(/\.\.\//g)
-            traverse && console.log('traverse length',  traverse.length)
             if (traverse)
                 for (let i = 1; i <= traverse.length; i++) {
                     dir = dir.replace(/\/[^\/]+$/, '')

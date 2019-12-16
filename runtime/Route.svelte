@@ -31,8 +31,6 @@
 
     setContext('routify', _context)
   }
-
-  $: console.log('layout', layout)
 </script>
 
 <svelte:component
