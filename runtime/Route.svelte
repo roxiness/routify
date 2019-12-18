@@ -3,30 +3,29 @@
   import * as internals from 'svelte/internal'
   import { demandObject, suppressWarnings } from './scripts.js'
   import { writable } from 'svelte/store'
-  import { _url, _goto } from './helpers.js'
+  import { _url, _goto, _isActive } from './helpers.js'
+  import { route } from './store'
 
   export let layouts = [],
     scoped = {}
   let scopeToChild
   let _context
 
-  const props = {}
+  let props = {}
 
   $: [layout, ...remainingLayouts] = layouts
 
-  $: if (layout.params) props.params = layout.params
+  $: updateContext(layout, $route)
 
-  $: layout && updateContext()
-
-  function updateContext() {
+  function updateContext(layout, route) {    
     const { path, params } = layout
     _context = _context || writable({})
-
     _context.set({
       path,
       params,
-      url: _url(layout),
-      goto: _goto(layout),
+      url: _url(layout, route),
+      goto: _goto(layout, route),
+      isActive: _isActive(layout, route)
     })
 
     setContext('routify', _context)
@@ -37,7 +36,7 @@
   this={layout.component()}
   let:scoped={scopeToChild}
   {scoped}
-  {...props}>
+  {...layout.params}>
   {#if remainingLayouts.length}
     <svelte:self
       layouts={remainingLayouts}
