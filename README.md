@@ -4,7 +4,7 @@
 
 While Routify and Sapper's router should work interchangeably, there are some key differences.
 
-|Differences|Sapper router|svelte-filerouter|
+|Differences|Sapper router|Routify|
 | - | -------------- | ------------- |
 |SSR   | +           | -             |
 |SPA   | -           | +             |
@@ -19,9 +19,6 @@ While Routify and Sapper's router should work interchangeably, there are some ke
 
 ## Template
 [Routify starter template](https://github.com/sveltech/routify-starter)
-
-## Example
-[See the template live](https://routify-starter.now.sh/)
 
 ## Issues
 Feel free to open an issue or a pull request, if there's anything you think could be improved.
