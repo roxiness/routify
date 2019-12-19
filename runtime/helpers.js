@@ -4,6 +4,20 @@ import { route } from './store'
 
 export const params = derived(route, route => route.params)
 
+export const context = {
+    subscribe(listener) {
+        return getContext('routify').subscribe(listener)
+    }
+}
+
+export const leftover = {
+    subscribe(listener) {
+        return derived(getContext('routify'),
+            context => context.route.leftover
+        ).subscribe(listener)
+    }
+}
+
 export const url = {
     subscribe(listener) {
         return derived(getContext('routify'),

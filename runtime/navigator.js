@@ -55,6 +55,8 @@ export default function(routes, cb) {
     }
 
     route.params = params
+    const match = url.match(route.regex+'(.+)')
+    route.leftover = (match && match[1]) || ''
 
     //set the route in the store
     store.route.set(route)

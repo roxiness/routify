@@ -21,6 +21,7 @@
     const { path, params } = layout
     _context = _context || writable({})
     _context.set({
+      route,
       path,
       params,
       url: _url(layout, route),
