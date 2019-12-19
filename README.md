@@ -2,17 +2,10 @@
 
 ###### SPA file router inspired by [Sapper router.](https://sapper.svelte.dev/docs#File_naming_rules)
 
-While Routify and Sapper's router should work interchangeably, there are some key differences.
+## Prerelease
+To try out our new prerelease of Routify, run ``npm i @sveltech/routify@next``
 
-|Differences|Sapper router|Routify|
-| - | -------------- | ------------- |
-|SSR   | +           | -             |
-|SPA   | -           | +             |
-|Resets| -           | +             |
-|Scoped variables| - | +             |
-|Route props | - | + |
-|Helpers | - | + |
-|Fast dev builds| - | + |
+For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
 
 ## Documentation
 [routify.now.sh](https://routify.now.sh)
@@ -21,4 +14,4 @@ While Routify and Sapper's router should work interchangeably, there are some ke
 [Routify starter template](https://github.com/sveltech/routify-starter)
 
 ## Issues
-Feel free to open an issue or a pull request, if there's anything you think could be improved.
+Everything is still in alpha, so feel free to open an issue or a pull request. All feedback is welcome.
