@@ -1,5 +1,5 @@
 <script>
-  import { setContext, getContext } from 'svelte'
+  import { setContext } from 'svelte'
   import * as internals from 'svelte/internal'
   import { demandObject, suppressWarnings } from './scripts.js'
   import { writable } from 'svelte/store'
@@ -15,18 +15,19 @@
 
   $: [layout, ...remainingLayouts] = layouts
 
-  $: updateContext(layout, $route)
+  $: updateContext(layout)
 
-  function updateContext(layout, route) {    
+  function updateContext(layout) {    
     const { path, params } = layout
     _context = _context || writable({})
     _context.set({
-      route,
+      route: $route,
       path,
       params,
-      url: _url(layout, route),
-      goto: _goto(layout, route),
-      isActive: _isActive(layout, route)
+      url: _url(layout, $route),
+      goto: _goto(layout, $route),
+      isActive: _isActive(layout, $route),
+      leftover: $route.leftover
     })
 
     setContext('routify', _context)

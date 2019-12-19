@@ -13,7 +13,7 @@ export const context = {
 export const leftover = {
     subscribe(listener) {
         return derived(getContext('routify'),
-            context => context.route.leftover
+            context => context.leftover
         ).subscribe(listener)
     }
 }
