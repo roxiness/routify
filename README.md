@@ -8,7 +8,7 @@ To try out our new prerelease of Routify, run ``npm i @sveltech/routify@next``
 For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
 
 ## Documentation
-[routify.now.sh](https://routify.now.sh)
+[routify.now.sh](https://routify.now.sh/docs/introduction)
 
 ## Template
 [Routify starter template](https://github.com/sveltech/routify-starter)
