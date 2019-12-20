@@ -53,8 +53,12 @@ export function _isActive(context, route){
 
 export function _goto(context, route) {
     const url = _url(context, route)
-    return function goto(path, params) {
-        history.pushState({}, null, url(path, params))
+    return function goto(path, params, _static, shallow) {
+        const href = url(path, params)
+        if(!_static)
+            history.pushState({}, null, href)
+        else
+            dispatchEvent(new CustomEvent('routifyupdatepage', {detail: {url: href, shallow}}))
     }
 }
 
