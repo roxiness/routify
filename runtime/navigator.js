@@ -3,13 +3,6 @@ import * as store from './store'
 export default function (routes, cb) {
 
 
-  addEventListener('popstate', () => updatePage())
-  addEventListener('replacestate', () => updatePage())
-  addEventListener('pushstate', () => updatePage())
-  addEventListener('click', click)
-  addEventListener('routifyupdatepage', ({ detail }) => { updatePage(detail.url, detail.shallow) })
-
-
     // create events for pushState and replaceState
     ;['pushState', 'replaceState'].forEach(eventName => {
       const fn = history[eventName]
@@ -39,7 +32,6 @@ export default function (routes, cb) {
     //run callback in Router.svelte
     cb({ layouts, route })
   }
-  updatePage()
 
   function click(event) {
     const el = event.target.closest('a')
@@ -60,7 +52,7 @@ export default function (routes, cb) {
     history.pushState({}, '', href)
   }
 
-  updatePage
+  return {updatePage, click}
 }
 
 
