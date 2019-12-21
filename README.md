@@ -13,5 +13,8 @@ For the old version (svelte-filerouter), please go [here](https://github.com/sve
 ## Template
 [Routify starter template](https://github.com/sveltech/routify-starter)
 
+## Example
+[Starter example](https://routify-starter.now.sh/)
+
 ## Issues
 Everything is still in alpha, so feel free to open an issue or a pull request. All feedback is welcome.
