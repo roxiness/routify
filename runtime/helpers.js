@@ -64,6 +64,7 @@ export function _goto(context, route) {
 
 export function _url(context, route) {
     return function url(path, params, preserveIndex) {
+        path = path || ('./')
 
         if (!preserveIndex)
             path = path.replace(/index$/, '')
