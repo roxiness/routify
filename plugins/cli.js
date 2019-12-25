@@ -15,7 +15,7 @@ program
     'Show warnings about unused props passed by filerouter'
   ) //todo, replace unknownPropWarnings
   .option(
-    '-d, --dynamic-imports',
+    '-D, --dynamic-imports',
     'Experimental code splitting. Defaults to false.)'
   )
   .option('-s, --single-build', "Don't watch for new route files") //todo

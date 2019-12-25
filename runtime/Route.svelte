@@ -34,8 +34,10 @@
   }
 </script>
 
+{#await layout.component()}
+{:then component}
 <svelte:component
-  this={layout.component()}
+  this={component}
   let:scoped={scopeToChild}
   {scoped}
   {...layout.params}>
@@ -45,3 +47,4 @@
       scoped={{ ...scoped, ...scopeToChild }} />
   {/if}
 </svelte:component>
+{/await}
