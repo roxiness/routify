@@ -59,7 +59,6 @@ export default function (routes, cb) {
 function urlToRoute(url, routes) {
   const fallbacks = routes.filter(route => route.isFallback)
   routes = routes.filter(route => !route.isFallback)
-  console.log(url)
   const urlWithIndex = url.match(/\/index\/?$/)
     ? url
     : (url + '/index').replace(/\/+/g, '/') //remove duplicate slashes
