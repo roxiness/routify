@@ -10,14 +10,21 @@
     scoped = {}
   let scopeToChild
   let _context
-
+  let self
   let props = {}
+  let parentElement
 
   $: [layout, ...remainingLayouts] = layouts
 
   $: updateContext(layout)
 
-  function updateContext(layout) {    
+  function setParent(el) {
+    parentElement = el.parentElement
+  }
+
+  $: layout && parentElement && parentElement.scrollTo(0, 0)
+
+  function updateContext(layout) {
     const { path, params } = layout
     _context = _context || writable({})
     _context.set({
@@ -27,7 +34,7 @@
       url: _url(layout, $route),
       goto: _goto(layout, $route),
       isActive: _isActive(layout, $route),
-      leftover: $route.leftover
+      leftover: $route.leftover,
     })
 
     setContext('routify', _context)
@@ -35,15 +42,20 @@
 </script>
 
 {#await layout.component() then component}
-<svelte:component
-  this={component}
-  let:scoped={scopeToChild}
-  {scoped}
-  {...layout.params}>
-  {#if remainingLayouts.length}
-    <svelte:self
-      layouts={remainingLayouts}
-      scoped={{ ...scoped, ...scopeToChild }} />
-  {/if}
-</svelte:component>
+  <svelte:component
+    this={component}
+    let:scoped={scopeToChild}
+    {scoped}
+    {...layout.params}>
+    {#if remainingLayouts.length}
+      <svelte:self
+        layouts={remainingLayouts}
+        scoped={{ ...scoped, ...scopeToChild }} />
+    {/if}
+  </svelte:component>
 {/await}
+
+<!-- get the parent element for scroll functionality -->
+{#if !parentElement}
+  <span use:setParent />
+{/if}
