@@ -42,7 +42,7 @@ export const isActive = {
     }
 }
 
-export function _isActive(context, route){
+export function _isActive(context, route) {
     const url = _url(context, route)
     return function (path, keepIndex = true) {
         path = url(path, null, keepIndex)
@@ -55,10 +55,10 @@ export function _goto(context, route) {
     const url = _url(context, route)
     return function goto(path, params, _static, shallow) {
         const href = url(path, params)
-        if(!_static)
+        if (!_static)
             history.pushState({}, null, href)
         else
-            dispatchEvent(new CustomEvent('routifyupdatepage', {detail: {url: href, shallow}}))
+            getContext('routifyupdatepage')(href, shallow)
     }
 }
 

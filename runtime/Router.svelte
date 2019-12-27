@@ -1,4 +1,5 @@
 <script>
+  import { setContext } from 'svelte'
   import { writable } from 'svelte/store'
   import Route from './Route.svelte'
   import init from './navigator.js'
@@ -12,16 +13,13 @@
   )
   updatePage()
 
-  // doesn't workin svelte:window (only gets called in navigation and not on refresh)
-  addEventListener('routifyupdatepage', ({ detail }) => {
-    updatePage(detail.url, detail.shallow)
-  })
+  setContext('routifyupdatepage', updatePage)
+
+  // svelte:window events doesn't work on refresh
+  ;['pushstate', 'popstate', 'replacestate'].forEach(e =>
+    addEventListener(e, () => updatePage())
+  )
+  addEventListener('click', click)
 </script>
 
 <Route {layouts} />
-
-<svelte:window  
-  on:pushstate={() => updatePage()}
-  on:popstate={() => updatePage()}
-  on:replacestate={() => updatePage()}
-  on:click={click} />
