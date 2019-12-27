@@ -34,8 +34,7 @@
   }
 </script>
 
-{#await layout.component()}
-{:then component}
+{#await layout.component() then component}
 <svelte:component
   this={component}
   let:scoped={scopeToChild}
