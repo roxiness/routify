@@ -1,9 +1,19 @@
 ![](./routify.png)
 
-###### SPA file router inspired by [Sapper router.](https://sapper.svelte.dev/docs#File_naming_rules)
 
-## Prerelease
-To try out our new prerelease of Routify, run ``npm i @sveltech/routify@next``
+----
+
+<p align="center"> 
+  <strong>WORK IN PROGRESS</strong>
+</p>
+
+----
+
+
+
+
+## Install
+``npm i @sveltech/routify@next`` or clone the [starter template](https://github.com/sveltech/routify-starter)
 
 For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
 
@@ -17,4 +27,4 @@ For the old version (svelte-filerouter), please go [here](https://github.com/sve
 [Starter example](https://routify-starter.now.sh/)
 
 ## Issues
-Everything is still in alpha, so feel free to open an issue or a pull request. All feedback is welcome.
+Please feel free to open an issue or a pull request. All feedback is welcome.
