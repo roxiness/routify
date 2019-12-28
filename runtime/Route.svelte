@@ -5,24 +5,24 @@
   import { writable } from 'svelte/store'
   import { _url, _goto, _isActive } from './helpers.js'
   import { route } from './store'
+  import { scrollAncestorsToTop } from './utils'
 
   export let layouts = [],
     scoped = {}
   let scopeToChild
   let _context
-  let self
   let props = {}
   let parentElement
 
   $: [layout, ...remainingLayouts] = layouts
 
-  $: updateContext(layout)
+    $: updateContext(layout)
 
   function setParent(el) {
     parentElement = el.parentElement
   }
 
-  $: layout && parentElement && parentElement.scrollTo(0, 0)
+  $: if(!remainingLayouts.length && parentElement) scrollAncestorsToTop(parentElement)
 
   function updateContext(layout) {
     const { path, params } = layout
