@@ -1,5 +1,9 @@
-module.exports = {
-  files: './test/**/*.spec.js',
+import * as path from 'path'
+
+const testDir = 'test/e2e'
+
+export default {
+  files: `./${testDir}/**/*.spec.js`,
 
   app: './example',
 
@@ -7,29 +11,7 @@ module.exports = {
   // will stop working
   resetGlob: ['*', '!pages', 'pages/*'],
 
-  fixtures: {
-    'main.js': `
-      import App from './App.svelte'
-
-      const target = document.body
-      const app = new App({ target })
-
-      export default app
-
-      if (import.meta.hot) {
-        import.meta.hot.dispose(() => { app.$destroy() })
-        import.meta.hot.accept()
-      }
-    `,
-    'App.svelte': `
-      <script>
-        import { Router } from '@sveltech/routify'
-        import { routes } from './.tmp/routes.js'
-      </script>
-
-      <Router {routes} />
-    `,
-  },
+  fixturesDir: path.resolve(`./${testDir}/fixtures`),
 
   // use FS (instead of RAM mock, that doesn't work currently with Routify)
   fs: true,

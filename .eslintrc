@@ -13,7 +13,7 @@ overrides:
   - files: ["runtime/**/*"]
     env:
       browser: true
-  - files: ["test/**/*"]
+  - files: ["test/e2e/**/*"]
     env:
       mocha: true
       node: true
