@@ -1,5 +1,5 @@
 import { getContext } from 'svelte'
-import { get, derived, writable } from 'svelte/store'
+import { derived } from 'svelte/store'
 import { route } from './store'
 
 export const params = derived(route, route => route.params)

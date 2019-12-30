@@ -3,27 +3,27 @@ import * as store from './store'
 export default function (routes, cb) {
 
 
-    // create events for pushState and replaceState
-    ;['pushState', 'replaceState'].forEach(eventName => {
-      const fn = history[eventName]
-      history[eventName] = function (state, title, url) {
-        const event = Object.assign(
-          new Event(eventName.toLowerCase(), { state, title, url })
-        )
-        Object.assign(event, { state, title, url })
+  // create events for pushState and replaceState
+  ;['pushState', 'replaceState'].forEach(eventName => {
+    const fn = history[eventName]
+    history[eventName] = function (state, title, url) {
+      const event = Object.assign(
+        new Event(eventName.toLowerCase(), { state, title, url })
+      )
+      Object.assign(event, { state, title, url })
 
-        fn.apply(this, [state, title, url])
-        return dispatchEvent(event)
-      }
-    })
+      fn.apply(this, [state, title, url])
+      return dispatchEvent(event)
+    }
+  })
 
   function updatePage(url, shallow) {
     const currentUrl = window.location.pathname
     url = url || currentUrl
 
-    let route = urlToRoute(url, routes)
-    let currentRoute = shallow && urlToRoute(currentUrl, routes)
-    let contextRoute = currentRoute || route
+    const route = urlToRoute(url, routes)
+    const currentRoute = shallow && urlToRoute(currentUrl, routes)
+    const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
 
     //set the route in the store
@@ -52,7 +52,7 @@ export default function (routes, cb) {
     history.pushState({}, '', href)
   }
 
-  return {updatePage, click}
+  return { updatePage, click }
 }
 
 
