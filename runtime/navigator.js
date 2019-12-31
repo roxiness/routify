@@ -61,25 +61,22 @@ function urlToRoute(url, routes) {
   const paramRoutes = routes.filter(route => route.hasParam)
   const plainRoutes = routes.filter(route => !route.isFallback && !route.hasParam)
 
-  const urlWithIndex = url.match(/\/index\/?$/) ? url
-    : (url + '/index').replace(/\/+/g, '/') //remove duplicate slashes
-  const urlWithSlash = (url + '/').replace(/\/+/g, '/')
+  const userUrl = url
+  url = (url + '/').replace(/\/+/g, '/')
 
   const route =
-    plainRoutes.filter(route => urlWithIndex.match(route.regex))[0] ||
+    plainRoutes.filter(route => url.match(route.regex))[0] ||
     paramRoutes.filter(route => url.match(route.regex))[0] ||
-    fallbacks.filter(route => urlWithSlash.match(route.regex))[0]
+    fallbacks.filter(route => url.match(route.regex))[0]
 
   if (!route)
     throw new Error(
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
     )
 
-  const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : urlWithSlash
-
   const params = {}
   if (route.paramKeys) {
-    regexUrl.match(route.regex).forEach((match, i) => {
+    url.match(route.regex).forEach((match, i) => {
       if (i === 0) return
       const key = route.paramKeys[i - 1]
       params[key] = match
@@ -88,7 +85,7 @@ function urlToRoute(url, routes) {
 
   route.params = params
 
-  const match = url.match(route.regex + '(.+)')
+  const match = userUrl.match(route.regex + '(.+)')
   route.leftover = (match && match[1]) || ''
 
   return route
