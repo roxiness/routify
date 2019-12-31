@@ -75,7 +75,7 @@ function urlToRoute(url, routes) {
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
     )
 
-  const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : url
+  const regexUrl = route.regex.match(/\/index$/) ? urlWithIndex : urlWithSlash
 
   const params = {}
   if (route.paramKeys) {
