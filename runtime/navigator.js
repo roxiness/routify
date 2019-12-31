@@ -58,17 +58,17 @@ export default function (routes, cb) {
 
 function urlToRoute(url, routes) {
   const fallbacks = routes.filter(route => route.isFallback)
-  routes = routes.filter(route => !route.isFallback)
-  const urlWithIndex = url.match(/\/index\/?$/)
-    ? url
+  const paramRoutes = routes.filter(route => route.hasParam)
+  const plainRoutes = routes.filter(route => !route.isFallback && !route.hasParam)
+
+  const urlWithIndex = url.match(/\/index\/?$/) ? url
     : (url + '/index').replace(/\/+/g, '/') //remove duplicate slashes
   const urlWithSlash = (url + '/').replace(/\/+/g, '/')
 
   const route =
-    routes.filter(route => urlWithIndex.match(route.regex))[0] ||
-    routes.filter(route => url.match(route.regex))[0] ||
-    fallbacks.filter(route => urlWithSlash.match(route.regex))[0] ||
-    fallbacks.filter(route => url.match(route.regex))[0]
+    plainRoutes.filter(route => urlWithIndex.match(route.regex))[0] ||
+    paramRoutes.filter(route => url.match(route.regex))[0] ||
+    fallbacks.filter(route => urlWithSlash.match(route.regex))[0]
 
   if (!route)
     throw new Error(
