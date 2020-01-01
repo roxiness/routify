@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const program = require('commander')
+const fs = require('fs')
 const { execSync } = require('child_process');
 const { start } = require('../lib/services/interface')
 
@@ -25,11 +26,17 @@ program
   .command('init')
   .action(() => {
     isCommand = true;
-    console.log('Fetching template')
-    execSync('degit https://github.com/sveltech/routify-starter')
-    console.log('Installing dependencies')
-    execSync('npm i')
-    execSync('npm run dev', { stdio: 'inherit' })
+    fs.readdir('./', (err, files) => {
+      if (err) console.log(err)
+      else if (files.length) console.log('Can only init in an empty directory.')
+      else {
+        console.log('Fetching template')
+        execSync('degit https://github.com/sveltech/routify-starter')
+        console.log('Installing dependencies')
+        execSync('npm i')
+        execSync('npm run dev', { stdio: 'inherit' })
+      }
+    })
   })
 
 program.parse(process.argv)
