@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
 const program = require('commander')
+const fs = require('fs')
+const { execSync } = require('child_process');
 const { start } = require('../lib/services/interface')
+
+let isCommand = false
 
 program
   .option('-d, --debug', 'extra debugging')
@@ -19,7 +23,22 @@ program
     'Experimental code splitting. Defaults to false.)'
   )
   .option('-s, --single-build', "Don't watch for new route files") //todo
+  .command('init')
+  .action(() => {
+    isCommand = true;
+    fs.readdir('./', (err, files) => {
+      if (err) console.log(err)
+      else if (files.length) console.log('Can only init in an empty directory.')
+      else {
+        console.log('Fetching template')
+        execSync('npx degit https://github.com/sveltech/routify-starter')
+        console.log('Installing dependencies')
+        execSync('npm i')
+        execSync('npm run dev', { stdio: 'inherit' })
+      }
+    })
+  })
 
 program.parse(process.argv)
 
-start(program)
+if (!isCommand) start(program)
