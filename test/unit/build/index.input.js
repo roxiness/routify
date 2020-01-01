@@ -4,7 +4,5 @@ export default {
   },
   files: {
     '/pages/index.svelte': 'index',
-    '/pages/foo.svelte': 'foo',
-    '/pages/bar.svelte': 'bar',
   },
 }

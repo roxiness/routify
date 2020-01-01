@@ -4,7 +4,6 @@ export default {
   },
   files: {
     '/pages/index.svelte': 'index',
-    '/pages/foo.svelte': 'foo',
-    '/pages/bar/index.svelte': 'bar',
+    '/pages/_layout.svelte': '<slot/>',
   },
 }
