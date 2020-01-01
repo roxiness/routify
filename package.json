@@ -14,14 +14,6 @@
     "url": "https://github.com/jakobrosenberg/svelte-filerouter/issues"
   },
   "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme",
-  "scripts": {
-    "eslint": "eslint lib plugins runtime",
-    "prettier": "prettier '{lib,plugins,runtime}/**/*.{js,svelte}'",
-    "lint": "npm run eslint",
-    "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
-    "test:nollup": "thc --nollup",
-    "test": "thc"
-  },
   "dependencies": {
     "cheap-watch": "^1.0.2",
     "commander": "^4.0.1",
@@ -37,5 +29,13 @@
     "@rixo/eslint-config-svelte": "^0.8.0",
     "svelte": "^3.16.0",
     "test-hmr": "^0.1.0-6"
+  },
+  "scripts": {
+    "eslint": "eslint lib plugins runtime",
+    "prettier": "prettier '{lib,plugins,runtime}/**/*.{js,svelte}'",
+    "lint": "npm run eslint",
+    "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
+    "test:nollup": "thc --nollup",
+    "test": "thc"
   }
 }
