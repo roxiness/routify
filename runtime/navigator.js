@@ -55,20 +55,8 @@ export default function (routes, cb) {
   return { updatePage, click }
 }
 
-
 function urlToRoute(url, routes) {
-  const fallbacks = routes.filter(route => route.isFallback)
-  const paramRoutes = routes.filter(route => route.hasParam)
-  const plainRoutes = routes.filter(route => !route.isFallback && !route.hasParam)
-
-  const userUrl = url
-  url = (url + '/').replace(/\/+/g, '/')
-
-  const route =
-    plainRoutes.filter(route => url.match(route.regex))[0] ||
-    paramRoutes.filter(route => url.match(route.regex))[0] ||
-    fallbacks.filter(route => url.match(route.regex))[0]
-
+  const route = routes.find(route => url.match(route.regex))
   if (!route)
     throw new Error(
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
@@ -82,11 +70,9 @@ function urlToRoute(url, routes) {
       params[key] = match
     })
   }
-
   route.params = params
 
-  const match = userUrl.match(route.regex + '(.+)')
-  route.leftover = (match && match[1]) || ''
+  route.leftover = url.replace(new RegExp(route.regex), '')
 
   return route
 }
