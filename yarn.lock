@@ -2789,9 +2789,9 @@ tapable@^0.1.8:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.1.10.tgz#29c35707c2b70e50d07482b5d202e8ed446dafd4"
 
-test-hmr@^0.1.0-5:
-  version "0.1.0-5"
-  resolved "https://registry.yarnpkg.com/test-hmr/-/test-hmr-0.1.0-5.tgz#e3598406fa2a4a1c18989e1ab2349025fc7e1509"
+test-hmr@^0.1.0-6:
+  version "0.1.0-6"
+  resolved "https://registry.yarnpkg.com/test-hmr/-/test-hmr-0.1.0-6.tgz#d16ca3c0c218b1d9ed19f007a66f2641ba3bfc94"
   dependencies:
     chai "^4.2.0"
     chai-as-promised "^7.1.1"
