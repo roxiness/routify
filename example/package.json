@@ -12,7 +12,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte-hot": "^0.1.1",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.16.7"
+    "svelte": "3.16.6"
   },
   "dependencies": {
     "sirv-cli": "^0.4.4"
