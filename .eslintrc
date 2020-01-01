@@ -19,6 +19,9 @@ overrides:
       node: true
     rules:
       no-unused-expressions: off
+  - files: ["test/unit/**/*"]
+    env:
+      node: true
 
 rules:
   require-atomic-updates: off
