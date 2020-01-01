@@ -31,7 +31,7 @@ program
       else if (files.length) console.log('Can only init in an empty directory.')
       else {
         console.log('Fetching template')
-        execSync('degit https://github.com/sveltech/routify-starter')
+        execSync('npx degit https://github.com/sveltech/routify-starter')
         console.log('Installing dependencies')
         execSync('npm i')
         execSync('npm run dev', { stdio: 'inherit' })
