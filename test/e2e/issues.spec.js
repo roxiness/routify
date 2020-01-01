@@ -1,7 +1,7 @@
 import thc from 'test-hmr'
 
 describe('issues', () => {
-  thc`
+  thc.skip`
     # #41 [id].svelte with no params resolves to fallback
 
     --- pages/[id].svelte ---
