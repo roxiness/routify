@@ -27,8 +27,13 @@
   },
   "devDependencies": {
     "@rixo/eslint-config-svelte": "^0.8.0",
+    "chokidar-cli": "^2.1.0",
+    "memfs": "^3.0.3",
+    "pta": "^0.1.3",
+    "rewiremock": "^3.13.9",
     "svelte": "^3.16.0",
-    "test-hmr": "^0.1.0-6"
+    "test-hmr": "^0.1.0-6",
+    "zora": "^3.1.8"
   },
   "scripts": {
     "eslint": "eslint lib plugins runtime",
@@ -36,6 +41,9 @@
     "lint": "npm run eslint",
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
     "test:nollup": "thc --nollup",
+    "test:unit": "pta test/**/*.pta.js",
+    "test:unit:watch": "chokidar '{test,lib,runtime,plugins}/**/*.js' -c 'npm run --silent test:unit'",
+    "test:unit:watch:only": "chokidar '{test,lib,runtime,plugins}/**/*.js' -c 'npm run --silent test:unit -- --only'",
     "test": "thc"
   }
 }
