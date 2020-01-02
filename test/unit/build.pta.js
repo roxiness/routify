@@ -24,10 +24,13 @@ export default t => {
 
         const vol = Volume.fromJSON(spec.files)
 
-        const build = Builder({
-          ...spec.options,
-          fsa: fsa.from(vol),
-        })
+        const build = Builder(
+          {
+            ...spec.options,
+            fsa: fsa.from(vol),
+          },
+          true
+        )
 
         const actual = await build(true)
 
