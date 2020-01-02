@@ -1,12 +1,10 @@
 import * as store from './store'
 
-export default function (routes, cb) {
-
-
+export default function(routes, cb) {
   // create events for pushState and replaceState
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = function (state, title, url) {
+    history[eventName] = function(state, title, url) {
       const event = Object.assign(
         new Event(eventName.toLowerCase(), { state, title, url })
       )

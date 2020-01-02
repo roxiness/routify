@@ -16,13 +16,14 @@
 
   $: [layout, ...remainingLayouts] = layouts
 
-    $: updateContext(layout)
+  $: updateContext(layout)
 
   function setParent(el) {
     parentElement = el.parentElement
   }
 
-  $: if(!remainingLayouts.length && parentElement) scrollAncestorsToTop(parentElement)
+  $: if (!remainingLayouts.length && parentElement)
+    scrollAncestorsToTop(parentElement)
 
   function updateContext(layout) {
     const { path, params } = layout
