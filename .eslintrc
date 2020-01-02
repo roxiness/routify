@@ -13,12 +13,15 @@ overrides:
   - files: ["runtime/**/*"]
     env:
       browser: true
-  - files: ["test/**/*"]
+  - files: ["test/e2e/**/*"]
     env:
       mocha: true
       node: true
     rules:
       no-unused-expressions: off
+  - files: ["test/unit/**/*"]
+    env:
+      node: true
 
 rules:
   require-atomic-updates: off
