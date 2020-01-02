@@ -42,11 +42,15 @@ export default t => {
         }
 
         // fail if expected file was not present
-        t.ok(hasExpected, `${name}.expected.js exists`)
+        t.test(`${name}.expected.js exists`, t => {
+          t.ok(hasExpected)
+        })
 
         const expected = await fsa.readFile(expectedFilename, 'utf8')
 
-        t.equal(actual, expected)
+        t.test('content is as expected', t => {
+          t.equal(actual, expected)
+        })
       })
     }
   })
