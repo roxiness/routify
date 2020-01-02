@@ -1,10 +1,10 @@
 import * as store from './store'
 
-export default function(routes, cb) {
+export default function (routes, cb) {
   // create events for pushState and replaceState
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = function(state, title, url) {
+    history[eventName] = function (state, title, url) {
       const event = Object.assign(
         new Event(eventName.toLowerCase(), { state, title, url })
       )
@@ -62,10 +62,14 @@ function urlToRoute(url, routes) {
 
   const params = {}
   if (route.paramKeys) {
-    url.match(route.regex).forEach((match, i) => {
-      if (i === 0) return
-      const key = route.paramKeys[i - 1]
-      params[key] = match
+    const positions = paramPosFromUrl(route.url)
+
+    const matches = url.match(route.regex).slice(1)
+    positions.forEach((paramPos, i) => {
+      const key = route.paramKeys[i]
+      params[key] = matches[i]
+      const layout = route.layouts.find(({ path }) => layoutPos(path) === paramPos)
+      layout.params.key = matches[i]
     })
   }
   route.params = params
@@ -73,4 +77,15 @@ function urlToRoute(url, routes) {
   route.leftover = url.replace(new RegExp(route.regex), '')
 
   return route
+}
+
+function layoutPos(path) { return path.split('/').filter(Boolean).length - 1 }
+
+function paramPosFromUrl(url) {
+  const fragments = url.split('/')
+    .filter(Boolean)
+    .map((f, i) => ({ f, i }))
+    .filter(({ f }) => f.charAt(0) === ':')
+    .map(f => f.i)
+  return fragments
 }

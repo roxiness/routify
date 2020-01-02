@@ -15,6 +15,7 @@ const decorateRoute = function(route) {
   route.name = route.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
   route.ranking = pathToRank(route)
   route.url = route.path.replace(/\[([^\]]+)\]/, ':$1')
+  route.layouts.map(l => { l.params = {}; return l })
 
   return route
 }
