@@ -6,21 +6,16 @@ import { Builder } from '../../lib/services/interface'
 
 export default t => {
   t.test('build', async t => {
-    const resolve = (...names) => path.resolve(__dirname, 'build', ...names)
+    const resolveSample = (...names) =>
+      path.resolve(__dirname, 'build', ...names)
 
-    const files = await fsa.readdir(resolve())
+    const files = await fsa.readdir(resolveSample())
 
     const inputRe = /^(.+)\.input\.js$/
 
-    for (const file of files) {
-      const match = inputRe.exec(file)
-
-      if (!match) continue
-
-      const name = match[1]
-
+    const runSample = ([file, name]) => {
       t.test(name, async t => {
-        const { default: spec } = await import(resolve(file))
+        const { default: spec } = await import(resolveSample(file))
 
         const vol = Volume.fromJSON(spec.files)
 
@@ -34,7 +29,7 @@ export default t => {
 
         const actual = await build(true)
 
-        const expectedFilename = resolve(`${name}.expected.js`)
+        const expectedFilename = resolveSample(`${name}.expected.js`)
         const hasExpected = await fsa.exists(expectedFilename)
 
         if (!hasExpected) {
@@ -53,5 +48,10 @@ export default t => {
         })
       })
     }
+
+    files
+      .map(file => inputRe.exec(file))
+      .filter(Boolean)
+      .forEach(runSample)
   })
 }
