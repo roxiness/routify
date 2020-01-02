@@ -2,7 +2,7 @@
 
 const program = require('commander')
 const fs = require('fs')
-const { execSync } = require('child_process');
+const { execSync } = require('child_process')
 const { start } = require('../lib/services/interface')
 
 let isCommand = false
@@ -25,7 +25,7 @@ program
   .option('-s, --single-build', "Don't watch for new route files") //todo
   .command('init')
   .action(() => {
-    isCommand = true;
+    isCommand = true
     fs.readdir('./', (err, files) => {
       if (err) console.log(err)
       else if (files.length) console.log('Can only init in an empty directory.')

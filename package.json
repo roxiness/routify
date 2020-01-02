@@ -38,7 +38,7 @@
   },
   "scripts": {
     "eslint": "eslint lib plugins runtime",
-    "prettier": "prettier '{lib,plugins,runtime}/**/*.{js,svelte}'",
+    "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
     "lint": "npm run eslint",
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
     "test:e2e:rollup": "thc",
