@@ -2,6 +2,10 @@ const throwsOutside = {
   throws: 'outside of app',
 }
 
+// expects: [
+//   [input, expected], // $url(input) === expected
+// ]
+
 export const paths = [
   {
     // TODO keep?
