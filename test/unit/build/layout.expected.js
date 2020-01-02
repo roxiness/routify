@@ -3,28 +3,35 @@
 import _index from '/pages/index.svelte'
 
 
- export const routes = [
+ import { buildRoutes } from "/home/eric/projects/routify/routify/runtime/buildRoutes"
+
+
+ const layouts = {
+["/_layout"]:{
+  "component": () => __layout,
+  "path": "/"
+}
+}
+
+
+ export const routeKeys = ["isFallback","isIndex","hasParam","path","component","layouts"]
+
+
+ const _routes = [
 {
-  "isLayout": false,
   "isFallback": false,
   "isIndex": true,
   "hasParam": false,
   "path": "/index",
-  "regex": "^(/index)?/?$",
-  "name": "/index",
-  "ranking": "Z",
-  "url": "/index",
   "component": () => _index,
   "layouts": [
-    {
-      "path": "/",
-      "url": "/",
-      "filepath": "/_layout.svelte",
-      "component": () => __layout
-    }
+    layouts['/_layout']
   ]
 }
 ]
+
+
+ export const routes = buildRoutes(_routes, routeKeys)
 
     export const options = {}
     
