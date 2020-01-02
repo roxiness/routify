@@ -69,7 +69,7 @@ function urlToRoute(url, routes) {
       const key = route.paramKeys[i]
       params[key] = matches[i]
       const layout = route.layouts.find(({ path }) => layoutPos(path) === paramPos)
-      layout.params.key = matches[i]
+      if (layout) layout.params.key = matches[i]
     })
   }
   route.params = params
