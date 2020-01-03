@@ -60,32 +60,36 @@ function urlToRoute(url, routes) {
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
     )
 
-  const params = {}
   if (route.paramKeys) {
-    const positions = paramPosFromUrl(route.url)
+    const layouts = layoutByPos(route.layouts)
+    const fragments = url.split('/').filter(Boolean)
+    const routeProps = getRouteProps(route.url)
 
-    const matches = url.match(route.regex).slice(1)
-    positions.forEach((paramPos, i) => {
-      const key = route.paramKeys[i]
-      params[key] = matches[i]
-      const layout = route.layouts.find(({ path }) => layoutPos(path) === paramPos)
-      if (layout) layout.params.key = matches[i]
+    routeProps.forEach((prop, i) => {
+      if (prop) {
+        route.params[prop] = fragments[i]
+        if (layouts[i])
+          layouts[i].param = { [prop]: fragments[i] }
+        else
+          route.param = { [prop]: fragments[i] }
+      }
     })
   }
-  route.params = params
 
   route.leftover = url.replace(new RegExp(route.regex), '')
 
   return route
 }
 
-function layoutPos(path) { return path.split('/').filter(Boolean).length - 1 }
+function layoutByPos(layouts) {
+  const arr = []
+  layouts.forEach(layout => { arr[layout.path.split('/').filter(Boolean).length] = layout })
+  return arr
+}
 
-function paramPosFromUrl(url) {
-  const fragments = url.split('/')
+function getRouteProps(url) {
+  return url.split('/')
     .filter(Boolean)
-    .map((f, i) => ({ f, i }))
-    .filter(({ f }) => f.charAt(0) === ':')
-    .map(f => f.i)
-  return fragments
+    .map(f => f.match(/\:(.+)/))
+    .map(f => f && f[1])
 }
