@@ -1,7 +1,7 @@
 import { _url } from '@/runtime/helpers.js'
 
 export default t => {
-  t.test('helpers: $url', async t => {
+  t.skip('helpers: $url', async t => {
     t.test('_url factory exists', t => {
       t.equal(typeof _url, 'function')
     })
