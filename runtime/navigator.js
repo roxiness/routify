@@ -1,10 +1,10 @@
 import * as store from './store'
 
-export default function(routes, cb) {
+export default function (routes, cb) {
   // create events for pushState and replaceState
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = function(state, title, url) {
+    history[eventName] = function (state, title, url) {
       const event = Object.assign(
         new Event(eventName.toLowerCase(), { state, title, url })
       )
@@ -60,17 +60,36 @@ function urlToRoute(url, routes) {
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
     )
 
-  const params = {}
   if (route.paramKeys) {
-    url.match(route.regex).forEach((match, i) => {
-      if (i === 0) return
-      const key = route.paramKeys[i - 1]
-      params[key] = match
+    const layouts = layoutByPos(route.layouts)
+    const fragments = url.split('/').filter(Boolean)
+    const routeProps = getRouteProps(route.url)
+
+    routeProps.forEach((prop, i) => {
+      if (prop) {
+        route.params[prop] = fragments[i]
+        if (layouts[i])
+          layouts[i].param = { [prop]: fragments[i] }
+        else
+          route.param = { [prop]: fragments[i] }
+      }
     })
   }
-  route.params = params
 
   route.leftover = url.replace(new RegExp(route.regex), '')
 
   return route
+}
+
+function layoutByPos(layouts) {
+  const arr = []
+  layouts.forEach(layout => { arr[layout.path.split('/').filter(Boolean).length] = layout })
+  return arr
+}
+
+function getRouteProps(url) {
+  return url.split('/')
+    .filter(Boolean)
+    .map(f => f.match(/\:(.+)/))
+    .map(f => f && f[1])
 }

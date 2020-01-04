@@ -74,11 +74,9 @@ export function _url(context, route) {
       // let dir = context.path.replace(/[^\/]+$/, '')
       let dir = context.path
       // traverse through parents if needed
-      const traverse = path.match(/\.\.\//g)
-      if (traverse)
-        for (let i = 1; i <= traverse.length; i++) {
-          dir = dir.replace(/\/[^\/]+\/?$/, '')
-        }
+      const traverse = path.match(/\.\.\//g) || []
+      traverse.forEach(() => { dir = dir.replace(/\/[^\/]+\/?$/, '') })
+
 
       // strip leading periods and slashes
       path = path.replace(/^[\.\/]+/, '')

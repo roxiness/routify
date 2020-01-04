@@ -47,7 +47,7 @@
     this={component}
     let:scoped={scopeToChild}
     {scoped}
-    {...layout.params}>
+    {...layout.param}>
     {#if remainingLayouts.length}
       <svelte:self
         layouts={remainingLayouts}
