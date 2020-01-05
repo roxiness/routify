@@ -49,7 +49,8 @@ export function _isActive(context, route) {
   return function(path, keepIndex = true) {
     path = url(path, null, keepIndex)
     const currentPath = url(route.url, null, keepIndex)
-    return currentPath.includes(path)
+    const re = new RegExp('^'+path)
+    return currentPath.match(re)
   }
 }
 
