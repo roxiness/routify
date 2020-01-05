@@ -63,7 +63,7 @@ function urlToRoute(url, routes) {
   if (route.paramKeys) {
     const layouts = layoutByPos(route.layouts)
     const fragments = url.split('/').filter(Boolean)
-    const routeProps = getRouteProps(route.url)
+    const routeProps = getRouteProps(route.path)
 
     routeProps.forEach((prop, i) => {
       if (prop) {
@@ -83,7 +83,7 @@ function urlToRoute(url, routes) {
 
 function layoutByPos(layouts) {
   const arr = []
-  layouts.forEach(layout => { arr[layout.path.split('/').filter(Boolean).length] = layout })
+  layouts.forEach(layout => { arr[layout.path.split('/').filter(Boolean).length-1] = layout })
   return arr
 }
 
