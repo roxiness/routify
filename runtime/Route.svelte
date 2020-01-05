@@ -26,16 +26,13 @@
     scrollAncestorsToTop(parentElement)
 
   function updateContext(layout) {
-    const { path, params } = layout
     _context = _context || writable({})
     _context.set({
       route: $route,
-      path,
-      params,
+      path: layout.path,
       url: _url(layout, $route),
       goto: _goto(layout, $route),
       isActive: _isActive(layout, $route),
-      leftover: $route.leftover,
     })
 
     setContext('routify', _context)
