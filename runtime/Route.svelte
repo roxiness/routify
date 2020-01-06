@@ -10,13 +10,14 @@
   export let layouts = [],
     scoped = {}
   let scopeToChild
-  let _context
   let props = {}
   let parentElement
+  let component
+  const context = writable({})
+  setContext('routify', context)
 
   $: [layout, ...remainingLayouts] = layouts
-
-  $: updateContext(layout)
+  $: setComponent(layout)
 
   function setParent(el) {
     parentElement = el.parentElement
@@ -26,20 +27,23 @@
     scrollAncestorsToTop(parentElement)
 
   function updateContext(layout) {
-    _context = _context || writable({})
-    _context.set({
+    context.set({
       route: $route,
       path: layout.path,
       url: _url(layout, $route),
       goto: _goto(layout, $route),
       isActive: _isActive(layout, $route),
     })
+  }
 
-    setContext('routify', _context)
+  async function setComponent(layout) {
+    // We want component and context to be synchronized
+    component = await layout.component()
+    updateContext(layout)
   }
 </script>
 
-{#await layout.component() then component}
+{#if component}
   <svelte:component
     this={component}
     let:scoped={scopeToChild}
@@ -51,7 +55,7 @@
         scoped={{ ...scoped, ...scopeToChild }} />
     {/if}
   </svelte:component>
-{/await}
+{/if}
 
 <!-- get the parent element for scroll functionality -->
 {#if !parentElement}
