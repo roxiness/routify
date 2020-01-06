@@ -9,22 +9,20 @@
 
   export let layouts = [],
     scoped = {}
-  let scopeToChild
-  let props = {}
-  let parentElement
-  let component
+  let scopeToChild,
+    props = {},
+    parentElement,
+    component
   const context = writable({})
   setContext('routify', context)
 
   $: [layout, ...remainingLayouts] = layouts
   $: setComponent(layout)
+  $: if (!remainingLayouts.length) scrollAncestorsToTop(parentElement)
 
   function setParent(el) {
     parentElement = el.parentElement
   }
-
-  $: if (!remainingLayouts.length && parentElement)
-    scrollAncestorsToTop(parentElement)
 
   function updateContext(layout) {
     context.set({
