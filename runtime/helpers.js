@@ -1,7 +1,6 @@
 import { getContext } from 'svelte'
 import { derived } from 'svelte/store'
 
-
 export const context = {
   subscribe(listener) {
     return getContext('routify').subscribe(listener)
@@ -29,7 +28,6 @@ export const leftover = {
     ).subscribe(listener)
   },
 }
-
 
 /** HELPERS */
 export const url = {
@@ -59,7 +57,7 @@ export const isActive = {
 
 export function _isActive(context, route) {
   const url = _url(context, route)
-  return function (path, keepIndex = true) {
+  return function(path, keepIndex = true) {
     path = url(path, null, keepIndex)
     const currentPath = url(route.path, null, keepIndex)
     const re = new RegExp('^' + path)
@@ -89,8 +87,9 @@ export function _url(context, route) {
       let dir = context.path
       // traverse through parents if needed
       const traverse = path.match(/\.\.\//g) || []
-      traverse.forEach(() => { dir = dir.replace(/\/[^\/]+\/?$/, '') })
-
+      traverse.forEach(() => {
+        dir = dir.replace(/\/[^\/]+\/?$/, '')
+      })
 
       // strip leading periods and slashes
       path = path.replace(/^[\.\/]+/, '')

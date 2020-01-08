@@ -1,10 +1,10 @@
 import * as store from './store'
 
-export default function (routes, cb) {
+export default function(routes, cb) {
   // create events for pushState and replaceState
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = function (state, title, url) {
+    history[eventName] = function(state, title, url) {
       const event = Object.assign(
         new Event(eventName.toLowerCase(), { state, title, url })
       )
@@ -68,10 +68,8 @@ function urlToRoute(url, routes) {
     routeProps.forEach((prop, i) => {
       if (prop) {
         route.params[prop] = fragments[i]
-        if (layouts[i])
-          layouts[i].param = { [prop]: fragments[i] }
-        else
-          route.param = { [prop]: fragments[i] }
+        if (layouts[i]) layouts[i].param = { [prop]: fragments[i] }
+        else route.param = { [prop]: fragments[i] }
       }
     })
   }
@@ -83,12 +81,15 @@ function urlToRoute(url, routes) {
 
 function layoutByPos(layouts) {
   const arr = []
-  layouts.forEach(layout => { arr[layout.path.split('/').filter(Boolean).length-1] = layout })
+  layouts.forEach(layout => {
+    arr[layout.path.split('/').filter(Boolean).length - 1] = layout
+  })
   return arr
 }
 
 function getRouteProps(url) {
-  return url.split('/')
+  return url
+    .split('/')
     .filter(Boolean)
     .map(f => f.match(/\:(.+)/))
     .map(f => f && f[1])
