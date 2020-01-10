@@ -1,6 +1,6 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.0.1-25",
+  "version": "1.0.1-26",
   "description": "![](./routify.png)",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
