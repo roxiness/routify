@@ -71,16 +71,6 @@ function handleClick(event) {
   history.pushState({}, '', href)
 }
 
-
-
-export function handleHash() {
-  if (config.scroll) {
-    const { hash } = window.location
-    const el = document.querySelector(hash)
-    if (hash && el) el.scrollIntoView()
-  }
-}
-
 function urlToRoute(url, routes) {
   const route = routes.find(route => url.match(route.regex))
   if (!route)

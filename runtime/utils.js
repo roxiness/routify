@@ -1,6 +1,25 @@
+import config from '../tmp/config'
 const MATCH_PARAM = RegExp(/\:[^\/\()]+/g)
 
-export const scrollAncestorsToTop = function(element) {
+export function handleScroll(element) {
+  scrollAncestorsToTop(element)
+  handleHash()
+}
+
+
+export function handleHash() {
+  const { scroll } = config
+  const options = ['auto', 'smooth', 'smooth']
+  if (scroll) {
+    const behavior = options.includes(scroll) && scroll || 'auto'
+    const { hash } = window.location
+    const el = document.querySelector(hash)
+    if (hash && el) el.scrollIntoView({ behavior })
+  }
+}
+
+
+export function scrollAncestorsToTop(element) {
   if (element && element.dataset.routify !== 'scroll-lock') {
     element.scrollTo(0, 0)
     scrollAncestorsToTop(element.parentElement)

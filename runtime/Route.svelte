@@ -5,7 +5,7 @@
   import { writable } from 'svelte/store'
   import { _url, _goto, _isActive } from './helpers.js'
   import { route } from './store'
-  import { scrollAncestorsToTop } from './utils'
+  import { handleScroll } from './utils'
 
   export let layouts = [],
     scoped = {}
@@ -18,7 +18,7 @@
 
   $: [layout, ...remainingLayouts] = layouts
   $: setComponent(layout)
-  $: if (!remainingLayouts.length) scrollAncestorsToTop(parentElement)
+  $: if (!remainingLayouts.length) handleScroll(parentElement)
 
   function setParent(el) {
     parentElement = el.parentElement

@@ -22,7 +22,8 @@ program
     '-D, --dynamic-imports',
     'Experimental code splitting. Defaults to false.)'
   )
-  .option('-s, --single-build', "Don't watch for new route files") //todo
+  .option('-b, --single-build', "Don't watch for new route files") //todo
+  .option('-s, --scroll [behavior]', "Scroll behavior.", "auto") 
   .command('init')
   .action(() => {
     isCommand = true
