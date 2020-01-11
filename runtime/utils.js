@@ -10,9 +10,9 @@ export function handleScroll(element) {
 export function handleHash() {
   const { scroll } = config
   const options = ['auto', 'smooth', 'smooth']
-  if (scroll) {
-    const behavior = options.includes(scroll) && scroll || 'auto'
-    const { hash } = window.location
+  const { hash } = window.location
+  if (scroll && hash) {
+    const behavior = options.includes(scroll) && scroll || 'auto'    
     const el = document.querySelector(hash)
     if (hash && el) el.scrollIntoView({ behavior })
   }
