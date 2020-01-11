@@ -1,21 +1,11 @@
 import * as store from './store'
+import config from '../tmp/config'
 
-export default function(routes, cb) {
-  // create events for pushState and replaceState
-  ;['pushState', 'replaceState'].forEach(eventName => {
-    const fn = history[eventName]
-    history[eventName] = function(state, title, url) {
-      const event = Object.assign(
-        new Event(eventName.toLowerCase(), { state, title, url })
-      )
-      Object.assign(event, { state, title, url })
 
-      fn.apply(this, [state, title, url])
-      return dispatchEvent(event)
-    }
-  })
 
+export function init(routes, callback) {
   function updatePage(url, shallow) {
+
     const currentUrl = window.location.pathname
     url = url || currentUrl
 
@@ -28,29 +18,67 @@ export default function(routes, cb) {
     store.route.set(route)
 
     //run callback in Router.svelte
-    cb({ layouts, route })
+    callback(layouts)
   }
 
-  function click(event) {
-    const el = event.target.closest('a')
-    const href = el && el.getAttribute('href')
+  createEventListeners(updatePage)
 
-    if (
-      event.ctrlKey ||
-      event.metaKey ||
-      event.altKey ||
-      event.shiftKey ||
-      event.button ||
-      event.defaultPrevented
+  return updatePage
+}
+
+/**
+ * svelte:window events doesn't work on refresh
+ * @param {Function} updatePage 
+ */
+function createEventListeners(updatePage) {
+  // history.*state
+  ;['pushState', 'replaceState'].forEach(eventName => {
+    const fn = history[eventName]
+    history[eventName] = function (state, title, url) {
+      const event = Object.assign(
+        new Event(eventName.toLowerCase(), { state, title, url })
+      )
+      Object.assign(event, { state, title, url })
+
+      fn.apply(this, [state, title, url])
+      return dispatchEvent(event)
+    }
+  })
+
+  // click
+  addEventListener('click', handleClick)
+    ;['pushstate', 'popstate', 'replacestate'].forEach(e =>
+      addEventListener(e, () => updatePage())
     )
-      return
-    if (!href || el.target || el.host !== location.host) return
+}
 
-    event.preventDefault()
-    history.pushState({}, '', href)
+function handleClick(event) {
+  const el = event.target.closest('a')
+  const href = el && el.getAttribute('href')
+
+  if (
+    event.ctrlKey ||
+    event.metaKey ||
+    event.altKey ||
+    event.shiftKey ||
+    event.button ||
+    event.defaultPrevented
+  )
+    return
+  if (!href || el.target || el.host !== location.host) return
+
+  event.preventDefault()
+  history.pushState({}, '', href)
+}
+
+
+
+export function handleHash() {
+  if (config.scroll) {
+    const { hash } = window.location
+    const el = document.querySelector(hash)
+    if (hash && el) el.scrollIntoView()
   }
-
-  return { updatePage, click }
 }
 
 function urlToRoute(url, routes) {
