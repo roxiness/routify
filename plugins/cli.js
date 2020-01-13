@@ -23,7 +23,7 @@ program
     'Experimental code splitting. Defaults to false.)'
   )
   .option('-b, --single-build', "Don't watch for new route files") //todo
-  .option('-s, --scroll [behavior]', "Scroll behavior.", false) 
+  .option('-s, --scroll [behavior]', "Scroll behavior (defaults to false)", false) 
   .command('init')
   .action(() => {
     isCommand = true
