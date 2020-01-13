@@ -1,7 +1,6 @@
 <script>
   import { setContext } from 'svelte'
   import * as internals from 'svelte/internal'
-  import { demandObject, suppressWarnings } from './scripts.js'
   import { writable } from 'svelte/store'
   import { _url, _goto, _isActive } from './helpers.js'
   import { route } from './store'
