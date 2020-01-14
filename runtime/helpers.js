@@ -1,8 +1,5 @@
 import { getContext } from 'svelte'
 import { derived } from 'svelte/store'
-import { route } from './store'
-
-export const params = derived(route, route => route.params)
 
 export const context = {
   subscribe(listener) {
@@ -10,15 +7,29 @@ export const context = {
   },
 }
 
-export const leftover = {
+/**
+ * We have to grab params and leftover from the context and not directly from the store.
+ * Otherwise the context is updated before the component is destroyed.
+ **/
+export const params = {
   subscribe(listener) {
     return derived(
       getContext('routify'),
-      context => context.leftover
+      context => context.route.params
     ).subscribe(listener)
   },
 }
 
+export const leftover = {
+  subscribe(listener) {
+    return derived(
+      getContext('routify'),
+      context => context.route.leftover
+    ).subscribe(listener)
+  },
+}
+
+/** HELPERS */
 export const url = {
   subscribe(listener) {
     return derived(getContext('routify'), context => context.url).subscribe(
@@ -48,8 +59,9 @@ export function _isActive(context, route) {
   const url = _url(context, route)
   return function(path, keepIndex = true) {
     path = url(path, null, keepIndex)
-    const currentPath = url(route.url, null, keepIndex)
-    return currentPath.includes(path)
+    const currentPath = url(route.path, null, keepIndex)
+    const re = new RegExp('^' + path)
+    return currentPath.match(re)
   }
 }
 
@@ -75,8 +87,9 @@ export function _url(context, route) {
       let dir = context.path
       // traverse through parents if needed
       const traverse = path.match(/\.\.\//g) || []
-      traverse.forEach(() => { dir = dir.replace(/\/[^\/]+\/?$/, '') })
-
+      traverse.forEach(() => {
+        dir = dir.replace(/\/[^\/]+\/?$/, '')
+      })
 
       // strip leading periods and slashes
       path = path.replace(/^[\.\/]+/, '')

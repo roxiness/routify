@@ -1,6 +1,6 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.0.1-21",
+  "version": "1.0.1-29",
   "description": "![](./routify.png)",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
@@ -17,6 +17,7 @@
   "dependencies": {
     "cheap-watch": "^1.0.2",
     "commander": "^4.0.1",
+    "picomatch": "^2.2.1",
     "rollup-pluginutils": "^2.8.2"
   },
   "bin": {

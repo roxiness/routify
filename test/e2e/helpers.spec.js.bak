@@ -1,0 +1,106 @@
+import thc from 'test-hmr'
+import { goto, expectPageLoad } from 'test-hmr/helpers'
+
+describe('helper', () => {
+  thc.only`
+    # url
+
+    --- pages/index.svelte ---
+
+    <script>
+      import { url } from '@sveltech/routify'
+    </script>
+
+    <pre data-focus>
+      relative: {$url('../../ingredients/sugar')}
+      absolute: {$url('/ingredients/sugar')}
+      params: {$url('/users/:id', { id: '123' })}
+      up: {$url('../')}
+    </pre>
+
+    --- pages/a/b/c/index.svelte ---
+
+    <script>
+      import { url } from '@sveltech/routify'
+      debugger
+      const x = $url('.')
+    </script>
+
+    <pre data-focus>
+      relative: {$url('../../ingredients/sugar')}
+      absolute: {$url('/ingredients/sugar')}
+      params: {$url('/users/:id', { id: '123' })}
+      up: {$url('../')}
+      up no trailing: {$url('..')}
+    </pre>
+
+    * * * * *
+
+    relative: /ingredients/sugar
+    absolute: /ingredients/sugar
+    params: /users/123
+    up: /
+
+    ${goto('/a/b/c')}
+
+    relative: /a/ingredients/sugar
+    absolute: /ingredients/sugar
+    params: /users/123
+    up: /a/b/
+    up no trailing: /a/b
+  `
+
+  thc.skip`
+    # url
+
+    ${goto('/a/b/c')}
+
+    --- pages/index.svelte ---
+
+    <script>
+      import { url } from '@sveltech/routify'
+    </script>
+
+    <pre data-focus>
+      relative: {$url('../../ingredients/sugar')}
+      absolute: {$url('/ingredients/sugar')}
+      params: {$url('/users/:id', { id: '123' })}
+      up: {$url('../')}
+    </pre>
+
+    --- pages/a/b/c.svelte ---
+
+    <script>
+      import { url } from '@sveltech/routify'
+    </script>
+
+    <pre data-focus>
+      relative: {$url('../../ingredients/sugar')}
+      absolute: {$url('/ingredients/sugar')}
+      params: {$url('/users/:id', { id: '123' })}
+      up: {$url('../')}
+      up no trailing: {$url('..')}
+    </pre>
+
+    * * * * *
+
+    relative: /ingredients/sugar
+    absolute: /ingredients/sugar
+    params: /users/123
+    up: /
+
+    ${goto('/a/b/c')}
+
+    ${() => {
+      describe('sub', () => {
+        it('is here', () => {})
+      })
+    }}
+
+    relative: /a/ingredients/sugar
+    absolute: /ingredients/sugar
+    params: /users/123
+    up: /a/b/
+    up no trailing: /a/b
+  `
+})

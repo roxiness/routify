@@ -49,8 +49,11 @@ describe('issues', () => {
     --- pages/[language]/[detail].svelte ---
 
     <script>
-      export let language
+      import { params } from '@sveltech/routify'
       export let detail
+      // export let language
+      // NOTE accepted solution is to use $params
+      $: language = $params.language
     </script>
 
     <x-focus>

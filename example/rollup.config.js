@@ -42,7 +42,7 @@ export default {
     routify({
       dynamicImport: true,
       pages: `${src}/pages`,
-      outputFile: `${src}/.tmp/routes.js`
+      outputDir: `${src}/.tmp`
     }),
 
     svelte({
