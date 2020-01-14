@@ -1,4 +1,6 @@
 import thc from 'test-hmr'
+import { click } from 'test-hmr/helpers'
+import { ignoreConsoleWarnings, goBack } from './helpers'
 
 describe('issues', () => {
   thc.skip`
@@ -19,5 +21,55 @@ describe('issues', () => {
     * * * * *
 
     fallback
+  `
+
+  thc.only`
+    # #50 folder name as parameter
+
+    --- pages/index.svelte ---
+
+    <script>
+      import { url } from '@sveltech/routify'
+
+      $: href = $url(
+        '/:language/:detail',
+        { detail: 'blabla', language: 'fr'}
+      )
+    </script>
+
+    <a id="var" href={href}>character.romaji</a>
+
+    <a id="inline" href={
+      $url(
+        '/:language/:detail',
+        { detail: 'character.romaji', language: 'hiragana'}
+      )
+    }>inline romaji</a>
+
+    --- pages/[language]/[detail].svelte ---
+
+    <script>
+      import { params } from '@sveltech/routify'
+      export let detail
+      $: language = $params.language
+    </script>
+
+    <x-focus>
+      [{language}]:"{detail}"
+    </x-focus>
+
+    * * * * *
+
+    ${[
+      // FIXME we shouldn't have this warning
+      ignoreConsoleWarnings("<Detail> was created with unknown prop 'scoped'"),
+      click('#var'),
+    ]}
+
+    [fr]:"blabla"
+
+    ${[goBack(), click('#inline')]}
+
+    [hiragana]:"character.romaji"
   `
 })
