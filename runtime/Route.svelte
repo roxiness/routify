@@ -1,19 +1,26 @@
 <script>
-  import { setContext } from 'svelte'
+  import { getContext, setContext } from 'svelte'
   import * as internals from 'svelte/internal'
   import { writable } from 'svelte/store'
   import { _url, _goto, _isActive } from './helpers.js'
   import { route } from './store'
   import { handleScroll } from './utils'
+  import Wrapper from './Wrapper.svelte'
 
   export let layouts = [],
-    scoped = {}
+    scoped = {},
+    Decorator = undefined
   let scopeToChild,
     props = {},
     parentElement,
-    component
+    component,
+    lastLayout
   const context = writable({})
   setContext('routify', context)
+
+  if (typeof Decorator === 'undefined')
+    Decorator = getContext('routify-decorator')
+  setContext('routify-decorator', Decorator)
 
   $: [layout, ...remainingLayouts] = layouts
   $: setComponent(layout)
@@ -35,8 +42,24 @@
 
   async function setComponent(layout) {
     // We want component and context to be synchronized
-    component = await layout.component()
+
+    const _component = await layout.component()
+    if (lastLayout !== layout) {
+      component = !Decorator
+        ? _component
+        : function(options = {}) {
+            return new Wrapper({
+              ...options,
+              props: {
+                ...options.props,
+                Decorator,
+                Component: _component,
+              },
+            })
+          }
+    } else component = _component
     updateContext(layout)
+    lastLayout = layout
   }
 </script>
 
@@ -44,11 +67,13 @@
   <svelte:component
     this={component}
     let:scoped={scopeToChild}
+    let:decorator
     {scoped}
     {...layout.param}>
     {#if remainingLayouts.length}
       <svelte:self
         layouts={remainingLayouts}
+        Decorator={decorator}
         scoped={{ ...scoped, ...scopeToChild }} />
     {/if}
   </svelte:component>
