@@ -4,6 +4,8 @@ import config from '../tmp/config'
 
 
 export function init(routes, callback) {
+  let prevRoute = {}
+
   function updatePage(url, shallow) {
 
     const currentUrl = window.location.pathname
@@ -13,6 +15,9 @@ export function init(routes, callback) {
     const currentRoute = shallow && urlToRoute(currentUrl, routes)
     const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
+    delete prevRoute.prev
+    route.prev = prevRoute
+    prevRoute = route
 
     //set the route in the store
     store.route.set(route)
