@@ -2,7 +2,7 @@
   const { Decorator, Component, ...props } = $$props
 </script>
 
-<Decorator >
+<Decorator scoped={props.scoped}>
   <Component {...props}>
     <slot />
   </Component>
