@@ -4,7 +4,7 @@ import config from '../tmp/config'
 
 
 export function init(routes, callback) {
-  let prevRoute = {}
+  let prevRoute = false
 
   function updatePage(url, shallow) {
 
@@ -117,3 +117,5 @@ function getRouteProps(url) {
     .map(f => f.match(/\:(.+)/))
     .map(f => f && f[1])
 }
+
+
