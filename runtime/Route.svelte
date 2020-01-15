@@ -42,9 +42,8 @@
 
   async function setComponent(layout) {
     // We want component and context to be synchronized
-
-    const _component = await layout.component()
     if (lastLayout !== layout) {
+      const _component = await layout.component()
       component = !Decorator
         ? _component
         : function(options = {}) {
@@ -57,9 +56,9 @@
               },
             })
           }
-    } else component = _component
+      lastLayout = layout
+    }
     updateContext(layout)
-    lastLayout = layout
   }
 </script>
 
