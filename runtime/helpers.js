@@ -106,3 +106,24 @@ export function _url(context, route) {
     return path
   }
 }
+
+
+export function getConcestor(route1, route2) {
+  // The route is the last piece of layout
+  const layouts1 = [...route1.layouts, route1]
+  const layouts2 = [...route2.layouts, route2]
+
+  let concestor = false
+  let children = [layouts1[0], layouts2[0]]
+
+  // iterate through the layouts starting from the root
+  layouts1.forEach((layout1, i) => {
+    const layout2 = layouts2[i]
+    if (layout1 === layout2) {
+      concestor = layout1
+      // if this is a concestor, the next iteration would be children
+      children = [layouts1[i + 1], layouts2[i + 1]]
+    }
+  })
+  return [concestor, ...children]
+}
