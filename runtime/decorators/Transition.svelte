@@ -18,7 +18,6 @@
   $: toHigherIndex = ancestor && ancestor.meta.index > oldAncestor.meta.index
   $: toLowerIndex = ancestor && ancestor.meta.index < oldAncestor.meta.index
 
-  $: console.log({toLowerIndex, toHigherIndex})
 
   $: meta = {
     toAncestor,
