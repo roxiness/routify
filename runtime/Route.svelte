@@ -14,7 +14,9 @@
     props = {},
     parentElement,
     component,
-    lastLayout
+    lastLayout,
+    propFromParam = {}
+
   const context = writable({})
   setContext('routify', context)
 
@@ -23,9 +25,10 @@
   setContext('routify-decorator', Decorator)
 
   $: [layout, ...remainingLayouts] = layouts
-  $: setComponent(layout)
+  $: if (layout) setComponent(layout)
   $: if (!remainingLayouts.length) handleScroll(parentElement)
-
+  $: if (layout && layout.param)
+    propFromParam = layout.param
   function setParent(el) {
     parentElement = el.parentElement
   }
@@ -41,18 +44,17 @@
   }
 
   async function setComponent(layout) {
-    // We want component and context to be synchronized
     if (lastLayout !== layout) {
-      const _component = await layout.component()
+      const Component = await layout.component()
       component = !Decorator
-        ? _component
+        ? Component
         : function(options = {}) {
             return new Wrapper({
               ...options,
               props: {
                 ...options.props,
                 Decorator,
-                Component: _component,
+                Component,
               },
             })
           }
@@ -68,13 +70,11 @@
     let:scoped={scopeToChild}
     let:decorator
     {scoped}
-    {...layout.param}>
-    {#if remainingLayouts.length}
-      <svelte:self
-        layouts={remainingLayouts}
-        Decorator={decorator}
-        scoped={{ ...scoped, ...scopeToChild }} />
-    {/if}
+    {...propFromParam}>
+    <svelte:self
+      layouts={[...remainingLayouts]}
+      Decorator={decorator}
+      scoped={{ ...scoped, ...scopeToChild }} />
   </svelte:component>
 {/if}
 
