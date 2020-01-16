@@ -12,7 +12,7 @@ export function handleHash() {
   const options = ['auto', 'smooth', 'smooth']
   const { hash } = window.location
   if (scroll && hash) {
-    const behavior = options.includes(scroll) && scroll || 'auto'    
+    const behavior = options.includes(scroll) && scroll || 'auto'
     const el = document.querySelector(hash)
     if (hash && el) el.scrollIntoView({ behavior })
   }
@@ -39,11 +39,9 @@ export const pathToParams = string => {
   if (matches) return matches.map(str => str.substr(1, str.length - 2))
 }
 
-export const pathToRank = ({ path, isFallback }) => {
-  return !isFallback
-    ? 'Z'
-    : path
-        .split('/')
-        .map(str => (str.match(/\[|\]/) ? 'A' : 'B'))
-        .join('')
+export const pathToRank = ({ path }) => {
+  return path
+    .split('/').filter(Boolean)
+    .map(str => (str === '_fallback' ? 'A' : str.startsWith(':') ? 'B' : 'C'))
+    .join('')
 }
