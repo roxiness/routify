@@ -13,32 +13,44 @@
 
   $: oldRoute = $route.prev || $route
   $: [concestor, ancestor, oldAncestor] = getConcestor($route, oldRoute)
+  $: toAncestor = isAncestor(oldRoute, $route)
+  $: toDescendant = isAncestor($route, oldRoute)
+  $: toHigherIndex = ancestor && ancestor.meta.index > oldAncestor.meta.index
+  $: toLowerIndex = ancestor && ancestor.meta.index < oldAncestor.meta.index
+
+  $: console.log({toLowerIndex, toHigherIndex})
 
   $: meta = {
-    route: $route,
-    path: $route.path,
-    shortPath: $route.shortPath,
-    index: $route.meta.index,
-    ancestor,
-    index: ancestor && ancestor.meta.index,
-    oldRoute,
-    oldPath: oldRoute.path,
-    oldIndex: oldAncestor && oldAncestor.meta.index,
-    oldShortPath:  oldRoute.shortPath,
-    oldAncestor,
+    toAncestor,
+    toDescendant,
+    toHigherIndex,
+    toLowerIndex,
+    routes: [$route, oldRoute],
+    ancestors: [ancestor, oldAncestor],
   }
 
   $: _config = configs.find(({ condition }) => condition(meta)) || config || {}
   $: normalizedConfig = { ...defaultConfig, ..._config }
   $: ({ transition, inParams, outParams } = normalizedConfig)
 
+  function isAncestor({ shortPath }, { shortPath: shortPath2 }) {
+    return shortPath !== shortPath2 && shortPath.startsWith(shortPath2)
+  }
+
   function setAbsolute({ target }) {
     target.style.position = 'absolute'
-    target.style.width = '100%'
   }
 </script>
 
+<style>
+  .transition {
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
 <div
+  class="transition"
   in:transition|local={inParams}
   out:transition|local={outParams}
   on:outrostart={setAbsolute}>
