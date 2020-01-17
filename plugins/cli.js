@@ -4,9 +4,11 @@ const program = require('commander')
 const fs = require('fs')
 const { execSync } = require('child_process')
 const { start } = require('../lib/services/interface')
+const { exporter, defaultOptions } = require('../lib/services/exporter')
+const log = require('../lib/services/log')
+
 
 let isCommand = false
-
 program
   .option('-d, --debug', 'extra debugging')
   .option('-p, --pages <location>', 'path/to/pages (Defaults to ./src/pages)')
@@ -22,24 +24,41 @@ program
     '-D, --dynamic-imports',
     'Experimental code splitting. Defaults to false.)'
   )
-  .option('-b, --single-build', "Don't watch for new route files") //todo
-  .option('-s, --scroll [behavior]', "Scroll behavior (defaults to false)", false) 
+  .option('-b, --single-build', "Don't watch for file changes") //todo
+  .option('-s, --scroll [behavior]', "Scroll behavior", false)  
+
+program
   .command('init')
   .action(() => {
     isCommand = true
     fs.readdir('./', (err, files) => {
-      if (err) console.log(err)
-      else if (files.length) console.log('Can only init in an empty directory.')
+      if (err) log(err)
+      else if (files.length) log('Can only init in an empty directory.')
       else {
-        console.log('Fetching template')
+        log('Fetching template')
         execSync('npx degit https://github.com/sveltech/routify-starter')
-        console.log('Installing dependencies')
+        log('Installing dependencies')
         execSync('npm i')
         execSync('npm run dev', { stdio: 'inherit' })
       }
     })
   })
 
+program
+  .command('export')
+  .option('-o --output [path]', 'Output folder', defaultOptions.output)
+  .option('-r --routes [path]', 'Routes path', defaultOptions.routes)
+  .option('-s --source [path]', 'Source folder', defaultOptions.source)
+  .option('-b --baseurl [path]', 'Baseurl', defaultOptions.baseurl)
+  .option('-c --server-script [name]', 'Server script', defaultOptions.serverScript)
+  .action(options => {
+    isCommand = true
+    exporter(options)
+  })
+
 program.parse(process.argv)
 
-if (!isCommand) start(program)
+if (!isCommand) {
+
+  start(program)
+}

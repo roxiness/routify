@@ -27,8 +27,8 @@
   $: [layout, ...remainingLayouts] = layouts
   $: if (layout) setComponent(layout)
   $: if (!remainingLayouts.length) handleScroll(parentElement)
-  $: if (layout && layout.param)
-    propFromParam = layout.param
+  $: if (layout && layout.param) propFromParam = layout.param
+  
   function setParent(el) {
     parentElement = el.parentElement
   }
@@ -61,6 +61,7 @@
       lastLayout = layout
     }
     updateContext(layout)
+    if(remainingLayouts.length === 0) window.status = "ready"
   }
 </script>
 
