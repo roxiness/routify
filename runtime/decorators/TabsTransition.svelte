@@ -1,6 +1,5 @@
 <script>
   import { scale, fly } from "svelte/transition";
-  import { route } from "../helpers";
   import BaseTransition from "./BaseTransition.svelte";
 
   export let scoped;
