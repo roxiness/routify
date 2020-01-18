@@ -1,6 +1,5 @@
 <script>
   import { setContext } from 'svelte'
-  import { writable } from 'svelte/store'
   import Route from './Route.svelte'
   import { init } from './navigator.js'
 
