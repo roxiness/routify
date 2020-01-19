@@ -61,7 +61,16 @@
       lastLayout = layout
     }
     updateContext(layout)
-    if(remainingLayouts.length === 0) window.status = "ready"
+    if (remainingLayouts.length === 0) onFinishedLoadingPage()
+  }
+
+  function onFinishedLoadingPage() {
+    const firstPage = window.routify != 'ready'
+    if (firstPage) {
+      // Let every know the last child has rendered
+      window.routify = 'ready'
+      dispatchEvent(new CustomEvent('app-loaded'))
+    }
   }
 </script>
 
