@@ -28,7 +28,7 @@
     ancestors: [ancestor, oldAncestor],
   }
 
-  $: _config = configs.find(({ condition }) => condition(meta)) || config || {}
+  $: _config = configs.find(({ condition }) => condition(meta)) || config || defaultConfig
   $: normalizedConfig = { ...defaultConfig, ..._config }
   $: ({ transition, inParams, outParams } = normalizedConfig)
 
