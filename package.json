@@ -16,9 +16,11 @@
   "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme",
   "dependencies": {
     "cheap-watch": "^1.0.2",
+    "chrome-aws-lambda": "^2.0.2",
     "commander": "^4.0.1",
     "picomatch": "^2.2.1",
     "puppeteer": "^2.0.0",
+    "puppeteer-core": "^2.0.0",
     "readdirp": "^3.3.0",
     "rollup-pluginutils": "^2.8.2"
   },

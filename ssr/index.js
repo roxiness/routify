@@ -1,5 +1,4 @@
 const express = require('express')
-const puppeteer = require('puppeteer')
 const renderURL = require('./renderURL.js');
 const { resolve } = require('path')
 
@@ -15,15 +14,11 @@ module.exports = function (userOptions = {}) {
     createSPA(options)
     sub.use(express.static(options.path))
 
-    let browserWSEndpoint = null;
-    sub.get('*', async function (req, res, next) {
-        if (!browserWSEndpoint) {
-            const browser = await puppeteer.launch();
-            browserWSEndpoint = await browser.wsEndpoint();
-        }
+
+    sub.get('*', async function (req, res) {
 
         const url = `${req.protocol}://localhost:${options.port}${req.url}`
-        const { html, ttRenderMs } = await renderURL(url, browserWSEndpoint);
+        const { html, ttRenderMs } = await renderURL(url);
 
         res.set('Server-Timing', `Prerender;dur=${ttRenderMs};desc="Headless render time (ms)"`);
         const ssrNote = '\n<!-- prerendered -->'

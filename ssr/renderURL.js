@@ -1,18 +1,29 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const chromium = require('chrome-aws-lambda');
+
+const browser = await puppeteer.launch({
+  // Required
+  executablePath: await chromium.executablePath,
+
+  // Optional
+  args: chromium.args,
+  defaultViewport: chromium.defaultViewport,
+  headless: chromium.headless
+});
+
 
 // In-memory cache of rendered pages. Note: this will be cleared whenever the
 // server process stops. If you need true persistence, use something like
 // Google Cloud Storage (https://firebase.google.com/docs/storage/web/start).
 const RENDER_CACHE = new Map();
 
-async function renderURL(url, browserWSEndpoint) {
+async function renderURL(url) {
   if (RENDER_CACHE.has(url)) {
-    return {html: RENDER_CACHE.get(url), ttRenderMs: 0};
+    return { html: RENDER_CACHE.get(url), ttRenderMs: 0 };
   }
-  
+
   const start = Date.now();
 
-  const browser = await puppeteer.connect({browserWSEndpoint});
   const page = await browser.newPage();
 
   try {
@@ -31,7 +42,7 @@ async function renderURL(url, browserWSEndpoint) {
 
   RENDER_CACHE.set(url, html); // cache rendered page.
 
-  return {html, ttRenderMs};
+  return { html, ttRenderMs };
 }
 
 
