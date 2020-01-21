@@ -19,7 +19,6 @@
     "chrome-aws-lambda": "^2.0.2",
     "commander": "^4.0.1",
     "picomatch": "^2.2.1",
-    "puppeteer": "^2.0.0",
     "puppeteer-core": "^2.0.0",
     "readdirp": "^3.3.0",
     "rollup-pluginutils": "^2.8.2"
@@ -31,6 +30,7 @@
     "lib": "lib"
   },
   "devDependencies": {
+    "puppeteer": "^2.0.0",
     "@rixo/eslint-config-svelte": "^0.8.0",
     "chokidar-cli": "^2.1.0",
     "del": "^5.1.0",
