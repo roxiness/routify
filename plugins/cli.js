@@ -50,6 +50,7 @@ program
   .option('-r --routes [path]', 'Routes path', defaultOptions.routes)
   .option('-s --source [path]', 'Source folder', defaultOptions.source)
   .option('-b --baseurl [path]', 'Baseurl', defaultOptions.baseurl)
+  .option('-p --no-prerender', 'Don\'t prerender static pages', defaultOptions.noPrerender)
   .option('-c --server-script [name]', 'Server script', defaultOptions.serverScript)
   .action(options => {
     isCommand = true
