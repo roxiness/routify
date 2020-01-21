@@ -1,16 +1,4 @@
-const puppeteer = require('puppeteer-core');
 const chromium = require('chrome-aws-lambda');
-
-const browser = await puppeteer.launch({
-  // Required
-  executablePath: await chromium.executablePath,
-
-  // Optional
-  args: chromium.args,
-  defaultViewport: chromium.defaultViewport,
-  headless: chromium.headless
-});
-
 
 // In-memory cache of rendered pages. Note: this will be cleared whenever the
 // server process stops. If you need true persistence, use something like
@@ -24,6 +12,7 @@ async function renderURL(url) {
 
   const start = Date.now();
 
+  const browser = await getBrowser()
   const page = await browser.newPage();
 
   try {
@@ -45,5 +34,12 @@ async function renderURL(url) {
   return { html, ttRenderMs };
 }
 
+let browser = null
+async function getBrowser() {
+    browser = browser || await chromium.puppeteer.launch({
+      executablePath: await chromium.executablePath
+    });
+  return browser
+}
 
 module.exports = renderURL
