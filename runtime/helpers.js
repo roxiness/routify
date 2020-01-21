@@ -127,3 +127,20 @@ export function getConcestor(route1, route2) {
   })
   return [concestor, ...children]
 }
+
+
+
+/**
+ * Get index difference between two paths
+ *
+ * @export
+ * @param {array} paths
+ * @param {object} newPath
+ * @param {object} oldPath
+ * @returns In
+ */
+export function getDirection(paths, newPath, oldPath) {
+  const newIndex = paths.findIndex(path => newPath.path.startsWith(path))
+  const oldIndex = paths.findIndex(path => oldPath.path.startsWith(path))
+  return newIndex - oldIndex
+}
