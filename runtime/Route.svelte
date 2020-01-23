@@ -1,39 +1,43 @@
 <script>
-  import { getContext, setContext } from 'svelte'
-  import * as internals from 'svelte/internal'
+  import { getContext, setContext, onDestroy, onMount } from 'svelte'
   import { writable } from 'svelte/store'
   import { _url, _goto, _isActive } from './helpers.js'
   import { route } from './store'
   import { handleScroll } from './utils'
-  import Wrapper from './Wrapper.svelte'
 
   export let layouts = [],
     scoped = {},
-    Decorator = undefined
+    Decorator,
+    parentDecorator
   let scopeToChild,
     props = {},
     parentElement,
-    component,
-    lastLayout,
-    propFromParam = {}
+    propFromParam = {},
+    key = 0
 
   const context = writable({})
   setContext('routify', context)
 
-  if (typeof Decorator === 'undefined')
-    Decorator = getContext('routify-decorator')
-  setContext('routify-decorator', Decorator)
+  $: if (Decorator) {
+    layouts = [
+      { component: () => Decorator, path: layouts[0].path + '__decorator' },
+      ...layouts,
+    ]
+  }
 
   $: [layout, ...remainingLayouts] = layouts
-  $: if (layout) setComponent(layout)
-  $: if (!remainingLayouts.length) handleScroll(parentElement)
   $: if (layout && layout.param) propFromParam = layout.param
+  $: layoutIsUpdated = !_lastLayout || _lastLayout.path !== layout.path
   
   function setParent(el) {
     parentElement = el.parentElement
   }
 
-  function updateContext(layout) {
+  let _lastLayout, _Component
+  function onComponentReady() {
+    _lastLayout = layout
+    if (layoutIsUpdated) key++
+    if (remainingLayouts.length === 0) onFinishedLoadingPage()
     context.set({
       route: $route,
       path: layout.path,
@@ -43,26 +47,20 @@
     })
   }
 
-  async function setComponent(layout) {
-    if (lastLayout !== layout) {
-      const Component = await layout.component()
-      component = !Decorator
-        ? Component
-        : function(options = {}) {
-            return new Wrapper({
-              ...options,
-              props: {
-                ...options.props,
-                Decorator,
-                Component,
-              },
-            })
-          }
-      lastLayout = layout
+  let component
+  function setComponent(layout) {
+    if (layoutIsUpdated) _Component = layout.component()
+    if (_Component.then)
+      _Component.then(res => {
+        component = res
+        onComponentReady()
+      })
+    else {
+      component = _Component
+      onComponentReady()
     }
-    updateContext(layout)
-    if (remainingLayouts.length === 0) onFinishedLoadingPage()
   }
+  $: setComponent(layout)
 
   function onFinishedLoadingPage() {
     const firstPage = window.routify != 'ready'
@@ -75,17 +73,22 @@
 </script>
 
 {#if component}
-  <svelte:component
-    this={component}
-    let:scoped={scopeToChild}
-    let:decorator
-    {scoped}
-    {...propFromParam}>
-    <svelte:self
-      layouts={[...remainingLayouts]}
-      Decorator={decorator}
-      scoped={{ ...scoped, ...scopeToChild }} />
-  </svelte:component>
+  {#each [0] as dummy (key)}
+    <svelte:component
+      this={component}
+      let:scoped={scopeToChild}
+      let:decorator
+      {scoped}
+      {...propFromParam}>
+      {#if remainingLayouts.length}
+        <svelte:self
+          layouts={[...remainingLayouts]}
+          Decorator={decorator || parentDecorator}
+          parentDecorator={Decorator}
+          scoped={{ ...scoped, ...scopeToChild }} />
+      {/if}
+    </svelte:component>
+  {/each}
 {/if}
 
 <!-- get the parent element for scroll functionality -->
