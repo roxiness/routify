@@ -8,7 +8,7 @@
   export let layouts = [],
     scoped = {},
     Decorator,
-    parentDecorator
+    _passthroughDecorator
   let scopeToChild,
     props = {},
     parentElement,
@@ -83,8 +83,8 @@
       {#if remainingLayouts.length}
         <svelte:self
           layouts={[...remainingLayouts]}
-          Decorator={decorator || parentDecorator}
-          parentDecorator={Decorator}
+          Decorator={typeof decorator !== 'undefined' ? decorator : _passthroughDecorator}
+          _passthroughDecorator={Decorator}
           scoped={{ ...scoped, ...scopeToChild }} />
       {/if}
     </svelte:component>
