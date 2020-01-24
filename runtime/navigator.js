@@ -1,7 +1,4 @@
 import * as store from './store'
-import config from '../tmp/config'
-
-
 
 export function init(routes, callback) {
   let prevRoute = false
@@ -77,6 +74,9 @@ function handleClick(event) {
 }
 
 function urlToRoute(url, routes) {
+  const mockUrl = (new URL(location)).searchParams.get('__mock-url');
+  url = mockUrl || url
+  
   const route = routes.find(route => url.match(route.regex))
   if (!route)
     throw new Error(
