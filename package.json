@@ -6,14 +6,14 @@
   "svelte": "runtime/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jakobrosenberg/svelte-filerouter.git"
+    "url": "git+https://github.com/sveltech/routify.git"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jakobrosenberg/svelte-filerouter/issues"
+    "url": "https://github.com/sveltech/routify/issues"
   },
-  "homepage": "https://github.com/jakobrosenberg/svelte-filerouter#readme",
+  "homepage": "https://routify.now.sh/docs/introduction",
   "dependencies": {
     "cheap-watch": "^1.0.2",
     "chrome-aws-lambda": "^2.0.2",
