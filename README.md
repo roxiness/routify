@@ -13,7 +13,7 @@
 
 
 ## Install
-``npm i @sveltech/routify@next`` or clone the [starter template](https://github.com/sveltech/routify-starter)
+``npm i -d @sveltech/routify@next`` or clone the [starter template](https://github.com/sveltech/routify-starter)
 
 For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
 
