@@ -1,7 +1,7 @@
 {
   "name": "@sveltech/routify",
   "version": "1.0.1-40",
-  "description": "![](./routify.png)",
+  "description": "Routes for Svelte, automated by your filestructure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
   "repository": {
@@ -22,7 +22,8 @@
     "picomatch": "^2.2.1",
     "puppeteer-core": "^2.0.0",
     "readdirp": "^3.3.0",
-    "rollup-pluginutils": "^2.8.2"
+    "rollup-pluginutils": "^2.8.2",
+    "tree-kill": "^1.2.2"
   },
   "bin": {
     "routify": "./plugins/cli.js"
@@ -40,7 +41,6 @@
     "puppeteer": "^2.0.0",
     "svelte": "^3.16.0",
     "test-hmr": "^0.1.0-6",
-    "tree-kill": "^1.2.2",
     "zora": "^3.1.8"
   },
   "scripts": {
