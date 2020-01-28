@@ -1,5 +1,5 @@
 <script>
-  import { getContext, setContext, onDestroy, onMount } from 'svelte'
+  import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable } from 'svelte/store'
   import { _url, _goto, _isActive } from './helpers.js'
   import { route } from './store'
@@ -62,7 +62,8 @@
   }
   $: setComponent(layout)
 
-  function onFinishedLoadingPage() {
+  async function onFinishedLoadingPage() {
+    await tick()
     const firstPage = window.routify != 'ready'
     if (firstPage) {
       // Let every know the last child has rendered
