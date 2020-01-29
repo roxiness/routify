@@ -4,26 +4,26 @@ const program = require('commander')
 const fs = require('fs')
 const { execSync } = require('child_process')
 const { start } = require('../lib/services/interface')
-const { exporter, defaultOptions: exporterDefaults } = require('../lib/services/exporter')
-const mainDefaults = require('../lib/services/interface').defaultOptions
+const { exporter } = require('../lib/services/exporter')
+const defaults = require('../config.defaults.json')
 const log = require('../lib/services/log')
 
 let isCommand = false
 program
   .option('-d, --debug', 'extra debugging')
-  .option('-p, --pages <location>', 'path/to/pages', mainDefaults.pages)
+  .option('-p, --pages <location>', 'path/to/pages', defaults.pages)
   .option(
     '-i, --ignore <list>',
-    'Files and dirs. Can be string or array. Interpreted as regular expression', mainDefaults.ignore
+    'Files and dirs. Can be string or array. Interpreted as regular expression', defaults.ignore
   )
   .option(
-    '-u, --unused-prop-warnings', 'Show warnings about unused props passed by filerouter', mainDefaults.unknownPropWarnings) //todo, replace unknownPropWarnings
+    '-u, --unused-prop-warnings', 'Show warnings about unused props passed by filerouter', defaults.unknownPropWarnings) //todo, replace unknownPropWarnings
   .option(
-    '-D, --dynamic-imports', 'Code splitting)', mainDefaults.dynamicImports
+    '-D, --dynamic-imports', 'Code splitting)', defaults.dynamicImports
   )
-  .option('-b, --single-build', "Don't watch for file changes", mainDefaults.singleBuild)
-  .option('-s, --scroll [behavior]', "Scroll behavior", mainDefaults.scroll)
-  .option('-e, --extensions <names>', "Comma separated extensions", mainDefaults.extensions)
+  .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
+  .option('-s, --scroll [behavior]', "Scroll behavior", defaults.scroll)
+  .option('-e, --extensions <names>', "Comma separated extensions", defaults.extensions)
 
 
 program
@@ -45,19 +45,16 @@ program
 
 program
   .command('export')
-  .option('-o --output <path>', 'Output folder', exporterDefaults.output)
-  .option('-r --routes <path>', 'Routes path', exporterDefaults.routes)
-  .option('-s --source <path>', 'Source folder', exporterDefaults.source)
-  .option('-b --baseurl <path>', 'Baseurl', exporterDefaults.baseurl)
-  .option('-p --no-prerender', 'Don\'t prerender static pages', exporterDefaults.noPrerender)
-  .option('-c --server-script <name>', 'Server script', exporterDefaults.serverScript)
+  .option('-o --output <path>', 'Dist folder', defaults.distDir)
+  .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
+  .option('-p --no-prerender', 'Don\'t prerender static pages', defaults.noPrerender)
   .action(options => {
     isCommand = true
-    exporter(options)
+    exporter(options.opts())
   })
+
 
 program.parse(process.argv)
 if (!isCommand) {
-
-  start(program)
+  start(program.opts())
 }
