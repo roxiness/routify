@@ -15,12 +15,12 @@
   },
   "homepage": "https://routify.now.sh/docs/introduction",
   "dependencies": {
+    "@sveltech/ssr": "^0.0.4",
     "cheap-watch": "^1.0.2",
-    "chrome-aws-lambda": "^2.0.2",
     "commander": "^4.0.1",
+    "config": "^3.2.5",
     "ncp": "^2.0.0",
     "picomatch": "^2.2.1",
-    "puppeteer-core": "^2.0.0",
     "readdirp": "^3.3.0",
     "rollup-pluginutils": "^2.8.2",
     "tree-kill": "^1.2.2"
@@ -38,7 +38,6 @@
     "memfs": "^3.0.3",
     "npm-run-all": "^4.1.5",
     "pta": "^0.1.3",
-    "puppeteer": "^2.0.0",
     "svelte": "^3.16.0",
     "test-hmr": "^0.1.0-6",
     "zora": "^3.1.8"
