@@ -67,7 +67,6 @@
     const firstPage = window.routify != 'ready'
     if (firstPage) {
       // Let every know the last child has rendered
-      window.routify = 'ready'
       dispatchEvent(new CustomEvent('app-loaded'))
     }
   }
