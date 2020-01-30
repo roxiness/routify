@@ -7,8 +7,8 @@
 
   export let layouts = [],
     scoped = {},
-    Decorator,
-    _passthroughDecorator
+    Decorator = undefined,
+    _passthroughDecorator = undefined
   let scopeToChild,
     props = {},
     parentElement,
