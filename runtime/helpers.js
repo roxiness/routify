@@ -1,10 +1,20 @@
-import { getContext } from 'svelte'
+import { getContext, tick } from 'svelte'
 import { derived } from 'svelte/store'
 
 export const context = {
   subscribe(listener) {
     return getContext('routify').subscribe(listener)
   },
+}
+
+export const ready = {
+  subscribe(listener) {
+    window.routify.stopAutoReady = true
+    return listener(async () => {
+      await tick()
+      dispatchEvent(new CustomEvent('app-loaded'))
+    })
+  }
 }
 
 /**
@@ -57,7 +67,7 @@ export const isActive = {
 
 export function _isActive(context, route) {
   const url = _url(context, route)
-  return function(path, keepIndex = true) {
+  return function (path, keepIndex = true) {
     path = url(path, null, keepIndex)
     const currentPath = url(route.path, null, keepIndex)
     const re = new RegExp('^' + path)
@@ -144,3 +154,4 @@ export function getDirection(paths, newPath, oldPath) {
   const oldIndex = paths.findIndex(path => oldPath.path.startsWith(path))
   return newIndex - oldIndex
 }
+

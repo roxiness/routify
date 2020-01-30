@@ -28,7 +28,7 @@
   $: [layout, ...remainingLayouts] = layouts
   $: if (layout && layout.param) propFromParam = layout.param
   $: layoutIsUpdated = !_lastLayout || _lastLayout.path !== layout.path
-  
+
   function setParent(el) {
     parentElement = el.parentElement
   }
@@ -64,8 +64,7 @@
 
   async function onFinishedLoadingPage() {
     await tick()
-    const firstPage = window.routify != 'ready'
-    if (firstPage) {
+    if (!window.routify.stopAutoReady) {
       // Let every know the last child has rendered
       dispatchEvent(new CustomEvent('app-loaded'))
     }
