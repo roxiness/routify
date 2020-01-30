@@ -3,6 +3,8 @@
   import Route from './Route.svelte'
   import { init } from './navigator.js'
 
+  window.routify = {}
+
   export let routes
   let layouts = []
 
