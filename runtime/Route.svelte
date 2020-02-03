@@ -13,7 +13,8 @@
     props = {},
     parentElement,
     propFromParam = {},
-    key = 0
+    key = 0,
+    scopedSync = {}
 
   const context = writable({})
   setContext('routify', context)
@@ -53,10 +54,12 @@
     if (_Component.then)
       _Component.then(res => {
         component = res
+        scopedSync = {...scoped}
         onComponentReady()
       })
     else {
       component = _Component
+      scopedSync = {...scoped}
       onComponentReady()
     }
   }
@@ -78,6 +81,7 @@
       let:scoped={scopeToChild}
       let:decorator
       {scoped}
+      {scopedSync}
       {...propFromParam}>
       {#if remainingLayouts.length}
         <svelte:self
