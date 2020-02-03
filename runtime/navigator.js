@@ -1,4 +1,7 @@
-import * as store from './store'
+import { route as routeStore } from './store'
+import { get } from 'svelte/store'
+import { beforeUrlChange } from './helpers'
+const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
   let prevRoute = false
@@ -17,7 +20,7 @@ export function init(routes, callback) {
     prevRoute = route
 
     //set the route in the store
-    store.route.set(route)
+    routeStore.set(route)
 
     //run callback in Router.svelte
     callback(layouts)
@@ -36,14 +39,14 @@ function createEventListeners(updatePage) {
   // history.*state
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = function (state, title, url) {
-      const event = Object.assign(
-        new Event(eventName.toLowerCase(), { state, title, url })
-      )
+    history[eventName] = async function (state, title, url) {
+      const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
 
-      fn.apply(this, [state, title, url])
-      return dispatchEvent(event)
+      if (await runHooksBeforeUrlChange(event)) {
+        fn.apply(this, [state, title, url])
+        return dispatchEvent(event)
+      }
     }
   })
 
@@ -73,10 +76,20 @@ function handleClick(event) {
   history.pushState({}, '', href)
 }
 
+async function runHooksBeforeUrlChange(event) {
+  const route = get(routeStore)
+  for (const hook of _hooks.filter(Boolean)) {
+    // return false if the hook returns false
+    if (await !hook(event, route)) return false
+  }
+  return true
+}
+
+
 function urlToRoute(url, routes) {
   const mockUrl = (new URL(location)).searchParams.get('__mock-url');
   url = mockUrl || url
-  
+
   const route = routes.find(route => url.match(route.regex))
   if (!route)
     throw new Error(

@@ -17,6 +17,17 @@ export const ready = {
   }
 }
 
+
+export const beforeUrlChange = {
+  _hooks: [],
+  subscribe(listener) {
+    const hooks = this._hooks
+    const index = hooks.length
+    listener(callback => { hooks[index] = callback })
+    return () => delete hooks[index]
+  }
+}
+
 /**
  * We have to grab params and leftover from the context and not directly from the store.
  * Otherwise the context is updated before the component is destroyed.
