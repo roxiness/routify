@@ -20,6 +20,7 @@
     "commander": "^4.0.1",
     "config": "^3.2.5",
     "picomatch": "^2.2.1",
+    "js-yaml": "^3.13.1",
     "readdirp": "^3.3.0",
     "rollup-pluginutils": "^2.8.2"
   },
