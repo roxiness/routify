@@ -2,7 +2,7 @@
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable } from 'svelte/store'
   import { _url, _goto, _isActive } from './helpers.js'
-  import { route } from './store'
+  import { route, routes } from './store'
   import { handleScroll } from './utils'
 
   export let layouts = [],
@@ -39,12 +39,13 @@
     _lastLayout = layout
     if (layoutIsUpdated) key++
     if (remainingLayouts.length === 0) onFinishedLoadingPage()
+    const url = _url(layout, $route, $routes)
     context.set({
       route: $route,
       path: layout.path,
-      url: _url(layout, $route),
-      goto: _goto(layout, $route),
-      isActive: _isActive(layout, $route),
+      url,
+      goto: _goto(url),
+      isActive: _isActive(url, $route),
     })
   }
 
@@ -54,12 +55,12 @@
     if (_Component.then)
       _Component.then(res => {
         component = res
-        scopedSync = {...scoped}
+        scopedSync = { ...scoped }
         onComponentReady()
       })
     else {
       component = _Component
-      scopedSync = {...scoped}
+      scopedSync = { ...scoped }
       onComponentReady()
     }
   }

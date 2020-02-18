@@ -76,8 +76,7 @@ export const isActive = {
   },
 }
 
-export function _isActive(context, route) {
-  const url = _url(context, route)
+export function _isActive(url, route) {
   return function (path, keepIndex = true) {
     path = url(path, null, keepIndex)
     const currentPath = url(route.path, null, keepIndex)
@@ -86,8 +85,7 @@ export function _isActive(context, route) {
   }
 }
 
-export function _goto(context, route) {
-  const url = _url(context, route)
+export function _goto(url) {
   return function goto(path, params, _static, shallow) {
     const href = url(path, params)
     if (!_static) history.pushState({}, null, href)
@@ -95,7 +93,7 @@ export function _goto(context, route) {
   }
 }
 
-export function _url(context, route) {
+export function _url(context, route, routes) {
   return function url(path, params, preserveIndex) {
     path = path || './'
 
@@ -104,7 +102,6 @@ export function _url(context, route) {
     if (path.match(/^\.\.?\//)) {
       //RELATIVE PATH
       // get component's dir
-      // let dir = context.path.replace(/[^\/]+$/, '')
       let dir = context.path
       // traverse through parents if needed
       const traverse = path.match(/\.\.\//g) || []
@@ -118,6 +115,10 @@ export function _url(context, route) {
       path = dir + path
     } else if (path.match(/^\//)) {
       // ABSOLUTE PATH
+    } else {
+      // NAMED PATH
+      const matchingRoute = routes.find(route => route.meta.name === path)
+      if(matchingRoute) path = matchingRoute.shortPath
     }
 
     params = Object.assign({}, route.params, context.params, params)
