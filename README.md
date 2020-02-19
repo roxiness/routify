@@ -18,13 +18,14 @@
 For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
 
 ## Documentation
-[routify.now.sh](https://routify.now.sh/docs/introduction)
+[routify.dev](https://routify.dev/docs/introduction)
 
 ## Template
 [Routify starter template](https://github.com/sveltech/routify-starter)
+Includes SSR, prerendering, code splitting and much more.
 
 ## Example
-[Starter example](https://routify-starter.now.sh/)
+[Starter example](https://example.routify.dev/example) Example from the starter template. Refresh a page to see how it is loaded.
 
 ## Issues
 Please feel free to open an issue or a pull request. All feedback is welcome.
