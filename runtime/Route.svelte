@@ -35,10 +35,10 @@
   }
 
   let _lastLayout, _Component
-  function onComponentReady() {
+  function onComponentLoaded() {
     _lastLayout = layout
     if (layoutIsUpdated) key++
-    if (remainingLayouts.length === 0) onFinishedLoadingPage()
+    if (remainingLayouts.length === 0) onLastComponentLoaded()
     const url = _url(layout, $route, $routes)
     context.set({
       route: $route,
@@ -56,17 +56,17 @@
       _Component.then(res => {
         component = res
         scopedSync = { ...scoped }
-        onComponentReady()
+        onComponentLoaded()
       })
     else {
       component = _Component
       scopedSync = { ...scoped }
-      onComponentReady()
+      onComponentLoaded()
     }
   }
   $: setComponent(layout)
 
-  async function onFinishedLoadingPage() {
+  async function onLastComponentLoaded() {
     await tick()
     if (!window.routify.stopAutoReady) {
       // Let every know the last child has rendered
