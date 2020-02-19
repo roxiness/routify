@@ -68,6 +68,7 @@
 
   async function onLastComponentLoaded() {
     await tick()
+    handleScroll(parentElement)
     if (!window.routify.stopAutoReady) {
       // Let every know the last child has rendered
       dispatchEvent(new CustomEvent('app-loaded'))
