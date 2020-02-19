@@ -20,7 +20,7 @@ export function handleHash() {
 
 
 export function scrollAncestorsToTop(element) {
-  if (element && element.dataset.routify !== 'scroll-lock') {
+  if (element && element.scrollTo && element.dataset.routify !== 'scroll-lock') {
     element.scrollTo(0, 0)
     scrollAncestorsToTop(element.parentElement)
   }
