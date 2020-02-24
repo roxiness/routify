@@ -28,7 +28,8 @@
     "routify": "./plugins/cli.js"
   },
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "test": "test"
   },
   "devDependencies": {
     "@rixo/eslint-config-svelte": "^0.8.0",
