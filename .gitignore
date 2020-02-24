@@ -4,4 +4,3 @@ dist
 tmp
 *.bak
 *.orig
-package-lock.json
