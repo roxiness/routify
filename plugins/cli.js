@@ -57,5 +57,9 @@ program
 
 program.parse(process.argv)
 if (!isCommand) {
-  start(program.opts())
+  const options = program.opts()
+  Object.entries(options).forEach(([key, value]) => {
+    if (typeof value === 'undefined') delete options[key]
+  })
+  start(options)
 }
