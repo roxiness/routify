@@ -22,6 +22,9 @@ overrides:
   - files: ["test/unit/**/*"]
     env:
       node: true
+  - files: ["test/unit/**/*.expected.js"]
+    rules:
+      import/no-unresolved: off
 
 rules:
   require-atomic-updates: off
