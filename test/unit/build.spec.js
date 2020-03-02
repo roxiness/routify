@@ -19,7 +19,7 @@ const runSample = async (t, file, name) => {
   const vol = Volume.fromJSON(spec.files)
 
   const defaultOptions = {
-    extensions: '.svelte',
+    extensions: 'svelte',
   }
 
   const { Builder } = await rewiremock.module(
