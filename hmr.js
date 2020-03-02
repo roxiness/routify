@@ -11,14 +11,6 @@
 export default function HMR(Component, options = { target: document.body }, id = 'hmr', eventName = 'app-loaded') {
     const oldContainer = document.getElementById(id)
 
-
-
-
-
-
-    // Wait for the app to load before replacing the component
-    addEventListener(eventName, replaceComponent)
-
     // Create the new (temporarily hidden) component container
     const appContainer = document.createElement("div")
     if (oldContainer) appContainer.style.visibility = 'hidden'
@@ -26,6 +18,9 @@ export default function HMR(Component, options = { target: document.body }, id =
 
     // Attach it to the target element
     options.target.appendChild(appContainer)
+
+    // Wait for the app to load before replacing the component
+    addEventListener(eventName, replaceComponent)
 
     function replaceComponent() {
         if (oldContainer) oldContainer.remove()
@@ -36,6 +31,7 @@ export default function HMR(Component, options = { target: document.body }, id =
     }
 
     return new Component({
+        ...options,
         target: appContainer
     });
 }
