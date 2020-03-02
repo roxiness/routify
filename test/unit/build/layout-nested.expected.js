@@ -1,53 +1,69 @@
 
-    import __layout from '/pages/_layout.svelte'
+/**
+ * @sveltech/routify 1.0.3
+ * File generated Mon Mar 02 2020 03:33:06 GMT+0100 (Central European Standard Time)
+ */
+
+//buildRoutes
+import { buildRoutes } from "/home/eric/projects/routify/routify/runtime/buildRoutes"
+
+//dynamic imports
+import __layout from '/pages/_layout.svelte'
 import _foo__layout from '/pages/foo/_layout.svelte'
 import _foo_index from '/pages/foo/index.svelte'
 import _index from '/pages/index.svelte'
 
+//keys
+const keys = ["isFallback","isIndex","hasParam","path","component","layouts","meta","shortPath"]
 
- import { buildRoutes } from "/home/eric/projects/routify/routify/runtime/buildRoutes"
-
-
- const layouts = {
-["/_layout"]:{
-  "component": () => __layout,
-  "path": "/"
-},["/foo/_layout"]:{
-  "component": () => _foo__layout,
-  "path": "/foo/"
+//layouts
+const layouts = {
+  "/_layout": {
+    "component": () => __layout,
+    "meta": {},
+    "relativeDir": "",
+    "path": ""
+  },
+  "/foo/_layout": {
+    "component": () => _foo__layout,
+    "meta": {},
+    "relativeDir": "/foo",
+    "path": "/foo"
+  }
 }
-}
 
 
- export const routeKeys = ["isFallback","isIndex","hasParam","path","component","layouts"]
-
-
- const _routes = [
-{
-  "isFallback": false,
-  "isIndex": true,
-  "hasParam": false,
-  "path": "/foo/index",
-  "component": () => _foo_index,
-  "layouts": [
-    layouts['/_layout'],
-    layouts['/foo/_layout']
-  ]
-},
-{
-  "isFallback": false,
-  "isIndex": true,
-  "hasParam": false,
-  "path": "/index",
-  "component": () => _index,
-  "layouts": [
-    layouts['/_layout']
-  ]
-}
+//raw routes
+const _routes = [
+  {
+    "component": () => _foo_index,
+    "meta": {},
+    "isIndex": true,
+    "isFallback": false,
+    "hasParam": false,
+    "path": "/foo/index",
+    "shortPath": "/foo",
+    "layouts": [
+      layouts['/_layout'],
+      layouts['/foo/_layout']
+    ]
+  },
+  {
+    "component": () => _index,
+    "meta": {},
+    "isIndex": true,
+    "isFallback": false,
+    "hasParam": false,
+    "path": "/index",
+    "shortPath": "",
+    "layouts": [
+      layouts['/_layout']
+    ]
+  }
 ]
 
+//options
+export const options = {}
 
- export const routes = buildRoutes(_routes, routeKeys)
-
-    export const options = {}
-    
+//routes
+export const routes = buildRoutes(_routes, keys)
