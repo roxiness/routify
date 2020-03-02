@@ -23,7 +23,8 @@ program
   )
   .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
   .option('-s, --scroll [behavior]', "Scroll behavior", defaults.scroll)
-  .option('-e, --extensions <names>', "Comma separated extensions", defaults.extensions)
+  .option('-e, --extensions <names>', "Included file extensions (comma separated)", defaults.extensions)
+  .option('-c, --child-process <command>', "Run command when Routify is ready", defaults.childProcess)
 
 
 program
@@ -56,5 +57,9 @@ program
 
 program.parse(process.argv)
 if (!isCommand) {
-  start(program.opts())
+  const options = program.opts()
+  Object.entries(options).forEach(([key, value]) => {
+    if (typeof value === 'undefined') delete options[key]
+  })
+  start(options)
 }
