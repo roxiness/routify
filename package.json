@@ -57,6 +57,6 @@
     "test:unit:watch": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit\"",
     "test:unit:watch:only": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit -- --only\"",
     "test:watch": "run-s test:unit test:unit:watch",
-    "test": "run-p --silent test:e2e test:unit"
+    "test": "npm run --silent test:unit"
   }
 }
