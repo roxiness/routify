@@ -5,7 +5,6 @@ import * as fs from 'fs'
 import rewiremock from 'rewiremock'
 
 import fsa from '../../lib/utils/fsa'
-// import { Builder } from '../../lib/services/interface'
 
 const resolveSample = (...names) => path.resolve(__dirname, 'build', ...names)
 
@@ -22,12 +21,9 @@ const runSample = async (t, file, name) => {
     extensions: 'svelte',
   }
 
-  const { Builder } = await rewiremock.module(
-    () => import('../../lib/services/interface'),
-    {
-      '../utils/fsa': fsa.from(vol),
-    }
-  )
+  const { Builder } = rewiremock.proxy('../../lib/services/interface', {
+    '../utils/fsa': fsa.from(vol),
+  })
 
   const build = Builder(
     {
