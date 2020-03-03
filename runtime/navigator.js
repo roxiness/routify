@@ -52,9 +52,16 @@ function createEventListeners(updatePage) {
 
   // click
   addEventListener('click', handleClick)
-    ;['pushstate', 'popstate', 'replacestate'].forEach(e =>
-      addEventListener(e, () => updatePage())
-    )
+  addEventListener('pushstate', () => updatePage())
+  addEventListener('replaceState', () => updatePage())
+  addEventListener('popstate', async (event) => {
+    if (await runHooksBeforeUrlChange(event)) {
+      updatePage()
+    } else {
+      event.preventDefault()
+      history.go(1)
+    }
+  })
 }
 
 function handleClick(event) {
