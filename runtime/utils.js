@@ -45,3 +45,16 @@ export const pathToRank = ({ path }) => {
     .map(str => (str === '_fallback' ? 'A' : str.startsWith(':') ? 'B' : 'C'))
     .join('')
 }
+
+/* eslint no-console: 0 */
+export function suppressWarnings() {
+  const consoleWarn = console.warn
+  console.warn = function (msg, ...msgs) {
+    const ignores = [
+      "was created with unknown prop 'scoped'",
+      "was created with unknown prop 'scopedSync'"
+    ]
+    if (!ignores.find(iMsg => msg.includes(iMsg)))
+      return consoleWarn(msg, ...msgs)
+  }
+}

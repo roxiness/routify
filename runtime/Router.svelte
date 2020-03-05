@@ -3,8 +3,10 @@
   import Route from './Route.svelte'
   import { init } from './navigator.js'
   import { routes as routesStore } from './store.js'
+  import { suppressWarnings } from './utils.js'
 
   window.routify = {}
+  suppressWarnings()
 
   export let routes
   routesStore.set(routes)
