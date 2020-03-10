@@ -9,7 +9,7 @@
     "url": "git+https://github.com/sveltech/routify.git"
   },
   "author": "jakobrosenberg@gmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sveltech/routify/issues"
   },
