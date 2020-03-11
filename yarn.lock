@@ -150,9 +150,10 @@
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
 
-"@sveltech/ssr@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@sveltech/ssr/-/ssr-0.0.8.tgz#d7a16b647a28d34493e6387e8f95a3b3eac6055f"
+"@sveltech/ssr@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@sveltech/ssr/-/ssr-0.0.9.tgz#a9149b9be5a76d1d9cac84ff48cf92a004afb880"
+  integrity sha512-9zzi/6ub8NKSvQ6AnJHTjTuWioSq6fIpddTqxtLpHTmlExf0bkrQT1BGVBx0Ynh4LE0fufd+rsTpZTAH8gWfmA==
   dependencies:
     bufferutil "^4.0.1"
     canvas "git+https://github.com/sveltech/dummy-module.git"
