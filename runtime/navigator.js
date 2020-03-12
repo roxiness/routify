@@ -1,6 +1,6 @@
 import { route as routeStore } from './store'
 import { get } from 'svelte/store'
-import { beforeUrlChange } from './helpers'
+import { beforeUrlChange, meta } from './helpers'
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
@@ -24,6 +24,7 @@ export function init(routes, callback) {
 
     //run callback in Router.svelte
     callback(layouts)
+    meta.title = false
   }
 
   createEventListeners(updatePage)
