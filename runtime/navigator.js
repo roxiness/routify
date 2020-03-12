@@ -7,7 +7,6 @@ export function init(routes, callback) {
   let prevRoute = false
 
   function updatePage(url, shallow) {
-
     const currentUrl = window.location.pathname
     url = url || currentUrl
 
@@ -26,20 +25,20 @@ export function init(routes, callback) {
     callback(layouts)
   }
 
-  createEventListeners(updatePage)
+  const destroy = createEventListeners(updatePage)
 
-  return updatePage
+  return { updatePage, destroy }
 }
 
 /**
  * svelte:window events doesn't work on refresh
- * @param {Function} updatePage 
+ * @param {Function} updatePage
  */
 function createEventListeners(updatePage) {
   // history.*state
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = async function (state, title, url) {
+    history[eventName] = async function(state, title, url) {
       const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
 
@@ -50,18 +49,27 @@ function createEventListeners(updatePage) {
     }
   })
 
-  // click
-  addEventListener('click', handleClick)
-  addEventListener('pushstate', () => updatePage())
-  addEventListener('replaceState', () => updatePage())
-  addEventListener('popstate', async (event) => {
-    if (await runHooksBeforeUrlChange(event)) {
-      updatePage()
-    } else {
-      event.preventDefault()
-      history.go(1)
-    }
-  })
+  const listeners = {
+    click: handleClick,
+    pushstate: () => updatePage(),
+    replacestate: () => updatePage(),
+    popstate: async event => {
+      if (await runHooksBeforeUrlChange(event)) {
+        updatePage()
+      } else {
+        event.preventDefault()
+        history.go(1)
+      }
+    },
+  }
+
+  Object.entries(listeners).forEach(args => addEventListener(...args))
+
+  const unregister = () => {
+    Object.entries(listeners).forEach(args => removeEventListener(...args))
+  }
+
+  return unregister
 }
 
 function handleClick(event) {
@@ -92,9 +100,8 @@ async function runHooksBeforeUrlChange(event) {
   return true
 }
 
-
 function urlToRoute(url, routes) {
-  const mockUrl = (new URL(location)).searchParams.get('__mock-url');
+  const mockUrl = new URL(location).searchParams.get('__mock-url')
   url = mockUrl || url
 
   const route = routes.find(route => url.match(route.regex))
@@ -137,5 +144,3 @@ function getRouteProps(url) {
     .map(f => f.match(/\:(.+)/))
     .map(f => f && f[1])
 }
-
-

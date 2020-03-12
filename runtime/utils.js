@@ -49,8 +49,11 @@ export const pathToRank = ({ path }) => {
     .join('')
 }
 
+let warningSuppressed = false
+
 /* eslint no-console: 0 */
 export function suppressWarnings() {
+  if (warningSuppressed) return
   const consoleWarn = console.warn
   console.warn = function(msg, ...msgs) {
     const ignores = [
@@ -60,4 +63,5 @@ export function suppressWarnings() {
     if (!ignores.find(iMsg => msg.includes(iMsg)))
       return consoleWarn(msg, ...msgs)
   }
+  warningSuppressed = true
 }
