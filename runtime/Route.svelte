@@ -8,18 +8,20 @@
   export let layouts = [],
     scoped = {},
     Decorator = undefined,
-    _passthroughDecorator = undefined
+    childOfDecorator = false
   let scopeToChild,
     props = {},
     parentElement,
     propFromParam = {},
     key = 0,
-    scopedSync = {}
+    scopedSync = {},
+    isDecorator = false
 
   const context = writable({})
   setContext('routify', context)
 
-  $: if (Decorator) {
+  $: if (Decorator && !childOfDecorator) {
+    isDecorator = true
     layouts = [
       { component: () => Decorator, path: layouts[0].path + '__decorator' },
       ...layouts,
@@ -78,23 +80,31 @@
 </script>
 
 {#if component}
-  {#each [0] as dummy (key)}
+  {#if remainingLayouts.length}
+    {#each [0] as dummy (key)}
+      <svelte:component
+        this={component}
+        let:scoped={scopeToChild}
+        let:decorator
+        {scoped}
+        {scopedSync}
+        {...propFromParam}>
+        <svelte:self
+          layouts={[...remainingLayouts]}
+          Decorator={typeof decorator !== 'undefined' ? decorator : Decorator}
+          childOfDecorator={isDecorator}
+          scoped={{ ...scoped, ...scopeToChild }} />
+      </svelte:component>
+    {/each}
+  {:else}
     <svelte:component
       this={component}
       let:scoped={scopeToChild}
       let:decorator
       {scoped}
       {scopedSync}
-      {...propFromParam}>
-      {#if remainingLayouts.length}
-        <svelte:self
-          layouts={[...remainingLayouts]}
-          Decorator={typeof decorator !== 'undefined' ? decorator : _passthroughDecorator}
-          _passthroughDecorator={Decorator}
-          scoped={{ ...scoped, ...scopeToChild }} />
-      {/if}
-    </svelte:component>
-  {/each}
+      {...propFromParam} />
+  {/if}
 {/if}
 
 <!-- get the parent element for scroll functionality -->
