@@ -50,16 +50,23 @@ function createEventListeners(updatePage) {
     }
   })
 
+  let _ignoreNextPop = false
+
   // click
   addEventListener('click', handleClick)
   addEventListener('pushstate', () => updatePage())
   addEventListener('replaceState', () => updatePage())
   addEventListener('popstate', async (event) => {
-    if (await runHooksBeforeUrlChange(event)) {
-      updatePage()
-    } else {
-      event.preventDefault()
-      history.go(1)
+    if (_ignoreNextPop)
+      _ignoreNextPop = false
+    else {
+      if (await runHooksBeforeUrlChange(event)) {
+        updatePage()
+      } else {
+        _ignoreNextPop = true
+        event.preventDefault()
+        history.go(1)
+      }
     }
   })
 }
