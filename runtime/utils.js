@@ -6,21 +6,23 @@ export function handleScroll(element) {
   handleHash()
 }
 
-
 export function handleHash() {
   const { scroll } = config
   const options = ['auto', 'smooth', 'smooth']
   const { hash } = window.location
   if (scroll && hash) {
-    const behavior = options.includes(scroll) && scroll || 'auto'
+    const behavior = (options.includes(scroll) && scroll) || 'auto'
     const el = document.querySelector(hash)
     if (hash && el) el.scrollIntoView({ behavior })
   }
 }
 
-
 export function scrollAncestorsToTop(element) {
-  if (element && element.scrollTo && element.dataset.routify !== 'scroll-lock') {
+  if (
+    element &&
+    element.scrollTo &&
+    element.dataset.routify !== 'scroll-lock'
+  ) {
     element.scrollTo(0, 0)
     scrollAncestorsToTop(element.parentElement)
   }
@@ -41,20 +43,25 @@ export const pathToParams = string => {
 
 export const pathToRank = ({ path }) => {
   return path
-    .split('/').filter(Boolean)
+    .split('/')
+    .filter(Boolean)
     .map(str => (str === '_fallback' ? 'A' : str.startsWith(':') ? 'B' : 'C'))
     .join('')
 }
 
+let warningSuppressed = false
+
 /* eslint no-console: 0 */
 export function suppressWarnings() {
+  if (warningSuppressed) return
   const consoleWarn = console.warn
-  console.warn = function (msg, ...msgs) {
+  console.warn = function(msg, ...msgs) {
     const ignores = [
       "was created with unknown prop 'scoped'",
-      "was created with unknown prop 'scopedSync'"
+      "was created with unknown prop 'scopedSync'",
     ]
     if (!ignores.find(iMsg => msg.includes(iMsg)))
       return consoleWarn(msg, ...msgs)
   }
+  warningSuppressed = true
 }
