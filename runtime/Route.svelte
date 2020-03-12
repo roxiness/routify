@@ -72,6 +72,7 @@
     if (!window.routify.stopAutoReady) {
       // Let every know the last child has rendered
       dispatchEvent(new CustomEvent('app-loaded'))
+      window.routify.appLoaded = true
     }
   }
 </script>
