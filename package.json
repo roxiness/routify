@@ -1,6 +1,6 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Routes for Svelte, automated by your filestructure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
@@ -15,7 +15,7 @@
   },
   "homepage": "https://routify.now.sh/docs/introduction",
   "dependencies": {
-    "@sveltech/ssr": "^0.0.8",
+    "@sveltech/ssr": "^0.0.9",
     "cheap-watch": "^1.0.2",
     "commander": "^4.0.1",
     "config": "^3.2.5",

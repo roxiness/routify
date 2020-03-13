@@ -118,7 +118,7 @@ export function _url(context, route, routes) {
     } else {
       // NAMED PATH
       const matchingRoute = routes.find(route => route.meta.name === path)
-      if(matchingRoute) path = matchingRoute.shortPath
+      if (matchingRoute) path = matchingRoute.shortPath
     }
 
     params = Object.assign({}, route.params, context.params, params)
@@ -167,3 +167,102 @@ export function getDirection(paths, newPath, oldPath) {
   return newIndex - oldIndex
 }
 
+
+export function focus(element) {
+  focus.elements = focus.elements || []
+  // Tell the first element to wait for all synchronous elements before calling waitAndFocus
+  if (!focus.elements.length)
+    setTimeout(waitAndFocus)
+  focus.elements.push(element)
+}
+
+function waitAndFocus() {
+  const elementsByProximityToRoot = focus.elements.sort((a, b) => getAncestors(a) - getAncestors(b))
+  const element = elementsByProximityToRoot[0]
+
+  element.setAttribute('tabindex', 0)
+  element.focus()
+  focus.elements = []
+}
+
+function getAncestors(elem) {
+  return document.evaluate('ancestor::*', elem, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotLength
+}
+
+
+const _meta = {
+  titleTemplate: value => 'Routify - ' + value,
+  urlTemplate: value => value,
+  props: {},
+  services: {
+    plain: { propField: 'name', valueField: 'content' },
+    twitter: { propField: 'name', valueField: 'content' },
+    og: { propField: 'property', valueField: 'content' },
+  },
+  plugins: [
+    {
+      name: 'renameTitle',
+      condition: prop => prop === 'title' && 'meta.titlePrefix',
+      action: (prop, value) => { return [prop, meta.titleTemplate(value)] }
+    },
+
+    {
+      name: 'createMeta',
+      condition: () => _meta.isLoading(),
+      action(prop, value) {
+        _meta.writeMeta(prop, value)
+      }
+    },
+    {
+      name: 'createOG',
+      condition: prop => !prop.match(':') && _meta.isLoading(),
+      action(prop, value) {
+        _meta.writeMeta(`og:${prop}`, value)
+      }
+    },
+    {
+      name: 'createTitle',
+      condition: prop => prop === 'title',
+      action(prop, value) {
+        document.title = value;
+      }
+    }
+  ],
+  writeMeta(prop, value) {
+    const head = document.getElementsByTagName('head')[0]
+    const match = prop.match(/(.+)\:/)
+    const serviceName = match && match[1] || 'plain'
+    const { propField, valueField } = meta.services[serviceName] || meta.services.plain
+    const oldElement = document.querySelector(`meta[${propField}='${prop}']`)
+    if (oldElement) oldElement.remove()
+
+    const newElement = document.createElement('meta')
+    newElement.setAttribute(propField, prop)
+    newElement.setAttribute(valueField, value)
+    head.appendChild(newElement)
+  },
+  set(prop, value) {
+    _meta.plugins.forEach(plugin => {
+      if (plugin.condition(prop, value))
+        [prop, value] = plugin.action(prop, value) || [prop, value]
+    })
+  },
+  isLoading() { return !window.routify || !window.routify.appLoaded }
+}
+
+export const meta = new Proxy(_meta, {
+  set(target, name, value, receiver) {
+    if (Reflect.has(target, name))
+      Reflect.set(target, name, value, receiver)
+    else {
+      target.set(name, value)
+      target.props[name] = value
+    }
+    // if we're setting the title template, let's update the title
+    if (name === 'titleTemplate')
+      target.set('title', target.props.title)
+    if (name === 'urlTemplate')
+      target.set('url', target.props.url)
+    return true
+  }
+})

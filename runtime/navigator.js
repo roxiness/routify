@@ -1,6 +1,6 @@
 import { route as routeStore } from './store'
 import { get } from 'svelte/store'
-import { beforeUrlChange } from './helpers'
+import { beforeUrlChange, meta } from './helpers'
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
@@ -23,6 +23,7 @@ export function init(routes, callback) {
 
     //run callback in Router.svelte
     callback(layouts)
+    meta.title = false
   }
 
   const destroy = createEventListeners(updatePage)
@@ -38,7 +39,7 @@ function createEventListeners(updatePage) {
   // history.*state
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = async function(state, title, url) {
+    history[eventName] = async function (state, title, url) {
       const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
 
@@ -49,16 +50,23 @@ function createEventListeners(updatePage) {
     }
   })
 
+  let _ignoreNextPop = false
+
   const listeners = {
     click: handleClick,
     pushstate: () => updatePage(),
     replacestate: () => updatePage(),
     popstate: async event => {
-      if (await runHooksBeforeUrlChange(event)) {
-        updatePage()
-      } else {
-        event.preventDefault()
-        history.go(1)
+      if (_ignoreNextPop)
+        _ignoreNextPop = false
+      else {
+        if (await runHooksBeforeUrlChange(event)) {
+          updatePage()
+        } else {
+          _ignoreNextPop = true
+          event.preventDefault()
+          history.go(1)
+        }
       }
     },
   }
