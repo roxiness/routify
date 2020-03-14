@@ -12,8 +12,8 @@ export const ready = {
   subscribe(listener) {
     window.routify.stopAutoReady = true
     return listener(async () => {
-      meta.update()
       await tick()
+      meta.update()
       window.routify.appLoaded = true
       dispatchEvent(new CustomEvent('app-loaded'))
     })

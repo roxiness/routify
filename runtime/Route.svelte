@@ -69,9 +69,9 @@
   $: setComponent(layout)
 
   async function onLastComponentLoaded() {
-    if (!window.routify.appLoaded) onAppLoaded()
     await tick()
     handleScroll(parentElement)
+    if (!window.routify.appLoaded) onAppLoaded()
   }
 
   async function onAppLoaded() {
