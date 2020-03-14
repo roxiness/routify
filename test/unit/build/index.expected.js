@@ -1,7 +1,7 @@
 
 /**
- * @sveltech/routify 1.0.3
- * File generated Mon Mar 02 2020 03:33:06 GMT+0100 (Central European Standard Time)
+ * @sveltech/routify 1.0.6
+ * File generated Sat Mar 14 2020 00:22:14 GMT+0100 (Central European Standard Time)
  */
 
 //buildRoutes

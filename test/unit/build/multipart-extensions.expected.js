@@ -9,8 +9,9 @@ import { buildRoutes } from "/home/eric/projects/routify/routify/runtime/buildRo
 
 //dynamic imports
 import __layout from '/pages/_layout.svelte'
-import _foo__layout from '/pages/foo/_layout.svelte'
-import _foo_index from '/pages/foo/index.svelte'
+import _docs from '/pages/docs.page.svx'
+import _foo__layout from '/pages/foo/_layout.page.svx'
+import _foo_docs from '/pages/foo/docs.page.svx'
 import _index from '/pages/index.svelte'
 
 //keys
@@ -36,13 +37,25 @@ const layouts = {
 //raw routes
 const _routes = [
   {
-    "component": () => _foo_index,
+    "component": () => _docs,
     "meta": {},
-    "isIndex": true,
+    "isIndex": false,
     "isFallback": false,
     "hasParam": false,
-    "path": "/foo/index",
-    "shortPath": "/foo",
+    "path": "/docs",
+    "shortPath": "/docs",
+    "layouts": [
+      layouts['/_layout']
+    ]
+  },
+  {
+    "component": () => _foo_docs,
+    "meta": {},
+    "isIndex": false,
+    "isFallback": false,
+    "hasParam": false,
+    "path": "/foo/docs",
+    "shortPath": "/foo/docs",
     "layouts": [
       layouts['/_layout'],
       layouts['/foo/_layout']
