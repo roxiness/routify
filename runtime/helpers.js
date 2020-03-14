@@ -285,7 +285,7 @@ const _meta = {
       })
     })
   },
-  batchedUpdate() {)
+  batchedUpdate() {
     if (!_meta._pendingUpdate) {
       _meta._pendingUpdate = true
       setTimeout(() => {
