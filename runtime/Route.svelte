@@ -1,7 +1,7 @@
 <script>
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable } from 'svelte/store'
-  import { _url, _goto, _isActive } from './helpers.js'
+  import { _url, _goto, _isActive, meta } from './helpers.js'
   import { route, routes } from './store'
   import { handleScroll } from './utils'
 
@@ -69,10 +69,15 @@
   $: setComponent(layout)
 
   async function onLastComponentLoaded() {
+    if (!window.routify.appLoaded) onAppLoaded()
     await tick()
     handleScroll(parentElement)
+  }
+
+  async function onAppLoaded() {
+    // Let every know the last child has rendered
     if (!window.routify.stopAutoReady) {
-      // Let every know the last child has rendered
+      meta.update()
       dispatchEvent(new CustomEvent('app-loaded'))
       window.routify.appLoaded = true
     }

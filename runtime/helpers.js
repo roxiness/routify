@@ -1,5 +1,6 @@
 import { getContext, tick } from 'svelte'
-import { derived } from 'svelte/store'
+import { derived, get } from 'svelte/store'
+import { route } from './store'
 
 export const context = {
   subscribe(listener) {
@@ -11,7 +12,9 @@ export const ready = {
   subscribe(listener) {
     window.routify.stopAutoReady = true
     return listener(async () => {
+      meta.update()
       await tick()
+      window.routify.appLoaded = true
       dispatchEvent(new CustomEvent('app-loaded'))
     })
   }
@@ -27,6 +30,7 @@ export const beforeUrlChange = {
     return () => delete hooks[index]
   }
 }
+
 
 /**
  * We have to grab params and leftover from the context and not directly from the store.
@@ -191,9 +195,8 @@ function getAncestors(elem) {
 
 
 const _meta = {
-  titleTemplate: value => 'Routify - ' + value,
-  urlTemplate: value => value,
   props: {},
+  templates: {},
   services: {
     plain: { propField: 'name', valueField: 'content' },
     twitter: { propField: 'name', valueField: 'content' },
@@ -201,21 +204,23 @@ const _meta = {
   },
   plugins: [
     {
-      name: 'renameTitle',
-      condition: prop => prop === 'title' && 'meta.titlePrefix',
-      action: (prop, value) => { return [prop, meta.titleTemplate(value)] }
+      name: 'applyTemplate',
+      condition: () => true,
+      action: (prop, value) => {
+        const template = _meta.getLongest(_meta.templates, prop) || (x => x)
+        return [prop, template(value)]
+      }
     },
-
     {
       name: 'createMeta',
-      condition: () => _meta.isLoading(),
+      condition: () => true,
       action(prop, value) {
         _meta.writeMeta(prop, value)
       }
     },
     {
       name: 'createOG',
-      condition: prop => !prop.match(':') && _meta.isLoading(),
+      condition: prop => !prop.match(':'),
       action(prop, value) {
         _meta.writeMeta(`og:${prop}`, value)
       }
@@ -228,6 +233,18 @@ const _meta = {
       }
     }
   ],
+  getLongest(repo, name) {
+    const providers = repo[name]
+    if (providers) {
+      const currentPath = get(route).path
+      const allPaths = Object.keys(repo[name])
+      const matchingPaths = allPaths.filter(path => currentPath.includes(path))
+
+      const longestKey = matchingPaths.sort((a, b) => b.length - a.length)[0]
+
+      return providers[longestKey]
+    }
+  },
   writeMeta(prop, value) {
     const head = document.getElementsByTagName('head')[0]
     const match = prop.match(/(.+)\:/)
@@ -239,6 +256,7 @@ const _meta = {
     const newElement = document.createElement('meta')
     newElement.setAttribute(propField, prop)
     newElement.setAttribute(valueField, value)
+    newElement.setAttribute('data-origin', 'routify')
     head.appendChild(newElement)
   },
   set(prop, value) {
@@ -247,22 +265,56 @@ const _meta = {
         [prop, value] = plugin.action(prop, value) || [prop, value]
     })
   },
-  isLoading() { return !window.routify || !window.routify.appLoaded }
+  clear() {
+    const oldElement = document.querySelector(`meta`)
+    if (oldElement) oldElement.remove()
+  },
+  template(name, fn) {
+    const origin = _meta.getOrigin()
+    _meta.templates[name] = _meta.templates[name] || {}
+    _meta.templates[name][origin] = fn
+  },
+  update() {
+    Object.keys(_meta.props).forEach((prop) => {
+      let value = (_meta.getLongest(_meta.props, prop))
+      _meta.plugins.forEach(plugin => {
+        if (plugin.condition(prop, value)) {
+          [prop, value] = plugin.action(prop, value) || [prop, value]
+
+        }
+      })
+    })
+  },
+  batchedUpdate() {)
+    if (!_meta._pendingUpdate) {
+      _meta._pendingUpdate = true
+      setTimeout(() => {
+        _meta._pendingUpdate = false
+        this.update()
+      })
+    }
+  },
+  _updateQueued: false,
+  getOrigin() {
+    const routifyCtx = getContext('routify')
+    return routifyCtx && get(routifyCtx).path || '_'
+  },
+  _pendingUpdate: false
 }
 
 export const meta = new Proxy(_meta, {
   set(target, name, value, receiver) {
+    const { props, getOrigin } = target
+
     if (Reflect.has(target, name))
       Reflect.set(target, name, value, receiver)
     else {
-      target.set(name, value)
-      target.props[name] = value
+      props[name] = props[name] || {}
+      props[name][getOrigin()] = value
     }
-    // if we're setting the title template, let's update the title
-    if (name === 'titleTemplate')
-      target.set('title', target.props.title)
-    if (name === 'urlTemplate')
-      target.set('url', target.props.url)
+    
+    if (window.routify.appLoaded)
+      target.batchedUpdate()
     return true
   }
 })
