@@ -8,7 +8,7 @@ export function handleScroll(element) {
 
 export function handleHash() {
   const { scroll } = config
-  const options = ['auto', 'smooth', 'smooth']
+  const options = ['auto', 'smooth']
   const { hash } = window.location
   if (scroll && hash) {
     const behavior = (options.includes(scroll) && scroll) || 'auto'
