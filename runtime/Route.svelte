@@ -71,13 +71,13 @@
   async function onLastComponentLoaded() {
     await tick()
     handleScroll(parentElement)
+    meta.update()
     if (!window.routify.appLoaded) onAppLoaded()
   }
 
   async function onAppLoaded() {
     // Let every know the last child has rendered
     if (!window.routify.stopAutoReady) {
-      meta.update()
       dispatchEvent(new CustomEvent('app-loaded'))
       window.routify.appLoaded = true
     }
