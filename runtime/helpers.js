@@ -297,7 +297,7 @@ const _meta = {
   _updateQueued: false,
   getOrigin() {
     const routifyCtx = getContext('routify')
-    return routifyCtx && get(routifyCtx).path || '_'
+    return routifyCtx && get(routifyCtx).path || '/'
   },
   _pendingUpdate: false
 }
