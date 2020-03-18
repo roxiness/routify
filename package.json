@@ -1,6 +1,6 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.1.1-1",
+  "version": "1.1.1-2",
   "description": "Routes for Svelte, automated by your filestructure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
