@@ -48,7 +48,9 @@ const runSample = async (t, file, name) => {
   const expected = await fsa.readFile(expectedFilename, 'utf8')
 
   const stripTimestamp = code =>
-    code.replace(/File generated.*/, 'File generated __TIMESTAMP__')
+    code
+      .replace(/File generated.*/, 'File generated __TIMESTAMP__')
+      .replace(/(@sveltech\/routify)[\s.\d-]*/, '$1 __VERSION__')
 
   t.eq(
     stripTimestamp(actual),
