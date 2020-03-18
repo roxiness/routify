@@ -1,5 +1,6 @@
-![](./routify.png)
-
+<div align="center">
+    <img src="routify.png" alt="routify" width="367" />
+</div>
 
 ----
 
