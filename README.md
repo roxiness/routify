@@ -5,10 +5,8 @@
 ----
 
 
-<p align="center"> 
-    
-###### WORK IN PROGRESS   
-
+<p align="center">     
+  <h6>WORK IN PROGRESS</h6>
 </p>
 
 
