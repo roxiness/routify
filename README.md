@@ -6,7 +6,7 @@
 
 
 <p align="center">     
-  <h6>WORK IN PROGRESS</h6>
+  <strong>WORK IN PROGRESS</strong>
 </p>
 
 
