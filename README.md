@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="routify.png" alt="routify" width="367" />
+    <img src="routify.png" alt="routify" width="512" />
 </div>
 
 ----
@@ -33,5 +33,10 @@ Includes SSR, prerendering, code splitting and much more.
 ## Tutorials
 [Easy client-side SPA routing with Routify](https://www.youtube.com/watch?v=AGLUJlOC6f0) by Jitesh
 
-## Issues
+## Support
 Please feel free to open an issue or a pull request. All feedback is welcome.
+
+**Join us on Discord**
+
+Want help? Have ideas about Routify? Chat with us. Find us on Discord.
+https://discord.gg/5M3FE68
