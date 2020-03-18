@@ -6,7 +6,7 @@
     "unknownPropWarnings": true,
     "dynamicImports": false,
     "singleBuild": false,
-    "scroll": false,
+    "scroll": "smooth",
     "extensions": [
       "html",
       "svelte",
