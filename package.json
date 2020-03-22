@@ -1,12 +1,12 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.1.1-2",
+  "version": "0.0.0-development",
   "description": "Routes for Svelte, automated by your filestructure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sveltech/routify.git"
+    "url": "https://github.com/sveltech/routify.git"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "MIT",
@@ -40,7 +40,8 @@
     "rewiremock": "^3.13.9",
     "svelte": "^3.16.0",
     "zoar": "^0.0.3",
-    "zorax": "^0.0.5"
+    "zorax": "^0.0.5",
+    "semantic-release": "^17.0.4"
   },
   "scripts": {
     "eslint": "eslint lib plugins runtime",
@@ -56,6 +57,7 @@
     "test:unit:watch": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit\"",
     "test:unit:watch:only": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit -- --only\"",
     "test:watch": "run-s test:unit test:unit:watch",
-    "test": "npm run --silent test:unit"
+    "test": "npm run --silent test:unit",
+    "semantic-release": "semantic-release"
   }
 }
