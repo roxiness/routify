@@ -7,6 +7,18 @@ on:
   ['push']
 
 jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@master    
+#     - uses: actions/setup-node@v1
+#       with:
+#         node-version: 12
+#     - name: install
+#       run: npm install
+#     - name: test
+#       run: npm run test:
+     
   publish:
 
     runs-on: ubuntu-latest
