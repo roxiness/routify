@@ -1,7 +1,7 @@
 <script>
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable } from 'svelte/store'
-  import { _url, _goto, _isActive, meta } from './helpers.js'
+  import { meta } from './helpers.js'
   import { route, routes } from './store'
   import { handleScroll } from './utils'
 
@@ -41,16 +41,7 @@
     _lastLayout = layout
     if (layoutIsUpdated) key++
     if (remainingLayouts.length === 0) onLastComponentLoaded()
-    const url = _url(layout, $route, $routes)
-    const ctx = {
-      component: layout,
-      route: $route,
-      path: layout.path,
-      url,
-      goto: _goto(url),
-      isActive: _isActive(url, $route),
-    }
-    context.set(ctx)
+    context.set({ component: layout })
   }
 
   let component

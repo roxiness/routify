@@ -1,6 +1,6 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
-import { route } from './store'
+import { route, routes } from './store'
 
 export const context = {
   subscribe(listener) {
@@ -39,8 +39,8 @@ export const beforeUrlChange = {
 export const params = {
   subscribe(listener) {
     return derived(
-      getContext('routify'),
-      context => context.route.params
+      route,
+      route => route.params
     ).subscribe(listener)
   },
 }
@@ -48,16 +48,53 @@ export const params = {
 export const leftover = {
   subscribe(listener) {
     return derived(
-      getContext('routify'),
-      context => context.route.leftover
+      route,
+      route => route.leftover
     ).subscribe(listener)
   },
 }
 
-/** HELPERS */
+
 export const url = {
   subscribe(listener) {
-    return derived(getContext('routify'), context => context.url).subscribe(
+    const ctx = getContext('routify')
+    return derived(
+      [ctx, route, routes],
+      ([ctx, route, routes]) => function url(path, params, preserveIndex) {
+        const { component } = ctx
+        path = path || './'
+
+        if (!preserveIndex) path = path.replace(/index$/, '')
+
+        if (path.match(/^\.\.?\//)) {
+          //RELATIVE PATH
+          // get component's dir
+          let dir = component.path
+          // traverse through parents if needed
+          const traverse = path.match(/\.\.\//g) || []
+          traverse.forEach(() => {
+            dir = dir.replace(/\/[^\/]+\/?$/, '')
+          })
+
+          // strip leading periods and slashes
+          path = path.replace(/^[\.\/]+/, '')
+          dir = dir.replace(/\/$/, '') + '/'
+          path = dir + path
+        } else if (path.match(/^\//)) {
+          // ABSOLUTE PATH
+        } else {
+          // NAMED PATH
+          const matchingRoute = routes.find(route => route.meta.name === path)
+          if (matchingRoute) path = matchingRoute.shortPath
+        }
+
+        params = Object.assign({}, route.params, component.params, params)
+        for (const [key, value] of Object.entries(params)) {
+          path = path.replace(`:${key}`, value)
+        }
+        return path
+      }
+    ).subscribe(
       listener
     )
   },
@@ -65,7 +102,13 @@ export const url = {
 
 export const goto = {
   subscribe(listener) {
-    return derived(getContext('routify'), context => context.goto).subscribe(
+    return derived(url,
+      url => function goto(path, params, _static, shallow) {
+        const href = url(path, params)
+        if (!_static) history.pushState({}, null, href)
+        else getContext('routifyupdatepage')(href, shallow)
+      }
+    ).subscribe(
       listener
     )
   },
@@ -74,65 +117,16 @@ export const goto = {
 export const isActive = {
   subscribe(listener) {
     return derived(
-      getContext('routify'),
-      context => context.isActive
+      [url, route],
+      ([url, route]) => function isActive(path, strict = true) {
+        path = url(path, null, strict)
+        const currentPath = url(route.path, null, strict)
+        const re = new RegExp('^' + path)
+        return currentPath.match(re)
+      }
     ).subscribe(listener)
   },
 }
-
-export function _isActive(url, route) {
-  return function (path, strict = true) {
-    path = url(path, null, strict)
-    const currentPath = url(route.path, null, strict)
-    const re = new RegExp('^' + path)
-    return currentPath.match(re)
-  }
-}
-
-export function _goto(url) {
-  return function goto(path, params, _static, shallow) {
-    const href = url(path, params)
-    if (!_static) history.pushState({}, null, href)
-    else getContext('routifyupdatepage')(href, shallow)
-  }
-}
-
-export function _url(context, route, routes) {
-  return function url(path, params, preserveIndex) {
-    path = path || './'
-
-    if (!preserveIndex) path = path.replace(/index$/, '')
-
-    if (path.match(/^\.\.?\//)) {
-      //RELATIVE PATH
-      // get component's dir
-      let dir = context.path
-      // traverse through parents if needed
-      const traverse = path.match(/\.\.\//g) || []
-      traverse.forEach(() => {
-        dir = dir.replace(/\/[^\/]+\/?$/, '')
-      })
-
-      // strip leading periods and slashes
-      path = path.replace(/^[\.\/]+/, '')
-      dir = dir.replace(/\/$/, '') + '/'
-      path = dir + path
-    } else if (path.match(/^\//)) {
-      // ABSOLUTE PATH
-    } else {
-      // NAMED PATH
-      const matchingRoute = routes.find(route => route.meta.name === path)
-      if (matchingRoute) path = matchingRoute.shortPath
-    }
-
-    params = Object.assign({}, route.params, context.params, params)
-    for (const [key, value] of Object.entries(params)) {
-      path = path.replace(`:${key}`, value)
-    }
-    return path
-  }
-}
-
 
 export function getConcestor(route1, route2) {
   // The route is the last piece of layout
@@ -312,7 +306,7 @@ export const meta = new Proxy(_meta, {
       props[name] = props[name] || {}
       props[name][getOrigin()] = value
     }
-    
+
     if (window.routify.appLoaded)
       target.batchedUpdate()
     return true
