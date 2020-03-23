@@ -42,13 +42,15 @@
     if (layoutIsUpdated) key++
     if (remainingLayouts.length === 0) onLastComponentLoaded()
     const url = _url(layout, $route, $routes)
-    context.set({
+    const ctx = {
+      component: layout,
       route: $route,
       path: layout.path,
       url,
       goto: _goto(url),
       isActive: _isActive(url, $route),
-    })
+    }
+    context.set(ctx)
   }
 
   let component
