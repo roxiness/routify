@@ -81,9 +81,9 @@ export const isActive = {
 }
 
 export function _isActive(url, route) {
-  return function (path, keepIndex = true) {
-    path = url(path, null, keepIndex)
-    const currentPath = url(route.path, null, keepIndex)
+  return function (path, strict = true) {
+    path = url(path, null, strict)
+    const currentPath = url(route.path, null, strict)
     const re = new RegExp('^' + path)
     return currentPath.match(re)
   }
