@@ -4,7 +4,7 @@ import { beforeUrlChange } from './helpers'
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
-  let prevRoute = false
+  let lastRoute = false
 
   function updatePage(url, shallow) {
     const currentUrl = window.location.pathname
@@ -14,9 +14,9 @@ export function init(routes, callback) {
     const currentRoute = shallow && urlToRoute(currentUrl, routes)
     const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
-    delete prevRoute.prev
-    route.prev = prevRoute
-    prevRoute = route
+    delete lastRoute.last
+    route.last = lastRoute
+    lastRoute = route
 
     //set the route in the store
     routeStore.set(route)
@@ -38,7 +38,9 @@ function createEventListeners(updatePage) {
   // history.*state
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = async function (state, title, url) {
+    history[eventName] = async function (state = {}, title, url) {
+      const { id, path, params } = get(routeStore)
+      state = { id, path, params, ...state }
       const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
 

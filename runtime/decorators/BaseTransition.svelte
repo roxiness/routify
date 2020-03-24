@@ -11,7 +11,7 @@
     outParams: {},
   }
 
-  $: oldRoute = $route.prev || $route
+  $: oldRoute = $route.last || $route
   $: [concestor, ancestor, oldAncestor] = getConcestor($route, oldRoute)
   $: toAncestor = isAncestor(oldRoute, $route)
   $: toDescendant = isAncestor($route, oldRoute)

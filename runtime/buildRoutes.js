@@ -30,8 +30,8 @@ const decorateRoute = function (route) {
  */
 function applyLayouts(tree, layouts = []) {
   return tree.map(file => {
-    if (file.dir) {
-      file.dir = applyLayouts(file.dir, [...layouts])
+    if (file.children) {
+      file.children = applyLayouts(file.children, [...layouts])
     } else {
       if (file.isReset || file.meta.$reset) layouts = []
       if (file.isLayout) {
@@ -51,8 +51,8 @@ function applyLayouts(tree, layouts = []) {
  */
 function flattenTree(tree, arr = []) {
   tree.forEach(file => {
-    if (file.dir)
-      arr.push(...flattenTree(file.dir))
+    if (file.children)
+      arr.push(...flattenTree(file.children))
     else
       arr.push(file)
   })
@@ -60,18 +60,20 @@ function flattenTree(tree, arr = []) {
 }
 
 
-export function createRelationalTree(tree, parent = false, prevFile = false) {
+export function buildClientTree(tree, parent = false, prevFile = false) {
   let _prevFile = false
+  tree.isActive = false
   if (tree.dir) {
     Object.setPrototypeOf(tree, Dir.prototype)
-    tree.dir = tree.dir.sort((a, b) => a.meta.$index - b.meta.$index).map(file => {
-      const _file = createRelationalTree(file, tree, _prevFile)
+    tree.children = tree.dir.sort((a, b) => a.meta.$index - b.meta.$index).map(file => {
+      const _file = buildClientTree(file, tree, _prevFile)
       if (isIndexable(_file)) _prevFile = _file
       return _file
     })
+    delete tree.dir
   }
   const Prototype = !parent ? Root
-    : tree.dir ? Dir
+    : tree.children ? Dir
       : tree.isReset ? Reset
         : tree.isLayout ? Layout
           : tree.isFallback ? Fallback
@@ -84,8 +86,6 @@ export function createRelationalTree(tree, parent = false, prevFile = false) {
   }
   if (parent) Object.defineProperty(tree, 'parent', { get: () => parent });
 
-  let isActive
-  Object.defineProperty(tree, 'isActive', { get: () => tree.ctx.isActive })
 
   if (tree.isIndex) Object.defineProperty(parent, 'index', { get: () => tree })
   if (tree.isLayout) Object.defineProperty(parent, 'layout', { get: () => tree })
