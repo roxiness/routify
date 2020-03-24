@@ -26,6 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: cycjimmy/semantic-release-action@v2.3.0    
+      id: semantic
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
