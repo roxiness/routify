@@ -88,7 +88,7 @@ export const url = {
           if (matchingRoute) path = matchingRoute.shortPath
         }
 
-        params = Object.assign({}, route.params, component.params, params)
+        params = Object.assign({}, route.params, params)
         for (const [key, value] of Object.entries(params)) {
           path = path.replace(`:${key}`, value)
         }
