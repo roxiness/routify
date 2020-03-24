@@ -65,11 +65,13 @@ export function buildClientTree(tree, parent = false, prevFile = false) {
   tree.isActive = false
   if (tree.dir) {
     Object.setPrototypeOf(tree, Dir.prototype)
-    tree.children = tree.dir.sort((a, b) => a.meta.$index - b.meta.$index).map(file => {
-      const _file = buildClientTree(file, tree, _prevFile)
-      if (isIndexable(_file)) _prevFile = _file
-      return _file
-    })
+    tree.children = tree.dir
+      .sort((a, b) => a.meta.$index - b.meta.$index)
+      .map(file => {
+        const _file = buildClientTree(file, tree, _prevFile)
+        if (isIndexable(_file)) _prevFile = _file
+        return _file
+      })
     delete tree.dir
   }
   const Prototype = !parent ? Root
@@ -80,7 +82,10 @@ export function buildClientTree(tree, parent = false, prevFile = false) {
             : Page
   Object.setPrototypeOf(tree, Prototype.prototype)
 
-  if (prevFile && isIndexable(tree)) {
+  tree.isIndexable = (isIndexable(tree))
+
+
+  if (prevFile && tree.isIndexable) {
     Object.defineProperty(tree, 'prevSibling', { get: () => prevFile });
     Object.defineProperty(prevFile, 'nextSibling', { get: () => tree });
   }
@@ -89,6 +94,8 @@ export function buildClientTree(tree, parent = false, prevFile = false) {
 
   if (tree.isIndex) Object.defineProperty(parent, 'index', { get: () => tree })
   if (tree.isLayout) Object.defineProperty(parent, 'layout', { get: () => tree })
+
+  Object.defineProperty(tree, 'prettyName', { get: () => tree.meta.$name || (tree.shortPath || tree.path).split('/').pop().replace('-', ' ') })
 
   return tree
 }
