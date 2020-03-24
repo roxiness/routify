@@ -54,46 +54,47 @@ export const leftover = {
   },
 }
 
+export const makeUrlHelper = (ctx, route, routes) => function url(path, params, preserveIndex) {
+  const { component } = ctx
+  path = path || './'
+
+  if (!preserveIndex) path = path.replace(/index$/, '')
+
+  if (path.match(/^\.\.?\//)) {
+    //RELATIVE PATH
+    // get component's dir
+    let dir = component.path
+    // traverse through parents if needed
+    const traverse = path.match(/\.\.\//g) || []
+    traverse.forEach(() => {
+      dir = dir.replace(/\/[^\/]+\/?$/, '')
+    })
+
+    // strip leading periods and slashes
+    path = path.replace(/^[\.\/]+/, '')
+    dir = dir.replace(/\/$/, '') + '/'
+    path = dir + path
+  } else if (path.match(/^\//)) {
+    // ABSOLUTE PATH
+  } else {
+    // NAMED PATH
+    const matchingRoute = routes.find(route => route.meta.name === path)
+    if (matchingRoute) path = matchingRoute.shortPath
+  }
+
+  params = Object.assign({}, route.params, component.params, params)
+  for (const [key, value] of Object.entries(params)) {
+    path = path.replace(`:${key}`, value)
+  }
+  return path
+}
 
 export const url = {
   subscribe(listener) {
     const ctx = getContext('routify')
     return derived(
       [ctx, route, routes],
-      ([ctx, route, routes]) => function url(path, params, preserveIndex) {
-        const { component } = ctx
-        path = path || './'
-
-        if (!preserveIndex) path = path.replace(/index$/, '')
-
-        if (path.match(/^\.\.?\//)) {
-          //RELATIVE PATH
-          // get component's dir
-          let dir = component.path
-          // traverse through parents if needed
-          const traverse = path.match(/\.\.\//g) || []
-          traverse.forEach(() => {
-            dir = dir.replace(/\/[^\/]+\/?$/, '')
-          })
-
-          // strip leading periods and slashes
-          path = path.replace(/^[\.\/]+/, '')
-          dir = dir.replace(/\/$/, '') + '/'
-          path = dir + path
-        } else if (path.match(/^\//)) {
-          // ABSOLUTE PATH
-        } else {
-          // NAMED PATH
-          const matchingRoute = routes.find(route => route.meta.name === path)
-          if (matchingRoute) path = matchingRoute.shortPath
-        }
-
-        params = Object.assign({}, route.params, component.params, params)
-        for (const [key, value] of Object.entries(params)) {
-          path = path.replace(`:${key}`, value)
-        }
-        return path
-      }
+      args => makeUrlHelper(...args)
     ).subscribe(
       listener
     )
