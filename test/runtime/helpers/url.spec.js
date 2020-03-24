@@ -1,12 +1,12 @@
-import { test, describe } from '@@'
-import { _url } from '@/runtime/helpers.js'
+import { test, describe } from '../..'
+import { makeUrlHelper } from '../../../runtime/helpers.js'
 
 import { paths as specs } from './url.samples.js'
 
 describe.skip('TODO: $url')
 
 test('_url is a function', t => {
-  t.equal(typeof _url, 'function')
+  t.equal(typeof makeUrlHelper, 'function')
 })
 
 const macro = (
@@ -15,7 +15,7 @@ const macro = (
 ) => {
   const context = { path, params: {}, ...contextArg }
   const route = { params: {}, ...routeArg }
-  const $url = _url(context, route)
+  const $url = makeUrlHelper(context, route)
   // unfold expects
   const runExpect = ([input, expected]) => {
     // throws
