@@ -25,8 +25,13 @@ jobs:
   
     steps:
     - uses: actions/checkout@v2
-    - uses: cycjimmy/semantic-release-action@v2.3.0
-    
+    - uses: cycjimmy/semantic-release-action@v2.3.0    
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - if: steps.semantic.outputs.new_release_published == 'true'
+      run: |
+        echo ${{ steps.semantic.outputs.new_release_version }}
+        echo ${{ steps.semantic.outputs.new_release_major_version }}
+        echo ${{ steps.semantic.outputs.new_release_minor_version }}
+        echo ${{ steps.semantic.outputs.new_release_patch_version }}
