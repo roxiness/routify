@@ -1,5 +1,5 @@
-import { test, describe } from '@@'
-import { makeUrlHelper } from '@/runtime/helpers.js'
+import { test, describe } from '../..'
+import { makeUrlHelper } from '../../../runtime/helpers.js'
 
 import { paths as specs } from './url.samples.js'
 
