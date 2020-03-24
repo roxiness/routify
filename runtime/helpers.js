@@ -54,11 +54,11 @@ export const leftover = {
   },
 }
 
-export const makeUrlHelper = (ctx, route, routes) => function url(path, params, preserveIndex) {
+export const makeUrlHelper = (ctx, route, routes) => function url(path, params, strict) {
   const { component } = ctx
   path = path || './'
 
-  if (!preserveIndex) path = path.replace(/index$/, '')
+  if (!strict) path = path.replace(/index$/, '')
 
   if (path.match(/^\.\.?\//)) {
     //RELATIVE PATH
