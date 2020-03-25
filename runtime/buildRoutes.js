@@ -62,7 +62,8 @@ if (tree.dir) {
             : Page
   Object.setPrototypeOf(tree, Prototype.prototype)
 
-  tree.isIndexable = (isIndexable(tree))
+  tree.isIndexable = isIndexable(tree)
+  tree.isNonIndexable = !tree.isIndexable
 
 
   if (prevFile && tree.isIndexable) {
