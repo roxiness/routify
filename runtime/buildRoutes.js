@@ -2,8 +2,8 @@ import { pathToParams, pathToRank, pathToRegex } from './utils'
 import { isActive } from './helpers'
 
 export function buildRoutes(tree) {
-  const treeWithLayouts = applyLayouts(tree)
-  const routes = flattenTree(treeWithLayouts)
+  // const treeWithLayouts = applyLayouts(tree)
+  const routes = flattenTree(tree)
   return (
     routes
       .filter(route => !route.isLayout)
@@ -24,27 +24,6 @@ const decorateRoute = function (route) {
 }
 
 /**
- * applyLayouts
- * @param {Object} tree
- * @param {Array} layouts
- */
-function applyLayouts(tree, layouts = []) {
-  return tree.map(file => {
-    if (file.children) {
-      file.children = applyLayouts(file.children, [...layouts])
-    } else {
-      if (file.isReset || file.meta.$reset) layouts = []
-      if (file.isLayout) {
-        file.param = {}
-        layouts.push(file)
-      }
-      else file.layouts = layouts
-    }
-    return file
-  })
-}
-
-/**
  * flattenTree
  * @param {Object} tree
  * @param {Array} arr
@@ -61,13 +40,14 @@ function flattenTree(tree, arr = []) {
 
 
 export function buildClientTree(tree, parent = false, prevFile = false) {
-  let _prevFile = false
-  tree.isActive = false
-  if (tree.dir) {
+ 
+if (tree.dir) {
+    let _prevFile = false
     Object.setPrototypeOf(tree, Dir.prototype)
     tree.children = tree.dir
       .sort((a, b) => a.meta.$index - b.meta.$index)
       .map(file => {
+        if (file.isLayout) tree.layout = file
         const _file = buildClientTree(file, tree, _prevFile)
         if (isIndexable(_file)) _prevFile = _file
         return _file
@@ -91,10 +71,10 @@ export function buildClientTree(tree, parent = false, prevFile = false) {
   }
   if (parent) Object.defineProperty(tree, 'parent', { get: () => parent });
 
-
   if (tree.isIndex) Object.defineProperty(parent, 'index', { get: () => tree })
   if (tree.isLayout) Object.defineProperty(parent, 'layout', { get: () => tree })
 
+  Object.defineProperty(tree, 'layouts', { get: () => getLayouts(tree) })
   Object.defineProperty(tree, 'prettyName', { get: () => tree.meta.$name || (tree.shortPath || tree.path).split('/').pop().replace('-', ' ') })
 
   return tree
@@ -105,6 +85,14 @@ function isIndexable(file) {
   return !isLayout && !isFallback && meta.$index !== false
 }
 
+function getLayouts(file) {
+  const { parent } = file
+  const layout = parent && parent.layout
+  const isReset = layout && layout.isReset  
+  const layouts = parent && !isReset && getLayouts(parent) || []
+  if (layout) layouts.push(layout)
+  return layouts
+}
 
 function Layout() { }
 function Dir() { }
