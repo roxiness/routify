@@ -3,7 +3,6 @@
     "sourceDir": "public",
     "routifyDir": "node_modules/@sveltech/routify/tmp",
     "ignore": [],
-    "unknownPropWarnings": true,
     "dynamicImports": false,
     "singleBuild": false,
     "noHashScroll": false,

@@ -17,8 +17,6 @@ program
     'Files and dirs. Can be string or array. Interpreted as regular expression', defaults.ignore
   )
   .option(
-    '-u, --unused-prop-warnings', 'Show warnings about unused props passed by filerouter', defaults.unknownPropWarnings) //todo, replace unknownPropWarnings
-  .option(
     '-D, --dynamic-imports', 'Code splitting)', defaults.dynamicImports
   )
   .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
