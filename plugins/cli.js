@@ -2,6 +2,7 @@
 
 const program = require('commander')
 const fs = require('fs')
+const fse = require('fs-extra')
 const { execSync } = require('child_process')
 const { start } = require('../lib/services/interface')
 const { exporter } = require('../lib/services/exporter')
@@ -27,8 +28,11 @@ program
 
 program
   .command('init')
-  .action(() => {
+  .option('-s, --start-dev', 'run "npm run dev" automatically')
+  .option('-f, --no-example', 'delete the example folder')
+  .action(options => {
     isCommand = true
+    const { example, startDev } = options.opts()
     fs.readdir('./', (err, files) => {
       if (err) log(err)
       else if (files.length) log('Can only init in an empty directory.')
@@ -37,7 +41,10 @@ program
         execSync('npx degit https://github.com/sveltech/routify-starter')
         log('Installing dependencies')
         execSync('npm i')
-        execSync('npm run dev', { stdio: 'inherit' })
+
+        if (!example) fse.remove('./src/pages/examples')
+        if (startDev) execSync('npm run dev', { stdio: 'inherit' })
+        else log('Run "npm run dev" to start the server.')
       }
     })
   })
