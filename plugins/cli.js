@@ -21,7 +21,7 @@ program
   )
   .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
   .option('-e, --extensions <names>', "Included file extensions (comma separated)", defaults.extensions)
-  .option('-c, --child-process <command>', "Run command when Routify is ready", defaults.childProcess)
+  .option('-c, --child-process <command>', "Run npm task when Routify is ready", defaults.childProcess)
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
 
 
