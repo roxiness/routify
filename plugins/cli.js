@@ -22,9 +22,9 @@ program
     '-D, --dynamic-imports', 'Code splitting)', defaults.dynamicImports
   )
   .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
-  .option('-s, --scroll [behavior]', "Scroll behavior", defaults.scroll)
   .option('-e, --extensions <names>', "Included file extensions (comma separated)", defaults.extensions)
   .option('-c, --child-process <command>', "Run command when Routify is ready", defaults.childProcess)
+  .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
 
 
 program

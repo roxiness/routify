@@ -7,13 +7,11 @@ export function handleScroll(element) {
 }
 
 export function handleHash() {
-  const { scroll } = config
-  const options = ['auto', 'smooth']
+  const { noHashScroll } = config
   const { hash } = window.location
-  if (scroll && hash) {
-    const behavior = (options.includes(scroll) && scroll) || 'auto'
+  if (!noHashScroll && hash) {
     const el = document.querySelector(hash)
-    if (hash && el) el.scrollIntoView({ behavior })
+    if (hash && el) el.scrollIntoView()
   }
 }
 
