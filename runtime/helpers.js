@@ -54,6 +54,13 @@ export const leftover = {
   },
 }
 
+export const metaTags = {
+  subscribe(listener) {
+    const ctx = getContext('routify')
+    return derived(ctx, ctx => ctx.component.meta).subscribe(listener)
+  },
+}
+
 export const makeUrlHelper = (ctx, route, routes) => function url(path, params, strict) {
   const { component } = ctx
   path = path || './'
