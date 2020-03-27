@@ -34,7 +34,8 @@ function flattenTree(tree, arr = []) {
   return arr
 }
 
-export function buildClientTree(tree, parent = false, prevFile = false) {
+export function buildClientTree(_tree, parent = false, prevFile = false) {
+  const tree = { ..._tree }
   if (tree.dir) {
     let _prevFile = false
     Object.setPrototypeOf(tree, Dir.prototype)
