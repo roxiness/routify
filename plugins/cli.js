@@ -29,7 +29,7 @@ program
 program
   .command('init')
   .option('-s, --start-dev', 'run "npm run dev" automatically')
-  .option('-f, --no-example', 'delete the example folder')
+  .option('-e, --no-example', 'delete the example folder')
   .action(options => {
     isCommand = true
     const { example, startDev } = options.opts()
@@ -40,7 +40,7 @@ program
         log('Fetching template')
         execSync('npx degit https://github.com/sveltech/routify-starter')
         log('Installing dependencies')
-        execSync('npm i')
+        execSync('npm i --loglevel=error')
 
         if (!example) fse.remove('./src/pages/examples')
         if (startDev) execSync('npm run dev', { stdio: 'inherit' })
