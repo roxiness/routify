@@ -82,7 +82,7 @@ export function buildClientTree(_tree, parent = false, prevFile = false) {
       (tree.shortPath || tree.path)
         .split('/')
         .pop()
-        .replace('-', ' '),
+        .replace(/-/g, ' '),
   })
 
   return tree
