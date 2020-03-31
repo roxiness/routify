@@ -15,8 +15,8 @@
   $: [concestor, ancestor, oldAncestor] = getConcestor($route, oldRoute)
   $: toAncestor = isAncestor(oldRoute, $route)
   $: toDescendant = isAncestor($route, oldRoute)
-  $: toHigherIndex = ancestor && ancestor.meta.$index > oldAncestor.meta.$index
-  $: toLowerIndex = ancestor && ancestor.meta.$index < oldAncestor.meta.$index
+  $: toHigherIndex = ancestor && ancestor.meta.index > oldAncestor.meta.index
+  $: toLowerIndex = ancestor && ancestor.meta.index < oldAncestor.meta.index
 
 
   $: meta = {

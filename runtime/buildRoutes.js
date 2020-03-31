@@ -10,7 +10,7 @@ export function buildRoutes(tree) {
     .sort((c, p) => (c.ranking >= p.ranking ? -1 : 1))
 }
 
-const decorateRoute = function(route) {
+const decorateRoute = function (route) {
   route.paramKeys = pathToParams(route.path)
   route.regex = pathToRegex(route.path, route.isFallback)
   route.name = route.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
@@ -40,7 +40,7 @@ export function buildClientTree(_tree, parent = false, prevFile = false) {
     let _prevFile = false
     Object.setPrototypeOf(tree, Dir.prototype)
     tree.children = tree.dir
-      .sort((a, b) => a.meta.$index - b.meta.$index)
+      .sort((a, b) => a.meta.index - b.meta.index)
       .map(file => {
         if (file.isLayout) tree.layout = file
         const _file = buildClientTree(file, tree, _prevFile)
@@ -52,14 +52,14 @@ export function buildClientTree(_tree, parent = false, prevFile = false) {
   const Prototype = !parent
     ? Root
     : tree.children
-    ? Dir
-    : tree.isReset
-    ? Reset
-    : tree.isLayout
-    ? Layout
-    : tree.isFallback
-    ? Fallback
-    : Page
+      ? Dir
+      : tree.isReset
+        ? Reset
+        : tree.isLayout
+          ? Layout
+          : tree.isFallback
+            ? Fallback
+            : Page
   Object.setPrototypeOf(tree, Prototype.prototype)
 
   tree.isIndexable = isIndexable(tree)
@@ -77,12 +77,7 @@ export function buildClientTree(_tree, parent = false, prevFile = false) {
 
   Object.defineProperty(tree, 'layouts', { get: () => getLayouts(tree) })
   Object.defineProperty(tree, 'prettyName', {
-    get: () =>
-      tree.meta.$name ||
-      (tree.shortPath || tree.path)
-        .split('/')
-        .pop()
-        .replace(/-/g, ' '),
+    get: () => _prettyName(tree)
   })
 
   return tree
@@ -90,7 +85,7 @@ export function buildClientTree(_tree, parent = false, prevFile = false) {
 
 function isIndexable(file) {
   const { isLayout, isFallback, meta } = file
-  return !isLayout && !isFallback && meta.$index !== false
+  return !isLayout && !isFallback && meta.index !== false
 }
 
 function getLayouts(file) {
@@ -102,9 +97,17 @@ function getLayouts(file) {
   return layouts
 }
 
-function Layout() {}
-function Dir() {}
-function Fallback() {}
-function Page() {}
-function Reset() {}
-function Root() {}
+function _prettyName(tree) {
+  return tree.meta.name ||
+    (tree.shortPath || tree.path)
+      .split('/')
+      .pop()
+      .replace(/-/g, ' ')
+}
+
+function Layout() { }
+function Dir() { }
+function Fallback() { }
+function Page() { }
+function Reset() { }
+function Root() { }

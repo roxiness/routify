@@ -13,7 +13,7 @@ export const ready = {
     window.routify.stopAutoReady = true
     return listener(async () => {
       await tick()
-      meta.update()
+      metatags.update()
       window.routify.appLoaded = true
       dispatchEvent(new CustomEvent('app-loaded'))
     })
@@ -54,7 +54,7 @@ export const leftover = {
   },
 }
 
-export const metaTags = {
+export const meta = {
   subscribe(listener) {
     const ctx = getContext('routify')
     return derived(ctx, ctx => ctx.component.meta).subscribe(listener)
@@ -196,7 +196,7 @@ function getAncestors(elem) {
 }
 
 
-const _meta = {
+const _metatags = {
   props: {},
   templates: {},
   services: {
@@ -209,7 +209,7 @@ const _meta = {
       name: 'applyTemplate',
       condition: () => true,
       action: (prop, value) => {
-        const template = _meta.getLongest(_meta.templates, prop) || (x => x)
+        const template = _metatags.getLongest(_metatags.templates, prop) || (x => x)
         return [prop, template(value)]
       }
     },
@@ -217,14 +217,14 @@ const _meta = {
       name: 'createMeta',
       condition: () => true,
       action(prop, value) {
-        _meta.writeMeta(prop, value)
+        _metatags.writeMeta(prop, value)
       }
     },
     {
       name: 'createOG',
       condition: prop => !prop.match(':'),
       action(prop, value) {
-        _meta.writeMeta(`og:${prop}`, value)
+        _metatags.writeMeta(`og:${prop}`, value)
       }
     },
     {
@@ -251,7 +251,7 @@ const _meta = {
     const head = document.getElementsByTagName('head')[0]
     const match = prop.match(/(.+)\:/)
     const serviceName = match && match[1] || 'plain'
-    const { propField, valueField } = meta.services[serviceName] || meta.services.plain
+    const { propField, valueField } = metatags.services[serviceName] || metatags.services.plain
     const oldElement = document.querySelector(`meta[${propField}='${prop}']`)
     if (oldElement) oldElement.remove()
 
@@ -262,7 +262,7 @@ const _meta = {
     head.appendChild(newElement)
   },
   set(prop, value) {
-    _meta.plugins.forEach(plugin => {
+    _metatags.plugins.forEach(plugin => {
       if (plugin.condition(prop, value))
         [prop, value] = plugin.action(prop, value) || [prop, value]
     })
@@ -272,14 +272,14 @@ const _meta = {
     if (oldElement) oldElement.remove()
   },
   template(name, fn) {
-    const origin = _meta.getOrigin()
-    _meta.templates[name] = _meta.templates[name] || {}
-    _meta.templates[name][origin] = fn
+    const origin = _metatags.getOrigin()
+    _metatags.templates[name] = _metatags.templates[name] || {}
+    _metatags.templates[name][origin] = fn
   },
   update() {
-    Object.keys(_meta.props).forEach((prop) => {
-      let value = (_meta.getLongest(_meta.props, prop))
-      _meta.plugins.forEach(plugin => {
+    Object.keys(_metatags.props).forEach((prop) => {
+      let value = (_metatags.getLongest(_metatags.props, prop))
+      _metatags.plugins.forEach(plugin => {
         if (plugin.condition(prop, value)) {
           [prop, value] = plugin.action(prop, value) || [prop, value]
 
@@ -288,10 +288,10 @@ const _meta = {
     })
   },
   batchedUpdate() {
-    if (!_meta._pendingUpdate) {
-      _meta._pendingUpdate = true
+    if (!_metatags._pendingUpdate) {
+      _metatags._pendingUpdate = true
       setTimeout(() => {
-        _meta._pendingUpdate = false
+        _metatags._pendingUpdate = false
         this.update()
       })
     }
@@ -304,7 +304,7 @@ const _meta = {
   _pendingUpdate: false
 }
 
-export const meta = new Proxy(_meta, {
+export const metatags = new Proxy(_metatags, {
   set(target, name, value, receiver) {
     const { props, getOrigin } = target
 

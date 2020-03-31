@@ -1,7 +1,7 @@
 <script>
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable } from 'svelte/store'
-  import { meta } from './helpers.js'
+  import { metatags } from './helpers.js'
   import { route, routes } from './store'
   import { handleScroll } from './utils'
 
@@ -64,7 +64,7 @@
   async function onLastComponentLoaded() {
     await tick()
     handleScroll(parentElement)
-    meta.update()
+    metatags.update()
     if (!window.routify.appLoaded) onAppLoaded()
   }
 
