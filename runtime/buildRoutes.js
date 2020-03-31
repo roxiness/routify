@@ -35,20 +35,19 @@ function flattenTree(tree, arr = []) {
   return arr
 }
 
-export function buildClientTree(_tree, parent = false, prevFiles = []) {
-  const tree = { ..._tree }
+export function buildClientTree(file, parent = false, prevFiles = []) {
+  
   const _prevFiles = []
-  if (tree.dir) {
-
-    tree.children = tree.dir
+  if (file.dir) {
+    file.children = file.dir
       .sort((a, b) => a.meta.index - b.meta.index)
-      .map(file => {
-        if (file.isLayout) tree.layout = file
-        const _file = buildClientTree(file, tree, [..._prevFiles])
-        _prevFiles.push(_file)
-        return _file
+      .map(_file => {
+        if (_file.isLayout) file.layout = _file
+        const builtFile = buildClientTree({..._file}, file, [..._prevFiles])
+        _prevFiles.push(builtFile)
+        return builtFile
       })
-    delete tree.dir
+    delete file.dir
   }
 
   const order = [
@@ -60,7 +59,7 @@ export function buildClientTree(_tree, parent = false, prevFiles = []) {
     "setPrototype",
   ]
 
-  order.forEach(plugin => plugins[plugin]({ tree, parent, prevFiles }));
+  order.forEach(plugin => plugins[plugin]({ file, parent, prevFiles }));
 
-  return tree
+  return file
 }

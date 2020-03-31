@@ -1,54 +1,55 @@
-export function setIsIndexable({ tree }) {
-    tree.isIndexable = isIndexable(tree)
-    tree.isNonIndexable = !tree.isIndexable
+export function setIsIndexable({ file }) {
+    file.isIndexable = isIndexable(file)
+    file.isNonIndexable = !file.isIndexable
 }
 
-export function assignRelations({ tree, prevFiles, parent }) {
+export function assignRelations({ file, prevFiles, parent }) {
     
     const prevFile = prevFiles.reverse().find(t => t.isIndexable)
-    if (prevFile && tree.isIndexable) {
-        Object.defineProperty(tree, 'prevSibling', { get: () => prevFile })
-        Object.defineProperty(prevFile, 'nextSibling', { get: () => tree })
+    if (prevFile && file.isIndexable) {
+        Object.defineProperty(file, 'prevSibling', { get: () => prevFile })
+        Object.defineProperty(prevFile, 'nextSibling', { get: () => file })
     }
-    if (parent) Object.defineProperty(tree, 'parent', { get: () => parent })
+    if (parent) Object.defineProperty(file, 'parent', { get: () => parent })
 }
 
-export function assignIndex({ tree, parent }) {
-    if (tree.isIndex) Object.defineProperty(parent, 'index', { get: () => tree })
-    if (tree.isLayout)
-        Object.defineProperty(parent, 'layout', { get: () => tree })
+export function assignIndex({ file, parent }) {
+    if (file.isIndex) Object.defineProperty(parent, 'index', { get: () => file })
+    if (file.isLayout)
+        Object.defineProperty(parent, 'layout', { get: () => file })
 }
 
-export function assignLayout({ tree }) {
-    Object.defineProperty(tree, 'layouts', { get: () => getLayouts(tree) })
-    Object.defineProperty(tree, 'prettyName', {
-        get: () => _prettyName(tree)
+export function assignLayout({ file }) {
+    Object.defineProperty(file, 'layouts', { get: () => getLayouts(file) })
+    Object.defineProperty(file, 'prettyName', {
+        get: () => _prettyName(file)
     })
 }
 
-export function assignIndexables({ tree }) {
-    Object.defineProperty(tree, 'indexables', {
+export function assignIndexables({ file }) {
+    Object.defineProperty(file, 'indexables', {
         get: () => {
-            const children = (tree.children || []).filter(c => c.isIndexable)
-            const metas = tree.meta.indexables || []
+            const source = file.isLayout? file.parent : file
+            const children = (source.children || []).filter(c => c.isIndexable)
+            const metas = file.meta.indexables || []
             return [...children, ...metas]
         }
     })
 }
 
-export function setPrototype({tree}) {
-    const Prototype = !tree.parent
+export function setPrototype({file}) {
+    const Prototype = !file.parent
         ? Root
-        : tree.children
+        : file.children
             ? Dir
-            : tree.isReset
+            : file.isReset
                 ? Reset
-                : tree.isLayout
+                : file.isLayout
                     ? Layout
-                    : tree.isFallback
+                    : file.isFallback
                         ? Fallback
                         : Page
-    Object.setPrototypeOf(tree, Prototype.prototype)
+    Object.setPrototypeOf(file, Prototype.prototype)
 
     function Layout() { }
     function Dir() { }
@@ -73,9 +74,9 @@ function getLayouts(file) {
     return layouts
 }
 
-function _prettyName(tree) {
-    return tree.meta.name ||
-        (tree.shortPath || tree.path)
+function _prettyName(file) {
+    return file.meta.name ||
+        (file.shortPath || file.path)
             .split('/')
             .pop()
             .replace(/-/g, ' ')
