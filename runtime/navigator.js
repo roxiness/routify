@@ -1,6 +1,7 @@
 import { route as routeStore } from './store'
 import { get } from 'svelte/store'
 import { beforeUrlChange } from './helpers'
+import config from '../runtime.config'
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
@@ -118,6 +119,9 @@ function urlToRoute(url, routes) {
     throw new Error(
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
     )
+
+  if (config.paramsHandler)
+    route.params = config.paramsHandler.parse(window.location.search)
 
   if (route.paramKeys) {
     const layouts = layoutByPos(route.layouts)

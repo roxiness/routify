@@ -1,6 +1,8 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
 import { route, routes } from './store'
+import { pathToParams } from './utils'
+import config from '../runtime.config'
 
 export const context = {
   subscribe(listener) {
@@ -61,7 +63,7 @@ export const meta = {
   },
 }
 
-export const makeUrlHelper = (ctx, route, routes) => function url(path, params, strict) {
+export const makeUrlHelper = (ctx, oldRoute, routes) => function url(path, params, strict) {
   const { component } = ctx
   path = path || './'
 
@@ -89,11 +91,27 @@ export const makeUrlHelper = (ctx, route, routes) => function url(path, params, 
     if (matchingRoute) path = matchingRoute.shortPath
   }
 
-  params = Object.assign({}, route.params, component.params, params)
-  for (const [key, value] of Object.entries(params)) {
-    path = path.replace(`:${key}`, value)
+  const allParams = Object.assign({}, oldRoute.params, component.params, params)
+
+  let pathWithParams = path
+  for (const [key, value] of Object.entries(allParams)) {
+    pathWithParams = pathWithParams.replace(`:${key}`, value)
   }
-  return path
+  const fullPath = pathWithParams + _getQueryString(path, params)
+
+  return fullPath.replace(/\?$/, '')
+}
+
+function _getQueryString(path, params) {
+  if (!config.paramsHandler) return ""
+
+  const pathParamKeys = pathToParams(path)
+  const queryParams = {}
+  if (params) Object.entries(params).forEach(([key, value]) => {
+    if (!pathParamKeys.includes(key))
+      queryParams[key] = value
+  })
+  return config.paramsHandler.stringify(queryParams)
 }
 
 export const url = {
