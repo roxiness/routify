@@ -1,4 +1,4 @@
-import { route as routeStore } from './store'
+import * as stores from './store'
 import { get } from 'svelte/store'
 import { beforeUrlChange } from './helpers'
 import config from '../runtime.config'
@@ -7,9 +7,9 @@ const { _hooks } = beforeUrlChange
 export function init(routes, callback) {
   let lastRoute = false
 
-  function updatePage(url, shallow) {
+  function updatePage(proxyToUrl, shallow) {
     const currentUrl = window.location.pathname
-    url = url || currentUrl
+    const url = proxyToUrl || currentUrl
 
     const route = urlToRoute(url, routes)
     const currentRoute = shallow && urlToRoute(currentUrl, routes)
@@ -20,7 +20,8 @@ export function init(routes, callback) {
     lastRoute = route
 
     //set the route in the store
-    routeStore.set(route)
+    stores.urlRoute.set(proxyToUrl ? get(stores.route) : route)
+    stores.route.set(route)
 
     //run callback in Router.svelte
     callback(layouts)
@@ -40,7 +41,7 @@ function createEventListeners(updatePage) {
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
     history[eventName] = async function (state = {}, title, url) {
-      const { id, path, params } = get(routeStore)
+      const { id, path, params } = get(stores.route)
       state = { id, path, params, ...state }
       const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
@@ -102,7 +103,7 @@ function handleClick(event) {
 }
 
 async function runHooksBeforeUrlChange(event) {
-  const route = get(routeStore)
+  const route = get(stores.route)
   for (const hook of _hooks.filter(Boolean)) {
     // return false if the hook returns false
     if (await !hook(event, route)) return false
@@ -114,18 +115,19 @@ function urlToRoute(url, routes) {
   const mockUrl = new URL(location).searchParams.get('__mock-url')
   url = mockUrl || url
 
-  const route = routes.find(route => url.match(route.regex))
+  const route = routes.find(route => url.match(`^${get(stores.basepath)}${route.regex}`))
   if (!route)
     throw new Error(
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
     )
 
-  if (config.paramsHandler)
-    route.params = config.paramsHandler.parse(window.location.search)
+  const [, base, path] = url.match(`^(${get(stores.basepath)})(${route.regex})`)
+  if (config.queryHandler)
+    route.params = config.queryHandler.parse(window.location.search)
 
   if (route.paramKeys) {
     const layouts = layoutByPos(route.layouts)
-    const fragments = url.split('/').filter(Boolean)
+    const fragments = path.split('/').filter(Boolean)
     const routeProps = getRouteProps(route.path)
 
     routeProps.forEach((prop, i) => {
@@ -137,11 +139,15 @@ function urlToRoute(url, routes) {
     })
   }
 
-  route.leftover = url.replace(new RegExp(route.regex), '')
+  route.leftover = url.replace(new RegExp(base+route.regex), '')
 
   return route
 }
 
+/**
+ * 
+ * @param {array} layouts 
+ */
 function layoutByPos(layouts) {
   const arr = []
   layouts.forEach(layout => {
@@ -150,6 +156,10 @@ function layoutByPos(layouts) {
   return arr
 }
 
+/**
+ * 
+ * @param {string} url 
+ */
 function getRouteProps(url) {
   return url
     .split('/')

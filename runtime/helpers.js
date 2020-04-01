@@ -1,6 +1,6 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
-import { route, routes } from './store'
+import { route, routes, baseMatch } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
 
@@ -63,10 +63,11 @@ export const meta = {
   },
 }
 
-export const makeUrlHelper = (ctx, oldRoute, routes) => function url(path, params, strict) {
+export const makeUrlHelper = (ctx, oldRoute, routes, baseMatch) => function url(path, params, strict) {
   const { component } = ctx
   path = path || './'
 
+  
   if (!strict) path = path.replace(/index$/, '')
 
   if (path.match(/^\.\.?\//)) {
@@ -97,11 +98,17 @@ export const makeUrlHelper = (ctx, oldRoute, routes) => function url(path, param
   for (const [key, value] of Object.entries(allParams)) {
     pathWithParams = pathWithParams.replace(`:${key}`, value)
   }
-  const fullPath = pathWithParams + _getQueryString(path, params)
-
+  
+  const fullPath = baseMatch + pathWithParams + _getQueryString(path, params)
+  // console.log('fp', fullPath)
   return fullPath.replace(/\?$/, '')
 }
 
+/**
+ * 
+ * @param {string} path 
+ * @param {object} params 
+ */
 function _getQueryString(path, params) {
   if (!config.paramsHandler) return ""
 
@@ -114,11 +121,13 @@ function _getQueryString(path, params) {
   return config.paramsHandler.stringify(queryParams)
 }
 
+
 export const url = {
   subscribe(listener) {
     const ctx = getContext('routify')
+    console.log('BM,', baseMatch)
     return derived(
-      [ctx, route, routes],
+      [ctx, route, routes, baseMatch],
       args => makeUrlHelper(...args)
     ).subscribe(
       listener
@@ -131,6 +140,7 @@ export const goto = {
     return derived(url,
       url => function goto(path, params, _static, shallow) {
         const href = url(path, params)
+        console.log('goto', href)
         if (!_static) history.pushState({}, null, href)
         else getContext('routifyupdatepage')(href, shallow)
       }
