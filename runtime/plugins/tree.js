@@ -59,6 +59,17 @@ export function setPrototype({file}) {
     function Root() { }
 }
 
+export function assignAPI({ file }) {
+    file.api = {
+        get name() { return file._prettyName },
+        get path() { return file.path },
+        get parent() { return file.parent.api },
+        get children() { return file.indexables.map(({ api }) => api) },
+        get next() { return file.nextSibling.api },
+        get prev() { return file.prev.api },
+        get meta() { return file.meta }
+    }
+}
 
 function isIndexable(file) {
     const { isLayout, isFallback, meta } = file
