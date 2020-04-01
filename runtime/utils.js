@@ -1,5 +1,5 @@
 import config from '../tmp/config'
-const MATCH_PARAM = RegExp(/\:[^\/\()]+/g)
+const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
 export function handleScroll(element) {
   scrollAncestorsToTop(element)
@@ -37,8 +37,11 @@ export const pathToRegex = (str, recursive) => {
 }
 
 export const pathToParams = string => {
-  const matches = string.match(MATCH_PARAM)
-  if (matches) return matches.map(str => str.substr(1, str.length - 2))
+  const params = []
+  let matches
+  while (matches = MATCH_PARAM.exec(string))
+    params.push(matches[1])
+  return params
 }
 
 export const pathToRank = ({ path }) => {

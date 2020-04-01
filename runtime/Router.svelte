@@ -4,11 +4,17 @@
   import { init } from './navigator.js'
   import { routes as routesStore } from './store.js'
   import { suppressWarnings } from './utils.js'
+  import defaultConfig from '../runtime.config'
 
   export let routes
+  export let config = {}
 
   let layouts
   let navigator
+
+  Object.entries(config).forEach(([key, value]) => {
+    defaultConfig[key] = value
+  })
 
   suppressWarnings()
 
