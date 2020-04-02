@@ -21,7 +21,7 @@
 For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
 
 ## Documentation
-[routify.dev](https://routify.dev/docs/introduction)
+[routify.dev](https://routify.dev/guide/introduction)
 
 ## Template
 [Routify starter template](https://github.com/sveltech/routify-starter)
