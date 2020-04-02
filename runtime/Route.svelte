@@ -78,7 +78,7 @@
 </script>
 
 {#if component}
-  {#if remainingLayouts.length}
+  {#if remainingLayouts.length && _lastLayout === layout}
     {#each [0] as dummy (key)}
       <svelte:component
         this={component}
