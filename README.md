@@ -39,4 +39,4 @@ Please feel free to open an issue or a pull request. All feedback is welcome.
 <img height="32px" src="https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg" /> **Join us on Discord** 
 
 Want help? Have ideas about Routify? Chat with us on Discord. 
-https://discord.gg/5M3FE68
+https://discord.gg/ntKJD5B
