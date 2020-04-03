@@ -20,7 +20,8 @@ export function init(routes, callback) {
     lastRoute = route
 
     //set the route in the store
-    stores.urlRoute.set(proxyToUrl ? get(stores.route) : route)
+    if (!proxyToUrl)
+      stores.urlRoute.set(route)
     stores.route.set(route)
 
     //run callback in Router.svelte
@@ -139,7 +140,7 @@ function urlToRoute(url, routes) {
     })
   }
 
-  route.leftover = url.replace(new RegExp(base+route.regex), '')
+  route.leftover = url.replace(new RegExp(base + route.regex), '')
 
   return route
 }
