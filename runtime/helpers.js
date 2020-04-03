@@ -139,7 +139,6 @@ export const goto = {
     return derived(url,
       url => function goto(path, params, _static, shallow) {
         const href = url(path, params)
-        console.log('goto', href)
         if (!_static) history.pushState({}, null, href)
         else getContext('routifyupdatepage')(href, shallow)
       }
