@@ -1,6 +1,6 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
-import { route, routes, baseMatch } from './store'
+import { route, routes, location } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
 
@@ -63,8 +63,8 @@ export const meta = {
   },
 }
 
-export const makeUrlHelper = (ctx, oldRoute, routes, baseMatch) => function url(path, params, strict) {
-  const { component } = ctx
+export const makeUrlHelper = ($ctx, $oldRoute, $routes, $location) => function url(path, params, strict) {
+  const { component } = $ctx
   path = path || './'
 
   
@@ -88,18 +88,18 @@ export const makeUrlHelper = (ctx, oldRoute, routes, baseMatch) => function url(
     // ABSOLUTE PATH
   } else {
     // NAMED PATH
-    const matchingRoute = routes.find(route => route.meta.name === path)
+    const matchingRoute = $routes.find(route => route.meta.name === path)
     if (matchingRoute) path = matchingRoute.shortPath
   }
 
-  const allParams = Object.assign({}, oldRoute.params, component.params, params)
+  const allParams = Object.assign({}, $oldRoute.params, component.params, params)
 
   let pathWithParams = path
   for (const [key, value] of Object.entries(allParams)) {
     pathWithParams = pathWithParams.replace(`:${key}`, value)
   }
   
-  const fullPath = baseMatch + pathWithParams + _getQueryString(path, params)
+  const fullPath = $location.base + pathWithParams + _getQueryString(path, params)
   // console.log('fp', fullPath)
   return fullPath.replace(/\?$/, '')
 }
@@ -125,9 +125,8 @@ function _getQueryString(path, params) {
 export const url = {
   subscribe(listener) {
     const ctx = getContext('routify')
-    console.log('BM,', baseMatch)
     return derived(
-      [ctx, route, routes, baseMatch],
+      [ctx, route, routes, location],
       args => makeUrlHelper(...args)
     ).subscribe(
       listener
@@ -140,7 +139,6 @@ export const goto = {
     return derived(url,
       url => function goto(path, params, _static, shallow) {
         const href = url(path, params)
-        console.log('goto', href)
         if (!_static) history.pushState({}, null, href)
         else getContext('routifyupdatepage')(href, shallow)
       }
