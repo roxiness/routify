@@ -54,6 +54,7 @@ program
   .option('-o --output <path>', 'Dist folder', defaults.distDir)
   .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
   .option('-p --no-prerender', 'Don\'t prerender static pages', defaults.noPrerender)
+  .option('   --basepath <path>', 'Dist folder', defaults.basepath)
   .action(options => {
     isCommand = true
     exporter(options.opts())

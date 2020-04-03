@@ -148,6 +148,21 @@ export const goto = {
   },
 }
 
+export const redirect = {
+  subscribe(listener) {
+    return derived(url,
+      url => function redirect(path, params, _static, shallow) {
+        const href = url(path, params)
+        if (!_static) history.replaceState({}, null, href)
+        else getContext('routifyupdatepage')(href, shallow)
+      }
+    ).subscribe(
+      listener
+    )
+  },
+}
+
+
 export const isActive = {
   subscribe(listener) {
     return derived(

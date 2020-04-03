@@ -78,7 +78,6 @@
     <!-- we need to check for remaining layouts, in case this component is a destroyed layout -->
   {:else if (remainingLayouts.length)}   
     {#each [$context] as { component, componentFile } (component.path)}
-      {layout}
       <svelte:component
         this={componentFile}
         let:scoped={scopeToChild}
