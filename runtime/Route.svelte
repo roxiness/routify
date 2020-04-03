@@ -10,12 +10,11 @@
     Decorator = undefined,
     childOfDecorator = false
   let scopeToChild,
-    props = {},
     parentElement,
-    propFromParam = {},
-    key = 0,
     scopedSync = {},
-    isDecorator = false
+    isDecorator = false,
+    _lastLayout
+    
 
   const context = writable({})
   setContext('routify', context)
@@ -29,35 +28,23 @@
   }
 
   $: [layout, ...remainingLayouts] = layouts
-  $: if (layout && layout.param) propFromParam = layout.param
   $: layoutIsUpdated = !_lastLayout || _lastLayout.path !== layout.path
 
   function setParent(el) {
     parentElement = el.parentElement
   }
 
-  let _lastLayout, _Component
-  function onComponentLoaded() {
+  function onComponentLoaded(componentFile) {
+    scopedSync = { ...scoped }
     _lastLayout = layout
-    if (layoutIsUpdated) key++
     if (remainingLayouts.length === 0) onLastComponentLoaded()
-    context.set({ component: layout })
+    context.set({ component: layout, componentFile })
   }
 
-  let component
   function setComponent(layout) {
-    if (layoutIsUpdated) _Component = layout.component()
-    if (_Component.then)
-      _Component.then(res => {
-        component = res
-        scopedSync = { ...scoped }
-        onComponentLoaded()
-      })
-    else {
-      component = _Component
-      scopedSync = { ...scoped }
-      onComponentLoaded()
-    }
+    const PendingComponent = layout.component()
+    if (PendingComponent.then) PendingComponent.then(onComponentLoaded)
+    else onComponentLoaded(PendingComponent)
   }
   $: setComponent(layout)
 
@@ -77,16 +64,28 @@
   }
 </script>
 
-{#if component}
-  {#if remainingLayouts.length && _lastLayout === layout}
-    {#each [0] as dummy (key)}
+{#if $context.componentFile}
+  {#if $context.component.isLayout === false}
+    {#each [$context] as { component, componentFile } (component.path)}
       <svelte:component
-        this={component}
+        this={componentFile}
         let:scoped={scopeToChild}
         let:decorator
         {scoped}
         {scopedSync}
-        {...propFromParam}>
+        {...layout.param || {}} />
+    {/each}
+    <!-- we need to check for remaining layouts, in case this component is a destroyed layout -->
+  {:else if (remainingLayouts.length)}   
+    {#each [$context] as { component, componentFile } (component.path)}
+      {layout}
+      <svelte:component
+        this={componentFile}
+        let:scoped={scopeToChild}
+        let:decorator
+        {scoped}
+        {scopedSync}
+        {...layout.param || {}}>
         <svelte:self
           layouts={[...remainingLayouts]}
           Decorator={typeof decorator !== 'undefined' ? decorator : Decorator}
@@ -94,14 +93,6 @@
           scoped={{ ...scoped, ...scopeToChild }} />
       </svelte:component>
     {/each}
-  {:else}
-    <svelte:component
-      this={component}
-      let:scoped={scopeToChild}
-      let:decorator
-      {scoped}
-      {scopedSync}
-      {...propFromParam} />
   {/if}
 {/if}
 
