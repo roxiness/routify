@@ -4,7 +4,7 @@ export function setIsIndexable({ file }) {
 }
 
 export function assignRelations({ file, prevFiles, parent }) {
-    
+
     const prevFile = prevFiles.reverse().find(t => t.isIndexable)
     if (prevFile && file.isIndexable) {
         Object.defineProperty(file, 'prevSibling', { get: () => prevFile })
@@ -29,7 +29,7 @@ export function assignLayout({ file }) {
 export function assignIndexables({ file }) {
     Object.defineProperty(file, 'indexables', {
         get: () => {
-            const source = file.isLayout? file.parent : file
+            const source = file.isLayout ? file.parent : file
             const children = (source.children || []).filter(c => c.isIndexable)
             const metas = file.meta.indexables || []
             return [...children, ...metas]
@@ -37,7 +37,7 @@ export function assignIndexables({ file }) {
     })
 }
 
-export function setPrototype({file}) {
+export function setPrototype({ file }) {
     const Prototype = !file.parent
         ? Root
         : file.children
@@ -75,7 +75,8 @@ function getLayouts(file) {
 }
 
 function _prettyName(file) {
-    return file.meta.name ||
+    if (typeof file.meta.name !== 'undefined') return file.meta.name
+    else return file.meta.name ||
         (file.shortPath || file.path)
             .split('/')
             .pop()
