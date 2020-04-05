@@ -29,14 +29,14 @@ const decorateRoute = function (route) {
  */
 function flattenTree(tree, arr = []) {
   tree.forEach(file => {
+    if (file.isFile) arr.push(file)
     if (file.children) arr.push(...flattenTree(file.children))
-    else arr.push(file)
   })
   return arr
 }
 
 export function buildClientTree(file, parent = false, prevFiles = []) {
-  
+
   const _prevFiles = []
   if (file.dir) {
     file.children = file.dir
@@ -59,6 +59,7 @@ export function buildClientTree(file, parent = false, prevFiles = []) {
     "setPrototype",
   ]
 
+  // eslint-disable-next-line import/namespace
   order.forEach(plugin => plugins[plugin]({ file, parent, prevFiles }));
 
   return file
