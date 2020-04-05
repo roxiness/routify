@@ -2,7 +2,7 @@
   import { setContext, onDestroy } from 'svelte'
   import Route from './Route.svelte'
   import { init } from './navigator.js'
-  import { routes as routesStore } from './store.js'
+  import { route, routes as routesStore } from './store.js'
   import { suppressWarnings } from './utils.js'
   import defaultConfig from '../runtime.config'
 
@@ -60,6 +60,6 @@
   onDestroy(cleanup)
 </script>
 
-{#if layouts}
+{#if layouts && $route !== null}
   <Route {layouts} />
 {/if}
