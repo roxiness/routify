@@ -41,7 +41,7 @@ export function setPrototype({ file }) {
     const Prototype = !file.parent
         ? Root
         : file.children
-            ? Dir
+            ? file.isFile ? PageDir : Dir
             : file.isReset
                 ? Reset
                 : file.isLayout
@@ -55,6 +55,7 @@ export function setPrototype({ file }) {
     function Dir() { }
     function Fallback() { }
     function Page() { }
+    function PageDir() { }
     function Reset() { }
     function Root() { }
 }
@@ -82,4 +83,3 @@ function _prettyName(file) {
             .pop()
             .replace(/-/g, ' ')
 }
-
