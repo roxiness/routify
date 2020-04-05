@@ -116,7 +116,8 @@ function urlToRoute(url, routes) {
   const mockUrl = new URL(location).searchParams.get('__mock-url')
   url = mockUrl || url
 
-  const route = routes.find(route => url.match(`^${get(stores.basepath)}${route.regex}`))
+  const basepath = get(stores.basepath)
+  const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
   if (!route)
     throw new Error(
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
@@ -146,8 +147,8 @@ function urlToRoute(url, routes) {
 }
 
 /**
- * 
- * @param {array} layouts 
+ *
+ * @param {array} layouts
  */
 function layoutByPos(layouts) {
   const arr = []
@@ -158,8 +159,8 @@ function layoutByPos(layouts) {
 }
 
 /**
- * 
- * @param {string} url 
+ *
+ * @param {string} url
  */
 function getRouteProps(url) {
   return url
