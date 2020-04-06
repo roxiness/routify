@@ -1,6 +1,6 @@
 import { writable, derived } from 'svelte/store'
 
-export const route = writable({}) // the actual route being rendered
+export const route = writable(null) // the actual route being rendered
 export const routes = writable([]) // all routes
 export const urlRoute = writable({})  // the route matching the url
 export const basepath = writable("") // basepath regex
