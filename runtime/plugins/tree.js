@@ -61,13 +61,14 @@ export function setPrototype({ file }) {
 }
 
 export function assignAPI({ file }) {
+    const { nextSibling, prevSibling, parent, path, _prettyName, meta, indexables } = file
     file.api = {
         get name() { return file._prettyName },
         get path() { return file.path },
-        get parent() { return file.parent.api },
+        get parent() { return parent && parent.api },
         get children() { return file.indexables.map(({ api }) => api) },
-        get next() { return file.nextSibling.api },
-        get prev() { return file.prev.api },
+        get next() { return nextSibling && nextSibling.api },
+        get prev() { return prevSibling && prevSibling.api },
         get meta() { return file.meta }
     }
 }

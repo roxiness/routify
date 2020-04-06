@@ -57,6 +57,7 @@ export function buildClientTree(file, parent = false, prevFiles = []) {
     "assignLayout",
     "assignIndexables",
     "setPrototype",
+    "assignAPI"
   ]
 
   // eslint-disable-next-line import/namespace
