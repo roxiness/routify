@@ -62,6 +62,7 @@
     "test:unit:watch:only": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit -- --only\"",
     "test:watch": "run-s test:unit test:unit:watch",
     "test(srtest)": "npm run --silent test:unit",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "postinstall": "mv tmp_template tmp || move tmp_template tmp"
   }
 }
