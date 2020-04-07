@@ -7,7 +7,7 @@ module.exports = function svelteFileRouter(inputOptions) {
   const { watchDelay } = inputOptions
 
   const { waitIdle, waitChange, close } = start({
-    watch: process.env.ROLLUP_WATCH,
+    singleBuild: !process.env.ROLLUP_WATCH,
     ...inputOptions,
   })
 
