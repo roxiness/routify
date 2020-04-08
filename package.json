@@ -63,6 +63,6 @@
     "test:watch": "run-s test:unit test:unit:watch",
     "test(srtest)": "npm run --silent test:unit",
     "semantic-release": "semantic-release",
-    "postinstall": "mv tmp_template tmp || move tmp_template tmp"
+    "postinstall": "mv tmp_template tmp || move tmp_template tmp || echo \"nothing to move\""
   }
 }
