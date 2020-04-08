@@ -72,18 +72,12 @@ export const makeUrlHelper = ($ctx, $oldRoute, $routes, $location) => function u
 
   if (path.match(/^\.\.?\//)) {
     //RELATIVE PATH
-    // get component's dir
+    let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
     let dir = component.path
-    // traverse through parents if needed
-    const traverse = path.match(/\.\.\//g) || []
-    traverse.forEach(() => {
-      dir = dir.replace(/\/[^\/]+\/?$/, '')
-    })
+    const traverse = breadcrumbs.match(/\.\.\//g) || []
+    traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
+    path = `${dir}/${relativePath}`.replace(/\/$/, '')
 
-    // strip leading periods and slashes
-    path = path.replace(/^[\.\/]+/, '')
-    dir = dir.replace(/\/$/, '') + '/'
-    path = dir + path
   } else if (path.match(/^\//)) {
     // ABSOLUTE PATH
   } else {
@@ -91,9 +85,7 @@ export const makeUrlHelper = ($ctx, $oldRoute, $routes, $location) => function u
     const matchingRoute = $routes.find(route => route.meta.name === path)
     if (matchingRoute) path = matchingRoute.shortPath
   }
-
   const allParams = Object.assign({}, $oldRoute.params, component.params, params)
-
   let pathWithParams = path
   for (const [key, value] of Object.entries(allParams)) {
     pathWithParams = pathWithParams.replace(`:${key}`, value)
@@ -110,15 +102,14 @@ export const makeUrlHelper = ($ctx, $oldRoute, $routes, $location) => function u
  * @param {object} params 
  */
 function _getQueryString(path, params) {
-  if (!config.paramsHandler) return ""
-
+  if (!config.queryHandler) return ""
   const pathParamKeys = pathToParams(path)
   const queryParams = {}
   if (params) Object.entries(params).forEach(([key, value]) => {
     if (!pathParamKeys.includes(key))
       queryParams[key] = value
   })
-  return config.paramsHandler.stringify(queryParams)
+  return config.queryHandler.stringify(queryParams)
 }
 
 
