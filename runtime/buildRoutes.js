@@ -15,7 +15,10 @@ const decorateRoute = function (route) {
   route.paramKeys = pathToParams(route.path)
   route.regex = pathToRegex(route.path, route.isFallback)
   route.name = route.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
-  route.shortPath = route.path.replace(/\/(index|_fallback)$/, '')
+  if (route.isFallback || route.isIndex)
+    route.shortPath = route.path.replace(/\/[^/]+$/, '')
+  else route.shortPath = route.path
+
   route.ranking = pathToRank(route)
   route.params = {}
 
@@ -43,7 +46,7 @@ export function buildClientTree(file, parent = false, prevFiles = []) {
       .sort((a, b) => a.meta.index - b.meta.index)
       .map(_file => {
         if (_file.isLayout) file.layout = _file
-        const builtFile = buildClientTree({..._file}, file, [..._prevFiles])
+        const builtFile = buildClientTree({ ..._file }, file, [..._prevFiles])
         _prevFiles.push(builtFile)
         return builtFile
       })
