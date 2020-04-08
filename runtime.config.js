@@ -1,6 +1,14 @@
 export default {
     queryHandler: {
-        parse: search => Object.fromEntries(new URLSearchParams(search)),
-        stringify: params => '?'+(new URLSearchParams(params)).toString()
+        parse: search => fromEntries(new URLSearchParams(search)),
+        stringify: params => '?' + (new URLSearchParams(params)).toString()
     }
+}
+
+
+function fromEntries(iterable) {
+    return [...iterable].reduce((obj, [key, val]) => {
+        obj[key] = val
+        return obj
+    }, {})
 }
