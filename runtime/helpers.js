@@ -3,6 +3,20 @@ import { derived, get } from 'svelte/store'
 import { route, routes, location } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
+import './typedef'
+
+export const layout = {
+  subscribe(listener) {
+    const ctx = getContext('routify')
+    return derived(ctx, ctx => ctx.component.api).subscribe(listener)
+  }
+}
+
+export const page = {
+  subscribe(listener) {
+    return derived(route, route => route.api).subscribe(listener)
+  }
+}
 
 export const context = {
   subscribe(listener) {
@@ -62,6 +76,7 @@ export const meta = {
     return derived(ctx, ctx => ctx.component.meta).subscribe(listener)
   },
 }
+
 
 export const makeUrlHelper = ($ctx, $oldRoute, $routes, $location) => function url(path, params, strict) {
   const { component } = $ctx

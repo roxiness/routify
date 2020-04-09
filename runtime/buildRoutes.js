@@ -1,10 +1,11 @@
-import { pathToParams, pathToRank, pathToRegex } from './utils'
-import { isActive } from './helpers'
+
+import { createNodeMiddleware } from '../lib/utils/middleware'
 import * as plugins from './plugins/tree'
+
 
 export function buildRoutes(tree) {
   // const treeWithLayouts = applyLayouts(tree)
-  const routes = flattenTree(tree)
+  // const routes = flattenTree(tree)
   return routes
     .filter(route => !route.isLayout)
     .map(decorateRoute)
@@ -12,59 +13,39 @@ export function buildRoutes(tree) {
 }
 
 const decorateRoute = function (route) {
-  route.paramKeys = pathToParams(route.path)
-  route.regex = pathToRegex(route.path, route.isFallback)
-  route.name = route.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
-  if (route.isFallback || route.isIndex)
-    route.shortPath = route.path.replace(/\/[^/]+$/, '')
-  else route.shortPath = route.path
 
-  route.ranking = pathToRank(route)
+
   route.params = {}
 
   return route
 }
 
-/**
- * flattenTree
- * @param {Object} tree
- * @param {Array} arr
- */
-function flattenTree(tree, arr = []) {
-  tree.forEach(file => {
-    if (file.isFile) arr.push(file)
-    if (file.children) arr.push(...flattenTree(file.children))
-  })
-  return arr
-}
 
-export function buildClientTree(file, parent = false, prevFiles = []) {
 
-  const _prevFiles = []
-  if (file.dir) {
-    file.children = file.dir
-      .sort((a, b) => a.meta.index - b.meta.index)
-      .map(_file => {
-        if (_file.isLayout) file.layout = _file
-        const builtFile = buildClientTree({ ..._file }, file, [..._prevFiles])
-        _prevFiles.push(builtFile)
-        return builtFile
-      })
-    delete file.dir
-  }
-
+export function buildClientTree(tree) {
   const order = [
+    "setShortPath",
+    "setRank",
     "setIsIndexable",
     "assignRelations",
     "assignIndex",
     "assignLayout",
-    "assignIndexables",
+    "addMetaChildren",
     "setPrototype",
-    "assignAPI"
+    "assignAPI",
+    "sortByIndex",
+    "setParams",
+    "setRegex",
+    "setName", //navigatable name
+    // routes
+    "createFlatList"
   ]
 
-  // eslint-disable-next-line import/namespace
-  order.forEach(plugin => plugins[plugin]({ file, parent, prevFiles }));
+  const payload = { tree, routes: [] }
+  for (let name of order) {
+    plugins[name].sync(payload)
+  }
 
-  return file
+  payload.routes = payload.routes.sort((c, p) => (c.ranking >= p.ranking ? -1 : 1))
+  return payload
 }

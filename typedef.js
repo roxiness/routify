@@ -23,6 +23,7 @@
  * @typedef {Object} MiscFile
  * @prop {String} id
  * @prop {GetParentFile} getParent
+ * @prop {RouteNode} parent 
  * @prop {Meta} meta
  * 
  * @typedef {function():RouteNode} GetParentFile  
@@ -36,6 +37,8 @@
  * @prop {*=} precache-proximity
  * @prop {*=} recursive
  * @prop {*=} bundle
+ * @prop {*=} index
+ * @prop {Array=} children
  * @prop {String=} $$bundleId
 */
 
