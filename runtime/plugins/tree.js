@@ -5,13 +5,10 @@ export const setRegex = createNodeMiddleware(({ file }) => {
     if (file.isPage || file.isFallback)
         file.regex = pathToRegex(file.path, file.isFallback)
 })
-export const setParams = createNodeMiddleware(({ file }) => {
+export const setParamKeys = createNodeMiddleware(({ file }) => {
     file.paramKeys = pathToParams(file.path)
 })
-export const setName = createNodeMiddleware(({ file }) => {
-    if (file.isPage || file.isFallback)
-        file.name = file.path.match(/[^\/]*\/[^\/]+$/)[0].replace(/[^\w\/]/g, '') //last dir and name, then replace all but \w and /
-})
+
 export const setShortPath = createNodeMiddleware(({ file }) => {
     if (file.isFallback || file.isIndex)
         file.shortPath = file.path.replace(/\/[^/]+$/, '')
@@ -78,13 +75,16 @@ export const assignLayout = createNodeMiddleware(({ file, scope }) => {
 })
 
 
-export const createFlatList = createNodeMiddleware(payload => {
-    if (payload.file.isPage || payload.file.isFallback)
+export const createFlatList = treePayload => {
+    createNodeMiddleware(payload => {
+        if (payload.file.isPage || payload.file.isFallback)
         payload.state.treePayload.routes.push(payload.file)
-})
+    }).sync(treePayload)    
+    treePayload.routes.sort((c, p) => (c.ranking >= p.ranking ? -1 : 1))
+}
 
 export const setPrototype = createNodeMiddleware(({ file }) => {
-    const Prototype = !file.parent
+    const Prototype = file.root
         ? Root
         : file.children
             ? file.isFile ? PageDir : Dir
@@ -105,46 +105,3 @@ export const setPrototype = createNodeMiddleware(({ file }) => {
     function Reset() { }
     function Root() { }
 })
-
-export const assignAPI = createNodeMiddleware(({ file }) => { file.api = new ClientApi(file) })
-
-class ClientApi {
-    constructor(file) {
-        this.__file = file
-        Object.defineProperty(this, '__file', { enumerable: false })
-        this.isMeta = !!file.isMeta
-        this.path = file.path
-        this.title = _prettyName(file)
-        this.meta = file.meta
-    }
-
-    get parent() { return !this.__file.root && this.__file.parent.api }
-    get children() {
-        return (this.__file.children || this.__file.isLayout && this.__file.parent.children || [])
-            .filter(c => !c.isNonIndexable)
-            .sort((a, b) => a.meta.index - b.meta.index)
-            .map(({ api }) => api)
-    }
-    get next() { return _navigate(this, +1) }
-    get prev() { return _navigate(this, -1) }
-}
-
-function _navigate(node, direction) {
-    if (!node.__file.root) {
-        const siblings = node.parent.children
-        const index = siblings.indexOf(node)
-        return node.parent.children[index + direction]
-    }
-}
-
-
-
-
-function _prettyName(file) {
-    if (typeof file.meta.title !== 'undefined') return file.meta.title
-    else return (file.shortPath || file.path)
-        .split('/')
-        .pop()
-        .replace(/-/g, ' ')
-}
-

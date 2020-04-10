@@ -1,32 +1,33 @@
 
-import { createNodeMiddleware } from '../lib/utils/middleware'
-import * as plugins from './plugins/tree'
 
+import * as miscPlugins from './plugins/tree'
+import { assignAPI } from './plugins/assignAPI'
 
+const plugins = {...miscPlugins, assignAPI}
 
 export function buildClientTree(tree) {
   const order = [
-    "setShortPath",
-    "setRank",
-    "setIsIndexable",
-    "assignRelations",
-    "assignIndex",
-    "assignLayout",
-    "addMetaChildren",
+    // pages
+    "setParamKeys", //pages only
+    "setRegex", //pages only
+    "setShortPath", //pages only
+    "setRank", //pages only
+    "assignLayout", //pages only,
+    // all
     "setPrototype",
-    "assignAPI",
-    "setParams",
-    "setRegex",
-    "setName", //navigatable name
+    "addMetaChildren",
+    "assignRelations", //all (except meta components?)
+    "setIsIndexable", //all
+    "assignIndex", //all
+    "assignAPI", //all
     // routes
     "createFlatList"
   ]
 
   const payload = { tree, routes: [] }
   for (let name of order) {
-    plugins[name].sync(payload)
+    const syncFn = plugins[name].sync || plugins[name]
+    syncFn(payload)
   }
-
-  payload.routes.sort((c, p) => (c.ranking >= p.ranking ? -1 : 1))
   return payload
 }
