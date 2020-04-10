@@ -8,7 +8,6 @@
  * @prop {Boolean=} isReset
  * @prop {Boolean=} isIndex
  * @prop {Boolean=} isFallback
- * @prop {Boolean=} hasParam
  *
  * @typedef {Object} GeneratedFile
  * @prop {String} name
