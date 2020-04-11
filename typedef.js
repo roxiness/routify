@@ -113,3 +113,20 @@
  * @description Call to kill subscription.
  * @typedef {function():void} SvelteStoreSubscription SSS
  */
+
+ /**
+  * @typedef {Object} UrlOptions
+  * @prop {Boolean=} strict
+  */
+
+  /**   
+   * @typedef {Object} GotoOptions
+   * @prop {Boolean=} strict preserve filename in url, ie. /index
+   * @prop {Boolean=false} redirect use replaceState instead pushState
+   * @prop {Boolean=false} static render url without redirecting
+   * @prop {Boolean=false} shallow use the current layouts instead of those of the target
+   */
+
+   /**
+    * @typedef {UrlOptions} IsActiveOptions
+    */
