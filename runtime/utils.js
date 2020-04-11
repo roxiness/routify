@@ -2,11 +2,13 @@ import config from '../tmp/config'
 const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
 export function handleScroll(element) {
+  if (navigator.userAgent.includes('jsdom')) return false
   scrollAncestorsToTop(element)
   handleHash()
 }
 
 export function handleHash() {
+  if (navigator.userAgent.includes('jsdom')) return false
   const { noHashScroll } = config
   const { hash } = window.location
   if (!noHashScroll && hash) {
@@ -22,7 +24,7 @@ export function scrollAncestorsToTop(element) {
     element.dataset.routify !== 'scroll-lock'
   ) {
     element.style['scroll-behavior'] = "auto"
-    element.scrollTo({top: 0, behavior: 'auto'})
+    element.scrollTo({ top: 0, behavior: 'auto' })
     element.style['scroll-behavior'] = ""
     scrollAncestorsToTop(element.parentElement)
   }
@@ -58,7 +60,7 @@ let warningSuppressed = false
 export function suppressWarnings() {
   if (warningSuppressed) return
   const consoleWarn = console.warn
-  console.warn = function(msg, ...msgs) {
+  console.warn = function (msg, ...msgs) {
     const ignores = [
       "was created with unknown prop 'scoped'",
       "was created with unknown prop 'scopedSync'",
