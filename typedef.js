@@ -63,3 +63,12 @@
  * @prop {(String|Array)=} ignore
  * @prop {Boolean=} noHashScroll
  */
+
+/**
+ * @typedef {Object} SvelteStore
+ * @prop {function(): SvelteStoreSubscription} subscribe
+ * 
+ * Svelte Store Subscription
+ * @description Call to kill subscription.
+ * @typedef {function():void} SvelteStoreSubscription SSS
+ */

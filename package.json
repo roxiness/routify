@@ -32,6 +32,7 @@
     "routify": "./plugins/cli.js"
   },
   "directories": {
+    "runtime": "runtime",
     "lib": "lib",
     "test": "test"
   },
