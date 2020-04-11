@@ -41,7 +41,16 @@ export const assignRelations = createNodeMiddleware(({ file, parent }) => {
     Object.defineProperty(file, 'parent', { get: () => parent })
     Object.defineProperty(file, 'nextSibling', { get: () => _getSibling(file, 1) })
     Object.defineProperty(file, 'prevSibling', { get: () => _getSibling(file, -1) })
+    Object.defineProperty(file, 'lineage', { get: () => _getLineage(parent) })
 })
+
+function _getLineage(node, lineage = []){
+    if(node){
+        lineage.unshift(node)
+        _getLineage(node.parent, lineage)
+    }
+    return lineage
+}
 
 /**
  * 
