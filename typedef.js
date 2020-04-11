@@ -1,9 +1,50 @@
 
 /**
+ * ClientNode
+ * @typedef {Object.<string, *> & DefinedFile & ClientNodeSpecifics} ClientNode
+ * 
+ * @typedef {Object} ClientNodeSpecifics
+ * @prop {ClientNode[]} layouts
+ * @prop {ClientNode|undefined} parent
+ * @prop {ClientNode|undefined} nextSibling
+ * @prop {ClientNode|undefined} prevSibling
+ * @prop {ClientNode[]} lineage
+ * @prop {String} ext
+ * @prop {Meta} meta
+ * @prop {String} id
+ * @prop {String} path
+ * @prop {String} shortPath
+ * @prop {String} ranking
+ * @prop {Boolean} isIndexable
+ * @prop {Boolean} isNonIndexable
+ * @prop {String[]} paramKeys
+ * @prop {String} regex
+ * @prop {Class} component
+ * @prop {ClientNodeApi} api
+ */
+
+/**
+ * ClientNodeApi
+ * @typedef {Object} ClientNodeApi
+ * @prop {ClientNodeApi|undefined} parent
+ * @prop {ClientNodeApi|undefined} next
+ * @prop {ClientNodeApi|undefined} prev
+ * @prop {ClientNodeApi[]} children
+ * @prop {Boolean} isMeta
+ * @prop {String} path
+ * @prop {String} title
+ * @prop {Meta} meta
+ * @prop {ClientNode} __file
+ */
+
+/**
  * File
  * @typedef {Object.<string, *> & MiscFile & GeneratedFile & DefinedFile} RouteNode
  *
  * @typedef {Object} DefinedFile
+ * @prop {Boolean=} isFile
+ * @prop {Boolean=} isDir
+ * @prop {Boolean=} isPage
  * @prop {Boolean=} isLayout
  * @prop {Boolean=} isReset
  * @prop {Boolean=} isIndex
@@ -22,10 +63,10 @@
  * @typedef {Object} MiscFile
  * @prop {String} id
  * @prop {GetParentFile} getParent
- * @prop {RouteNode} parent 
+ * @prop {RouteNode} parent
  * @prop {Meta} meta
- * 
- * @typedef {function():RouteNode} GetParentFile  
+ *
+ * @typedef {function():RouteNode} GetParentFile
  * @returns {RouteNode}
  */
 
@@ -47,7 +88,7 @@
  * @prop {RouteNode} tree
  * @prop {BuildConfig} options
  * @prop {Object} metaParser
- * @prop {Object} defaultMeta 
+ * @prop {Object} defaultMeta
  */
 
 
@@ -67,7 +108,7 @@
 /**
  * @typedef {Object} SvelteStore
  * @prop {function(): SvelteStoreSubscription} subscribe
- * 
+ *
  * Svelte Store Subscription
  * @description Call to kill subscription.
  * @typedef {function():void} SvelteStoreSubscription SSS
