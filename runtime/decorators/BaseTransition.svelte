@@ -32,8 +32,12 @@
   $: normalizedConfig = { ...defaultConfig, ..._config }
   $: ({ transition, inParams, outParams } = normalizedConfig)
 
-  function isAncestor({ shortPath }, { shortPath: shortPath2 }) {
-    return shortPath !== shortPath2 && shortPath.startsWith(shortPath2)
+  function isAncestor(descendant, ancestor) {
+    if(descendant.parent === ancestor.parent) return false
+    const { shortPath } = descendant.parent
+    const { shortPath: shortPath2 } = ancestor.parent
+    
+    return ancestor.isIndex && shortPath !== shortPath2 && shortPath.startsWith(shortPath2)
   }
 
   function setAbsolute({ target }) {
