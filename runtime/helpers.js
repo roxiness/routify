@@ -27,12 +27,13 @@ export const context = {
 export const ready = {
   subscribe(listener) {
     window.routify.stopAutoReady = true
-    return listener(async () => {
+    async function ready() {
       await tick()
       metatags.update()
       window.routify.appLoaded = true
       dispatchEvent(new CustomEvent('app-loaded'))
-    })
+    }
+    return listener(ready)
   }
 }
 
@@ -77,38 +78,39 @@ export const meta = {
   },
 }
 
+export  function makeUrlHelper ($ctx, $oldRoute, $routes, $location) {
+  return function url(path, params, strict) {
+    const { component } = $ctx
+    path = path || './'
 
-export const makeUrlHelper = ($ctx, $oldRoute, $routes, $location) => function url(path, params, strict) {
-  const { component } = $ctx
-  path = path || './'
 
-  
-  if (!strict) path = path.replace(/index$/, '')
+    if (!strict) path = path.replace(/index$/, '')
 
-  if (path.match(/^\.\.?\//)) {
-    //RELATIVE PATH
-    let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
-    let dir = component.path
-    const traverse = breadcrumbs.match(/\.\.\//g) || []
-    traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
-    path = `${dir}/${relativePath}`.replace(/\/$/, '')
+    if (path.match(/^\.\.?\//)) {
+      //RELATIVE PATH
+      let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
+      let dir = component.path
+      const traverse = breadcrumbs.match(/\.\.\//g) || []
+      traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
+      path = `${dir}/${relativePath}`.replace(/\/$/, '')
 
-  } else if (path.match(/^\//)) {
-    // ABSOLUTE PATH
-  } else {
-    // NAMED PATH
-    const matchingRoute = $routes.find(route => route.meta.name === path)
-    if (matchingRoute) path = matchingRoute.shortPath
+    } else if (path.match(/^\//)) {
+      // ABSOLUTE PATH
+    } else {
+      // NAMED PATH
+      const matchingRoute = $routes.find(route => route.meta.name === path)
+      if (matchingRoute) path = matchingRoute.shortPath
+    }
+    const allParams = Object.assign({}, $oldRoute.params, component.params, params)
+    let pathWithParams = path
+    for (const [key, value] of Object.entries(allParams)) {
+      pathWithParams = pathWithParams.replace(`:${key}`, value)
+    }
+
+    const fullPath = $location.base + pathWithParams + _getQueryString(path, params)
+    // console.log('fp', fullPath)
+    return fullPath.replace(/\?$/, '')
   }
-  const allParams = Object.assign({}, $oldRoute.params, component.params, params)
-  let pathWithParams = path
-  for (const [key, value] of Object.entries(allParams)) {
-    pathWithParams = pathWithParams.replace(`:${key}`, value)
-  }
-  
-  const fullPath = $location.base + pathWithParams + _getQueryString(path, params)
-  // console.log('fp', fullPath)
-  return fullPath.replace(/\?$/, '')
 }
 
 /**
@@ -185,19 +187,18 @@ export const isActive = {
 
 export function getConcestor(route1, route2) {
   // The route is the last piece of layout
-  const layouts1 = [...route1.layouts, route1]
-  const layouts2 = [...route2.layouts, route2]
+  const lineage1 = [...route1.lineage, route1]
+  const lineage2 = [...route2.lineage, route2]
 
   let concestor = false
-  let children = [layouts1[0], layouts2[0]]
-
+  let children = [lineage1[0], lineage2[0]]
   // iterate through the layouts starting from the root
-  layouts1.forEach((layout1, i) => {
-    const layout2 = layouts2[i]
-    if (layout1 === layout2) {
-      concestor = layout1
+  lineage1.forEach((parent1, i) => {
+    const parent2 = lineage2[i]
+    if (parent1 && parent1 === parent2) {
+      concestor = parent1
       // if this is a concestor, the next iteration would be children
-      children = [layouts1[i + 1], layouts2[i + 1]]
+      children = [lineage1[i + 1], lineage2[i + 1]]
     }
   })
   return [concestor, ...children]
