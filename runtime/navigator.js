@@ -5,6 +5,7 @@ import config from '../runtime.config'
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
+  /** @type { ClientNode | false } */
   let lastRoute = false
 
   function updatePage(proxyToUrl, shallow) {
@@ -15,7 +16,7 @@ export function init(routes, callback) {
     const currentRoute = shallow && urlToRoute(currentUrl, routes)
     const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
-    delete lastRoute.last
+    if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?
     route.last = lastRoute
     lastRoute = route
 
@@ -107,7 +108,7 @@ async function runHooksBeforeUrlChange(event) {
   const route = get(stores.route)
   for (const hook of _hooks.filter(Boolean)) {
     // return false if the hook returns false
-    if (await !hook(event, route)) return false
+    if (await !hook(event, route)) return false //todo remove route from hook. Its API Can be accessed as $page
   }
   return true
 }

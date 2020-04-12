@@ -12,7 +12,7 @@
   }
 
   $: oldRoute = $route.last || $route
-  $: [concestor, ancestor, oldAncestor] = getConcestor($route, oldRoute)
+  $: [concestor, ancestor, oldAncestor] = getConcestor($route.api, oldRoute.api)
   $: toAncestor = isAncestor(oldRoute, $route)
   $: toDescendant = isAncestor($route, oldRoute)
   $: toHigherIndex = ancestor && ancestor.meta.index > oldAncestor.meta.index

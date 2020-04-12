@@ -3,41 +3,56 @@ import { derived, get } from 'svelte/store'
 import { route, routes, location } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
-import './typedef'
+import '../typedef'
 
+/** @returns {import('svelte/store').Readable<{component: ClientNode}>} */
+function getRoutifyContext() {
+  return getContext('routify')
+}
+
+/** @type {import('svelte/store').Readable<ClientNodeApi>} */
 export const layout = {
-  subscribe(listener) {
-    const ctx = getContext('routify')
-    return derived(ctx, ctx => ctx.component.api).subscribe(listener)
+  subscribe(run) {
+    const ctx = getRoutifyContext()
+    return derived(ctx, ctx => ctx.component.api).subscribe(run)
   }
 }
 
+/** @type {import('svelte/store').Readable<ClientNodeApi>} */
 export const page = {
-  subscribe(listener) {
-    return derived(route, route => route.api).subscribe(listener)
+  subscribe(run) {
+    return derived(route, route => route.api).subscribe(run)
   }
 }
 
+/** @type {import('svelte/store').Readable<{component: ClientNode}>} */
 export const context = {
-  subscribe(listener) {
-    return getContext('routify').subscribe(listener)
+  subscribe(run) {
+    return getRoutifyContext().subscribe(run)
   },
 }
 
+
+/**@type {import('svelte/store').Readable<function():void>} */
 export const ready = {
-  subscribe(listener) {
-    window.routify.stopAutoReady = true
+  subscribe(run) {
+    window['routify'].stopAutoReady = true
     async function ready() {
       await tick()
       metatags.update()
-      window.routify.appLoaded = true
+      window['routify'].appLoaded = true
       dispatchEvent(new CustomEvent('app-loaded'))
     }
-    return listener(ready)
+    run(ready)
+    return () => { }
   }
 }
 
-
+/** 
+ * @callback BeforeUrlChangeHelper
+ * @param {function} callback
+ * 
+ * @type {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<function>}} */
 export const beforeUrlChange = {
   _hooks: [],
   subscribe(listener) {
@@ -48,10 +63,10 @@ export const beforeUrlChange = {
   }
 }
 
-
 /**
  * We have to grab params and leftover from the context and not directly from the store.
- * Otherwise the context is updated before the component is destroyed.
+ * Otherwise the context is updated before the component is destroyed. * 
+ * @type {import('svelte/store').Readable<Object.<string, *>>} 
  **/
 export const params = {
   subscribe(listener) {
@@ -62,6 +77,7 @@ export const params = {
   },
 }
 
+/** @type {import('svelte/store').Readable<string>} */
 export const leftover = {
   subscribe(listener) {
     return derived(
@@ -71,19 +87,46 @@ export const leftover = {
   },
 }
 
+/** @type {import('svelte/store').Readable<Meta>} */
 export const meta = {
   subscribe(listener) {
-    const ctx = getContext('routify')
+    const ctx = getRoutifyContext()
     return derived(ctx, ctx => ctx.component.meta).subscribe(listener)
   },
 }
 
-export  function makeUrlHelper ($ctx, $oldRoute, $routes, $location) {
-  return function url(path, params, strict) {
+/** @type {import('svelte/store').Readable<UrlHelper>} */
+export const url = {
+  subscribe(listener) {
+    const ctx = getRoutifyContext()
+    return derived(
+      [ctx, route, routes, location],
+      args => makeUrlHelper(...args)
+    ).subscribe(
+      listener
+    )
+  }
+}
+
+/**
+ * @callback UrlHelper
+ * @param {String=} path
+ * @param {UrlParams=} params
+ * @param {UrlOptions=} options
+ * @return {String}
+ *
+ * @param {{component: ClientNode}} $ctx 
+ * @param {RouteNode} $oldRoute 
+ * @param {RouteNode[]} $routes 
+ * @param {{base: string, path: string}} $location
+ * @returns {UrlHelper}
+ */
+export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
+  return function url(path, params, options = {}) {
     const { component } = $ctx
     path = path || './'
 
-
+    const strict = options && options.strict !== false
     if (!strict) path = path.replace(/index$/, '')
 
     if (path.match(/^\.\.?\//)) {
@@ -101,6 +144,8 @@ export  function makeUrlHelper ($ctx, $oldRoute, $routes, $location) {
       const matchingRoute = $routes.find(route => route.meta.name === path)
       if (matchingRoute) path = matchingRoute.shortPath
     }
+
+    /** @type {Object<string, *>} Parameters */
     const allParams = Object.assign({}, $oldRoute.params, component.params, params)
     let pathWithParams = path
     for (const [key, value] of Object.entries(allParams)) {
@@ -108,7 +153,6 @@ export  function makeUrlHelper ($ctx, $oldRoute, $routes, $location) {
     }
 
     const fullPath = $location.base + pathWithParams + _getQueryString(path, params)
-    // console.log('fp', fullPath)
     return fullPath.replace(/\?$/, '')
   }
 }
@@ -129,19 +173,13 @@ function _getQueryString(path, params) {
   return config.queryHandler.stringify(queryParams)
 }
 
-
-export const url = {
-  subscribe(listener) {
-    const ctx = getContext('routify')
-    return derived(
-      [ctx, route, routes, location],
-      args => makeUrlHelper(...args)
-    ).subscribe(
-      listener
-    )
-  },
-}
-
+/**
+* @callback GotoHelper
+* @param {String=} path
+* @param {UrlParams=} params
+* @param {GotoOptions=} options
+*
+* @type {import('svelte/store').Readable<GotoHelper>} */
 export const goto = {
   subscribe(listener) {
     return derived(url,
@@ -156,6 +194,7 @@ export const goto = {
   },
 }
 
+/** @type {import('svelte/store').Readable<GotoHelper>} */
 export const redirect = {
   subscribe(listener) {
     return derived(url,
@@ -170,41 +209,53 @@ export const redirect = {
   },
 }
 
-
+/**
+ * @callback IsActiveHelper
+ * @param {String=} path
+ * @param {UrlParams=} params
+ * @param {UrlOptions=} options
+ * @returns {Boolean}
+ * 
+ * @type {import('svelte/store').Readable<IsActiveHelper>} */
 export const isActive = {
-  subscribe(listener) {
+  subscribe(run) {
     return derived(
       [url, route],
-      ([url, route]) => function isActive(path, strict = true) {
-        path = url(path, null, strict)
-        const currentPath = url(route.path, null, strict)
+      ([url, route]) => function isActive(path = "", params = {}, { strict } = { strict: true }) {
+        path = url(path, null, { strict })
+        const currentPath = url(route.path, null, { strict })
         const re = new RegExp('^' + path)
-        return currentPath.match(re)
+        return !!currentPath.match(re)
       }
-    ).subscribe(listener)
+    ).subscribe(run)
   },
 }
 
-export function getConcestor(route1, route2) {
-  // The route is the last piece of layout
-  const lineage1 = [...route1.lineage, route1]
-  const lineage2 = [...route2.lineage, route2]
+/**
+ * @param {ClientNodeApi} nodeApi1 
+ * @param {ClientNodeApi} nodeApi2 
+ * @returns [ClientNodeApi, ClientNodeApi, ClientNodeApi]
+ */
+export function getConcestor(nodeApi1, nodeApi2) {
+  const node1 = nodeApi1.__file
+  const node2 = nodeApi2.__file
 
-  let concestor = false
+  // The route is the last piece of layout
+  const lineage1 = [...node1.lineage, node1]
+  const lineage2 = [...node2.lineage, node2]
+
+  let concestor = lineage1[0] //root
   let children = [lineage1[0], lineage2[0]]
   // iterate through the layouts starting from the root
-  lineage1.forEach((parent1, i) => {
-    const parent2 = lineage2[i]
-    if (parent1 && parent1 === parent2) {
-      concestor = parent1
-      // if this is a concestor, the next iteration would be children
-      children = [lineage1[i + 1], lineage2[i + 1]]
+  lineage1.forEach((n1, i) => {
+    const n2 = lineage2[i]
+    if (n2 && n1.parent === n2.parent) {
+      concestor = n1.parent
+      children = [n1, n2]
     }
   })
   return [concestor, ...children]
 }
-
-
 
 /**
  * Get index difference between two paths
@@ -221,27 +272,20 @@ export function getDirection(paths, newPath, oldPath) {
   return newIndex - oldIndex
 }
 
-
+/**
+ * Sets element to active
+ * @param {HTMLElement} element  
+ */
 export function focus(element) {
-  focus.elements = focus.elements || []
-  // Tell the first element to wait for all synchronous elements before calling waitAndFocus
-  if (!focus.elements.length)
-    setTimeout(waitAndFocus)
-  focus.elements.push(element)
+  if (!focusIsSet) {
+    focusIsSet = true
+    element.setAttribute('tabindex', "0")
+    element.focus()
+    setTimeout(() => (focusIsSet = false))
+  }
 }
+let focusIsSet = false
 
-function waitAndFocus() {
-  const elementsByProximityToRoot = focus.elements.sort((a, b) => getAncestors(a) - getAncestors(b))
-  const element = elementsByProximityToRoot[0]
-
-  element.setAttribute('tabindex', 0)
-  element.focus()
-  focus.elements = []
-}
-
-function getAncestors(elem) {
-  return document.evaluate('ancestor::*', elem, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotLength
-}
 
 
 const _metatags = {
@@ -346,12 +390,17 @@ const _metatags = {
   },
   _updateQueued: false,
   getOrigin() {
-    const routifyCtx = getContext('routify')
+    const routifyCtx = getRoutifyContext()
     return routifyCtx && get(routifyCtx).path || '/'
   },
   _pendingUpdate: false
 }
 
+
+/**
+ * metatags
+ * @prop {Object.<string, string>}
+ */
 export const metatags = new Proxy(_metatags, {
   set(target, name, value, receiver) {
     const { props, getOrigin } = target

@@ -1,8 +1,11 @@
+/**
+ * @typedef {import("svelte/store").Readable<{component: RouteNode}>} ContextStore
+ */
 
 /**
  * ClientNode
  * @typedef {Object.<string, *> & DefinedFile & ClientNodeSpecifics} ClientNode
- * 
+ *
  * @typedef {Object} ClientNodeSpecifics
  * @prop {ClientNode[]} layouts
  * @prop {ClientNode|undefined} parent
@@ -20,6 +23,7 @@
  * @prop {String[]} paramKeys
  * @prop {String} regex
  * @prop {Class} component
+ * @prop {ClientNode} last
  * @prop {ClientNodeApi} api
  */
 
@@ -72,14 +76,21 @@
 
 /**
  * @typedef {Object} Meta
- * @prop {*=} preload
+ * @prop {true=} preload Bundle with main app
  * @prop {*=} precache-order
  * @prop {*=} precache-proximity
- * @prop {*=} recursive
- * @prop {*=} bundle
- * @prop {*=} index
- * @prop {Array=} children
- * @prop {String=} $$bundleId
+ * @prop {true=} recursive
+ * @prop {true=} bundle Bundle folder recursively in a single .js file
+ * @prop {String|Number=} index Position among siblings
+ * @prop {String=} name Custom identifier
+ * @prop {String=} title Title of the page
+ * @prop {MetaChild[]} [children]
+ * @prop {String} [$$bundleId]
+ *
+ * @typedef {Object} MetaChild
+ * @prop {String} [title]
+ * @prop {String} [path]
+ * @prop {MetaChild[]} [children]
 */
 
 /**
@@ -105,28 +116,27 @@
  * @prop {Boolean=} noHashScroll
  */
 
+
+
 /**
- * @typedef {Object} SvelteStore
- * @prop {function(): SvelteStoreSubscription} subscribe
- *
- * Svelte Store Subscription
- * @description Call to kill subscription.
- * @typedef {function():void} SvelteStoreSubscription SSS
+ * @typedef {Object.<string, *>} UrlParams
+ * 
+ * @typedef {Object} UrlOptions
+ * @prop {Boolean=} strict
  */
 
- /**
-  * @typedef {Object} UrlOptions
-  * @prop {Boolean=} strict
-  */
+/**
+ * @typedef {Object} GotoOptions
+ * @prop {Boolean=} strict preserve filename in url, ie. /index
+ * @prop {Boolean} [redirect=false] use replaceState instead pushState
+ * @prop {Boolean} [static=false] render url without redirecting
+ * @prop {Boolean} [shallow=false] use the current layouts instead of those of the target
+ */
 
-  /**   
-   * @typedef {Object} GotoOptions
-   * @prop {Boolean=} strict preserve filename in url, ie. /index
-   * @prop {Boolean=false} redirect use replaceState instead pushState
-   * @prop {Boolean=false} static render url without redirecting
-   * @prop {Boolean=false} shallow use the current layouts instead of those of the target
-   */
+/**
+ * @typedef {UrlOptions} IsActiveOptions
+ */
 
-   /**
-    * @typedef {UrlOptions} IsActiveOptions
-    */
+/**
+ * @typedef {[ClientNodeApi, ClientNodeApi, ClientNodeApi]} ConcestorReturn
+ */
