@@ -5,12 +5,24 @@ import { pathToParams } from './utils'
 import config from '../runtime.config'
 import '../typedef'
 
+
 /** @returns {import('svelte/store').Readable<{component: ClientNode}>} */
 function getRoutifyContext() {
   return getContext('routify')
 }
 
-/** @type {import('svelte/store').Readable<ClientNodeApi>} */
+
+/**
+ * @typedef {import('svelte/store').Readable<ClientNodeApi>} ClientNodeHelperStore
+ * @type { ClientNodeHelperStore } 
+ */
+export const page = {
+  subscribe(run) {
+    return derived(route, route => route.api).subscribe(run)
+  }
+}
+
+/** @type {ClientNodeHelperStore} */
 export const layout = {
   subscribe(run) {
     const ctx = getRoutifyContext()
@@ -18,22 +30,22 @@ export const layout = {
   }
 }
 
-/** @type {import('svelte/store').Readable<ClientNodeApi>} */
-export const page = {
-  subscribe(run) {
-    return derived(route, route => route.api).subscribe(run)
-  }
-}
-
-/** @type {import('svelte/store').Readable<{component: ClientNode}>} */
+/**
+* @typedef {{component: ClientNode}}  ContextHelper
+* @typedef {import('svelte/store').Readable<ContextHelper>} ContextHelperStore
+* @type {ContextHelperStore}
+*/
 export const context = {
   subscribe(run) {
     return getRoutifyContext().subscribe(run)
-  },
+  }
 }
 
-
-/**@type {import('svelte/store').Readable<function():void>} */
+/**
+ * @typedef {function():void} ReadyHelper
+ * @typedef {import('svelte/store').Readable<ReadyHelper>} ReadyHelperStore
+ * @type {ReadyHelperStore}
+*/
 export const ready = {
   subscribe(run) {
     window['routify'].stopAutoReady = true
@@ -51,8 +63,10 @@ export const ready = {
 /** 
  * @callback BeforeUrlChangeHelper
  * @param {function} callback
- * 
- * @type {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<function>}} */
+ *
+ * @typedef {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<function>}} BeforeUrlChangeHelperStore
+ * @type {BeforeUrlChangeHelperStore}
+ **/
 export const beforeUrlChange = {
   _hooks: [],
   subscribe(listener) {
@@ -66,7 +80,9 @@ export const beforeUrlChange = {
 /**
  * We have to grab params and leftover from the context and not directly from the store.
  * Otherwise the context is updated before the component is destroyed. * 
- * @type {import('svelte/store').Readable<Object.<string, *>>} 
+ * @typedef {Object.<string, *>} ParamsHelper
+ * @typedef {import('svelte/store').Readable<Params>} ParamsHelperStore
+ * @type {ParamsHelperStore}
  **/
 export const params = {
   subscribe(listener) {
@@ -77,7 +93,11 @@ export const params = {
   },
 }
 
-/** @type {import('svelte/store').Readable<string>} */
+/**
+ * @typedef {string} LeftoverHelper
+ * @typedef {import('svelte/store').Readable<string>} LeftoverHelperStore
+ * @type {LeftoverHelperStore} 
+ **/
 export const leftover = {
   subscribe(listener) {
     return derived(
@@ -87,7 +107,13 @@ export const leftover = {
   },
 }
 
-/** @type {import('svelte/store').Readable<Meta>} */
+
+
+
+/**
+ * @typedef {import('svelte/store').Readable<Meta>} MetaHelperStore 
+ * @type {MetaHelperStore}
+ * */
 export const meta = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
@@ -95,7 +121,16 @@ export const meta = {
   },
 }
 
-/** @type {import('svelte/store').Readable<UrlHelper>} */
+/**
+ * @callback UrlHelper
+ * @param {String=} path
+ * @param {UrlParams=} params
+ * @param {UrlOptions=} options
+ * @return {String}
+ *
+ * @typedef {import('svelte/store').Readable<UrlHelper>} UrlHelperStore
+ * @type {UrlHelperStore} 
+ * */
 export const url = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
@@ -108,13 +143,7 @@ export const url = {
   }
 }
 
-/**
- * @callback UrlHelper
- * @param {String=} path
- * @param {UrlParams=} params
- * @param {UrlOptions=} options
- * @return {String}
- *
+/** 
  * @param {{component: ClientNode}} $ctx 
  * @param {RouteNode} $oldRoute 
  * @param {RouteNode[]} $routes 
@@ -179,7 +208,9 @@ function _getQueryString(path, params) {
 * @param {UrlParams=} params
 * @param {GotoOptions=} options
 *
-* @type {import('svelte/store').Readable<GotoHelper>} */
+* @typedef {import('svelte/store').Readable<GotoHelper>}  GotoHelperStore
+* @type {GotoHelperStore} 
+* */
 export const goto = {
   subscribe(listener) {
     return derived(url,
@@ -194,7 +225,9 @@ export const goto = {
   },
 }
 
-/** @type {import('svelte/store').Readable<GotoHelper>} */
+/**
+ * @type {GotoHelperStore} 
+ * */
 export const redirect = {
   subscribe(listener) {
     return derived(url,
@@ -216,7 +249,9 @@ export const redirect = {
  * @param {UrlOptions=} options
  * @returns {Boolean}
  * 
- * @type {import('svelte/store').Readable<IsActiveHelper>} */
+ * @typedef {import('svelte/store').Readable<IsActiveHelper>} IsActiveHelperStore
+ * @type {IsActiveHelperStore} 
+ * */
 export const isActive = {
   subscribe(run) {
     return derived(
@@ -232,9 +267,9 @@ export const isActive = {
 }
 
 /**
- * @param {ClientNodeApi} nodeApi1 
- * @param {ClientNodeApi} nodeApi2 
- * @returns [ClientNodeApi, ClientNodeApi, ClientNodeApi]
+ * @typedef {[ClientNodeApi, ClientNodeApi, ClientNodeApi]} ConcestorReturn
+ * @typedef {function(ClientNodeApi, ClientNodeApi):ConcestorReturn} GetConcestor
+ * @typeGetConcestor
  */
 export function getConcestor(nodeApi1, nodeApi2) {
   const node1 = nodeApi1.__file
@@ -274,7 +309,8 @@ export function getDirection(paths, newPath, oldPath) {
 
 /**
  * Sets element to active
- * @param {HTMLElement} element  
+ * @typedef {function(HTMLElement):void} FocusHelper
+ * @type {FocusHelper}
  */
 export function focus(element) {
   if (!focusIsSet) {
