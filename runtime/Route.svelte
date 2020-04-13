@@ -1,42 +1,58 @@
 <script>
+  // @ts-check
+  /** @typedef {import('../typedef').ClientNode} ClientNode */
+  /** @typedef {{component():*, path: string}} Decorator */
+  /** @typedef {ClientNode | Decorator} LayoutOrDecorator */
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable } from 'svelte/store'
   import { metatags } from './helpers.js'
   import { route, routes } from './store'
   import { handleScroll } from './utils'
 
-  export let layouts = [],
-    scoped = {},
-    Decorator = undefined,
-    childOfDecorator = false
-  let scopeToChild,
-    parentElement,
-    scopedSync = {},
-    isDecorator = false,
-    _lastLayout
-    
+  /** @type {LayoutOrDecorator[]} */
+  export let layouts = []
+  export let scoped = {}
+  export let Decorator = null
+  export let childOfDecorator = false
+
+  let scopedSync = {}
+  let layoutIsUpdated = false
+
+  /** @type {HTMLElement} */
+  let parentElement
+
+  /** @type {LayoutOrDecorator} */
+  let layout = null
+
+  /** @type {LayoutOrDecorator} */
+  let lastLayout = null
+
+  /** @type {LayoutOrDecorator[]} */
+  let remainingLayouts = []
 
   const context = writable({})
   setContext('routify', context)
 
   $: if (Decorator && !childOfDecorator) {
-    isDecorator = true
-    layouts = [
-      { component: () => Decorator, path: layouts[0].path + '__decorator' },
-      ...layouts,
-    ]
+    const decoratorLayout = {
+      component: () => Decorator,
+      path: `${layouts[0].path}__decorator`,
+      isDecorator: true,
+    }
+    layouts = [decoratorLayout, ...layouts]
   }
 
   $: [layout, ...remainingLayouts] = layouts
-  $: layoutIsUpdated = !_lastLayout || _lastLayout.path !== layout.path
+  $: layoutIsUpdated = !lastLayout || lastLayout.path !== layout.path
 
+  /** @param {HTMLElement} el */
   function setParent(el) {
     parentElement = el.parentElement
   }
 
   function onComponentLoaded(componentFile) {
     scopedSync = { ...scoped }
-    _lastLayout = layout
+    lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
     context.set({ component: layout, componentFile })
   }
@@ -76,7 +92,7 @@
         {...layout.param || {}} />
     {/each}
     <!-- we need to check for remaining layouts, in case this component is a destroyed layout -->
-  {:else if (remainingLayouts.length)}   
+  {:else if remainingLayouts.length}
     {#each [$context] as { component, componentFile } (component.path)}
       <svelte:component
         this={componentFile}
@@ -88,7 +104,7 @@
         <svelte:self
           layouts={[...remainingLayouts]}
           Decorator={typeof decorator !== 'undefined' ? decorator : Decorator}
-          childOfDecorator={isDecorator}
+          childOfDecorator={layout.isDecorator}
           scoped={{ ...scoped, ...scopeToChild }} />
       </svelte:component>
     {/each}
