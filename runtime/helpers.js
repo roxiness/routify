@@ -5,7 +5,7 @@ import { pathToParams } from './utils'
 import config from '../runtime.config'
 import '../typedef'
 
-
+/** @ts-check */
 /** @returns {import('svelte/store').Readable<{component: ClientNode}>} */
 function getRoutifyContext() {
   return getContext('routify')
@@ -269,7 +269,7 @@ export const isActive = {
 /**
  * @typedef {[ClientNodeApi, ClientNodeApi, ClientNodeApi]} ConcestorReturn
  * @typedef {function(ClientNodeApi, ClientNodeApi):ConcestorReturn} GetConcestor
- * @typeGetConcestor
+ * @type {GetConcestor}
  */
 export function getConcestor(nodeApi1, nodeApi2) {
   const node1 = nodeApi1.__file
@@ -280,16 +280,16 @@ export function getConcestor(nodeApi1, nodeApi2) {
   const lineage2 = [...node2.lineage, node2]
 
   let concestor = lineage1[0] //root
-  let children = [lineage1[0], lineage2[0]]
+  let children = [lineage1[0].api, lineage2[0].api]
   // iterate through the layouts starting from the root
   lineage1.forEach((n1, i) => {
     const n2 = lineage2[i]
     if (n2 && n1.parent === n2.parent) {
       concestor = n1.parent
-      children = [n1, n2]
+      children = [n1.api, n2.api]
     }
   })
-  return [concestor, ...children]
+  return [concestor.api, children[0], children[1]]
 }
 
 /**
