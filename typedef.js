@@ -22,7 +22,7 @@
  * @prop {Boolean} isNonIndexable
  * @prop {String[]} paramKeys
  * @prop {String} regex
- * @prop {Class} component
+ * @prop {function():{}} component
  * @prop {ClientNode} last
  * @prop {ClientNodeApi} api
  */
