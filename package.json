@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/sveltech/routify/issues"
   },
-  "homepage": "https://routify.now.sh/docs/introduction",
+  "homepage": "https://routify.dev",
   "publishConfig": {
     "access": "public"
   },
