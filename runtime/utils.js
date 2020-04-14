@@ -1,4 +1,3 @@
-import config from '../tmp/config'
 const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
 export function handleScroll(element) {
@@ -9,9 +8,8 @@ export function handleScroll(element) {
 
 export function handleHash() {
   if (navigator.userAgent.includes('jsdom')) return false
-  const { noHashScroll } = config
   const { hash } = window.location
-  if (!noHashScroll && hash) {
+  if (hash) {
     const el = document.querySelector(hash)
     if (hash && el) el.scrollIntoView()
   }
