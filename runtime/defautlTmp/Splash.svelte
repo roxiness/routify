@@ -6,7 +6,7 @@
   let error = false
   setTimeout(() => (show = true))
   setTimeout(() => (drawing = false), 1800)
-  setTimeout(() => (error = true), 5000)
+  setTimeout(() => (error = true), 10000)
 </script>
 
 <style>
