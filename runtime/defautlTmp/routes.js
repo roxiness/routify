@@ -8,7 +8,7 @@ export const __version = "0.0.0-development"
 export const __timestamp = "2020-04-14T07:23:45.459Z"
 
 //buildRoutes
-import { buildClientTree } from "C:/Users/jakob/sandbox/svelte/dev/svelte-filerouter/runtime/buildRoutes"
+import { buildClientTree } from "../buildRoutes"
 
 //options
 export const options = {}
