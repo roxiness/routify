@@ -1,6 +1,8 @@
 .history
 /node_modules/
 /dist/
-tmp
+tmp/**
+!tmp/routes.js
+!tmp/config.js
 *.bak
 *.orig
