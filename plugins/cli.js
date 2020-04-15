@@ -13,9 +13,10 @@ const { start } = require('../lib/services/interface')
 const { exporter } = require('../lib/services/exporter')
 const defaults = require('../config.defaults.json')
 const log = require('../lib/services/log')
+const stdio = 'inherit'
 
-let isCommand = false
 program
+  .command('run', { isDefault: true })
   .option('-d, --debug', 'extra debugging')
   .option('-p, --pages <location>', 'path/to/pages', defaults.pages)
   .option(
@@ -29,26 +30,41 @@ program
   .option('-e, --extensions <names>', "Included file extensions (comma separated)", defaults.extensions)
   .option('-c, --child-process <command>', "Run npm task when Routify is ready", defaults.childProcess)
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
+  .action(program => {
+    const options = program.opts()
+    Object.entries(options).forEach(([key, value]) => {
+      if (typeof value === 'undefined') delete options[key]
+    })
+    start(options)
+  })
 
 
 program
   .command('init')
-  .option('-s, --start-dev', 'run "npm run dev" automatically')
+  .option('-s, --start-dev', 'run "npm run dev" automatically', false)
   .option('-e, --no-example', 'delete the example folder')
-  .action(options => {
-    isCommand = true
-    const { example, startDev } = options.opts()
+  .option('-n, --no-install', 'don\'t auto install npm modules')
+  .option('-b, --branch [name]', 'branch to checkout (can also be commit hash or release tag)', 'master')
+  
+  .action(program => {
+    const { example, startDev, branch, linkRoutify, install } = program.opts()
     fs.readdir('./', (err, files) => {
       if (err) log(err)
       else if (files.length) log('Can only init in an empty directory.')
       else {
         log('Fetching template')
-        execSync('npx degit https://github.com/sveltech/routify-starter')
-        log('Installing dependencies')
-        execSync('npm i --loglevel=error')
+        execSync(`npx degit https://github.com/sveltech/routify-starter#${branch}`)
 
-        if (!example) fse.remove('./src/pages/examples')
-        if (startDev) execSync('npm run dev', { stdio: 'inherit' })
+        if (install) {
+          log('Installing dependencies')
+          execSync('npm i --loglevel=error')
+        }
+
+        if (!example) {
+          fse.remove('./src/pages/examples')
+          fse.remove('./src/pages/index.svelte')
+        }
+        if (startDev) execSync('npm run dev', { stdio })
         else log('Run "npm run dev" to start the server.')
       }
     })
@@ -60,17 +76,7 @@ program
   .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
   .option('-p --no-prerender', 'Don\'t prerender static pages', defaults.noPrerender) //todo really should get rid of this one
   .option('   --basepath <path>', 'Dist folder', defaults.basepath)
-  .action(options => {
-    isCommand = true
-    exporter(options.opts())
-  })
+  .action(options => exporter(options.opts()))
 
 
 program.parse(process.argv)
-if (!isCommand) {
-  const options = program.opts()
-  Object.entries(options).forEach(([key, value]) => {
-    if (typeof value === 'undefined') delete options[key]
-  })
-  start(options)
-}
