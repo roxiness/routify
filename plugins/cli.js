@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 // @ts-nocheck
 
-const program = require('commander')
 const fs = require('fs')
+// Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
+fs.writeFileSync(__dirname + '/../tmp/routes.js', 'export * from "../runtime/defaultTmp/routes"', 'utf-8')
+
+
+const program = require('commander')
 const fse = require('fs-extra')
 const { execSync } = require('child_process')
 const { start } = require('../lib/services/interface')
