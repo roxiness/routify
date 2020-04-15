@@ -20,7 +20,7 @@
   "dependencies": {
     "@sveltech/ssr": "^0.0.9",
     "cheap-watch": "^1.0.2",
-    "commander": "^4.0.1",
+    "commander": "^5.0.0",
     "config": "^3.2.5",
     "fs-extra": "^9.0.0",
     "js-yaml": "^3.13.1",
@@ -56,6 +56,7 @@
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
     "test:e2e:rollup": "thc",
     "test:e2e:nollup": "thc --nollup",
+    "testcafe": "cd tests && testcafe chrome tests/starter-example.js --app \"npm run dev --prefix builds/starter-example\"",
     "test:e2e": "npm run --silent test:e2e:nollup",
     "test:unit": "zoar",
     "test:unit:purge": "del test/unit/build/*.expected.js",

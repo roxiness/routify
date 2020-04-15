@@ -6,3 +6,4 @@ tmp/**
 !tmp/config.js
 *.bak
 *.orig
+tests/builds/**
