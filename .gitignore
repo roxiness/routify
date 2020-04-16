@@ -1,9 +1,10 @@
 .history
 /node_modules/
 /dist/
+#todo why doesn't /test/e2e/builds/ work?
+/test/**/builds/
 tmp/**
 !tmp/routes.js
 !tmp/config.js
 *.bak
 *.orig
-tests/builds/**

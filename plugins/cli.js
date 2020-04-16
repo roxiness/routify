@@ -12,7 +12,7 @@ const { execSync } = require('child_process')
 const { start } = require('../lib/services/interface')
 const { exporter } = require('../lib/services/exporter')
 const defaults = require('../config.defaults.json')
-const log = require('../lib/services/log')
+const log = require('../lib/utils/log')
 const stdio = 'inherit'
 
 program

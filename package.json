@@ -24,6 +24,7 @@
     "config": "^3.2.5",
     "fs-extra": "^9.0.0",
     "js-yaml": "^3.13.1",
+    "log-symbols": "^3.0.0",
     "picomatch": "^2.2.1",
     "readdirp": "^3.3.0",
     "rollup-pluginutils": "^2.8.2"
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@rixo/eslint-config-svelte": "^0.8.0",
+    "chalk": "^4.0.0",
     "chokidar-cli": "^2.1.0",
     "del-cli": "^3.0.0",
     "memfs": "^3.0.3",
@@ -54,10 +56,8 @@
     "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
     "lint": "npm run eslint",
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
-    "test:e2e:rollup": "thc",
-    "test:e2e:nollup": "thc --nollup",
-    "testcafe": "cd tests && testcafe chrome tests/starter-example.js --app \"npm run dev --prefix builds/starter-example\"",
-    "test:e2e": "npm run --silent test:e2e:nollup",
+    "test:e2e:setup": "node test/e2e setup",
+    "test:e2e:starter": "cd test/e2e && testcafe chrome tests/starter-example.js --app \"npm run dev --prefix builds/starter-example\"",
     "test:unit": "zoar",
     "test:unit:purge": "del test/unit/build/*.expected.js",
     "test:unit:refresh": "npm run test:unit:purge && npm run --silent test:unit",
