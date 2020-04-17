@@ -2,7 +2,7 @@
 /node_modules/
 /dist/
 #todo why doesn't /test/e2e/builds/ work?
-/test/**/builds/
+/test/e2e/builds/
 tmp/**
 !tmp/routes.js
 !tmp/config.js
