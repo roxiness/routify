@@ -74,7 +74,6 @@ program
   .command('export')
   .option('-o --output <path>', 'Dist folder', defaults.distDir)
   .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
-  .option('-p --no-prerender', 'Don\'t prerender static pages', defaults.noPrerender) //todo really should get rid of this one
   .option('   --basepath <path>', 'Dist folder', defaults.basepath)
   .action(options => exporter(options.opts()))
 

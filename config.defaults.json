@@ -11,6 +11,5 @@
       "svelte",
       "md"
     ],
-    "distDir": "dist",
-    "noPrerender": false
+    "distDir": "dist"
   }
