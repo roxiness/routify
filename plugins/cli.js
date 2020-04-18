@@ -1,18 +1,7 @@
 #!/usr/bin/env node
-// @ts-nocheck
-
-const fs = require('fs')
-// Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
-fs.writeFileSync(__dirname + '/../tmp/routes.js', 'export * from "../runtime/defaultTmp/routes"', 'utf-8')
-
 
 const program = require('commander')
-const fse = require('fs-extra')
-const { execSync } = require('child_process')
-const { start } = require('../lib/services/interface')
-const { exporter } = require('../lib/services/exporter')
 const defaults = require('../config.defaults.json')
-const log = require('../lib/utils/log')
 const stdio = 'inherit'
 
 program
@@ -21,7 +10,7 @@ program
   .option('-p, --pages <location>', 'path/to/pages', defaults.pages)
   .option(
     '-i, --ignore <list>',
-    'Files and dirs. Can be string or array. Interpreted as regular expression', defaults.ignore
+    'Blob of files and dirs to be ignored', defaults.ignore
   )
   .option(
     '-D, --dynamic-imports', 'Code splitting)', defaults.dynamicImports
@@ -31,11 +20,14 @@ program
   .option('-c, --child-process <command>', "Run npm task when Routify is ready", defaults.childProcess)
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
   .action(program => {
+    // Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
+    require('fs').writeFileSync(__dirname + '/../tmp/routes.js', 'export * from "../runtime/defaultTmp/routes"', 'utf-8')
+
     const options = program.opts()
     Object.entries(options).forEach(([key, value]) => {
       if (typeof value === 'undefined') delete options[key]
     })
-    start(options)
+    require('../lib/services/interface').start(options)
   })
 
 
@@ -45,8 +37,11 @@ program
   .option('-e, --no-example', 'delete the example folder')
   .option('-n, --no-install', 'don\'t auto install npm modules')
   .option('-b, --branch [name]', 'branch to checkout (can also be commit hash or release tag)', 'master')
-  
+
   .action(program => {
+    const fs = require('fs-extra')
+    const log = require('../lib/utils/log')
+    const { execSync } = require('child_process')
     const { example, startDev, branch, linkRoutify, install } = program.opts()
     fs.readdir('./', (err, files) => {
       if (err) log(err)
@@ -61,8 +56,8 @@ program
         }
 
         if (!example) {
-          fse.remove('./src/pages/examples')
-          fse.remove('./src/pages/index.svelte')
+          fs.remove('./src/pages/examples')
+          fs.remove('./src/pages/index.svelte')
         }
         if (startDev) execSync('npm run dev', { stdio })
         else log('Run "npm run dev" to start the server.')
@@ -74,8 +69,12 @@ program
   .command('export')
   .option('-o --output <path>', 'Dist folder', defaults.distDir)
   .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
+  // todo implement default basepath - avoid extra iteration
   .option('   --basepath <path>', 'Dist folder', defaults.basepath)
-  .action(options => exporter(options.opts()))
+  .action(options => {
+    const { exporter } = require('../lib/services/exporter')
+    exporter(options.opts())
+  })
 
 
 program.parse(process.argv)

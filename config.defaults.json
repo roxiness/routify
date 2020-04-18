@@ -1,15 +1,11 @@
-  {
-    "pages": "src/pages",
-    "sourceDir": "public",
-    "routifyDir": "node_modules/@sveltech/routify/tmp",
-    "ignore": [],
-    "dynamicImports": false,
-    "singleBuild": false,
-    "noHashScroll": false,
-    "extensions": [
-      "html",
-      "svelte",
-      "md"
-    ],
-    "distDir": "dist"
-  }
+{
+  "pages": "src/pages",
+  "sourceDir": "public",
+  "routifyDir": "node_modules/@sveltech/routify/tmp",
+  "ignore": "",
+  "dynamicImports": false,
+  "singleBuild": false,
+  "noHashScroll": false,
+  "extensions": "html,svelte,md",
+  "distDir": "dist"
+}
