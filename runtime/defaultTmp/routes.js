@@ -9,7 +9,7 @@ export const __timestamp = "2020-04-14T07:23:45.459Z"
 
 //buildRoutes
 import { buildClientTree } from "../buildRoutes"
-
+import Splash from "./Splash.svelte"
 
 //options
 export const options = {}
@@ -37,7 +37,7 @@ export const _tree = {
       },
       "path": "/_fallback",
       "id": "__fallback",
-      "component": () => import('./Splash.svelte').then(m => m.default)
+      "component": () => Splash
     },
   ],
   "isLayout": false,
