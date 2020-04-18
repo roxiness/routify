@@ -9,7 +9,7 @@ async function run({ branch, buildsDir, projectDir, args, app }) {
 
     const argsStr = args.join(' ')
      exec(`testcafe chrome starter-example.js ${app} ${argsStr}`,
-         { cwd: path.resolve(__dirname, '../tests') })
+         { cwd: path.resolve(__dirname, '../fixtures') })
 }
 
 module.exports = run

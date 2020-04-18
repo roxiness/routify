@@ -5,6 +5,10 @@ const base = `http://localhost:5000`
 
 fixture`Home`.page(base);
 
+test('Server starts', async t => {
+    await t.expect(Selector('*').exists).ok('server timed out', {timeout: 5})
+})
+
 test('Page loads', async t => {
     await t.expect(Selector(`#routify-app h1`).exists).ok()
 });
