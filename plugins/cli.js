@@ -33,7 +33,7 @@ program
 
 program
   .command('init')
-  .option('-s, --start-dev', 'run "npm run dev" automatically', false)
+  .option('-s, --start-dev', 'run "npm run dev" after install', false)
   .option('-e, --no-example', 'delete the example folder')
   .option('-n, --no-install', 'don\'t auto install npm modules')
   .option('-b, --branch [name]', 'branch to checkout (can also be commit hash or release tag)', 'master')
