@@ -68,5 +68,10 @@
     "test:watch": "run-s test:unit test:unit:watch",
     "test(srtest)": "npm run --silent test:unit",
     "semantic-release": "semantic-release"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }
