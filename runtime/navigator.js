@@ -1,25 +1,29 @@
-import { route as routeStore } from './store'
+import * as stores from './store'
 import { get } from 'svelte/store'
 import { beforeUrlChange } from './helpers'
+import config from '../runtime.config'
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
-  let prevRoute = false
+  /** @type { ClientNode | false } */
+  let lastRoute = false
 
-  function updatePage(url, shallow) {
+  function updatePage(proxyToUrl, shallow) {
     const currentUrl = window.location.pathname
-    url = url || currentUrl
+    const url = proxyToUrl || currentUrl
 
     const route = urlToRoute(url, routes)
     const currentRoute = shallow && urlToRoute(currentUrl, routes)
     const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
-    delete prevRoute.prev
-    route.prev = prevRoute
-    prevRoute = route
+    if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?
+    route.last = lastRoute
+    lastRoute = route
 
     //set the route in the store
-    routeStore.set(route)
+    if (!proxyToUrl)
+      stores.urlRoute.set(route)
+    stores.route.set(route)
 
     //run callback in Router.svelte
     callback(layouts)
@@ -38,7 +42,9 @@ function createEventListeners(updatePage) {
   // history.*state
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
-    history[eventName] = async function (state, title, url) {
+    history[eventName] = async function (state = {}, title, url) {
+      const { id, path, params } = get(stores.route)
+      state = { id, path, params, ...state }
       const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
 
@@ -99,10 +105,10 @@ function handleClick(event) {
 }
 
 async function runHooksBeforeUrlChange(event) {
-  const route = get(routeStore)
+  const route = get(stores.route)
   for (const hook of _hooks.filter(Boolean)) {
     // return false if the hook returns false
-    if (await !hook(event, route)) return false
+    if (await !hook(event, route)) return false //todo remove route from hook. Its API Can be accessed as $page
   }
   return true
 }
@@ -111,15 +117,20 @@ function urlToRoute(url, routes) {
   const mockUrl = new URL(location).searchParams.get('__mock-url')
   url = mockUrl || url
 
-  const route = routes.find(route => url.match(route.regex))
+  const basepath = get(stores.basepath)
+  const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
   if (!route)
     throw new Error(
       `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
     )
 
+  const [, base, path] = url.match(`^(${get(stores.basepath)})(${route.regex})`)
+  if (config.queryHandler)
+    route.params = config.queryHandler.parse(window.location.search)
+
   if (route.paramKeys) {
     const layouts = layoutByPos(route.layouts)
-    const fragments = url.split('/').filter(Boolean)
+    const fragments = path.split('/').filter(Boolean)
     const routeProps = getRouteProps(route.path)
 
     routeProps.forEach((prop, i) => {
@@ -131,11 +142,15 @@ function urlToRoute(url, routes) {
     })
   }
 
-  route.leftover = url.replace(new RegExp(route.regex), '')
+  route.leftover = url.replace(new RegExp(base + route.regex), '')
 
   return route
 }
 
+/**
+ *
+ * @param {array} layouts
+ */
 function layoutByPos(layouts) {
   const arr = []
   layouts.forEach(layout => {
@@ -144,6 +159,10 @@ function layoutByPos(layouts) {
   return arr
 }
 
+/**
+ *
+ * @param {string} url
+ */
 function getRouteProps(url) {
   return url
     .split('/')

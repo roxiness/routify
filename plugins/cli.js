@@ -1,45 +1,66 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const fs = require('fs')
-const { execSync } = require('child_process')
-const { start } = require('../lib/services/interface')
-const { exporter } = require('../lib/services/exporter')
 const defaults = require('../config.defaults.json')
-const log = require('../lib/services/log')
+const stdio = 'inherit'
 
-let isCommand = false
 program
+  .command('run', { isDefault: true })
   .option('-d, --debug', 'extra debugging')
   .option('-p, --pages <location>', 'path/to/pages', defaults.pages)
   .option(
     '-i, --ignore <list>',
-    'Files and dirs. Can be string or array. Interpreted as regular expression', defaults.ignore
+    'Blob of files and dirs to be ignored', defaults.ignore
   )
-  .option(
-    '-u, --unused-prop-warnings', 'Show warnings about unused props passed by filerouter', defaults.unknownPropWarnings) //todo, replace unknownPropWarnings
   .option(
     '-D, --dynamic-imports', 'Code splitting)', defaults.dynamicImports
   )
   .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
-  .option('-s, --scroll [behavior]', "Scroll behavior", defaults.scroll)
   .option('-e, --extensions <names>', "Included file extensions (comma separated)", defaults.extensions)
-  .option('-c, --child-process <command>', "Run command when Routify is ready", defaults.childProcess)
+  .option('-c, --child-process <command>', "Run npm task when Routify is ready", defaults.childProcess)
+  .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
+  .action(program => {
+    // Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
+    require('fs').writeFileSync(__dirname + '/../tmp/routes.js', 'export * from "../runtime/defaultTmp/routes"', 'utf-8')
+
+    const options = program.opts()
+    Object.entries(options).forEach(([key, value]) => {
+      if (typeof value === 'undefined') delete options[key]
+    })
+    require('../lib/services/interface').start(options)
+  })
 
 
 program
   .command('init')
-  .action(() => {
-    isCommand = true
+  .option('-s, --start-dev', 'run "npm run dev" automatically', false)
+  .option('-e, --no-example', 'delete the example folder')
+  .option('-n, --no-install', 'don\'t auto install npm modules')
+  .option('-b, --branch [name]', 'branch to checkout (can also be commit hash or release tag)', 'master')
+
+  .action(program => {
+    const fs = require('fs-extra')
+    const log = require('../lib/utils/log')
+    const { execSync } = require('child_process')
+    const { example, startDev, branch, linkRoutify, install } = program.opts()
     fs.readdir('./', (err, files) => {
       if (err) log(err)
       else if (files.length) log('Can only init in an empty directory.')
       else {
         log('Fetching template')
-        execSync('npx degit https://github.com/sveltech/routify-starter')
-        log('Installing dependencies')
-        execSync('npm i')
-        execSync('npm run dev', { stdio: 'inherit' })
+        execSync(`npx degit https://github.com/sveltech/routify-starter#${branch}`)
+
+        if (install) {
+          log('Installing dependencies')
+          execSync('npm i --loglevel=error')
+        }
+
+        if (!example) {
+          fs.remove('./src/pages/examples')
+          fs.remove('./src/pages/index.svelte')
+        }
+        if (startDev) execSync('npm run dev', { stdio })
+        else log('Run "npm run dev" to start the server.')
       }
     })
   })
@@ -48,18 +69,12 @@ program
   .command('export')
   .option('-o --output <path>', 'Dist folder', defaults.distDir)
   .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
-  .option('-p --no-prerender', 'Don\'t prerender static pages', defaults.noPrerender)
+  // todo implement default basepath - avoid extra iteration
+  .option('   --basepath <path>', 'Dist folder', defaults.basepath)
   .action(options => {
-    isCommand = true
+    const { exporter } = require('../lib/services/exporter')
     exporter(options.opts())
   })
 
 
 program.parse(process.argv)
-if (!isCommand) {
-  const options = program.opts()
-  Object.entries(options).forEach(([key, value]) => {
-    if (typeof value === 'undefined') delete options[key]
-  })
-  start(options)
-}

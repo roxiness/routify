@@ -1,4 +1,4 @@
-import { test } from '@@'
+import { test } from '..'
 import { Volume } from 'memfs'
 import * as path from 'path'
 import * as fs from 'fs'

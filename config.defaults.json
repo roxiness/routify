@@ -1,17 +1,11 @@
-  {
-    "pages": "src/pages",
-    "sourceDir": "public",
-    "routifyDir": "node_modules/@sveltech/routify/tmp",
-    "ignore": [],
-    "unknownPropWarnings": true,
-    "dynamicImports": false,
-    "singleBuild": false,
-    "scroll": "smooth",
-    "extensions": [
-      "html",
-      "svelte",
-      "md"
-    ],
-    "distDir": "dist",
-    "noPrerender": false
-  }
+{
+  "pages": "src/pages",
+  "sourceDir": "public",
+  "routifyDir": "node_modules/@sveltech/routify/tmp",
+  "ignore": "",
+  "dynamicImports": false,
+  "singleBuild": false,
+  "noHashScroll": false,
+  "extensions": "html,svelte,md",
+  "distDir": "dist"
+}

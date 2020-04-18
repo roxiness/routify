@@ -1,25 +1,30 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.1.1-2",
+  "version": "0.0.0-development",
   "description": "Routes for Svelte, automated by your filestructure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sveltech/routify.git"
+    "url": "https://github.com/sveltech/routify.git"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sveltech/routify/issues"
   },
-  "homepage": "https://routify.now.sh/docs/introduction",
+  "homepage": "https://routify.dev",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@sveltech/ssr": "^0.0.9",
     "cheap-watch": "^1.0.2",
-    "commander": "^4.0.1",
+    "commander": "^5.0.0",
     "config": "^3.2.5",
+    "fs-extra": "^9.0.0",
     "js-yaml": "^3.13.1",
+    "log-symbols": "^3.0.0",
     "picomatch": "^2.2.1",
     "readdirp": "^3.3.0",
     "rollup-pluginutils": "^2.8.2"
@@ -28,17 +33,21 @@
     "routify": "./plugins/cli.js"
   },
   "directories": {
+    "runtime": "runtime",
     "lib": "lib",
     "test": "test"
   },
   "devDependencies": {
     "@rixo/eslint-config-svelte": "^0.8.0",
+    "chalk": "^4.0.0",
     "chokidar-cli": "^2.1.0",
     "del-cli": "^3.0.0",
     "memfs": "^3.0.3",
     "npm-run-all": "^4.1.5",
     "rewiremock": "^3.13.9",
+    "semantic-release": "^17.0.4",
     "svelte": "^3.16.0",
+    "testcafe": "^1.8.4",
     "zoar": "^0.0.3",
     "zorax": "^0.0.5"
   },
@@ -47,15 +56,17 @@
     "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
     "lint": "npm run eslint",
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
-    "test:e2e:rollup": "thc",
-    "test:e2e:nollup": "thc --nollup",
-    "test:e2e": "npm run --silent test:e2e:nollup",
+    "test": "npm run test:e2e:setup && npm run test:e2e:starter-template",
+    "test:e2e:watch": "node test/e2e test --live",
+    "test:e2e:starter-template": "node test/e2e test --app \"cd __buildDir__ && npm run dev\"",
+    "test:e2e:setup": "node test/e2e setup",
     "test:unit": "zoar",
     "test:unit:purge": "del test/unit/build/*.expected.js",
     "test:unit:refresh": "npm run test:unit:purge && npm run --silent test:unit",
     "test:unit:watch": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit\"",
     "test:unit:watch:only": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit -- --only\"",
     "test:watch": "run-s test:unit test:unit:watch",
-    "test": "npm run --silent test:unit"
+    "test(srtest)": "npm run --silent test:unit",
+    "semantic-release": "semantic-release"
   }
 }

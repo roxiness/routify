@@ -11,8 +11,8 @@
     outParams: {},
   }
 
-  $: oldRoute = $route.prev || $route
-  $: [concestor, ancestor, oldAncestor] = getConcestor($route, oldRoute)
+  $: oldRoute = $route.last || $route
+  $: [concestor, ancestor, oldAncestor] = getConcestor($route.api, oldRoute.api)
   $: toAncestor = isAncestor(oldRoute, $route)
   $: toDescendant = isAncestor($route, oldRoute)
   $: toHigherIndex = ancestor && ancestor.meta.index > oldAncestor.meta.index
@@ -32,8 +32,12 @@
   $: normalizedConfig = { ...defaultConfig, ..._config }
   $: ({ transition, inParams, outParams } = normalizedConfig)
 
-  function isAncestor({ shortPath }, { shortPath: shortPath2 }) {
-    return shortPath !== shortPath2 && shortPath.startsWith(shortPath2)
+  function isAncestor(descendant, ancestor) {
+    if(descendant.parent === ancestor.parent) return false
+    const { shortPath } = descendant.parent
+    const { shortPath: shortPath2 } = ancestor.parent
+    
+    return ancestor.isIndex && shortPath !== shortPath2 && shortPath.startsWith(shortPath2)
   }
 
   function setAbsolute({ target }) {

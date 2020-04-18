@@ -1,19 +1,17 @@
-import config from '../tmp/config'
-const MATCH_PARAM = RegExp(/\:[^\/\()]+/g)
+const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
 export function handleScroll(element) {
+  if (navigator.userAgent.includes('jsdom')) return false
   scrollAncestorsToTop(element)
   handleHash()
 }
 
 export function handleHash() {
-  const { scroll } = config
-  const options = ['auto', 'smooth']
+  if (navigator.userAgent.includes('jsdom')) return false
   const { hash } = window.location
-  if (scroll && hash) {
-    const behavior = (options.includes(scroll) && scroll) || 'auto'
+  if (hash) {
     const el = document.querySelector(hash)
-    if (hash && el) el.scrollIntoView({ behavior })
+    if (hash && el) el.scrollIntoView()
   }
 }
 
@@ -23,7 +21,9 @@ export function scrollAncestorsToTop(element) {
     element.scrollTo &&
     element.dataset.routify !== 'scroll-lock'
   ) {
-    element.scrollTo(0, 0)
+    element.style['scroll-behavior'] = "auto"
+    element.scrollTo({ top: 0, behavior: 'auto' })
+    element.style['scroll-behavior'] = ""
     scrollAncestorsToTop(element.parentElement)
   }
 }
@@ -32,13 +32,16 @@ export const pathToRegex = (str, recursive) => {
   const suffix = recursive ? '' : '/?$' //fallbacks should match recursively
   str = str.replace(/\/_fallback?$/, '(/|$)')
   str = str.replace(/\/index$/, '(/index)?') //index files should be matched even if not present in url
-  str = '^' + str.replace(MATCH_PARAM, '([^/]+)') + suffix
+  str = str.replace(MATCH_PARAM, '([^/]+)') + suffix
   return str
 }
 
 export const pathToParams = string => {
-  const matches = string.match(MATCH_PARAM)
-  if (matches) return matches.map(str => str.substr(1, str.length - 2))
+  const params = []
+  let matches
+  while (matches = MATCH_PARAM.exec(string))
+    params.push(matches[1])
+  return params
 }
 
 export const pathToRank = ({ path }) => {
@@ -55,7 +58,7 @@ let warningSuppressed = false
 export function suppressWarnings() {
   if (warningSuppressed) return
   const consoleWarn = console.warn
-  console.warn = function(msg, ...msgs) {
+  console.warn = function (msg, ...msgs) {
     const ignores = [
       "was created with unknown prop 'scoped'",
       "was created with unknown prop 'scopedSync'",

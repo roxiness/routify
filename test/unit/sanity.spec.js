@@ -1,4 +1,4 @@
-import { test } from '@@'
+import { test } from '..'
 
 test('the test framework', t => {
   t.test('works', t => {

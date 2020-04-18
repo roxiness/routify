@@ -1,26 +1,72 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
-import { route } from './store'
+import { route, routes, location } from './store'
+import { pathToParams } from './utils'
+import config from '../runtime.config'
+import '../typedef'
 
-export const context = {
-  subscribe(listener) {
-    return getContext('routify').subscribe(listener)
-  },
+/** @ts-check */
+/** @returns {import('svelte/store').Readable<{component: ClientNode}>} */
+function getRoutifyContext() {
+  return getContext('routify')
 }
 
-export const ready = {
-  subscribe(listener) {
-    window.routify.stopAutoReady = true
-    return listener(async () => {
-      await tick()
-      meta.update()
-      window.routify.appLoaded = true
-      dispatchEvent(new CustomEvent('app-loaded'))
-    })
+
+/**
+ * @typedef {import('svelte/store').Readable<ClientNodeApi>} ClientNodeHelperStore
+ * @type { ClientNodeHelperStore } 
+ */
+export const page = {
+  subscribe(run) {
+    return derived(route, route => route.api).subscribe(run)
   }
 }
 
+/** @type {ClientNodeHelperStore} */
+export const layout = {
+  subscribe(run) {
+    const ctx = getRoutifyContext()
+    return derived(ctx, ctx => ctx.component.api).subscribe(run)
+  }
+}
 
+/**
+* @typedef {{component: ClientNode}}  ContextHelper
+* @typedef {import('svelte/store').Readable<ContextHelper>} ContextHelperStore
+* @type {ContextHelperStore}
+*/
+export const context = {
+  subscribe(run) {
+    return getRoutifyContext().subscribe(run)
+  }
+}
+
+/**
+ * @typedef {function():void} ReadyHelper
+ * @typedef {import('svelte/store').Readable<ReadyHelper>} ReadyHelperStore
+ * @type {ReadyHelperStore}
+*/
+export const ready = {
+  subscribe(run) {
+    window['routify'].stopAutoReady = true
+    async function ready() {
+      await tick()
+      metatags.update()
+      window['routify'].appLoaded = true
+      dispatchEvent(new CustomEvent('app-loaded'))
+    }
+    run(ready)
+    return () => { }
+  }
+}
+
+/** 
+ * @callback BeforeUrlChangeHelper
+ * @param {function} callback
+ *
+ * @typedef {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<function>}} BeforeUrlChangeHelperStore
+ * @type {BeforeUrlChangeHelperStore}
+ **/
 export const beforeUrlChange = {
   _hooks: [],
   subscribe(listener) {
@@ -31,130 +77,220 @@ export const beforeUrlChange = {
   }
 }
 
-
 /**
  * We have to grab params and leftover from the context and not directly from the store.
- * Otherwise the context is updated before the component is destroyed.
+ * Otherwise the context is updated before the component is destroyed. * 
+ * @typedef {Object.<string, *>} ParamsHelper
+ * @typedef {import('svelte/store').Readable<Params>} ParamsHelperStore
+ * @type {ParamsHelperStore}
  **/
 export const params = {
   subscribe(listener) {
     return derived(
-      getContext('routify'),
-      context => context.route.params
+      route,
+      route => route.params
     ).subscribe(listener)
   },
 }
 
+/**
+ * @typedef {string} LeftoverHelper
+ * @typedef {import('svelte/store').Readable<string>} LeftoverHelperStore
+ * @type {LeftoverHelperStore} 
+ **/
 export const leftover = {
   subscribe(listener) {
     return derived(
-      getContext('routify'),
-      context => context.route.leftover
+      route,
+      route => route.leftover
     ).subscribe(listener)
   },
 }
 
-/** HELPERS */
+
+
+
+/**
+ * @typedef {import('svelte/store').Readable<Meta>} MetaHelperStore 
+ * @type {MetaHelperStore}
+ * */
+export const meta = {
+  subscribe(listener) {
+    const ctx = getRoutifyContext()
+    return derived(ctx, ctx => ctx.component.meta).subscribe(listener)
+  },
+}
+
+/**
+ * @callback UrlHelper
+ * @param {String=} path
+ * @param {UrlParams=} params
+ * @param {UrlOptions=} options
+ * @return {String}
+ *
+ * @typedef {import('svelte/store').Readable<UrlHelper>} UrlHelperStore
+ * @type {UrlHelperStore} 
+ * */
 export const url = {
   subscribe(listener) {
-    return derived(getContext('routify'), context => context.url).subscribe(
-      listener
-    )
-  },
-}
-
-export const goto = {
-  subscribe(listener) {
-    return derived(getContext('routify'), context => context.goto).subscribe(
-      listener
-    )
-  },
-}
-
-export const isActive = {
-  subscribe(listener) {
+    const ctx = getRoutifyContext()
     return derived(
-      getContext('routify'),
-      context => context.isActive
-    ).subscribe(listener)
-  },
-}
-
-export function _isActive(url, route) {
-  return function (path, keepIndex = true) {
-    path = url(path, null, keepIndex)
-    const currentPath = url(route.path, null, keepIndex)
-    const re = new RegExp('^' + path)
-    return currentPath.match(re)
+      [ctx, route, routes, location],
+      args => makeUrlHelper(...args)
+    ).subscribe(
+      listener
+    )
   }
 }
 
-export function _goto(url) {
-  return function goto(path, params, _static, shallow) {
-    const href = url(path, params)
-    if (!_static) history.pushState({}, null, href)
-    else getContext('routifyupdatepage')(href, shallow)
-  }
-}
-
-export function _url(context, route, routes) {
-  return function url(path, params, preserveIndex) {
+/** 
+ * @param {{component: ClientNode}} $ctx 
+ * @param {RouteNode} $oldRoute 
+ * @param {RouteNode[]} $routes 
+ * @param {{base: string, path: string}} $location
+ * @returns {UrlHelper}
+ */
+export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
+  return function url(path, params, options = {}) {
+    const { component } = $ctx
     path = path || './'
 
-    if (!preserveIndex) path = path.replace(/index$/, '')
+    const strict = options && options.strict !== false
+    if (!strict) path = path.replace(/index$/, '')
 
     if (path.match(/^\.\.?\//)) {
       //RELATIVE PATH
-      // get component's dir
-      let dir = context.path
-      // traverse through parents if needed
-      const traverse = path.match(/\.\.\//g) || []
-      traverse.forEach(() => {
-        dir = dir.replace(/\/[^\/]+\/?$/, '')
-      })
+      let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
+      let dir = component.path
+      const traverse = breadcrumbs.match(/\.\.\//g) || []
+      traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
+      path = `${dir}/${relativePath}`.replace(/\/$/, '')
 
-      // strip leading periods and slashes
-      path = path.replace(/^[\.\/]+/, '')
-      dir = dir.replace(/\/$/, '') + '/'
-      path = dir + path
     } else if (path.match(/^\//)) {
       // ABSOLUTE PATH
     } else {
       // NAMED PATH
-      const matchingRoute = routes.find(route => route.meta.name === path)
+      const matchingRoute = $routes.find(route => route.meta.name === path)
       if (matchingRoute) path = matchingRoute.shortPath
     }
 
-    params = Object.assign({}, route.params, context.params, params)
-    for (const [key, value] of Object.entries(params)) {
-      path = path.replace(`:${key}`, value)
+    /** @type {Object<string, *>} Parameters */
+    const allParams = Object.assign({}, $oldRoute.params, component.params, params)
+    let pathWithParams = path
+    for (const [key, value] of Object.entries(allParams)) {
+      pathWithParams = pathWithParams.replace(`:${key}`, value)
     }
-    return path
+
+    const fullPath = $location.base + pathWithParams + _getQueryString(path, params)
+    return fullPath.replace(/\?$/, '')
   }
 }
 
-
-export function getConcestor(route1, route2) {
-  // The route is the last piece of layout
-  const layouts1 = [...route1.layouts, route1]
-  const layouts2 = [...route2.layouts, route2]
-
-  let concestor = false
-  let children = [layouts1[0], layouts2[0]]
-
-  // iterate through the layouts starting from the root
-  layouts1.forEach((layout1, i) => {
-    const layout2 = layouts2[i]
-    if (layout1 === layout2) {
-      concestor = layout1
-      // if this is a concestor, the next iteration would be children
-      children = [layouts1[i + 1], layouts2[i + 1]]
-    }
+/**
+ * 
+ * @param {string} path 
+ * @param {object} params 
+ */
+function _getQueryString(path, params) {
+  if (!config.queryHandler) return ""
+  const pathParamKeys = pathToParams(path)
+  const queryParams = {}
+  if (params) Object.entries(params).forEach(([key, value]) => {
+    if (!pathParamKeys.includes(key))
+      queryParams[key] = value
   })
-  return [concestor, ...children]
+  return config.queryHandler.stringify(queryParams)
 }
 
+/**
+* @callback GotoHelper
+* @param {String=} path
+* @param {UrlParams=} params
+* @param {GotoOptions=} options
+*
+* @typedef {import('svelte/store').Readable<GotoHelper>}  GotoHelperStore
+* @type {GotoHelperStore} 
+* */
+export const goto = {
+  subscribe(listener) {
+    return derived(url,
+      url => function goto(path, params, _static, shallow) {
+        const href = url(path, params)
+        if (!_static) history.pushState({}, null, href)
+        else getContext('routifyupdatepage')(href, shallow)
+      }
+    ).subscribe(
+      listener
+    )
+  },
+}
 
+/**
+ * @type {GotoHelperStore} 
+ * */
+export const redirect = {
+  subscribe(listener) {
+    return derived(url,
+      url => function redirect(path, params, _static, shallow) {
+        const href = url(path, params)
+        if (!_static) history.replaceState({}, null, href)
+        else getContext('routifyupdatepage')(href, shallow)
+      }
+    ).subscribe(
+      listener
+    )
+  },
+}
+
+/**
+ * @callback IsActiveHelper
+ * @param {String=} path
+ * @param {UrlParams=} params
+ * @param {UrlOptions=} options
+ * @returns {Boolean}
+ * 
+ * @typedef {import('svelte/store').Readable<IsActiveHelper>} IsActiveHelperStore
+ * @type {IsActiveHelperStore} 
+ * */
+export const isActive = {
+  subscribe(run) {
+    return derived(
+      [url, route],
+      ([url, route]) => function isActive(path = "", params = {}, { strict } = { strict: true }) {
+        path = url(path, null, { strict })
+        const currentPath = url(route.path, null, { strict })
+        const re = new RegExp('^' + path)
+        return !!currentPath.match(re)
+      }
+    ).subscribe(run)
+  },
+}
+
+/**
+ * @typedef {[ClientNodeApi, ClientNodeApi, ClientNodeApi]} ConcestorReturn
+ * @typedef {function(ClientNodeApi, ClientNodeApi):ConcestorReturn} GetConcestor
+ * @type {GetConcestor}
+ */
+export function getConcestor(nodeApi1, nodeApi2) {
+  const node1 = nodeApi1.__file
+  const node2 = nodeApi2.__file
+
+  // The route is the last piece of layout
+  const lineage1 = [...node1.lineage, node1]
+  const lineage2 = [...node2.lineage, node2]
+
+  let concestor = lineage1[0] //root
+  let children = [lineage1[0].api, lineage2[0].api]
+  // iterate through the layouts starting from the root
+  lineage1.forEach((n1, i) => {
+    const n2 = lineage2[i]
+    if (n2 && n1.parent === n2.parent) {
+      concestor = n1.parent
+      children = [n1.api, n2.api]
+    }
+  })
+  return [concestor.api, children[0], children[1]]
+}
 
 /**
  * Get index difference between two paths
@@ -171,30 +307,24 @@ export function getDirection(paths, newPath, oldPath) {
   return newIndex - oldIndex
 }
 
-
+/**
+ * Sets element to active
+ * @typedef {function(HTMLElement):void} FocusHelper
+ * @type {FocusHelper}
+ */
 export function focus(element) {
-  focus.elements = focus.elements || []
-  // Tell the first element to wait for all synchronous elements before calling waitAndFocus
-  if (!focus.elements.length)
-    setTimeout(waitAndFocus)
-  focus.elements.push(element)
+  if (!focusIsSet) {
+    focusIsSet = true
+    element.setAttribute('tabindex', "0")
+    element.focus()
+    setTimeout(() => (focusIsSet = false))
+  }
 }
-
-function waitAndFocus() {
-  const elementsByProximityToRoot = focus.elements.sort((a, b) => getAncestors(a) - getAncestors(b))
-  const element = elementsByProximityToRoot[0]
-
-  element.setAttribute('tabindex', 0)
-  element.focus()
-  focus.elements = []
-}
-
-function getAncestors(elem) {
-  return document.evaluate('ancestor::*', elem, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null).snapshotLength
-}
+let focusIsSet = false
 
 
-const _meta = {
+
+const _metatags = {
   props: {},
   templates: {},
   services: {
@@ -207,7 +337,7 @@ const _meta = {
       name: 'applyTemplate',
       condition: () => true,
       action: (prop, value) => {
-        const template = _meta.getLongest(_meta.templates, prop) || (x => x)
+        const template = _metatags.getLongest(_metatags.templates, prop) || (x => x)
         return [prop, template(value)]
       }
     },
@@ -215,14 +345,14 @@ const _meta = {
       name: 'createMeta',
       condition: () => true,
       action(prop, value) {
-        _meta.writeMeta(prop, value)
+        _metatags.writeMeta(prop, value)
       }
     },
     {
       name: 'createOG',
       condition: prop => !prop.match(':'),
       action(prop, value) {
-        _meta.writeMeta(`og:${prop}`, value)
+        _metatags.writeMeta(`og:${prop}`, value)
       }
     },
     {
@@ -249,7 +379,7 @@ const _meta = {
     const head = document.getElementsByTagName('head')[0]
     const match = prop.match(/(.+)\:/)
     const serviceName = match && match[1] || 'plain'
-    const { propField, valueField } = meta.services[serviceName] || meta.services.plain
+    const { propField, valueField } = metatags.services[serviceName] || metatags.services.plain
     const oldElement = document.querySelector(`meta[${propField}='${prop}']`)
     if (oldElement) oldElement.remove()
 
@@ -260,7 +390,7 @@ const _meta = {
     head.appendChild(newElement)
   },
   set(prop, value) {
-    _meta.plugins.forEach(plugin => {
+    _metatags.plugins.forEach(plugin => {
       if (plugin.condition(prop, value))
         [prop, value] = plugin.action(prop, value) || [prop, value]
     })
@@ -270,14 +400,14 @@ const _meta = {
     if (oldElement) oldElement.remove()
   },
   template(name, fn) {
-    const origin = _meta.getOrigin()
-    _meta.templates[name] = _meta.templates[name] || {}
-    _meta.templates[name][origin] = fn
+    const origin = _metatags.getOrigin()
+    _metatags.templates[name] = _metatags.templates[name] || {}
+    _metatags.templates[name][origin] = fn
   },
   update() {
-    Object.keys(_meta.props).forEach((prop) => {
-      let value = (_meta.getLongest(_meta.props, prop))
-      _meta.plugins.forEach(plugin => {
+    Object.keys(_metatags.props).forEach((prop) => {
+      let value = (_metatags.getLongest(_metatags.props, prop))
+      _metatags.plugins.forEach(plugin => {
         if (plugin.condition(prop, value)) {
           [prop, value] = plugin.action(prop, value) || [prop, value]
 
@@ -286,23 +416,28 @@ const _meta = {
     })
   },
   batchedUpdate() {
-    if (!_meta._pendingUpdate) {
-      _meta._pendingUpdate = true
+    if (!_metatags._pendingUpdate) {
+      _metatags._pendingUpdate = true
       setTimeout(() => {
-        _meta._pendingUpdate = false
+        _metatags._pendingUpdate = false
         this.update()
       })
     }
   },
   _updateQueued: false,
   getOrigin() {
-    const routifyCtx = getContext('routify')
+    const routifyCtx = getRoutifyContext()
     return routifyCtx && get(routifyCtx).path || '/'
   },
   _pendingUpdate: false
 }
 
-export const meta = new Proxy(_meta, {
+
+/**
+ * metatags
+ * @prop {Object.<string, string>}
+ */
+export const metatags = new Proxy(_metatags, {
   set(target, name, value, receiver) {
     const { props, getOrigin } = target
 
@@ -312,7 +447,7 @@ export const meta = new Proxy(_meta, {
       props[name] = props[name] || {}
       props[name][getOrigin()] = value
     }
-    
+
     if (window.routify.appLoaded)
       target.batchedUpdate()
     return true
