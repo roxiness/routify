@@ -11,6 +11,7 @@ declare module '@sveltech/routify' {
     export const ready: import('./runtime/helpers.js').ReadyHelperStore
     export const focus: import('./runtime/helpers.js').FocusHelper
     export const getConcestor: import('./runtime/helpers.js').GetConcestor
+    export const basepath: import('./runtime/store').Basepath
 
     global {
         export const $params:import('./runtime/helpers.js').ParamsHelper
@@ -20,6 +21,7 @@ declare module '@sveltech/routify' {
         export const $goto: import('./runtime/helpers.js').GotoHelper
         export const $beforeUrlChange: import('./runtime/helpers.js').BeforeUrlChangeHelper
         export const $ready: import('./runtime/helpers.js').ReadyHelper
+        export let $basepath: String
     }
 }
 
