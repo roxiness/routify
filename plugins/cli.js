@@ -56,7 +56,7 @@ program
         }
 
         if (!example) {
-          fs.remove('./src/pages/examples')
+          fs.remove('./src/pages/example')
           fs.remove('./src/pages/index.svelte')
         }
         if (startDev) execSync('npm run dev', { stdio })
