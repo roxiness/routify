@@ -12,8 +12,12 @@ declare module '@sveltech/routify' {
     export const focus: import('./runtime/helpers.js').FocusHelper
     export const getConcestor: import('./runtime/helpers.js').GetConcestor
     export const basepath: import('./runtime/store').Basepath
-
+    export const page: import('./runtime/helpers.js').ClientNodeHelperStore
+    export const layout: import('./runtime/helpers.js').ClientNodeHelperStore
+    
     global {
+        export const $page:ClientNodeApi
+        export const $layout:ClientNodeApi
         export const $params:import('./runtime/helpers.js').ParamsHelper
         export const $leftover:import('./runtime/helpers.js').LeftoverHelper
         export const $url: import('./runtime/helpers.js').UrlHelper
