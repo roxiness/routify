@@ -151,7 +151,7 @@ export const url = {
  * @returns {UrlHelper}
  */
 export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
-  return function url(path, params, options = {}) {
+  return function url(path, params, options) {
     const { component } = $ctx
     path = path || './'
 
