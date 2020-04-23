@@ -34,7 +34,9 @@
   const parentContext = getContext('routify')
   setContext('routify', context)
 
-  $: if (Decorator && !childOfDecorator) {
+  $: isDecorator = Decorator && !childOfDecorator
+
+  $: if (isDecorator) {
     const decoratorLayout = {
       component: () => Decorator,
       path: `${layouts[0].path}__decorator`,
@@ -56,7 +58,7 @@
     lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
     context.set({
-      layout: Decorator ? get(parentContext).component : layout,
+      layout: isDecorator ? get(parentContext).layout : layout,
       component: layout,
       componentFile
     })
