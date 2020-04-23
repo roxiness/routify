@@ -4,7 +4,7 @@
   /** @typedef {{component():*, path: string}} Decorator */
   /** @typedef {ClientNode | Decorator} LayoutOrDecorator */
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
-  import { writable } from 'svelte/store'
+  import { writable, get } from 'svelte/store'
   import { metatags } from './helpers.js'
   import { route, routes } from './store'
   import { handleScroll } from './utils'
@@ -31,6 +31,7 @@
   let remainingLayouts = []
 
   const context = writable({})
+  const parentContext = getContext('routify')
   setContext('routify', context)
 
   $: if (Decorator && !childOfDecorator) {
@@ -54,7 +55,11 @@
     scopedSync = { ...scoped }
     lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
-    context.set({ component: layout, componentFile })
+    context.set({
+      layout: Decorator ? get(parentContext).component : layout,
+      component: layout,
+      componentFile
+    })
   }
 
   function setComponent(layout) {

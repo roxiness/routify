@@ -6,7 +6,13 @@ import config from '../runtime.config'
 import '../typedef'
 
 /** @ts-check */
-/** @returns {import('svelte/store').Readable<{component: ClientNode}>} */
+/**
+ * @typedef {Object} RoutifyContext
+ * @prop {ClientNode} component
+ * @prop {ClientNode} layout
+ * @prop {any} componentFile 
+ * 
+ *  @returns {import('svelte/store').Readable<RoutifyContext>} */
 function getRoutifyContext() {
   return getContext('routify')
 }
@@ -26,7 +32,7 @@ export const page = {
 export const layout = {
   subscribe(run) {
     const ctx = getRoutifyContext()
-    return derived(ctx, ctx => ctx.component.api).subscribe(run)
+    return derived(ctx, ctx => ctx.layout.api).subscribe(run)
   }
 }
 
@@ -259,7 +265,7 @@ export const isActive = {
       ([url, route]) => function isActive(path = "", params = {}, { strict } = { strict: true }) {
         path = url(path, null, { strict })
         const currentPath = url(route.path, null, { strict })
-        const re = new RegExp('^' + path+'($|/)')
+        const re = new RegExp('^' + path + '($|/)')
         return !!currentPath.match(re)
       }
     ).subscribe(run)
