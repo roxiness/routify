@@ -25,6 +25,7 @@
     toHigherIndex,
     toLowerIndex,
     routes: [$route, oldRoute],
+    pages: [$route.api, oldRoute.api],
     ancestors: [ancestor, oldAncestor],
   }
 
