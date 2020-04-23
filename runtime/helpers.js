@@ -259,7 +259,7 @@ export const isActive = {
       ([url, route]) => function isActive(path = "", params = {}, { strict } = { strict: true }) {
         path = url(path, null, { strict })
         const currentPath = url(route.path, null, { strict })
-        const re = new RegExp('^' + path)
+        const re = new RegExp('^' + path+'($|/)')
         return !!currentPath.match(re)
       }
     ).subscribe(run)
