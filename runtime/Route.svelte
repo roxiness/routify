@@ -17,6 +17,7 @@
 
   let scopedSync = {}
   let layoutIsUpdated = false
+  let isDecorator = false
 
   /** @type {HTMLElement} */
   let parentElement
