@@ -42,9 +42,9 @@
   }
 
   function setAbsolute({ target }) {
-    target.style.transform = 'translate(-50%, -50%)'
     target.style.width = `${target.clientWidth}px`
-    target.style.height = `${target.clientheight}px`
+    target.style.height = `${target.clientHeight}px`
+    target.style.transform = 'translate(-50%, -50%)'
     target.style.position = 'absolute'
 
   }
