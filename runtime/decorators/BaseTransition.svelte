@@ -42,7 +42,17 @@
   }
 
   function setAbsolute({ target }) {
+    target.style.transform = 'translate(-50%, -50%)'
+    target.style.width = `${target.clientWidth}px`
+    target.style.height = `${target.clientheight}px`
     target.style.position = 'absolute'
+
+  }
+  function removeAbsolute({ target }) {
+    target.style.position = ''
+    target.style.width = ''
+    target.style.height = ''
+    target.style.transform = ''
   }
 </script>
 
@@ -57,6 +67,9 @@
   class="transition"
   in:transition|local={inParams}
   out:transition|local={outParams}
-  on:outrostart={setAbsolute}>
+  on:introstart={removeAbsolute}
+  on:outrostart={setAbsolute}
+  >
   <slot />
 </div>
+
