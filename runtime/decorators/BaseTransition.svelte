@@ -42,11 +42,14 @@
   }
 
   function setAbsolute({ target }) {
-    target.style.width = `${target.clientWidth}px`
-    target.style.height = `${target.clientHeight}px`
+    const rect = target.getBoundingClientRect()
+    target.style.width = `${rect.width}px`
+    target.style.height = `${rect.height}px`
+    target.style.top = `${rect.top}px`
+    target.style.left = `${rect.left}px`
+    
     target.style.transform = 'translate(-50%, -50%)'
-    target.style.position = 'absolute'
-
+    target.style.position = 'fixed'
   }
   function removeAbsolute({ target }) {
     target.style.position = ''
