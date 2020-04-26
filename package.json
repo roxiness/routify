@@ -55,6 +55,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "prepublish": "npm run build",
     "eslint": "eslint lib plugins runtime",
     "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
     "lint": "npm run eslint",
