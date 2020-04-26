@@ -3,7 +3,7 @@ import { derived, get } from 'svelte/store'
 import { route, routes, location } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
-import '../typedef'
+/// <reference path="../typedef.js" />
 
 /** @ts-check */
 /**
