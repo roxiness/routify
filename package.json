@@ -18,6 +18,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@types/node": ">=4.2.0 < 13",
     "@sveltech/ssr": "^0.0.9",
     "cheap-watch": "^1.0.2",
     "commander": "^5.0.0",
@@ -48,10 +49,12 @@
     "semantic-release": "^17.0.4",
     "svelte": "^3.16.0",
     "testcafe": "^1.8.4",
+    "typescript": "^3.8.3",
     "zoar": "^0.0.3",
     "zorax": "^0.0.5"
   },
   "scripts": {
+    "build": "tsc",
     "eslint": "eslint lib plugins runtime",
     "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
     "lint": "npm run eslint",

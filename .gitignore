@@ -7,3 +7,4 @@ tmp/**
 !tmp/config.js
 *.bak
 *.orig
+types

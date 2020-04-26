@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "emitDeclarationOnly": true
+  },
+  "include": ["runtime/**/*.js", "lib/**/*.js"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
