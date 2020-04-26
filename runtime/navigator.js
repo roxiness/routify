@@ -114,9 +114,6 @@ async function runHooksBeforeUrlChange(event) {
 }
 
 function urlToRoute(url, routes) {
-  const mockUrl = new URL(location).searchParams.get('__mock-url')
-  url = mockUrl || url
-
   const basepath = get(stores.basepath)
   const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
   if (!route)

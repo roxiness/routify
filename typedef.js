@@ -76,12 +76,12 @@
 
 /**
  * @typedef {Object} Meta
- * @prop {true=} preload Bundle with main app
+ * @prop {Boolean=} preload Bundle with main app
  * @prop {*=} precache-order
  * @prop {*=} precache-proximity
- * @prop {true=} recursive
- * @prop {true=} bundle Bundle folder recursively in a single .js file
- * @prop {String|Number=} index Position among siblings
+ * @prop {Boolean=} recursive
+ * @prop {Boolean=} bundle Bundle folder recursively in a single .js file
+ * @prop {String|Number|false=} index Position among siblings
  * @prop {String=} name Custom identifier
  * @prop {String=} title Title of the page
  * @prop {MetaChild[]} [children]
@@ -96,6 +96,7 @@
 /**
  * Tree Payload
  * @typedef {Object} TreePayload
+ * @prop {RouteNode[]} routes
  * @prop {RouteNode} tree
  * @prop {BuildConfig} options
  * @prop {Object} metaParser

@@ -87,7 +87,7 @@ export const beforeUrlChange = {
  * We have to grab params and leftover from the context and not directly from the store.
  * Otherwise the context is updated before the component is destroyed. * 
  * @typedef {Object.<string, *>} ParamsHelper
- * @typedef {import('svelte/store').Readable<Params>} ParamsHelperStore
+ * @typedef {import('svelte/store').Readable<ParamsHelper>} ParamsHelperStore
  * @type {ParamsHelperStore}
  **/
 export const params = {
@@ -454,7 +454,7 @@ export const metatags = new Proxy(_metatags, {
       props[name][getOrigin()] = value
     }
 
-    if (window.routify.appLoaded)
+    if (window['routify'].appLoaded)
       target.batchedUpdate()
     return true
   }
