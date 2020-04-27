@@ -1,20 +1,20 @@
 /// <reference path="./typedef.js" />
 
 declare module '@sveltech/routify' {  
-    export * from '@sveltech/routify/runtime/helpers'
-    export * from '@sveltech/routify/runtime/store'
+    export * from '@sveltech/routify/typings/runtime/helpers'
+    export * from '@sveltech/routify/typings/runtime/store'
     export const Router: import('svelte/internal').SvelteComponent
     
     global {
         export const $page:ClientNodeApi
         export const $layout:ClientNodeApi
-        export const $params:import('./runtime/helpers').ParamsHelper
-        export const $leftover:import('./runtime/helpers').LeftoverHelper
-        export const $url: import('./runtime/helpers').UrlHelper
-        export const $isActive: import('./runtime/helpers').IsActiveHelper
-        export const $goto: import('./runtime/helpers').GotoHelper
-        export const $beforeUrlChange: import('./runtime/helpers').BeforeUrlChangeHelper
-        export const $ready: import('./runtime/helpers').ReadyHelper
+        export const $params:import('./typings/runtime/helpers').ParamsHelper
+        export const $leftover:import('./typings/runtime/helpers').LeftoverHelper
+        export const $url: import('./typings/runtime/helpers').UrlHelper
+        export const $isActive: import('./typings/runtime/helpers').IsActiveHelper
+        export const $goto: import('./typings/runtime/helpers').GotoHelper
+        export const $beforeUrlChange: import('./typings/runtime/helpers').BeforeUrlChangeHelper
+        export const $ready: import('./typings/runtime/helpers').ReadyHelper
         export let $basepath: String
     }
 }
