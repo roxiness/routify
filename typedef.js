@@ -1,5 +1,6 @@
 /**
- * @typedef {import("svelte/store").Readable<{component: RouteNode}>} ContextStore
+//  * @typedef {import("svelte/store").Readable<{component: RouteNode}>} ContextStore
+ * @typedef {import("svelte").SvelteComponent} SvelteComponent
  */
 
 /**
@@ -22,7 +23,7 @@
  * @prop {Boolean} isNonIndexable
  * @prop {String[]} paramKeys
  * @prop {String} regex
- * @prop {function():{}} component
+ * @prop {function():SvelteComponent|Promise<SvelteComponent>} component
  * @prop {ClientNode} last
  * @prop {ClientNodeApi} api
  */

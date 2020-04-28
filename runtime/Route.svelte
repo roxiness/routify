@@ -2,10 +2,18 @@
   // @ts-check
   /** @typedef {{component():*, path: string}} Decorator */
   /** @typedef {ClientNode | Decorator} LayoutOrDecorator */
+  /**
+   * @typedef {Object} Context
+   * @prop {ClientNode} layout
+   * @prop {ClientNode} component
+   * @prop {LayoutOrDecorator} child
+   * @prop {SvelteComponent} ComponentFile
+   * */
+
   import '../typedef.js'
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
-  import { metatags } from './helpers.js'
+  import { metatags, afterPageLoad } from './helpers.js'
   import { route, routes } from './store'
   import { handleScroll } from './utils'
 
@@ -31,11 +39,14 @@
   /** @type {LayoutOrDecorator[]} */
   let remainingLayouts = []
 
-  const context = writable({})
-  const parentContext = getContext('routify')
-  setContext('routify', context)
+  const context = writable(null)
 
-  $: isDecorator = Decorator && !childOfDecorator
+  /** @type {import("svelte/store").Writable<Context>} */
+  const parentContextStore = getContext('routify')
+
+
+  isDecorator = Decorator && !childOfDecorator
+  setContext('routify', context)
 
   $: if (isDecorator) {
     const decoratorLayout = {
@@ -54,41 +65,55 @@
     parentElement = el.parentElement
   }
 
+  /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
+    /** @type {Context} */
+    const parentContext = get(parentContextStore)
+
     scopedSync = { ...scoped }
     lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
     context.set({
-      layout: isDecorator ? get(parentContext).layout : layout,
+      layout: isDecorator ? parentContext.layout : layout,
       component: layout,
-      componentFile
+      componentFile,
+      child:  isDecorator ? parentContext.child : get(context) && get(context).child,
     })
+
+    if (parentContext && !isDecorator)
+      parentContextStore.update(store => {
+        store.child = layout || store.child
+        return store
+      })
   }
 
+  /**  @param {LayoutOrDecorator} layout */
   function setComponent(layout) {
-    const PendingComponent = layout.component()
-    if (PendingComponent.then) PendingComponent.then(onComponentLoaded)
+    let PendingComponent = layout.component()
+    if (PendingComponent instanceof Promise)
+      PendingComponent.then(onComponentLoaded)
     else onComponentLoaded(PendingComponent)
   }
   $: setComponent(layout)
 
   async function onLastComponentLoaded() {
+    afterPageLoad._hooks.forEach(hook => hook(layout.api))    
     await tick()
     handleScroll(parentElement)
     metatags.update()
-    if (!window.routify.appLoaded) onAppLoaded()
+    if (!window['routify'].appLoaded) onAppLoaded()
   }
 
   async function onAppLoaded() {
-    // Let every know the last child has rendered
-    if (!window.routify.stopAutoReady) {
+    // Let everyone know the last child has rendered
+    if (!window['routify'].stopAutoReady) {
       dispatchEvent(new CustomEvent('app-loaded'))
-      window.routify.appLoaded = true
+      window['routify'].appLoaded = true
     }
   }
 </script>
 
-{#if $context.componentFile}
+{#if $context}
   {#if $context.component.isLayout === false}
     {#each [$context] as { component, componentFile } (component.path)}
       <svelte:component

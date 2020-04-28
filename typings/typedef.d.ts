@@ -1,8 +1,7 @@
-type ContextStore = import("svelte/store").Readable<{
-    component: {
-        [x: string]: any;
-    } & MiscFile & GeneratedFile & DefinedFile;
-}>;
+/**
+ * //  * @typedef {import("svelte/store").Readable<{component: RouteNode}>} ContextStore
+ */
+type SvelteComponent = import("svelte").SvelteComponent;
 /**
  * ClientNode
  */
@@ -38,7 +37,7 @@ type ClientNodeSpecifics = {
     isNonIndexable: boolean;
     paramKeys: string[];
     regex: string;
-    component: () => {};
+    component: () => import("svelte").SvelteComponent | Promise<import("svelte").SvelteComponent>;
     last: {
         [x: string]: any;
     } & DefinedFile & ClientNodeSpecifics;

@@ -66,6 +66,18 @@ export const ready = {
   }
 }
 
+/**
+ * @callback AfterPageLoadHelper
+ * @param {function} callback
+ * 
+ * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<function>}} AfterPageLoadHelperStore
+ * @type {AfterPageLoadHelperStore}
+ */
+export const afterPageLoad = {
+  _hooks: [],
+  subscribe: hookHandler
+}
+
 /** 
  * @callback BeforeUrlChangeHelper
  * @param {function} callback
@@ -75,12 +87,14 @@ export const ready = {
  **/
 export const beforeUrlChange = {
   _hooks: [],
-  subscribe(listener) {
-    const hooks = this._hooks
-    const index = hooks.length
-    listener(callback => { hooks[index] = callback })
-    return () => delete hooks[index]
-  }
+  subscribe: hookHandler
+}
+
+function hookHandler(listener) {
+  const hooks = this._hooks
+  const index = hooks.length
+  listener(callback => { hooks[index] = callback })
+  return () => delete hooks[index]
 }
 
 /**

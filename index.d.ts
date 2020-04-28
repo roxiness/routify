@@ -4,6 +4,7 @@ declare module '@sveltech/routify' {
     export * from '@sveltech/routify/typings/runtime/helpers'
     export * from '@sveltech/routify/typings/runtime/store'
     export const Router: import('svelte/internal').SvelteComponent
+    export const routify: typeof import('@sveltech/routify/plugins/rollup')
     
     global {
         export const $page:ClientNodeApi

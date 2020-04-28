@@ -1,2 +1,3 @@
-declare function _exports(payload: any): void;
-export = _exports;
+export = template;
+/** @param {TreePayload} payload */
+declare function template(payload: TreePayload): void;

@@ -59,6 +59,14 @@ export const context: ContextHelperStore;
 */
 export const ready: ReadyHelperStore;
 /**
+ * @callback AfterPageLoadHelper
+ * @param {function} callback
+ *
+ * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<function>}} AfterPageLoadHelperStore
+ * @type {AfterPageLoadHelperStore}
+ */
+export const afterPageLoad: AfterPageLoadHelperStore;
+/**
  * @callback BeforeUrlChangeHelper
  * @param {function} callback
  *
@@ -154,6 +162,10 @@ export type ContextHelperStore = import("svelte/store").Readable<{
 }>;
 export type ReadyHelper = () => void;
 export type ReadyHelperStore = import("svelte/store").Readable<() => void>;
+export type AfterPageLoadHelper = (callback: Function) => any;
+export type AfterPageLoadHelperStore = import("svelte/store").Readable<AfterPageLoadHelper> & {
+    _hooks: Function[];
+};
 export type BeforeUrlChangeHelper = (callback: Function) => any;
 export type BeforeUrlChangeHelperStore = import("svelte/store").Readable<BeforeUrlChangeHelper> & {
     _hooks: Function[];
