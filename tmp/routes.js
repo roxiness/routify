@@ -1,1 +1,1 @@
-export * from '../runtime/defautlTmp/routes'
+export * from "../runtime/defaultTmp/routes"
