@@ -1,8 +1,8 @@
 <script>
   // @ts-check
-  /** @typedef {import('../typedef').ClientNode} ClientNode */
   /** @typedef {{component():*, path: string}} Decorator */
   /** @typedef {ClientNode | Decorator} LayoutOrDecorator */
+  import '../typedef.js'
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
   import { metatags } from './helpers.js'
