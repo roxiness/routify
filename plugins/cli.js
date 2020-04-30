@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+//disable annoying warning
+process.env.SUPPRESS_NO_CONFIG_WARNING = true
+
 const program = require('commander')
 const defaults = require('../config.defaults.json')
 const stdio = 'inherit'
