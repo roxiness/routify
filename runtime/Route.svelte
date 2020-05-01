@@ -77,7 +77,9 @@
       layout: isDecorator ? parentContext.layout : layout,
       component: layout,
       componentFile,
-      child:  isDecorator ? parentContext.child : get(context) && get(context).child,
+      child: isDecorator
+        ? parentContext.child
+        : get(context) && get(context).child,
     })
 
     if (parentContext && !isDecorator)
@@ -107,8 +109,11 @@
   async function onAppLoaded() {
     // Let everyone know the last child has rendered
     if (!window['routify'].stopAutoReady) {
-      dispatchEvent(new CustomEvent('app-loaded'))
-      window['routify'].appLoaded = true
+      // let sync calls finish
+      setTimeout(() => {
+        dispatchEvent(new CustomEvent('app-loaded'))
+        window['routify'].appLoaded = true
+      })
     }
   }
 </script>
