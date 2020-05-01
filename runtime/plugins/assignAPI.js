@@ -17,7 +17,9 @@ class ClientApi {
     get children() {
         return (this.__file.children || this.__file.isLayout && this.__file.parent.children || [])
             .filter(c => !c.isNonIndexable)
-            .sort((a, b) => a.meta.index - b.meta.index)
+            .sort((a, b) => (a.meta.index || a.meta.title || a.path)
+                .toString()
+                .localeCompare(b.meta.index, undefined, { numeric: true, sensitivity: 'base' }))
             .map(({ api }) => api)
     }
     get next() { return _navigate(this, +1) }
