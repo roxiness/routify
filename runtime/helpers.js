@@ -319,7 +319,7 @@ export function getConcestor(nodeApi1, nodeApi2) {
  * @param {array} paths
  * @param {object} newPath
  * @param {object} oldPath
- * @returns In
+ * @returns {number}
  */
 export function getDirection(paths, newPath, oldPath) {
   const newIndex = paths.findIndex(path => newPath.path.startsWith(path))
