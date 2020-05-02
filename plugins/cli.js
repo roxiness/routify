@@ -21,6 +21,7 @@ program
   .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
   .option('-e, --extensions <names>', "Included file extensions (comma separated)", defaults.extensions)
   .option('-c, --child-process <command>', "Run npm task when Routify is ready", defaults.childProcess)
+  .option('-r, --routify-dir <dir>', "Output folder for routify temp files", defaults.routifyDir)
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
   .action(program => {
     // Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
