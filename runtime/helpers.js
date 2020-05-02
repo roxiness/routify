@@ -181,7 +181,7 @@ export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
     if (path.match(/^\.\.?\//)) {
       //RELATIVE PATH
       let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
-      let dir = component.path
+      let dir = component.path.replace(/\/$/, '')
       const traverse = breadcrumbs.match(/\.\.\//g) || []
       traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
       path = `${dir}/${relativePath}`.replace(/\/$/, '')
