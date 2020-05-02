@@ -17,9 +17,10 @@
 
 ## Install
 
-``npm i @sveltech/routify`` or clone the [starter template](https://github.com/sveltech/routify-starter)
-
-For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
+* Install the Router only: `npm install --save-dev @sveltech/routify`
+* Clone the [starter template](https://github.com/sveltech/routify-starter):
+    * `npx @sveltech/routify init`
+    * The starter template contains a lot more than just the router, for more info see [here](https://routify.dev/guide/starter-Template).
 
 ## Documentation
 
@@ -47,3 +48,7 @@ Please feel free to open an issue or a pull request. All feedback is welcome.
 
 Want help? Have ideas about Routify? Chat with us on Discord. 
 https://discord.gg/ntKJD5B
+
+## Older versions
+
+For the old version (svelte-filerouter), please go [here](https://github.com/sveltech/routify/tree/v1)
