@@ -1,4 +1,4 @@
-<div style="text-align: center;">
+<div align="center">
     <img src="routify.png" alt="routify" width="512" /><br>
     <img src="https://badgen.net/npm/v/@sveltech/routify" alt="Badge" />
 </div>
