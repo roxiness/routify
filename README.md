@@ -1,19 +1,15 @@
 <div style="text-align: center;">
-    <img src="routify.png" alt="routify" width="512" />
+    <img src="routify.png" alt="routify" width="512" /><br>
+    <img src="https://badgen.net/npm/v/@sveltech/routify" alt="Badge" />
 </div>
 
-<img src="https://badgen.net/npm/v/@sveltech/routify" alt="Badge" />
-
 ----
-
 
 <p> 
   <strong>Warning: Routify is a work in progress. Since v1.5 we have a stable release. But this is a relatively young project. You can expect it to change and evolve.</strong>
 </p>
 
-
 ----
-
 
 ## Install
 
