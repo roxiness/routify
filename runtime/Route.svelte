@@ -107,13 +107,14 @@
   }
 
   async function onAppLoaded() {
+    const pagePath = $context.component.path
+    const routePath = $route.path
+    const isOnCurrentRoute = pagePath === routePath //maybe we're getting redirected
+
     // Let everyone know the last child has rendered
-    if (!window['routify'].stopAutoReady) {
-      // let sync calls finish
-      setTimeout(() => {
-        dispatchEvent(new CustomEvent('app-loaded'))
-        window['routify'].appLoaded = true
-      })
+    if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
+      dispatchEvent(new CustomEvent('app-loaded'))
+      window['routify'].appLoaded = true
     }
   }
 </script>
