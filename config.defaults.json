@@ -6,6 +6,8 @@
   "dynamicImports": false,
   "singleBuild": false,
   "noHashScroll": false,
+  "hashScroll": true,
   "extensions": "html,svelte,md",
-  "distDir": "dist"
+  "distDir": "dist",
+  "configFile": "routify.config.js"
 }

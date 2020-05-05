@@ -23,6 +23,7 @@ program
   .option('-c, --child-process <command>', "Run npm task when Routify is ready", defaults.childProcess)
   .option('-r, --routify-dir <dir>', "Output folder for routify temp files", defaults.routifyDir)
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
+  .option('    --config-file <path>', "path to custom routify config", defaults.configFile)
   .action(program => {
     // Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
     require('fs').writeFileSync(__dirname + '/../tmp/routes.js', 'export * from "../runtime/defaultTmp/routes"', 'utf-8')
