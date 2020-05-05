@@ -29,7 +29,7 @@ Includes SSR, prerendering, code splitting and much more.
 
 ## Example
 
-[Starter example](https://example.routify.dev/example) Example from the starter template. Refresh a page to see how it is loaded.
+[Starter example](https://routify-starter.now.sh/example) Example from the starter template. Refresh a page to see how it is loaded.
 
 ## Tutorials
 
