@@ -18,17 +18,18 @@
     "access": "public"
   },
   "dependencies": {
-    "@types/node": ">=4.2.0 < 13",
     "@sveltech/ssr": "^0.0.9",
+    "@types/node": ">=4.2.0 < 13",
     "cheap-watch": "^1.0.2",
     "commander": "^5.0.0",
-    "config": "^3.2.5",
+    "dotenv": "^8.2.0",
     "fs-extra": "^9.0.0",
     "js-yaml": "^3.13.1",
     "log-symbols": "^3.0.0",
     "picomatch": "^2.2.1",
     "readdirp": "^3.3.0",
-    "rollup-pluginutils": "^2.8.2"
+    "rollup-pluginutils": "^2.8.2",
+    "yaml": "^1.9.2"
   },
   "bin": {
     "routify": "./plugins/cli.js"
