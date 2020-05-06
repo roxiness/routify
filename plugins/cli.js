@@ -71,7 +71,7 @@ program
   .option('   --dist-dir <path>', 'Dist folder', defaults.distDir)
   .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
   // todo implement default basepath - avoid extra iteration
-  .option('   --basepath <path>', 'Dist folder', defaults.basepath)
+  .option('   --basepath <path>', 'Comma separated basepaths to use for exports', defaults.basepath)
   .action(options => {
     const { exporter } = require('../lib/services/exporter')
     exporter(options.opts())
