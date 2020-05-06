@@ -68,7 +68,7 @@ program
 
 program
   .command('export')
-  .option('-o --output <path>', 'Dist folder', defaults.distDir)
+  .option('   --dist-dir <path>', 'Dist folder', defaults.distDir)
   .option('-r --routes <path>', 'Routify dir', defaults.routifyDir)
   // todo implement default basepath - avoid extra iteration
   .option('   --basepath <path>', 'Dist folder', defaults.basepath)
