@@ -14,7 +14,7 @@
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
-  import { route, routes } from './store'
+  import { route, routes, rootContext } from './store'
   import { handleScroll } from './utils'
 
   /** @type {LayoutOrDecorator[]} */
@@ -22,6 +22,7 @@
   export let scoped = {}
   export let Decorator = null
   export let childOfDecorator = false
+  export let isRoot = false
 
   let scopedSync = {}
   let layoutIsUpdated = false
@@ -73,14 +74,16 @@
     scopedSync = { ...scoped }
     lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
-    context.set({
+    const ctx = {
       layout: isDecorator ? parentContext.layout : layout,
       component: layout,
       componentFile,
       child: isDecorator
         ? parentContext.child
         : get(context) && get(context).child,
-    })
+    }
+    context.set(ctx)
+    if (isRoot) rootContext.set(ctx)
 
     if (parentContext && !isDecorator)
       parentContextStore.update(store => {
