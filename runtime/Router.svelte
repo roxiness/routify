@@ -61,5 +61,5 @@
 </script>
 
 {#if layouts && $route !== null}
-  <Route {layouts} />
+  <Route {layouts} isRoot={true} />
 {/if}

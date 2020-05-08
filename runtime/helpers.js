@@ -1,6 +1,6 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
-import { route, routes, location } from './store'
+import { route, routes, location, rootContext } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
 /// <reference path="../typedef.js" />
@@ -14,7 +14,7 @@ import config from '../runtime.config'
  * 
  *  @returns {import('svelte/store').Readable<RoutifyContext>} */
 function getRoutifyContext() {
-  return getContext('routify')
+  return getContext('routify') || rootContext
 }
 
 

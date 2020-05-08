@@ -5,6 +5,8 @@ import '../typedef'
 export const route = writable(null) // the actual route being rendered
 export const routes = writable([]) // all routes
 
+export let rootContext = writable({ component: { params: {} } })
+
 /** @type {import('svelte/store').Writable<RouteNode>} */
 export const urlRoute = writable(null)  // the route matching the url
 
