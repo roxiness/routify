@@ -3,7 +3,7 @@
   import Route from './Route.svelte'
   import { init } from './navigator.js'
   import { route, routes as routesStore } from './store.js'
-  import { suppressWarnings } from './utils.js'
+  import { suppressWarnings } from './utils'
   import defaultConfig from '../runtime.config'
 
   export let routes
