@@ -172,6 +172,7 @@ export const url = {
  */
 export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
   return function url(path, params, options) {
+    console.log($ctx)
     const { component } = $ctx
     path = path || './'
 
