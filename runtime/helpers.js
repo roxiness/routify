@@ -3,6 +3,7 @@ import { derived, get } from 'svelte/store'
 import { route, routes, location, rootContext } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
+import { urlToRoute } from './utils/urlToRoute'
 /// <reference path="../typedef.js" />
 
 /** @ts-check */
@@ -172,7 +173,6 @@ export const url = {
  */
 export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
   return function url(path, params, options) {
-    console.log($ctx)
     const { component } = $ctx
     path = path || './'
 
@@ -285,6 +285,24 @@ export const isActive = {
       }
     ).subscribe(run)
   },
+}
+
+/**
+ * @param {string|ClientNodeApi} path 
+ * @param {*} options 
+ */
+export function precache(path, options) {
+  const node = typeof path === 'string' ? urlToRoute(path) : path
+  node.component()
+}
+
+/**
+ * @param {string|ClientNodeApi} path 
+ * @param {*} options 
+ */
+export function prefetch(path, options) {
+  const node = typeof path === 'string' ? urlToRoute(path) : path
+  node.component()
 }
 
 /**
