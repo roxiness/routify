@@ -2,7 +2,12 @@ import { get } from 'svelte/store'
 import * as stores from '../store'
 import config from '../../runtime.config'
 
+/**
+ * @param {string} url 
+ * @return {ClientNode}
+ */
 export function urlToRoute(url) {
+    /** @type {RouteNode[]} */
     const routes = get(stores.routes)
     const basepath = get(stores.basepath)
     const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
@@ -36,7 +41,6 @@ export function urlToRoute(url) {
 
 
 /**
- *
  * @param {array} layouts
  */
 function layoutByPos(layouts) {
@@ -49,7 +53,6 @@ function layoutByPos(layouts) {
 
 
 /**
- *
  * @param {string} url
  */
 function getRouteProps(url) {
