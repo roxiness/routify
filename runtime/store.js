@@ -3,6 +3,8 @@ import '../typedef'
 
 /** @type {import('svelte/store').Writable<RouteNode>} */
 export const route = writable(null) // the actual route being rendered
+
+/** @type {import('svelte/store').Writable<RouteNode[]>} */
 export const routes = writable([]) // all routes
 
 export let rootContext = writable({ component: { params: {} } })
@@ -10,9 +12,7 @@ export let rootContext = writable({ component: { params: {} } })
 /** @type {import('svelte/store').Writable<RouteNode>} */
 export const urlRoute = writable(null)  // the route matching the url
 
-/** 
- * @typedef {import('svelte/store').Writable<String>} Basepath
- * @type {Basepath} */
+/** @type {import('svelte/store').Writable<String>} */
 export const basepath = (() => {
     const { set, subscribe } = writable("")
 
