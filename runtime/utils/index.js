@@ -69,3 +69,13 @@ export function suppressWarnings() {
   }
   warningSuppressed = true
 }
+
+
+export function currentLocation(){
+  const pathMatch = window.location.search.match(/__routify_path=([^&]+)/)
+  const prefetchMatch = window.location.search.match(/__routify_prefetch=?[^&]*/)
+  window.routify = window.routify || {}
+  window.routify.prefetched = prefetchMatch ? true : false
+  const path = pathMatch && pathMatch[1]
+  return path || window.location.pathname
+}

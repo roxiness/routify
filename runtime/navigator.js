@@ -2,6 +2,8 @@ import * as stores from './store'
 import { get } from 'svelte/store'
 import { beforeUrlChange } from './helpers'
 import { urlToRoute } from './utils/urlToRoute'
+import { currentLocation } from './utils'
+
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
@@ -9,11 +11,9 @@ export function init(routes, callback) {
   let lastRoute = false
 
   function updatePage(proxyToUrl, shallow) {
-    const currentUrl = window.location.pathname
-    const url = proxyToUrl || currentUrl
-
+    const url = proxyToUrl || currentLocation()
     const route = urlToRoute(url, routes)
-    const currentRoute = shallow && urlToRoute(currentUrl, routes)
+    const currentRoute = shallow && urlToRoute(currentLocation(), routes)
     const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
     if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?

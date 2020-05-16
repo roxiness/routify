@@ -1,9 +1,10 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
-import { route, routes, location, rootContext } from './store'
+import { route, routes, location, rootContext, prefetchPath } from './store'
 import { pathToParams } from './utils'
 import config from '../runtime.config'
 import { urlToRoute } from './utils/urlToRoute'
+import { prefetch as _prefetch } from './Prefetcher.svelte'
 /// <reference path="../typedef.js" />
 
 /** @ts-check */
@@ -61,6 +62,11 @@ export const ready = {
       metatags.update()
       window['routify'].appLoaded = true
       dispatchEvent(new CustomEvent('app-loaded'))
+      parent.postMessage({
+        msg: 'app-loaded',
+        prefetched: window.routify.prefetched,
+        path: get(route).path
+      }, "*")
     }
     run(ready)
     return () => { }
@@ -301,8 +307,7 @@ export function precache(path, options) {
  * @param {*} options 
  */
 export function prefetch(path, options) {
-  const node = typeof path === 'string' ? urlToRoute(path) : path
-  node.component()
+  _prefetch(path)
 }
 
 /**

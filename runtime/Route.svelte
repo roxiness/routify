@@ -102,7 +102,7 @@
   $: setComponent(layout)
 
   async function onLastComponentLoaded() {
-    afterPageLoad._hooks.forEach(hook => hook(layout.api))    
+    afterPageLoad._hooks.forEach(hook => hook(layout.api))
     await tick()
     handleScroll(parentElement)
     metatags.update()
@@ -117,6 +117,14 @@
     // Let everyone know the last child has rendered
     if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
       dispatchEvent(new CustomEvent('app-loaded'))
+      parent.postMessage(
+        {
+          msg: 'app-loaded',
+          prefetched: window.routify.prefetched,
+          path: pagePath
+        },
+        '*'
+      )
       window['routify'].appLoaded = true
     }
   }

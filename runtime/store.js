@@ -1,5 +1,6 @@
 import { writable, derived } from 'svelte/store'
 import '../typedef'
+import { currentLocation } from './utils'
 
 /** @type {import('svelte/store').Writable<RouteNode>} */
 export const route = writable(null) // the actual route being rendered
@@ -30,8 +31,9 @@ export const basepath = (() => {
 export const location = derived( // the part of the url matching the basepath
     [basepath, urlRoute],
     ([$basepath, $route]) => {
-        const url = window.location.pathname
-        const [, base, path] = url.match(`^(${$basepath})(${$route.regex})`) || []
+        const [, base, path] = currentLocation().match(`^(${$basepath})(${$route.regex})`) || []
         return { base, path }
     }
 )
+
+export const prefetchPath = writable("")

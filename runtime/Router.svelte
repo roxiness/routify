@@ -1,8 +1,9 @@
 <script>
   import { setContext, onDestroy } from 'svelte'
   import Route from './Route.svelte'
+  import Prefetcher from './Prefetcher.svelte'
   import { init } from './navigator.js'
-  import { route, routes as routesStore } from './store.js'
+  import { route, routes as routesStore, prefetchPath } from './store.js'
   import { suppressWarnings } from './utils'
   import defaultConfig from '../runtime.config'
 
@@ -63,3 +64,6 @@
 {#if layouts && $route !== null}
   <Route {layouts} isRoot={true} />
 {/if}
+
+
+<Prefetcher />
