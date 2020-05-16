@@ -5,6 +5,9 @@
   let actives = derived(queue, q => q.filter(q => q.isActive))
   let queued = derived(queue, q => q.filter(q => q.isQueued))
   export function prefetch(path) {
+    if (window.routify.prefetched || navigator.userAgent.match('jsdom'))
+      return false
+
     queue.update(q => {
       q.push({
         path,
