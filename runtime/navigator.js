@@ -1,7 +1,9 @@
 import * as stores from './store'
 import { get } from 'svelte/store'
 import { beforeUrlChange } from './helpers'
-import config from '../runtime.config'
+import { urlToRoute } from './utils/urlToRoute'
+import { currentLocation } from './utils'
+
 const { _hooks } = beforeUrlChange
 
 export function init(routes, callback) {
@@ -9,11 +11,9 @@ export function init(routes, callback) {
   let lastRoute = false
 
   function updatePage(proxyToUrl, shallow) {
-    const currentUrl = window.location.pathname
-    const url = proxyToUrl || currentUrl
-
+    const url = proxyToUrl || currentLocation()
     const route = urlToRoute(url, routes)
-    const currentRoute = shallow && urlToRoute(currentUrl, routes)
+    const currentRoute = shallow && urlToRoute(currentLocation(), routes)
     const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
     if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?
@@ -113,57 +113,3 @@ async function runHooksBeforeUrlChange(event) {
   return true
 }
 
-function urlToRoute(url, routes) {
-  const basepath = get(stores.basepath)
-  const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
-  if (!route)
-    throw new Error(
-      `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
-    )
-
-  const [, base, path] = url.match(`^(${get(stores.basepath)})(${route.regex})`)
-  if (config.queryHandler)
-    route.params = config.queryHandler.parse(window.location.search)
-
-  if (route.paramKeys) {
-    const layouts = layoutByPos(route.layouts)
-    const fragments = path.split('/').filter(Boolean)
-    const routeProps = getRouteProps(route.path)
-
-    routeProps.forEach((prop, i) => {
-      if (prop) {
-        route.params[prop] = fragments[i]
-        if (layouts[i]) layouts[i].param = { [prop]: fragments[i] }
-        else route.param = { [prop]: fragments[i] }
-      }
-    })
-  }
-
-  route.leftover = url.replace(new RegExp(base + route.regex), '')
-
-  return route
-}
-
-/**
- *
- * @param {array} layouts
- */
-function layoutByPos(layouts) {
-  const arr = []
-  layouts.forEach(layout => {
-    arr[layout.path.split('/').filter(Boolean).length - 1] = layout
-  })
-  return arr
-}
-
-/**
- *
- * @param {string} url
- */
-function getRouteProps(url) {
-  return url
-    .split('/')
-    .filter(Boolean)
-    .map(f => f.match(/\:(.+)/))
-    .map(f => f && f[1])
-}

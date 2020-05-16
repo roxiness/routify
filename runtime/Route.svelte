@@ -14,7 +14,7 @@
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
-  import { route, routes } from './store'
+  import { route, routes, rootContext } from './store'
   import { handleScroll } from './utils'
 
   /** @type {LayoutOrDecorator[]} */
@@ -22,6 +22,7 @@
   export let scoped = {}
   export let Decorator = null
   export let childOfDecorator = false
+  export let isRoot = false
 
   let scopedSync = {}
   let layoutIsUpdated = false
@@ -73,14 +74,16 @@
     scopedSync = { ...scoped }
     lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
-    context.set({
+    const ctx = {
       layout: isDecorator ? parentContext.layout : layout,
       component: layout,
       componentFile,
       child: isDecorator
         ? parentContext.child
         : get(context) && get(context).child,
-    })
+    }
+    context.set(ctx)
+    if (isRoot) rootContext.set(ctx)
 
     if (parentContext && !isDecorator)
       parentContextStore.update(store => {
@@ -99,7 +102,7 @@
   $: setComponent(layout)
 
   async function onLastComponentLoaded() {
-    afterPageLoad._hooks.forEach(hook => hook(layout.api))    
+    afterPageLoad._hooks.forEach(hook => hook(layout.api))
     await tick()
     handleScroll(parentElement)
     metatags.update()
@@ -114,6 +117,14 @@
     // Let everyone know the last child has rendered
     if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
       dispatchEvent(new CustomEvent('app-loaded'))
+      parent.postMessage(
+        {
+          msg: 'app-loaded',
+          prefetched: window.routify.prefetched,
+          path: pagePath
+        },
+        '*'
+      )
       window['routify'].appLoaded = true
     }
   }
