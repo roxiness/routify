@@ -19,7 +19,7 @@ class ClientApi {
             .filter(c => !c.isNonIndexable)
             .sort((a, b) => (a.meta.index || a.meta.title || a.path)
                 .toString()
-                .localeCompare(b.meta.index, undefined, { numeric: true, sensitivity: 'base' }))
+                .localeCompare(a.meta.index || a.meta.title || a.path, undefined, { numeric: true, sensitivity: 'base' }))
             .map(({ api }) => api)
     }
     get next() { return _navigate(this, +1) }
