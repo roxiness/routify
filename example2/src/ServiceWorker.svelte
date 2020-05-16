@@ -1,5 +1,4 @@
 <script>
-console.log('ffs')
   let prompt = false
   let justInstalled = false
 
