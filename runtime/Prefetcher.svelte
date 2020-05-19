@@ -13,7 +13,7 @@
         path,
         isQueued: true,
         isActive: false,
-        url: '/app.html?__routify_prefetch=true&__routify_path=' + path,
+        url: '/__app.html?__routify_prefetch=true&__routify_path=' + path,
       })
       return q
     })
