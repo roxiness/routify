@@ -1,0 +1,15 @@
+<script>
+  import { ready } from '@sveltech/routify'
+  
+  const data = fetch('/data.json')
+    .then(res => res.json())
+    .then(res => $ready() && res)
+
+
+  setTimeout(() => {
+    parent.postMessage('hello')
+  }, 500);
+</script>
+
+<h1>Delay 2</h1>
+{#await data then value}{JSON.stringify(value)}{/await}
