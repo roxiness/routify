@@ -51,6 +51,7 @@
     ]
   },
   "dependencies": {
+    "@getgauge/cli": "^1.0.8",
     "@rollup/plugin-replace": "^2.3.2",
     "workbox-window": "^5.1.3"
   }
