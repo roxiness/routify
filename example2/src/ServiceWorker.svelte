@@ -5,7 +5,6 @@
   if ('serviceWorker' in navigator) {
     import('workbox-window').then(async ({ Workbox, messageSW }) => {
       const wb = new Workbox('/sw.js')
-      const _messageSW = messageSW
 
       wb.addEventListener('installed', () => (justInstalled = true))
       wb.addEventListener('externalinstalled', () => (justInstalled = true))
@@ -21,7 +20,7 @@
               window.location.reload()
             )
             if (registration && registration.waiting) {
-              _messageSW(registration.waiting, { type: 'SKIP_WAITING' })
+              messageSW(registration.waiting, { type: 'SKIP_WAITING' })
             }
           },
         }
@@ -58,8 +57,8 @@
   <div>
     <p>
       Update available.
-      <a href="/update" on:click={prompt.accept}>Update</a>
-      <a href="/close" class="close" on:click={() => (prompt = false)}>×</a>
+      <a href="#update-service-worker" on:click={prompt.accept}>Update</a>
+      <a href="#close" class="close" on:click={() => (prompt = false)}>×</a>
     </p>
   </div>
 {/if}
