@@ -22,7 +22,7 @@ self.addEventListener('install', async (event) => {
 
 // bypass for cypress testing
 registerRoute(({ url }) =>
-  url.pathname === '/__/',
+  url.pathname.match(/^\/__(\/|cypress)/),
   new NetworkOnly()
 )
 
