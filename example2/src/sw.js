@@ -14,6 +14,14 @@ self.addEventListener('install', async (event) => {
     caches.open("fallback")
       .then((cache) => cache.addAll([fallbackUrl, fallbackImage]))
   );
+
+  //uncomment to automatically update service workers
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', () => {
+  // claim clients without having to refresh browser
+  clients.claim();
 });
 
 /**********
