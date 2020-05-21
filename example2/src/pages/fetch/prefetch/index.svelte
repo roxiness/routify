@@ -11,8 +11,10 @@
 {#each $layout.parent.children as child}
   <div id="prefetch">
     <button class="{child.title}" on:click={prefetchPath(child.path)}>{child.path}</button>
-    <a href="{$url(child.path)}">{child.path}</a>
+    <a href="{$url(child.path)}">goto{child.path}</a>
   </div>
 {/each}
+
+<a href="https://google.com">google.com</a>
 
 <!-- routify:options index=false -->

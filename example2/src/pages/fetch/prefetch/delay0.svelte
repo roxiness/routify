@@ -1,7 +1,7 @@
 <script>
   import { ready } from '@sveltech/routify'
 
-  const data = fetch('https://www.mocky.io/v2/5185415ba171ea3a00704eed')
+  const data = fetch('//www.mocky.io/v2/5185415ba171ea3a00704eed')
     .then(res => res.json())
     .then(res => $ready() && res)
 

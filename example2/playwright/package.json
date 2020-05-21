@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ava": "^3.8.2",
+    "playwright": "^1.0.2"
+  },
+  "devDependencies": {
+    "@ava/typescript": "^1.1.1"
+  }
+}

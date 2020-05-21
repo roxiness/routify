@@ -15,8 +15,8 @@ self.addEventListener('install', async (event) => {
       .then((cache) => cache.addAll([fallbackUrl, fallbackImage]))
   );
 
-  //uncomment to automatically update service workers
-  self.skipWaiting();
+  // uncomment to auto update service workers
+  // self.skipWaiting();
 });
 
 self.addEventListener('activate', () => {
