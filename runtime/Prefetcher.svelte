@@ -14,6 +14,7 @@
         isQueued: true,
         isActive: false,
         url: '/__app.html?__routify_prefetch=true&__routify_path=' + path,
+        key: path+Date.now()
       })
       return q
     })
@@ -58,7 +59,7 @@
 </script>
 
 <div id="__routify_iframes" style="display:none">
-  {#each $actives as prefetch (prefetch.path)}
+  {#each $actives as prefetch (prefetch.key)}
     <iframe src={prefetch.url} frameborder="0" title="routify prefetcher" />
   {/each}
 </div>
