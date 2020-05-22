@@ -25,11 +25,13 @@ function test(name, macro, callback) {
 
 }
 
-const { chromium,firefox, webkit } = require('playwright');
+const { chromium, firefox, webkit } = require('playwright');
 const browserPromise = chromium.launch({ headless: false });
 
 // @ts-ignore
 test = require('ava');
+const serialTest = require('ava').serial;
+
 
 /**
  * @template {MacroCallback} F
@@ -48,13 +50,23 @@ async function pageMacro(t, callback) {
     }
 }
 
+// /** @typedef {function(string, MacroCallback):void} PlaywrightTest */
+
 /**
- * 
  * @param {string} name 
  * @param {MacroCallback} callback 
  */
-function playwrightTest (name, callback){
+function playwrightTest(name, callback) {
     test(name, pageMacro, callback)
+}
+
+/**
+ * Assign the project to an employee.
+ * @param {string} name - The name of the employee.
+ * @param {MacroCallback} callback - The employee's department.
+ */
+playwrightTest.serial = function(name, callback){
+    serialTest(name, pageMacro, callback)
 }
 
 module.exports = playwrightTest

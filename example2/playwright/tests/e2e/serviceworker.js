@@ -1,4 +1,4 @@
-const test = require('./playwright-test')
+const test = require('../../playwright-test')
 
 
 test('Site should be online', async (t, page) => {
@@ -27,7 +27,7 @@ test('Prefetched pages have data', async (t, page, context) => {
     await page.goto('http://localhost:5000/fetch/prefetch')
     await page.waitForSelector('"Just installed"')
     await page.click('.delay1')
-    await new Promise(resolve => setTimeout(resolve, 1200))
+    await new Promise(resolve => setTimeout(resolve, 2500))
     
     await page.click('"goto/fetch/prefetch/delay1"')
     const element = await page.$('.result')
