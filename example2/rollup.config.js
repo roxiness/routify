@@ -111,10 +111,7 @@ const serviceWorkerConfig = {
     {
       name: 'watch-app',
       buildStart() {
-        // this.addWatchFile("dist/__app.html")
-        // this.addWatchFile("/dist/__app.html")
         this.addWatchFile("dist/build/bundle.js")
-        // this.addWatchFile("/dist/build/bundle.js")
       }
     },
     commonjs(),
