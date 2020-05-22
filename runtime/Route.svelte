@@ -41,12 +41,11 @@
 
   const context = writable(null)
 
-  /** @type {import("svelte/store").Writable<Context>} */
-  const parentContextStore = getContext('routify')
-
-
   isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
+  
+  /** @type {import("svelte/store").Writable<Context>} */
+  const parentContextStore = getContext('routify')
 
   $: if (isDecorator) {
     const decoratorLayout = {
