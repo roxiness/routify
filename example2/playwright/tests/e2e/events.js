@@ -2,7 +2,7 @@ const test = require('../../playwright-test')
 
 
 test('afterPageLoad fires after new page', async (t, page) => {
-    await page.goto('http://dev.local:5000/helpers/events/from');
+    await page.goto('http://localhost:5000/helpers/events/from');
     t.assert(await page.$('"afterPageLoad: from"'))
     
     await page.click('[data-node-path="/helpers/events/to.svelte"]')
@@ -13,7 +13,7 @@ test('afterPageLoad fires after new page', async (t, page) => {
 
 
 test('afterPageLoad fires when params change', async (t, page) => {
-    await page.goto('http://dev.local:5000/helpers/events/param1');
+    await page.goto('http://localhost:5000/helpers/events/param1');
     await page.click('"param2"')
     t.assert(await page.$$('"afterPageLoad: :param"'))    
 })

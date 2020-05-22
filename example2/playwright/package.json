@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:cli": "ava tests/cli/** --timeout 300s"
+    "test:cli": "ava tests/cli/** --timeout 300s",
+    "test:e2e": "ava tests/e2e/**"
   },
   "author": "",
   "license": "ISC",
