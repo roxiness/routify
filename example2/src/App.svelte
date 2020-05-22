@@ -4,7 +4,7 @@
   import { routes } from '@sveltech/routify/tmp/routes'
   import { writable } from 'svelte/store'
   import ServiceWorker from './ServiceWorker.svelte'
-
+  console.log(routes)
 </script>
 
 <Router {routes} />
