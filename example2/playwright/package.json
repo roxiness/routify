@@ -3,14 +3,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:cli": "ava tests/cli/** --timeout 300s"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "ava": "^3.8.2",
     "fs-extra": "^9.0.0",
-    "playwright": "^1.0.2"
+    "playwright": "^1.0.2",
+    "tree-kill": "^1.2.2"
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1"
