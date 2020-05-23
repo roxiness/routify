@@ -113,11 +113,9 @@ function hookHandler(listener) {
  **/
 export const params = {
   subscribe(listener) {
-    return derived(
-      route,
-      route => route.params
-    ).subscribe(listener)
-  },
+    const ctx = getRoutifyContext()
+    return derived(ctx, ctx => ctx.layout.params).subscribe(listener)
+  }
 }
 
 /**
