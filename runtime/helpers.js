@@ -142,7 +142,7 @@ export const leftover = {
 export const meta = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
-    return derived(ctx, ctx => ctx.component.meta).subscribe(listener)
+    return derived(ctx, ctx => ctx.layout.meta).subscribe(listener)
   },
 }
 
