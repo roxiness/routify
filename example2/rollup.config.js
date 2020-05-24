@@ -56,7 +56,7 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
       // https://github.com/rollup/rollup-plugin-commonjs
       resolve({
         browser: true,
-        dedupe: importee => importee.match(/^(svelte|routify-helper)($|\/)/)
+        dedupe: importee => importee.match(/^(svelte|routify-dev-ui)($|\/)/)
       }),
       commonjs(),
 
