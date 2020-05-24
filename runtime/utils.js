@@ -19,7 +19,8 @@ export function scrollAncestorsToTop(element) {
   if (
     element &&
     element.scrollTo &&
-    element.dataset.routify !== 'scroll-lock'
+    element.dataset.routify !== 'scroll-lock' &&
+    element.dataset['routify-scroll'] !== 'lock'
   ) {
     element.style['scroll-behavior'] = "auto"
     element.scrollTo({ top: 0, behavior: 'auto' })
