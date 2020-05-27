@@ -7,7 +7,12 @@ test('/date returns timestamp', async t => {
     t.assert(date.match(/\d{13}/), 'timestamp is 13 digits')
 })
 
-test('/echo returns same data', async t => {
+test('get /echo returns same data', async t => {
+    const text = await fetch(basepath + '/echo?message=hello world').then(res => res.text())
+    t.is(text, 'hello world')
+})
+
+test('post /echo returns same data', async t => {
     const json = await fetch(basepath + '/echo', {
         method: 'POST',
         body: JSON.stringify({ message: 'hello world' }),
