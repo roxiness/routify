@@ -28,7 +28,7 @@ test('Prefetched pages have data', async (t, page, context) => {
     await page.waitForSelector('"Just installed"')
     await page.click('.delay1')
     await new Promise(resolve => setTimeout(resolve, 2500))
-    
+
     await page.click('"goto/fetch/prefetch/delay1"')
     const element = await page.$('.result')
     const txt = await element.innerText()
@@ -45,3 +45,18 @@ test('Prefetched pages have data', async (t, page, context) => {
 //     const txt = await element.innerText()
 //     await t.deepEqual(txt, '')
 // })
+
+
+test('prefetch is gone after cache timeout', async (t, page, context) => {
+    await page.goto('http://localhost:5000/fetch/prefetch')
+    const elem = await page.$('input.cachetime')
+    await elem.fill('1')
+    await page.click('.delay1')
+    await new Promise(resolve => setTimeout(resolve, 4000))
+    // t.is(1, (await elem.asElement()).evaluate(f => f))
+
+    await page.click('"goto/fetch/prefetch/delay1"')
+    const element = await page.$('.result')
+    const txt = await element.innerText()
+    await t.notDeepEqual(txt, '{"hello":"world"}')
+})
