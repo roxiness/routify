@@ -6,7 +6,7 @@
   let queued = derived(queue, q => q.filter(q => q.isQueued))
 
   const defaults = {
-    cache_assets_time: 60,
+    prefetchValidFor: 60,
     prefetch: true,
     timeout: 10,
   }
