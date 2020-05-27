@@ -83,7 +83,7 @@
   )
 </script>
 
-<div id="__routify_iframes" style="">abc
+<div id="__routify_iframes" style="display: none">
   {#each $actives as prefetch (prefetch.key)}
     <iframe src={prefetch.url} frameborder="0" title="routify prefetcher" />
   {/each}
