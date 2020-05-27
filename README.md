@@ -6,7 +6,7 @@
 ----
 
 <p> 
-  <strong>Warning: Routify is a work in progress. Since v1.5 we have a stable release. But this is a relatively young project. You can expect it to change and evolve.</strong>
+  <strong>Routify is a work in progress. Since v1.5 we have a stable release. But this is a relatively young project. You can expect it to change and evolve.</strong>
 </p>
 
 ----
