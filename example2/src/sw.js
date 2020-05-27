@@ -90,7 +90,7 @@ function wasRecentlyFetchedFactory(defaultOptions) {
   const recentFetches = new Map()
 
   return function wasRecentlyFetched(event) {
-    cleanuprecentFetches()    
+    cleanupRecentFetches()    
     const { method, url, headers } = event.request
     if (method != 'GET') return false
 
@@ -116,7 +116,7 @@ function wasRecentlyFetchedFactory(defaultOptions) {
   /**
    * 
    */
-  function cleanuprecentFetches() {
+  function cleanupRecentFetches() {
     recentFetches.forEach((data, key) => {
       console.log(data, key)
       if (data.prefetchValidUntil < Date.now()) {
