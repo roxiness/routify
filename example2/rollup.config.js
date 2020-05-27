@@ -121,7 +121,8 @@ const serviceWorkerConfig = {
     injectManifest({
       swSrc: `${distDir}/sw.js`,
       swDest: `${distDir}/sw.js`,
-      globDirectory: distDir
+      globDirectory: distDir,
+      globPatterns: ['**/*.{js,css,html,svg}']
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production'),
