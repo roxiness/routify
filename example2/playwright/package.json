@@ -5,13 +5,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:cli": "ava tests/cli/** --timeout 300s",
-    "test:e2e": "ava tests/e2e/**"
+    "test:e2e": "ava tests/e2e/**",
+    "test:mock-api": "ava tests/mock-server/**"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "ava": "^3.8.2",
     "fs-extra": "^9.0.0",
+    "node-fetch": "^2.6.0",
     "playwright": "^1.0.2",
     "tree-kill": "^1.2.2"
   },
