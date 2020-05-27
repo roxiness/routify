@@ -76,6 +76,6 @@ export function currentLocation(){
   const prefetchMatch = window.location.search.match(/__routify_prefetch=?[^&]*/)
   window.routify = window.routify || {}
   window.routify.prefetched = prefetchMatch ? true : false
-  const path = pathMatch && pathMatch[1]
+  const path = pathMatch && pathMatch[1].replace(/[#?].+/,'') // strip any thing after ? and #
   return path || window.location.pathname
 }

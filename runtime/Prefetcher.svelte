@@ -12,6 +12,8 @@
   }
 
   export function prefetch(path, options = {}) {
+    //replace first ? since were mixing user queries with routify queries
+    path = path.replace('?', '&') 
     options = { ...defaults, ...options, path }
     if (window.routify.prefetched || navigator.userAgent.match('jsdom'))
       return false
@@ -81,7 +83,7 @@
   )
 </script>
 
-<div id="__routify_iframes" style="display:none">
+<div id="__routify_iframes" style="">abc
   {#each $actives as prefetch (prefetch.key)}
     <iframe src={prefetch.url} frameborder="0" title="routify prefetcher" />
   {/each}
