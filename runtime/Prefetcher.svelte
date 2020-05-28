@@ -4,7 +4,7 @@
   /** config */
   const iframeNum = 2
   const defaults = {
-    prefetchValidFor: 60,
+    validFor: 60,
     timeout: 5000,
   }
 
