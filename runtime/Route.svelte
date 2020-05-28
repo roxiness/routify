@@ -15,7 +15,7 @@
   import { writable, get } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
   import { route, routes, rootContext } from './store'
-  import { handleScroll } from './utils'
+  import { handleScroll, onAppLoaded } from './utils'
 
   /** @type {LayoutOrDecorator[]} */
   export let layouts = []
@@ -44,7 +44,6 @@
 
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
-
 
   isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
@@ -105,27 +104,15 @@
     afterPageLoad._hooks.forEach(hook => hook(layout.api))
     await tick()
     handleScroll(parentElement)
-    metatags.update()
-    if (!window['routify'].appLoaded) onAppLoaded()
-  }
+    if (!window['routify'].appLoaded) {
+      const pagePath = $context.component.path
+      const routePath = $route.path
+      const isOnCurrentRoute = pagePath === routePath //maybe we're getting redirected
 
-  async function onAppLoaded() {
-    const pagePath = $context.component.path
-    const routePath = $route.path
-    const isOnCurrentRoute = pagePath === routePath //maybe we're getting redirected
-
-    // Let everyone know the last child has rendered
-    if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
-      dispatchEvent(new CustomEvent('app-loaded'))
-      parent.postMessage(
-        {
-          msg: 'app-loaded',
-          prefetched: window.routify.prefetched,
-          path: pagePath
-        },
-        '*'
-      )
-      window['routify'].appLoaded = true
+      // Let everyone know the last child has rendered
+      if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
+        onAppLoaded({ path: pagePath })
+      }
     }
   }
 </script>

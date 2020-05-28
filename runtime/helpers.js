@@ -1,7 +1,7 @@
 import { getContext, tick } from 'svelte'
 import { derived, get } from 'svelte/store'
 import { route, routes, location, rootContext, prefetchPath } from './store'
-import { pathToParams } from './utils'
+import { pathToParams, onAppLoaded } from './utils'
 import config from '../runtime.config'
 import { urlToRoute } from './utils/urlToRoute'
 import { prefetch as _prefetch } from './Prefetcher.svelte'
@@ -59,14 +59,7 @@ export const ready = {
     window['routify'].stopAutoReady = true
     async function ready() {
       await tick()
-      metatags.update()
-      window['routify'].appLoaded = true
-      dispatchEvent(new CustomEvent('app-loaded'))
-      parent.postMessage({
-        msg: 'app-loaded',
-        prefetched: window.routify.prefetched,
-        path: get(route).path
-      }, "*")
+      await onAppLoaded({path: get(route).path})
     }
     run(ready)
     return () => { }
