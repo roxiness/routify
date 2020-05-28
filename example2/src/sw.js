@@ -13,14 +13,16 @@ import { ExpirationPlugin } from 'workbox-expiration';
 const entrypointUrl = '__app.html' // entrypoint
 const fallbackImage = '404.svg'
 const files = self.__WB_MANIFEST // files matching globDirectory and globPattern in rollup.config.js
-const wasRecentlyFetchedDefaults = { prefetchValidFor: 10 }
+const wasRecentlyFetchedDefaults = { validFor: 10 }
 
 const externalAssetsConfig = () => ({
   cacheName: 'external',
-  plugins: [new ExpirationPlugin({
-    maxEntries: 50,
-    purgeOnQuotaError: true
-  })]
+  plugins: [
+    markHeader(),
+    new ExpirationPlugin({
+      maxEntries: 50,
+      purgeOnQuotaError: true
+    })]
 })
 
 
@@ -56,7 +58,14 @@ registerRoute(isLocalPage, matchPrecache(entrypointUrl))
 registerRoute(isLocalAsset, new CacheFirst())
 
 // serve external assets from cache if they're fresh
-registerRoute(wasRecentlyFetched, new CacheFirst(externalAssetsConfig()))
+registerRoute(wasRecentlyFetched, async function (params) {
+  const strategy = new CacheFirst(externalAssetsConfig())
+  const response = await strategy.handle(params)
+  response.headers.set('foo', 'bar')
+  response.headers.set('x-custom-header', 'bar')
+  console.log('response', response)
+  return response
+})
 
 // serve external pages and assets
 setDefaultHandler(new NetworkFirst(externalAssetsConfig()));
@@ -82,6 +91,20 @@ setCatchHandler(async ({ event }) => {
 function isLocalAsset({ url, request }) { return url.host === self.location.host && request.destination != 'document' }
 function isLocalPage({ url, request }) { return url.host === self.location.host && request.destination === 'document' }
 
+function markHeader() {
+  return {
+    cachedResponseWillBeUsed: ({ cacheName, request, matchOptions, cachedResponse, event }) => {
+      if (cachedResponse.type === 'opaque')
+        return cachedResponse;
+
+      const headers = new Headers(cachedResponse.headers)
+      headers.set('cached-response-will-be-used', 'yay')
+
+      return cachedResponse.arrayBuffer().then(buffer => new Response(buffer, { ...cachedResponse, headers }))
+    }
+  }
+}
+
 /**
  * Create a wasRecentlyFetched function
  * @param {object} defaultOptions 
@@ -90,26 +113,22 @@ function wasRecentlyFetchedFactory(defaultOptions) {
   const recentFetches = new Map()
 
   return function wasRecentlyFetched(event) {
-    cleanupRecentFetches()    
+    cleanupRecentFetches()
     const { method, url, headers } = event.request
     if (method != 'GET') return false
 
-    
-    console.log('x-prefetchValidFor', headers.get('x-prefetchValidFor'))
+    const prefetchOptions = getPrefetchOptions(event.request)
+    const headerOptions = getHeaderOptions(event.request)
 
-    const prefetchOptions = getRoutifyOptions(event.request)
-    const options = { ...defaultOptions }
-    // const options = { ...defaultOptions, ...prefetchOptions }
+    const options = { ...defaultOptions, ...prefetchOptions, ...headerOptions }
 
-    // console.log(options)
 
     const recentRequest = recentFetches.get(url)
 
     if (!recentRequest)
       recentFetches.set(url, {
-        prefetchValidUntil: Date.now() + (options.prefetchValidFor * 1000)
+        prefetchValidUntil: Date.now() + (options.validFor * 1000)
       })
-    console.log('had recent request', recentRequest, url)
     return !!recentRequest
   }
 
@@ -118,7 +137,6 @@ function wasRecentlyFetchedFactory(defaultOptions) {
    */
   function cleanupRecentFetches() {
     recentFetches.forEach((data, key) => {
-      console.log(data, key)
       if (data.prefetchValidUntil < Date.now()) {
         recentFetches.delete(key)
       }
@@ -129,17 +147,28 @@ function wasRecentlyFetchedFactory(defaultOptions) {
    * Get options caching options from routify
    * @param {Request} request 
    */
-  function getRoutifyOptions(request) {
+  function getPrefetchOptions(request) {
     const { referrer } = request
+    const headers = [...request.headers.entries()]
     const search = (referrer.match(/\?(.+)/) || [null, ''])[1]
     const optionsFromPrefetch = {}
     const optionsFromRequest = {}
     for (const [key, val] of [...new URLSearchParams(search)])
       optionsFromPrefetch[key.replace(/^__routify_/, '')] = val
 
-    console.log(request)
-    // console.log(request.headers)
-
     return optionsFromPrefetch
   }
+
+  function getHeaderOptions({ headers }) {
+    const routifyHeaders = [...headers.entries()].filter(([key]) => key.startsWith('x-routify-'))
+
+    const options = {}
+    for (const [key, val] of routifyHeaders) {
+      const name = key.replace('x-routify-', '').replace(/-./g, x => x.toUpperCase()[1])
+      options[name] = val
+    }
+    console.log({ options })
+    return options
+  }
 }
+

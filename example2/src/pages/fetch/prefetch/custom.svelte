@@ -1,10 +1,17 @@
 <script>
   import { ready, params } from '@sveltech/routify'
-  console.log('fetching', $params.url)
-  $: dataPromise = fetch($params.url, JSON.parse($params.options))
-    .then(res => res.json())
-    .then(res => $ready() && res)
-  $: dataPromise.then(r => console.log('returned', r))
+  
+  let response = null
+  let headers = null
+  let json = null
+
+  $: fetchData($params.url)
+
+  async function fetchData(url) {
+    response = await fetch($params.url, JSON.parse($params.options))    
+    headers = [...response.headers.entries()]
+    json = await response.json()
+  }
 </script>
 
 <div class="result">
@@ -15,11 +22,23 @@
 <pre>{JSON.stringify($params, null, 2)}</pre>
 
 <h3>Response</h3>
-{#await dataPromise then data}
-  {#each Object.entries(data) as [key, value]}
+<h4>Body</h4>
+{#if json}
+  {#each Object.entries(json) as [key, value]}
     <div id="result_{key}">
-      <strong>{key}: </strong><span class="value">{value}</span>
+      <strong>{key}:</strong>
+      <span class="value">{value}</span>
     </div>
   {/each}
-  <pre>{JSON.stringify(data, null, 2)}</pre>
-{/await}
+  <pre>{JSON.stringify(json, null, 2)}</pre>
+{/if}
+
+<h4>Headers</h4>
+{#if response}
+  {#each headers as [key, value]}
+     <div id="header_{key}">
+      <strong>{key}:</strong>
+      <span class="value">{value}</span>
+    </div>
+  {/each}
+{/if}
