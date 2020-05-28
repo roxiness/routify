@@ -299,7 +299,7 @@ export function precache(path, options) {
  * @param {*} options 
  */
 export function prefetch(path, options) {
-  _prefetch(path)
+  _prefetch(path, options)
 }
 
 /**
