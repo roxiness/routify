@@ -108,7 +108,8 @@ async function runHooksBeforeUrlChange(event) {
   const route = get(stores.route)
   for (const hook of _hooks.filter(Boolean)) {
     // return false if the hook returns false
-    if (await !hook(event, route)) return false //todo remove route from hook. Its API Can be accessed as $page
+    const result = await hook(event, route) //todo remove route from hook. Its API Can be accessed as $page
+    if (!result) return false
   }
   return true
 }
