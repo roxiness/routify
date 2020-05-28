@@ -79,19 +79,3 @@ export function currentLocation() {
   const path = pathMatch && pathMatch[1].replace(/[#?].+/, '') // strip any thing after ? and #
   return path || window.location.pathname
 }
-
-
-export function onAppLoaded({ path }) {
-  metatags.update()
-  const prefetchMatch = window.location.search.match(/__routify_prefetch=(\d+)/)
-  const prefetchId = prefetchMatch && prefetchMatch[1]
-
-  dispatchEvent(new CustomEvent('app-loaded'))
-  parent.postMessage({
-    msg: 'app-loaded',
-    prefetched: window.routify.prefetched,
-    path,
-    prefetchId
-  }, "*")
-  window['routify'].appLoaded = true
-}

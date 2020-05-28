@@ -15,7 +15,8 @@
   import { writable, get } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
   import { route, routes, rootContext } from './store'
-  import { handleScroll, onAppLoaded } from './utils'
+  import { handleScroll } from './utils'
+  import { onAppLoaded } from './utils/onAppLoaded.js'
 
   /** @type {LayoutOrDecorator[]} */
   export let layouts = []
