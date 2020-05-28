@@ -1,90 +1,75 @@
 <script context="module">
   import { writable, derived } from 'svelte/store'
-  const iframeNum = 2
-  let queue = writable([])
-  let actives = derived(queue, q => q.filter(q => q.isActive))
-  let queued = derived(queue, q => q.filter(q => q.isQueued))
 
+  /** config */
+  const iframeNum = 2
   const defaults = {
     prefetchValidFor: 60,
-    prefetch: true,
-    timeout: 10,
+    timeout: 5000,
   }
 
+  /** stores and subscriptions */
+  const queue = writable([])
+  const actives = derived(queue, q => q.slice(0, iframeNum))
+  actives.subscribe(actives =>
+    actives.forEach(({ options }) =>
+      setTimeout(() => removeFromQueue(options.prefetch), options.timeout)
+    )
+  )
+
+  /**
+   * @param {string} path
+   * @param {defaults} options
+   */
   export function prefetch(path, options = {}) {
+    prefetch.id = prefetch.id || 1
+
     //replace first ? since were mixing user queries with routify queries
-    path = path.replace('?', '&') 
+    path = path.replace('?', '&')
+
     options = { ...defaults, ...options, path }
+    options.prefetch = prefetch.id++
+
+    //don't prefetch within prefetch or SSR
     if (window.routify.prefetched || navigator.userAgent.match('jsdom'))
       return false
 
+    // add to queue
     queue.update(q => {
-      q.push({
-        path,
-        isQueued: true,
-        isActive: false,
-        url: `/__app.html?${optionsToQuery(options)}`,
-        key: path + Date.now(),
-        options,
-      })
-      return q
-    })
-    updateQueue()
-  }
-
-  function updateQueue({ prevPath } = {}) {
-    queue.update(q => {
-      const prevFetches = q.filter(q => q.path === prevPath) || []
-      prevFetches.forEach(prevFetch => {
-        prevFetch.isActive = false
-        prevFetch.isQueued = false
-      })
-      while (fetchNext(q)) {}
+      if (!q.some(e => e.options.path === path))
+        q.push({
+          url: `/__app.html?${optionsToQuery(options)}`,
+          options,
+        })
       return q
     })
   }
 
-  function fetchNext(q) {
-    const freeSpots = iframeNum > q.filter(q => q.isActive).length
-    const nextFetch = q.find(q => q.isQueued)
-    if (freeSpots && nextFetch) {
-      nextFetch.isQueued = false
-      nextFetch.isActive = true
-      setTimeout(() => {
-        nextFetch.isActive = false
-        queue.update(q => q)
-      }, nextFetch.options.timeout * 1000)
-      return true
-    }
-    return false
-  }
-
+  /**
+   * convert options to query string
+   * {a:1,b:2} becomes __routify_a=1&routify_b=2
+   * @param {defaults & {path: string, prefetch: number}} options
+   */
   function optionsToQuery(options) {
-    return Object.entries(options).reduce((q, [key, val]) => {
-      const delimiter = q ? '&' : ''
-      return `${q + delimiter}__routify_${key}=${val}`
-    }, '')
+    return Object.entries(options)
+      .map(([key, val]) => `__routify_${key}=${val}`)
+      .join('&')
   }
-</script>
 
-<script>
-  var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent'
-  var eventer = window[eventMethod]
-  var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message'
+  /**
+   * @param {number|MessageEvent} idOrEvent
+   */
+  function removeFromQueue(idOrEvent) {
+    const id = idOrEvent.data ? idOrEvent.data.prefetchId : idOrEvent
+    queue.update(q => q.filter(q => q.options.prefetch != id))
+  }
 
   // Listen to message from child window
-  eventer(
-    messageEvent,
-    function({ data }) {
-      const { path } = data
-      updateQueue({ prevPath: path })
-    },
-    false
-  )
+  addEventListener('message', removeFromQueue, false)
 </script>
 
 <div id="__routify_iframes" style="display: none">
-  {#each $actives as prefetch (prefetch.key)}
+  {#each $actives as prefetch (prefetch.options.prefetch)}
     <iframe src={prefetch.url} frameborder="0" title="routify prefetcher" />
   {/each}
 </div>
