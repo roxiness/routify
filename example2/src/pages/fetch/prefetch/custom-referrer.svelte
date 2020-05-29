@@ -1,7 +1,11 @@
 <script>
   import { url, prefetch } from '@sveltech/routify'
   let reqUrl = '//localhost:5432/generic?foo=bar'
-  let reqOptions = JSON.stringify({ headers: { 'x-delay': 0, "x-routify-valid-for": 5 } }, null, 2)
+  let reqOptions = JSON.stringify(
+    { headers: { 'x-delay': 0, 'x-routify-valid-for': 5, 'x-routify-write-headers': true } },
+    null,
+    2
+  )
   let prefetchOptions = JSON.stringify({ validFor: 60 }, null, 2)
 
   let method = 'GET'
