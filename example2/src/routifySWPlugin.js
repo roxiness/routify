@@ -1,56 +1,53 @@
 // @ts-check
 
-export const recentFetches = new Map()
-
-export const RoutifyPlugin = {
-    cachedResponseWillBeUsed({ cacheName, request, matchOptions, cachedResponse, event }) {
-        if (getHeaderOptions(request).writeHeaders !== true)
-            return cachedResponse;
-
-        const headers = new Headers(cachedResponse.headers)
-        const fetch = recentFetches.get(request.url) || {}
-        for (const [key, val] of Object.entries(fetch))
-            headers.set('x-routify-' + kebabify(key), val)
-        return cachedResponse.arrayBuffer().then(buffer => new Response(buffer, { ...cachedResponse, headers }))
-    }
+const freshCache = {
+    map: new Map(),
+    set(req, value) { return this.map.set(reqToStr(req), value) },
+    get(req) { return this.map.get(reqToStr(req)) }
 }
 
-/**
- * Create a wasRecentlyFetched function
- * @param {object} defaultOptions 
- */
-export function wasRecentlyFetchedFactory(defaultOptions) {
-    return function wasRecentlyFetched(event) {
+export const RoutifyPlugin = function (defaultOptions) {
+    return {
+        cachedResponseWillBeUsed({ cacheName, request, matchOptions, cachedResponse, event }) {
+            if (getHeaderOptions(request).writeHeaders !== true)
+                return cachedResponse;
 
-        cleanupRecentFetches()
-        const { method, url, headers } = event.request
-        if (method != 'GET') return false
+            const headers = new Headers(cachedResponse.headers)
+            const fetch = freshCache.get(request) || {}
+            for (const [key, val] of Object.entries(fetch))
+                headers.set('x-routify-' + kebabify(key), val)
+            return cachedResponse.arrayBuffer().then(buffer => new Response(buffer, { ...cachedResponse, headers }))
+        },
+        cacheDidUpdate: async ({ cacheName, request, oldResponse, newResponse, event }) => {
+            // if cached updated we update freshCache
+            const prefetchOptions = getPrefetchOptions(event.request)
+            const headerOptions = getHeaderOptions(event.request)
 
-        const prefetchOptions = getPrefetchOptions(event.request)
-        const headerOptions = getHeaderOptions(event.request)
+            const options = { ...defaultOptions, ...prefetchOptions, ...headerOptions }
 
-        const options = { ...defaultOptions, ...prefetchOptions, ...headerOptions }
-
-
-        const recentRequest = recentFetches.get(url)
-
-        if (!recentRequest)
-            recentFetches.set(url, {
+            freshCache.set(event.request, {
                 ...options,
                 validUntil: Date.now() + (options.validFor * 1000)
             })
-        return !!recentRequest
+        }
     }
 }
+
+
+export function hasFreshCache(event) {
+    cleanupFreshCache()
+    return !!freshCache.get(event.request)
+}
+
 
 
 /**
  * 
  */
-function cleanupRecentFetches() {
-    recentFetches.forEach((data, key) => {
+function cleanupFreshCache() {
+    freshCache.map.forEach((data, key) => {
         if (data.validUntil < Date.now()) {
-            recentFetches.delete(key)
+            freshCache.map.delete(key)
         }
     })
 }
@@ -83,10 +80,8 @@ function getHeaderOptions({ headers }) {
     return options
 }
 
-function parse(str) {
-    try { str = JSON.parse(str) } catch (err) { }
-    return str
-}
 
+function reqToStr({ url, headers, method }) { return JSON.stringify({ url, method, headers: [...headers.entries()], }) }
 function kebabify(str) { return str.replace(/[A-Z]/g, x => '-' + x.toLowerCase()) }
 function camelize(str) { return str.replace(/-./g, x => x.toUpperCase()[1]) }
+function parse(str) { try { return JSON.parse(str) } catch (err) { } }

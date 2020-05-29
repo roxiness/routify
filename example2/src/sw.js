@@ -5,7 +5,7 @@ import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 import { skipWaiting, clientsClaim } from 'workbox-core';
 import { precacheAndRoute, matchPrecache } from 'workbox-precaching';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { RoutifyPlugin, wasRecentlyFetchedFactory } from './routifySWPlugin'
+import { RoutifyPlugin, hasFreshCache } from './routifySWPlugin'
 
 
 
@@ -21,7 +21,7 @@ const wasRecentlyFetchedDefaults = { validFor: 10 }
 const externalAssetsConfig = () => ({
   cacheName: 'external',
   plugins: [
-    RoutifyPlugin,
+    RoutifyPlugin(wasRecentlyFetchedDefaults),
     new ExpirationPlugin({
       maxEntries: 50,
       purgeOnQuotaError: true
@@ -45,9 +45,6 @@ clientsClaim() // take control of client without having to wait for refresh
  */
 // addEventListener('message', event => { if (event.data && event.data.type === 'SKIP_WAITING') skipWaiting(); });
 
-/** initialize wasRecentlyFetched function */
-const wasRecentlyFetched = wasRecentlyFetchedFactory(wasRecentlyFetchedDefaults)
-
 
 
 /**********
@@ -61,7 +58,7 @@ registerRoute(isLocalPage, matchPrecache(entrypointUrl))
 registerRoute(isLocalAsset, new CacheFirst())
 
 // serve external assets from cache if they're fresh
-registerRoute(wasRecentlyFetched, new CacheFirst(externalAssetsConfig()))
+registerRoute(hasFreshCache, new CacheFirst(externalAssetsConfig()))
 
 // serve external pages and assets
 setDefaultHandler(new NetworkFirst(externalAssetsConfig()));
