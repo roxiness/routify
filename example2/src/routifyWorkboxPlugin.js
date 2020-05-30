@@ -3,7 +3,12 @@
 const freshCache = {
     map: new Map(),
     set(req, value) { return this.map.set(reqToStr(req), value) },
-    get(req) { return this.map.get(reqToStr(req)) }
+    get(req) {
+        const cache = this.map.get(reqToStr(req))
+        // @ts-ignore
+        if (cache) cache.validLeft = (new Date(cache.validUntil) - new Date())/1000
+        return cache
+    }
 }
 
 export const RoutifyPlugin = function (defaultOptions) {
@@ -16,27 +21,29 @@ export const RoutifyPlugin = function (defaultOptions) {
             const fetch = freshCache.get(request) || {}
             for (const [key, val] of Object.entries(fetch))
                 headers.set('x-routify-' + kebabify(key), val)
+            headers.set('x-routify-use-cache', "true")
             return cachedResponse.arrayBuffer().then(buffer => new Response(buffer, { ...cachedResponse, headers }))
         },
         cacheDidUpdate: async ({ cacheName, request, oldResponse, newResponse, event }) => {
             // if cached updated we update freshCache
             const prefetchOptions = getPrefetchOptions(event.request)
             const headerOptions = getHeaderOptions(event.request)
-
             const options = { ...defaultOptions, ...prefetchOptions, ...headerOptions }
+            const date = Date.now()
 
             freshCache.set(event.request, {
                 ...options,
-                validUntil: Date.now() + (options.validFor * 1000)
+                validUntil: new Date(date + (options.validFor * 1000)).toISOString(),
+                cachedAt: (new Date(date)).toISOString()
             })
         }
     }
 }
 
 
-export function hasFreshCache(event) {
+export function freshCacheData(event) {
     cleanupFreshCache()
-    return !!freshCache.get(event.request)
+    return freshCache.get(event.request)
 }
 
 
@@ -46,7 +53,7 @@ export function hasFreshCache(event) {
  */
 function cleanupFreshCache() {
     freshCache.map.forEach((data, key) => {
-        if (data.validUntil < Date.now()) {
+        if (new Date(data.validUntil) < new Date) {
             freshCache.map.delete(key)
         }
     })

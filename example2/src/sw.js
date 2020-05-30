@@ -1,11 +1,11 @@
 // @ts-check
 
 import { registerRoute, setDefaultHandler, setCatchHandler } from 'workbox-routing';
-import { CacheFirst, NetworkFirst } from 'workbox-strategies';
+import { CacheFirst, NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { skipWaiting, clientsClaim } from 'workbox-core';
 import { precacheAndRoute, matchPrecache } from 'workbox-precaching';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { RoutifyPlugin, hasFreshCache } from './routifySWPlugin'
+import { RoutifyPlugin, freshCacheData } from './routifyWorkboxPlugin'
 
 
 
@@ -16,17 +16,19 @@ import { RoutifyPlugin, hasFreshCache } from './routifySWPlugin'
 const entrypointUrl = '__app.html' // entrypoint
 const fallbackImage = '404.svg'
 const files = self.__WB_MANIFEST // files matching globDirectory and globPattern in rollup.config.js
-const wasRecentlyFetchedDefaults = { validFor: 10 }
 
 const externalAssetsConfig = () => ({
   cacheName: 'external',
   plugins: [
-    RoutifyPlugin(wasRecentlyFetchedDefaults),
+    RoutifyPlugin({
+      validFor: 60 // cache is considered fresh for n seconds.
+    }),
     new ExpirationPlugin({
-      maxEntries: 50,
-      purgeOnQuotaError: true
+      maxEntries: 50, // last used entries will be purged when we hit this limit
+      purgeOnQuotaError: true // purge external assets on quota error
     })]
 })
+
 
 
 
@@ -34,14 +36,21 @@ const externalAssetsConfig = () => ({
  * INITIALIZE *
  **************/
 
-precacheAndRoute(files) // precache files
+/** precache all files */
+precacheAndRoute(files)
+
+/** precache only fallback files */
+// precacheAndRoute(files.filter(file =>
+//   ['__app.html', '404.svg']
+//     .includes(file.url)
+// ))
 
 skipWaiting() // auto update service workers across all tabs when new release is available
 clientsClaim() // take control of client without having to wait for refresh
 
 /** 
  * manually upgrade service worker by sending a SKIP_WAITING message.
- * (remember to disable auto update above)
+ * (remember to disable skipWaiting())
  */
 // addEventListener('message', event => { if (event.data && event.data.type === 'SKIP_WAITING') skipWaiting(); });
 
@@ -78,8 +87,19 @@ setCatchHandler(async ({ event }) => {
 
 
 /**********
- * UTILS *
+ * CONDITIONS *
  **********/
 
 function isLocalAsset({ url, request }) { return url.host === self.location.host && request.destination != 'document' }
 function isLocalPage({ url, request }) { return url.host === self.location.host && request.destination === 'document' }
+function hasFreshCache(event) { return !!freshCacheData(event) }
+
+/** Example condition */
+function hasWitheringCache(event) {
+  const cache = freshCacheData(event)
+  if (cache) {
+    const { cachedAt, validFor, validLeft, validUntil } = cache
+    // return true if half the fresh time has passed
+    return validFor / 2 > validFor - validLeft
+  }
+}

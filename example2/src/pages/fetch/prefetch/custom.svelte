@@ -42,3 +42,7 @@
     </div>
   {/each}
 {/if}
+
+
+<h3>Image test</h3>
+<img style="width: 200px" src="/500.jpg" alt="">

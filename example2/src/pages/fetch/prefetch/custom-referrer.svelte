@@ -36,16 +36,16 @@
     <input type="text" id="url" bind:value={reqUrl} />
   </label>
   <label for="options">
-    Mock API options
+    Request options
     <textarea
       type="text"
       id="options"
       cols="50"
-      rows="5"
+      rows="7"
       bind:value={reqOptions} />
   </label>
   <label for="prefetch-options">
-    Prefetch options
+    Prefetch/referrer options (__routify_validFor=n&...)
     <textarea
       type="text"
       id="prefetch-options"
