@@ -60,7 +60,7 @@ export const ready = {
     window['routify'].stopAutoReady = true
     async function ready() {
       await tick()
-      await onAppLoaded({ path: get(route).path })
+      await onAppLoaded({ path: get(route).path, metatags })
     }
     run(ready)
     return () => { }

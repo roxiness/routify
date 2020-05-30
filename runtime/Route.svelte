@@ -112,7 +112,7 @@
 
       // Let everyone know the last child has rendered
       if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
-        onAppLoaded({ path: pagePath })
+        onAppLoaded({ path: pagePath, metatags })
       }
     }
   }

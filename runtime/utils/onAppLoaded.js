@@ -1,6 +1,4 @@
-import { metatags } from "../helpers"
-
-export function onAppLoaded({ path }) {
+export function onAppLoaded({ path, metatags }) {
     metatags.update()
     const prefetchMatch = window.location.search.match(/__routify_prefetch=(\d+)/)
     const prefetchId = prefetchMatch && prefetchMatch[1]
