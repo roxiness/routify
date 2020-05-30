@@ -132,9 +132,10 @@ function urlToRoute(url, routes) {
 
     routeProps.forEach((prop, i) => {
       if (prop) {
-        route.params[prop] = fragments[i]
-        if (layouts[i]) layouts[i].param = { [prop]: fragments[i] }
-        else route.param = { [prop]: fragments[i] }
+        const fragment = decodeURI(fragments[i])
+        route.params[prop] = fragment
+        if (layouts[i]) layouts[i].param = { [prop]: fragment }
+        else route.param = { [prop]: fragment }
       }
     })
   }
