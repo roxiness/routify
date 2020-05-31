@@ -1,20 +1,21 @@
 <script context="module">
-  import { writable, derived } from 'svelte/store'
+  import { writable, derived, get } from 'svelte/store'
 
   /** config */
   const iframeNum = 2
   const defaults = {
     validFor: 60,
     timeout: 5000,
+    gracePeriod: 1000,
   }
 
   /** stores and subscriptions */
   const queue = writable([])
   const actives = derived(queue, q => q.slice(0, iframeNum))
   actives.subscribe(actives =>
-    actives.forEach(({ options }) =>
+    actives.forEach(({ options }) => {
       setTimeout(() => removeFromQueue(options.prefetch), options.timeout)
-    )
+    })
   )
 
   /**
@@ -23,7 +24,7 @@
    */
   export function prefetch(path, options = {}) {
     prefetch.id = prefetch.id || 1
-
+    path = !path.href ? path : path.href.replace(/^(?:\/\/|[^/]+)*\//, '/')
     //replace first ? since were mixing user queries with routify queries
     path = path.replace('?', '&')
 
@@ -61,7 +62,27 @@
    */
   function removeFromQueue(idOrEvent) {
     const id = idOrEvent.data ? idOrEvent.data.prefetchId : idOrEvent
-    queue.update(q => q.filter(q => q.options.prefetch != id))
+    if (!id) return null
+
+    const entry = get(queue).find(
+      entry => entry && entry.options.prefetch == id
+    )
+    // removeFromQueue is called by both eventListener and timeout,
+    // but we can only remove the item once
+    if (entry) {
+      const { gracePeriod } = entry.options
+      const gracePromise = new Promise(resolve =>
+        setTimeout(resolve, gracePeriod)
+      )
+      const idlePromise = new Promise(resolve => {
+        window.requestIdleCallback
+          ? window.requestIdleCallback(resolve)
+          : setTimeout(resolve, gracePeriod + 1000)
+      })
+      Promise.all([gracePromise, idlePromise]).then(() => {
+        queue.update(q => q.filter(q => q.options.prefetch != id))
+      })
+    }
   }
 
   // Listen to message from child window
