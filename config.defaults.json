@@ -6,6 +6,6 @@
   "dynamicImports": false,
   "singleBuild": false,
   "noHashScroll": false,
-  "extensions": "html,svelte,md",
+  "extensions": "html,svelte,md,svx",
   "distDir": "dist"
 }
