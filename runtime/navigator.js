@@ -4,8 +4,6 @@ import { beforeUrlChange } from './helpers'
 import { urlToRoute } from './utils/urlToRoute'
 import { currentLocation } from './utils'
 
-const { _hooks } = beforeUrlChange
-
 export function init(routes, callback) {
   /** @type { ClientNode | false } */
   let lastRoute = false
@@ -106,7 +104,7 @@ function handleClick(event) {
 
 async function runHooksBeforeUrlChange(event) {
   const route = get(stores.route)
-  for (const hook of _hooks.filter(Boolean)) {
+  for (const hook of beforeUrlChange._hooks.filter(Boolean)) {
     // return false if the hook returns false
     const result = await hook(event, route) //todo remove route from hook. Its API Can be accessed as $page
     if (!result) return false
