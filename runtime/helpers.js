@@ -1,5 +1,5 @@
 import { getContext, tick } from 'svelte'
-import { derived, get } from 'svelte/store'
+import { derived, get, writable } from 'svelte/store'
 import { route, routes, location, rootContext, prefetchPath } from './store'
 import { pathToParams } from './utils'
 import { onAppLoaded } from './utils/onAppLoaded.js'
@@ -489,3 +489,15 @@ export const metatags = new Proxy(_metatags, {
     return true
   }
 })
+
+export const isChangingPage = (function () {
+  const store = writable(false)
+  beforeUrlChange.subscribe(fn => fn(event => {
+    store.set(true)
+    return true
+  }))
+  
+  afterPageLoad.subscribe(fn => fn(event => store.set(false)))
+
+  return store
+})()
