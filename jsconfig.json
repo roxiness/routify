@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "**/node_modules/*",
+    "**/*.spec.ts",
+    "test",
+    "**/tmp/*",
+    "example",
+    "**/dist/*",
+    "**/.history/*"
+  ]
+}
