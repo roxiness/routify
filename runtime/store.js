@@ -20,9 +20,9 @@ export const basepath = (() => {
     return {
         subscribe,
         set(value) {
-            if (value.match(/^\//))
+            if (value.match(/^[/(]/))
                 set(value)
-            else console.warn('Basepaths must start with /')
+            else console.warn('Basepaths must start with / or (')
         },
         update() { console.warn('Use assignment or set to update basepaths.') }
     }
