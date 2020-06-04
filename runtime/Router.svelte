@@ -19,9 +19,6 @@
 
   suppressWarnings()
 
-  if (!window.routify) {
-    window.routify = {}
-  }
 
   const updatePage = (...args) => navigator && navigator.updatePage(...args)
 
