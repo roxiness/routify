@@ -21,6 +21,10 @@ class ClientApi {
     }
     get next() { return _navigate(this, +1) }
     get prev() { return _navigate(this, -1) }
+    preload() {
+        this.__file.layouts.forEach(file => file.component())
+        this.__file.component() 
+    }
 }
 
 function _navigate(node, direction) {
