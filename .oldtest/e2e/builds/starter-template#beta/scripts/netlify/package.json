@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build": "npm run build:app && npm run build:netlify",
+    "build:app": "cd ../.. && npm i && npm run build",
+    "build:netlify": "node build && cd api/ssr && npm i",
+    "deploy": "npm run build:netlify && netlify deploy"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0"
+  }
+}
