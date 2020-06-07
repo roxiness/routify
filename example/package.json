@@ -16,7 +16,7 @@
     "deploy:now": "cd scripts/now && npm run deploy",
     "deploy:netlify": "cd scripts/netlify && npm run deploy",
     "rollup": "rollup -cw",
-    "routify": "routify -D --extensions svelte,html,svx,md"
+    "routify": "routify -D"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.0",
