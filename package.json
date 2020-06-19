@@ -1,6 +1,6 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.8.0-beta.24",
+  "version": "1.8.0-beta.9999",
   "description": "Routes for Svelte, automated by your file structure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@sveltech/ssr": "^0.0.11",
     "@types/node": ">=4.2.0 < 13",
+    "@sveltech/routify": "file:.",
     "cheap-watch": "^1.0.2",
     "commander": "^5.0.0",
     "dotenv": "^8.2.0",
