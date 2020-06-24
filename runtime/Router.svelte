@@ -13,6 +13,9 @@
   let layouts
   let navigator
 
+  window.routify = window.routify || {}
+  window.routify.inBrowser = !!window.navigator.userAgent.match('jsdom')
+
   Object.entries(config).forEach(([key, value]) => {
     defaultConfig[key] = value
   })
