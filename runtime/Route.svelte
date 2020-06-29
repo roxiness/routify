@@ -14,14 +14,16 @@
   import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
-  import { route, routes } from './store'
+  import { route, routes, rootContext } from './store'
   import { handleScroll } from './utils'
+  import { onAppLoaded } from './utils/onAppLoaded.js'
 
   /** @type {LayoutOrDecorator[]} */
   export let layouts = []
   export let scoped = {}
   export let Decorator = null
   export let childOfDecorator = false
+  export let isRoot = false
 
   let scopedSync = {}
   let layoutIsUpdated = false
@@ -43,7 +45,6 @@
 
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
-
 
   isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
@@ -73,14 +74,16 @@
     scopedSync = { ...scoped }
     lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
-    context.set({
+    const ctx = {
       layout: isDecorator ? parentContext.layout : layout,
       component: layout,
       componentFile,
       child: isDecorator
         ? parentContext.child
         : get(context) && get(context).child,
-    })
+    }
+    context.set(ctx)
+    if (isRoot) rootContext.set(ctx)
 
     if (parentContext && !isDecorator)
       parentContextStore.update(store => {
@@ -99,22 +102,18 @@
   $: setComponent(layout)
 
   async function onLastComponentLoaded() {
-    afterPageLoad._hooks.forEach(hook => hook(layout.api))    
+    afterPageLoad._hooks.forEach(hook => hook(layout.api))
     await tick()
     handleScroll(parentElement)
-    metatags.update()
-    if (!window['routify'].appLoaded) onAppLoaded()
-  }
+    if (!window['routify'].appLoaded) {
+      const pagePath = $context.component.path
+      const routePath = $route.path
+      const isOnCurrentRoute = pagePath === routePath //maybe we're getting redirected
 
-  async function onAppLoaded() {
-    const pagePath = $context.component.path
-    const routePath = $route.path
-    const isOnCurrentRoute = pagePath === routePath //maybe we're getting redirected
-
-    // Let everyone know the last child has rendered
-    if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
-      dispatchEvent(new CustomEvent('app-loaded'))
-      window['routify'].appLoaded = true
+      // Let everyone know the last child has rendered
+      if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
+        onAppLoaded({ path: pagePath, metatags })
+      }
     }
   }
 </script>

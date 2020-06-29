@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build": "echo \"dummy build\"",
+    "build:app": "cd ../.. && npm run build",
+    "deploy": "node build && npx now"
+  },
+  "dependencies": {
+    "@sveltech/ssr": "^0.0.9",
+    "fs-extra": "^8.1.0"
+  }
+}

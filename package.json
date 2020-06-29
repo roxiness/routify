@@ -1,6 +1,6 @@
 {
   "name": "@sveltech/routify",
-  "version": "0.0.0-development",
+  "version": "1.8.0-beta.9999",
   "description": "Routes for Svelte, automated by your file structure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
@@ -32,9 +32,7 @@
     "rollup-pluginutils": "^2.8.2",
     "yaml": "^1.9.2"
   },
-  "bin": {
-    "routify": "./plugins/cli.js"
-  },
+  "bin": "./plugins/cli.js",
   "directories": {
     "runtime": "runtime",
     "lib": "lib",
@@ -60,18 +58,12 @@
     "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
     "lint": "npm run eslint",
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
-    "test": "npm run test:e2e:setup && npm run test:e2e:starter-template",
-    "test:e2e:watch": "node test/e2e test --live",
-    "test:e2e:starter-template": "node test/e2e test --app \"cd __buildDir__ && npm run dev\"",
-    "test:e2e:setup": "node test/e2e setup",
-    "test:unit": "zoar",
-    "test:unit:purge": "del test/unit/build/*.expected.js",
-    "test:unit:refresh": "npm run test:unit:purge && npm run --silent test:unit",
-    "test:unit:watch": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit\"",
-    "test:unit:watch:only": "chokidar \"{test,lib,runtime,plugins}/**/*.js\" -c \"npm run --silent test:unit -- --only\"",
-    "test:watch": "run-s test:unit test:unit:watch",
-    "test(srtest)": "npm run --silent test:unit",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "pretest": "cd example && npm install && npm run dev",
+    "test": "cd test && ava tests/** --timeout 300s",
+    "test:cli": "cd test && ava tests/cli/** --timeout 300s",
+    "test:e2e": "cd test && ava tests/e2e/**",
+    "test:mock-api": "cd test && ava tests/mock-server/**"
   },
   "prettier": {
     "semi": false,

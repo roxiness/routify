@@ -1,18 +1,8 @@
+import HMR from '@sveltech/routify/hmr'
 import App from './App.svelte';
 
-const app = new App({
-	target: document.body,
-	props: {
-		name: 'world'
-	}
-});
+const app = HMR(App, { target: document.body }, 'routify-app')
 
 export default app;
 
-// recreate the whole app if an HMR update touches this module
-if (import.meta.hot) {
-	import.meta.hot.dispose(() => {
-		app.$destroy()
-	})
-	import.meta.hot.accept()
-}
+

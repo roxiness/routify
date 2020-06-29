@@ -1,19 +1,17 @@
 import * as stores from './store'
 import { get } from 'svelte/store'
 import { beforeUrlChange } from './helpers'
-import config from '../runtime.config'
-const { _hooks } = beforeUrlChange
+import { urlToRoute } from './utils/urlToRoute'
+import { currentLocation } from './utils'
 
 export function init(routes, callback) {
   /** @type { ClientNode | false } */
   let lastRoute = false
 
   function updatePage(proxyToUrl, shallow) {
-    const currentUrl = window.location.pathname
-    const url = proxyToUrl || currentUrl
-
+    const url = proxyToUrl || currentLocation()
     const route = urlToRoute(url, routes)
-    const currentRoute = shallow && urlToRoute(currentUrl, routes)
+    const currentRoute = shallow && urlToRoute(currentLocation(), routes)
     const contextRoute = currentRoute || route
     const layouts = [...contextRoute.layouts, route]
     if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?
@@ -106,65 +104,11 @@ function handleClick(event) {
 
 async function runHooksBeforeUrlChange(event) {
   const route = get(stores.route)
-  for (const hook of _hooks.filter(Boolean)) {
+  for (const hook of beforeUrlChange._hooks.filter(Boolean)) {
     // return false if the hook returns false
-    if (await !hook(event, route)) return false //todo remove route from hook. Its API Can be accessed as $page
+    const result = await hook(event, route) //todo remove route from hook. Its API Can be accessed as $page
+    if (!result) return false
   }
   return true
 }
 
-function urlToRoute(url, routes) {
-  const basepath = get(stores.basepath)
-  const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
-  if (!route)
-    throw new Error(
-      `Route could not be found. Make sure ${url}.svelte or ${url}/index.svelte exists. A restart may be required.`
-    )
-
-  const [, base, path] = url.match(`^(${get(stores.basepath)})(${route.regex})`)
-  if (config.queryHandler)
-    route.params = config.queryHandler.parse(window.location.search)
-
-  if (route.paramKeys) {
-    const layouts = layoutByPos(route.layouts)
-    const fragments = path.split('/').filter(Boolean)
-    const routeProps = getRouteProps(route.path)
-
-    routeProps.forEach((prop, i) => {
-      if (prop) {
-        const fragment = decodeURI(fragments[i])
-        route.params[prop] = fragment
-        if (layouts[i]) layouts[i].param = { [prop]: fragment }
-        else route.param = { [prop]: fragment }
-      }
-    })
-  }
-
-  route.leftover = url.replace(new RegExp(base + route.regex), '')
-
-  return route
-}
-
-/**
- *
- * @param {array} layouts
- */
-function layoutByPos(layouts) {
-  const arr = []
-  layouts.forEach(layout => {
-    arr[layout.path.split('/').filter(Boolean).length - 1] = layout
-  })
-  return arr
-}
-
-/**
- *
- * @param {string} url
- */
-function getRouteProps(url) {
-  return url
-    .split('/')
-    .filter(Boolean)
-    .map(f => f.match(/\:(.+)/))
-    .map(f => f && f[1])
-}

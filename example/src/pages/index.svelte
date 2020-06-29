@@ -1,1 +1,2 @@
-<h2 data-focus>Home</h2>
+
+pages/index.svelte abcasd23

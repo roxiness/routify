@@ -11,5 +11,13 @@
     "baseUrl": "./"
   },
   "include": ["**/*.js", "index.d.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "test", "tmp", "example"]
+  "exclude": [
+    "**/node_modules/*",
+    "**/*.spec.ts",
+    "test",
+    "**/tmp/*",
+    "example",
+    "**/dist/*",
+    "**/.history/*"
+  ]
 }
