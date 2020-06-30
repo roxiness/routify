@@ -77,6 +77,7 @@
     const ctx = {
       layout: isDecorator ? parentContext.layout : layout,
       component: layout,
+      route: $route,
       componentFile,
       child: isDecorator
         ? parentContext.child

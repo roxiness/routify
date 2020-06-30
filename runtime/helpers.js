@@ -1,7 +1,7 @@
 import { getContext, tick } from 'svelte'
 import { derived, get, writable } from 'svelte/store'
 import { route, routes, location, rootContext, prefetchPath } from './store'
-import { pathToParams } from './utils'
+import { pathToParamKeys } from './utils'
 import { onAppLoaded } from './utils/onAppLoaded.js'
 import config from '../runtime.config'
 import { urlToRoute } from './utils/urlToRoute'
@@ -106,9 +106,9 @@ function hookHandler(listener) {
  * @type {ParamsHelperStore}
  **/
 export const params = {
-  subscribe(listener) {
+  subscribe(run) {
     const ctx = getRoutifyContext()
-    return derived(ctx, ctx => ctx.layout.params).subscribe(listener)
+    return derived(ctx, ctx => ctx.route.params).subscribe(run)
   }
 }
 
@@ -212,7 +212,7 @@ export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
  */
 function _getQueryString(path, params) {
   if (!config.queryHandler) return ""
-  const pathParamKeys = pathToParams(path)
+  const pathParamKeys = pathToParamKeys(path)
   const queryParams = {}
   if (params) Object.entries(params).forEach(([key, value]) => {
     if (!pathParamKeys.includes(key))

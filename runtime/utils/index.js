@@ -37,12 +37,12 @@ export const pathToRegex = (str, recursive) => {
   return str
 }
 
-export const pathToParams = string => {
-  const params = []
+export const pathToParamKeys = string => {
+  const paramsKeys = []
   let matches
   while (matches = MATCH_PARAM.exec(string))
-    params.push(matches[1])
-  return params
+    paramsKeys.push(matches[1])
+  return paramsKeys
 }
 
 export const pathToRank = ({ path }) => {
