@@ -48,7 +48,7 @@
     target.style.top = `${rect.top}px`
     target.style.left = `${rect.left}px`
     
-    target.style.transform = 'translate(-50%, -50%)'
+    // target.style.transform = 'translate(-50%, -50%)'
     target.style.position = 'fixed'
   }
   function removeAbsolute({ target }) {
