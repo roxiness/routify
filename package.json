@@ -1,6 +1,6 @@
 {
   "name": "@sveltech/routify",
-  "version": "1.8.0-beta.9999",
+  "version": "1.999.999",
   "description": "Routes for Svelte, automated by your file structure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
@@ -10,6 +10,12 @@
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "MIT",
+  "bin": "./plugins/cli.js",
+  "directories": {
+    "runtime": "runtime",
+    "lib": "lib",
+    "test": "test"
+  },
   "bugs": {
     "url": "https://github.com/sveltech/routify/issues"
   },
@@ -32,14 +38,9 @@
     "rollup-pluginutils": "^2.8.2",
     "yaml": "^1.9.2"
   },
-  "bin": "./plugins/cli.js",
-  "directories": {
-    "runtime": "runtime",
-    "lib": "lib",
-    "test": "test"
-  },
   "devDependencies": {
     "@rixo/eslint-config-svelte": "^0.8.0",
+    "@sveltech/routify": "*",
     "chalk": "^4.0.0",
     "chokidar-cli": "^2.1.0",
     "del-cli": "^3.0.0",
@@ -52,6 +53,8 @@
     "typescript": "^3.8.3",
     "zoar": "^0.0.3",
     "zorax": "^0.0.5"
+  },
+  "peerDependencies": {
   },
   "scripts": {
     "eslint": "eslint lib plugins runtime",

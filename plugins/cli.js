@@ -68,8 +68,9 @@ program
 
 program
   .command('export')
-  .option('   --dist-dir <path>', 'Dist folder', defaults.distDir)
+  .option('    --dist-dir <path>', 'Dist folder', defaults.distDir)
   .option('-r, --routify-dir <path>', 'Routify dir', defaults.routifyDir)
+  .option('i,   --convert-to-index', 'Output foo.svelte to /foo/index.html', defaults.convertToIndex)
   // todo implement default basepath - avoid extra iteration
   .option('   --basepath <path>', 'Comma separated basepaths to use for exports', defaults.basepath)
   .action(options => {
