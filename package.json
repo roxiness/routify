@@ -39,6 +39,7 @@
     "yaml": "^1.9.2"
   },
   "devDependencies": {
+    "start-server-and-test": "^1.11.0",
     "@rixo/eslint-config-svelte": "^0.8.0",
     "@sveltech/routify": "*",
     "chalk": "^4.0.0",
@@ -54,18 +55,17 @@
     "zoar": "^0.0.3",
     "zorax": "^0.0.5"
   },
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "scripts": {
     "eslint": "eslint lib plugins runtime",
     "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
     "lint": "npm run eslint",
     "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
     "semantic-release": "semantic-release",
-    "pretest": "cd example && npm install && npm run dev",
+    "start:example": "cd example && npm install && npm run dev",
     "test": "cd test && ava tests/** --timeout 300s",
     "test:cli": "cd test && ava tests/cli/** --timeout 300s",
-    "test:e2e": "cd test && ava tests/e2e/**",
+    "test:e2e": "start-server-and-test start:example 5000 \"cd test && ava tests/e2e/** --watch\"",
     "test:mock-api": "cd test && ava tests/mock-server/**"
   },
   "prettier": {
