@@ -16,7 +16,9 @@ export function urlToRoute(url) {
             `Route could not be found.`
         )
 
-    const [, base, path] = url.match(`^(${basepath})(${route.regex})`)
+    const [, base] = url.match(`^(${basepath})${route.regex}`)
+    const path = url.slice(base.length)
+
     if (config.queryHandler)
         route.params = config.queryHandler.parse(window.location.search)
 
