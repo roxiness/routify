@@ -40,7 +40,6 @@
   },
   "devDependencies": {
     "start-server-and-test": "^1.11.0",
-    "@rixo/eslint-config-svelte": "^0.8.0",
     "@sveltech/routify": "*",
     "chalk": "^4.0.0",
     "chokidar-cli": "^2.1.0",
@@ -56,11 +55,7 @@
     "zorax": "^0.0.5"
   },
   "peerDependencies": {},
-  "scripts": {
-    "eslint": "eslint lib plugins runtime",
-    "prettier": "prettier \"{lib,plugins,runtime}/**/*.{js,svelte}\"",
-    "lint": "npm run eslint",
-    "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
+  "scripts": {    
     "semantic-release": "semantic-release",
     "start:example": "cd example && npm install && npm run dev",
     "test": "cd test && ava tests/** --timeout 300s",
