@@ -13,7 +13,7 @@ export function handleHash () {
     const validElementIdRegex = /^[A-Za-z]+[\w\-\:\.]*$/
     if (validElementIdRegex.test(hash)) {
       const el = document.querySelector(hash)
-      if (hash && el) el.scrollIntoView()
+      if (el) el.scrollIntoView()
     }
   }
 }
