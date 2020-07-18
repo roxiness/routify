@@ -11,7 +11,7 @@ export function handleHash () {
   const { hash } = window.location
   if (hash) {
     const validElementIdRegex = /^[A-Za-z]+[\w\-\:\.]*$/
-    if (validElementIdRegex.test(hash)) {
+    if (validElementIdRegex.test(hash.substring(1))) {
       const el = document.querySelector(hash)
       if (el) el.scrollIntoView()
     }
