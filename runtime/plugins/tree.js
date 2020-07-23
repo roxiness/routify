@@ -1,4 +1,4 @@
-import { createNodeMiddleware } from '../../lib/utils/middleware'
+import { createNodeMiddleware } from '../middleware'
 import { pathToParamKeys, pathToRank, pathToRegex } from '../utils'
 
 export const setRegex = createNodeMiddleware(({ file }) => {

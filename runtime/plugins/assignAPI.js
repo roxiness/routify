@@ -1,4 +1,4 @@
-import { createNodeMiddleware } from '../../lib/utils/middleware'
+import { createNodeMiddleware } from '../middleware'
 export const assignAPI = createNodeMiddleware(({ file }) => {
     file.api = new ClientApi(file)
 })
