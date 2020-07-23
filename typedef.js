@@ -76,7 +76,7 @@
  */
 
 /**
- * @typedef {Object} Meta
+ * @typedef {Object.<string, *>} Meta
  * @prop {Boolean=} preload Bundle with main app
  * @prop {*=} precache-order
  * @prop {*=} precache-proximity
