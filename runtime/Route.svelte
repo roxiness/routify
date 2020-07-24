@@ -26,7 +26,6 @@
   export let isRoot = false
 
   let scopedSync = {}
-  let layoutIsUpdated = false
   let isDecorator = false
 
   /** @type {HTMLElement} */
@@ -59,7 +58,6 @@
   }
 
   $: [layout, ...remainingLayouts] = layouts
-  $: layoutIsUpdated = !lastLayout || lastLayout.path !== layout.path
 
   /** @param {HTMLElement} el */
   function setParent(el) {
