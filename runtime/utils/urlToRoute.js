@@ -13,7 +13,7 @@ export function urlToRoute(url) {
     const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
     if (!route)
         throw new Error(
-            `Route could not be found.`
+            `Route could not be found for "${url}".`
         )
 
     const [, base] = url.match(`^(${basepath})${route.regex}`)
