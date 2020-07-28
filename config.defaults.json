@@ -1,7 +1,7 @@
 {
   "pages": "src/pages",
   "sourceDir": "public",
-  "routifyDir": "node_modules/@sveltech/routify/tmp",
+  "routifyDir": ".routify",
   "ignore": "",
   "dynamicImports": false,
   "singleBuild": false,
