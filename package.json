@@ -6,7 +6,7 @@
   "svelte": "runtime/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/roxi/routify.git"
+    "url": "https://github.com/roxiness/routify.git"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "MIT",
