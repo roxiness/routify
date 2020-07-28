@@ -164,44 +164,66 @@ export const url = {
 
 /** 
  * @param {{component: ClientNode}} $ctx 
- * @param {RouteNode} $oldRoute 
+ * @param {RouteNode} $currentRoute 
  * @param {RouteNode[]} $routes 
  * @param {{base: string, path: string}} $location
  * @returns {UrlHelper}
  */
-export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
+export function makeUrlHelper($ctx, $currentRoute, $routes, $location) {
   return function url(path, params, options) {
     const { component } = $ctx
-    path = path || './'
+    let el = path && path.nodeType && path
+
+    if (el) {
+      path = path.getAttribute('href')
+    }
+
+    path = resolvePath(path)
 
     const strict = options && options.strict !== false
     if (!strict) path = path.replace(/index$/, '')
 
-    if (path.match(/^\.\.?\//)) {
-      //RELATIVE PATH
-      let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
-      let dir = component.path.replace(/\/$/, '')
-      const traverse = breadcrumbs.match(/\.\.\//g) || []
-      traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
-      path = `${dir}/${relativePath}`.replace(/\/$/, '')
-
-    } else if (path.match(/^\//)) {
-      // ABSOLUTE PATH
-    } else {
-      // NAMED PATH
-      const matchingRoute = $routes.find(route => route.meta.name === path)
-      if (matchingRoute) path = matchingRoute.shortPath
+    if (el) {
+      el.href = populateUrl(path, params)
+      return { update(params) { el.href = populateUrl(path, params) } }
     }
 
-    /** @type {Object<string, *>} Parameters */
-    const allParams = Object.assign({}, $oldRoute.params, component.params, params)
-    let pathWithParams = path
-    for (const [key, value] of Object.entries(allParams)) {
-      pathWithParams = pathWithParams.replace(`:${key}`, value)
+    return populateUrl(path, params)
+
+    function resolvePath(path) {
+      if (!path) {
+        path = component.shortPath // use current path
+      }
+      else if (path.match(/^\.\.?\//)) {
+        //RELATIVE PATH
+        let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
+        let dir = component.path.replace(/\/$/, '')
+        const traverse = breadcrumbs.match(/\.\.\//g) || []
+        if (component.isPage) traverse.push(null)
+        traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
+        path = `${dir}/${relativePath}`.replace(/\/$/, '')
+        path = path || '/' // empty means root
+      } else if (path.match(/^\//)) {
+        // ABSOLUTE PATH
+      } else {
+        // NAMED PATH
+        const matchingRoute = $routes.find(route => route.meta.name === path)
+        if (matchingRoute) path = matchingRoute.shortPath
+      }
+      return path
     }
 
-    const fullPath = $location.base + pathWithParams + _getQueryString(path, params)
-    return fullPath.replace(/\?$/, '')
+    function populateUrl(path, params) {
+      /** @type {Object<string, *>} Parameters */
+      const allParams = Object.assign({}, $currentRoute.params, component.params, params)
+      let pathWithParams = path
+      for (const [key, value] of Object.entries(allParams)) {
+        pathWithParams = pathWithParams.replace(`:${key}`, value)
+      }
+
+      const _fullPath = $location.base + pathWithParams + _getQueryString(path, params)
+      return _fullPath.replace(/\?$/, '')
+    }
   }
 }
 
