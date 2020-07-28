@@ -49,7 +49,7 @@ program
       else if (files.length) log('Can only init in an empty directory.')
       else {
         log('Fetching template')
-        execSync(`npx degit https://github.com/sveltech/routify-starter#${branch}`)
+        execSync(`npx degit https://github.com/roxiness/routify-starter#${branch}`)
 
         if (install) {
           log('Installing dependencies')
