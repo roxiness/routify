@@ -1,5 +1,5 @@
 <script>
-    import {page} from '@sveltech/routify'
+    import {page} from '@roxi/routify'
 </script>
 
 <h1>{$page.title}</h1>

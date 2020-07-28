@@ -1,5 +1,5 @@
 <script>
-  import { beforeUrlChange, url } from '@sveltech/routify'
+  import { beforeUrlChange, url } from '@roxi/routify'
 
   $beforeUrlChange(async () => {
       await new Promise(resolve => setTimeout(resolve, 1000))
@@ -7,4 +7,4 @@
   })
 </script>
 
-<a href={$url('../page2')}>page2</a>
+<a href={$url('./page2')}>page2</a>

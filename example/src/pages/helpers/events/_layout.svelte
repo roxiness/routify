@@ -1,5 +1,5 @@
 <script>
-  import { afterPageLoad, url } from '@sveltech/routify'
+  import { afterPageLoad, url } from '@roxi/routify'
   let events = []
   $afterPageLoad(event => {
     console.log('wtf', event)

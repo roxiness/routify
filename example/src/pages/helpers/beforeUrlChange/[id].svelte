@@ -4,7 +4,7 @@
     beforeUrlChange,
     isChangingPage,
     url,
-  } from '@sveltech/routify'
+  } from '@roxi/routify'
   let isChanging = []
   let beforeUrlChangeRan = false
   let afterPageLoadRan = false

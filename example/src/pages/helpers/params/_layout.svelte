@@ -1,5 +1,5 @@
 <script>
-import {url, params} from '@sveltech/routify'
+import {url, params} from '@roxi/routify'
 // $: console.log('layout', $params)
 </script>
 

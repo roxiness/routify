@@ -1,7 +1,7 @@
 <script>
   import { setContext } from 'svelte'
-  import { Router, basepath } from '@sveltech/routify'
-  import { routes } from '@sveltech/routify/tmp/routes'
+  import { Router, basepath } from '@roxi/routify'
+  import { routes } from '../.routify/routes'
   import { writable } from 'svelte/store'
   import ServiceWorker from './ServiceWorker.svelte'
 

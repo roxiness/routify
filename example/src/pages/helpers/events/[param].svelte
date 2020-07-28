@@ -1,3 +1,3 @@
 <script>
-import {params} from '@sveltech/routify'
+import {params} from '@roxi/routify'
 </script>

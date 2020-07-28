@@ -1,5 +1,5 @@
 <script>
-  import { prefetch, layout, url } from '@sveltech/routify'
+  import { prefetch, layout, url } from '@roxi/routify'
 
   let cache_time = 60
   function prefetchPath(e) {
