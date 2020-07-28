@@ -1,6 +1,6 @@
 {
-  "name": "@sveltech/routify",
-  "version": "1.999.999",
+  "name": "@roxi/routify",
+  "version": "2.0.0-next-major",
   "description": "Routes for Svelte, automated by your file structure",
   "main": "lib/index.js",
   "svelte": "runtime/index.js",
