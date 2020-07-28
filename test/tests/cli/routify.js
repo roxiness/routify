@@ -14,7 +14,7 @@ test.serial('init creates new project', async t => {
 
     mkdirSync(outputDir)
     t.log('created dir')
-    const child = await execSync('npx @sveltech/routify init', { cwd: outputDir })
+    const child = await execSync('npx @roxi/routify init', { cwd: outputDir })
     t.assert(existsSync(resolve(outputDir, 'node_modules')))
     t.assert(existsSync(resolve(outputDir, 'src')))
     t.assert(existsSync(resolve(outputDir, 'scripts')))

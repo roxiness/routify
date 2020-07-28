@@ -1,10 +1,10 @@
 /// <reference path="./typedef.js" />
 
-declare module '@sveltech/routify' {  
-    export * from '@sveltech/routify/typings/runtime/helpers'
-    export * from '@sveltech/routify/typings/runtime/store'
+declare module '@roxi/routify' {  
+    export * from '@roxi/routify/typings/runtime/helpers'
+    export * from '@roxi/routify/typings/runtime/store'
     export const Router: import('svelte/internal').SvelteComponent
-    export const routify: typeof import('@sveltech/routify/plugins/rollup')
+    export const routify: typeof import('@roxi/routify/plugins/rollup')
     
     global {
         export const $page:ClientNodeApi
@@ -20,7 +20,7 @@ declare module '@sveltech/routify' {
     }
 }
 
-declare module '@sveltech/routify/tmp/routes' {
+declare module '@roxi/routify/tmp/routes' {
     export const tree: ClientNode
     export const routes: ClientNode[]
 }
