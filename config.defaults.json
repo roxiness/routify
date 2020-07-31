@@ -3,7 +3,7 @@
   "sourceDir": "public",
   "routifyDir": ".routify",
   "ignore": "",
-  "dynamicImports": false,
+  "dynamicImports": true,
   "singleBuild": false,
   "noHashScroll": false,
   "extensions": "html,svelte,md,svx",
