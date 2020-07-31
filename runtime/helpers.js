@@ -513,13 +513,13 @@ export const metatags = new Proxy(_metatags, {
 })
 
 export const isChangingPage = (function () {
-  const store = writable(false)
+  const isChangingPageStore = writable(false)
   beforeUrlChange.subscribe(fn => fn(event => {
-    store.set(true)
+    isChangingPageStore.set(true)
     return true
   }))
   
-  afterPageLoad.subscribe(fn => fn(event => store.set(false)))
+  afterPageLoad.subscribe(fn => fn(event => isChangingPageStore.set(false)))
 
-  return store
+  return isChangingPageStore
 })()
