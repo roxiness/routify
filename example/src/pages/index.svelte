@@ -1,2 +1,2 @@
 
-pages/index.svelte abcasd23
+/index.svelte
