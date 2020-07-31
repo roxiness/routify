@@ -1,3 +1,0 @@
-<slot>
-  <!-- optional fallback -->
-</slot>
