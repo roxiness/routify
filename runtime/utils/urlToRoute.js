@@ -7,6 +7,8 @@ import config from '../../runtime.config'
  * @return {ClientNode}
  */
 export function urlToRoute(url) {
+    url = config.urlTransform.remove(url)
+
     /** @type {RouteNode[]} */
     const routes = get(stores.routes)
     const basepath = get(stores.basepath)

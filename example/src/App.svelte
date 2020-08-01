@@ -5,10 +5,20 @@
   import { writable } from 'svelte/store'
   import ServiceWorker from './ServiceWorker.svelte'
 
+  const config = {}
   const params = new URLSearchParams(location.search)
   const bp = params.get('basepath')
-  if (bp) $basepath = bp    
+  const ut = params.get('urlTransform')
+
+  if (bp) $basepath = bp
+  if (ut) {
+    const re = new RegExp(`^/${ut}`)
+    config.urlTransform = {
+      apply: (x) => `/${ut}${x}`,
+      remove: (x) => x.replace(re, ''),
+    }
+  }
 </script>
 
-<Router {routes} />
+<Router {routes} {config} />
 <ServiceWorker />

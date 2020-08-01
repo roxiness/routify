@@ -188,7 +188,9 @@ export function makeUrlHelper($ctx, $currentRoute, $routes, $location) {
       return { update(params) { el.href = populateUrl(path, params) } }
     }
 
-    return populateUrl(path, params)
+    const url = populateUrl(path, params)
+
+    return config.urlTransform.apply(url)
 
     function resolvePath(path) {
       if (!path) {
@@ -221,7 +223,9 @@ export function makeUrlHelper($ctx, $currentRoute, $routes, $location) {
         pathWithParams = pathWithParams.replace(`:${key}`, value)
       }
 
-      const _fullPath = $location.base + pathWithParams + _getQueryString(path, params)
+      const base = $location.base || ''
+
+      const _fullPath = base + pathWithParams + _getQueryString(path, params)
       return _fullPath.replace(/\?$/, '')
     }
   }
