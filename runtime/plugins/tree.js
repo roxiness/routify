@@ -67,15 +67,13 @@ function _getSibling(file, direction) {
 
 export const assignIndex = createNodeMiddleware(({ file, parent }) => {
     if (file.isIndex) Object.defineProperty(parent, 'index', { get: () => file })
-    if (file.isLayout)
-        Object.defineProperty(parent, 'layout', { get: () => file })
 })
 
 export const assignLayout = createNodeMiddleware(({ file, scope }) => {
     Object.defineProperty(file, 'layouts', { get: () => getLayouts(file) })
     function getLayouts(file) {
         const { parent } = file
-        const layout = parent && parent.layout
+        const layout = parent && parent.component && parent
         const isReset = layout && layout.isReset
         const layouts = (parent && !isReset && getLayouts(parent)) || []
         if (layout) layouts.push(layout)
