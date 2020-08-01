@@ -8,7 +8,10 @@
   const config = {}
   const params = new URLSearchParams(location.search)
   const ut = params.get('urlTransform')
+  const uh = params.get('useHash')
 
+
+  if (uh) config.useHash = true
   if (ut) {
     const re = new RegExp(`^/${ut}`)
     config.urlTransform = {

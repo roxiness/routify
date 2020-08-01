@@ -1,3 +1,5 @@
+import config from '../../runtime.config'
+
 const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
 export function handleScroll (element) {
@@ -58,7 +60,7 @@ export const pathToRank = ({ path }) => {
 let warningSuppressed = false
 
 /* eslint no-console: 0 */
-export function suppressWarnings () {
+export function suppressWarnings() {
   if (warningSuppressed) return
   const consoleWarn = console.warn
   console.warn = function (msg, ...msgs) {
@@ -72,11 +74,21 @@ export function suppressWarnings () {
   warningSuppressed = true
 }
 
-export function currentLocation () {
+export function currentLocation() {
+  const path = getInternalUrlOverride()
+  if (path)
+    return path
+  else if (config.useHash)
+    return window.location.hash.replace(/#/, '')
+  else
+    return window.location.pathname
+}
+
+function getInternalUrlOverride() {
   const pathMatch = window.location.search.match(/__routify_path=([^&]+)/)
   const prefetchMatch = window.location.search.match(/__routify_prefetch=\d+/)
   window.routify = window.routify || {}
   window.routify.prefetched = prefetchMatch ? true : false
   const path = pathMatch && pathMatch[1].replace(/[#?].+/, '') // strip any thing after ? and #
-  return path || window.location.pathname
+  return path
 }

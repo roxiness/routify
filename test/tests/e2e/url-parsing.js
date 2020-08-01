@@ -14,9 +14,12 @@ const test = require('../../playwright-test')
 
 //todo test that outgoing/destroyed components don't fire
 
-
-
 test('urlTransform', async (t, page) => {
-    await page.goto('http://localhost:5000/bp/?urlTransform=bp');
-    t.assert(await page.$('"/index.svelte"'))
-});
+    await page.goto('http://localhost:5000/bp/helpers/url?urlTransform=bp');
+    t.assert(await page.$('"/helpers/url.svelte"'))
+})
+
+test('hash', async (t, page) => {
+    await page.goto('http://localhost:5000?useHash=1#/helpers/url');
+    t.assert(await page.$('"/helpers/url.svelte"'))
+})

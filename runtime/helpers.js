@@ -182,12 +182,15 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
     const strict = options && options.strict !== false
     if (!strict) path = path.replace(/index$/, '')
 
+    let url = resolveUrl(path, params)
+
     if (el) {
-      el.href = populateUrl(path, params)
-      return { update(params) { el.href = populateUrl(path, params) } }
+      el.href = url
+      return {
+        update(params) { el.href = resolveUrl(path, params) }
+      }
     }
 
-    const url = populateUrl(path, params)
 
     return config.urlTransform.apply(url)
 
@@ -212,6 +215,14 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
         if (matchingRoute) path = matchingRoute.shortPath
       }
       return path
+    }
+
+    function resolveUrl(path, params) {
+      const url = populateUrl(path, params)
+      if (config.useHash)
+        return `#${url}`
+      else
+        return url
     }
 
     function populateUrl(path, params) {

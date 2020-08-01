@@ -6,7 +6,8 @@ export default {
     urlTransform: {
         apply: x => x,
         remove: x => x
-    }
+    },
+    useHash: false
 }
 
 
