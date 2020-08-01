@@ -11,15 +11,14 @@ export function urlToRoute(url) {
 
     /** @type {RouteNode[]} */
     const routes = get(stores.routes)
-    const basepath = get(stores.basepath)
-    const route = routes.find(route => url.match(`^${basepath}${route.regex}`))
+    const route = routes.find(route => url.match(`^${route.regex}`))
     if (!route)
         throw new Error(
             `Route could not be found for "${url}".`
         )
 
-    const [, base] = url.match(`^(${basepath})${route.regex}`)
-    const path = url.slice(base.length)
+    
+    const path = url
 
     if (config.queryHandler)
         route.params = config.queryHandler.parse(window.location.search)
@@ -38,7 +37,7 @@ export function urlToRoute(url) {
         })
     }
 
-    route.leftover = url.replace(new RegExp(base + route.regex), '')
+    route.leftover = url.replace(new RegExp(route.regex), '')
 
     return route
 }

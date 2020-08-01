@@ -16,7 +16,6 @@ declare module '@roxi/routify' {
         export const $goto: import('./typings/runtime/helpers').GotoHelper
         export const $beforeUrlChange: import('./typings/runtime/helpers').BeforeUrlChangeHelper
         export const $ready: import('./typings/runtime/helpers').ReadyHelper
-        export let $basepath: String
     }
 }
 

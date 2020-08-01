@@ -1,6 +1,6 @@
 import { getContext, tick } from 'svelte'
 import { derived, get, writable } from 'svelte/store'
-import { route, routes, location, rootContext, prefetchPath } from './store'
+import { route, routes, rootContext, prefetchPath } from './store'
 import { pathToParamKeys } from './utils'
 import { onAppLoaded } from './utils/onAppLoaded.js'
 import config from '../runtime.config'
@@ -154,7 +154,7 @@ export const url = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
     return derived(
-      [ctx, route, routes, location],
+      [ctx, route, routes],
       args => makeUrlHelper(...args)
     ).subscribe(
       listener
@@ -166,10 +166,9 @@ export const url = {
  * @param {{component: ClientNode}} $ctx 
  * @param {RouteNode} $currentRoute 
  * @param {RouteNode[]} $routes 
- * @param {{base: string, path: string}} $location
  * @returns {UrlHelper}
  */
-export function makeUrlHelper($ctx, $currentRoute, $routes, $location) {
+export function makeUrlHelper($ctx, $currentRoute, $routes) {
   return function url(path, params, options) {
     const { component } = $ctx
     let el = path && path.nodeType && path
@@ -223,9 +222,8 @@ export function makeUrlHelper($ctx, $currentRoute, $routes, $location) {
         pathWithParams = pathWithParams.replace(`:${key}`, value)
       }
 
-      const base = $location.base || ''
 
-      const _fullPath = base + pathWithParams + _getQueryString(path, params)
+      const _fullPath = pathWithParams + _getQueryString(path, params)
       return _fullPath.replace(/\?$/, '')
     }
   }
