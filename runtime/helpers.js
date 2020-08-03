@@ -32,12 +32,16 @@ export const page = {
 }
 
 /** @type {ClientNodeHelperStore} */
-export const layout = {
+export const node = {
   subscribe(run) {
     const ctx = getRoutifyContext()
     return derived(ctx, ctx => ctx.layout.api).subscribe(run)
   }
 }
+/**
+ * deprecated
+ */
+export const layout = node
 
 /**
 * @typedef {{component: ClientNode}}  ContextHelper
@@ -126,7 +130,22 @@ export const leftover = {
   },
 }
 
+/** * 
+ * @param {ClientNodeApi} descendant 
+ * @param {ClientNodeApi} ancestor 
+ * @param {boolean} treatIndexAsAncestor 
+ */
+export function isAncestor(ancestor, descendant, treatIndexAsAncestor = true) {
+  ancestor = ancestor.__file || ancestor
+  descendant = descendant.__file || descendant
+  const siblings = descendant.parent === ancestor.parent
 
+  if (!ancestor.isIndex) return false
+  if (descendant.shortPath === ancestor.shortPath) return false
+
+  if (siblings && !descendant.isDir) return !!treatIndexAsAncestor
+  return descendant.shortPath.startsWith(ancestor.shortPath)
+}
 
 
 /**
@@ -531,7 +550,7 @@ export const isChangingPage = (function () {
     isChangingPageStore.set(true)
     return true
   }))
-  
+
   afterPageLoad.subscribe(fn => fn(event => isChangingPageStore.set(false)))
 
   return isChangingPageStore

@@ -1,9 +1,10 @@
 <script>
-  import { getConcestor } from '../helpers'
+  import { getConcestor, isAncestor } from '../helpers'
   import { fade } from 'svelte/transition'
   import { route } from '../'
   export let configs = []
   export let config = false
+  export let SiblingIndexIsAncestor = false
 
   const defaultConfig = {
     transition: fade,
@@ -13,11 +14,10 @@
 
   $: oldRoute = $route.last || $route
   $: [concestor, ancestor, oldAncestor] = getConcestor($route.api, oldRoute.api)
-  $: toAncestor = isAncestor(oldRoute, $route)
-  $: toDescendant = isAncestor($route, oldRoute)
+  $: toAncestor = isAncestor($route, oldRoute, SiblingIndexIsAncestor)
+  $: toDescendant = isAncestor(oldRoute, $route, SiblingIndexIsAncestor)
   $: toHigherIndex = ancestor && ancestor.meta.index > oldAncestor.meta.index
   $: toLowerIndex = ancestor && ancestor.meta.index < oldAncestor.meta.index
-
 
   $: meta = {
     toAncestor,
@@ -29,17 +29,10 @@
     ancestors: [ancestor, oldAncestor],
   }
 
-  $: _config = configs.find(({ condition }) => condition(meta)) || config || defaultConfig
+  $: _config =
+    configs.find(({ condition }) => condition(meta)) || config || defaultConfig
   $: normalizedConfig = { ...defaultConfig, ..._config }
   $: ({ transition, inParams, outParams } = normalizedConfig)
-
-  function isAncestor(descendant, ancestor) {
-    if(descendant.parent === ancestor.parent) return false
-    const { shortPath } = descendant.parent
-    const { shortPath: shortPath2 } = ancestor.parent
-    
-    return ancestor.isIndex && shortPath !== shortPath2 && shortPath.startsWith(shortPath2)
-  }
 
   function setAbsolute({ target }) {
     const rect = target.getBoundingClientRect()
@@ -47,8 +40,6 @@
     target.style.height = `${rect.height}px`
     target.style.top = `${rect.top}px`
     target.style.left = `${rect.left}px`
-    
-    // target.style.transform = 'translate(-50%, -50%)'
     target.style.position = 'fixed'
   }
   function removeAbsolute({ target }) {
@@ -71,8 +62,6 @@
   in:transition|local={inParams}
   out:transition|local={outParams}
   on:introstart={removeAbsolute}
-  on:outrostart={setAbsolute}
-  >
+  on:outrostart={setAbsolute}>
   <slot />
 </div>
-
