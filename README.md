@@ -6,7 +6,7 @@
 ----
 
 <p> 
-  <strong>Routify is a work in progress. Since v1.5 we have a stable release. But this is a relatively young project. You can expect it to evolve.</strong>
+  <strong>Routify 2 beta</strong>
 </p>
 
 ----
