@@ -6,7 +6,7 @@
 ----
 
 <p> 
-  <strong>Routify 2 beta</strong>
+  <strong>Routify 2 - beta</strong>
 </p>
 
 ----
