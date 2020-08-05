@@ -1,4 +1,4 @@
-const test = require('../../playwright-test')
+const test = require('../../../playwright-test')
 
 test('isAncestor', async (t, page) => {
     await page.goto('http://localhost:5000/helpers/isAncestor');
@@ -8,6 +8,5 @@ test('isAncestor', async (t, page) => {
     for (const err of errors) {
         t.log(await err.textContent())
     }
-    t.assert(!errors)
+    t.assert(!errors.length)
 })
-

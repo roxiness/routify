@@ -1,4 +1,4 @@
-const test = require('../../playwright-test')
+const test = require('../../../playwright-test')
 
 test('parameters work', async (t, page) => {
     await page.goto('http://localhost:5000/helpers/params/foo/bar/baz');

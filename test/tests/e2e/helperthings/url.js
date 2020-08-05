@@ -1,4 +1,4 @@
-const test = require('../../playwright-test')
+const test = require('../../../playwright-test')
 
 test('urls resolve correctly', async (t, page) => {
     let counter = 0

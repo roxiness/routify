@@ -16,7 +16,7 @@
   import { metatags, afterPageLoad } from './helpers.js'
   import { route, routes, rootContext } from './store'
   import { handleScroll } from './utils'
-  import { onAppLoaded } from './utils/onAppLoaded.js'
+  import { onPageLoaded } from './utils/onPageLoaded.js'
 
   /** @type {LayoutOrDecorator[]} */
   export let layouts = []
@@ -85,7 +85,7 @@
     if (isRoot) rootContext.set(ctx)
 
     if (parentContext && !isDecorator)
-      parentContextStore.update(store => {
+      parentContextStore.update((store) => {
         store.child = layout || store.child
         return store
       })
@@ -101,18 +101,14 @@
   $: setComponent(layout)
 
   async function onLastComponentLoaded() {
-    afterPageLoad._hooks.forEach(hook => hook(layout.api))
     await tick()
     handleScroll(parentElement)
-    if (!window['routify'].appLoaded) {
-      const pagePath = $context.component.path
-      const routePath = $route.path
-      const isOnCurrentRoute = pagePath === routePath //maybe we're getting redirected
 
-      // Let everyone know the last child has rendered
-      if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
-        onAppLoaded({ path: pagePath, metatags })
-      }
+    const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
+
+    // Let everyone know the last child has rendered
+    if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
+      onPageLoaded({ page: $context.component, metatags, afterPageLoad })
     }
   }
 </script>

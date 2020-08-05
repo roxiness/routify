@@ -2,7 +2,7 @@ import { getContext, tick } from 'svelte'
 import { derived, get, writable } from 'svelte/store'
 import { route, routes, rootContext, prefetchPath } from './store'
 import { pathToParamKeys } from './utils'
-import { onAppLoaded } from './utils/onAppLoaded.js'
+import { onPageLoaded } from './utils/onPageLoaded.js'
 import config from '../runtime.config'
 import { urlToRoute } from './utils/urlToRoute'
 import { prefetch as _prefetch } from './Prefetcher.svelte'
@@ -64,7 +64,7 @@ export const ready = {
     window['routify'].stopAutoReady = true
     async function ready() {
       await tick()
-      await onAppLoaded({ path: get(route).path, metatags })
+      await onPageLoaded({ page: get(route), metatags, afterPageLoad })
     }
     run(ready)
     return () => { }
@@ -544,13 +544,11 @@ export const metatags = new Proxy(_metatags, {
   }
 })
 
-export const isChangingPage = (function () {
-  const isChangingPageStore = writable(false)
-  beforeUrlChange.subscribe(fn => fn(event => {
-    isChangingPageStore.set(true)
-    return true
-  }))
 
+export const isChangingPage = (function () {
+  const isChangingPageStore = writable(true)
+
+  beforeUrlChange.subscribe(fn => fn(event => isChangingPageStore.set(true) || true))
   afterPageLoad.subscribe(fn => fn(event => isChangingPageStore.set(false)))
 
   return isChangingPageStore
