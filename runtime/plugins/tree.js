@@ -31,11 +31,10 @@ export const addMetaChildren = createNodeMiddleware(({ file }) => {
 
 export const setIsIndexable = createNodeMiddleware(payload => {
     const { file } = payload
-    const { isLayout, isFallback, meta } = file
-    file.isIndexable = !isLayout && !isFallback && meta.index !== false
+    const { isFallback, meta } = file
+    file.isIndexable =  !isFallback && meta.index !== false
     file.isNonIndexable = !file.isIndexable
 })
-
 
 export const assignRelations = createNodeMiddleware(({ file, parent }) => {
     Object.defineProperty(file, 'parent', { get: () => parent })
