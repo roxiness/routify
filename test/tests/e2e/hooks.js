@@ -11,10 +11,14 @@ test('beforeUrlChange blocks asynchronously', async (t, page) => {
     t.is(page.url(), 'http://localhost:5000/helpers/beforeUrlChange/page2')
 });
 
-test('changing parameter triggers beforeUrlChange, afterPageLoad and isChangingPage', async (t, page) => {
+test('updating parameter triggers beforeUrlChange, afterPageLoad and isChangingPage', async (t, page) => {
     await page.goto('http://dev.local:5000/helpers/beforeUrlChange/foo');
+    t.assert(await page.$('"beforeUrlChange ran 0"'))
+    t.assert(await page.$('"afterPageLoad ran 1"'))
+    t.assert(await page.$('"isChanging true,false"'))
+
     await page.click('"bar"')
-    t.assert(await page.$('"beforeUrlChange ran"'))
-    t.assert(await page.$('"afterPageLoad ran"'))
-    t.assert(await page.$('"isChanging false,true,false"'))
+    t.assert(await page.$('"beforeUrlChange ran 1"'))
+    t.assert(await page.$('"afterPageLoad ran 2"'))
+    t.assert(await page.$('"isChanging true,false,true,false"'))
 });
