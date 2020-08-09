@@ -1,5 +1,5 @@
 {
-  "name": "routify-docs-2020",
+  "name": "routify-test-example",
   "version": "1.0.0",
   "repository": {
     "type": "git",
@@ -48,6 +48,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "routify-dev-ui": "workspace:^0.0.3",
+    "routify-test-example": "link:",
     "workbox-window": "^5.1.3"
   }
 }
