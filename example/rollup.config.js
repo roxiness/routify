@@ -16,13 +16,13 @@ const buildDir = `${distDir}/build`
 const production = !process.env.ROLLUP_WATCH;
 const bundling = process.env.BUNDLING || production ? 'dynamic' : 'bundle'
 const shouldPrerender = (typeof process.env.PRERENDER !== 'undefined') ? process.env.PRERENDER : !!production
-
+let configCount = 0
 
 del.sync(distDir + '/**')
 
 function createConfig({ output, inlineDynamicImports, plugins = [] }) {
   const transform = inlineDynamicImports ? bundledTransform : dynamicTransform
-
+  configCount++
   return {
     inlineDynamicImports,
     input: `src/main.js`,
@@ -34,7 +34,7 @@ function createConfig({ output, inlineDynamicImports, plugins = [] }) {
     plugins: [
       copy({
         targets: [
-          { src: staticDir + '/**/!(__index.html)', dest: distDir },
+          configCount === 1 && { src: staticDir + '/**/!(__index.html)', dest: distDir },
           { src: `${staticDir}/__index.html`, dest: distDir, rename: '__app.html', transform },
         ], copyOnce: true
       }),
