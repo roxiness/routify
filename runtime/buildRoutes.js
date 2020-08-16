@@ -26,8 +26,7 @@ export function buildClientTree(tree) {
 
   const payload = { tree, routes: [] }
   for (let name of order) {
-    const syncFn = plugins[name].sync || plugins[name]
-    syncFn(payload)
+    plugins[name](payload)
   }
   return payload
 }
