@@ -22,7 +22,7 @@ program
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
   .action(program => {
     // Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
-    require('fs').writeFileSync(__dirname + '/../tmp/routes.js', 'export * from "../runtime/defaultTmp/routes"', 'utf-8')
+    require('fs').writeFileSync(`${defaults.routifyDir}/routes.js`, 'export * from "@sveltech/routify/runtime/defaultTmp/routes"', 'utf-8')
 
     const options = program.opts()
     Object.entries(options).forEach(([key, value]) => {
