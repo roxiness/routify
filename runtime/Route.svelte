@@ -34,9 +34,6 @@
   /** @type {LayoutOrDecorator} */
   let layout = null
 
-  /** @type {LayoutOrDecorator} */
-  let lastLayout = null
-
   /** @type {LayoutOrDecorator[]} */
   let remainingLayouts = []
 
@@ -70,7 +67,6 @@
     const parentContext = get(parentContextStore)
 
     scopedSync = { ...scoped }
-    lastLayout = layout
     if (remainingLayouts.length === 0) onLastComponentLoaded()
     const ctx = {
       layout: isDecorator ? parentContext.layout : layout,
