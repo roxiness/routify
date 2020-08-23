@@ -107,15 +107,21 @@
       onPageLoaded({ page: $context.component, metatags, afterPageLoad })
     }
   }
+  function getIndex(component) {
+    const paramIsPage = component.meta && component.meta['param-is-page']
+    const suffix = paramIsPage ? JSON.stringify(component.param) : ''
+    return component.path + suffix
+  }
 </script>
 
 {#if $context}
   {#if $context.component.isLayout === false}
-    {#each [$context] as { component, componentFile } (component.path)}
+    {#each [$context] as { component, componentFile } (getIndex(component))}
       <svelte:component
         this={componentFile}
         let:scoped={scopeToChild}
         let:decorator
+        index={getIndex(component)}
         {scoped}
         {scopedSync}
         {...layout.param || {}} />
