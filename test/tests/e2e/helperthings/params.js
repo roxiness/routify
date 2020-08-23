@@ -15,4 +15,18 @@ test('overloaded parameters', async (t, page) => {
     t.is(page.url(), 'http://localhost:5000/helpers/params')
 });
 
+test('component reloads when param-is-page=true', async(t, page) => {
+    await page.goto('http://localhost:5000/helpers/params/is-page/foo');
+    t.assert(await page.$('"[is-page.svelte] afterPageLoad count: 1"'))
+    await page.click('"Bar"')
+    t.assert(await page.$('"[is-page.svelte] afterPageLoad count: 1"'))
+})
+
+test('component doesn\' reload if param-is-page is missing', async(t, page) => {
+    await page.goto('http://localhost:5000/helpers/params/is-not-page/foo');
+    t.assert(await page.$('"[is-page.svelte] afterPageLoad count: 1"'))
+    await page.click('"Bar"')
+    t.assert(await page.$('"[is-page.svelte] afterPageLoad count: 2"'))
+})
+
 //todo test that outgoing/destroyed components don't fire
