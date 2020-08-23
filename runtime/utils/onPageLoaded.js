@@ -5,7 +5,8 @@ export async function onPageLoaded({ page, metatags, afterPageLoad }) {
     const prefetchId = prefetchMatch && prefetchMatch[1]
 
     for (const hook of afterPageLoad._hooks) {
-        await hook(page.api)
+        // deleted/invalidated hooks are left as undefined
+        if (hook) await hook(page.api)
     }
 
     metatags.update()
