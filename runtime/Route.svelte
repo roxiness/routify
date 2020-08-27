@@ -121,7 +121,6 @@
         this={componentFile}
         let:scoped={scopeToChild}
         let:decorator
-        index={getIndex(component)}
         {scoped}
         {scopedSync}
         {...layout.param || {}} />
