@@ -31,6 +31,33 @@ Includes SSR, prerendering, code splitting and much more.
 
 [Starter example](https://example.routify.dev/example) Example from the starter template. Refresh a page to see how it is loaded.
 
+### CLI (Command-Line Interface)
+
+> 💡 Example: `routify <command> <...options>`
+
+#### `run` - Default command
+* `-d`, `--debug` - Extra debugging
+* `-p`, `--pages <location>` - path/to/pages
+* `-i`, `--ignore <list>` - Blob of files and directories to be ignored
+* `-D`, `--dynamic-imports` - Code splitting
+* `-b`, `--single-build` - Don't watch for file changes
+* `-e`, `--extensions <names>` - Included file extensions (comma-separated)
+* `-c`, `--child-process <command>` - Run npm task when Routify is ready
+* `-r`, `--routify-dir <dir>` - Output directory for Routify's temporary files
+* `--no-hash-scroll` - Disable automatic scroll to hash
+
+#### `init` - Initializing a project
+* `-s`, `--start-dev` - Run `npm run dev` after installation
+* `-e`, `--no-example` - Deletes the example directory
+* `-n`, `no-install` - Prevents automatic NPM installation
+* `-b`, `--branch <name>` - Branch to checkout (commit hash or release tag compliant)
+
+#### `export` - Exporting a Routify program
+* `--dist-dir <path>` - Distrobution directory
+* `-r`, `--routify-dir <path>` - Routify directory
+* `-i`, `--convert-to-index` - Outputs pages as index files (e.g. `foo.svelte` -> `foo/index.html`)
+* `--basepath <path>` - Comma-separated basepaths (prefixes) to static exports.
+
 ## Tutorials
 
 * [Easy client-side SPA routing with Routify](https://www.youtube.com/watch?v=AGLUJlOC6f0) by Jitesh
