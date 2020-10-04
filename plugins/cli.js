@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const defaults = require('../lib/services/config').getConfig()
+const defaults = require('../lib/utils/config')()
 const stdio = 'inherit'
 
 program
