@@ -8,7 +8,9 @@ test('urls resolve correctly', async (t, page) => {
         withParam: '/helpers/path/:param',
         parent: '/helpers',
         grantParent: '/',
-        sibling: '/helpers/sibling'
+        sibling: '/helpers/sibling',
+        named: '/helpers/url',
+        unmatchedNamed: 'unmatched-named-path',
     }
     const types = ['prop', 'use', 'prop-param', 'use-param']
     
@@ -22,7 +24,7 @@ test('urls resolve correctly', async (t, page) => {
     param = 'updated'
     await runTests()
 
-    t.is(counter, 6*4*2, 'should text 6 urls in 4 modes with 2 parameters')
+    t.is(counter, 8*4*2, 'should text 6 urls in 4 modes with 2 parameters')
 
     async function runTests(){
         for (const [name, expect] of Object.entries(expectations)) {

@@ -11,7 +11,9 @@
         withParam: './path/:param',
         parent: './',
         grantParent: '../',
-        sibling: './sibling'
+        sibling: './sibling',
+        named: 'named-path',
+        unmatchedNamed: 'unmatched-named-path'
     }
 </script>
 
@@ -32,3 +34,5 @@
 <div><a href={$url(path, {foo, param})} class="url-{name}-prop-param" >prop-param</a>{$url(path, {foo, param})}</div>
 <div><a href={path} use:$url={{foo, param}} class="url-{name}-use-param" >use-param</a>{$url(path, {foo, param})}</div>
 {/each}
+
+<!-- routify:options name="named-path" -->

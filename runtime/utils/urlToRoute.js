@@ -10,14 +10,18 @@ export function urlToRoute(url) {
     url = config.urlTransform.remove(url)
 
     /** @type {RouteNode[]} */
-    const routes = get(stores.routes)
-    const route = routes.find(route => url.match(`^${route.regex}`))
+    const routes = get(stores.routes)    
+    const route =
+        // find a route with a matching name
+        routes.find(route => url === route.meta.name) ||
+        // or a matching path
+        routes.find(route => url.match(`^${route.regex}`))
+
     if (!route)
         throw new Error(
             `Route could not be found for "${url}".`
         )
 
-    
     const path = url
 
     if (config.queryHandler)
