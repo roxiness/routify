@@ -25,6 +25,6 @@ declare module '@roxi/routify/tmp/routes' {
 }
 
 declare module '@roxi/routify/hmr' {
-  let hmr: typeof import('./typings/hmr')
+  let hmr: typeof import('./typings/hmr').default
   export default hmr
 }
