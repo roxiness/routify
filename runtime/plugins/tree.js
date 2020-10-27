@@ -93,7 +93,7 @@ export const setPrototype = createNodeMiddleware(({ file }) => {
     const Prototype = file.root
         ? Root
         : file.children
-            ? file.isFile ? PageDir : Dir
+            ? file.isPage ? PageDir : Dir
             : file.isReset
                 ? Reset
                 : file.isLayout

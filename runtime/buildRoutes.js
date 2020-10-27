@@ -1,12 +1,19 @@
 
 
 import * as miscPlugins from './plugins/tree'
+import { restoreDefaults } from './utils/normalizeNode'
 import { assignAPI } from './plugins/assignAPI'
 
-const plugins = {...miscPlugins, assignAPI}
+const plugins = {
+  ...miscPlugins,
+  restoreDefaults: ({ tree }) => restoreDefaults(tree),
+  assignAPI
+}
 
 export function buildClientTree(tree) {
   const order = [
+    // all
+    "restoreDefaults",
     // pages
     "setParamKeys", //pages only
     "setRegex", //pages only
