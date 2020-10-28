@@ -24,7 +24,7 @@ export function init(routes, callback) {
     stores.route.set(route)
 
     //preload components in parallel
-    layouts.forEach(layout => layout.component())
+    route.api.preload()
 
     //run callback in Router.svelte
     callback(layouts)
