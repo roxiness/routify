@@ -192,11 +192,19 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
     const { component } = $ctx
     let el = path && path.nodeType && path
 
-    if (el) {
+    if (el)
       path = path.getAttribute('href')
-    }
 
     path = resolvePath(path)
+
+    // preload the route  
+    const route = $routes.find(route => [route.shortPath || '/', route.path].includes(path))
+    if (route && route.meta.preload === 'proximity' && window.requestIdleCallback) {
+      const delay = routify.appLoaded ? 0 : 1500
+      setTimeout(() => {
+        window.requestIdleCallback(() => route.api.preload())
+      }, delay)
+    }
 
     const strict = options && options.strict !== false
     if (!strict) path = path.replace(/index$/, '')
