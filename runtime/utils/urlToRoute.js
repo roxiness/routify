@@ -15,7 +15,7 @@ export function urlToRoute(url) {
         // find a route with a matching name
         routes.find(route => url === route.meta.name) ||
         // or a matching path
-        routes.find(route => url.match(`^${route.regex}`))
+        routes.find(route => url.match(route.regex))
 
     if (!route)
         throw new Error(

@@ -39,6 +39,7 @@ export const pathToRegex = (str, recursive) => {
   str = str.replace(/\/_fallback?$/, '(/|$)')
   str = str.replace(/\/index$/, '(/index)?') //index files should be matched even if not present in url
   str = str.replace(MATCH_PARAM, '([^/]+)') + suffix
+  str = `^${str}`
   return str
 }
 
