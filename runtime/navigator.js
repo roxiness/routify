@@ -8,7 +8,7 @@ export function init(routes, callback) {
   /** @type { ClientNode | false } */
   let lastRoute = false
 
-  function updatePage(proxyToUrl, shallow) {
+  async function updatePage(proxyToUrl, shallow) {
     const url = proxyToUrl || currentLocation()
     const route = urlToRoute(url, routes)
     const currentRoute = shallow && urlToRoute(currentLocation(), routes)
@@ -24,7 +24,7 @@ export function init(routes, callback) {
     stores.route.set(route)
 
     //preload components in parallel
-    route.api.preload()
+    await route.api.preload()
 
     //run callback in Router.svelte
     callback(layouts)

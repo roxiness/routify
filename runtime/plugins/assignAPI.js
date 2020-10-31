@@ -27,9 +27,10 @@ class ClientApi {
     }
     get next() { return _navigate(this, +1) }
     get prev() { return _navigate(this, -1) }
-    preload() {
-        this.__file.layouts.forEach(file => file.component())
-        this.__file.component() 
+    async preload() {
+        const filePromises = [...this.__file.layouts, this.__file]
+            .map(file => file.component())
+        await Promise.all(filePromises)
     }
 }
 
