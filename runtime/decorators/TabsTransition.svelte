@@ -1,14 +1,15 @@
 <script>
   import { scale, fly } from 'svelte/transition'
   import BaseTransition from './BaseTransition.svelte'
-
-  export let scoped
-  const { width } = scoped
-
+  import { getContext } from 'svelte'
+  export let width 
+  const ctx = getContext('routify')  
+  width = width || $ctx.parentNode.getBoundingClientRect().width
+  
   const configs = [
     {
       // New and old route are identical, do nothing
-      condition: ({ routes }) => routes[0] === routes[1],
+      condition: c => c.routes[0] === c.routes[1],
       transition: () => {},
     },
     {
@@ -26,14 +27,14 @@
     {
       condition: c => c.toHigherIndex,
       transition: fly,
-      inParams: { x: $width, duration: 500 },
-      outParams: { x: -$width, duration: 500 },
+      inParams: { x: width, duration: 500 },
+      outParams: { x: -width, duration: 500 },
     },
     {
       condition: c => c.toLowerIndex,
       transition: fly,
-      inParams: { x: -$width, duration: 500 },
-      outParams: { x: $width, duration: 500 },
+      inParams: { x: -width, duration: 500 },
+      outParams: { x: width, duration: 500 },
     },
     {
       // No matching config. We don't want a transition
@@ -43,6 +44,6 @@
   ]
 </script>
 
-<BaseTransition {configs}>
+<BaseTransition {configs} >
   <slot />
 </BaseTransition>

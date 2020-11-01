@@ -8,6 +8,7 @@
    * @prop {ClientNode} component
    * @prop {LayoutOrDecorator} child
    * @prop {SvelteComponent} ComponentFile
+   * @prop {HTMLElement} parentNode
    * */
 
   import '../typedef.js'
@@ -28,8 +29,6 @@
   let scopedSync = {}
   let isDecorator = false
 
-  /** @type {HTMLElement} */
-  let parentElement
 
   /** @type {LayoutOrDecorator} */
   let layout = null
@@ -41,6 +40,9 @@
 
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
+
+  /** @type {Node | Context} */
+  let mole = $parentContextStore
 
   isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
@@ -56,11 +58,6 @@
 
   $: [layout, ...remainingLayouts] = layouts
 
-  /** @param {HTMLElement} el */
-  function setParent(el) {
-    parentElement = el.parentElement
-  }
-
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
     /** @type {Context} */
@@ -73,6 +70,7 @@
       component: layout,
       route: $route,
       componentFile,
+      parentNode: mole.parentNode,
       child: isDecorator
         ? parentContext.child
         : get(context) && get(context).child,
@@ -98,7 +96,7 @@
 
   async function onLastComponentLoaded() {
     await tick()
-    handleScroll(parentElement)
+    handleScroll(mole.parentNode)
 
     const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
 
@@ -146,6 +144,4 @@
 {/if}
 
 <!-- get the parent element for scroll functionality -->
-{#if !parentElement}
-  <span use:setParent />
-{/if}
+<span bind:this={mole} />
