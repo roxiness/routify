@@ -41,8 +41,8 @@
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
 
-  /** @type {Node | Context} */
-  let mole = $parentContextStore
+  /** @type {Partial<Node | Context>} */
+  let mole = $parentContextStore || { parentNode: null }
 
   isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
