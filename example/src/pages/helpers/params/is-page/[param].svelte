@@ -11,6 +11,7 @@
 <div>
   <a href={null} use:$url={{ param: 'foo' }}>Foo</a>
   <a href={null} use:$url={{ param: 'bar' }}>Bar</a>
+  <a href={null} use:$url={{ overload: 'overloaded' }}>overload it</a>
 </div>
 <div>
     [is-page.svelte] afterPageLoad count: {count}

@@ -6,6 +6,8 @@
   })
 </script>
 
+<!-- routify:options query-params-is-page=true -->
+
 <div>
   <a href={null} use:$url={{ param: 'foo' }}>Foo</a>
   <a href={null} use:$url={{ param: 'bar' }}>Bar</a>

@@ -105,16 +105,20 @@
       onPageLoaded({ page: $context.component, metatags, afterPageLoad })
     }
   }
-  function getIndex(component) {
-    const paramIsPage = component.meta && component.meta['param-is-page']
-    const suffix = paramIsPage ? JSON.stringify(component.param) : ''
-    return component.path + suffix
+
+  /**  @param {ClientNode} layout */
+  function getID({ meta, path, param, params }) {
+    return JSON.stringify({
+      path,
+      param: (meta['param-is-page'] || meta['slug-is-page']) && param,
+      queryParams: meta['query-params-is-page'] && params,
+    })
   }
 </script>
 
 {#if $context}
   {#if $context.component.isLayout === false}
-    {#each [$context] as { component, componentFile } (getIndex(component))}
+    {#each [$context] as { component, componentFile } (getID(component))}
       <svelte:component
         this={componentFile}
         let:scoped={scopeToChild}
