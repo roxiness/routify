@@ -16,12 +16,9 @@
   window.routify = window.routify || {}
   window.routify.inBrowser = !window.navigator.userAgent.match('jsdom')
 
-  Object.entries(config).forEach(([key, value]) => {
-    defaultConfig[key] = value
-  })
+  Object.assign(defaultConfig, config)
 
   suppressWarnings()
-
 
   const updatePage = (...args) => navigator && navigator.updatePage(...args)
 
@@ -64,6 +61,5 @@
 {#if layouts && $route !== null}
   <Route {layouts} isRoot={true} />
 {/if}
-
 
 <Prefetcher />
