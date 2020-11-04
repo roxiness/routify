@@ -29,7 +29,6 @@
   let scopedSync = {}
   let isDecorator = false
 
-
   /** @type {LayoutOrDecorator} */
   let layout = null
 
@@ -41,8 +40,8 @@
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
 
-  /** @type {Partial<Node | Context>} */
-  let mole = $parentContextStore || { parentNode: null }
+  let parentNode
+  const setparentNode = (el) => (parentNode = el.parentNode)
 
   isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
@@ -70,7 +69,7 @@
       component: layout,
       route: $route,
       componentFile,
-      parentNode: mole.parentNode,
+      parentNode,
       child: isDecorator
         ? parentContext.child
         : get(context) && get(context).child,
@@ -96,7 +95,7 @@
 
   async function onLastComponentLoaded() {
     await tick()
-    handleScroll(mole.parentNode)
+    handleScroll(parentNode)
 
     const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
 
@@ -147,5 +146,5 @@
   {/if}
 {/if}
 
-<!-- get the parent element for scroll functionality -->
-<span bind:this={mole} />
+<!-- get the parent element for scroll and transitions -->
+<span use:setparentNode />
