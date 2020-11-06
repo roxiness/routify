@@ -65,7 +65,8 @@
     scopedSync = { ...scoped }
     if (remainingLayouts.length === 0) onLastComponentLoaded()
     const ctx = {
-      layout: isDecorator ? parentContext.layout : layout,
+      layout:
+        (layout.isLayout && layout) || (parentContext && parentContext.layout),
       component: layout,
       route: $route,
       componentFile,

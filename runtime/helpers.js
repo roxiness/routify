@@ -35,13 +35,17 @@ export const page = {
 export const node = {
   subscribe(run) {
     const ctx = getRoutifyContext()
+    return derived(ctx, ctx => ctx.component.api).subscribe(run)
+  }
+}
+
+/** @type {ClientNodeHelperStore} */
+export const layout = {
+  subscribe(run) {
+    const ctx = getRoutifyContext()
     return derived(ctx, ctx => ctx.layout.api).subscribe(run)
   }
 }
-/**
- * deprecated
- */
-export const layout = node
 
 /**
 * @typedef {{component: ClientNode}}  ContextHelper
