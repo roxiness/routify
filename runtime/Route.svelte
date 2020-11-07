@@ -12,15 +12,15 @@
    * */
 
   import '../typedef.js'
-  import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
+  import { getContext, setContext, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
-  import { route, routes, rootContext } from './store'
+  import { route, rootContext } from './store'
   import { handleScroll } from './utils'
   import { onPageLoaded } from './utils/onPageLoaded.js'
 
   /** @type {LayoutOrDecorator[]} */
-  export let layouts = []
+  export let nodes = []
   export let scoped = {}
   export let Decorator = null
   export let childOfDecorator = false
@@ -30,10 +30,10 @@
   let isDecorator = false
 
   /** @type {LayoutOrDecorator} */
-  let layout = null
+  let node = null
 
   /** @type {LayoutOrDecorator[]} */
-  let remainingLayouts = []
+  let remainingNodes = []
 
   const context = writable(null)
 
@@ -49,13 +49,13 @@
   $: if (isDecorator) {
     const decoratorLayout = {
       component: () => Decorator,
-      path: `${layouts[0].path}__decorator`,
+      path: `${nodes[0].path}__decorator`,
       isDecorator: true,
     }
-    layouts = [decoratorLayout, ...layouts]
+    nodes = [decoratorLayout, ...nodes]
   }
 
-  $: [layout, ...remainingLayouts] = layouts
+  $: [node, ...remainingNodes] = nodes
 
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
@@ -63,11 +63,11 @@
     const parentContext = get(parentContextStore)
 
     scopedSync = { ...scoped }
-    if (remainingLayouts.length === 0) onLastComponentLoaded()
+    if (remainingNodes.length === 0) onLastComponentLoaded()
     const ctx = {
       layout:
-        (layout.isLayout && layout) || (parentContext && parentContext.layout),
-      component: layout,
+        (node.isLayout && node) || (parentContext && parentContext.layout),
+      component: node,
       route: $route,
       componentFile,
       parentNode,
@@ -80,19 +80,19 @@
 
     if (parentContext && !isDecorator)
       parentContextStore.update((store) => {
-        store.child = layout || store.child
+        store.child = node || store.child
         return store
       })
   }
 
-  /**  @param {LayoutOrDecorator} layout */
-  function setComponent(layout) {
-    let PendingComponent = layout.component()
+  /**  @param {LayoutOrDecorator} node */
+  function setComponent(node) {
+    let PendingComponent = node.component()
     if (PendingComponent instanceof Promise)
       PendingComponent.then(onComponentLoaded)
     else onComponentLoaded(PendingComponent)
   }
-  $: setComponent(layout)
+  $: setComponent(node)
 
   async function onLastComponentLoaded() {
     await tick()
@@ -125,10 +125,10 @@
         let:decorator
         {scoped}
         {scopedSync}
-        {...layout.param || {}} />
+        {...node.param || {}} />
     {/each}
-    <!-- we need to check for remaining layouts, in case this component is a destroyed layout -->
-  {:else if remainingLayouts.length}
+    <!-- we need to check for remaining nodes, in case this component is a destroyed layout -->
+  {:else if remainingNodes.length}
     {#each [$context] as { component, componentFile } (component.path)}
       <svelte:component
         this={componentFile}
@@ -136,11 +136,11 @@
         let:decorator
         {scoped}
         {scopedSync}
-        {...layout.param || {}}>
+        {...node.param || {}}>
         <svelte:self
-          layouts={[...remainingLayouts]}
+          nodes={[...remainingNodes]}
           Decorator={typeof decorator !== 'undefined' ? decorator : Decorator}
-          childOfDecorator={layout.isDecorator}
+          childOfDecorator={node.isDecorator}
           scoped={{ ...scoped, ...scopeToChild }} />
       </svelte:component>
     {/each}

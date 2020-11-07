@@ -13,7 +13,7 @@ export function init(routes, callback) {
     const route = urlToRoute(url, routes)
     const currentRoute = shallow && urlToRoute(currentLocation(), routes)
     const contextRoute = currentRoute || route
-    const layouts = [...contextRoute.layouts, route]
+    const nodes = [...contextRoute.layouts, route]
     if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?
     route.last = lastRoute
     lastRoute = route
@@ -27,7 +27,7 @@ export function init(routes, callback) {
     await route.api.preload()
 
     //run callback in Router.svelte
-    callback(layouts)
+    callback(nodes)
   }
 
   const destroy = createEventListeners(updatePage)
