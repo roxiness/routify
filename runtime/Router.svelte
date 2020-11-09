@@ -10,24 +10,21 @@
   export let routes
   export let config = {}
 
-  let layouts
+  let nodes
   let navigator
 
   window.routify = window.routify || {}
   window.routify.inBrowser = !window.navigator.userAgent.match('jsdom')
 
-  Object.entries(config).forEach(([key, value]) => {
-    defaultConfig[key] = value
-  })
+  Object.assign(defaultConfig, config)
 
   suppressWarnings()
-
 
   const updatePage = (...args) => navigator && navigator.updatePage(...args)
 
   setContext('routifyupdatepage', updatePage)
 
-  const callback = res => (layouts = res)
+  const callback = res => (nodes = res)
 
   const cleanup = () => {
     if (!navigator) return
@@ -61,9 +58,8 @@
   onDestroy(cleanup)
 </script>
 
-{#if layouts && $route !== null}
-  <Route {layouts} isRoot={true} />
+{#if nodes && $route !== null}
+  <Route {nodes} isRoot={true} />
 {/if}
-
 
 <Prefetcher />

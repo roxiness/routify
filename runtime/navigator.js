@@ -8,12 +8,12 @@ export function init(routes, callback) {
   /** @type { ClientNode | false } */
   let lastRoute = false
 
-  function updatePage(proxyToUrl, shallow) {
+  async function updatePage(proxyToUrl, shallow) {
     const url = proxyToUrl || currentLocation()
     const route = urlToRoute(url, routes)
     const currentRoute = shallow && urlToRoute(currentLocation(), routes)
     const contextRoute = currentRoute || route
-    const layouts = [...contextRoute.layouts, route]
+    const nodes = [...contextRoute.layouts, route]
     if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?
     route.last = lastRoute
     lastRoute = route
@@ -23,8 +23,11 @@ export function init(routes, callback) {
       stores.urlRoute.set(route)
     stores.route.set(route)
 
+    //preload components in parallel
+    await route.api.preload()
+
     //run callback in Router.svelte
-    callback(layouts)
+    callback(nodes)
   }
 
   const destroy = createEventListeners(updatePage)

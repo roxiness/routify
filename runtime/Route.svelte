@@ -8,18 +8,19 @@
    * @prop {ClientNode} component
    * @prop {LayoutOrDecorator} child
    * @prop {SvelteComponent} ComponentFile
+   * @prop {HTMLElement} parentNode
    * */
 
   import '../typedef.js'
-  import { getContext, setContext, onDestroy, onMount, tick } from 'svelte'
+  import { getContext, setContext, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
-  import { route, routes, rootContext } from './store'
+  import { route, rootContext } from './store'
   import { handleScroll } from './utils'
-  import { onAppLoaded } from './utils/onAppLoaded.js'
+  import { onPageLoaded } from './utils/onPageLoaded.js'
 
   /** @type {LayoutOrDecorator[]} */
-  export let layouts = []
+  export let nodes = []
   export let scoped = {}
   export let Decorator = null
   export let childOfDecorator = false
@@ -28,22 +29,19 @@
   let scopedSync = {}
   let isDecorator = false
 
-  /** @type {HTMLElement} */
-  let parentElement
-
   /** @type {LayoutOrDecorator} */
-  let layout = null
-
-  /** @type {LayoutOrDecorator} */
-  let lastLayout = null
+  let node = null
 
   /** @type {LayoutOrDecorator[]} */
-  let remainingLayouts = []
+  let remainingNodes = []
 
   const context = writable(null)
 
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
+
+  let parentNode
+  const setparentNode = (el) => (parentNode = el.parentNode)
 
   isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
@@ -51,18 +49,13 @@
   $: if (isDecorator) {
     const decoratorLayout = {
       component: () => Decorator,
-      path: `${layouts[0].path}__decorator`,
+      path: `${nodes[0].path}__decorator`,
       isDecorator: true,
     }
-    layouts = [decoratorLayout, ...layouts]
+    nodes = [decoratorLayout, ...nodes]
   }
 
-  $: [layout, ...remainingLayouts] = layouts
-
-  /** @param {HTMLElement} el */
-  function setParent(el) {
-    parentElement = el.parentElement
-  }
+  $: [node, ...remainingNodes] = nodes
 
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
@@ -70,13 +63,14 @@
     const parentContext = get(parentContextStore)
 
     scopedSync = { ...scoped }
-    lastLayout = layout
-    if (remainingLayouts.length === 0) onLastComponentLoaded()
+    if (remainingNodes.length === 0) onLastComponentLoaded()
     const ctx = {
-      layout: isDecorator ? parentContext.layout : layout,
-      component: layout,
+      layout:
+        (node.isLayout && node) || (parentContext && parentContext.layout),
+      component: node,
       route: $route,
       componentFile,
+      parentNode,
       child: isDecorator
         ? parentContext.child
         : get(context) && get(context).child,
@@ -85,51 +79,56 @@
     if (isRoot) rootContext.set(ctx)
 
     if (parentContext && !isDecorator)
-      parentContextStore.update(store => {
-        store.child = layout || store.child
+      parentContextStore.update((store) => {
+        store.child = node || store.child
         return store
       })
   }
 
-  /**  @param {LayoutOrDecorator} layout */
-  function setComponent(layout) {
-    let PendingComponent = layout.component()
+  /**  @param {LayoutOrDecorator} node */
+  function setComponent(node) {
+    let PendingComponent = node.component()
     if (PendingComponent instanceof Promise)
       PendingComponent.then(onComponentLoaded)
     else onComponentLoaded(PendingComponent)
   }
-  $: setComponent(layout)
+  $: setComponent(node)
 
   async function onLastComponentLoaded() {
-    afterPageLoad._hooks.forEach(hook => hook(layout.api))
     await tick()
-    handleScroll(parentElement)
-    if (!window['routify'].appLoaded) {
-      const pagePath = $context.component.path
-      const routePath = $route.path
-      const isOnCurrentRoute = pagePath === routePath //maybe we're getting redirected
+    handleScroll(parentNode)
 
-      // Let everyone know the last child has rendered
-      if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
-        onAppLoaded({ path: pagePath, metatags })
-      }
+    const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
+
+    // Let everyone know the last child has rendered
+    if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
+      onPageLoaded({ page: $context.component, metatags, afterPageLoad })
     }
+  }
+
+  /**  @param {ClientNode} layout */
+  function getID({ meta, path, param, params }) {
+    return JSON.stringify({
+      path,
+      param: (meta['param-is-page'] || meta['slug-is-page']) && param,
+      queryParams: meta['query-params-is-page'] && params,
+    })
   }
 </script>
 
 {#if $context}
   {#if $context.component.isLayout === false}
-    {#each [$context] as { component, componentFile } (component.path)}
+    {#each [$context] as { component, componentFile } (getID(component))}
       <svelte:component
         this={componentFile}
         let:scoped={scopeToChild}
         let:decorator
         {scoped}
         {scopedSync}
-        {...layout.param || {}} />
+        {...node.param || {}} />
     {/each}
-    <!-- we need to check for remaining layouts, in case this component is a destroyed layout -->
-  {:else if remainingLayouts.length}
+    <!-- we need to check for remaining nodes, in case this component is a destroyed layout -->
+  {:else if remainingNodes.length}
     {#each [$context] as { component, componentFile } (component.path)}
       <svelte:component
         this={componentFile}
@@ -137,18 +136,16 @@
         let:decorator
         {scoped}
         {scopedSync}
-        {...layout.param || {}}>
+        {...node.param || {}}>
         <svelte:self
-          layouts={[...remainingLayouts]}
+          nodes={[...remainingNodes]}
           Decorator={typeof decorator !== 'undefined' ? decorator : Decorator}
-          childOfDecorator={layout.isDecorator}
+          childOfDecorator={node.isDecorator}
           scoped={{ ...scoped, ...scopeToChild }} />
       </svelte:component>
     {/each}
   {/if}
 {/if}
 
-<!-- get the parent element for scroll functionality -->
-{#if !parentElement}
-  <span use:setParent />
-{/if}
+<!-- get the parent element for scroll and transitions -->
+<span use:setparentNode />

@@ -18,7 +18,9 @@
     transform: translate(-50%, -50%);
     margin: 0;
   }
-  .error {min-height: 100px}
+  .error {
+    min-height: 100px;
+  }
   .svg {
     width: 200px;
     margin: auto;
@@ -105,6 +107,13 @@
   <div class="error">
     {#if error}
       <h3>Your app should probably have loaded by now</h3>
+      <p>
+        This is likely caused by
+        <strong>routifyDir</strong>
+        not matching the routes import path in
+        <strong>app.svelte</strong>
+        .
+      </p>
     {/if}
   </div>
 </div>

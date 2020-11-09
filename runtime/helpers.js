@@ -1,8 +1,8 @@
 import { getContext, tick } from 'svelte'
 import { derived, get, writable } from 'svelte/store'
-import { route, routes, location, rootContext, prefetchPath } from './store'
+import { route, routes, rootContext, prefetchPath } from './store'
 import { pathToParamKeys } from './utils'
-import { onAppLoaded } from './utils/onAppLoaded.js'
+import { onPageLoaded } from './utils/onPageLoaded.js'
 import config from '../runtime.config'
 import { urlToRoute } from './utils/urlToRoute'
 import { prefetch as _prefetch } from './Prefetcher.svelte'
@@ -28,6 +28,14 @@ function getRoutifyContext() {
 export const page = {
   subscribe(run) {
     return derived(route, route => route.api).subscribe(run)
+  }
+}
+
+/** @type {ClientNodeHelperStore} */
+export const node = {
+  subscribe(run) {
+    const ctx = getRoutifyContext()
+    return derived(ctx, ctx => ctx.component.api).subscribe(run)
   }
 }
 
@@ -60,7 +68,7 @@ export const ready = {
     window['routify'].stopAutoReady = true
     async function ready() {
       await tick()
-      await onAppLoaded({ path: get(route).path, metatags })
+      await onPageLoaded({ page: get(route), metatags, afterPageLoad })
     }
     run(ready)
     return () => { }
@@ -126,7 +134,22 @@ export const leftover = {
   },
 }
 
+/** * 
+ * @param {ClientNodeApi} descendant 
+ * @param {ClientNodeApi} ancestor 
+ * @param {boolean} treatIndexAsAncestor 
+ */
+export function isAncestor(ancestor, descendant, treatIndexAsAncestor = true) {
+  ancestor = ancestor.__file || ancestor
+  descendant = descendant.__file || descendant
+  const siblings = descendant.parent === ancestor.parent
 
+  if (!ancestor.isIndex) return false
+  if (descendant.shortPath === ancestor.shortPath) return false
+
+  if (siblings && !descendant.isDir) return !!treatIndexAsAncestor
+  return descendant.shortPath.startsWith(ancestor.shortPath)
+}
 
 
 /**
@@ -154,7 +177,7 @@ export const url = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
     return derived(
-      [ctx, route, routes, location],
+      [ctx, route, routes],
       args => makeUrlHelper(...args)
     ).subscribe(
       listener
@@ -164,44 +187,87 @@ export const url = {
 
 /** 
  * @param {{component: ClientNode}} $ctx 
- * @param {RouteNode} $oldRoute 
+ * @param {RouteNode} $currentRoute 
  * @param {RouteNode[]} $routes 
- * @param {{base: string, path: string}} $location
  * @returns {UrlHelper}
  */
-export function makeUrlHelper($ctx, $oldRoute, $routes, $location) {
+export function makeUrlHelper($ctx, $currentRoute, $routes) {
   return function url(path, params, options) {
     const { component } = $ctx
-    path = path || './'
+    let el = path && path.nodeType && path
+
+    if (el)
+      path = path.getAttribute('href')
+
+    path = resolvePath(path)
+
+    // preload the route  
+    const route = $routes.find(route => [route.shortPath || '/', route.path].includes(path))
+    if (route && route.meta.preload === 'proximity' && window.requestIdleCallback) {
+      const delay = routify.appLoaded ? 0 : 1500
+      setTimeout(() => {
+        window.requestIdleCallback(() => route.api.preload())
+      }, delay)
+    }
 
     const strict = options && options.strict !== false
     if (!strict) path = path.replace(/index$/, '')
 
-    if (path.match(/^\.\.?\//)) {
-      //RELATIVE PATH
-      let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
-      let dir = component.path.replace(/\/$/, '')
-      const traverse = breadcrumbs.match(/\.\.\//g) || []
-      traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
-      path = `${dir}/${relativePath}`.replace(/\/$/, '')
+    let url = resolveUrl(path, params)
 
-    } else if (path.match(/^\//)) {
-      // ABSOLUTE PATH
-    } else {
-      // NAMED PATH
-      const matchingRoute = $routes.find(route => route.meta.name === path)
-      if (matchingRoute) path = matchingRoute.shortPath
+    if (el) {
+      el.href = url
+      return {
+        update(params) { el.href = resolveUrl(path, params) }
+      }
     }
 
-    /** @type {Object<string, *>} Parameters */
-    const allParams = Object.assign({}, $oldRoute.params, component.params, params)
-    let pathWithParams = path
-    for (const [key, value] of Object.entries(allParams)) {
-      pathWithParams = pathWithParams.replace(`:${key}`, value)
+
+    return config.urlTransform.apply(url)
+
+    function resolvePath(path) {
+      if (!path) {
+        path = component.shortPath // use current path
+      }
+      else if (path.match(/^\.\.?\//)) {
+        //RELATIVE PATH
+        let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
+        let dir = component.path.replace(/\/$/, '')
+        const traverse = breadcrumbs.match(/\.\.\//g) || []
+        if (component.isPage) traverse.push(null)
+        traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
+        path = `${dir}/${relativePath}`.replace(/\/$/, '')
+        path = path || '/' // empty means root
+      } else if (path.match(/^\//)) {
+        // ABSOLUTE PATH
+      } else {
+        // NAMED PATH
+        const matchingRoute = $routes.find(route => route.meta.name === path)
+        if (matchingRoute) path = matchingRoute.shortPath
+      }
+      return path
     }
 
-    const fullPath = $location.base + pathWithParams + _getQueryString(path, params)
-    return fullPath.replace(/\?$/, '')
+    function resolveUrl(path, params) {
+      const url = populateUrl(path, params)
+      if (config.useHash)
+        return `#${url}`
+      else
+        return url
+    }
+
+    function populateUrl(path, params) {
+      /** @type {Object<string, *>} Parameters */
+      const allParams = Object.assign({}, $currentRoute.params, component.params, params)
+      let pathWithParams = path
+      for (const [key, value] of Object.entries(allParams)) {
+        pathWithParams = pathWithParams.replace(`:${key}`, value)
+      }
+
+
+      const _fullPath = pathWithParams + _getQueryString(path, params)
+      return _fullPath.replace(/\?$/, '')
+    }
   }
 }
 
@@ -490,14 +556,12 @@ export const metatags = new Proxy(_metatags, {
   }
 })
 
-export const isChangingPage = (function () {
-  const store = writable(false)
-  beforeUrlChange.subscribe(fn => fn(event => {
-    store.set(true)
-    return true
-  }))
-  
-  afterPageLoad.subscribe(fn => fn(event => store.set(false)))
 
-  return store
+export const isChangingPage = (function () {
+  const isChangingPageStore = writable(true)
+
+  beforeUrlChange.subscribe(fn => fn(event => isChangingPageStore.set(true) || true))
+  afterPageLoad.subscribe(fn => fn(event => isChangingPageStore.set(false)))
+
+  return isChangingPageStore
 })()

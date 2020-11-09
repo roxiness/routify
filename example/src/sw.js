@@ -5,7 +5,7 @@ import { CacheFirst, NetworkFirst, StaleWhileRevalidate } from 'workbox-strategi
 import { skipWaiting, clientsClaim } from 'workbox-core';
 import { precacheAndRoute, matchPrecache } from 'workbox-precaching';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { RoutifyPlugin, freshCacheData } from '@sveltech/routify/workbox-plugin'
+import { RoutifyPlugin, freshCacheData } from '@roxi/routify/workbox-plugin'
 
 
 

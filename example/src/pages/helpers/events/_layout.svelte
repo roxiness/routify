@@ -1,23 +1,20 @@
 <script>
-  import { afterPageLoad, url } from '@sveltech/routify'
+  import { afterPageLoad, isChangingPage, url } from '@roxi/routify'
   let events = []
-  $afterPageLoad(event => {
-    console.log('wtf', event)
+  $afterPageLoad((event) => {
     events = [...events, event]
   })
-  
 </script>
 
-<slot />
-
 <nav>
-  <a href="{$url('./:param', {param: 'param1'})}">param1</a>
-  <a href="{$url('./:param', {param: 'param2'})}">param2</a>
+  <a href={$url('./:param', { param: 'param1' })}>param1</a>
+  <a href={$url('./:param', { param: 'param2' })}>param2</a>
+  <a href={$url('./from')}>from</a>
+  <a href={$url('./to')}>to</a>
+  <a href={$url('./delayed-page')}>delayed page</a>
 </nav>
 
-{#each events as event}
-<div>
-  afterPageLoad: {event.title}
-</div>
-  <!-- content here -->
-{/each}
+<div>afterPageLoad count: {events.length}</div>
+
+<div>isChangingPage: {$isChangingPage}</div>
+<slot />

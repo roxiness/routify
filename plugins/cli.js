@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const defaults = require('../lib/services/config').getConfig()
+const defaults = require('../lib/utils/config')()
 const stdio = 'inherit'
 
 program
@@ -22,7 +22,11 @@ program
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
   .action(program => {
     // Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
+<<<<<<< HEAD
     require('fs-extra').outputFileSync(`${defaults.routifyDir}/routes.js`, 'export * from "@sveltech/routify/runtime/defaultTmp/routes"', 'utf-8')
+=======
+    require('fs-extra').outputFileSync(`${defaults.routifyDir}/routes.js`, 'export * from "@roxi/routify/runtime/defaultTmp/routes"', 'utf-8')
+>>>>>>> next-major
 
     const options = program.opts()
     Object.entries(options).forEach(([key, value]) => {

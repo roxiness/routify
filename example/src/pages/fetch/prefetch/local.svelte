@@ -1,5 +1,5 @@
 <script>
-  import { ready } from '@sveltech/routify'
+  import { ready } from '@roxi/routify'
 
   const data = fetch('/data.json')
     .then(res => res.json())

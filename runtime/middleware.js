@@ -29,7 +29,11 @@ function createNodeMiddleware(fn) {
      * @param {TreePayload} payload
      */
     const inner = async function execute(payload) {
-        return await nodeMiddleware(payload.tree, fn, { state: { treePayload: payload } })
+        return await nodeMiddleware(fn, {
+            file: payload.tree,
+            state: { treePayload: payload },
+            scope: {}
+        })
     }
 
     /**    
@@ -37,7 +41,11 @@ function createNodeMiddleware(fn) {
      * @param {TreePayload} payload
      */
     inner.sync = function executeSync(payload) {
-        return nodeMiddlewareSync(payload.tree, fn, { state: { treePayload: payload } })
+        return nodeMiddlewareSync(fn, {
+            file: payload.tree,
+            state: { treePayload: payload },
+            scope: {}
+        })
     }
 
     return inner
@@ -45,50 +53,49 @@ function createNodeMiddleware(fn) {
 
 /**
  * Node walker
- * @param {Object} file mutable file
  * @param {NodeWalkerProxy} fn function to be called for each file
  * @param {NodePayload=} payload 
  */
-async function nodeMiddleware(file, fn, payload) {
-    const { state, scope, parent } = payload || {}
-    payload = {
-        file,
-        parent,
-        state: state || {},            //state is shared by all files in the walk
-        scope: clone(scope || {}),     //scope is inherited by descendants
-    }
-
-    await fn(payload)
+async function nodeMiddleware(fn, payload) {
+    const _file = await fn(payload)
+    if (_file === false) return false
+    const file = _file || payload.file
 
     if (file.children) {
-        payload.parent = file
-        await Promise.all(file.children.map(_file => nodeMiddleware(_file, fn, payload)))
+        const children = await Promise.all(file.children.map(async _file => nodeMiddleware(fn, {
+            state: payload.state,
+            scope: clone(payload.scope || {}),
+            parent: payload.file,
+            file: await _file
+        })))
+        file.children = children.filter(Boolean)
     }
-    return payload
+
+    return file
 }
 
 /**
  * Node walker (sync version)
- * @param {Object} file mutable file
  * @param {NodeWalkerProxy} fn function to be called for each file
  * @param {NodePayload=} payload 
  */
-function nodeMiddlewareSync(file, fn, payload) {
-    const { state, scope, parent } = payload || {}
-    payload = {
-        file,
-        parent,
-        state: state || {},            //state is shared by all files in the walk
-        scope: clone(scope || {}),     //scope is inherited by descendants
-    }
+function nodeMiddlewareSync(fn, payload) {
+    const _file = fn(payload)
+    if (_file === false) return false
 
-    fn(payload)
+    const file = _file || payload.file
 
     if (file.children) {
-        payload.parent = file
-        file.children.map(_file => nodeMiddlewareSync(_file, fn, payload))
+        const children = file.children.map(_file => nodeMiddlewareSync(fn, {
+            state: payload.state,
+            scope: clone(payload.scope || {}),
+            parent: payload.file,
+            file: _file
+        }))
+        file.children = children.filter(Boolean)
     }
-    return payload
+
+    return file
 }
 
 

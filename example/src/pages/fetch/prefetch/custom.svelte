@@ -1,5 +1,5 @@
 <script>
-  import { ready, params } from '@sveltech/routify'
+  import { ready, params } from '@roxi/routify'
   
   let response = null
   let headers = null

@@ -31,11 +31,15 @@ export const addMetaChildren = createNodeMiddleware(({ file }) => {
 
 export const setIsIndexable = createNodeMiddleware(payload => {
     const { file } = payload
-    const { isLayout, isFallback, meta } = file
-    file.isIndexable = !isLayout && !isFallback && meta.index !== false
+    const { isFallback, meta } = file
+    const isDynamic = file.path.match('/:')
+    const isIndex = file.path.endsWith('/index')
+    const isIndexed = meta.index || meta.index === 0
+    const isHidden = meta.index === false
+
+    file.isIndexable = isIndexed || (!isFallback && !isDynamic && !isIndex && !isHidden)
     file.isNonIndexable = !file.isIndexable
 })
-
 
 export const assignRelations = createNodeMiddleware(({ file, parent }) => {
     Object.defineProperty(file, 'parent', { get: () => parent })
@@ -44,8 +48,8 @@ export const assignRelations = createNodeMiddleware(({ file, parent }) => {
     Object.defineProperty(file, 'lineage', { get: () => _getLineage(parent) })
 })
 
-function _getLineage(node, lineage = []){
-    if(node){
+function _getLineage(node, lineage = []) {
+    if (node) {
         lineage.unshift(node)
         _getLineage(node.parent, lineage)
     }
@@ -67,15 +71,13 @@ function _getSibling(file, direction) {
 
 export const assignIndex = createNodeMiddleware(({ file, parent }) => {
     if (file.isIndex) Object.defineProperty(parent, 'index', { get: () => file })
-    if (file.isLayout)
-        Object.defineProperty(parent, 'layout', { get: () => file })
 })
 
 export const assignLayout = createNodeMiddleware(({ file, scope }) => {
     Object.defineProperty(file, 'layouts', { get: () => getLayouts(file) })
     function getLayouts(file) {
         const { parent } = file
-        const layout = parent && parent.layout
+        const layout = parent && parent.component && parent
         const isReset = layout && layout.isReset
         const layouts = (parent && !isReset && getLayouts(parent)) || []
         if (layout) layouts.push(layout)
@@ -87,8 +89,8 @@ export const assignLayout = createNodeMiddleware(({ file, scope }) => {
 export const createFlatList = treePayload => {
     createNodeMiddleware(payload => {
         if (payload.file.isPage || payload.file.isFallback)
-        payload.state.treePayload.routes.push(payload.file)
-    }).sync(treePayload)    
+            payload.state.treePayload.routes.push(payload.file)
+    }).sync(treePayload)
     treePayload.routes.sort((c, p) => (c.ranking >= p.ranking ? -1 : 1))
 }
 
@@ -96,7 +98,7 @@ export const setPrototype = createNodeMiddleware(({ file }) => {
     const Prototype = file.root
         ? Root
         : file.children
-            ? file.isFile ? PageDir : Dir
+            ? file.isPage ? PageDir : Dir
             : file.isReset
                 ? Reset
                 : file.isLayout

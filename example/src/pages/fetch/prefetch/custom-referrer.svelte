@@ -1,5 +1,5 @@
 <script>
-  import { url, prefetch } from '@sveltech/routify'
+  import { url, prefetch } from '@roxi/routify'
   let reqUrl = '//localhost:5432/generic?foo=bar'
   let reqOptions = JSON.stringify(
     { headers: { 'x-delay': 0, 'x-routify-valid-for': 5, 'x-routify-write-headers': true } },
@@ -9,7 +9,7 @@
   let prefetchOptions = JSON.stringify({ validFor: 60 }, null, 2)
 
   let method = 'GET'
-  $: href = $url('../custom', {
+  $: href = $url('./custom', {
     url: reqUrl,
     options: reqOptions,
     prefetchOptions,

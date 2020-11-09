@@ -1,12 +1,19 @@
 
 
 import * as miscPlugins from './plugins/tree'
+import { restoreDefaults } from './utils/normalizeNode'
 import { assignAPI } from './plugins/assignAPI'
 
-const plugins = {...miscPlugins, assignAPI}
+const plugins = {
+  ...miscPlugins,
+  restoreDefaults: ({ tree }) => restoreDefaults(tree),
+  assignAPI
+}
 
 export function buildClientTree(tree) {
   const order = [
+    // all
+    "restoreDefaults",
     // pages
     "setParamKeys", //pages only
     "setRegex", //pages only
@@ -26,8 +33,9 @@ export function buildClientTree(tree) {
 
   const payload = { tree, routes: [] }
   for (let name of order) {
-    const syncFn = plugins[name].sync || plugins[name]
-    syncFn(payload)
+    // if plugin is a createNodeMiddleware, use the sync function
+    const fn = plugins[name].sync || plugins[name]
+    fn(payload)
   }
   return payload
 }
