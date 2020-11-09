@@ -26,6 +26,7 @@
   "dependencies": {
     "@roxi/ssr": "^0.2.1",
     "@types/node": ">=4.2.0 < 13",
+    "chalk": "^4.0.0",
     "cheap-watch": "^1.0.2",
     "commander": "^5.0.0",
     "configent": "^1.0.3",
