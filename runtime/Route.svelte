@@ -39,6 +39,7 @@
 
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
+  $: parentContext = $parentContextStore
 
   let parentNode
   const setparentNode = (el) => (parentNode = el.parentNode)
@@ -60,7 +61,6 @@
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
     /** @type {Context} */
-    const parentContext = get(parentContextStore)
 
     scopedSync = { ...scoped }
     if (remainingNodes.length === 0) onLastComponentLoaded()
@@ -70,19 +70,10 @@
       component: node,
       route: $route,
       componentFile,
-      parentNode,
-      child: isDecorator
-        ? parentContext.child
-        : get(context) && get(context).child,
+      parentNode: parentNode || (parentContext && parentContext.parentNode)
     }
     context.set(ctx)
     if (isRoot) rootContext.set(ctx)
-
-    if (parentContext && !isDecorator)
-      parentContextStore.update((store) => {
-        store.child = node || store.child
-        return store
-      })
   }
 
   /**  @param {LayoutOrDecorator} node */
