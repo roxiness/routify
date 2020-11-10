@@ -3,11 +3,6 @@
     <img src="https://badgen.net/npm/v/@roxi/routify" alt="Badge" />
 </div> 
 
-----
-
-<p> 
-  <strong>Routify 2 - beta</strong>
-</p>
 
 ----
 
@@ -24,7 +19,7 @@
 
 ## Template
 
-[Routify starter template](https://github.com/roxi/routify-starter)
+[Routify starter template](https://github.com/roxiness/routify-starter)
 Includes SSR, prerendering, code splitting and much more.
 
 ## Example
@@ -47,4 +42,4 @@ https://discord.gg/ntKJD5B
 
 ## Older versions
 
-For the old version (svelte-filerouter), please go [here](https://github.com/roxi/routify/tree/v1)
+For the old version (svelte-filerouter), please go [here](https://github.com/roxiness/routify/tree/v1)
