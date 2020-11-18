@@ -11,6 +11,8 @@
    * @prop {HTMLElement} parentNode
    * */
 
+  import { suppressComponentWarnings } from './utils'
+  import Noop from './decorators/Noop.svelte'
   import '../typedef.js'
   import { getContext, setContext, tick } from 'svelte'
   import { writable, get } from 'svelte/store'
@@ -22,18 +24,13 @@
   /** @type {LayoutOrDecorator[]} */
   export let nodes = []
   export let scoped = {}
-  export let Decorator = null
-  export let childOfDecorator = false
   export let isRoot = false
+  export let decorator = undefined
 
   let scopedSync = {}
-  let isDecorator = false
 
   /** @type {LayoutOrDecorator} */
   let node = null
-
-  /** @type {LayoutOrDecorator[]} */
-  let remainingNodes = []
 
   const context = writable(null)
 
@@ -44,17 +41,7 @@
   let parentNode
   const setparentNode = (el) => (parentNode = el.parentNode)
 
-  isDecorator = Decorator && !childOfDecorator
   setContext('routify', context)
-
-  $: if (isDecorator) {
-    const decoratorLayout = {
-      component: () => Decorator,
-      path: `${nodes[0].path}__decorator`,
-      isDecorator: true,
-    }
-    nodes = [decoratorLayout, ...nodes]
-  }
 
   $: [node, ...remainingNodes] = nodes
 
@@ -64,13 +51,15 @@
 
     scopedSync = { ...scoped }
     if (remainingNodes.length === 0) onLastComponentLoaded()
+
     const ctx = {
+      decorator: (decorator === false || !parentContext) && Noop || decorator,
       layout:
         (node.isLayout && node) || (parentContext && parentContext.layout),
       component: node,
       route: $route,
       componentFile,
-      parentNode: parentNode || (parentContext && parentContext.parentNode)
+      parentNode: parentNode || (parentContext && parentContext.parentNode),
     }
     context.set(ctx)
     if (isRoot) rootContext.set(ctx)
@@ -105,22 +94,12 @@
       queryParams: meta['query-params-is-page'] && params,
     })
   }
+  $: $context && suppressComponentWarnings($context, tick)
 </script>
 
 {#if $context}
-  {#if $context.component.isLayout === false}
-    {#each [$context] as { component, componentFile } (getID(component))}
-      <svelte:component
-        this={componentFile}
-        let:scoped={scopeToChild}
-        let:decorator
-        {scoped}
-        {scopedSync}
-        {...node.param || {}} />
-    {/each}
-    <!-- we need to check for remaining nodes, in case this component is a destroyed layout -->
-  {:else if remainingNodes.length}
-    {#each [$context] as { component, componentFile } (component.path)}
+  {#each [$context] as { component, componentFile, decorator } (getID(component))}
+    <svelte:component this={decorator}>
       <svelte:component
         this={componentFile}
         let:scoped={scopeToChild}
@@ -128,15 +107,15 @@
         {scoped}
         {scopedSync}
         {...node.param || {}}>
-        <svelte:self
-          nodes={[...remainingNodes]}
-          Decorator={typeof decorator !== 'undefined' ? decorator : Decorator}
-          childOfDecorator={node.isDecorator}
-          scoped={{ ...scoped, ...scopeToChild }} />
+        {#if component && remainingNodes.length}
+          <svelte:self
+            {decorator}
+            nodes={[...remainingNodes]}
+            scoped={{ ...scoped, ...scopeToChild }} />
+        {/if}
       </svelte:component>
-    {/each}
-  {/if}
+    </svelte:component>
+  {/each}
 {/if}
-
 <!-- get the parent element for scroll and transitions -->
 <span use:setparentNode />

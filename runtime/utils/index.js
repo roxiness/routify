@@ -2,13 +2,13 @@ import config from '../../runtime.config'
 
 const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
-export function handleScroll (element) {
+export function handleScroll(element) {
   if (navigator.userAgent.includes('jsdom')) return false
   scrollAncestorsToTop(element)
   handleHash()
 }
 
-export function handleHash () {
+export function handleHash() {
   if (navigator.userAgent.includes('jsdom')) return false
   const { hash } = window.location
   if (hash) {
@@ -20,7 +20,7 @@ export function handleHash () {
   }
 }
 
-export function scrollAncestorsToTop (element) {
+export function scrollAncestorsToTop(element) {
   if (
     element &&
     element.scrollTo &&
@@ -58,21 +58,32 @@ export const pathToRank = ({ path }) => {
     .join('')
 }
 
-let warningSuppressed = false
+/** Supresses Routify caused logs and warnings for one tick */
+export function suppressComponentWarnings(ctx, tick) {
+  suppressComponentWarnings._console = suppressComponentWarnings._console || { log: console.log, warn: console.warn }
+  const { _console } = suppressComponentWarnings
 
-/* eslint no-console: 0 */
-export function suppressWarnings() {
-  if (warningSuppressed) return
-  const consoleWarn = console.warn
-  console.warn = function (msg, ...msgs) {
-    const ignores = [
-      "was created with unknown prop 'scoped'",
-      "was created with unknown prop 'scopedSync'",
-    ]
-    if (!ignores.find(iMsg => msg.includes(iMsg)))
-      return consoleWarn(msg, ...msgs)
+  name = ctx.componentFile.name
+    .replace(/Proxy<_?(.+)>/, '$1') //nollup wraps names in Proxy<...>
+    .replace(/^Index$/, ctx.component.shortPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
+    .replace(/^./, s => s.toUpperCase()) //capitalize first letter
+    .replace(/\:(.+)/, 'U5B$1u5D') // :id => U5Bidu5D
+
+  const ignores = [
+    `<${name}> received an unexpected slot "default".`,
+    `<${name}> was created with unknown prop 'scoped'`,
+    `<${name}> was created with unknown prop 'scopedSync'`,
+  ]
+  for (const log of ['log', 'warn']) {
+    console[log] = (...args) => {
+      if (!ignores.includes(args[0]))
+        _console[log](...args)
+    }
+    tick().then(() => {
+      //after component has been created, we want to restore the console method (log or warn)
+      console[log] = _console[log]
+    })
   }
-  warningSuppressed = true
 }
 
 export function currentLocation() {

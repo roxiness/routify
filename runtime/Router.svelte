@@ -4,7 +4,6 @@
   import Prefetcher from './Prefetcher.svelte'
   import { init } from './navigator.js'
   import { route, routes as routesStore, prefetchPath } from './store.js'
-  import { suppressWarnings } from './utils'
   import defaultConfig from '../runtime.config'
 
   export let routes
@@ -17,8 +16,6 @@
   window.routify.inBrowser = !window.navigator.userAgent.match('jsdom')
 
   Object.assign(defaultConfig, config)
-
-  suppressWarnings()
 
   const updatePage = (...args) => navigator && navigator.updatePage(...args)
 
