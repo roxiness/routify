@@ -3,7 +3,7 @@
 declare module '@roxi/routify' {
   export * from '@roxi/routify/typings/runtime/helpers'
   export * from '@roxi/routify/typings/runtime/store'
-  export const Router: import('svelte/internal').SvelteComponent
+  export const Router: typeof import('./runtime/Router.svelte').default
   export const routify: typeof import('@roxi/routify/plugins/rollup')
 
   global {
