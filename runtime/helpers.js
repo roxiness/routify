@@ -298,11 +298,12 @@ function _getQueryString(path, params) {
 * */
 export const goto = {
   subscribe(listener) {
+    const routifyUpdatePage = getContext('routifyupdatepage')
     return derived(url,
       url => function goto(path, params, _static, shallow) {
         const href = url(path, params)
         if (!_static) history.pushState({}, null, href)
-        else getContext('routifyupdatepage')(href, shallow)
+        else routifyUpdatePage(href, shallow)
       }
     ).subscribe(
       listener
@@ -315,11 +316,12 @@ export const goto = {
  * */
 export const redirect = {
   subscribe(listener) {
+    const routifyUpdatePage = getContext('routifyupdatepage')
     return derived(url,
       url => function redirect(path, params, _static, shallow) {
         const href = url(path, params)
         if (!_static) history.replaceState({}, null, href)
-        else getContext('routifyupdatepage')(href, shallow)
+        else routifyUpdatePage(href, shallow)
       }
     ).subscribe(
       listener
