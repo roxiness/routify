@@ -60,6 +60,13 @@ type ClientNodeApi = {
     } & DefinedFile & ClientNodeSpecifics;
 };
 /**
+ * Navigation
+ */
+type RouteNavigator = {
+    updatePage(): (proxyToUrl: any, shallow: any) => Promise<void>,
+    destroy(): void
+}
+/**
  * File
  */
 type RouteNode = {

@@ -3,7 +3,7 @@
   import Route from './Route.svelte'
   import Prefetcher from './Prefetcher.svelte'
   import { init } from './navigator.js'
-  import { route, routes as routesStore, prefetchPath } from './store.js'
+  import { route, routes as routesStore, prefetchPath, routeNavigator as navigator } from './store.js'
   import { suppressWarnings } from './utils'
   import defaultConfig from '../runtime.config'
 
@@ -11,7 +11,6 @@
   export let config = {}
 
   let nodes
-  let navigator
 
   window.routify = window.routify || {}
   window.routify.inBrowser = !window.navigator.userAgent.match('jsdom')
@@ -20,16 +19,12 @@
 
   suppressWarnings()
 
-  const updatePage = (...args) => navigator && navigator.updatePage(...args)
-
-  setContext('routifyupdatepage', updatePage)
-
   const callback = res => (nodes = res)
 
   const cleanup = () => {
-    if (!navigator) return
-    navigator.destroy()
-    navigator = null
+    if (!$navigator) return
+    $navigator.destroy()
+    $navigator = null
   }
 
   let initTimeout = null
@@ -47,9 +42,9 @@
     clearTimeout(initTimeout)
     initTimeout = setTimeout(() => {
       cleanup()
-      navigator = init(routes, callback)
+      $navigator = init(routes, callback)
       routesStore.set(routes)
-      navigator.updatePage()
+      $navigator.updatePage()
     })
   }
 

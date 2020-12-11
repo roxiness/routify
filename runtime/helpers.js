@@ -1,6 +1,6 @@
 import { getContext, tick } from 'svelte'
 import { derived, get, writable } from 'svelte/store'
-import { route, routes, rootContext, prefetchPath } from './store'
+import { route, routes, rootContext, prefetchPath, routeNavigator as navigator } from './store'
 import { pathToParamKeys } from './utils'
 import { onPageLoaded } from './utils/onPageLoaded.js'
 import config from '../runtime.config'
@@ -13,8 +13,8 @@ import { prefetch as _prefetch } from './Prefetcher.svelte'
  * @typedef {Object} RoutifyContext
  * @prop {ClientNode} component
  * @prop {ClientNode} layout
- * @prop {any} componentFile 
- * 
+ * @prop {any} componentFile
+ *
  *  @returns {import('svelte/store').Readable<RoutifyContext>} */
 function getRoutifyContext() {
   return getContext('routify') || rootContext
@@ -23,7 +23,7 @@ function getRoutifyContext() {
 
 /**
  * @typedef {import('svelte/store').Readable<ClientNodeApi>} ClientNodeHelperStore
- * @type { ClientNodeHelperStore } 
+ * @type { ClientNodeHelperStore }
  */
 export const page = {
   subscribe(run) {
@@ -78,7 +78,7 @@ export const ready = {
 /**
  * @callback AfterPageLoadHelper
  * @param {function} callback
- * 
+ *
  * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<function>}} AfterPageLoadHelperStore
  * @type {AfterPageLoadHelperStore}
  */
@@ -87,7 +87,7 @@ export const afterPageLoad = {
   subscribe: hookHandler
 }
 
-/** 
+/**
  * @callback BeforeUrlChangeHelper
  * @param {function} callback
  *
@@ -108,7 +108,7 @@ function hookHandler(listener) {
 
 /**
  * We have to grab params and leftover from the context and not directly from the store.
- * Otherwise the context is updated before the component is destroyed. * 
+ * Otherwise the context is updated before the component is destroyed. *
  * @typedef {Object.<string, *>} ParamsHelper
  * @typedef {import('svelte/store').Readable<ParamsHelper>} ParamsHelperStore
  * @type {ParamsHelperStore}
@@ -123,7 +123,7 @@ export const params = {
 /**
  * @typedef {string} LeftoverHelper
  * @typedef {import('svelte/store').Readable<string>} LeftoverHelperStore
- * @type {LeftoverHelperStore} 
+ * @type {LeftoverHelperStore}
  **/
 export const leftover = {
   subscribe(listener) {
@@ -134,10 +134,10 @@ export const leftover = {
   },
 }
 
-/** * 
- * @param {ClientNodeApi} descendant 
- * @param {ClientNodeApi} ancestor 
- * @param {boolean} treatIndexAsAncestor 
+/** *
+ * @param {ClientNodeApi} descendant
+ * @param {ClientNodeApi} ancestor
+ * @param {boolean} treatIndexAsAncestor
  */
 export function isAncestor(ancestor, descendant, treatIndexAsAncestor = true) {
   ancestor = ancestor.__file || ancestor
@@ -153,7 +153,7 @@ export function isAncestor(ancestor, descendant, treatIndexAsAncestor = true) {
 
 
 /**
- * @typedef {import('svelte/store').Readable<Meta>} MetaHelperStore 
+ * @typedef {import('svelte/store').Readable<Meta>} MetaHelperStore
  * @type {MetaHelperStore}
  * */
 export const meta = {
@@ -171,7 +171,7 @@ export const meta = {
  * @return {String}
  *
  * @typedef {import('svelte/store').Readable<UrlHelper>} UrlHelperStore
- * @type {UrlHelperStore} 
+ * @type {UrlHelperStore}
  * */
 export const url = {
   subscribe(listener) {
@@ -185,10 +185,10 @@ export const url = {
   }
 }
 
-/** 
- * @param {{component: ClientNode}} $ctx 
- * @param {RouteNode} $currentRoute 
- * @param {RouteNode[]} $routes 
+/**
+ * @param {{component: ClientNode}} $ctx
+ * @param {RouteNode} $currentRoute
+ * @param {RouteNode[]} $routes
  * @returns {UrlHelper}
  */
 export function makeUrlHelper($ctx, $currentRoute, $routes) {
@@ -201,7 +201,7 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
 
     path = resolvePath(path)
 
-    // preload the route  
+    // preload the route
     const route = $routes.find(route => [route.shortPath || '/', route.path].includes(path))
     if (route && route.meta.preload === 'proximity' && window.requestIdleCallback) {
       const delay = routify.appLoaded ? 0 : 1500
@@ -272,9 +272,9 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
 }
 
 /**
- * 
- * @param {string} path 
- * @param {object} params 
+ *
+ * @param {string} path
+ * @param {object} params
  */
 function _getQueryString(path, params) {
   if (!config.queryHandler) return ""
@@ -294,15 +294,15 @@ function _getQueryString(path, params) {
 * @param {GotoOptions=} options
 *
 * @typedef {import('svelte/store').Readable<GotoHelper>}  GotoHelperStore
-* @type {GotoHelperStore} 
+* @type {GotoHelperStore}
 * */
 export const goto = {
   subscribe(listener) {
-    return derived(url,
-      url => function goto(path, params, _static, shallow) {
+    return derived([url, navigator],
+     ([url, navigator ]) => function goto(path, params, _static, shallow) {
         const href = url(path, params)
         if (!_static) history.pushState({}, null, href)
-        else getContext('routifyupdatepage')(href, shallow)
+        else navigator.updatePage(href, shallow)
       }
     ).subscribe(
       listener
@@ -311,15 +311,15 @@ export const goto = {
 }
 
 /**
- * @type {GotoHelperStore} 
+ * @type {GotoHelperStore}
  * */
 export const redirect = {
   subscribe(listener) {
-    return derived(url,
-      url => function redirect(path, params, _static, shallow) {
+    return derived([url, navigator],
+     ([url, navigator ]) => function redirect(path, params, _static, shallow) {
         const href = url(path, params)
         if (!_static) history.replaceState({}, null, href)
-        else getContext('routifyupdatepage')(href, shallow)
+        else navigator.updatePage(href, shallow)
       }
     ).subscribe(
       listener
@@ -333,9 +333,9 @@ export const redirect = {
  * @param {UrlParams=} params
  * @param {UrlOptions=} options
  * @returns {Boolean}
- * 
+ *
  * @typedef {import('svelte/store').Readable<IsActiveHelper>} IsActiveHelperStore
- * @type {IsActiveHelperStore} 
+ * @type {IsActiveHelperStore}
  * */
 export const isActive = {
   subscribe(run) {
@@ -352,8 +352,8 @@ export const isActive = {
 }
 
 /**
- * @param {string|ClientNodeApi} path 
- * @param {*} options 
+ * @param {string|ClientNodeApi} path
+ * @param {*} options
  */
 export function precache(path, options) {
   const node = typeof path === 'string' ? urlToRoute(path) : path
@@ -361,8 +361,8 @@ export function precache(path, options) {
 }
 
 /**
- * @param {string|ClientNodeApi} path 
- * @param {*} options 
+ * @param {string|ClientNodeApi} path
+ * @param {*} options
  */
 export function prefetch(path, options) {
   _prefetch(path, options)

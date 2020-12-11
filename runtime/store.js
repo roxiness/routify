@@ -11,6 +11,9 @@ export const route = writable(null) // the actual route being rendered
 export const routes = writable([]) // all routes
 routes.subscribe(routes => (window.routify.routes = routes))
 
+/** @type {import('svelte/store').Writable<RouteNavigator>} */
+export const routeNavigator = writable(null);
+
 export let rootContext = writable({ component: { params: {} } })
 
 /** @type {import('svelte/store').Writable<RouteNode>} */
