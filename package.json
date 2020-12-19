@@ -41,12 +41,12 @@
     "npm-run-all": "^4.1.5",
     "semantic-release": "^17.1.1",
     "start-server-and-test": "^1.11.3",
-    "svelte": "^3.24.1",
+    "svelte": "^3.31.0",
     "typescript": "^3.8.3"
   },
   "scripts": {
     "semantic-release": "semantic-release",
-    "start:example": "cd example && pnpm install && pnpm run dev",
+    "start:example": "cd test/example && pnpm install && pnpm run dev",
     "test": "cd test && ava tests/** --timeout 300s",
     "test:cli": "cd test && ava tests/cli/** --timeout 300s",
     "test:e2e": "start-server-and-test start:example 5000 \"cd test && pnpm install && pnpx ava tests/e2e/** --watch\"",
