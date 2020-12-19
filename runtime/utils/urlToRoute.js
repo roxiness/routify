@@ -2,12 +2,15 @@ import { get } from 'svelte/store'
 import * as stores from '../store'
 import config from '../../runtime.config'
 
+const stripQueryAndHash = url => url.replace(/[#?].+/, '')
+
 /**
  * @param {string} url 
  * @return {ClientNode}
  */
-export function urlToRoute(url) {
+export function urlToRoute(url) {    
     url = config.urlTransform.remove(url)
+    url = stripQueryAndHash(url)
 
     /** @type {RouteNode[]} */
     const routes = get(stores.routes)    

@@ -49,7 +49,7 @@ function createEventListeners(updatePage) {
       const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
 
-      if (await runHooksBeforeUrlChange(event)) {
+      if (await runHooksBeforeUrlChange(event, url)) {
         fn.apply(this, [state, title, url])
         return dispatchEvent(event)
       }
@@ -105,11 +105,11 @@ function handleClick(event) {
   history.pushState({}, '', href)
 }
 
-async function runHooksBeforeUrlChange(event) {
-  const route = get(stores.route)
+async function runHooksBeforeUrlChange(event, url) {  
+  const route = urlToRoute(url).api
   for (const hook of beforeUrlChange._hooks.filter(Boolean)) {
     // return false if the hook returns false
-    const result = await hook(event, route) //todo remove route from hook. Its API Can be accessed as $page
+    const result = await hook(event, route)
     if (!result) return false
   }
   return true
