@@ -1,6 +1,5 @@
 import { writable, derived } from 'svelte/store'
 import '../typedef'
-import { currentLocation } from './utils'
 
 window.routify = window.routify || {}
 

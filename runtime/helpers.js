@@ -199,7 +199,7 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
     if (el)
       path = path.getAttribute('href')
 
-    path = resolvePath(path)
+    path = path ? resolvePath(path) : component.shortPath
 
     // preload the route  
     const route = $routes.find(route => [route.shortPath || '/', route.path].includes(path))
@@ -222,18 +222,20 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
       }
     }
 
-
     return config.urlTransform.apply(url)
 
+    /**
+     * converts relative, named and absolute paths to absolute paths
+     * example: at `/foo/bar/baz`  the path  `../bar2/:something`  converts to   `/foo/bar2/:something`
+     * @param {*} path 
+     */
     function resolvePath(path) {
-      if (!path) {
-        path = component.shortPath // use current path
-      }
-      else if (path.match(/^\.\.?\//)) {
+      if (path.match(/^\.\.?\//)) {
         //RELATIVE PATH
         let [, breadcrumbs, relativePath] = path.match(/^([\.\/]+)(.*)/)
         let dir = component.path.replace(/\/$/, '')
         const traverse = breadcrumbs.match(/\.\.\//g) || []
+        // if this is a page, we want to traverse one step back to its folder
         if (component.isPage) traverse.push(null)
         traverse.forEach(() => dir = dir.replace(/\/[^\/]+\/?$/, ''))
         path = `${dir}/${relativePath}`.replace(/\/$/, '')
@@ -248,14 +250,21 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
       return path
     }
 
+    /**
+     * converts /foo/:bar to /foo/something or #/foo/something
+     * @param {*} path 
+     * @param {*} params 
+     */
     function resolveUrl(path, params) {
       const url = populateUrl(path, params)
-      if (config.useHash)
-        return `#${url}`
-      else
-        return url
+      return config.useHash ? `#${url}` : url
     }
 
+    /**
+     * converts /foo/:bar to /foo/something
+     * @param {*} path 
+     * @param {*} params 
+     */
     function populateUrl(path, params) {
       /** @type {Object<string, *>} Parameters */
       const allParams = Object.assign({}, $currentRoute.params, component.params, params)
@@ -263,7 +272,6 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
       for (const [key, value] of Object.entries(allParams)) {
         pathWithParams = pathWithParams.replace(`:${key}`, value)
       }
-
 
       const _fullPath = pathWithParams + _getQueryString(path, params)
       return _fullPath.replace(/\?$/, '')
