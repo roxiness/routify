@@ -66,7 +66,7 @@ function createEventListeners(updatePage) {
       if (_ignoreNextPop)
         _ignoreNextPop = false
       else {
-        if (await runHooksBeforeUrlChange(event)) {
+        if (await runHooksBeforeUrlChange(event, currentLocation())) {
           updatePage()
         } else {
           _ignoreNextPop = true
