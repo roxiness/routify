@@ -1,6 +1,6 @@
 <script>
   // @ts-check
-  /** @typedef {{component():*, path: string}} Decorator */
+  /** @typedef {{component():*, path: string, isLayout: false, param: false}} Decorator */
   /** @typedef {ClientNode | Decorator} LayoutOrDecorator */
   /**
    * @typedef {Object} Context
@@ -27,23 +27,31 @@
   export let isRoot = false
   export let decorator = undefined
 
-  let scopedSync = {}
-
   /** @type {LayoutOrDecorator} */
   let node = null
-
+  let remainingNodes = null
+  let scopedSync = {}
+  let parentNode
   const context = writable(null)
 
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
   $: parentContext = $parentContextStore
 
-  let parentNode
   const setparentNode = (el) => (parentNode = el.parentNode)
 
   setContext('routify', context)
 
   $: [node, ...remainingNodes] = nodes
+
+  /**  @param {LayoutOrDecorator} node */
+  function setComponent(node) {
+    let PendingComponent = node.component()
+    if (PendingComponent instanceof Promise)
+      PendingComponent.then(onComponentLoaded)
+    else onComponentLoaded(PendingComponent)
+  }
+  $: setComponent(node)
 
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
@@ -53,7 +61,7 @@
     if (remainingNodes.length === 0) onLastComponentLoaded()
 
     const ctx = {
-      decorator: (decorator === false || !parentContext) && Noop || decorator,
+      decorator: ((decorator === false || !parentContext) && Noop) || decorator,
       layout:
         (node.isLayout && node) || (parentContext && parentContext.layout),
       component: node,
@@ -65,14 +73,6 @@
     if (isRoot) rootContext.set(ctx)
   }
 
-  /**  @param {LayoutOrDecorator} node */
-  function setComponent(node) {
-    let PendingComponent = node.component()
-    if (PendingComponent instanceof Promise)
-      PendingComponent.then(onComponentLoaded)
-    else onComponentLoaded(PendingComponent)
-  }
-  $: setComponent(node)
 
   async function onLastComponentLoaded() {
     await tick()
