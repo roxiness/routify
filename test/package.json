@@ -20,5 +20,10 @@
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1"
+  },
+  "ava": {
+    "ignoredByWatcher": [
+      "example/**"
+    ]
   }
 }
