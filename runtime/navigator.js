@@ -26,7 +26,8 @@ export function init(routes, callback) {
     //preload components in parallel
     await route.api.preload()
 
-    //run callback in Router.svelte
+    //run callback in Router.svelte    
+    stores.isChangingPage.set(true)
     callback(nodes)
   }
 
@@ -113,7 +114,7 @@ async function runHooksBeforeUrlChange(event, url) {
   const route = urlToRoute(url).api
   for (const hook of beforeUrlChange._hooks.filter(Boolean)) {
     // return false if the hook returns false
-    const result = await hook(event, route)
+    const result = await hook(event, route, { url })
     if (!result) return false
   }
   return true

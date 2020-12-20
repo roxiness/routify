@@ -1,6 +1,6 @@
 import { getContext, tick } from 'svelte'
 import { derived, get, writable } from 'svelte/store'
-import { route, routes, rootContext, prefetchPath } from './store'
+import { route, routes, rootContext, isChangingPage } from './store'
 import { pathToParamKeys } from './utils'
 import { onPageLoaded } from './utils/onPageLoaded.js'
 import config from '../runtime.config'
@@ -83,7 +83,9 @@ export const ready = {
  * @type {AfterPageLoadHelperStore}
  */
 export const afterPageLoad = {
-  _hooks: [],
+  _hooks: [
+    event => isChangingPage.set(false)
+  ],
   subscribe: hookHandler
 }
 
@@ -566,12 +568,5 @@ export const metatags = new Proxy(_metatags, {
   }
 })
 
+export { isChangingPage }
 
-export const isChangingPage = (function () {
-  const isChangingPageStore = writable(true)
-
-  beforeUrlChange.subscribe(fn => fn(event => isChangingPageStore.set(true) || true))
-  afterPageLoad.subscribe(fn => fn(event => isChangingPageStore.set(false)))
-
-  return isChangingPageStore
-})()

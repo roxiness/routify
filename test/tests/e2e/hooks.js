@@ -22,3 +22,10 @@ test('updating parameter triggers beforeUrlChange, afterPageLoad and isChangingP
     t.assert(await page.$('"afterPageLoad ran 2"'))
     t.assert(await page.$('"isChanging true,false,true,false"'))
 });
+
+test('isChangingPage doesn\'t trigger when beforeUrlChange returns false', async(t, page) => {
+    await page.goto('http://dev.local:5000/helpers/beforeUrlChange/foo');
+    t.assert(await page.$('"isChanging true,false"'))
+    await page.click('"block me"')
+    t.assert(await page.$('"isChanging true,false"'))
+})
