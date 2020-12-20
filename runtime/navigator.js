@@ -44,6 +44,10 @@ function createEventListeners(updatePage) {
   ;['pushState', 'replaceState'].forEach(eventName => {
     const fn = history[eventName]
     history[eventName] = async function (state = {}, title, url) {
+      // do nothing if we're navigating to the current page
+      const currentUrl = location.pathname + location.search + location.hash
+      if (url === currentUrl) return false
+      
       const { id, path, params } = get(stores.route)
       state = { id, path, params, ...state }
       const event = new Event(eventName.toLowerCase())
