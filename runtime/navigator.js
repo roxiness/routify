@@ -9,9 +9,9 @@ export function init(routes, callback) {
   let lastRoute = false
 
   async function updatePage(proxyToUrl, shallow) {
-    const url = proxyToUrl || currentLocation()
+    const url = proxyToUrl || currentLocation().url
     const route = urlToRoute(url, routes)
-    const currentRoute = shallow && urlToRoute(currentLocation(), routes)
+    const currentRoute = shallow && urlToRoute(currentLocation().url, routes)
     const contextRoute = currentRoute || route
     const nodes = [...contextRoute.layouts, route]
     if (lastRoute) delete lastRoute.last //todo is a page component the right place for the previous route?
@@ -71,7 +71,7 @@ function createEventListeners(updatePage) {
       if (_ignoreNextPop)
         _ignoreNextPop = false
       else {
-        if (await runHooksBeforeUrlChange(event, currentLocation())) {
+        if (await runHooksBeforeUrlChange(event, currentLocation().url)) {
           updatePage()
         } else {
           _ignoreNextPop = true

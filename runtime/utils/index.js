@@ -87,20 +87,31 @@ export function suppressComponentWarnings(ctx, tick) {
 }
 
 export function currentLocation() {
-  const path = getInternalUrlOverride()
-  if (path)
-    return path
-  else if (config.useHash)
-    return window.location.hash.replace(/#/, '')
-  else
-    return window.location.pathname
+  let { url, options } = getUrlAndOptions()
+  if (config.useHash)
+    url = url.replace(/.*#(.+)/, '$1')
+
+  const { path, search, hash } = getUrlParts(url)
+  return { url, path, search, hash, options }
 }
 
-function getInternalUrlOverride() {
-  const pathMatch = window.location.search.match(/__routify_path=([^&]+)/)
-  const prefetchMatch = window.location.search.match(/__routify_prefetch=\d+/)
+/**
+ * converts /__routify_[options]/path/to to
+ * {options, url: '/path/to'}
+ * @param {string} url 
+ */
+function getUrlAndOptions(url) {
+  url = url || window.location.pathname + window.location.search + window.location.hash
+  const [, , _options, _url] = url.match(/^(\/__routify_([^/]+))?(.*)/)
+  const options = JSON.parse(decodeURIComponent(_options || '') || '{}')
+
   window.routify = window.routify || {}
-  window.routify.prefetched = prefetchMatch ? true : false
-  const path = pathMatch && pathMatch[1].replace(/[#?].+/, '') // strip any thing after ? and #
-  return path
+  window.routify.prefetched = options.prefetch
+
+  return { url: _url, options }
+}
+
+export function getUrlParts(url) {
+  const [, path, search, hash] = url.match(/([^?#]*)([^#]*)(.*)/)
+  return { path, search, hash }
 }
