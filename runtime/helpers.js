@@ -567,6 +567,3 @@ export const metatags = new Proxy(_metatags, {
     return true
   }
 })
-
-export { isChangingPage }
-
