@@ -1,8 +1,9 @@
+import { currentLocation } from './index'
 
 export async function onPageLoaded({ page, metatags, afterPageLoad }) {
     const { path } = page
-    const prefetchMatch = window.location.search.match(/__routify_prefetch=(\d+)/)
-    const prefetchId = prefetchMatch && prefetchMatch[1]
+    const { options } = currentLocation()
+    const prefetchId = options.prefetch
 
     for (const hook of afterPageLoad._hooks) {
         // deleted/invalidated hooks are left as undefined

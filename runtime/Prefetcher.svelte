@@ -24,11 +24,9 @@
    */
   export function prefetch(path, options = {}) {
     prefetch.id = prefetch.id || 1
-    path = !path.href ? path : path.href.replace(/^(?:\/\/|[^/]+)*\//, '/')
-    //replace first ? since were mixing user queries with routify queries
-    path = path.replace('?', '&')
+    path = path.href || path
 
-    options = { ...defaults, ...options, path }
+    options = { ...defaults, ...options }
     options.prefetch = prefetch.id++
 
     //don't prefetch within prefetch or SSR
@@ -39,22 +37,11 @@
     queue.update(q => {
       if (!q.some(e => e.options.path === path))
         q.push({
-          url: `/__app.html?${optionsToQuery(options)}`,
+          url: `/__routify_${encodeURIComponent(JSON.stringify(options))}${path}`,
           options,
         })
       return q
     })
-  }
-
-  /**
-   * convert options to query string
-   * {a:1,b:2} becomes __routify_a=1&routify_b=2
-   * @param {defaults & {path: string, prefetch: number}} options
-   */
-  function optionsToQuery(options) {
-    return Object.entries(options)
-      .map(([key, val]) => `__routify_${key}=${val}`)
-      .join('&')
   }
 
   /**

@@ -1,6 +1,5 @@
 import { writable, derived } from 'svelte/store'
 import '../typedef'
-import { currentLocation } from './utils'
 
 window.routify = window.routify || {}
 
@@ -17,3 +16,5 @@ export let rootContext = writable({ component: { params: {} } })
 export const urlRoute = writable(null)  // the route matching the url
 
 export const prefetchPath = writable("")
+
+export const isChangingPage = writable(true)

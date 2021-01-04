@@ -1,28 +1,31 @@
 import { get } from 'svelte/store'
 import * as stores from '../store'
 import config from '../../runtime.config'
+import { getUrlParts } from './index'
 
 /**
  * @param {string} url 
  * @return {ClientNode}
  */
-export function urlToRoute(url) {
+export function urlToRoute(url, clone = false) {
     url = config.urlTransform.remove(url)
+    const { path, search, hash } = getUrlParts(url)
 
     /** @type {RouteNode[]} */
     const routes = get(stores.routes)    
-    const route =
+    const _route =
         // find a route with a matching name
-        routes.find(route => url === route.meta.name) ||
+        routes.find(route => path === route.meta.name) ||
         // or a matching path
-        routes.find(route => url.match(route.regex))
+        routes.find(route => path.match(route.regex))
+
+    // we want to clone if we're only previewing an URL
+    const route = clone ? Object.create(_route) : _route
 
     if (!route)
         throw new Error(
-            `Route could not be found for "${url}".`
+            `Route could not be found for "${path}".`
         )
-
-    const path = url
 
     if (config.queryHandler)
         route.params = config.queryHandler.parse(window.location.search)

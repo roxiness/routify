@@ -2,13 +2,13 @@ import config from '../../runtime.config'
 
 const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
-export function handleScroll (element) {
+export function handleScroll(element) {
   if (navigator.userAgent.includes('jsdom')) return false
   scrollAncestorsToTop(element)
   handleHash()
 }
 
-export function handleHash () {
+export function handleHash() {
   if (navigator.userAgent.includes('jsdom')) return false
   const { hash } = window.location
   if (hash) {
@@ -20,7 +20,7 @@ export function handleHash () {
   }
 }
 
-export function scrollAncestorsToTop (element) {
+export function scrollAncestorsToTop(element) {
   if (
     element &&
     element.scrollTo &&
@@ -58,38 +58,60 @@ export const pathToRank = ({ path }) => {
     .join('')
 }
 
-let warningSuppressed = false
+/** Supresses Routify caused logs and warnings for one tick */
+export function suppressComponentWarnings(ctx, tick) {
+  suppressComponentWarnings._console = suppressComponentWarnings._console || { log: console.log, warn: console.warn }
+  const { _console } = suppressComponentWarnings
 
-/* eslint no-console: 0 */
-export function suppressWarnings() {
-  if (warningSuppressed) return
-  const consoleWarn = console.warn
-  console.warn = function (msg, ...msgs) {
-    const ignores = [
-      "was created with unknown prop 'scoped'",
-      "was created with unknown prop 'scopedSync'",
-    ]
-    if (!ignores.find(iMsg => msg.includes(iMsg)))
-      return consoleWarn(msg, ...msgs)
+  name = ctx.componentFile.name
+    .replace(/Proxy<_?(.+)>/, '$1') //nollup wraps names in Proxy<...>
+    .replace(/^Index$/, ctx.component.shortPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
+    .replace(/^./, s => s.toUpperCase()) //capitalize first letter
+    .replace(/\:(.+)/, 'U5B$1u5D') // :id => U5Bidu5D
+
+  const ignores = [
+    `<${name}> received an unexpected slot "default".`,
+    `<${name}> was created with unknown prop 'scoped'`,
+    `<${name}> was created with unknown prop 'scopedSync'`,
+  ]
+  for (const log of ['log', 'warn']) {
+    console[log] = (...args) => {
+      if (!ignores.includes(args[0]))
+        _console[log](...args)
+    }
+    tick().then(() => {
+      //after component has been created, we want to restore the console method (log or warn)
+      console[log] = _console[log]
+    })
   }
-  warningSuppressed = true
 }
 
 export function currentLocation() {
-  const path = getInternalUrlOverride()
-  if (path)
-    return path
-  else if (config.useHash)
-    return window.location.hash.replace(/#/, '')
-  else
-    return window.location.pathname
+  let { url, options } = getUrlAndOptions()
+  if (config.useHash)
+    url = url.replace(/.*#(.+)/, '$1')
+
+  const { path, search, hash } = getUrlParts(url)
+  return { url, path, search, hash, options }
 }
 
-function getInternalUrlOverride() {
-  const pathMatch = window.location.search.match(/__routify_path=([^&]+)/)
-  const prefetchMatch = window.location.search.match(/__routify_prefetch=\d+/)
+/**
+ * converts /__routify_[options]/path/to to
+ * {options, url: '/path/to'}
+ * @param {string} url 
+ */
+function getUrlAndOptions(url) {
+  url = url || window.location.pathname + window.location.search + window.location.hash
+  const [, , _options, _url] = url.match(/^(\/__routify_([^/]+))?(.*)/)
+  const options = JSON.parse(decodeURIComponent(_options || '') || '{}')
+
   window.routify = window.routify || {}
-  window.routify.prefetched = prefetchMatch ? true : false
-  const path = pathMatch && pathMatch[1].replace(/[#?].+/, '') // strip any thing after ? and #
-  return path
+  window.routify.prefetched = options.prefetch
+
+  return { url: _url, options }
+}
+
+export function getUrlParts(url) {
+  const [, path, search, hash] = url.match(/([^?#]*)([^#]*)(.*)/)
+  return { path, search, hash }
 }
