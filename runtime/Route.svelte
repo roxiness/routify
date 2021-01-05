@@ -15,7 +15,7 @@
   import Noop from './decorators/Noop.svelte'
   import '../typedef.js'
   import { getContext, setContext, tick } from 'svelte'
-  import { writable, get } from 'svelte/store'
+  import { writable } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
   import { route, rootContext } from './store'
   import { handleScroll } from './utils'
@@ -55,8 +55,6 @@
 
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
-    /** @type {Context} */
-
     scopedSync = { ...scoped }
     if (remainingNodes.length === 0) onLastComponentLoaded()
 
@@ -73,17 +71,18 @@
     if (isRoot) rootContext.set(ctx)
   }
 
-
   async function onLastComponentLoaded() {
-    await tick()
     handleScroll(parentNode)
 
-    const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
-
-    // Let everyone know the last child has rendered
-    if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
-      onPageLoaded({ page: $context.component, metatags, afterPageLoad })
-    }
+    // let all synchronous code finish before we 
+    setTimeout(() => {
+      const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
+      
+      // Let everyone know the last child has rendered
+      if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
+        onPageLoaded({ page: $context.component, metatags, afterPageLoad })
+      }
+    })
   }
 
   /**  @param {ClientNode} layout */

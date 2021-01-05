@@ -8,9 +8,9 @@ export function init(routes, callback) {
   /** @type { ClientNode | false } */
   let lastRoute = false
 
-  async function updatePage(proxyToUrl, shallow) {
+  function updatePage(proxyToUrl, shallow) {
     const url = proxyToUrl || currentLocation().url
-    const route = urlToRoute(url, routes)
+    const route = urlToRoute(url)
     const currentRoute = shallow && urlToRoute(currentLocation().url, routes)
     const contextRoute = currentRoute || route
     const nodes = [...contextRoute.layouts, route]
@@ -24,11 +24,11 @@ export function init(routes, callback) {
     stores.route.set(route)
 
     //preload components in parallel
-    await route.api.preload()
-
-    //run callback in Router.svelte    
-    stores.isChangingPage.set(true)
-    callback(nodes)
+    route.api.preload().then(() => {
+      //run callback in Router.svelte    
+      stores.isChangingPage.set(true)
+      callback(nodes)
+    })
   }
 
   const destroy = createEventListeners(updatePage)
