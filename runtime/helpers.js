@@ -224,7 +224,7 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
       }
     }
 
-    return config.urlTransform.apply(url)
+    return url
 
     /**
      * converts relative, named and absolute paths to absolute paths
@@ -253,12 +253,16 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
     }
 
     /**
-     * converts /foo/:bar to /foo/something or #/foo/something
+     * converts absolute path to url
+     * eg. /foo/:bar to /foo/something or #/foo/something
+     * and applies config.urlTransform
      * @param {*} path 
      * @param {*} params 
      */
     function resolveUrl(path, params) {
-      const url = populateUrl(path, params)
+      let url
+      url = populateUrl(path, params)
+      url = config.urlTransform.apply(url)
       return config.useHash ? `#${url}` : url
     }
 
