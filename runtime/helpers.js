@@ -20,6 +20,21 @@ function getRoutifyContext() {
   return getContext('routify') || rootContext
 }
 
+export const components = {
+  subscribe(run) {
+    const components = []
+    return derived(routes, routes => {
+      routes.forEach(route => {
+        const layouts = route.layouts
+          .map(layout => layout.api)
+          .filter(api => !components.includes(api))
+
+        components.push(route.api, ...layouts)
+      })
+      return components
+    }).subscribe(run)
+  }
+}
 
 /**
  * @typedef {import('svelte/store').Readable<ClientNodeApi>} ClientNodeHelperStore
