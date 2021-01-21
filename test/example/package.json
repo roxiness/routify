@@ -22,7 +22,7 @@
     "@rollup/plugin-alias": "^3.1.0",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-node-resolve": "^7.1.3",
-    "@roxi/routify": "file:../",
+    "@roxi/routify": "file:../../",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
     "del": "^5.1.0",

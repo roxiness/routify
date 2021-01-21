@@ -59,7 +59,7 @@
     if (remainingNodes.length === 0) onLastComponentLoaded()
 
     const ctx = {
-      decorator: ((decorator === false || !parentContext) && Noop) || decorator,
+      decorator: decorator || Noop,
       layout:
         (node.isLayout && node) || (parentContext && parentContext.layout),
       component: node,
