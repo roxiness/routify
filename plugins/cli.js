@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const program = require('commander')
+const { Command } = require('commander')
+const program = new Command()
 const defaults = require('../lib/utils/config')()
 const stdio = 'inherit'
 
@@ -20,15 +21,14 @@ program
   .option('-c, --child-process <command>', "Run npm task when Routify is ready", defaults.childProcess)
   .option('-r, --routify-dir <dir>', "Output folder for routify temp files", defaults.routifyDir)
   .option('    --no-hash-scroll', "Disable automatic scroll to hash", defaults.noHashScroll)
-  .action(program => {
-    // Let's write a template before we do anything else, to help us avoid race conditions with bundlers and servers.
-    require('fs-extra').outputFileSync(`${defaults.routifyDir}/routes.js`, 'export * from "@roxi/routify/runtime/defaultTmp/routes"', 'utf-8')
+  .action((routify, options) => {
+    // Let's write an empty template before we do anything else, to help us avoid race conditions with bundlers and servers.    
+    require('fs-extra').outputFileSync(`${routify.routifyDir}/routes.js`, 'export * from "@roxi/routify/runtime/defaultTmp/routes"', 'utf-8')
 
-    const options = program.opts()
-    Object.entries(options).forEach(([key, value]) => {
-      if (typeof value === 'undefined') delete options[key]
-    })
-    require('../lib/services/interface').start(options)
+    // we don't want commander to ignore the defalut value
+    routify.dynamicImports = routify.dynamicImports && defaults.dynamicImports
+
+    require('../lib/services/interface').start(routify)
   })
 
 
@@ -39,11 +39,11 @@ program
   .option('-n, --no-install', 'don\'t auto install npm modules')
   .option('-b, --branch [name]', 'branch to checkout (can also be commit hash or release tag)', 'master')
 
-  .action(program => {
+  .action(init => {
     const fs = require('fs-extra')
     const log = require('../lib/utils/log')
     const { execSync } = require('child_process')
-    const { example, startDev, branch, linkRoutify, install } = program.opts()
+    const { example, startDev, branch, install } = init
     fs.readdir('./', (err, files) => {
       if (err) log(err)
       else if (files.length) log('Can only init in an empty directory.')
