@@ -13,7 +13,7 @@ program
     'Blob of files and dirs to be ignored', defaults.ignore
   )
   .option(
-    '-D, --dynamic-imports', 'Code splitting)', defaults.dynamicImports
+    '-D, --no-dynamic-imports', 'Code splitting)', defaults.dynamicImports
   )
   .option('-b, --single-build', "Don't watch for file changes", defaults.singleBuild)
   .option('-e, --extensions <names>', "Included file extensions (comma separated)", defaults.extensions)
