@@ -1,14 +1,14 @@
 <script>
-  import { isAncestor, layout } from '@roxi/routify'
+  import { isAncestor, layout, page } from '@roxi/routify'
 
   window.routify.isAncestor = isAncestor
   window.routify.layout = layout
 
   const nodes = {
-    self: $layout,
-    child: $layout.parent.children.find((node) => node.title === 'child'),
-    sibling1: $layout.parent.children.find((node) => node.title === 'sibling1'),
-    sibling2: $layout.parent.children.find((node) => node.title === 'sibling2'),
+    self: $page,
+    child: $page.parent.children.find((node) => node.title === 'child'),
+    sibling1: $page.parent.children.find((node) => node.title === 'sibling1'),
+    sibling2: $page.parent.children.find((node) => node.title === 'sibling2'),
   }
 
   //   node1, node2, useIndex, expect

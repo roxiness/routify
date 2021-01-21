@@ -46,10 +46,10 @@
   },
   "scripts": {
     "semantic-release": "semantic-release",
-    "start:example": "cd test/example && pnpm install && pnpm run dev",
+    "start:example": "cd test/example && npm install && npm run dev",
     "test": "cd test && ava tests/** --timeout 300s",
     "test:cli": "cd test && ava tests/cli/** --timeout 300s",
-    "test:e2e": "start-server-and-test start:example 5000 \"cd test && pnpm install && pnpx ava tests/e2e/** --watch\"",
+    "test:e2e": "start-server-and-test start:example 5000 \"cd test && npm install && npx ava tests/e2e/** --watch\"",
     "test:mock-api": "cd test && ava tests/mock-server/**"
   },
   "prettier": {
