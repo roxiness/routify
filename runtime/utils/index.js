@@ -87,31 +87,40 @@ export function suppressComponentWarnings(ctx, tick) {
 }
 
 export function currentLocation() {
-  let { url, options } = getUrlAndOptions()
+  let dirtyFullpath = window.location.pathname + window.location.search + window.location.hash
   if (config.useHash)
-    url = url.replace(/.*#(.+)/, '$1')
+    dirtyFullpath = dirtyFullpath.replace(/.*#(.+)/, '$1')
 
-  const { path, search, hash } = getUrlParts(url)
-  return { url, path, search, hash, options }
+  const { url, options } = resolvePrefetch(dirtyFullpath)
+  const parsedUrl = parseUrl(url)
+
+  return { ...parsedUrl, options }
 }
 
 /**
- * converts /__routify_[options]/path/to to
+ * converts /__routify_[options]:http://example.com/path/to to
  * {options, url: '/path/to'}
- * @param {string} url 
+ * @param {string} dirtyFullpath 
  */
-function getUrlAndOptions(url) {
-  url = url || window.location.pathname + window.location.search + window.location.hash
-  const [, , _options, _url] = url.match(/^(\/__routify_([^/]+))?(.*)/)
+function resolvePrefetch(dirtyFullpath) {
+  const [url, _options] = dirtyFullpath.split('__[[routify_url_options]]__')
+
   const options = JSON.parse(decodeURIComponent(_options || '') || '{}')
 
   window.routify = window.routify || {}
   window.routify.prefetched = options.prefetch
 
-  return { url: _url, options }
+  return { url, options }
 }
 
-export function getUrlParts(url) {
-  const [, path, search, hash] = url.match(/([^?#]*)([^#]*)(.*)/)
-  return { path, search, hash }
+/**
+ * 
+ * @param {string} url 
+ */
+export function parseUrl(url) {
+  const origin = url.startsWith('/') ? window.location.origin : undefined
+  const _url = new URL(url, origin)
+  const fullpath = _url.pathname + _url.search + _url.hash
+  console.log('fullpath', fullpath, url)
+  return { url: _url, fullpath }
 }

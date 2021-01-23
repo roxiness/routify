@@ -37,7 +37,7 @@
     queue.update(q => {
       if (!q.some(e => e.options.path === path))
         q.push({
-          url: `/__routify_${encodeURIComponent(JSON.stringify(options))}${path}`,
+          url: `${path}__[[routify_url_options]]__${encodeURIComponent(JSON.stringify(options))}`,
           options,
         })
       return q
