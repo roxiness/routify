@@ -121,6 +121,5 @@ export function parseUrl(url) {
   const origin = url.startsWith('/') ? window.location.origin : undefined
   const _url = new URL(url, origin)
   const fullpath = _url.pathname + _url.search + _url.hash
-  console.log('fullpath', fullpath, url)
   return { url: _url, fullpath }
 }
