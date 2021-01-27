@@ -93,7 +93,7 @@ function createEventListeners(updatePage) {
 
 function handleClick(event) {
   const el = event.target.closest('a')
-  const href = el && el.getAttribute('href')
+  const href = el && el.href
 
   if (
     event.ctrlKey ||
