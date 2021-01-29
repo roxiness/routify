@@ -106,8 +106,11 @@ function handleClick(event) {
     return
   if (!href || el.target || el.host !== location.host) return
 
+  const url = new URL(href)
+  const relativeUrl = url.pathname + url.search + url.hash
+
   event.preventDefault()
-  history.pushState({}, '', href)
+  history.pushState({}, '', relativeUrl)
 }
 
 async function runHooksBeforeUrlChange(event, url) {  
