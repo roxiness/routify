@@ -74,7 +74,7 @@ test('fresh cache is gone after specified cache timeout', async (t, page, contex
     await fillWithJSON(page.$('#prefetch-options'), { "headers": { "validFor": 1 } })
 
     await page.click('#goto')
-    await t.assert(await page.$('#result_date'))
+    await t.assert(await page.waitForSelector('#result_date'))
     await page.reload({ waitUntil: 'networkidle' })
     await t.assert(await page.$('#header_x-routify-write-headers'))
     await new Promise(resolve => setTimeout(resolve, 1200))
