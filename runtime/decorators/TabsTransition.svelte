@@ -2,11 +2,12 @@
   import { scale, fly } from 'svelte/transition'
   import BaseTransition from './BaseTransition.svelte'
   import { getContext } from 'svelte'
-  export let width 
-  const ctx = getContext('routify')  
-  width = width || $ctx.parentNode.getBoundingClientRect().width
+  export let scoped = {}
+  const ctx = getContext('routify')
   
-  const configs = [
+  $: width = scoped.width || $ctx.parentNode.getBoundingClientRect().width
+  
+  $: configs = [
     {
       // New and old route are identical, do nothing
       condition: c => c.routes[0] === c.routes[1],
@@ -44,6 +45,6 @@
   ]
 </script>
 
-<BaseTransition {configs} >
+<BaseTransition {configs} {...scoped}>
   <slot />
 </BaseTransition>

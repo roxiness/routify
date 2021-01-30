@@ -100,7 +100,7 @@
 
 {#if $context}
   {#each [$context] as { component, componentFile, decorator, nodes } (getID(component))}
-    <svelte:component this={decorator}>
+    <svelte:component this={decorator} {scoped}>
       <svelte:component
         this={componentFile}
         let:scoped={scopeToChild}
