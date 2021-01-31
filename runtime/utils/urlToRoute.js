@@ -23,7 +23,7 @@ export function urlToRoute(url, clone = false) {
         throw new Error(`Route could not be found for "${pathname}".`)
 
     // we want to clone if we're only previewing an URL
-    const _matchingRoute = clone ? Object.create(_route) : matchingRoute
+    const _matchingRoute = clone ? Object.create(matchingRoute) : matchingRoute
 
     const { route, redirectPath, rewritePath } = resolveRedirects(_matchingRoute, routes)
 
