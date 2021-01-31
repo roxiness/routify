@@ -75,7 +75,7 @@ program
   .option('   --basepath <path>', 'Comma separated basepaths to use for exports', defaults.basepath)
   .action(options => {
     const { exporter } = require('../lib/services/exporter')
-    exporter(options.opts())
+    exporter(options)
   })
 
 
