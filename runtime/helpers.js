@@ -1,9 +1,8 @@
 import { getContext, tick } from 'svelte'
 import { derived, get, writable } from 'svelte/store'
 import { route, routes, rootContext, isChangingPage } from './store'
-import { pathToParamKeys } from './utils'
+import { resolveUrl } from './utils'
 import { onPageLoaded } from './utils/onPageLoaded.js'
-import config from '../runtime.config'
 import { urlToRoute } from './utils/urlToRoute'
 import { prefetch as _prefetch } from './Prefetcher.svelte'
 /// <reference path="../typedef.js" />
@@ -209,8 +208,9 @@ export const url = {
  * @returns {UrlHelper}
  */
 export function makeUrlHelper($ctx, $currentRoute, $routes) {
-  return function url(path, params, options) {
+  return function url(path, params = {}, options) {
     const { component } = $ctx
+    const inheritedParams = Object.assign({}, $currentRoute.params, component.params)
     let el = path && path.nodeType && path
 
     if (el)
@@ -230,12 +230,12 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
     const strict = options && options.strict !== false
     if (!strict) path = path.replace(/index$/, '')
 
-    let url = resolveUrl(path, params)
+    let url = resolveUrl(path, params, inheritedParams)
 
     if (el) {
       el.href = url
       return {
-        update(params) { el.href = resolveUrl(path, params) }
+        update(changedParams) { el.href = resolveUrl(path, changedParams, inheritedParams) }
       }
     }
 
@@ -267,54 +267,11 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
       return path
     }
 
-    /**
-     * converts absolute path to url
-     * eg. /foo/:bar to /foo/something or #/foo/something
-     * and applies config.urlTransform
-     * @param {*} path 
-     * @param {*} params 
-     */
-    function resolveUrl(path, params) {
-      let url
-      url = populateUrl(path, params)
-      url = config.urlTransform.apply(url)
-      return config.useHash ? `#${url}` : url
-    }
 
-    /**
-     * converts /foo/:bar to /foo/something
-     * @param {*} path 
-     * @param {*} params 
-     */
-    function populateUrl(path, params) {
-      /** @type {Object<string, *>} Parameters */
-      const allParams = Object.assign({}, $currentRoute.params, component.params, params)
-      let pathWithParams = path
-      for (const [key, value] of Object.entries(allParams)) {
-        pathWithParams = pathWithParams.replace(`:${key}`, value)
-      }
 
-      const _fullPath = pathWithParams + _getQueryString(path, params)
-      return _fullPath.replace(/\?$/, '')
-    }
   }
 }
 
-/**
- * 
- * @param {string} path 
- * @param {object} params 
- */
-function _getQueryString(path, params) {
-  if (!config.queryHandler) return ""
-  const pathParamKeys = pathToParamKeys(path)
-  const queryParams = {}
-  if (params) Object.entries(params).forEach(([key, value]) => {
-    if (!pathParamKeys.includes(key))
-      queryParams[key] = value
-  })
-  return config.queryHandler.stringify(queryParams)
-}
 
 /**
 * @callback GotoHelper

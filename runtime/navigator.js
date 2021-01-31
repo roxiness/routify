@@ -11,6 +11,11 @@ export function init(routes, callback) {
   function updatePage(proxyToUrl, shallow) {
     const url = proxyToUrl || currentLocation().fullpath
     const route = urlToRoute(url)
+    if (route.redirectTo) {
+      history.replaceStateNative({}, null, route.redirectTo)
+      delete route.redirectTo
+    }
+
     const currentRoute = shallow && urlToRoute(currentLocation().fullpath, routes)
     const contextRoute = currentRoute || route
     const nodes = [...contextRoute.layouts, route]
@@ -43,19 +48,21 @@ export function init(routes, callback) {
 function createEventListeners(updatePage) {
   // history.*state
   ;['pushState', 'replaceState'].forEach(eventName => {
-    const fn = history[eventName]
+    history[eventName]
+    history[eventName + 'Native'] = history[eventName]
     history[eventName] = async function (state = {}, title, url) {
       // do nothing if we're navigating to the current page
       const currentUrl = location.pathname + location.search + location.hash
       if (url === currentUrl) return false
-      
+
       const { id, path, params } = get(stores.route)
       state = { id, path, params, ...state }
       const event = new Event(eventName.toLowerCase())
       Object.assign(event, { state, title, url })
 
-      if (await runHooksBeforeUrlChange(event, url)) {
-        fn.apply(this, [state, title, url])
+      const route = await runHooksBeforeUrlChange(event, url)
+      if (route) {
+        history[eventName + 'Native'].apply(this, [state, title, url])
         return dispatchEvent(event)
       }
     }
@@ -113,7 +120,7 @@ function handleClick(event) {
   history.pushState({}, '', relativeUrl)
 }
 
-async function runHooksBeforeUrlChange(event, url) {  
+async function runHooksBeforeUrlChange(event, url) {
   const route = urlToRoute(url).api
   for (const hook of beforeUrlChange._hooks.filter(Boolean)) {
     // return false if the hook returns false

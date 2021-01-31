@@ -123,3 +123,54 @@ export function parseUrl(url) {
   const fullpath = _url.pathname + _url.search + _url.hash
   return { url: _url, fullpath }
 }
+
+
+/**
+ * converts absolute path to url
+ * eg. /foo/:bar to /foo/something or #/foo/something
+ * and applies config.urlTransform
+ * @param {*} path 
+ * @param {*} params 
+ */
+export function resolveUrl(path, params, inheritedParams) {
+  const hash = config.useHash ? '#' : ''
+  let url
+  url = populateUrl(path, params, inheritedParams)
+  url = config.urlTransform.apply(url)
+  url = hash + url
+  return url
+}
+
+
+/**
+ * populates an url path with parameters
+ * populateUrl('/home/:foo', {foo: 'something', bar:'baz'})  to /foo/something?bar=baz
+ * @param {*} path 
+ * @param {*} params 
+ */
+export function populateUrl(path, params, inheritedParams) {
+  const allParams = Object.assign({}, inheritedParams, params)
+  const queryString = getQueryString(path, params)
+
+  for (const [key, value] of Object.entries(allParams))
+    path = path.replace(`:${key}`, value)
+
+  return `${path}${queryString}`
+}
+
+
+/**
+ * 
+ * @param {string} path 
+ * @param {object} params 
+ */
+function getQueryString(path, params) {
+  if (!config.queryHandler) return ""
+  const ignoredKeys = pathToParamKeys(path)
+  const queryParams = {}
+  if (params) Object.entries(params).forEach(([key, value]) => {
+    if (!ignoredKeys.includes(key))
+      queryParams[key] = value
+  })
+  return config.queryHandler.stringify(queryParams).replace(/\?$/, '')
+}

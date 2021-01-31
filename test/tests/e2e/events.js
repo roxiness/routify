@@ -27,6 +27,6 @@ test('isChangingPage', async (t, page) => {
     t.assert(await page.$('"isChangingPage: false"'))
     await page.click('"delayed page"')
     t.assert(await page.$('"isChangingPage: true"'))
-    await new Promise(resolve => setTimeout(resolve, 500))
+    await new Promise(resolve => setTimeout(resolve, 600))
     t.assert(await page.$('"isChangingPage: false"'))
 })

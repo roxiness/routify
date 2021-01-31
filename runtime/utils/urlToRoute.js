@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 import * as stores from '../store'
 import config from '../../runtime.config'
-import { parseUrl } from './index'
+import { parseUrl, resolveUrl } from './index'
 
 /**
  * @param {string} url 
@@ -13,23 +13,33 @@ export function urlToRoute(url, clone = false) {
 
     /** @type {RouteNode[]} */
     const routes = get(stores.routes)
-    const _route =
+    const matchingRoute =
         // find a route with a matching name
         routes.find(route => pathname === route.meta.name) ||
         // or a matching path
         routes.find(route => pathname.match(route.regex))
 
     // we want to clone if we're only previewing an URL
-    const route = clone ? Object.create(_route) : _route
+    const _matchingRoute = clone ? Object.create(_route) : matchingRoute
+
+    const { route, redirectPath } = resolveRedirects(_matchingRoute, routes)
+
+    if (redirectPath)
+        route.redirectTo = resolveUrl(redirectPath, route.params || {})
 
     if (!route)
-        throw new Error(
-            `Route could not be found for "${pathname}".`
-        )
+        throw new Error(`Route could not be found for "${pathname}".`)
 
     if (config.queryHandler)
         route.params = config.queryHandler.parse(window.location.search)
 
+    assignParamsToRouteAndLayouts(route, pathname)
+
+    route.leftover = url.replace(new RegExp(route.regex), '')
+    return route
+}
+
+function assignParamsToRouteAndLayouts(route, pathname) {
     if (route.paramKeys) {
         const layouts = layoutByPos(route.layouts)
         const fragments = pathname.split('/').filter(Boolean)
@@ -43,10 +53,33 @@ export function urlToRoute(url, clone = false) {
             }
         })
     }
+}
 
-    route.leftover = url.replace(new RegExp(route.regex), '')
+/**
+ * 
+ * @param {RouteNode} route 
+ * @param {RouteNode[]} routes 
+ * @param {*} params 
+ */
+function resolveRedirects(route, routes, redirectPath) {
+    const { redirect, rewrite } = route.meta
 
-    return route
+    if (redirect || rewrite) {
+        redirectPath = redirect ? redirect.path || redirect : redirectPath
+        const rewritePath = rewrite ? rewrite.path || rewrite : redirectPath
+
+        const newRoute = routes.find(r => r.path === rewritePath)
+        if (newRoute === route) console.error(`${rewritePath} is redirecting to itself`)
+        if (!newRoute) console.error(`${route.path} is redirecting to non-existent path: ${rewritePath}`)
+        if (redirect && redirect.params) {
+            newRoute.params = newRoute.params || {}
+            Object.assign(newRoute.params, redirect.params)
+        }
+
+        return resolveRedirects(newRoute, routes, redirectPath)
+
+    }
+    return { route, redirectPath }
 }
 
 
