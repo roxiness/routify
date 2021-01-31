@@ -63,7 +63,7 @@ export function suppressComponentWarnings(ctx, tick) {
   suppressComponentWarnings._console = suppressComponentWarnings._console || { log: console.log, warn: console.warn }
   const { _console } = suppressComponentWarnings
 
-  name = ctx.componentFile.name
+  const name = ctx.componentFile.name
     .replace(/Proxy<_?(.+)>/, '$1') //nollup wraps names in Proxy<...>
     .replace(/^Index$/, ctx.component.shortPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
     .replace(/^./, s => s.toUpperCase()) //capitalize first letter
