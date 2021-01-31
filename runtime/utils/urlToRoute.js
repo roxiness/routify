@@ -9,7 +9,7 @@ import { parseUrl, resolveUrl } from './index'
  */
 export function urlToRoute(url, clone = false) {
     url = config.urlTransform.remove(url)
-    const { pathname } = parseUrl(url).url
+    let { pathname, search } = parseUrl(url).url
 
     /** @type {RouteNode[]} */
     const routes = get(stores.routes)
@@ -19,19 +19,22 @@ export function urlToRoute(url, clone = false) {
         // or a matching path
         routes.find(route => pathname.match(route.regex))
 
+    if (!matchingRoute)
+        throw new Error(`Route could not be found for "${pathname}".`)
+
     // we want to clone if we're only previewing an URL
     const _matchingRoute = clone ? Object.create(_route) : matchingRoute
 
-    const { route, redirectPath } = resolveRedirects(_matchingRoute, routes)
+    const { route, redirectPath, rewritePath } = resolveRedirects(_matchingRoute, routes)
 
-    if (redirectPath)
-        route.redirectTo = resolveUrl(redirectPath, route.params || {})
-
-    if (!route)
-        throw new Error(`Route could not be found for "${pathname}".`)
+    if (rewritePath) {
+        ({ pathname, search } = parseUrl(resolveUrl(rewritePath, route.params)).url)
+        if (redirectPath)
+            route.redirectTo = resolveUrl(redirectPath, route.params || {});
+    }
 
     if (config.queryHandler)
-        route.params = config.queryHandler.parse(window.location.search)
+        route.params = Object.assign({}, route.params, config.queryHandler.parse(search))
 
     assignParamsToRouteAndLayouts(route, pathname)
 
@@ -61,25 +64,24 @@ function assignParamsToRouteAndLayouts(route, pathname) {
  * @param {RouteNode[]} routes 
  * @param {*} params 
  */
-function resolveRedirects(route, routes, redirectPath) {
+function resolveRedirects(route, routes, redirectPath, rewritePath) {
     const { redirect, rewrite } = route.meta
 
     if (redirect || rewrite) {
         redirectPath = redirect ? redirect.path || redirect : redirectPath
-        const rewritePath = rewrite ? rewrite.path || rewrite : redirectPath
+        rewritePath = rewrite ? rewrite.path || rewrite : redirectPath
+        const redirectParams = redirect && redirect.params
+        const rewriteParams = rewrite && rewrite.params
 
         const newRoute = routes.find(r => r.path === rewritePath)
         if (newRoute === route) console.error(`${rewritePath} is redirecting to itself`)
         if (!newRoute) console.error(`${route.path} is redirecting to non-existent path: ${rewritePath}`)
-        if (redirect && redirect.params) {
-            newRoute.params = newRoute.params || {}
-            Object.assign(newRoute.params, redirect.params)
-        }
+        if (redirectParams || rewriteParams)
+            newRoute.params = Object.assign({}, newRoute.params, redirectParams, rewriteParams)
 
-        return resolveRedirects(newRoute, routes, redirectPath)
-
+        return resolveRedirects(newRoute, routes, redirectPath, rewritePath)
     }
-    return { route, redirectPath }
+    return { route, redirectPath, rewritePath }
 }
 
 
