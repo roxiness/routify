@@ -33,7 +33,7 @@ test('Prefetched pages have data', async (t, page, context) => {
     await new Promise(resolve => setTimeout(resolve, 1200))
 
     await page.click('#goto')
-    const element = await page.$('#result_date')
+    const element = await page.waitForSelector('#result_date')
     t.assert(element)
 })
 
@@ -50,7 +50,7 @@ test('headers are written with writeHeaders', async (t, page, context) => {
         })))
     await page.click('#goto')
 
-    const element = await page.$('#result_date')
+    const element = await page.waitForSelector('#result_date')
     t.assert(element)
 })
 
