@@ -126,7 +126,7 @@ export function parseUrl(url) {
 
 
 /**
- * converts absolute path to url
+ * populates parameters, applies urlTransform, prefixes hash
  * eg. /foo/:bar to /foo/something or #/foo/something
  * and applies config.urlTransform
  * @param {*} path 
