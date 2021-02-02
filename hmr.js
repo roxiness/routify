@@ -1,5 +1,5 @@
 /**
- * Hot module replacement for Svelte in the Wild
+ * mounts app to target element 
  *
  * @export
  * @param {object} Component Svelte component
@@ -9,29 +9,25 @@
  * @returns
  */
 export default function HMR(Component, options = { target: document.body }, id = 'hmr', eventName = 'app-loaded') {
-    const oldContainer = document.getElementById(id)
+    const prerenderedHtmlElement = document.getElementById(id)
 
-    // Create the new (temporarily hidden) component container
-    const appContainer = document.createElement("div")
-    if (oldContainer) appContainer.style.visibility = 'hidden'
-    else appContainer.setAttribute('id', id) //ssr doesn't get an event, so we set the id now
+    // Create a hidden target element to contain our app
+    const target = document.createElement("div")
+    target.style.visibility = 'hidden'
+    options.target.appendChild(target)
 
-    // Attach it to the target element
-    options.target.appendChild(appContainer)
+    if (!prerenderedHtmlElement)
+        showApp()
+    else
+        // Wait for the app to load before replacing the prerendered HTML
+        addEventListener(eventName, showApp)
 
-    // Wait for the app to load before replacing the component
-    addEventListener(eventName, replaceComponent)
-
-    function replaceComponent() {
-        if (oldContainer) oldContainer.remove()
+    function showApp() {
+        if (prerenderedHtmlElement) prerenderedHtmlElement.remove()
         // Show our component and take over the ID of the old container
-        appContainer.style.visibility = 'initial'
-        // delete (appContainer.style.visibility)
-        appContainer.setAttribute('id', id)
+        target.style.visibility = null
+        target.setAttribute('id', id)
     }
 
-    return new Component({
-        ...options,
-        target: appContainer
-    });
+    return new Component({ ...options, target });
 }
