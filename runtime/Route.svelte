@@ -74,17 +74,13 @@
   }
 
   async function onLastComponentLoaded() {
+    await tick()
     handleScroll(parentNode)
+    const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
 
-    // let all synchronous code finish before we
-    setTimeout(() => {
-      const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
-      
-      // Let everyone know the last child has rendered
-      if (!window['routify'].stopAutoReady && isOnCurrentRoute) {
-        onPageLoaded({ page: $context.component, metatags, afterPageLoad })
-      }
-    })
+    // Let everyone know the last child has rendered
+    if (!window['routify'].stopAutoReady && isOnCurrentRoute) 
+      onPageLoaded({ page: $context.component, metatags, afterPageLoad })    
   }
 
   /**  @param {ClientNode} layout */
