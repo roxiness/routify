@@ -1,7 +1,8 @@
 <script>
   import { getConcestor, isAncestor } from '../helpers'
   import { fade } from 'svelte/transition'
-  import { route } from '../'
+  import { get } from 'svelte/store'
+  import { route, node } from '../'
   export let configs = []
   export let config = false
   export let SiblingIndexIsAncestor = false
@@ -50,18 +51,19 @@
   }
 </script>
 
+<div
+  class="transition node{get(node).__file.id}"
+  in:transition|local={inParams}
+  out:transition|local={outParams}
+  on:introstart={removeAbsolute}
+  on:outrostart={setAbsolute}
+>
+  <slot />
+</div>
+
 <style>
   .transition {
     height: 100%;
     width: 100%;
   }
 </style>
-
-<div
-  class="transition"
-  in:transition|local={inParams}
-  out:transition|local={outParams}
-  on:introstart={removeAbsolute}
-  on:outrostart={setAbsolute}>
-  <slot />
-</div>
