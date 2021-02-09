@@ -1,5 +1,5 @@
 <script>
-  export let scoped = "";
+  export let scoped = {};
 </script>
 
 <slot/>
