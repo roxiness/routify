@@ -1,41 +1,41 @@
 export const setRegex: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const setParamKeys: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const setShortPath: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const setRank: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const addMetaChildren: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const setIsIndexable: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const assignRelations: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const assignIndex: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export const assignLayout: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };
 export function createFlatList(treePayload: any): void;
 export const setPrototype: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };

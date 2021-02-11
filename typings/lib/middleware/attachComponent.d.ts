@@ -1,4 +1,4 @@
 export const attachComponent: {
-    (payload: TreePayload): Promise<import("../utils/middleware").NodePayload>;
-    sync(payload: TreePayload): import("../utils/middleware").NodePayload;
+    (payload: TreePayload): Promise<any>;
+    sync(payload: TreePayload): any;
 };

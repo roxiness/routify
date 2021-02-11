@@ -1,2 +1,2 @@
-declare function _exports(payload: any): Promise<{}>;
+declare function _exports(payload: TreePayload): Promise<{}>;
 export = _exports;

@@ -12,21 +12,11 @@ type ClientNode = {
  * ClientNode
  */
 type ClientNodeSpecifics = {
-    layouts: ({
-        [x: string]: any;
-    } & DefinedFile & ClientNodeSpecifics)[];
-    parent: {
-        [x: string]: any;
-    } & DefinedFile & ClientNodeSpecifics;
-    nextSibling: {
-        [x: string]: any;
-    } & DefinedFile & ClientNodeSpecifics;
-    prevSibling: {
-        [x: string]: any;
-    } & DefinedFile & ClientNodeSpecifics;
-    lineage: ({
-        [x: string]: any;
-    } & DefinedFile & ClientNodeSpecifics)[];
+    layouts: ClientNode[];
+    parent: ClientNode | undefined;
+    nextSibling: ClientNode | undefined;
+    prevSibling: ClientNode | undefined;
+    lineage: ClientNode[];
     ext: string;
     meta: Meta;
     id: string;
@@ -37,45 +27,39 @@ type ClientNodeSpecifics = {
     isNonIndexable: boolean;
     paramKeys: string[];
     regex: string;
-    component: () => import("svelte").SvelteComponent | Promise<import("svelte").SvelteComponent>;
-    last: {
-        [x: string]: any;
-    } & DefinedFile & ClientNodeSpecifics;
+    component: () => SvelteComponent | Promise<SvelteComponent>;
+    last: ClientNode;
     api: ClientNodeApi;
 };
 /**
  * ClientNodeApi
  */
 type ClientNodeApi = {
-    parent: ClientNodeApi;
-    next: ClientNodeApi;
-    prev: ClientNodeApi;
+    parent: ClientNodeApi | undefined;
+    next: ClientNodeApi | undefined;
+    prev: ClientNodeApi | undefined;
     children: ClientNodeApi[];
     isMeta: boolean;
     path: string;
     title: string;
     meta: Meta;
-    __file: {
-        [x: string]: any;
-    } & DefinedFile & ClientNodeSpecifics;
+    __file: ClientNode;
 };
 /**
  * File
  */
-type RouteNode = {
-    [x: string]: any;
-} & MiscFile & GeneratedFile & DefinedFile;
+type RouteNode = never;
 /**
  * File
  */
 type DefinedFile = {
-    isFile?: boolean;
-    isDir?: boolean;
-    isPage?: boolean;
-    isLayout?: boolean;
-    isReset?: boolean;
-    isIndex?: boolean;
-    isFallback?: boolean;
+    isFile?: boolean | undefined;
+    isDir?: boolean | undefined;
+    isPage?: boolean | undefined;
+    isLayout?: boolean | undefined;
+    isReset?: boolean | undefined;
+    isIndex?: boolean | undefined;
+    isFallback?: boolean | undefined;
 };
 /**
  * File
@@ -83,9 +67,7 @@ type DefinedFile = {
 type GeneratedFile = {
     name: string;
     path: string;
-    dir?: ({
-        [x: string]: any;
-    } & MiscFile & GeneratedFile & DefinedFile)[];
+    dir?: RouteNode[] | undefined;
     absolutePath: string;
     isFile: string;
     filepath: string;
@@ -97,46 +79,16 @@ type GeneratedFile = {
  */
 type MiscFile = {
     id: string;
-    getParent: () => {
-        [x: string]: any;
-    } & MiscFile & GeneratedFile & DefinedFile;
-    parent: {
-        [x: string]: any;
-    } & MiscFile & GeneratedFile & DefinedFile;
+    getParent: GetParentFile;
+    parent: RouteNode;
     meta: Meta;
 };
 /**
  * File
  */
-type GetParentFile = () => {
-    [x: string]: any;
-} & MiscFile & GeneratedFile & DefinedFile;
+type GetParentFile = () => RouteNode;
 type Meta = {
-    /**
-     * Bundle with main app
-     */
-    preload?: boolean;
-    "precache-order"?: any;
-    "precache-proximity"?: any;
-    recursive?: boolean;
-    /**
-     * Bundle folder recursively in a single .js file
-     */
-    bundle?: boolean;
-    /**
-     * Position among siblings
-     */
-    index?: string | number | false;
-    /**
-     * Custom identifier
-     */
-    name?: string;
-    /**
-     * Title of the page
-     */
-    title?: string;
-    children?: MetaChild[];
-    $$bundleId?: string;
+    [x: string]: any;
 };
 type MetaChild = {
     title?: string;
@@ -147,12 +99,8 @@ type MetaChild = {
  * Tree Payload
  */
 type TreePayload = {
-    routes: ({
-        [x: string]: any;
-    } & MiscFile & GeneratedFile & DefinedFile)[];
-    tree: {
-        [x: string]: any;
-    } & MiscFile & GeneratedFile & DefinedFile;
+    routes: RouteNode[];
+    tree: RouteNode;
     options: BuildConfig;
     metaParser: any;
     defaultMeta: any;
@@ -161,26 +109,26 @@ type TreePayload = {
  * Build Config
  */
 type BuildConfig = {
-    pages?: string;
-    routifyDir?: string;
-    dynamicImports?: boolean;
-    singleBuild?: boolean;
-    distDir?: string;
-    extensions?: string | any[];
-    ignore?: string | any[];
-    noHashScroll?: boolean;
+    pages?: string | undefined;
+    routifyDir?: string | undefined;
+    dynamicImports?: boolean | undefined;
+    singleBuild?: boolean | undefined;
+    distDir?: string | undefined;
+    extensions?: (string | any[]) | undefined;
+    ignore?: (string | any[]) | undefined;
+    noHashScroll?: boolean | undefined;
 };
 type UrlParams = {
     [x: string]: any;
 };
 type UrlOptions = {
-    strict?: boolean;
+    strict?: boolean | undefined;
 };
 type GotoOptions = {
     /**
      * preserve filename in url, ie. /index
      */
-    strict?: boolean;
+    strict?: boolean | undefined;
     /**
      * use replaceState instead pushState
      */
@@ -195,6 +143,6 @@ type GotoOptions = {
     shallow?: boolean;
 };
 type IsActiveOptions = {
-    strict?: boolean;
+    strict?: boolean | undefined;
 };
 type ConcestorReturn = [ClientNodeApi, ClientNodeApi, ClientNodeApi];

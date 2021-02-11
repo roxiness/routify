@@ -3,5 +3,5 @@ export var routify: (inputOptions: any) => {
     name: string;
     renderStart(): Promise<void>;
 };
-export var getConfig: (options: any) => Promise<any>;
-export var config: {};
+export var getConfig: any;
+export let config: {};
