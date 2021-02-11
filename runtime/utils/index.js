@@ -88,9 +88,6 @@ export function suppressComponentWarnings(ctx, tick) {
 
 export function currentLocation() {
   let dirtyFullpath = window.location.pathname + window.location.search + window.location.hash
-  if (config.useHash)
-    dirtyFullpath = dirtyFullpath.replace(/.*#(.+)/, '$1')
-
   const { url, options } = resolvePrefetch(dirtyFullpath)
   const parsedUrl = parseUrl(url)
 
@@ -118,6 +115,8 @@ function resolvePrefetch(dirtyFullpath) {
  * @param {string} url 
  */
 export function parseUrl(url) {
+  if (config.useHash)
+    url = url.replace(/.*#(.+)/, '$1')
   const origin = url.startsWith('/') ? window.location.origin : undefined
   const _url = new URL(url, origin)
   const fullpath = _url.pathname + _url.search + _url.hash
