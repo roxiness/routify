@@ -330,7 +330,7 @@ export const isActive = {
     return derived(
       [url, route],
       ([url, route]) => function isActive(path = "", params = {}, { strict } = { strict: true }) {
-        path = url(path, null, { strict })
+        path = url(path, params, { strict })
         const currentPath = url(route.path, null, { strict })
         const re = new RegExp('^' + path + '($|/)')
         return !!currentPath.match(re)
