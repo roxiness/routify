@@ -51,14 +51,8 @@
     target.style.left = null
   }
 
-  let parentElementOverflow = null
-  function setHidden({ target }) {
-    if (parentElementOverflow === null)
-      parentElementOverflow = target.parentElement.style.overflow
-    target.parentElement.style.overflow = 'hidden'
-  }
-  function undoHidden({ target }) {
-    target.parentElement.style.overflow = parentElementOverflow
+  function hideOverflow(target) {
+    target.parentElement.classList.add('transition-container')
   }
 </script>
 
@@ -66,11 +60,8 @@
   class="transition node{get(node).__file.id}"
   in:transition|local={inParams}
   out:transition|local={outParams}
-  on:introstart={(t) => {
-    undoFixed(t)
-    setHidden(t)
-  }}
-  on:introend={undoHidden}
+  use:hideOverflow
+  on:introstart={undoFixed}
   on:outrostart={setFixed}
 >
   <slot />
@@ -80,5 +71,8 @@
   .transition {
     height: 100%;
     width: 100%;
+  }
+  .transition-container {
+    overflow: hidden;
   }
 </style>
