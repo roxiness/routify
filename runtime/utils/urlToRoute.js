@@ -34,7 +34,7 @@ export function urlToRoute(url, clone = false) {
     }
 
     if (config.queryHandler)
-        route.params = Object.assign({}, route.params, config.queryHandler.parse(search))
+        route.params = Object.assign({}, config.queryHandler.parse(search))
 
     assignParamsToRouteAndLayouts(route, pathname)
 
