@@ -24,7 +24,6 @@
   /** @type {LayoutOrDecorator[]} */
   export let nodes = []
   export let scoped = {}
-  export let isRoot = false
   export let decorator = undefined
 
   /** @type {LayoutOrDecorator} */
@@ -36,7 +35,7 @@
   const context = writable(null)
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContextStore = getContext('routify')
-  $: parentContext = $parentContextStore
+  $: parentContext = $parentContextStore || $rootContext
 
   const setparentNode = (el) => (parentNode = el.parentNode)
 
@@ -63,14 +62,13 @@
       // to leaf layouts of to-be-destroyed-layouts
       nodes: remainingNodes,
       decorator: decorator || Noop,
-      layout: node.isLayout ? node : parentContext && parentContext.layout,
+      layout: node.isLayout ? node : parentContext.layout,
       component: node,
       route: $route,
       componentFile,
-      parentNode: parentNode || (parentContext && parentContext.parentNode),
+      parentNode: parentNode || parentContext.parentNode,
     }
     context.set(ctx)
-    if (isRoot) rootContext.set(ctx)
   }
 
   async function onLastComponentLoaded() {

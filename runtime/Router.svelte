@@ -56,7 +56,7 @@
 </script>
 
 {#if nodes && $route !== null}
-  <Route {nodes} isRoot={true} />
+  <Route {nodes} />
 {/if}
 
 <Prefetcher />
