@@ -37,10 +37,7 @@
   const parentContextStore = getContext('routify')
   $: parentContext = $parentContextStore || $rootContext
 
-  const setParentNode = (el) => {
-    parentNode = el.parentNode
-    el.remove()
-  }
+  const setParentNode = (el) => (parentNode = el.parentNode)
 
   setContext('routify', context)
 
@@ -80,8 +77,8 @@
     const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
 
     // Let everyone know the last child has rendered
-    if (!window['routify'].stopAutoReady && isOnCurrentRoute) 
-      onPageLoaded({ page: $context.component, metatags, afterPageLoad })    
+    if (!window['routify'].stopAutoReady && isOnCurrentRoute)
+      onPageLoaded({ page: $context.component, metatags, afterPageLoad })
   }
 
   /**  @param {ClientNode} layout */
@@ -104,12 +101,14 @@
         let:decorator
         {scoped}
         {scopedSync}
-        {...node.param || {}}>
+        {...node.param || {}}
+      >
         {#if component && nodes.length}
           <svelte:self
             {decorator}
             nodes={[...nodes]}
-            scoped={{ ...scoped, ...scopeToChild }} />
+            scoped={{ ...scoped, ...scopeToChild }}
+          />
         {/if}
       </svelte:component>
     </svelte:component>
