@@ -17,7 +17,7 @@
   import { getContext, setContext, tick } from 'svelte'
   import { writable } from 'svelte/store'
   import { metatags, afterPageLoad } from './helpers.js'
-  import { route, rootContext } from './store'
+  import { route, routes, rootContext } from './store'
   import { handleScroll } from './utils'
   import { onPageLoaded } from './utils/onPageLoaded.js'
 
@@ -64,6 +64,7 @@
       layout: node.isLayout ? node : parentContext.layout,
       component: node,
       route: $route,
+      routes: $routes,
       componentFile,
       parentNode: parentNode || parentContext.parentNode,
     }

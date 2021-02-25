@@ -192,9 +192,10 @@ export const meta = {
 export const url = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
+    const { route, routes } = get(ctx)
     return derived(
-      [ctx, route, routes],
-      args => makeUrlHelper(...args)
+      ctx,
+      ctx => makeUrlHelper(ctx, route, routes)
     ).subscribe(
       listener
     )
