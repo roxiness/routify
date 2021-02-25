@@ -95,7 +95,7 @@ export function currentLocation() {
 }
 
 /**
- * converts /__routify_[options]:http://example.com/path/to to
+ * converts /path/to__routify_url_options__1234abcde to
  * {options, url: '/path/to'}
  * @param {string} dirtyFullpath 
  */
