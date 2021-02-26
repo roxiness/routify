@@ -34,14 +34,15 @@
 
   const context = writable(null)
   /** @type {import("svelte/store").Writable<Context>} */
-  const parentContextStore = getContext('routify')
-  $: parentContext = $parentContextStore || $rootContext
-
+  const parentContext = getContext('routify') || rootContext
   const setParentNode = (el) => (parentNode = el.parentNode)
-
   setContext('routify', context)
 
-  $: [node, ...remainingNodes] = nodes
+let lastNodes = []
+$: if(lastNodes !== nodes){
+  lastNodes = nodes;
+  [node, ...remainingNodes] = [...nodes]
+}
 
   /**  @param {LayoutOrDecorator} node */
   function setComponent(node) {
@@ -56,19 +57,22 @@
   function onComponentLoaded(componentFile) {
     scopedSync = { ...scoped }
 
+    // we have to proxy remaining nodes through ctx or route changes get propagated
+    // to leaf layouts of to-be-destroyed-layouts
     const ctx = {
-      // we have to proxy remaining nodes through ctx or route changes get propagated
-      // to leaf layouts of to-be-destroyed-layouts
+      //we need to keep any possible context.child or the layout will be childless until the new child has been rendered
+      ...$context, 
       nodes: remainingNodes,
       decorator: decorator || Noop,
-      layout: node.isLayout ? node : parentContext.layout,
+      layout: node.isLayout ? node : $parentContext.layout,
       component: node,
       route: $route,
       routes: $routes,
       componentFile,
-      parentNode: parentNode || parentContext.parentNode,
+      parentNode: parentNode || $parentContext.parentNode,
     }
     context.set(ctx)
+    $parentContext.child = node
     if (remainingNodes.length === 0) onLastComponentLoaded()
   }
 
@@ -107,7 +111,7 @@
         {#if component && nodes.length}
           <svelte:self
             {decorator}
-            nodes={[...nodes]}
+            {nodes}
             scoped={{ ...scoped, ...scopeToChild }}
           />
         {/if}
