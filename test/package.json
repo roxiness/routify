@@ -1,24 +1,16 @@
 {
-  "name": "routify-test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:cli": "ava tests/cli/** --timeout 300s",
     "test:e2e": "ava tests/e2e/**",
     "test:mock-api": "ava tests/mock-server/**"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "ava": "^3.13.0",
     "fs-extra": "^9.0.0",
     "node-fetch": "^2.6.0",
     "playwright": "^1.2.1",
-    "tree-kill": "^1.2.2"
-  },
-  "devDependencies": {
+    "tree-kill": "^1.2.2",
     "@ava/typescript": "^1.1.1"
   },
   "ava": {
