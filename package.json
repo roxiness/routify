@@ -29,7 +29,7 @@
     "chalk": "^4.0.0",
     "cheap-watch": "^1.0.2",
     "commander": "^7.1.0",
-    "configent": "^2.1.1",
+    "configent": "^2.1.2",
     "esm": "^3.2.25",
     "fs-extra": "^9.0.1",
     "log-symbols": "^3.0.0",
