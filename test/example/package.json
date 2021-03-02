@@ -11,7 +11,7 @@
     "dev-dynamic": "cross-env BUNDLING=dynamic npm run dev",
     "mock-server": "nodemon api-server",
     "build": "npm run routify -- -b && rollup -c",
-    "serve": "spassr --serve-spa --serve-ssr",
+    "serve": "spassr",
     "export": "routify export",
     "deploy:now": "cd scripts/now && npm run deploy",
     "deploy:netlify": "cd scripts/netlify && npm run deploy",
@@ -22,7 +22,6 @@
     "@rollup/plugin-alias": "^3.1.0",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-node-resolve": "^7.1.3",
-    "@roxi/routify": "latest",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
     "del": "^5.1.0",
@@ -33,7 +32,7 @@
     "rollup-plugin-svelte": "^6.1.1",
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-workbox": "^5.0.1",
-    "spassr": "^1.0.2",
+    "spassr": "^2.2.3",
     "svelte": "^3.20.1",
     "workbox-build": "^5.1.3",
     "workbox-strategies": "^5.1.3"
@@ -49,6 +48,10 @@
     "cors": "^2.8.5",
     "routify-dev-ui": "latest",
     "workbox-window": "^5.1.3"
+  },
+  "spassr": {
+    "entrypoint": "dist/__app.html",
+    "script": "dist/build/bundle.js"
   },
   "workspaces": [
     "../.."

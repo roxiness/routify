@@ -31,6 +31,7 @@
   let remainingNodes = null
   let scopedSync = {}
   let parentNode
+  let invalidate = 1
 
   const context = writable(null)
   /** @type {import("svelte/store").Writable<Context>} */
@@ -55,6 +56,7 @@ $: if(lastNodes !== nodes){
 
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
+    node.api.reset = () => invalidate++
     scopedSync = { ...scoped }
 
     // we have to proxy remaining nodes through ctx or route changes get propagated
@@ -90,15 +92,17 @@ $: if(lastNodes !== nodes){
   function getID({ meta, path, param, params }) {
     return JSON.stringify({
       path,
+      invalidate,
       param: (meta['param-is-page'] || meta['slug-is-page']) && param,
       queryParams: meta['query-params-is-page'] && params,
     })
   }
+  $: id = $context && invalidate && getID($context.component)
   $: $context && suppressComponentWarnings($context, tick)
 </script>
 
 {#if $context}
-  {#each [$context] as { component, componentFile, decorator, nodes } (getID(component))}
+  {#each [$context] as { component, componentFile, decorator, nodes } (id)}
     <svelte:component this={decorator} {scoped}>
       <svelte:component
         this={componentFile}
