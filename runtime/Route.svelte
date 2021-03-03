@@ -43,6 +43,7 @@ let lastNodes = []
 $: if(lastNodes !== nodes){
   lastNodes = nodes;
   [node, ...remainingNodes] = [...nodes]
+  node.api.reset = () => invalidate++
 }
 
   /**  @param {LayoutOrDecorator} node */
@@ -56,7 +57,6 @@ $: if(lastNodes !== nodes){
 
   /** @param {SvelteComponent} componentFile */
   function onComponentLoaded(componentFile) {
-    node.api.reset = () => invalidate++
     scopedSync = { ...scoped }
 
     // we have to proxy remaining nodes through ctx or route changes get propagated
