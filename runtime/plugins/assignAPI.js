@@ -28,7 +28,12 @@ class ClientApi {
     get next() { return _navigate(this, +1) }
     get prev() { return _navigate(this, -1) }
     async preload() {
-        const filePromises = [...this.__file.layouts, this.__file]
+        const filePromises = [
+            ...this.__file.layouts,
+            this.__file,
+            this.index && this.index.__file //if this is a layout, we want to include its index
+        ]
+            .filter(Boolean)
             .map(file => file.component())
         await Promise.all(filePromises)
     }
@@ -38,6 +43,20 @@ class ClientApi {
             : this.__file.index ? //is dir with index?
                 this.__file.index.component()
                 : false
+    }
+    get componentWithIndex() {
+        return new Promise(resolve =>
+            Promise.all([
+                this.component,
+                this.index && this.index.component
+            ])
+                .then(res => resolve(res))
+        )
+    }
+    get index() {
+        const child = this.__file.children &&
+            this.__file.children.find(child => child.isIndex)
+        return child && child.api
     }
 }
 
