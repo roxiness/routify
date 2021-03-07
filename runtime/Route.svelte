@@ -79,13 +79,12 @@ $: if(lastNodes !== nodes){
   }
 
   async function onLastComponentLoaded() {
-    tick().then(() => handleScroll(parentNode)) //scroll needs to run after next tick
     await new Promise((resolve) => setTimeout(resolve))
     const isOnCurrentRoute = $context.component.path === $route.path //maybe we're getting redirected
 
     // Let everyone know the last child has rendered
     if (!window['routify'].stopAutoReady && isOnCurrentRoute)
-      onPageLoaded({ page: $context.component, metatags, afterPageLoad })
+      onPageLoaded({ page: $context.component, metatags, afterPageLoad, parentNode })
   }
 
   /**  @param {ClientNode} layout */

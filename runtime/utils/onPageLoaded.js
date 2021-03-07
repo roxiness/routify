@@ -1,6 +1,11 @@
-import { currentLocation } from './index'
+import { currentLocation, handleScroll } from './index'
 
-export async function onPageLoaded({ page, metatags, afterPageLoad }) {
+
+export async function onPageLoaded({ page, metatags, afterPageLoad, parentNode }) {
+    //scroll needs to run after page load
+    const scrollToTop = page.last !== page
+    setTimeout(() => handleScroll(parentNode, scrollToTop))
+
     const { path } = page
     const { options } = currentLocation()
     const prefetchId = options.prefetch

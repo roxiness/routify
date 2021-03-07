@@ -2,9 +2,9 @@ import config from '../../runtime.config'
 
 const MATCH_PARAM = RegExp(/\:([^/()]+)/g)
 
-export function handleScroll(element) {
+export function handleScroll(element, scrollToTop) {
   if (navigator.userAgent.includes('jsdom')) return false
-  scrollAncestorsToTop(element)
+  if (scrollToTop) scrollAncestorsToTop(element)
   handleHash()
 }
 
