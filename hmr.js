@@ -23,6 +23,7 @@ export default function HMR(Component, options = { target: document.body }, id =
         addEventListener(eventName, showApp)
 
     function showApp() {
+        removeEventListener(eventName, showApp)
         if (prerenderedHtmlElement) prerenderedHtmlElement.remove()
         // Show our component and take over the ID of the old container
         target.style.visibility = null
