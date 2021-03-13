@@ -74,11 +74,21 @@ export const assignIndex = createNodeMiddleware(({ file, parent }) => {
 })
 
 export const assignLayout = createNodeMiddleware(({ file, scope }) => {
+    // create a layouts getter
     Object.defineProperty(file, 'layouts', { get: () => getLayouts(file) })
+
+    /**
+     * returns a list of layouts by recursively traversing the AST ancestry
+     * @param {RouteNode} file 
+     * @returns {RouteNode[]}
+     */
     function getLayouts(file) {
+        // if this isn't a layout and it's reset, return an empty array
+        if (!file.isLayout && file.meta.reset) return []
+
         const { parent } = file
         const layout = parent && parent.component && parent
-        const isReset = layout && layout.isReset
+        const isReset = layout && (layout.isReset || layout.meta.reset)
         const layouts = (parent && !isReset && getLayouts(parent)) || []
         if (layout) layouts.push(layout)
         return layouts
