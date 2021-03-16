@@ -48,8 +48,8 @@ export function init(routes, callback) {
 function createEventListeners(updatePage) {
   // history.*state
   ;['pushState', 'replaceState'].forEach(eventName => {
-    history[eventName]
-    history[eventName + 'Native'] = history[eventName]
+    if (!history[eventName + 'Native'])
+      history[eventName + 'Native'] = history[eventName]
     history[eventName] = async function (state = {}, title, url) {
       // do nothing if we're navigating to the current page
       const currentUrl = location.pathname + location.search + location.hash
