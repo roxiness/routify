@@ -1,5 +1,5 @@
 <script>
-  import { getConcestor, isAncestor } from '../helpers'
+  import { getConcestor, isAncestor, context } from '../helpers'
   import { fade } from 'svelte/transition'
   import { get } from 'svelte/store'
   import { route, node } from '../'
@@ -35,44 +35,23 @@
   $: normalizedConfig = { ...defaultConfig, ..._config }
   $: ({ transition, inParams, outParams } = normalizedConfig)
 
-  function setFixed({ target }) {
-    const rect = target.getBoundingClientRect()
-    target.style.position = 'fixed'
-    target.style.width = `${rect.width}px`
-    target.style.height = `${rect.height}px`
-    target.style.top = `${rect.top}px`
-    target.style.left = `${rect.left}px`
-  }
-  function undoFixed({ target }) {
-    target.style.position = null
-    target.style.width = null
-    target.style.height = null
-    target.style.top = null
-    target.style.left = null
-  }
-
-  function hideOverflow(target) {
-    target.parentElement.classList.add('transition-container')
-  }
+  const { parentNode } = $context
+  parentNode.style.display = 'grid'
+  parentNode.style['grid-template-rows'] = '1fr'
+  parentNode.style['grid-template-columns'] = '1fr'
 </script>
 
 <div
   class="transition node{get(node).__file.id}"
   in:transition|local={inParams}
   out:transition|local={outParams}
-  use:hideOverflow
-  on:introstart={undoFixed}
-  on:outrostart={setFixed}
 >
   <slot />
 </div>
 
 <style>
   .transition {
-    height: 100%;
-    width: 100%;
-  }
-  .transition-container {
-    overflow: hidden;
+    grid-row: 1;
+    grid-column: 1;
   }
 </style>
