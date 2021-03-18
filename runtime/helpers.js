@@ -119,7 +119,10 @@ function hookHandler(listener) {
   const hooks = this._hooks
   const index = hooks.length
   listener(callback => { hooks[index] = callback })
-  return () => delete hooks[index]
+  return (...params) => {
+    delete hooks[index]
+    listener(...params)
+  }
 }
 
 /**
