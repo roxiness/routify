@@ -416,6 +416,10 @@ let focusIsSet = false
 
 
 const _metatags = {
+  subscribe(listener) {
+    this._origin = this.getOrigin()
+    return listener(metatags)
+  },
   props: {},
   templates: {},
   services: {
@@ -481,17 +485,20 @@ const _metatags = {
     head.appendChild(newElement)
   },
   set(prop, value) {
-    _metatags.plugins.forEach(plugin => {
-      if (plugin.condition(prop, value))
-        [prop, value] = plugin.action(prop, value) || [prop, value]
-    })
+    // we only want strings. If metatags is used as a store, svelte will try to assign an object to prop
+    if (typeof prop === 'string') {
+      _metatags.plugins.forEach(plugin => {
+        if (plugin.condition(prop, value))
+          [prop, value] = plugin.action(prop, value) || [prop, value]
+      })
+    }
   },
   clear() {
     const oldElement = document.querySelector(`meta`)
     if (oldElement) oldElement.remove()
   },
   template(name, fn) {
-    const origin = _metatags.getOrigin()
+    const origin = _metatags.getOrigin
     _metatags.templates[name] = _metatags.templates[name] || {}
     _metatags.templates[name][origin] = fn
   },
@@ -516,7 +523,9 @@ const _metatags = {
     }
   },
   _updateQueued: false,
+  _origin: false,
   getOrigin() {
+    if (this._origin) return this._origin
     const routifyCtx = getRoutifyContext()
     return routifyCtx && get(routifyCtx).path || '/'
   },
@@ -530,13 +539,13 @@ const _metatags = {
  */
 export const metatags = new Proxy(_metatags, {
   set(target, name, value, receiver) {
-    const { props, getOrigin } = target
+    const { props } = target
 
     if (Reflect.has(target, name))
       Reflect.set(target, name, value, receiver)
     else {
       props[name] = props[name] || {}
-      props[name][getOrigin()] = value
+      props[name][target.getOrigin()] = value
     }
 
     if (window['routify'].appLoaded)
