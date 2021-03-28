@@ -19,21 +19,34 @@ function getRoutifyContext() {
   return getContext('routify') || rootContext
 }
 
-export const components = {
+export const nodes = {
   subscribe(run) {
-    const components = []
+    const nodes = []
     return derived(routes, routes => {
       routes.forEach(route => {
         const layouts = route.layouts
           .map(layout => layout.api)
-          .filter(api => !components.includes(api))
-
-        components.push(route.api, ...layouts)
+          .filter(api => !nodes.includes(api))
+        nodes.push(route.api, ...layouts)
       })
-      return components
+
+      // enhance find method
+      const find = nodes.find
+      nodes.find = (value, ...args) => {
+        // if value is string, return route which name or path matches value
+        if (typeof value === 'string')
+          return nodes.find(n => n.meta.name === value) ||
+            nodes.find(n => n.path === value)
+        // or default to Array.find
+        else return find.bind(nodes)(value, ...args)
+      }
+
+      return nodes
     }).subscribe(run)
   }
 }
+
+export const components = nodes
 
 /**
  * @typedef {import('svelte/store').Readable<ClientNodeApi>} ClientNodeHelperStore
