@@ -4,6 +4,7 @@ about: Create a report to help us improve
 title: ''
 labels: 'needs triage, bug'
 assignees: ''
+projects: '1'
 ---
 
 **First rule of bug posting**
