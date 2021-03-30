@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: ''
 labels: 'needs triage, bug'
 assignees: ''
-projects: 'Issue Tracker'
 ---
 
 **First rule of bug posting**
