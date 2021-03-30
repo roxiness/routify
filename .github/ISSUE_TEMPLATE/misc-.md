@@ -2,7 +2,7 @@
 name: Misc.
 about: For the non-conformists
 title: ''
-labels: ''
+labels: 'needs triage'
 assignees: ''
 
 ---
