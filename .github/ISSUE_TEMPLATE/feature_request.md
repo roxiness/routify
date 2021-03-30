@@ -2,9 +2,8 @@
 name: Feature request
 about: Use the template or shoot from the hip. Up to you.
 title: ''
-labels: ''
+labels: 'needs triage, enhancement'
 assignees: ''
-
 ---
 
 **Is your feature request related to a problem? Please describe.**
