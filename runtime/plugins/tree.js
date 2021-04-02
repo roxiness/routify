@@ -32,7 +32,7 @@ export const addMetaChildren = createNodeMiddleware(({ file }) => {
 export const setIsIndexable = createNodeMiddleware(payload => {
     const { file } = payload
     const { isFallback, meta } = file
-    const isDynamic = file.path.match('/:')
+    const isDynamic = file.path.split('/').pop().startsWith(':')
     const isIndex = file.path.endsWith('/index')
     const isIndexed = meta.index || meta.index === 0
     const isHidden = meta.index === false
