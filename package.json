@@ -1,0 +1,24 @@
+{
+  "name": "routify3",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "uvu test",
+    "test-watch": "nodemon --exec npm run test"
+  },
+  "author": "jakobrosenberg@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "uvu": "^0.5.1"
+  },
+  "dependencies": {
+    "fs-extra": "^9.1.0"
+  }
+}
