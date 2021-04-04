@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "uvu test",
-    "test-watch": "nodemon --exec npm run test"
+    "test-watch": "nodemon --exec npm run test --ignore fixtures/**"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "ISC",

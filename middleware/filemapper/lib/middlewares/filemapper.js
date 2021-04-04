@@ -1,7 +1,7 @@
-import { Node } from "../../../lib/node.js";
+import { Node } from "../../../../lib/node.js";
 import { readdir } from 'fs/promises'
 import { resolve } from "path";
-import { File } from "./File.js";
+import { File } from "../File.js";
 
 
 /**
@@ -9,18 +9,18 @@ import { File } from "./File.js";
  * @param {string} path 
  * @param {Node} parentNode 
  */
-export const filemapper = async (path, parentNode) => {
+export const filemapper = async (parentNode, path) => {
     if (!parentNode)
         throw new Error('parentNode is missing')
     const filenames = await readdir(path)
     const promises = filenames.map(filename => {
         const filepath = resolve(path, filename)
         const file = new File(filepath)
-        const node = new Node()
+        const node = new Node(file.name)
         node.file = file
         parentNode.appendChild(node)
         if (file.stat.isDirectory())
-            return filemapper(file.path, node)
+            return filemapper(node, file.path)
     })
     await Promise.all(promises)
     return parentNode

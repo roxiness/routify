@@ -1,0 +1,407 @@
+{
+  "meta": {},
+  "file": {
+    "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\_module.svelte",
+    "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+    "base": "_module.svelte",
+    "ext": ".svelte",
+    "name": "_module"
+  },
+  "children": [
+    {
+      "meta": {
+        "reset": true
+      },
+      "name": "admin",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin\\_reset.svelte",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin",
+        "base": "_reset.svelte",
+        "ext": ".svelte",
+        "name": "_reset"
+      },
+      "children": []
+    },
+    {
+      "meta": {},
+      "name": "blog",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "blog",
+        "ext": "",
+        "name": "blog"
+      },
+      "children": [
+        {
+          "meta": {
+            "dynamic": true
+          },
+          "name": "prefixed[slug]",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog\\prefixed[slug].svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+            "base": "prefixed[slug].svelte",
+            "ext": ".svelte",
+            "name": "prefixed[slug]"
+          },
+          "children": []
+        },
+        {
+          "meta": {
+            "dynamic": true
+          },
+          "name": "[slug]",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog\\[slug].svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+            "base": "[slug].svelte",
+            "ext": ".svelte",
+            "name": "[slug]"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "index",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\index.svelte",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "index.svelte",
+        "ext": ".svelte",
+        "name": "index"
+      },
+      "children": []
+    },
+    {
+      "meta": {},
+      "name": "no-layouts",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "no-layouts",
+        "ext": "",
+        "name": "no-layouts"
+      },
+      "children": [
+        {
+          "meta": {},
+          "name": "nested",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts",
+            "base": "nested",
+            "ext": "",
+            "name": "nested"
+          },
+          "children": [
+            {
+              "meta": {},
+              "name": "foo",
+              "file": {
+                "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested\\foo.svelte",
+                "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+                "base": "foo.svelte",
+                "ext": ".svelte",
+                "name": "foo"
+              },
+              "children": []
+            },
+            {
+              "meta": {},
+              "name": "index",
+              "file": {
+                "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested\\index.svelte",
+                "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+                "base": "index.svelte",
+                "ext": ".svelte",
+                "name": "index"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "admin",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "admin",
+        "ext": "",
+        "name": "admin"
+      },
+      "children": [
+        {
+          "meta": {
+            "reset": true
+          },
+          "name": "_reset",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin\\_reset.svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin",
+            "base": "_reset.svelte",
+            "ext": ".svelte",
+            "name": "_reset"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "blog",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "blog",
+        "ext": "",
+        "name": "blog"
+      },
+      "children": [
+        {
+          "meta": {
+            "dynamic": true
+          },
+          "name": "prefixed[slug]",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog\\prefixed[slug].svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+            "base": "prefixed[slug].svelte",
+            "ext": ".svelte",
+            "name": "prefixed[slug]"
+          },
+          "children": []
+        },
+        {
+          "meta": {
+            "dynamic": true
+          },
+          "name": "[slug]",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog\\[slug].svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+            "base": "[slug].svelte",
+            "ext": ".svelte",
+            "name": "[slug]"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "index",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\index.svelte",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "index.svelte",
+        "ext": ".svelte",
+        "name": "index"
+      },
+      "children": []
+    },
+    {
+      "meta": {},
+      "name": "no-layouts",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "no-layouts",
+        "ext": "",
+        "name": "no-layouts"
+      },
+      "children": [
+        {
+          "meta": {},
+          "name": "nested",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts",
+            "base": "nested",
+            "ext": "",
+            "name": "nested"
+          },
+          "children": [
+            {
+              "meta": {},
+              "name": "foo",
+              "file": {
+                "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested\\foo.svelte",
+                "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+                "base": "foo.svelte",
+                "ext": ".svelte",
+                "name": "foo"
+              },
+              "children": []
+            },
+            {
+              "meta": {},
+              "name": "index",
+              "file": {
+                "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested\\index.svelte",
+                "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+                "base": "index.svelte",
+                "ext": ".svelte",
+                "name": "index"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "_module",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\_module.svelte",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "_module.svelte",
+        "ext": ".svelte",
+        "name": "_module"
+      },
+      "children": []
+    },
+    {
+      "meta": {},
+      "name": "admin",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "admin",
+        "ext": "",
+        "name": "admin"
+      },
+      "children": [
+        {
+          "meta": {},
+          "name": "_reset",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin\\_reset.svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\admin",
+            "base": "_reset.svelte",
+            "ext": ".svelte",
+            "name": "_reset"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "blog",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "blog",
+        "ext": "",
+        "name": "blog"
+      },
+      "children": [
+        {
+          "meta": {},
+          "name": "prefixed[slug]",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog\\prefixed[slug].svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+            "base": "prefixed[slug].svelte",
+            "ext": ".svelte",
+            "name": "prefixed[slug]"
+          },
+          "children": []
+        },
+        {
+          "meta": {},
+          "name": "[slug]",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog\\[slug].svelte",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\blog",
+            "base": "[slug].svelte",
+            "ext": ".svelte",
+            "name": "[slug]"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "index",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\index.svelte",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "index.svelte",
+        "ext": ".svelte",
+        "name": "index"
+      },
+      "children": []
+    },
+    {
+      "meta": {},
+      "name": "no-layouts",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "no-layouts",
+        "ext": "",
+        "name": "no-layouts"
+      },
+      "children": [
+        {
+          "meta": {},
+          "name": "nested",
+          "file": {
+            "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+            "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts",
+            "base": "nested",
+            "ext": "",
+            "name": "nested"
+          },
+          "children": [
+            {
+              "meta": {},
+              "name": "foo",
+              "file": {
+                "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested\\foo.svelte",
+                "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+                "base": "foo.svelte",
+                "ext": ".svelte",
+                "name": "foo"
+              },
+              "children": []
+            },
+            {
+              "meta": {},
+              "name": "index",
+              "file": {
+                "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested\\index.svelte",
+                "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts\\nested",
+                "base": "index.svelte",
+                "ext": ".svelte",
+                "name": "index"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "meta": {},
+      "name": "_module",
+      "file": {
+        "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\_module.svelte",
+        "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
+        "base": "_module.svelte",
+        "ext": ".svelte",
+        "name": "_module"
+      },
+      "children": []
+    }
+  ]
+}
