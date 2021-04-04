@@ -2,7 +2,7 @@ import { test, suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { dirname, resolve, sep } from "path";
 import { fileURLToPath } from 'url';
-import { Node } from '../../../lib/node.js';
+import { Node } from '../../../lib/Node.js';
 import { filemapper } from '../../../middleware/filemapper/lib/middlewares/filemapper.js';
 import { moveModuleToParentNode } from '../../../middleware/filemapper/lib/middlewares/fileToModule.js';
 import { filenameToOptions } from '../../../middleware/filemapper/lib/middlewares/filenameToOptions.js';

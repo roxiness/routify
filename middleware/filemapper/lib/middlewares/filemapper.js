@@ -1,4 +1,4 @@
-import { Node } from "../../../../lib/node.js";
+import { Node } from "../../../../lib/Node.js";
 import { readdir } from 'fs/promises'
 import { resolve } from "path";
 import { File } from "../File.js";

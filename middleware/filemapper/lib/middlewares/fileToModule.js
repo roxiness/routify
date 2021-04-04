@@ -1,4 +1,4 @@
-import { Node } from "../../../../lib/node.js"
+import { Node } from "../../../../lib/Node.js"
 import { nameFilter } from "../../utils.js";
 
 
