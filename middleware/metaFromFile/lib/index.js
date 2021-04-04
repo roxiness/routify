@@ -74,6 +74,3 @@ export const externalComments = async (filepath, output) => {
         return meta
     }
 }
-
-
-externalComments().then(r => r)
