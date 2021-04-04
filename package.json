@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "uvu test",
-    "test-watch": "nodemon --exec npm run test --ignore fixtures/**"
+    "test-watch": "nodemon --exec npm run test --ignore {fixtures/**,output/**}"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "uvu": "^0.5.1"
   },
   "dependencies": {
+    "cheerio": "*",
     "fs-extra": "^9.1.0"
   }
 }
