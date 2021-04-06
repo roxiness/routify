@@ -7,8 +7,11 @@ import { nameFilter } from "../../utils.js";
  * `file` is moved to node.parent and the old node is removed
  * @param {Node} rootNode 
  */
-export const moveModuleToParentNode = (rootNode, moduleFiles) => {
-    rootNode.nodeIndex
+export const moveModuleToParentNode = (rootNode) => {
+    const { nodeIndex, options } = rootNode.instance
+    const { moduleFiles } = options.filemapper
+
+    nodeIndex
         .filter(nameFilter(moduleFiles))
         .forEach(node => {
             node.parent.file = node.file

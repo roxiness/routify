@@ -6,18 +6,20 @@ import { nameFilter } from "../../utils.js";
  * @param {Node} rootNode 
  */
 export const filenameToOptions = (rootNode) => {
-    rootNode.nodeIndex
+    const { nodeIndex } = rootNode.instance
+
+    // set meta.reset for _reset.svelte
+    nodeIndex
         .filter(nameFilter(['_reset.svelte']))
         .forEach(node => node.meta.reset = true)
 
-    rootNode.nodeIndex
+    // set meta.fallback for _fallback.svelte
+    nodeIndex
         .filter(nameFilter(['_fallback.svelte']))
         .forEach(node => node.meta.fallback = true)
 
-    rootNode.nodeIndex
-        .filter(node => node.file.name.match(/\[.+\]/))
-        .forEach(node => {
-            node.meta.dynamic = true
-            // node.name = node.name.replace(/\[([^\[\]]+)\]/g, `:$1`)
-        })
+    // set meta.dynamic for files with attribute in name
+    nodeIndex
+        .filter(node => node.file && node.file.name.match(/\[.+\]/))
+        .forEach(node => node.meta.dynamic = true)
 }

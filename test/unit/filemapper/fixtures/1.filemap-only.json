@@ -1,5 +1,12 @@
 {
   "meta": {},
+  "file": {
+    "path": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper/example",
+    "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper",
+    "base": "example",
+    "ext": "",
+    "name": "example"
+  },
   "children": [
     {
       "meta": {},
