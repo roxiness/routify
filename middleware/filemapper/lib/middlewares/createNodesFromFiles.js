@@ -1,15 +1,15 @@
 import { Node } from "../../../../lib/node.js";
 import { readdir } from 'fs/promises'
-import { resolve } from "path";
+import { relative, resolve } from "path";
 import { File } from "../File.js";
 
 /**
  * Maps filestructure to a node tree
- * @param {Node} node
- * @param {String} path
+ * @param {Node} node the root node of the specified path
+ * @param {String} path dir to scan for files
  * @return {Promise<Node>}
  */
-export async function filemapper(node, path) {
+export async function createNodesFromFiles(node, path) {
     const { instance } = node
 
     const queue = [{ path, node }]
@@ -22,6 +22,7 @@ export async function filemapper(node, path) {
         const promises = children.map(filename => {
             const filepath = resolve(path, filename)
             const file = new File(filepath)
+            file.relative = relative(node.root.file.path, node.file.path)
             const childNode = instance.createNode(file.name)
             childNode.file = file
             node.appendChild(childNode)

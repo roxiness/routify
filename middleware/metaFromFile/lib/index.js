@@ -1,8 +1,9 @@
 import cheerio from "cheerio"
-import { existsSync, writeFileSync, writeSync } from "fs"
+import { existsSync, mkdirSync, writeFileSync, writeSync } from "fs"
 import { readFile } from "fs/promises"
-import url, { fileURLToPath, pathToFileURL } from 'url'
+import { fileURLToPath, pathToFileURL } from 'url'
 import { dirname, relative } from "path";
+import { Routify } from "../../../lib/Routify.js";
 
 /**
  * return meta data from comments
@@ -40,6 +41,7 @@ export const htmlComments = async filepath => {
 const writeCodesplitMeta = (key, value, output) => {
     const content = JSON.stringify(value, null, 2)
     const metaFilePath = `${output}/_meta_${key}.js`
+    mkdirSync(output, { recursive: true })
     writeFileSync(metaFilePath, `export default ${content}`)
     return () => import(pathToFileURL(metaFilePath).href).then(r => r.default)
 }
@@ -54,7 +56,8 @@ const writeCodesplitMeta = (key, value, output) => {
 export const externalComments = async (filepath, output) => {
     const metaFilePath = filepath.replace(/(.+)\.[^.]+$/, '$1.meta.js')
     if (existsSync(metaFilePath)) {
-        const meta = await import(url.pathToFileURL(metaFilePath)).then(r => r.default())
+        console.log('URL', pathToFileURL(metaFilePath).pathname)
+        const meta = await import(pathToFileURL(metaFilePath).pathname).then(r => r.default())
 
         // replace <name>.$split props with <name> getters
         Object.entries(meta).forEach(([oldKey, value]) => {
@@ -73,4 +76,21 @@ export const externalComments = async (filepath, output) => {
         })
         return meta
     }
+}
+
+/**
+ * @param {{instance: Routify}}
+ */
+export default async ({ instance }) => {
+    const promises = instance.nodeIndex.map(async node => {
+        if (node.file && !node.file.stat.isDirectory()) {
+            const metaPromises = [
+                externalComments(node.file.path, instance.options.routifyDir),
+                htmlComments(node.file.path)
+            ]
+
+            Object.assign(node.meta, ...await Promise.all(metaPromises))
+        }
+    })
+    await Promise.all(promises)
 }
