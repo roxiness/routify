@@ -7,8 +7,9 @@
     "base": "_module.svelte",
     "ext": ".svelte",
     "name": "_module",
-    "relative": ""
+    "relative": "_module.svelte"
   },
+  "id": "",
   "children": [
     {
       "meta": {
@@ -21,8 +22,9 @@
         "base": "_reset.svelte",
         "ext": ".svelte",
         "name": "_reset",
-        "relative": "admin"
+        "relative": "admin\\_reset.svelte"
       },
+      "id": "admin",
       "children": []
     },
     {
@@ -33,8 +35,10 @@
         "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
         "base": "blog",
         "ext": "",
-        "name": "blog"
+        "name": "blog",
+        "relative": "blog"
       },
+      "id": "blog",
       "children": [
         {
           "meta": {
@@ -47,8 +51,9 @@
             "base": "prefixed[slug].svelte",
             "ext": ".svelte",
             "name": "prefixed[slug]",
-            "relative": "blog"
+            "relative": "blog\\prefixed[slug].svelte"
           },
+          "id": "blog_prefixed_slug__svelte",
           "children": []
         },
         {
@@ -62,8 +67,9 @@
             "base": "[slug].svelte",
             "ext": ".svelte",
             "name": "[slug]",
-            "relative": "blog"
+            "relative": "blog\\[slug].svelte"
           },
+          "id": "blog__slug__svelte",
           "children": []
         }
       ]
@@ -77,8 +83,9 @@
         "base": "index.svelte",
         "ext": ".svelte",
         "name": "index",
-        "relative": ""
+        "relative": "index.svelte"
       },
+      "id": "index_svelte",
       "children": []
     },
     {
@@ -89,8 +96,10 @@
         "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example",
         "base": "no-layouts",
         "ext": "",
-        "name": "no-layouts"
+        "name": "no-layouts",
+        "relative": "no-layouts"
       },
+      "id": "no_layouts",
       "children": [
         {
           "meta": {},
@@ -100,8 +109,10 @@
             "dir": "C:\\Users\\jakob\\sandbox\\@roxi\\routify3\\test\\unit\\filemapper\\example\\no-layouts",
             "base": "nested",
             "ext": "",
-            "name": "nested"
+            "name": "nested",
+            "relative": "no-layouts\\nested"
           },
+          "id": "no_layouts_nested",
           "children": [
             {
               "meta": {},
@@ -112,8 +123,9 @@
                 "base": "foo.svelte",
                 "ext": ".svelte",
                 "name": "foo",
-                "relative": "no-layouts\\nested"
+                "relative": "no-layouts\\nested\\foo.svelte"
               },
+              "id": "no_layouts_nested_foo_svelte",
               "children": []
             },
             {
@@ -125,8 +137,9 @@
                 "base": "index.svelte",
                 "ext": ".svelte",
                 "name": "index",
-                "relative": "no-layouts\\nested"
+                "relative": "no-layouts\\nested\\index.svelte"
               },
+              "id": "no_layouts_nested_index_svelte",
               "children": []
             }
           ]
