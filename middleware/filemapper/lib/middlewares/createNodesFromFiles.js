@@ -5,33 +5,35 @@ import { File } from "../File.js";
 
 /**
  * Maps filestructure to a node tree
- * @param {Node} node the root node of the specified path
+ * @param {Node} firstNode the root node of the specified path
  * @param {String} path dir to scan for files
  * @return {Promise<Node>}
  */
-export async function createNodesFromFiles(node, path) {
-    const { instance } = node
+export async function createNodesFromFiles(firstNode, path) {
+    const { instance } = firstNode
+    firstNode.file = new File(path)
+    const queue = [firstNode]
 
-    const queue = [{ path, node }]
 
-    while (queue.length) {
-        const { node, path } = queue.pop()
-        node.file = new File(path)
-        const children = await readdir(path)
+    let node
 
-        const promises = children.map(filename => {
-            const filepath = resolve(path, filename)
-            const file = new File(filepath)
-            file.relative = relative(node.root.file.path, node.file.path)
-            const childNode = instance.createNode(file.name)
-            childNode.file = file
-            node.appendChild(childNode)
-            if (file.stat.isDirectory())
-                queue.unshift({ node: childNode, path: file.path })
-        })
+    while (node = queue.pop()) {
+        node.file.relative = relative(firstNode.file.path, node.file.path) // todo is not including filename
+        node.id = node.file.relative.replace(/[^\w]/g, '_')
+        
+        if (node.file.stat.isDirectory()) {
+            // for each child create a node, attach a file and add it to the queue
+            const children = await readdir(node.file.path)
+            const promises = children.map(filename => {
+                const file = new File(resolve(node.file.path, filename))
+                const childNode = instance.createNode(file.name)
+                childNode.file = file
+                node.appendChild(childNode)
+                queue.unshift(childNode)
+            })
+            await Promise.all(promises)
+        }
 
-        await Promise.all(promises)
     }
-
-    return node
+    return firstNode
 }

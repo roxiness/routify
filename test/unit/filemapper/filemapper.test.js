@@ -29,7 +29,7 @@ let rootNode = instance.createNode()
 rootNode.rootName = 'default'
 
 test('files are mapped', async () => {
-    rootNode = await createNodesFromFiles(rootNode, options.filemapper.routesDir.default)
+    await createNodesFromFiles(rootNode, options.filemapper.routesDir.default)
     assert.equal(instance.nodeIndex.length, 13)
     assertSnapshot('1.filemap-only', rootNode.map, 0)
 })

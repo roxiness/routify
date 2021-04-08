@@ -22,13 +22,14 @@ export const parseComment = body => {
  * @param {string} filepath file to check for inlined html meta comments
  * @returns {any}
  */
-export const htmlComments = async filepath => {
+export const htmlComments = async filepath => {    
     const meta = {}
-    const content = await readFile(filepath, 'utf-8')
+    // todo can we get rid of this div? It won't parse files with only comments in them
+    const content = '<div />' + await readFile(filepath, 'utf-8')    
     const $ = cheerio.load(content)
 
     const comments = $('*').contents().filter((i, el) => el.type === 'comment')
-    comments.each((i, c) => Object.assign(meta, parseComment(c.data)))
+    comments.each((i, c) => Object.assign(meta, parseComment(c.data)))    
     return meta
 }
 
@@ -56,7 +57,6 @@ const writeCodesplitMeta = (key, value, output) => {
 export const externalComments = async (filepath, output) => {
     const metaFilePath = filepath.replace(/(.+)\.[^.]+$/, '$1.meta.js')
     if (existsSync(metaFilePath)) {
-        console.log('URL', pathToFileURL(metaFilePath).pathname)
         const meta = await import(pathToFileURL(metaFilePath).pathname).then(r => r.default())
 
         // replace <name>.$split props with <name> getters
@@ -88,7 +88,6 @@ export default async ({ instance }) => {
                 externalComments(node.file.path, instance.options.routifyDir),
                 htmlComments(node.file.path)
             ]
-
             Object.assign(node.meta, ...await Promise.all(metaPromises))
         }
     })

@@ -2,12 +2,10 @@ import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
-import { htmlComments, externalComments, default as metaFromFile } from '../../../middleware/metaFromFile/lib/index.js';
+import metaFromFile, { htmlComments, externalComments } from '../../../middleware/metaFromFile/lib/index.js';
 import { emptyDirSync } from 'fs-extra'
 import { Routify } from '../../../lib/Routify.js';
 import filemapper from '../../../middleware/filemapper/lib/index.js';
-import { readdirSync, writeSync } from 'fs';
-
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const expectedExternal = {
@@ -65,7 +63,7 @@ test('metaFromFile middleware', async () => {
     const externalMetaFile = instance.nodeIndex.find(node => node.name === 'externalMeta')
 
     assert.equal(classless(inlineMetaFile.meta), expectedInline)
-    assert.equal(classless(externalMetaFile.meta), expectedExternal)
+    assert.equal(classless(externalMetaFile.meta), { ...expectedExternal, inlined: true })
     assert.ok(externalMetaFile.meta.codesplitted.then, 'should be a promise')
     assert.snapshot(
         await externalMetaFile.meta.codesplitted,
