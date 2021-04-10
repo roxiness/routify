@@ -11,20 +11,25 @@ import { File } from "../File.js";
  */
 export async function createNodesFromFiles(firstNode, path) {
     const { instance } = firstNode
-    firstNode.file = new File(path, path)
+    firstNode.file = new File(path)
     const queue = [firstNode]
 
 
     let node
 
     while (node = queue.pop()) {
-        node.id = node.file.relative.replace(/[^\w]/g, '_')
-        
+        const relativePath = relative(node.root.file.path, node.file.path)
+        // set id to `default_path_to_file` if rootName is default
+        node.id = [node.root.rootName, relativePath]
+            .filter(Boolean)
+            .join('_')
+            .replace(/[^\w]/g, '_')
+
         if (node.file.stat.isDirectory()) {
             // for each child create a node, attach a file and add it to the queue
             const children = await readdir(node.file.path)
             const promises = children.map(filename => {
-                const file = new File(resolve(node.file.path, filename), path)
+                const file = new File(resolve(node.file.path, filename))
                 const childNode = instance.createNode(file.name)
                 childNode.file = file
                 node.appendChild(childNode)
