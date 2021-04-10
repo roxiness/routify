@@ -66,7 +66,7 @@ const bundleIsNotNullOrUndefined = val => ![null, undefined].includes(val.meta.b
 /**
  * 
  * @param {Node} node 
- * @param {any} bundle
+ * @param {any} outputDir
  */
 export const createBundles = async (node, outputDir) => {
     const bundles = new Bundles(outputDir)
