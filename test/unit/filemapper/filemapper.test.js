@@ -3,11 +3,11 @@ import * as assert from 'uvu/assert';
 import { dirname, resolve, sep } from "path";
 import { fileURLToPath } from 'url';
 import { createNodesFromFiles } from '../../../middleware/filemapper/lib/middlewares/createNodesFromFiles.js';
-import { moveModuleToParentNode } from '../../../middleware/filemapper/lib/middlewares/fileToModule.js';
+import { moveModuleToParentNode } from '../../../middleware/filemapper/lib/middlewares/moveModuleToParentNode.js';
 import { filenameToOptions } from '../../../middleware/filemapper/lib/middlewares/filenameToOptions.js';
 import { readFileSync, writeFileSync } from 'fs';
 import { setComponent } from '../../../middleware/filemapper/lib/middlewares/setComponent.js';
-import filemapper from '../../../middleware/filemapper/lib/index.js';
+import { filemapper } from '../../../middleware/filemapper/lib/index.js';
 import { Routify } from '../../../lib/Routify.js';
 
 

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import metaFromFile, { htmlComments, externalComments } from '../../../middleware/metaFromFile/lib/index.js';
 import { emptyDirSync } from 'fs-extra'
 import { Routify } from '../../../lib/Routify.js';
-import filemapper from '../../../middleware/filemapper/lib/index.js';
+import { filemapper } from '../../../middleware/filemapper/lib/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const expectedExternal = {

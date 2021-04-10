@@ -2,10 +2,8 @@ import { test, suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { dirname, resolve, sep } from "path";
 import { fileURLToPath } from 'url';
-import { Node } from '../../../lib/Node.js';
-import { createNodesFromFiles } from '../../../middleware/filemapper/lib/middlewares/createNodesFromFiles.js';
-import { moveModuleToParentNode } from '../../../middleware/filemapper/lib/middlewares/fileToModule.js';
-import filemapper from '../../../middleware/filemapper/lib/index.js';
+
+import { filemapper } from '../../../middleware/filemapper/lib/index.js';
 import { readFileSync, writeFileSync } from 'fs';
 import { setComponent } from '../../../middleware/filemapper/lib/middlewares/setComponent.js';
 import { Routify } from '../../../lib/Routify.js';

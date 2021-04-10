@@ -1,15 +1,15 @@
 import { Routify } from "../../../lib/Routify.js"
 import { createNodesFromFiles } from "./middlewares/createNodesFromFiles.js"
 import { filenameToOptions } from "./middlewares/filenameToOptions.js"
-import { moveModuleToParentNode } from "./middlewares/fileToModule.js"
+import { moveModuleToParentNode } from "./middlewares/moveModuleToParentNode.js"
 import { setComponent } from "./middlewares/setComponent.js"
 
 /**
  * Runs the suite of filemapper middlewares on the
  * Routify instance
- * @param {{instance: Routify}}
+ * @param {{instance: Routify}} param0
  */
-export default async ({ instance }) => {
+export const filemapper = async ({ instance }) => {
     const { options } = instance
 
     const promises = Object.entries(options.filemapper.routesDir)
