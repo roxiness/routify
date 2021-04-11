@@ -6,7 +6,7 @@ import { Node } from '../../../../lib/Node.js' //eslint-disable-line
  * @param {Node} node
  */
 export const setComponent = (node) => {
-    node.descendants
+    [node, ...node.descendants]
         .filter(node => node.file && !node.file.stat.isDirectory())
         .forEach(node => node.component = node.file.path)
 }
