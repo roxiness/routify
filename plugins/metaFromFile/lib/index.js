@@ -1,9 +1,10 @@
 import cheerio from 'cheerio'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import {existsSync} from 'fs'
 import { readFile } from 'fs/promises'
 import { pathToFileURL } from 'url'
 // we Routify for typed JS
 import { Routify } from '../../../lib/Routify.js' //eslint-disable-line
+import { writeDynamicImport } from '../../../lib/utils.js'
 
 /**
  * return meta data from comments
@@ -31,19 +32,6 @@ export const htmlComments = async filepath => {
     return meta
 }
 
-/**
- *
- * @param {string} key name of the meta entry: <key>.$split
- * @param {any} value JSON.stringifiable value
- * @param {string} output destination for code split files
- */
-const writeCodesplitMeta = (key, value, output) => {
-    const content = JSON.stringify(value, null, 2)
-    const metaFilePath = `${output}/_meta_${key}.js`
-    mkdirSync(output, { recursive: true })
-    writeFileSync(metaFilePath, `export default ${content}`)
-    return () => import(pathToFileURL(metaFilePath).href).then(r => r.default)
-}
 
 /**
  * reads meta from <filename>.meta.js files
@@ -63,9 +51,9 @@ export const externalComments = async (filepath, output) => {
             if (matches) {
                 // create a getter
                 const [, key] = matches
-                const splitValue = writeCodesplitMeta(key, value, output)
+                const get = writeDynamicImport(`${output}/_meta_${key}.js`, value)
                 Object.defineProperty(meta, key, {
-                    get: splitValue,
+                    get,
                     enumerable: true
                 })
                 // delete the <name>.$split key
