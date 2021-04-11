@@ -3,12 +3,12 @@ import * as assert from 'uvu/assert';
 import { dirname, resolve, sep } from "path";
 import { fileURLToPath } from 'url';
 
-import { filemapper } from '../../../middleware/filemapper/lib/index.js';
+import { filemapper } from '../../../plugins/filemapper/lib/index.js';
 import { readFileSync, writeFileSync } from 'fs';
-import { setComponent } from '../../../middleware/filemapper/lib/middlewares/setComponent.js';
+import { setComponent } from '../../../plugins/filemapper/lib/middlewares/setComponent.js';
 import { Routify } from '../../../lib/Routify.js';
-import { createBundles } from '../../../middleware/bundler/lib/index.js';
-import metaFromFile from '../../../middleware/metaFromFile/lib/index.js';
+import { createBundles } from '../../../plugins/bundler/lib/index.js';
+import metaFromFile from '../../../plugins/metaFromFile/lib/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 

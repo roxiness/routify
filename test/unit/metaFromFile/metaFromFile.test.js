@@ -2,10 +2,10 @@ import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
-import metaFromFile, { htmlComments, externalComments } from '../../../middleware/metaFromFile/lib/index.js';
+import metaFromFile, { htmlComments, externalComments } from '../../../plugins/metaFromFile/lib/index.js';
 import { emptyDirSync } from 'fs-extra'
 import { Routify } from '../../../lib/Routify.js';
-import { filemapper } from '../../../middleware/filemapper/lib/index.js';
+import { filemapper } from '../../../plugins/filemapper/lib/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const expectedExternal = {
