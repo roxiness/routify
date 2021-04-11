@@ -21,11 +21,10 @@ const options = {
 }
 
 const instance = new Routify(options)
-const root = instance.createNode()
 test('bundler writes files', async () => {
     await filemapper({ instance })
     await metaFromFile({ instance })
-    await createBundles(root, `${__dirname}/bundles`)
+    await createBundles(instance.superNode.children[0], `${__dirname}/bundles`)
 
     assert.snapshot(readFileSync(__dirname + '/bundles/default_admin-bundle.js', 'utf-8'),
         'export {default as default_admin} from \'../example/admin/_reset.svelte\'' +
@@ -36,9 +35,10 @@ test('bundler writes files', async () => {
 })
 
 test('bundled files have correct component', () => {
-    const adminImports = instance.nodeIndex
+    const adminNode = instance.nodeIndex
         .find(node => node.name === 'admin')
-        .descendants.map(node => node.component)
+
+    const adminImports = [adminNode, ...adminNode.descendants].map(node => node.component)
 
     assert.equal(adminImports, [
         'import("default_admin-bundle.js").then(r => r.default_admin)',

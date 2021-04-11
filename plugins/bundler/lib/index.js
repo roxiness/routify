@@ -71,8 +71,10 @@ const bundleIsNotNullOrUndefined = val => ![null, undefined].includes(val.meta.b
 export const createBundles = async (node, outputDir) => {
     const bundles = new Bundles(outputDir)
 
+    // iterate node and its descendants
     for (node of [node, ...node.descendants]) {
-        const bundleInstructionsNode = node.ancestors.find(bundleIsNotNullOrUndefined)
+        // look for nearest instructions in node and its ancestors
+        const bundleInstructionsNode = [node, ...node.ancestors].find(bundleIsNotNullOrUndefined)
 
         const isEnabled = bundleInstructionsNode && bundleInstructionsNode.meta.bundle
         if (isEnabled) {
