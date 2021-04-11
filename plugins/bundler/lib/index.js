@@ -3,7 +3,7 @@ import fse, { ensureDirSync } from 'fs-extra'
 import { relative, resolve } from 'path'
 
 const { writeFile } = fse
-const relativeUnix = (...paths) => relative(...paths).replace(/\\/g, '/')
+const relativeUnix = (path, path2) => relative(path, path2).replace(/\\/g, '/')
 
 class Bundles {
     constructor(outputDir) {
@@ -71,7 +71,7 @@ const bundleIsNotNullOrUndefined = val => ![null, undefined].includes(val.meta.b
 export const createBundles = async (node, outputDir) => {
     const bundles = new Bundles(outputDir)
 
-    for (node of node.instance.nodeIndex) {
+    for (node of [node, ...node.descendants]) {
         const bundleInstructionsNode = node.ancestors.find(bundleIsNotNullOrUndefined)
 
         const isEnabled = bundleInstructionsNode && bundleInstructionsNode.meta.bundle
