@@ -1,7 +1,7 @@
-import { Node } from "../../../../lib/node.js";
+import { Node } from '../../../../lib/node.js' //eslint-disable-line
 import { readdir } from 'fs/promises'
-import { relative, resolve } from "path";
-import { File } from "../File.js";
+import { relative, resolve } from 'path'
+import { File } from '../File.js'
 
 /**
  * Maps filestructure to a node tree
@@ -17,7 +17,7 @@ export async function createNodesFromFiles(firstNode, path) {
 
     let node
 
-    while (node = queue.pop()) {
+    while ((node = queue.pop())) {
         const relativePath = relative(node.root.file.path, node.file.path)
         // set id to `default_path_to_file` if rootName is default
         node.id = [node.root.rootName, relativePath]

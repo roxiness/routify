@@ -1,5 +1,5 @@
-import { statSync } from "fs"
-import { sep, parse, relative } from "path"
+import { statSync } from 'fs'
+import { parse, relative } from 'path'
 
 
 

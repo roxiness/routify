@@ -1,6 +1,6 @@
-import { Node } from "../../../lib/node.js"
-import fse, { ensureDirSync } from "fs-extra";
-import { relative, resolve } from "path";
+import { Node } from '../../../lib/node.js' //eslint-disable-line
+import fse, { ensureDirSync } from 'fs-extra'
+import { relative, resolve } from 'path'
 
 const { writeFile } = fse
 const relativeUnix = (...paths) => relative(...paths).replace(/\\/g, '/')
@@ -32,8 +32,8 @@ class Bundle {
     /** @type {node[]} */
     members = []
 
-    /** 
-     * @param {Node} node 
+    /**
+     * @param {Node} node
      * @param {string} outputDir
      * */
     constructor(node, outputDir) {
@@ -49,7 +49,7 @@ class Bundle {
     async apply() {
         ensureDirSync(this.outputDir)
         const output = resolve(this.outputDir, this.filename)
-        
+
         const exportStr = this.members
             .map(node => `export {default as ${node.id}} from '${relativeUnix(this.outputDir, node.component)}'`)
             .join('\n')
@@ -64,8 +64,8 @@ class Bundle {
 const bundleIsNotNullOrUndefined = val => ![null, undefined].includes(val.meta.bundle)
 
 /**
- * 
- * @param {Node} node 
+ *
+ * @param {Node} node
  * @param {any} outputDir
  */
 export const createBundles = async (node, outputDir) => {

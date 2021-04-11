@@ -1,14 +1,14 @@
-import { suite } from 'uvu';
-import * as assert from 'uvu/assert';
-import { dirname, resolve, sep } from "path";
-import { fileURLToPath } from 'url';
-import { createNodesFromFiles } from '../../../plugins/filemapper/lib/middlewares/createNodesFromFiles.js';
-import { moveModuleToParentNode } from '../../../plugins/filemapper/lib/middlewares/moveModuleToParentNode.js';
-import { filenameToOptions } from '../../../plugins/filemapper/lib/middlewares/filenameToOptions.js';
-import { readFileSync, writeFileSync } from 'fs';
-import { setComponent } from '../../../plugins/filemapper/lib/middlewares/setComponent.js';
-import { filemapper } from '../../../plugins/filemapper/lib/index.js';
-import { Routify } from '../../../lib/Routify.js';
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { createNodesFromFiles } from '../../../plugins/filemapper/lib/middlewares/createNodesFromFiles.js'
+import { moveModuleToParentNode } from '../../../plugins/filemapper/lib/middlewares/moveModuleToParentNode.js'
+import { filenameToOptions } from '../../../plugins/filemapper/lib/middlewares/filenameToOptions.js'
+import { readFileSync, writeFileSync } from 'fs'
+import { setComponent } from '../../../plugins/filemapper/lib/middlewares/setComponent.js'
+import { filemapper } from '../../../plugins/filemapper/lib/index.js'
+import { Routify } from '../../../lib/Routify.js'
 
 
 const test = suite('filemapper')

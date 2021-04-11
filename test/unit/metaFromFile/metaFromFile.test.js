@@ -1,20 +1,20 @@
-import { suite } from 'uvu';
-import * as assert from 'uvu/assert';
-import { dirname } from "path";
-import { fileURLToPath } from 'url';
-import metaFromFile, { htmlComments, externalComments } from '../../../plugins/metaFromFile/lib/index.js';
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import metaFromFile, { htmlComments, externalComments } from '../../../plugins/metaFromFile/lib/index.js'
 import { emptyDirSync } from 'fs-extra'
-import { Routify } from '../../../lib/Routify.js';
-import { filemapper } from '../../../plugins/filemapper/lib/index.js';
+import { Routify } from '../../../lib/Routify.js'
+import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 
 const test = suite('meta from file')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const expectedExternal = {
-    "prop": "value",
-    "nested": {
-        "nestedProp": "nestedValue"
+    'prop': 'value',
+    'nested': {
+        'nestedProp': 'nestedValue'
     },
-    "codesplitted": {}
+    'codesplitted': {}
 }
 const expectedInline = {
     'equal-sign-trimmed': 'meta',
@@ -49,7 +49,7 @@ test('external meta', async () => {
     assert.ok(meta.codesplitted.then, 'should be a promise')
     assert.snapshot(
         await meta.codesplitted,
-        "I'm split",
+        'I\'m split',
         'accessing codesplit prop should return Promise<value>'
     )
 })
@@ -68,7 +68,7 @@ test('metaFromFile middleware', async () => {
     assert.ok(externalMetaFile.meta.codesplitted.then, 'should be a promise')
     assert.snapshot(
         await externalMetaFile.meta.codesplitted,
-        "I'm split",
+        'I\'m split',
         'accessing codesplit prop should return Promise<value>'
     )
 })

@@ -1,9 +1,9 @@
-import { Node } from "../../../../lib/Node.js"
-import { nameFilter } from "../../utils.js";
+// Node needed for typed JS
+import { Node } from '../../../../lib/Node.js' //eslint-disable-line
 
 /**
  * set component (svelte file) for nodes that have a file prop
- * @param {Node} node 
+ * @param {Node} node
  */
 export const setComponent = (node) => {
     node.descendants

@@ -1,14 +1,13 @@
-import { suite } from 'uvu';
-import * as assert from 'uvu/assert';
-import { dirname, resolve, sep } from "path";
-import { fileURLToPath } from 'url';
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
-import { filemapper } from '../../../plugins/filemapper/lib/index.js';
-import { readFileSync, writeFileSync } from 'fs';
-import { setComponent } from '../../../plugins/filemapper/lib/middlewares/setComponent.js';
-import { Routify } from '../../../lib/Routify.js';
-import { createBundles } from '../../../plugins/bundler/lib/index.js';
-import metaFromFile from '../../../plugins/metaFromFile/lib/index.js';
+import { filemapper } from '../../../plugins/filemapper/lib/index.js'
+import { readFileSync } from 'fs'
+import { Routify } from '../../../lib/Routify.js'
+import { createBundles } from '../../../plugins/bundler/lib/index.js'
+import metaFromFile from '../../../plugins/metaFromFile/lib/index.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const test = suite('bundler')
@@ -29,9 +28,9 @@ test('bundler writes files', async () => {
     await createBundles(root, `${__dirname}/bundles`)
 
     assert.snapshot(readFileSync(__dirname + '/bundles/default_admin-bundle.js', 'utf-8'),
-        "export {default as default_admin} from '../example/admin/_reset.svelte'" +
-        "\nexport {default as default_admin_index_svelte} from '../example/admin/index.svelte'" +
-        "\nexport {default as default_admin_page_svelte} from '../example/admin/page.svelte'"
+        'export {default as default_admin} from \'../example/admin/_reset.svelte\'' +
+        '\nexport {default as default_admin_index_svelte} from \'../example/admin/index.svelte\'' +
+        '\nexport {default as default_admin_page_svelte} from \'../example/admin/page.svelte\''
     )
 
 })

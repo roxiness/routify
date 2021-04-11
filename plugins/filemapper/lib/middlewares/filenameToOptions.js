@@ -1,9 +1,9 @@
-import { Node } from "../../../../lib/Node.js"
-import { nameFilter } from "../../utils.js";
+import { Node } from '../../../../lib/Node.js' //eslint-disable-line
+import { nameFilter } from '../../utils.js'
 
 /**
  * assign reset, fallback and dynamic paths to node.meta
- * @param {Node} node 
+ * @param {Node} node
  */
 export const filenameToOptions = (node) => {
     const { descendants } = node
