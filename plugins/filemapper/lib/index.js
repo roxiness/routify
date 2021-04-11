@@ -21,7 +21,7 @@ export const filemapper = async ({ instance }) => {
             filenameToOptions(rootNode)
             setComponent(rootNode)
             // todo this line should be able to precede middleware
-            instance.rootNode.appendChild(rootNode)
+            instance.superNode.appendChild(rootNode)
         })
 
     await Promise.all(promises)

@@ -53,7 +53,7 @@ test('components get added', async () => {
 test('filemapper', async () => {
     const instance = new Routify(options)
     await filemapper({ instance })
-    assertSnapshot('4.filemap-with-components', instance.rootNode.children[0].map, 0)
+    assertSnapshot('4.filemap-with-components', instance.superNode.children[0].map, 0)
 })
 
 test.run()
