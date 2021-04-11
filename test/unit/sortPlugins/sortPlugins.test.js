@@ -37,7 +37,16 @@ test('sortPlugins reports loops', async () => {
         { name: 'impossible', before: 'second', after: 'third' },
     ]
 
-    assert.throws(() => sortPlugins(plugins))
+    try {
+        sortPlugins(plugins)
+    }catch(err){
+        assert.snapshot(err.message,
+            'found infinite loop in plugins. Repeating pattern:\n'+
+            'impossible (before: second; after: third )\n'+
+            'third ( after: second )\n'+
+            'second '
+        )
+    }
 })
 
 test.run()

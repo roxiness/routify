@@ -20,6 +20,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
     "no-multi-spaces": "error",
-    "no-trailing-spaces": "error"
+    "no-trailing-spaces": "error",
+    "no-regex-spaces": "off"
   }
 }
