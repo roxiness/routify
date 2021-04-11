@@ -1,4 +1,4 @@
-import { test } from 'uvu';
+import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
@@ -7,6 +7,7 @@ import { emptyDirSync } from 'fs-extra'
 import { Routify } from '../../../lib/Routify.js';
 import { filemapper } from '../../../plugins/filemapper/lib/index.js';
 
+const test = suite('meta from file')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const expectedExternal = {
     "prop": "value",

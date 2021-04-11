@@ -1,4 +1,4 @@
-import { test, suite } from 'uvu';
+import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { dirname, resolve, sep } from "path";
 import { fileURLToPath } from 'url';
@@ -11,7 +11,7 @@ import { createBundles } from '../../../plugins/bundler/lib/index.js';
 import metaFromFile from '../../../plugins/metaFromFile/lib/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-
+const test = suite('bundler')
 
 const options = {
     filemapper: {

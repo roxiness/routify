@@ -1,4 +1,4 @@
-import { test, suite } from 'uvu';
+import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { dirname, resolve, sep } from "path";
 import { fileURLToPath } from 'url';
@@ -11,7 +11,7 @@ import { filemapper } from '../../../plugins/filemapper/lib/index.js';
 import { Routify } from '../../../lib/Routify.js';
 
 
-
+const test = suite('filemapper')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const options = {
