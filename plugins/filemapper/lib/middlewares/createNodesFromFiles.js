@@ -9,18 +9,17 @@ import { File } from '../File.js'
  * @param {String} path dir to scan for files
  * @return {Promise<Node>}
  */
-export async function createNodesFromFiles(firstNode, path) {
+export async function createNodesFromFiles (firstNode, path) {
     const { instance } = firstNode
     firstNode.file = new File(path)
     const queue = [firstNode]
-
 
     let node
 
     while ((node = queue.pop())) {
         const relativePath = relative(node.root.file.path, node.file.path)
         // set id to `default_path_to_file` if rootName is default
-        node.id = [node.root.rootName, relativePath]
+        node.id = '_' + [node.root.rootName, relativePath]
             .filter(Boolean)
             .join('_')
             .replace(/[^\w]/g, '_')
