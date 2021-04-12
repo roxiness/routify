@@ -13,10 +13,10 @@ export const filemapper = async ({ instance }) => {
     const { options } = instance
 
     const promises = Object.entries(options.filemapper.routesDir)
-        .map(async ([key, value]) => {
+        .map(async ([key, path]) => {
             const rootNode = instance.createNode()
             rootNode.rootName = key
-            await createNodesFromFiles(rootNode, value)
+            await createNodesFromFiles(rootNode, path)
             moveModuleToParentNode(rootNode)
             filenameToOptions(rootNode)
             setComponent(rootNode)
