@@ -8,7 +8,7 @@
     "ext": ".svelte",
     "name": "_module"
   },
-  "id": "default",
+  "id": "_default",
   "component": "test/unit/filemapper/example/_module.svelte",
   "children": [
     {
@@ -23,7 +23,7 @@
         "ext": ".svelte",
         "name": "_reset"
       },
-      "id": "default_admin",
+      "id": "_default_admin",
       "component": "test/unit/filemapper/example/admin/_reset.svelte",
       "children": []
     },
@@ -37,7 +37,7 @@
         "ext": "",
         "name": "blog"
       },
-      "id": "default_blog",
+      "id": "_default_blog",
       "children": [
         {
           "meta": {
@@ -51,7 +51,7 @@
             "ext": ".svelte",
             "name": "prefixed[slug]"
           },
-          "id": "default_blog_prefixed_slug__svelte",
+          "id": "_default_blog_prefixed_slug__svelte",
           "component": "test/unit/filemapper/example/blog/prefixed[slug].svelte",
           "children": []
         },
@@ -67,7 +67,7 @@
             "ext": ".svelte",
             "name": "[slug]"
           },
-          "id": "default_blog__slug__svelte",
+          "id": "_default_blog__slug__svelte",
           "component": "test/unit/filemapper/example/blog/[slug].svelte",
           "children": []
         }
@@ -83,7 +83,7 @@
         "ext": ".svelte",
         "name": "index"
       },
-      "id": "default_index_svelte",
+      "id": "_default_index_svelte",
       "component": "test/unit/filemapper/example/index.svelte",
       "children": []
     },
@@ -97,7 +97,7 @@
         "ext": "",
         "name": "no-layouts"
       },
-      "id": "default_no_layouts",
+      "id": "_default_no_layouts",
       "children": [
         {
           "meta": {},
@@ -109,7 +109,7 @@
             "ext": "",
             "name": "nested"
           },
-          "id": "default_no_layouts_nested",
+          "id": "_default_no_layouts_nested",
           "children": [
             {
               "meta": {},
@@ -121,7 +121,7 @@
                 "ext": ".svelte",
                 "name": "foo"
               },
-              "id": "default_no_layouts_nested_foo_svelte",
+              "id": "_default_no_layouts_nested_foo_svelte",
               "component": "test/unit/filemapper/example/no-layouts/nested/foo.svelte",
               "children": []
             },
@@ -135,7 +135,7 @@
                 "ext": ".svelte",
                 "name": "index"
               },
-              "id": "default_no_layouts_nested_index_svelte",
+              "id": "_default_no_layouts_nested_index_svelte",
               "component": "test/unit/filemapper/example/no-layouts/nested/index.svelte",
               "children": []
             }

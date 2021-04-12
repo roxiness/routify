@@ -8,7 +8,7 @@
     "ext": "",
     "name": "example"
   },
-  "id": "default",
+  "id": "_default",
   "children": [
     {
       "meta": {},
@@ -20,7 +20,7 @@
         "ext": "",
         "name": "admin"
       },
-      "id": "default_admin",
+      "id": "_default_admin",
       "children": [
         {
           "meta": {},
@@ -32,7 +32,7 @@
             "ext": ".svelte",
             "name": "_reset"
           },
-          "id": "default_admin__reset_svelte",
+          "id": "_default_admin__reset_svelte",
           "children": []
         }
       ]
@@ -47,7 +47,7 @@
         "ext": "",
         "name": "blog"
       },
-      "id": "default_blog",
+      "id": "_default_blog",
       "children": [
         {
           "meta": {},
@@ -59,7 +59,7 @@
             "ext": ".svelte",
             "name": "prefixed[slug]"
           },
-          "id": "default_blog_prefixed_slug__svelte",
+          "id": "_default_blog_prefixed_slug__svelte",
           "children": []
         },
         {
@@ -72,7 +72,7 @@
             "ext": ".svelte",
             "name": "[slug]"
           },
-          "id": "default_blog__slug__svelte",
+          "id": "_default_blog__slug__svelte",
           "children": []
         }
       ]
@@ -87,7 +87,7 @@
         "ext": ".svelte",
         "name": "index"
       },
-      "id": "default_index_svelte",
+      "id": "_default_index_svelte",
       "children": []
     },
     {
@@ -100,7 +100,7 @@
         "ext": "",
         "name": "no-layouts"
       },
-      "id": "default_no_layouts",
+      "id": "_default_no_layouts",
       "children": [
         {
           "meta": {},
@@ -112,7 +112,7 @@
             "ext": "",
             "name": "nested"
           },
-          "id": "default_no_layouts_nested",
+          "id": "_default_no_layouts_nested",
           "children": [
             {
               "meta": {},
@@ -124,7 +124,7 @@
                 "ext": ".svelte",
                 "name": "foo"
               },
-              "id": "default_no_layouts_nested_foo_svelte",
+              "id": "_default_no_layouts_nested_foo_svelte",
               "children": []
             },
             {
@@ -137,7 +137,7 @@
                 "ext": ".svelte",
                 "name": "index"
               },
-              "id": "default_no_layouts_nested_index_svelte",
+              "id": "_default_no_layouts_nested_index_svelte",
               "children": []
             }
           ]
@@ -154,7 +154,7 @@
         "ext": ".svelte",
         "name": "_module"
       },
-      "id": "default__module_svelte",
+      "id": "_default__module_svelte",
       "children": []
     }
   ]
