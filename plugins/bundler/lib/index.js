@@ -51,7 +51,7 @@ class Bundle {
         const output = resolve(this.outputDir, this.filename)
 
         const exportStr = this.members
-            .map(node => `export {default as ${node.id}} from '${relativeUnix(this.outputDir, node.component)}'`)
+            .map(node => `export { default as ${node.id} } from '${relativeUnix(this.outputDir, node.component)}'`)
             .join('\n')
 
         this.members.forEach(node => {
