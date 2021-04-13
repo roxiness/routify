@@ -36,15 +36,16 @@
   const context = writable(null)
   /** @type {import("svelte/store").Writable<Context>} */
   const parentContext = getContext('routify') || rootContext
-  const setParentNode = (el) => (parentNode = el.parentNode)
+  const setParentNode = (el) => parentNode = el.parentNode
+  
   setContext('routify', context)
 
-let lastNodes = []
-$: if(lastNodes !== nodes){
-  lastNodes = nodes;
-  [node, ...remainingNodes] = [...nodes]
-  node.api.reset = () => invalidate++
-}
+  let lastNodes = []
+  $: if (lastNodes !== nodes) {
+    lastNodes = nodes
+    ;[node, ...remainingNodes] = [...nodes]
+    node.api.reset = () => invalidate++
+  }
 
   /**  @param {LayoutOrDecorator} node */
   function setComponent(node) {
@@ -59,11 +60,11 @@ $: if(lastNodes !== nodes){
   function onComponentLoaded(componentFile) {
     scopedSync = { ...scoped }
 
-    // we have to proxy remaining nodes through ctx or route changes get propagated
+    // we have to proxy remaining nodes through ctx (instead of props) or route changes get propagated
     // to leaf layouts of to-be-destroyed-layouts
     const ctx = {
       //we need to keep any possible context.child or the layout will be childless until the new child has been rendered
-      ...$context, 
+      ...$context,
       nodes: remainingNodes,
       decorator: decorator || Noop,
       layout: node.isLayout ? node : $parentContext.layout,
@@ -84,7 +85,12 @@ $: if(lastNodes !== nodes){
 
     // Let everyone know the last child has rendered
     if (!window['routify'].stopAutoReady && isOnCurrentRoute)
-      onPageLoaded({ page: $context.component, metatags, afterPageLoad, parentNode })
+      onPageLoaded({
+        page: $context.component,
+        metatags,
+        afterPageLoad,
+        parentNode,
+      })
   }
 
   /**  @param {ClientNode} layout */
@@ -123,4 +129,7 @@ $: if(lastNodes !== nodes){
   {/each}
 {/if}
 <!-- get the parent element for scroll and transitions -->
-<span use:setParentNode />
+
+{#if !parentNode}
+  <div style="display: contents" use:setParentNode />
+{/if}
