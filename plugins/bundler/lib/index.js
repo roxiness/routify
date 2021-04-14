@@ -6,7 +6,7 @@ const { writeFile } = fse
 const relativeUnix = (path, path2) => relative(path, path2).replace(/\\/g, '/')
 
 class Bundles {
-    constructor(outputDir) {
+    constructor (outputDir) {
         this.outputDir = outputDir
     }
 
@@ -14,14 +14,14 @@ class Bundles {
     bundles = {}
 
     /** @param {Node} node */
-    upsert(node) {
+    upsert (node) {
         const { path } = node.file
         this.bundles[path] =
             this.bundles[path] ||
             new Bundle(node, this.outputDir)
         return this.bundles[path]
     }
-    async apply() {
+    async apply () {
         const promises = Object.values(this.bundles)
             .map(bundle => bundle.apply())
         return Promise.all(promises)
@@ -29,24 +29,24 @@ class Bundles {
 }
 
 class Bundle {
-    /** @type {node[]} */
+    /** @type {Node[]} */
     members = []
 
     /**
      * @param {Node} node
      * @param {string} outputDir
      * */
-    constructor(node, outputDir) {
+    constructor (node, outputDir) {
         this.outputDir = outputDir
         this.instructor = node
         this.filename = node.id + '-bundle.js'
     }
 
-    include(node) {
+    include (node) {
         this.members.push(node)
     }
 
-    async apply() {
+    async apply () {
         ensureDirSync(this.outputDir)
         const output = resolve(this.outputDir, this.filename)
 
