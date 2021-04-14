@@ -21,20 +21,30 @@ const stringifyWithEscape = (obj, keys) => {
         .replace(re, '$1"$2": $3')
 }
 
+const setComponentToId = node => node.component = node.component ? node.id : null
+
 /**
  *
  * @param {Node} rootNode
  * @param {string} outputDir
  */
 export const exporter = (rootNode, outputDir) => {
+    // create imports
     const imports = [rootNode, ...rootNode.descendants]
         .filter(node => node.component)
         .map(node => `import ${node.id} from '${relative(outputDir, node.component).replace(/\\/g, '/')}'`)
         .join('\n');
 
-    [rootNode, ...rootNode.descendants].forEach(node => node.component = node.id)
+    // set component to id
+    [rootNode, ...rootNode.descendants].forEach(setComponentToId)
 
-    const tree = stringifyWithEscape(rootNode.map, ['component'])
+    const treeString = stringifyWithEscape(rootNode.map, ['component'])
+    const outputPath = resolve(outputDir, `routes.${rootNode.rootName}.js`)
+    const content = [
+        imports ,
+        `export const routes = ${treeString}`
+    ]
+        .join('\n\n')
 
-    fse.outputFileSync(resolve(outputDir, `routes.${rootNode.rootName}.js`), `${imports}\n\n${tree}`)
+    fse.outputFileSync( outputPath, content )
 }
