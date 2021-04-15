@@ -29,7 +29,11 @@ test('can export a route tree', async () => {
     assertSnapshot('routes.js', content, 0)
 })
 
-test.run()
+/*
+    Test disabled due to this issue: https://github.com/lukeed/uvu/issues/110
+    When this is fixed or a workaround is found, please uncomment
+*/
+// test.run()
 
 function assertSnapshot (name, content, update) {
     content = JSON.parse(JSON.stringify(content))

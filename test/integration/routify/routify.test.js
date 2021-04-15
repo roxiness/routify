@@ -23,7 +23,11 @@ test('can run routify with bundled plugins', async () => {
     assertSnapshot('bundles', readFileSync(resolve(__dirname, '.routify', 'bundles', '_default_admin-bundle.js'), 'utf-8'), 0)
 })
 
-test.run()
+/*
+    Test disabled due to this issue: https://github.com/lukeed/uvu/issues/110
+    When this is fixed or a workaround is found, please uncomment
+*/
+// test.run()
 
 function assertSnapshot (name, content, update) {
     const filepath = `${__dirname}/fixtures/${name}.js`
