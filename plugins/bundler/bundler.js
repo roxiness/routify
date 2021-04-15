@@ -1,6 +1,6 @@
 import fse, { ensureDirSync } from 'fs-extra'
 import { relative, resolve } from 'path'
-import { Node } from '../../common/node.js' //eslint-disable-line
+import { Node } from '../../common/Node.js' //eslint-disable-line
 import { Routify } from '../../common/Routify.js' //eslint-disable-line
 
 const { outputFile } = fse
