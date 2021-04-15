@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { readFileSync } from 'fs'
 import { Routify } from '../../../common/Routify.js'
-import { createBundles } from '../../../plugins/bundler/lib/index.js'
+import { createBundles } from '../../../plugins/bundler/bundler.js'
 import { metaFromFile } from '../../../plugins/metaFromFile/metaFromFile.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -24,7 +24,7 @@ const instance = new Routify(options)
 test('bundler writes files', async () => {
     await filemapper({ instance })
     await metaFromFile({ instance })
-    await createBundles(instance.superNode.children[0], `${__dirname}/bundles`)
+    await createBundles(instance.superNode.children[0], __dirname)
 
     assert.snapshot(readFileSync(__dirname + '/bundles/_default_admin-bundle.js', 'utf-8'),
         'export { default as _default_admin } from \'../example/admin/_reset.svelte\'' +
@@ -40,9 +40,9 @@ test('bundled files have correct component', () => {
     const adminImports = [adminNode, ...adminNode.descendants].map(node => node.component)
 
     assert.equal(adminImports, [
-        'import("_default_admin-bundle.js").then(r => r._default_admin)',
-        'import("_default_admin-bundle.js").then(r => r._default_admin_index_svelte)',
-        'import("_default_admin-bundle.js").then(r => r._default_admin_page_svelte)'
+        'import("./bundles/_default_admin-bundle.js").then(r => r._default_admin)',
+        'import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_index_svelte)',
+        'import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_page_svelte)'
     ])
 })
 

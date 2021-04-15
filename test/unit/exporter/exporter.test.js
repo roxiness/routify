@@ -2,7 +2,7 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
-import { exporter } from '../../../plugins/exporter/exporter.js'
+import { exportNode } from '../../../plugins/exporter/exporter.js'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { Routify } from '../../../common/Routify.js'
 import fse from 'fs-extra'
@@ -24,7 +24,7 @@ test('can build route tree', async () => {
 })
 
 test('can export a route tree', async () => {
-    await exporter(instance.superNode.children[0], __dirname+'/.routify')
+    await exportNode(instance.superNode.children[0], __dirname+'/.routify')
     const content = fse.readFileSync(resolve(__dirname, '.routify', 'routes.default.js'), 'utf-8')
     assertSnapshot('routes.js', content, 0)
 })

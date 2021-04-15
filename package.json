@@ -9,7 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "uvu test/unit/ test\\.js$",
+    "test": "uvu test test\\.js$",
     "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test"
   },
   "author": "jakobrosenberg@gmail.com",
