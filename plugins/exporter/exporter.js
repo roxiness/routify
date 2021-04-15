@@ -5,8 +5,10 @@ import fse from 'fs-extra'
 
 
 /** @param {{instance: Routify}} param0 */
-export const exporterPlugin = ({ instance }) => {
-    // console.log(instance.superNode.children)
+export const exporter = ({ instance }) => {
+    const promises = instance.superNode.children.map(rootNode =>
+        exportNode(rootNode, instance.options.routifyDir))
+    return Promise.all(promises)
 }
 
 /**
@@ -16,27 +18,27 @@ export const exporterPlugin = ({ instance }) => {
  * @returns {string}
  */
 const stringifyWithEscape = (obj, keys) => {
-    const re = new RegExp(`^( *)"(${keys.join('|')})": "(.+)"`, 'gm')
+    const re = new RegExp(`^( *)"(${keys.join('|')})": (".+")`, 'gm')
     return JSON.stringify(obj, null, 2)
-        .replace(re, '$1"$2": $3')
+        .replace(re, (m, spaces, key, value) => `${spaces}"${key}": ${JSON.parse(value)}` )
 }
-
-const setComponentToId = node => node.component = node.component ? node.id : null
 
 /**
  *
  * @param {Node} rootNode
  * @param {string} outputDir
  */
-export const exporter = (rootNode, outputDir) => {
+export const exportNode = (rootNode, outputDir) => {
     // create imports
     const imports = [rootNode, ...rootNode.descendants]
-        .filter(node => node.component)
+        .filter(node => node.component && !node.component.startsWith('import('))
         .map(node => `import ${node.id} from '${relative(outputDir, node.component).replace(/\\/g, '/')}'`)
         .join('\n');
 
     // set component to id
-    [rootNode, ...rootNode.descendants].forEach(setComponentToId)
+    [rootNode, ...rootNode.descendants]
+        .filter(node => node.component && !node.component.startsWith('import('))
+        .forEach(node => node.component = node.id)
 
     const treeString = stringifyWithEscape(rootNode.map, ['component'])
     const outputPath = resolve(outputDir, `routes.${rootNode.rootName}.js`)

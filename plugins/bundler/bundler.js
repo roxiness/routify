@@ -1,8 +1,9 @@
-import { Node } from '../../../common/node.js' //eslint-disable-line
 import fse, { ensureDirSync } from 'fs-extra'
 import { relative, resolve } from 'path'
+import { Node } from '../../common/node.js' //eslint-disable-line
+import { Routify } from '../../common/Routify.js' //eslint-disable-line
 
-const { writeFile } = fse
+const { outputFile } = fse
 const relativeUnix = (path, path2) => relative(path, path2).replace(/\\/g, '/')
 
 class Bundles {
@@ -39,7 +40,7 @@ class Bundle {
     constructor (node, outputDir) {
         this.outputDir = outputDir
         this.instructor = node
-        this.filename = node.id + '-bundle.js'
+        this.filename = 'bundles/' + node.id + '-bundle.js'
     }
 
     include (node) {
@@ -51,13 +52,13 @@ class Bundle {
         const output = resolve(this.outputDir, this.filename)
 
         const exportStr = this.members
-            .map(node => `export { default as ${node.id} } from '${relativeUnix(this.outputDir, node.component)}'`)
+            .map(node => `export { default as ${node.id} } from '${relativeUnix(this.outputDir+'/bundles', node.component)}'`)
             .join('\n')
 
         this.members.forEach(node => {
-            node.component = `import("${this.filename}").then(r => r.${node.id})`
+            node.component = `import("./${this.filename}").then(r => r.${node.id})`
         })
-        await writeFile(output, [exportStr].join('\n'))
+        await outputFile(output, [exportStr].join('\n'))
     }
 }
 
@@ -70,7 +71,6 @@ const bundleIsNotNullOrUndefined = val => ![null, undefined].includes(val.meta.b
  */
 export const createBundles = async (node, outputDir) => {
     const bundles = new Bundles(outputDir)
-
     // iterate node and its descendants
     for (node of [node, ...node.descendants]) {
         // look for nearest instructions in node and its ancestors
@@ -86,3 +86,12 @@ export const createBundles = async (node, outputDir) => {
     await bundles.apply()
 }
 
+/**
+ *
+ * @param {{instance: Routify}} param0
+ */
+export const bundler = async ({ instance }) => {
+    const promises = instance.superNode.children.map(rootNode =>
+        createBundles(rootNode, instance.options.routifyDir))
+    return await Promise.all(promises)
+}
