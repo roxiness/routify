@@ -3,8 +3,9 @@ name: Test Suite CI
 on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    name: Test on NodeJS v{{ matrix.node-version }}
+    runs-on: windows-latest
 
     strategy:
       matrix:
