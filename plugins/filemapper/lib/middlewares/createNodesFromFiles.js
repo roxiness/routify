@@ -1,4 +1,4 @@
-import { Node } from '../../../../common/node.js' //eslint-disable-line
+import { Node } from '../../../../common/Node.js' //eslint-disable-line
 import { readdir } from 'fs/promises'
 import { relative, resolve } from 'path'
 import { File } from '../File.js'
