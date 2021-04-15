@@ -20,6 +20,7 @@ export class Routify {
     /** @param {Partial<RoutifyOptions>} options */
     constructor (options) {
         this.options = deepAssign(this.options, options)
+        Object.assign(this.plugins, this.options.plugins)
     }
 
     /** @type {Node[]} */
@@ -52,7 +53,7 @@ export class Routify {
         this.plugins = sortPlugins(this.plugins)
         const instance = this
         for (const plugin of this.plugins){
-            const shouldRun = await plugin.condition({ instance })
+            const shouldRun = typeof plugin.condition === 'undefined' || await plugin.condition({ instance })
             if(shouldRun) await plugin.run({ instance })
         }
     }
