@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Test on NodeJS v{{ matrix.node-version }}
+    name: Test on NodeJS v${{ matrix.node-version }}
     runs-on: windows-latest
 
     strategy:
