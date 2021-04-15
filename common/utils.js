@@ -1,5 +1,6 @@
 import fse from 'fs-extra'
 import { pathToFileURL } from 'url'
+import '../typedef.js'
 
 /**
  * @template {{}} T
@@ -8,7 +9,7 @@ import { pathToFileURL } from 'url'
  * @param  {...T2} sources
  * @return {T&Partial<T2>} //jsdoc unaware of mutation - incorrectly wants partial T2
  */
-export function deepAssign(target, ...sources) {
+export function deepAssign (target, ...sources) {
     for (const source of sources) {
         if (Array.isArray(source)) {
             target = Array.isArray(target) ? target : []
@@ -57,7 +58,11 @@ class RepetitionChecker {
 }
 
 
-export function sortPlugins(_plugins) {
+/**
+ * @param {RoutifyPlugin[]} _plugins
+ * @returns {RoutifyPlugin[]}
+ */
+export function sortPlugins (_plugins) {
     // clone, flatten and normalize
     const plugins = [...[].concat(_plugins)].map(plugin => ({
         ...plugin,

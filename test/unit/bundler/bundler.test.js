@@ -7,7 +7,7 @@ import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { readFileSync } from 'fs'
 import { Routify } from '../../../common/Routify.js'
 import { createBundles } from '../../../plugins/bundler/lib/index.js'
-import metaFromFile from '../../../plugins/metaFromFile/lib/index.js'
+import { metaFromFile } from '../../../plugins/metaFromFile/metaFromFile.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const test = suite('bundler')

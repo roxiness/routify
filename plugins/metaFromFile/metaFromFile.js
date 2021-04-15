@@ -1,10 +1,9 @@
 import cheerio from 'cheerio'
-import {existsSync} from 'fs'
+import { existsSync } from 'fs'
 import { readFile } from 'fs/promises'
 import { pathToFileURL } from 'url'
-// we Routify for typed JS
-import { Routify } from '../../../common/Routify.js' //eslint-disable-line
-import { writeDynamicImport } from '../../../common/utils.js'
+import { Routify } from '../../common/Routify.js' //eslint-disable-line
+import { writeDynamicImport } from '../../common/utils.js'
 
 /**
  * return meta data from comments
@@ -65,9 +64,9 @@ export const externalComments = async (filepath, output) => {
 }
 
 /**
- * @param {{instance: Routify}}
+ * @param {{instance: Routify}} param0
  */
-export default async ({ instance }) => {
+const metaFromFile = async ({ instance }) => {
     const promises = instance.nodeIndex.map(async node => {
         if (node.file && !node.file.stat.isDirectory()) {
             const metaPromises = [
@@ -79,3 +78,5 @@ export default async ({ instance }) => {
     })
     await Promise.all(promises)
 }
+
+export { metaFromFile }

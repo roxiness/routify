@@ -1,10 +1,12 @@
 import { Node } from './Node.js'
-import { deepAssign } from './utils.js'
+import { deepAssign, sortPlugins } from './utils.js'
+import '../typedef.js'
 
 /**
  * @typedef {Object} RoutifyOptions
  * @prop {string} routifyDir
  * @prop {Partial<FilemapperOptions>} filemapper
+ * @prop {(RoutifyPlugin|string)[]} plugins
  */
 
 /**
@@ -32,6 +34,7 @@ export class Routify {
     /** @type {RoutifyOptions} */
     options = {
         routifyDir: '.routify',
+        plugins: [],
         filemapper: {
             moduleFiles: ['_module.svelte', '_reset.svelte'],
             resetFiles: ['_reset.svelte'],
@@ -41,5 +44,16 @@ export class Routify {
         }
     }
 
+    /** @type {RoutifyPlugin[]} */
     plugins = []
+
+    async start () {
+        this.plugins = this.plugins.filter(plugin => plugin.mode === 'compile')
+        this.plugins = sortPlugins(this.plugins)
+        const instance = this
+        for (const plugin of this.plugins){
+            const shouldRun = await plugin.condition({ instance })
+            if(shouldRun) await plugin.run({ instance })
+        }
+    }
 }
