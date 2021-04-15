@@ -1,6 +1,6 @@
 import cheerio from 'cheerio'
 import { existsSync } from 'fs'
-import { readFile } from 'fs/promises'
+import { readFile } from '../../common/wrappers.js'
 import { pathToFileURL } from 'url'
 import { Routify } from '../../common/Routify.js' //eslint-disable-line
 import { writeDynamicImport } from '../../common/utils.js'

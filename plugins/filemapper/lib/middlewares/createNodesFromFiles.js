@@ -1,5 +1,5 @@
 import { Node } from '../../../../common/Node.js' //eslint-disable-line
-import { readdir } from 'fs/promises'
+import { readdir } from '../../../../common/wrappers.js'
 import { relative, resolve } from 'path'
 import { File } from '../File.js'
 
