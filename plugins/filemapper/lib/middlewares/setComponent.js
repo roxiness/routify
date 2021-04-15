@@ -1,5 +1,5 @@
 // Node needed for typed JS
-import { Node } from '../../../../lib/Node.js' //eslint-disable-line
+import { Node } from '../../../../common/Node.js' //eslint-disable-line
 
 /**
  * set component (svelte file) for nodes that have a file prop

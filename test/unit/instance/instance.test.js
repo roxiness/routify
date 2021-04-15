@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { Node } from '../../../lib/Node.js' //eslint-disable-line
-import { Routify } from '../../../lib/Routify.js'
+import { Node } from '../../../common/Node.js' //eslint-disable-line
+import { Routify } from '../../../common/Routify.js'
 
 const nodeTest = suite('node')
 

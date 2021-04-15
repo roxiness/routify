@@ -1,6 +1,6 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { sortPlugins } from '../../../lib/utils.js'
+import { sortPlugins } from '../../../common/utils.js'
 
 const test = suite('sort plugins')
 

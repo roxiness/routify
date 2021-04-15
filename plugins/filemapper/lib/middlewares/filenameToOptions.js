@@ -1,4 +1,4 @@
-import { Node } from '../../../../lib/Node.js' //eslint-disable-line
+import { Node } from '../../../../common/Node.js' //eslint-disable-line
 import { nameFilter } from '../../utils.js'
 
 /**

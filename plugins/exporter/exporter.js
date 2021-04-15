@@ -1,5 +1,5 @@
-import { Node } from '../../lib/Node.js' //eslint-disable-line
-import { Routify } from '../../lib/Routify.js' //eslint-disable-line
+import { Node } from '../../common/Node.js' //eslint-disable-line
+import { Routify } from '../../common/Routify.js' //eslint-disable-line
 import { relative, resolve } from 'path'
 import fse from 'fs-extra'
 

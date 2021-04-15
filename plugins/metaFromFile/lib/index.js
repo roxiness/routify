@@ -3,8 +3,8 @@ import {existsSync} from 'fs'
 import { readFile } from 'fs/promises'
 import { pathToFileURL } from 'url'
 // we Routify for typed JS
-import { Routify } from '../../../lib/Routify.js' //eslint-disable-line
-import { writeDynamicImport } from '../../../lib/utils.js'
+import { Routify } from '../../../common/Routify.js' //eslint-disable-line
+import { writeDynamicImport } from '../../../common/utils.js'
 
 /**
  * return meta data from comments

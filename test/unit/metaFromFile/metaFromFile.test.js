@@ -4,7 +4,7 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import metaFromFile, { htmlComments, externalComments } from '../../../plugins/metaFromFile/lib/index.js'
 import { emptyDirSync } from 'fs-extra'
-import { Routify } from '../../../lib/Routify.js'
+import { Routify } from '../../../common/Routify.js'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 
 const test = suite('meta from file')

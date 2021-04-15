@@ -8,7 +8,7 @@ import { filenameToOptions } from '../../../plugins/filemapper/lib/middlewares/f
 import { readFileSync, writeFileSync } from 'fs'
 import { setComponent } from '../../../plugins/filemapper/lib/middlewares/setComponent.js'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
-import { Routify } from '../../../lib/Routify.js'
+import { Routify } from '../../../common/Routify.js'
 
 
 const test = suite('filemapper')

@@ -1,4 +1,4 @@
-import { Node } from '../../../lib/node.js' //eslint-disable-line
+import { Node } from '../../../common/node.js' //eslint-disable-line
 import fse, { ensureDirSync } from 'fs-extra'
 import { relative, resolve } from 'path'
 

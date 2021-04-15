@@ -4,7 +4,7 @@ import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { exporter } from '../../../plugins/exporter/exporter.js'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
-import { Routify } from '../../../lib/Routify.js'
+import { Routify } from '../../../common/Routify.js'
 import fse from 'fs-extra'
 
 

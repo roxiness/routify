@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { readFileSync } from 'fs'
-import { Routify } from '../../../lib/Routify.js'
+import { Routify } from '../../../common/Routify.js'
 import { createBundles } from '../../../plugins/bundler/lib/index.js'
 import metaFromFile from '../../../plugins/metaFromFile/lib/index.js'
 
