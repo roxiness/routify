@@ -1,5 +1,6 @@
 import fse from 'fs-extra'
-import { pathToFileURL } from 'url'
+import { dirname } from 'path'
+import { fileURLToPath, pathToFileURL } from 'url'
 import '../typedef.js'
 
 /**
@@ -116,3 +117,5 @@ export const writeDynamicImport = (file, value) => {
     fse.outputFileSync(file, `export default ${content}`)
     return () => import(pathToFileURL(file).href).then(r => r.default)
 }
+
+export const createDirname = meta => dirname(fileURLToPath(meta.url))
