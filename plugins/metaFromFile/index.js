@@ -1,4 +1,4 @@
-export const filemapperPlugin = {
+export const metaFromFile = {
     condition: () => true,
     after: 'filemapper',
 }
