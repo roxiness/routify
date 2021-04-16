@@ -3,8 +3,8 @@ import _default_admin from '../example/admin/_reset.svelte'
 import _default_index_svelte from '../example/index.svelte'
 import _default_admin_index_svelte from '../example/admin/index.svelte'
 import _default_admin_page_svelte from '../example/admin/page.svelte'
-import _default_blog_prefixed_slug__svelte from '../example/blog/prefixed[slug].svelte'
 import _default_blog__slug__svelte from '../example/blog/[slug].svelte'
+import _default_blog_prefixed_slug__svelte from '../example/blog/prefixed[slug].svelte'
 
 export const routes = {
   "meta": {},
@@ -80,22 +80,6 @@ export const routes = {
           "meta": {
             "dynamic": true
           },
-          "component": _default_blog_prefixed_slug__svelte,
-          "id": "_default_blog_prefixed_slug__svelte",
-          "name": "prefixed[slug]",
-          "file": {
-            "path": "test/unit/exporter/example/blog/prefixed[slug].svelte",
-            "dir": "test/unit/exporter/example/blog",
-            "base": "prefixed[slug].svelte",
-            "ext": ".svelte",
-            "name": "prefixed[slug]"
-          },
-          "children": []
-        },
-        {
-          "meta": {
-            "dynamic": true
-          },
           "component": _default_blog__slug__svelte,
           "id": "_default_blog__slug__svelte",
           "name": "[slug]",
@@ -105,6 +89,22 @@ export const routes = {
             "base": "[slug].svelte",
             "ext": ".svelte",
             "name": "[slug]"
+          },
+          "children": []
+        },
+        {
+          "meta": {
+            "dynamic": true
+          },
+          "component": _default_blog_prefixed_slug__svelte,
+          "id": "_default_blog_prefixed_slug__svelte",
+          "name": "prefixed[slug]",
+          "file": {
+            "path": "test/unit/exporter/example/blog/prefixed[slug].svelte",
+            "dir": "test/unit/exporter/example/blog",
+            "base": "prefixed[slug].svelte",
+            "ext": ".svelte",
+            "name": "prefixed[slug]"
           },
           "children": []
         }

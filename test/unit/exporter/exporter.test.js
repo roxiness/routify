@@ -30,10 +30,11 @@ test('can export a route tree', async () => {
 })
 
 /*
+    todo temporarily enabled
     Test disabled due to this issue: https://github.com/lukeed/uvu/issues/110
     When this is fixed or a workaround is found, please uncomment
 */
-// test.run()
+test.run()
 
 function assertSnapshot (name, content, update) {
     content = JSON.parse(JSON.stringify(content))

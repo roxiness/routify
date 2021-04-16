@@ -24,10 +24,11 @@ test('can run routify with bundled plugins', async () => {
 })
 
 /*
+    todo temporarily enabled
     Test disabled due to this issue: https://github.com/lukeed/uvu/issues/110
     When this is fixed or a workaround is found, please uncomment
 */
-// test.run()
+test.run()
 
 function assertSnapshot (name, content, update) {
     const filepath = `${__dirname}/fixtures/${name}.js`

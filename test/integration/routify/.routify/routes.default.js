@@ -1,7 +1,7 @@
 import _default from '../example/_module.svelte'
 import _default_index_svelte from '../example/index.svelte'
-import _default_blog_prefixed_slug__svelte from '../example/blog/prefixed[slug].svelte'
 import _default_blog__slug__svelte from '../example/blog/[slug].svelte'
+import _default_blog_prefixed_slug__svelte from '../example/blog/prefixed[slug].svelte'
 import _default_no_layouts_nested_foo_svelte from '../example/no-layouts/nested/foo.svelte'
 import _default_no_layouts_nested_index_svelte from '../example/no-layouts/nested/index.svelte'
 
@@ -66,22 +66,6 @@ export const routes = {
           "meta": {
             "dynamic": true
           },
-          "component": _default_blog_prefixed_slug__svelte,
-          "id": "_default_blog_prefixed_slug__svelte",
-          "name": "prefixed[slug]",
-          "file": {
-            "path": "test/integration/routify/example/blog/prefixed[slug].svelte",
-            "dir": "test/integration/routify/example/blog",
-            "base": "prefixed[slug].svelte",
-            "ext": ".svelte",
-            "name": "prefixed[slug]"
-          },
-          "children": []
-        },
-        {
-          "meta": {
-            "dynamic": true
-          },
           "component": _default_blog__slug__svelte,
           "id": "_default_blog__slug__svelte",
           "name": "[slug]",
@@ -91,6 +75,22 @@ export const routes = {
             "base": "[slug].svelte",
             "ext": ".svelte",
             "name": "[slug]"
+          },
+          "children": []
+        },
+        {
+          "meta": {
+            "dynamic": true
+          },
+          "component": _default_blog_prefixed_slug__svelte,
+          "id": "_default_blog_prefixed_slug__svelte",
+          "name": "prefixed[slug]",
+          "file": {
+            "path": "test/integration/routify/example/blog/prefixed[slug].svelte",
+            "dir": "test/integration/routify/example/blog",
+            "base": "prefixed[slug].svelte",
+            "ext": ".svelte",
+            "name": "prefixed[slug]"
           },
           "children": []
         }
