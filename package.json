@@ -1,13 +1,8 @@
 {
   "name": "routify3",
   "version": "0.0.1",
-  "description": "",
   "main": "index.js",
   "type": "module",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
   "scripts": {
     "test": "uvu test/ test\\.js$",
     "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test",
