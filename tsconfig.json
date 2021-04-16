@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "typings",
+    "emitDeclarationOnly": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "rootDirs": ["runtime", "lib"],
+    "target": "es6",
+    "baseUrl": "./"
+  },
+  "include": ["**/*.js", "index.d.ts"],
+  "exclude": [
+    "**/node_modules/*",
+    "**/*.spec.ts",
+    "test",
+    "**/tmp/*",
+    "example",
+    "**/dist/*",
+    "**/.history/*"
+  ]
+}

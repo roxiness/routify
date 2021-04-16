@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "uvu test/ test\\.js$",
-    "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test"
+    "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test",
+    "build": "tsc && documentation readme typedef.js -f md --section API"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "ISC",
@@ -18,9 +19,11 @@
     "@babel/core": "^7.13.15",
     "@babel/eslint-parser": "^7.13.14",
     "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "documentation": "^13.2.1",
     "eslint": "^7.24.0",
     "nodemon": "^2.0.7",
     "sort-any": "^1.2.3",
+    "typescript": "^4.2.4",
     "uvu": "^0.5.1"
   },
   "dependencies": {
