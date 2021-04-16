@@ -1,5 +1,5 @@
 import { Node } from '../../../../common/Node.js' //eslint-disable-line
-import { readdir } from '../../../../common/wrappers.js'
+import fse from 'fs-extra'
 import { relative, resolve } from 'path'
 import { File } from '../File.js'
 
@@ -26,7 +26,7 @@ export async function createNodesFromFiles (firstNode, path) {
 
         if (node.file.stat.isDirectory()) {
             // for each child create a node, attach a file and add it to the queue
-            const children = await readdir(node.file.path)
+            const children = await fse.readdir(node.file.path)
             const promises = children.map(filename => {
                 const file = new File(resolve(node.file.path, filename))
                 const childNode = instance.createNode(file.name)

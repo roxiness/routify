@@ -1,9 +1,10 @@
 import cheerio from 'cheerio'
-import { existsSync } from 'fs'
-import { readFile } from '../../common/wrappers.js'
+import fse from 'fs-extra'
 import { pathToFileURL } from 'url'
 import { Routify } from '../../common/Routify.js' //eslint-disable-line
 import { writeDynamicImport } from '../../common/utils.js'
+
+const { readFile, existsSync } = fse
 
 /**
  * return meta data from comments
