@@ -4,9 +4,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "uvu test/ test\\.js$",
-    "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test",
-    "build": "documentation readme typedef.js -f md --section API"
+    "test": "run-s test:*",
+    "build": "run-s build:*",
+    "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test:uvu",
+    "test:prettier": "prettier -c --plugin-search-dir=. ./**",
+    "test:uvu": "uvu test/ test\\.js$",
+    "build:documentation": "documentation readme typedef.js -f md --section API"
   },
   "author": "jakobrosenberg@gmail.com",
   "license": "MIT",
@@ -17,7 +20,11 @@
     "documentation": "^13.2.1",
     "eslint": "^7.24.0",
     "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "prettier-plugin-svelte": "^2.2.0",
     "sort-any": "^1.2.3",
+    "svelte": "^3.37.0",
     "uvu": "^0.5.1"
   },
   "dependencies": {

@@ -1,0 +1,14 @@
+{
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "semi": true,
+    "useTabs": false,
+    "tabWidth": 4,
+    "svelteSortOrder": "scripts-markup-styles",
+    "svelteAllowShorthand": true,
+    "svelteBracketNewLine": false,
+    "svelteIndentScriptAndStyle": true
+}
