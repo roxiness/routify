@@ -14,7 +14,7 @@
     "build": "documentation readme typedef.js -f md --section API"
   },
   "author": "jakobrosenberg@gmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.13.15",
     "@babel/eslint-parser": "^7.13.14",
