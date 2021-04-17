@@ -31,6 +31,18 @@ export class Node {
         child.parent = this
     }
 
+    /**
+     * Creates a new child node
+     * Same as `node.appendChild(instance.createNode('my-node'))`
+     * @param {string} name
+     * @returns {Node}
+     */
+    createChild (name) {
+        const node = this.instance.createNode(name)
+        this.appendChild(node)
+        return node
+    }
+
     get descendants () {
         return this.instance.nodeIndex
             .filter(node =>
