@@ -19,9 +19,10 @@ export class Node {
     /** @type {String} */
     id
 
-    constructor (name, instance) {
+    constructor (name, component, instance) {
         this.name = name
         instance.nodeIndex.push(this)
+        this.component = component
         Object.defineProperty(this, 'instance', { get () { return instance }, enumerable: false })
         Object.defineProperty(this, 'parent', { enumerable: false })
     }
@@ -37,8 +38,8 @@ export class Node {
      * @param {string} name
      * @returns {Node}
      */
-    createChild (name) {
-        const node = this.instance.createNode(name)
+    createChild (name, component) {
+        const node = this.instance.createNode(name, component)
         this.appendChild(node)
         return node
     }

@@ -12,6 +12,7 @@
   "children": [
     {
       "meta": {},
+      "component": "test/unit/filemapper/example/_module.svelte",
       "id": "_default__module_svelte",
       "name": "_module",
       "file": {
@@ -25,6 +26,7 @@
     },
     {
       "meta": {},
+      "component": false,
       "id": "_default_admin",
       "name": "admin",
       "file": {
@@ -37,6 +39,7 @@
       "children": [
         {
           "meta": {},
+          "component": "test/unit/filemapper/example/admin/_reset.svelte",
           "id": "_default_admin__reset_svelte",
           "name": "_reset",
           "file": {
@@ -52,6 +55,7 @@
     },
     {
       "meta": {},
+      "component": false,
       "id": "_default_blog",
       "name": "blog",
       "file": {
@@ -64,6 +68,7 @@
       "children": [
         {
           "meta": {},
+          "component": "test/unit/filemapper/example/blog/[slug].svelte",
           "id": "_default_blog__slug__svelte",
           "name": "[slug]",
           "file": {
@@ -77,6 +82,7 @@
         },
         {
           "meta": {},
+          "component": "test/unit/filemapper/example/blog/prefixed[slug].svelte",
           "id": "_default_blog_prefixed_slug__svelte",
           "name": "prefixed[slug]",
           "file": {
@@ -92,6 +98,7 @@
     },
     {
       "meta": {},
+      "component": "test/unit/filemapper/example/index.svelte",
       "id": "_default_index_svelte",
       "name": "index",
       "file": {
@@ -105,6 +112,7 @@
     },
     {
       "meta": {},
+      "component": false,
       "id": "_default_no_layouts",
       "name": "no-layouts",
       "file": {
@@ -117,6 +125,7 @@
       "children": [
         {
           "meta": {},
+          "component": false,
           "id": "_default_no_layouts_nested",
           "name": "nested",
           "file": {
@@ -129,6 +138,7 @@
           "children": [
             {
               "meta": {},
+              "component": "test/unit/filemapper/example/no-layouts/nested/foo.svelte",
               "id": "_default_no_layouts_nested_foo_svelte",
               "name": "foo",
               "file": {
@@ -142,6 +152,7 @@
             },
             {
               "meta": {},
+              "component": "test/unit/filemapper/example/no-layouts/nested/index.svelte",
               "id": "_default_no_layouts_nested_index_svelte",
               "name": "index",
               "file": {

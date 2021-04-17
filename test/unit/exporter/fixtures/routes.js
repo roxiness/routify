@@ -66,6 +66,7 @@ export const routes = {
     },
     {
       "meta": {},
+      "component": false,
       "id": "_default_blog",
       "name": "blog",
       "file": {

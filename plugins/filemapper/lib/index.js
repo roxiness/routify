@@ -2,7 +2,6 @@ import { Routify } from '../../../common/Routify.js' //eslint-disable-line
 import { createNodesFromFiles } from './middlewares/createNodesFromFiles.js'
 import { filenameToOptions } from './middlewares/filenameToOptions.js'
 import { moveModuleToParentNode } from './middlewares/moveModuleToParentNode.js'
-import { setComponent } from './middlewares/setComponent.js'
 
 /**
  * Runs the suite of filemapper middlewares on the
@@ -19,7 +18,6 @@ export const filemapper = async ({ instance }) => {
             await createNodesFromFiles(rootNode, path)
             moveModuleToParentNode(rootNode)
             filenameToOptions(rootNode)
-            setComponent(rootNode)
             // todo this line should be able to precede middleware
             instance.superNode.appendChild(rootNode)
         })

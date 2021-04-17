@@ -52,6 +52,7 @@ export const routes = {
     },
     {
       "meta": {},
+      "component": false,
       "id": "_default_blog",
       "name": "blog",
       "file": {
@@ -112,6 +113,7 @@ export const routes = {
     },
     {
       "meta": {},
+      "component": false,
       "id": "_default_no_layouts",
       "name": "no-layouts",
       "file": {
@@ -124,6 +126,7 @@ export const routes = {
       "children": [
         {
           "meta": {},
+          "component": false,
           "id": "_default_no_layouts_nested",
           "name": "nested",
           "file": {

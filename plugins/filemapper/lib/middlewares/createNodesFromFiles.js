@@ -10,7 +10,6 @@ import { File } from '../File.js'
  * @return {Promise<Node>}
  */
 export async function createNodesFromFiles (firstNode, path) {
-    const { instance } = firstNode
     firstNode.file = new File(path)
     const queue = [firstNode]
 
@@ -29,9 +28,9 @@ export async function createNodesFromFiles (firstNode, path) {
             const children = await fse.readdir(node.file.path)
             const promises = children.map(filename => {
                 const file = new File(resolve(node.file.path, filename))
-                const childNode = instance.createNode(file.name)
+                const component = !file.stat.isDirectory() && file.path
+                const childNode = node.createChild(file.name, component)
                 childNode.file = file
-                node.appendChild(childNode)
                 queue.unshift(childNode)
             })
             await Promise.all(promises)

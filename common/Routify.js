@@ -30,11 +30,11 @@ export class Routify {
     /** @type {Node[]} */
     nodeIndex = []
 
-    createNode (name) {
-        return new Node(name, this)
+    createNode (name, component) {
+        return new Node(name, component, this)
     }
 
-    superNode = new Node('_ROOT', this)
+    superNode = new Node('_ROOT', null, this)
 
     /** @type {RoutifyOptions} */
     options = {
