@@ -23,7 +23,10 @@ test('can build route tree', async () => {
 })
 
 test('can export a route tree', async () => {
-    await exportNode(instance.superNode.children[0], __dirname + '/temp/.routify')
+    await exportNode(
+        instance.superNode.children[0],
+        __dirname + '/temp/.routify',
+    )
     const content = fse.readFileSync(
         resolve(__dirname, 'temp/.routify', 'routes.default.js'),
         'utf-8',

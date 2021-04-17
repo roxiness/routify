@@ -24,13 +24,16 @@ const instance = new Routify(options)
 test('bundler writes files', async () => {
     await filemapper({ instance })
     await metaFromFile({ instance })
-    await createBundles(instance.superNode.children[0], __dirname+'/temp')
+    await createBundles(instance.superNode.children[0], __dirname + '/temp')
 
     assert.snapshot(
-        readFileSync(__dirname + '/temp/bundles/_default_admin-bundle.js', 'utf-8'),
-        'export { default as _default_admin } from \'../../example/admin/_reset.svelte\'' +
-        '\nexport { default as _default_admin_index_svelte } from \'../../example/admin/index.svelte\'' +
-        '\nexport { default as _default_admin_page_svelte } from \'../../example/admin/page.svelte\'',
+        readFileSync(
+            __dirname + '/temp/bundles/_default_admin-bundle.js',
+            'utf-8',
+        ),
+        "export { default as _default_admin } from '../../example/admin/_reset.svelte'" +
+            "\nexport { default as _default_admin_index_svelte } from '../../example/admin/index.svelte'" +
+            "\nexport { default as _default_admin_page_svelte } from '../../example/admin/page.svelte'",
     )
 })
 
