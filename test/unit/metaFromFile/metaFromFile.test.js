@@ -31,7 +31,7 @@ const expectedInline = {
 const classless = (val) => JSON.parse(JSON.stringify(val))
 
 const options = {
-    routifyDir: `${__dirname}/output`,
+    routifyDir: `${__dirname}/temp`,
     filemapper: {
         routesDir: { default: `${__dirname}/example` },
     },

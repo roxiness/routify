@@ -23,19 +23,14 @@ test('can build route tree', async () => {
 })
 
 test('can export a route tree', async () => {
-    await exportNode(instance.superNode.children[0], __dirname + '/.routify')
+    await exportNode(instance.superNode.children[0], __dirname + '/temp/.routify')
     const content = fse.readFileSync(
-        resolve(__dirname, '.routify', 'routes.default.js'),
+        resolve(__dirname, 'temp/.routify', 'routes.default.js'),
         'utf-8',
     )
     assertSnapshot('routes.js', content, 0)
 })
 
-/*
-    todo temporarily enabled
-    Test disabled due to this issue: https://github.com/lukeed/uvu/issues/110
-    When this is fixed or a workaround is found, please uncomment
-*/
 test.run()
 
 function assertSnapshot(name, content, update) {

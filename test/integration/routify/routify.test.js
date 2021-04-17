@@ -13,7 +13,7 @@ const __dirname = createDirname(import.meta)
 
 test('can run routify with bundled plugins', async () => {
     const instance = new RoutifyBackend({
-        routifyDir: resolve(__dirname, '.routify'),
+        routifyDir: resolve(__dirname, 'temp', '.routify'),
         filemapper: {
             routesDir: resolve(__dirname, 'example'),
         },
@@ -22,7 +22,7 @@ test('can run routify with bundled plugins', async () => {
     assertSnapshot(
         'routify',
         readFileSync(
-            resolve(__dirname, '.routify', 'routes.default.js'),
+            resolve(__dirname, 'temp', '.routify', 'routes.default.js'),
             'utf-8',
         ),
         0,
@@ -32,6 +32,7 @@ test('can run routify with bundled plugins', async () => {
         readFileSync(
             resolve(
                 __dirname,
+                'temp',
                 '.routify',
                 'bundles',
                 '_default_admin-bundle.js',
@@ -42,11 +43,6 @@ test('can run routify with bundled plugins', async () => {
     )
 })
 
-/*
-    todo temporarily enabled
-    Test disabled due to this issue: https://github.com/lukeed/uvu/issues/110
-    When this is fixed or a workaround is found, please uncomment
-*/
 test.run()
 
 function assertSnapshot(name, content, update) {
