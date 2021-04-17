@@ -1,7 +1,7 @@
 import { Routify } from '../../../common/Routify.js' //eslint-disable-line
-import { createNodesFromFiles } from './middlewares/createNodesFromFiles.js'
-import { filenameToOptions } from './middlewares/filenameToOptions.js'
-import { moveModuleToParentNode } from './middlewares/moveModuleToParentNode.js'
+import { createNodesFromFiles } from './utils/createNodesFromFiles.js'
+import { filenameToOptions } from './utils/filenameToOptions.js'
+import { moveModuleToParentNode } from './utils/moveModuleToParentNode.js'
 
 /**
  * Runs the suite of filemapper middlewares on the
