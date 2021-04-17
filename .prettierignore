@@ -1,7 +1,0 @@
-package-lock.json
-.gitignore
-README.md
-.github
-.vscode
-node_modules
-typedef.js

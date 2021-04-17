@@ -1,48 +1,50 @@
 {
-  "name": "routify3",
-  "version": "0.0.1",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "run-s test:*",
-    "build": "run-s build:*",
-    "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test:uvu",
-    "test:prettier": "prettier -c --plugin-search-dir=. ./**",
-    "test:uvu": "uvu test/ test\\.js$",
-    "build:documentation": "documentation readme typedef.js -f md --section API"
-  },
-  "author": "jakobrosenberg@gmail.com",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.13.15",
-    "@babel/eslint-parser": "^7.13.14",
-    "@babel/plugin-syntax-class-properties": "^7.12.13",
-    "documentation": "^13.2.1",
-    "eslint": "^7.24.0",
-    "nodemon": "^2.0.7",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.1",
-    "prettier-plugin-svelte": "^2.2.0",
-    "sort-any": "^1.2.3",
-    "svelte": "^3.37.0",
-    "uvu": "^0.5.1"
-  },
-  "dependencies": {
-    "cheerio": "*",
-    "fs-extra": "^9.1.0"
-  },
-  "prettier": {    
-    "singleQuote": true,
-    "quoteProps": "as-needed",
-    "trailingComma": "all",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "semi": false,
-    "useTabs": false,
-    "tabWidth": 4,
-    "svelteSortOrder": "scripts-markup-styles",
-    "svelteAllowShorthand": true,
-    "svelteBracketNewLine": false,
-    "svelteIndentScriptAndStyle": true  
-  }
+    "name": "routify3",
+    "version": "0.0.1",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "run-s test:*",
+        "build": "run-s build:*",
+        "test:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
+        "test:uvu": "uvu test/ test\\.js$",
+        "build:documentation": "documentation readme typedef.js -f md --section API",
+        "build:prettier": "npm run format",
+        "test-watch": "nodemon --ignore {fixtures,output,bundles}/** --exec npm run test:uvu",
+        "format": "prettier --write --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\""
+    },
+    "author": "jakobrosenberg@gmail.com",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.13.15",
+        "@babel/eslint-parser": "^7.13.14",
+        "@babel/plugin-syntax-class-properties": "^7.12.13",
+        "documentation": "^13.2.1",
+        "eslint": "^7.24.0",
+        "nodemon": "^2.0.7",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.2.1",
+        "prettier-plugin-svelte": "^2.2.0",
+        "sort-any": "^1.2.3",
+        "svelte": "^3.37.0",
+        "uvu": "^0.5.1"
+    },
+    "dependencies": {
+        "cheerio": "*",
+        "fs-extra": "^9.1.0"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "quoteProps": "as-needed",
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "arrowParens": "always",
+        "semi": false,
+        "useTabs": false,
+        "tabWidth": 4,
+        "svelteSortOrder": "options-scripts-markup-styles",
+        "svelteAllowShorthand": true,
+        "svelteBracketNewLine": false,
+        "svelteIndentScriptAndStyle": true
+    }
 }
