@@ -6,5 +6,5 @@ export const filemapperPlugin = {
     condition: () => true,
     after: 'filemapper',
     mode: 'compile',
-    run: filemapper
+    run: filemapper,
 }

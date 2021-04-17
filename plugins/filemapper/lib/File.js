@@ -1,8 +1,6 @@
 import { statSync } from 'fs'
 import { parse, relative } from 'path'
 
-
-
 export class File {
     constructor(path) {
         const { dir, base, ext, name } = parse(path)

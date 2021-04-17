@@ -6,5 +6,5 @@ export const bundlerPlugin = {
     condition: () => true,
     after: 'filemapper',
     mode: 'compile',
-    run: bundler
+    run: bundler,
 }

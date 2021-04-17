@@ -2,7 +2,11 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { metaFromFile, htmlComments, externalComments } from '../../../plugins/metaFromFile/metaFromFile.js'
+import {
+    metaFromFile,
+    htmlComments,
+    externalComments,
+} from '../../../plugins/metaFromFile/metaFromFile.js'
 import { emptyDirSync } from 'fs-extra'
 import { Routify } from '../../../common/Routify.js'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
@@ -10,11 +14,11 @@ import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 const test = suite('meta from file')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const expectedExternal = {
-    'prop': 'value',
-    'nested': {
-        'nestedProp': 'nestedValue'
+    prop: 'value',
+    nested: {
+        nestedProp: 'nestedValue',
     },
-    'codesplitted': {}
+    codesplitted: {},
 }
 const expectedInline = {
     'equal-sign-trimmed': 'meta',
@@ -22,14 +26,14 @@ const expectedInline = {
     'equal-sign-left': 'meta',
     'equal-sign-center ': 'meta',
     'an-array': ['item1', 'item2'],
-    'an-object': { prop: { nested: 'value' } }
+    'an-object': { prop: { nested: 'value' } },
 }
-const classless = val => JSON.parse(JSON.stringify(val))
+const classless = (val) => JSON.parse(JSON.stringify(val))
 
 const options = {
     routifyDir: `${__dirname}/output`,
     filemapper: {
-        routesDir: { default: `${__dirname}/example` }
+        routesDir: { default: `${__dirname}/example` },
     },
 }
 test.before.each(() => {
@@ -49,8 +53,8 @@ test('external meta', async () => {
     assert.ok(meta.codesplitted.then, 'should be a promise')
     assert.snapshot(
         await meta.codesplitted,
-        'I\'m split',
-        'accessing codesplit prop should return Promise<value>'
+        "I'm split",
+        'accessing codesplit prop should return Promise<value>',
     )
 })
 
@@ -60,16 +64,23 @@ test('metaFromFile middleware', async () => {
     await filemapper({ instance })
     await metaFromFile({ instance })
 
-    const inlineMetaFile = instance.nodeIndex.find(node => node.name === 'inlineMeta')
-    const externalMetaFile = instance.nodeIndex.find(node => node.name === 'externalMeta')
+    const inlineMetaFile = instance.nodeIndex.find(
+        (node) => node.name === 'inlineMeta',
+    )
+    const externalMetaFile = instance.nodeIndex.find(
+        (node) => node.name === 'externalMeta',
+    )
 
     assert.equal(classless(inlineMetaFile.meta), expectedInline)
-    assert.equal(classless(externalMetaFile.meta), { ...expectedExternal, inlined: true })
+    assert.equal(classless(externalMetaFile.meta), {
+        ...expectedExternal,
+        inlined: true,
+    })
     assert.ok(externalMetaFile.meta.codesplitted.then, 'should be a promise')
     assert.snapshot(
         await externalMetaFile.meta.codesplitted,
-        'I\'m split',
-        'accessing codesplit prop should return Promise<value>'
+        "I'm split",
+        'accessing codesplit prop should return Promise<value>',
     )
 })
 

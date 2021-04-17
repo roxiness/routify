@@ -11,8 +11,8 @@ import { moveModuleToParentNode } from './utils/moveModuleToParentNode.js'
 export const filemapper = async ({ instance }) => {
     const { options } = instance
 
-    const promises = Object.entries(options.filemapper.routesDir)
-        .map(async ([key, path]) => {
+    const promises = Object.entries(options.filemapper.routesDir).map(
+        async ([key, path]) => {
             const rootNode = instance.createNode()
             rootNode.rootName = key
             await createNodesFromFiles(rootNode, path)
@@ -20,7 +20,8 @@ export const filemapper = async ({ instance }) => {
             filenameToOptions(rootNode)
             // todo this line should be able to precede middleware
             instance.superNode.appendChild(rootNode)
-        })
+        },
+    )
 
     await Promise.all(promises)
 }

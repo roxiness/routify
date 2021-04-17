@@ -13,7 +13,7 @@ const aPlugin = {
     run: ({ instance }) => {
         const node = instance.createNode('my-node')
         instance.superNode.appendChild(node)
-    }
+    },
 }
 /**
  * @type {RoutifyPlugin}
@@ -23,12 +23,12 @@ const anotherPlugin = {
     run: ({ instance }) => {
         const node = instance.createNode('my-2nd-node')
         instance.superNode.appendChild(node)
-    }
+    },
 }
 
 test('can run plugin', async () => {
     const instance = new Routify({
-        plugins: [aPlugin]
+        plugins: [aPlugin],
     })
     await instance.start()
     assert.ok(instance.superNode.descendants[0])
@@ -37,7 +37,7 @@ test('can run plugin', async () => {
 
 test('can run multiple plugins', async () => {
     const instance = new Routify({
-        plugins: [aPlugin, anotherPlugin]
+        plugins: [aPlugin, anotherPlugin],
     })
     await instance.start()
     assert.is(instance.superNode.descendants[0].name, 'my-node')

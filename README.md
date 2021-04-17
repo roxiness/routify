@@ -1,14 +1,15 @@
 # Routify 3
 
-## Using Routify 
-
+## Using Routify
 
 #### Creating a Routify instance
+
 ```javascript
 const instance = new Routify({/* options */})
 ```
 
 #### Creating nodes
+
 ```javascript
 // create a root node
 const rootNode = instance.superNode.createChild('my-root-node')
@@ -20,8 +21,8 @@ rootNode.createChild('im-page-2', component)
 // Note: component can be a component or its path
 ```
 
-
 #### Appending nodes
+
 ```javascript
 // create a root node
 const rootNode = instance.createNode('my-root-node')

@@ -17,10 +17,9 @@ const options = {
     filemapper: {
         moduleFiles: ['_module.svelte', '_reset.svelte'],
         resetFiles: ['_reset.svelte'],
-        routesDir: { default: `${__dirname}/example` }
-    }
+        routesDir: { default: `${__dirname}/example` },
+    },
 }
-
 
 const instance = new Routify(options)
 
@@ -47,22 +46,24 @@ test('options get added', async () => {
 test('filemapper', async () => {
     const instance = new Routify(options)
     await filemapper({ instance })
-    assertSnapshot('4.filemap-with-components', instance.superNode.children[0].map, 0)
+    assertSnapshot(
+        '4.filemap-with-components',
+        instance.superNode.children[0].map,
+        0,
+    )
 })
 
 test.run()
 
-function assertSnapshot (name, content, update) {
+function assertSnapshot(name, content, update) {
     content = JSON.parse(JSON.stringify(content))
     const filepath = `${__dirname}/fixtures/${name}.json`
-    if (update)
-        writeFileSync(filepath, JSON.stringify(content, null, 2))
+    if (update) writeFileSync(filepath, JSON.stringify(content, null, 2))
     const expect = JSON.parse(readFileSync(filepath, 'utf-8'))
     assert.equal(content, expect)
 }
 // todo get rid of this or find a way to use it
 // const faketest = suite('faketest')
-
 
 // faketest('faketest', () => {
 //     const unsorted = { a: [2,1,3] }
@@ -71,7 +72,6 @@ function assertSnapshot (name, content, update) {
 // })
 
 // faketest.run()
-
 
 // const sortDeep = (object) => {
 //     if (!Array.isArray(object)) {

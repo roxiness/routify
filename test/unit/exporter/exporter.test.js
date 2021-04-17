@@ -7,13 +7,12 @@ import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { Routify } from '../../../common/Routify.js'
 import fse from 'fs-extra'
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const test = suite('exporter')
 const options = {
     filemapper: {
-        routesDir: { default: __dirname+'/example' }
-    }
+        routesDir: { default: __dirname + '/example' },
+    },
 }
 
 const instance = new Routify(options)
@@ -24,8 +23,11 @@ test('can build route tree', async () => {
 })
 
 test('can export a route tree', async () => {
-    await exportNode(instance.superNode.children[0], __dirname+'/.routify')
-    const content = fse.readFileSync(resolve(__dirname, '.routify', 'routes.default.js'), 'utf-8')
+    await exportNode(instance.superNode.children[0], __dirname + '/.routify')
+    const content = fse.readFileSync(
+        resolve(__dirname, '.routify', 'routes.default.js'),
+        'utf-8',
+    )
     assertSnapshot('routes.js', content, 0)
 })
 
@@ -36,11 +38,10 @@ test('can export a route tree', async () => {
 */
 test.run()
 
-function assertSnapshot (name, content, update) {
+function assertSnapshot(name, content, update) {
     content = JSON.parse(JSON.stringify(content))
     const filepath = `${__dirname}/fixtures/${name}`
-    if (update)
-        fse.outputFileSync(filepath, content)
+    if (update) fse.outputFileSync(filepath, content)
     const expect = fse.readFileSync(filepath, 'utf-8')
     assert.snapshot(content, expect)
 }

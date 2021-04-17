@@ -12,7 +12,7 @@ test('sortPlugins can sort plugins', async () => {
     ]
 
     const res = sortPlugins(plugins)
-    assert.snapshot(res.map(p => p.name).join(','), 'first,second,third')
+    assert.snapshot(res.map((p) => p.name).join(','), 'first,second,third')
 })
 
 test('sortPlugins preserves order when possible', async () => {
@@ -26,7 +26,10 @@ test('sortPlugins preserves order when possible', async () => {
     ]
 
     const res = sortPlugins(plugins)
-    assert.snapshot(res.map(p => p.name).join(','), 'first,second,third,fourth,fifth,sixth')
+    assert.snapshot(
+        res.map((p) => p.name).join(','),
+        'first,second,third,fourth,fifth,sixth',
+    )
 })
 
 test('sortPlugins reports loops', async () => {
@@ -39,12 +42,13 @@ test('sortPlugins reports loops', async () => {
 
     try {
         sortPlugins(plugins)
-    }catch(err){
-        assert.snapshot(err.message,
-            'found infinite loop in plugins. Repeating pattern:\n'+
-            'impossible (before: second; after: third )\n'+
-            'third ( after: second )\n'+
-            'second '
+    } catch (err) {
+        assert.snapshot(
+            err.message,
+            'found infinite loop in plugins. Repeating pattern:\n' +
+                'impossible (before: second; after: third )\n' +
+                'third ( after: second )\n' +
+                'second ',
         )
     }
 })

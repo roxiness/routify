@@ -9,7 +9,7 @@ import { File } from '../File.js'
  * @param {String} path dir to scan for files
  * @return {Promise<Node>}
  */
-export async function createNodesFromFiles (firstNode, path) {
+export async function createNodesFromFiles(firstNode, path) {
     firstNode.file = new File(path)
     const queue = [firstNode]
 
@@ -18,15 +18,17 @@ export async function createNodesFromFiles (firstNode, path) {
     while ((node = queue.pop())) {
         const relativePath = relative(node.root.file.path, node.file.path)
         // set id to `default_path_to_file` if rootName is default
-        node.id = '_' + [node.root.rootName, relativePath]
-            .filter(Boolean)
-            .join('_')
-            .replace(/[^\w]/g, '_')
+        node.id =
+            '_' +
+            [node.root.rootName, relativePath]
+                .filter(Boolean)
+                .join('_')
+                .replace(/[^\w]/g, '_')
 
         if (node.file.stat.isDirectory()) {
             // for each child create a node, attach a file and add it to the queue
             const children = await fse.readdir(node.file.path)
-            const promises = children.map(filename => {
+            const promises = children.map((filename) => {
                 const file = new File(resolve(node.file.path, filename))
                 const component = !file.stat.isDirectory() && file.path
                 const childNode = node.createChild(file.name, component)
@@ -35,7 +37,6 @@ export async function createNodesFromFiles (firstNode, path) {
             })
             await Promise.all(promises)
         }
-
     }
     return firstNode
 }

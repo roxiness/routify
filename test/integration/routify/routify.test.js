@@ -15,12 +15,31 @@ test('can run routify with bundled plugins', async () => {
     const instance = new RoutifyBackend({
         routifyDir: resolve(__dirname, '.routify'),
         filemapper: {
-            routesDir: resolve(__dirname, 'example')
-        }
+            routesDir: resolve(__dirname, 'example'),
+        },
     })
     await instance.start()
-    assertSnapshot('routify', readFileSync(resolve(__dirname, '.routify', 'routes.default.js'), 'utf-8'), 0)
-    assertSnapshot('bundles', readFileSync(resolve(__dirname, '.routify', 'bundles', '_default_admin-bundle.js'), 'utf-8'), 0)
+    assertSnapshot(
+        'routify',
+        readFileSync(
+            resolve(__dirname, '.routify', 'routes.default.js'),
+            'utf-8',
+        ),
+        0,
+    )
+    assertSnapshot(
+        'bundles',
+        readFileSync(
+            resolve(
+                __dirname,
+                '.routify',
+                'bundles',
+                '_default_admin-bundle.js',
+            ),
+            'utf-8',
+        ),
+        0,
+    )
 })
 
 /*
@@ -30,10 +49,9 @@ test('can run routify with bundled plugins', async () => {
 */
 test.run()
 
-function assertSnapshot (name, content, update) {
+function assertSnapshot(name, content, update) {
     const filepath = `${__dirname}/fixtures/${name}.js`
-    if (update)
-        fse.outputFileSync(filepath, content)
-    const expect = (readFileSync(filepath, 'utf-8'))
+    if (update) fse.outputFileSync(filepath, content)
+    const expect = readFileSync(filepath, 'utf-8')
     assert.equal(content, expect)
 }

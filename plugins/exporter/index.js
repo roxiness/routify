@@ -6,5 +6,5 @@ export const exporterPlugin = {
     condition: () => true,
     after: 'filemapper',
     mode: 'compile',
-    run: exporter
+    run: exporter,
 }

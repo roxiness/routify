@@ -4,9 +4,8 @@ import { Routify } from '../../../common/Routify.js'
 import '../../../typedef.js'
 
 const test = suite('node')
-const instance = new Routify({ })
+const instance = new Routify({})
 const node = instance.createNode('my-node')
-
 
 test('can create node', async () => {
     assert.is(node.name, 'my-node')

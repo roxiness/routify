@@ -5,5 +5,5 @@ import { metaFromFile } from './metaFromFile.js'
 export const metaFromFilePlugin = {
     after: 'filemapper',
     mode: 'compile',
-    run: metaFromFile
+    run: metaFromFile,
 }
