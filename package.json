@@ -30,7 +30,7 @@
         "uvu": "^0.5.1"
     },
     "dependencies": {
-        "cheerio": "*",
+        "cheerio": "^0.x",
         "fs-extra": "^9.1.0"
     },
     "prettier": {
