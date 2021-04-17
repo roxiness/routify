@@ -1,6 +1,6 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { RoutifyBackend } from '../../../lib/RoutifyBackend.js'
+import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
 import '../../../typedef.js'
 import { createDirname } from '../../../common/utils.js'
 import { resolve } from 'path'
@@ -12,7 +12,7 @@ const test = suite('routify')
 const __dirname = createDirname(import.meta)
 
 test('can run routify with bundled plugins', async () => {
-    const instance = new RoutifyBackend({
+    const instance = new RoutifyBuildtime({
         routifyDir: resolve(__dirname, 'temp', '.routify'),
         filemapper: {
             routesDir: resolve(__dirname, 'example'),
