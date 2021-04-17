@@ -30,5 +30,19 @@
   "dependencies": {
     "cheerio": "*",
     "fs-extra": "^9.1.0"
+  },
+  "prettier": {    
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "semi": false,
+    "useTabs": false,
+    "tabWidth": 4,
+    "svelteSortOrder": "scripts-markup-styles",
+    "svelteAllowShorthand": true,
+    "svelteBracketNewLine": false,
+    "svelteIndentScriptAndStyle": true  
   }
 }
