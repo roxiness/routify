@@ -1,3 +1,3 @@
 <script>
-    export let options = {}
+    export let instance
 </script>
