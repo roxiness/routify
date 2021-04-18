@@ -1,7 +1,7 @@
 import cheerio from 'cheerio'
 import fse from 'fs-extra'
 import { pathToFileURL } from 'url'
-import { writeDynamicImport } from '../../common/utils.js'
+import { writeDynamicImport } from '../../lib/utils.js'
 
 const { readFile, existsSync } = fse
 
