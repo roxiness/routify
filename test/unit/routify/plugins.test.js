@@ -1,6 +1,6 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { Routify } from '../../../common/Routify.js'
+import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
 import '../../../typedef.js'
 
 const test = suite('plugins')
@@ -9,7 +9,7 @@ const test = suite('plugins')
  * @type {RoutifyPlugin}
  */
 const aPlugin = {
-    mode: 'compile',
+    mode: 'runtime',
     run: ({ instance }) => {
         const node = instance.createNode('my-node')
         instance.superNode.appendChild(node)
@@ -19,7 +19,7 @@ const aPlugin = {
  * @type {RoutifyPlugin}
  */
 const anotherPlugin = {
-    mode: 'compile',
+    mode: 'runtime',
     run: ({ instance }) => {
         const node = instance.createNode('my-2nd-node')
         instance.superNode.appendChild(node)
@@ -27,7 +27,7 @@ const anotherPlugin = {
 }
 
 test('can run plugin', async () => {
-    const instance = new Routify({
+    const instance = new RoutifyRuntime({
         plugins: [aPlugin],
     })
     await instance.start()
@@ -36,7 +36,7 @@ test('can run plugin', async () => {
 })
 
 test('can run multiple plugins', async () => {
-    const instance = new Routify({
+    const instance = new RoutifyRuntime({
         plugins: [aPlugin, anotherPlugin],
     })
     await instance.start()
