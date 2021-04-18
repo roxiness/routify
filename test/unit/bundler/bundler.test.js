@@ -3,11 +3,12 @@ import * as assert from 'uvu/assert'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { readFileSync } from 'fs'
-import { Routify } from '../../../common/Routify.js'
+import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { createBundles } from '../../../plugins/bundler/bundler.js'
 import { metaFromFile } from '../../../plugins/metaFromFile/metaFromFile.js'
+import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const test = suite('bundler')
@@ -20,7 +21,7 @@ const options = {
     },
 }
 
-const instance = new Routify(options)
+const instance = new RoutifyBuildtime(options)
 test('bundler writes files', async () => {
     await filemapper({ instance })
     await metaFromFile({ instance })

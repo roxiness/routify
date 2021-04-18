@@ -8,8 +8,8 @@ import {
     externalComments,
 } from '../../../plugins/metaFromFile/metaFromFile.js'
 import { emptyDirSync } from 'fs-extra'
-import { Routify } from '../../../common/Routify.js'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
+import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
 
 const test = suite('meta from file')
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -59,7 +59,7 @@ test('external meta', async () => {
 })
 
 test('metaFromFile middleware', async () => {
-    const instance = new Routify(options)
+    const instance = new RoutifyBuildtime(options)
 
     await filemapper({ instance })
     await metaFromFile({ instance })

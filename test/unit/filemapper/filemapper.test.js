@@ -7,7 +7,7 @@ import { moveModuleToParentNode } from '../../../plugins/filemapper/lib/utils/mo
 import { filenameToOptions } from '../../../plugins/filemapper/lib/utils/filenameToOptions.js'
 import { readFileSync, writeFileSync } from 'fs'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
-import { Routify } from '../../../common/Routify.js'
+import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
 import sortAny from 'sort-any'
 
 const test = suite('filemapper')
@@ -21,7 +21,7 @@ const options = {
     },
 }
 
-const instance = new Routify(options)
+const instance = new RoutifyBuildtime(options)
 
 let rootNode = instance.createNode()
 rootNode.rootName = 'default'
@@ -44,7 +44,7 @@ test('options get added', async () => {
 })
 
 test('filemapper', async () => {
-    const instance = new Routify(options)
+    const instance = new RoutifyBuildtime(options)
     await filemapper({ instance })
     assertSnapshot(
         '4.filemap-with-components',

@@ -1,11 +1,11 @@
 import { suite } from 'uvu'
+import fse from 'fs-extra'
 import * as assert from 'uvu/assert'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { exportNode } from '../../../plugins/exporter/exporter.js'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
-import { Routify } from '../../../common/Routify.js'
-import fse from 'fs-extra'
+import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const test = suite('exporter')
@@ -15,7 +15,7 @@ const options = {
     },
 }
 
-const instance = new Routify(options)
+const instance = new RoutifyBuildtime(options)
 
 test('can build route tree', async () => {
     await filemapper({ instance })

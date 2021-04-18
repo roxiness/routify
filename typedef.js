@@ -1,5 +1,12 @@
 /**
+ * @typedef {import('./common/RNode')['RNode']['prototype']} RNode
+ *
  * @typedef {import('./common/Routify')['Routify']['prototype']} Routify
+ * @typedef {import('./lib/RoutifyBuildtime')['RoutifyBuildtime']['prototype']} RoutifyBuildtime
+ * @typedef {import('./runtime/RoutifyRuntime')['RoutifyRuntime']['prototype']} RoutifyRuntime
+ * @typedef {{instance: Routify}} RoutifyPayload
+ * @typedef {{instance: RoutifyBuildtime}} RoutifyBuildtimePayload
+ * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
  */
 
 /**

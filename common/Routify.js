@@ -18,13 +18,9 @@ import '../typedef.js'
 
 export class Routify {
     /** @param {Partial<RoutifyOptions>} options */
-    constructor(options) {
+    constructor (options) {
         this.options = deepAssign(this.options, options)
         Object.assign(this.plugins, this.options.plugins)
-        // normalize routifyDir
-        const { filemapper } = this.options
-        if (typeof filemapper.routesDir === 'string')
-            filemapper.routesDir = { default: filemapper.routesDir }
     }
 
     /** @type {RNode[]} */
@@ -38,21 +34,13 @@ export class Routify {
 
     /** @type {RoutifyOptions} */
     options = {
-        routifyDir: '.routify',
         plugins: [],
-        filemapper: {
-            moduleFiles: ['_module.svelte', '_reset.svelte'],
-            resetFiles: ['_reset.svelte'],
-            routesDir: {
-                default: 'routes',
-            },
-        },
     }
 
     /** @type {RoutifyPlugin[]} */
     plugins = []
 
-    async start() {
+    async start () {
         this.plugins = this.plugins.filter(
             (plugin) => plugin.mode === 'compile',
         )
