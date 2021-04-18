@@ -1,6 +1,6 @@
 import fse, { ensureDirSync } from 'fs-extra'
 import { relative, resolve } from 'path'
-import { Node } from '../../common/Node.js' //eslint-disable-line
+import { RNode } from '../../common/RNode.js' //eslint-disable-line
 import { Routify } from '../../common/Routify.js' //eslint-disable-line
 
 const { outputFile } = fse
@@ -14,7 +14,7 @@ class Bundles {
     /** @type {Object.<string, Bundle} */
     bundles = {}
 
-    /** @param {Node} node */
+    /** @param {RNode} node */
     upsert(node) {
         const { path } = node.file
         this.bundles[path] =
@@ -30,11 +30,11 @@ class Bundles {
 }
 
 class Bundle {
-    /** @type {Node[]} */
+    /** @type {RNode[]} */
     members = []
 
     /**
-     * @param {Node} node
+     * @param {RNode} node
      * @param {string} outputDir
      * */
     constructor(node, outputDir) {
@@ -73,7 +73,7 @@ const bundleIsNotNullOrUndefined = (val) =>
 
 /**
  *
- * @param {Node} node
+ * @param {RNode} node
  * @param {any} outputDir
  */
 export const createBundles = async (node, outputDir) => {

@@ -1,13 +1,13 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { Node } from '../../../common/Node.js' //eslint-disable-line
+import { RNode } from '../../../common/RNode.js' //eslint-disable-line
 import { Routify } from '../../../common/Routify.js'
 
 const nodeTest = suite('node')
 
 /** @type {Routify} */
 let instance
-/** @type {Node} */
+/** @type {RNode} */
 let rootNode
 
 nodeTest('new instance has one empty super node', () => {

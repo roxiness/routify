@@ -1,4 +1,4 @@
-import { Node } from './Node.js'
+import { RNode } from './RNode.js'
 import { deepAssign, sortPlugins } from './utils.js'
 import '../typedef.js'
 
@@ -27,14 +27,14 @@ export class Routify {
             filemapper.routesDir = { default: filemapper.routesDir }
     }
 
-    /** @type {Node[]} */
+    /** @type {RNode[]} */
     nodeIndex = []
 
     createNode(name, component) {
-        return new Node(name, component, this)
+        return new RNode(name, component, this)
     }
 
-    superNode = new Node('_ROOT', null, this)
+    superNode = new RNode('_ROOT', null, this)
 
     /** @type {RoutifyOptions} */
     options = {

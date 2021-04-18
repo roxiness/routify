@@ -1,4 +1,4 @@
-import { Node } from '../../common/Node.js' //eslint-disable-line
+import { RNode } from '../../common/RNode.js' //eslint-disable-line
 import { Routify } from '../../common/Routify.js' //eslint-disable-line
 import { relative, resolve } from 'path'
 import fse from 'fs-extra'
@@ -27,7 +27,7 @@ const stringifyWithEscape = (obj, keys) => {
 
 /**
  *
- * @param {Node} rootNode
+ * @param {RNode} rootNode
  * @param {string} outputDir
  */
 export const exportNode = (rootNode, outputDir) => {

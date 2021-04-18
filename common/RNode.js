@@ -1,11 +1,8 @@
-// we need Routify for typed JS
-import { Routify } from './Routify.js' // eslint-disable-line
-
-export class Node {
+export class RNode {
     /** @type {Routify} */
     instance
 
-    /** @type {Node} */
+    /** @type {RNode} */
     parent
 
     meta = {
@@ -31,7 +28,7 @@ export class Node {
         Object.defineProperty(this, 'parent', { enumerable: false })
     }
 
-    /** @param {Node} child */
+    /** @param {RNode} child */
     appendChild(child) {
         child.parent = this
     }
@@ -40,7 +37,7 @@ export class Node {
      * Creates a new child node
      * Same as `node.appendChild(instance.createNode('my-node'))`
      * @param {string} name
-     * @returns {Node}
+     * @returns {RNode}
      */
     createChild(name, component) {
         const node = this.instance.createNode(name, component)
@@ -61,7 +58,7 @@ export class Node {
     }
 
     get ancestors() {
-        /** @type {Node} */
+        /** @type {RNode} */
         let node = this
         const ancestors = []
         while ((node = node.parent)) ancestors.push(node)

@@ -1,13 +1,13 @@
-import { Node } from '../../../../common/Node.js' //eslint-disable-line
+import { RNode } from '../../../../common/RNode.js' //eslint-disable-line
 import fse from 'fs-extra'
 import { relative, resolve } from 'path'
 import { File } from '../File.js'
 
 /**
  * Maps filestructure to a node tree
- * @param {Node} firstNode the root node of the specified path
+ * @param {RNode} firstNode the root node of the specified path
  * @param {String} path dir to scan for files
- * @return {Promise<Node>}
+ * @return {Promise<RNode>}
  */
 export async function createNodesFromFiles(firstNode, path) {
     firstNode.file = new File(path)

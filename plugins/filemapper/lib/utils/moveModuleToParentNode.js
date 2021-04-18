@@ -1,10 +1,10 @@
-import { Node } from '../../../../common/Node.js' //eslint-disable-line
+import { RNode } from '../../../../common/RNode.js' //eslint-disable-line
 import { nameFilter } from '../../utils.js'
 
 /**
  * for nodes that have a _module.svelte or _reset.svelte file,
  * `file` prop and component is moved to node.parent and the old node is removed
- * @param {Node} node
+ * @param {RNode} node
  */
 export const moveModuleToParentNode = (node) => {
     const { options } = node.instance

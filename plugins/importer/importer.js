@@ -1,10 +1,10 @@
-import { Node } from '../../common/Node.js' //eslint-disable-line
+import { RNode } from '../../common/RNode.js' //eslint-disable-line
 import { RoutifyRuntime } from '../../runtime/RoutifyRuntime.js'
 
 /**
- * @param {Node} parentNode
+ * @param {RNode} parentNode
  * @param {object} snapshotRoot
- * @returns {Node}
+ * @returns {RNode}
  */
 export const populateNodeTreeFromSnapshot = (parentNode, snapshotRoot) => {
     const queue = [[parentNode, snapshotRoot]]
