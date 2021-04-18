@@ -1,5 +1,7 @@
 {
     "scripts": {
-        "dev": "rollup -c -w"
+        "dev": "run-p dev:*",
+        "dev:rollup": "rollup -c -w",
+        "dev:server": "npx spassr -a public"
     }
 }

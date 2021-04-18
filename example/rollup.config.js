@@ -7,7 +7,15 @@ import { RoutifyBuildtime } from '../lib/RoutifyBuildtime'
 
 const production = !process.env.ROLLUP_WATCH
 
-const instance = new RoutifyBuildtime({})
+const instance = new RoutifyBuildtime({
+    // filemapper: {
+    //     routesDir: {
+    //         default: 'src/routes',
+    //     }
+    // }
+})
+
+instance.start()
 
 export default {
     input: 'src/main.js',

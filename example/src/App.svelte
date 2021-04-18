@@ -1,0 +1,9 @@
+<script>
+    import { Routify, Router } from '../../runtime/index.js'
+    import { routes } from '../.routify/routes.default.js'
+    const instance = new Routify({ import: routes })
+</script>
+
+<h1>App.svelte</h1>
+
+<Router {instance} />
