@@ -1,6 +1,5 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { RNode } from '../../../common/RNode.js' //eslint-disable-line
 import { importer, populateNodeTreeFromSnapshot } from '../../../plugins/importer/importer.js'
 import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
 

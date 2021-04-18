@@ -1,4 +1,3 @@
-import { Routify } from '../../../common/Routify.js' //eslint-disable-line
 import { createNodesFromFiles } from './utils/createNodesFromFiles.js'
 import { filenameToOptions } from './utils/filenameToOptions.js'
 import { moveModuleToParentNode } from './utils/moveModuleToParentNode.js'

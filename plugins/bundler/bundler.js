@@ -1,13 +1,11 @@
 import fse, { ensureDirSync } from 'fs-extra'
 import { relative, resolve } from 'path'
-import { RNode } from '../../common/RNode.js' //eslint-disable-line
-import { Routify } from '../../common/Routify.js' //eslint-disable-line
 
 const { outputFile } = fse
 const relativeUnix = (path, path2) => relative(path, path2).replace(/\\/g, '/')
 
 class Bundles {
-    constructor(outputDir) {
+    constructor (outputDir) {
         this.outputDir = outputDir
     }
 
@@ -15,13 +13,13 @@ class Bundles {
     bundles = {}
 
     /** @param {RNode} node */
-    upsert(node) {
+    upsert (node) {
         const { path } = node.file
         this.bundles[path] =
             this.bundles[path] || new Bundle(node, this.outputDir)
         return this.bundles[path]
     }
-    async apply() {
+    async apply () {
         const promises = Object.values(this.bundles).map((bundle) =>
             bundle.apply(),
         )
@@ -37,17 +35,17 @@ class Bundle {
      * @param {RNode} node
      * @param {string} outputDir
      * */
-    constructor(node, outputDir) {
+    constructor (node, outputDir) {
         this.outputDir = outputDir
         this.instructor = node
         this.filename = 'bundles/' + node.id + '-bundle.js'
     }
 
-    include(node) {
+    include (node) {
         this.members.push(node)
     }
 
-    async apply() {
+    async apply () {
         ensureDirSync(this.outputDir)
         const output = resolve(this.outputDir, this.filename)
 
@@ -97,8 +95,7 @@ export const createBundles = async (node, outputDir) => {
 }
 
 /**
- *
- * @param {{instance: Routify}} param0
+ * @param {RoutifyBuildtimePayload} param0
  */
 export const bundler = async ({ instance }) => {
     const promises = instance.superNode.children.map((rootNode) =>

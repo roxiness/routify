@@ -1,6 +1,3 @@
-import { RNode } from '../../common/RNode.js' //eslint-disable-line
-import { RoutifyRuntime } from '../../runtime/RoutifyRuntime.js'
-
 /**
  * @param {RNode} parentNode
  * @param {object} snapshotRoot
@@ -26,7 +23,7 @@ export const populateNodeTreeFromSnapshot = (parentNode, snapshotRoot) => {
 
 /**
  * imports exported nodes
- * @param {{instance: RoutifyRuntime}} param0
+ * @param {RoutifyRuntimePayload} param0
  */
 export const importer = ({ instance }) => {
     const node = instance.superNode.createChild('')

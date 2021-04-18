@@ -1,7 +1,6 @@
 import cheerio from 'cheerio'
 import fse from 'fs-extra'
 import { pathToFileURL } from 'url'
-import { Routify } from '../../common/Routify.js' //eslint-disable-line
 import { writeDynamicImport } from '../../common/utils.js'
 
 const { readFile, existsSync } = fse

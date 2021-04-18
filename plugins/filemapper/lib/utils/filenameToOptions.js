@@ -1,4 +1,3 @@
-import { RNode } from '../../../../common/RNode.js' //eslint-disable-line
 import { nameFilter } from '../../utils.js'
 
 /**
