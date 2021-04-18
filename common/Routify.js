@@ -21,7 +21,10 @@ export class Routify {
     constructor (options) {
         this.options = deepAssign(this.options, options)
         Object.assign(this.plugins, this.options.plugins)
+        this.init()
     }
+
+    init (){}
 
     /** @type {RNode[]} */
     nodeIndex = []
@@ -32,25 +35,11 @@ export class Routify {
 
     superNode = new RNode('_ROOT', null, this)
 
-    /** @type {RoutifyOptions} */
+    /** @type {Partial<RoutifyOptions>} */
     options = {
         plugins: [],
     }
 
     /** @type {RoutifyPlugin[]} */
     plugins = []
-
-    start () {
-        this.plugins = this.plugins.filter(
-            (plugin) => plugin.mode === 'compile',
-        )
-        this.plugins = sortPlugins(this.plugins)
-        const instance = this
-        for (const plugin of this.plugins) {
-            const shouldRun =
-                typeof plugin.condition === 'undefined' ||
-                plugin.condition({ instance })
-            if (shouldRun) plugin.run({ instance })
-        }
-    }
 }
