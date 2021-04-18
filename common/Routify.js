@@ -40,7 +40,7 @@ export class Routify {
     /** @type {RoutifyPlugin[]} */
     plugins = []
 
-    async start () {
+    start () {
         this.plugins = this.plugins.filter(
             (plugin) => plugin.mode === 'compile',
         )
@@ -49,8 +49,8 @@ export class Routify {
         for (const plugin of this.plugins) {
             const shouldRun =
                 typeof plugin.condition === 'undefined' ||
-                (await plugin.condition({ instance }))
-            if (shouldRun) await plugin.run({ instance })
+                plugin.condition({ instance })
+            if (shouldRun) plugin.run({ instance })
         }
     }
 }
