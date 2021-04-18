@@ -1,5 +1,5 @@
 import { RNode } from './RNode.js'
-import { deepAssign, sortPlugins } from './utils.js'
+import { deepAssign } from './utils.js'
 import '../typedef.js'
 
 /**
@@ -36,9 +36,7 @@ export class Routify {
     superNode = new RNode('_ROOT', null, this)
 
     /** @type {Partial<RoutifyOptions>} */
-    options = {
-        plugins: [],
-    }
+    options = {}
 
     /** @type {RoutifyPlugin[]} */
     plugins = []
