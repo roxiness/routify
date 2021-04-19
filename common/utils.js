@@ -1,5 +1,3 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
 import '../typedef.js'
 
 /**
@@ -119,4 +117,3 @@ export function sortPlugins(_plugins) {
     return plugins
 }
 
-export const createDirname = (meta) => dirname(fileURLToPath(meta.url))
