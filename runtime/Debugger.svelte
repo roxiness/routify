@@ -3,16 +3,27 @@
     const { urlStore } = instance
 </script>
 
+{#if instance.options.debugger}
+    <main>
+        <div>
+            <strong>urlStore:</strong>
+            {$urlStore}
+        </div>
+        <slot />
+    </main>
+{:else}
+    <slot />
+{/if}
+
 <pre>
     <!-- {JSON.stringify(instance, null, 2)} -->
 </pre>
 
-<div>
-    <strong>urlStore:</strong>
-    {$urlStore}
-</div>
-
 <style>
+    main {
+        position: relative;
+        padding-top: 30px;
+    }
     div {
         position: absolute;
         height: 30px;

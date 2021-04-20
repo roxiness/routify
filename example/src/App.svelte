@@ -3,7 +3,7 @@
     import Widget2 from './widget2/App.svelte'
     import { Routify, Router } from '../../runtime/index.js'
     import { routes } from '../.routify/routes.widget2.js'
-    const instance = new Routify({ routes })
+    const instance = new Routify({ routes, debugger: true })
 </script>
 
 <h1>App.svelte</h1>

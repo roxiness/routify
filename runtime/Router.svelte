@@ -41,10 +41,10 @@
 
 <h1>Router.svelte</h1>
 <div style="display: contents" use:initialize>
-    <Component />
+    <Debugger {instance}>
+        <Component />
+    </Debugger>
 </div>
 
 <a href="#outside-1">outside-link 1</a>
 <a href="#outside-2">outside-link 2</a>
-
-<Debugger {instance} />
