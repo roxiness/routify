@@ -18,13 +18,13 @@ import '../typedef.js'
 
 export class Routify {
     /** @param {Partial<RoutifyOptions>} options */
-    constructor (options) {
+    constructor(options) {
         this.options = deepAssign(this.options, options)
         Object.assign(this.plugins, this.options.plugins)
-        this.init()
+        this.init(options)
     }
 
-    init (){}
+    init(options) {}
 
     /** @type {RNode[]} */
     nodeIndex = []
