@@ -42,7 +42,7 @@
         "quoteProps": "as-needed",
         "trailingComma": "all",
         "bracketSpacing": true,
-        "arrowParens": "always",
+        "arrowParens": "avoid",
         "semi": false,
         "useTabs": false,
         "tabWidth": 4,
