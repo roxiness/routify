@@ -1,9 +1,26 @@
 <script>
+    import Widget1 from './widget1/App.svelte'
+    import Widget2 from './widget2/App.svelte'
     import { Routify, Router } from '../../runtime/index.js'
-    import { routes } from '../.routify/routes.default.js'
+    import { routes } from '../.routify/routes.widget2.js'
     const instance = new Routify({ import: routes })
 </script>
 
 <h1>App.svelte</h1>
 
-<Router {instance} />
+<div class="main">
+    <Router {instance} />
+</div>
+
+<div>
+    <Widget1 />
+</div>
+<div>
+    <Widget2 />
+</div>
+
+<style>
+    div {
+        position: relative;
+    }
+</style>

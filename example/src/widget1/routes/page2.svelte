@@ -1,0 +1,1 @@
+<h1>page2.svelte</h1>
