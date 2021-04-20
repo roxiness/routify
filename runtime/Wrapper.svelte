@@ -1,4 +1,5 @@
 <script>
+    import Component from './Component.svelte'
     export let instance
     const { urlStore } = instance
 </script>
@@ -9,29 +10,26 @@
             <strong>urlStore:</strong>
             {$urlStore}
         </div>
-        <slot />
+        <Component {instance} />
     </main>
 {:else}
-    <slot />
+    <Component {instance} />
 {/if}
-
-<pre>
-    <!-- {JSON.stringify(instance, null, 2)} -->
-</pre>
 
 <style>
     main {
         position: relative;
-        padding-top: 30px;
+        padding: 30px;
+        border: 2px solid #eee;
     }
     div {
         position: absolute;
         height: 30px;
         line-height: 30px;
         background: #eee;
-        width: 100%;
         top: 0;
         left: 0;
+        right: 0;
         padding: 0 16px;
     }
 </style>

@@ -39,3 +39,33 @@ export const writable2 = value => {
         hooks,
     }
 }
+
+export const isDescendantElem = parent => elem => {
+    while ((elem = elem.parentNode)) if (elem === parent) return true
+    return false
+}
+
+export const getUrlFromClick = boundaryElement => event => {
+    if (!isDescendantElem(boundaryElement)(event.target)) return false
+
+    const el = event.target.closest('a')
+    const href = el && el.href
+
+    if (
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey ||
+        event.shiftKey ||
+        event.button ||
+        (event.key && event.key !== 'Enter') ||
+        event.defaultPrevented
+    )
+        return
+    if (!href || el.target || el.host !== location.host) return
+
+    const url = new URL(href)
+    const relativeUrl = url.pathname + url.search + url.hash
+
+    event.preventDefault()
+    return relativeUrl
+}
