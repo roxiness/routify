@@ -2,17 +2,18 @@ import svelte from 'rollup-plugin-svelte'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import livereload from 'rollup-plugin-livereload'
-import css from 'rollup-plugin-css-only'
 import { RoutifyBuildtime } from '../lib/RoutifyBuildtime'
 
 const production = !process.env.ROLLUP_WATCH
 
 const instance = new RoutifyBuildtime({
-    // filemapper: {
-    //     routesDir: {
-    //         default: 'src/routes',
-    //     }
-    // }
+    filemapper: {
+        routesDir: {
+            default: 'src/routes',
+            widget1: 'src/widget1/routes',
+            widget2: 'src/widget2/routes',
+        },
+    },
 })
 
 instance.start()
@@ -23,24 +24,24 @@ export default {
         sourcemap: true,
         format: 'iife',
         name: 'app',
-        file: 'public/build/bundle.js'
+        file: 'public/build/bundle.js',
     },
     plugins: [
         svelte({
+            emitCss: false,
             compilerOptions: {
                 // enable run-time checks when not in production
-                dev: !production
-            }
+                dev: !production,
+            },
         }),
-        css({ output: 'bundle.css' }),
         resolve({
             browser: true,
-            dedupe: ['svelte']
+            dedupe: ['svelte'],
         }),
         commonjs(),
-        livereload('public')
+        livereload('public'),
     ],
     watch: {
-        clearScreen: false
-    }
+        clearScreen: false,
+    },
 }
