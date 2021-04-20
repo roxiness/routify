@@ -1,3 +1,5 @@
+import '../../typedef.js'
+
 /**
  * @param {RNode} parentNode
  * @param {object} snapshotRoot
@@ -13,7 +15,7 @@ export const populateNodeTreeFromSnapshot = (parentNode, snapshotRoot) => {
         Object.assign(node, nodeSnapshot)
 
         // queue children
-        for (const childSnapshot of children){
+        for (const childSnapshot of children) {
             const childNode = node.createChild(childSnapshot.name)
             queue.unshift([childNode, childSnapshot])
         }
