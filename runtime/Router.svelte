@@ -13,8 +13,6 @@
         const url = getUrlFromClick(instance.element)(event)
         if (url) instance.urlStore.set(url)
     }
-
-    console.log(instance)
 </script>
 
 <div style="display: contents" use:initialize>

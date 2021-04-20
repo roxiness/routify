@@ -1,3 +1,4 @@
+import { derived, writable } from 'svelte/store'
 import { Routify } from '../common/Routify.js'
 import { deepAssign, sortPlugins } from '../common/utils.js'
 import { importerPlugin } from '../plugins/importer/index.js'
@@ -10,10 +11,10 @@ const getDefaults = () => ({
 
 export class RoutifyRuntime extends Routify {
     init(options) {
-        console.log('starting Routify Runtime...')
         deepAssign(this.options, options)
         this.plugins.push(...getDefaults().plugins)
-        if (this.options.autoStart) this.start()
+        // if (this.options.autoStart)
+        this.start()
     }
 
     start() {
@@ -30,5 +31,38 @@ export class RoutifyRuntime extends Routify {
 
     urlStore = createUrlStoreInternal(this)
 
-    activeNode(run) {}
+    activeNodes = derived(this.urlStore, $url => {
+        const [, ...parts] = $url.replace(/\/$/, '').split('/')
+
+        let node = this.superNode.children[0]
+        const nodes = [node] // start with rootNode
+        for (const part of parts) {
+            const child = node.children.find(child => child.name === part)
+            if (child) {
+                node = child
+                nodes.push(node)
+            } else {
+                const fallbackIndex = nodes.findIndex(fbNode => fbNode.fallback)
+                if (fallbackIndex === -1)
+                    throw new Error(`could not find route: ${$url}`)
+                nodes.splice(fallbackIndex)
+                nodes.push(nodes[fallbackIndex].fallback)
+                break
+            }
+        }
+
+        let lastNode = nodes[nodes.length - 1]
+        while (lastNode) {
+            lastNode = lastNode.children.find(node => node.name === 'index')
+            if (lastNode) nodes.push(lastNode)
+        }
+
+        const activeNodes = nodes.filter(Boolean).filter(node => node.component)
+
+        if (!activeNodes.length)
+            throw new Error(`could not find route: ${$url}`)
+        return activeNodes
+    })
+
+    params = writable({})
 }

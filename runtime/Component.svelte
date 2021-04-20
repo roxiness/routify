@@ -1,4 +1,10 @@
-<h1>Component.svelte</h1>
+<script>
+    export let nodes
+    $: [node, ...restNodes] = [...nodes]
+</script>
 
-<a href="#inside-1">inside-link 1</a>
-<a href="#inside-2">inside-link 2</a>
+<svelte:component this={node.component}>
+    {#if restNodes.length}
+        <svelte:self nodes={restNodes} />
+    {/if}
+</svelte:component>
