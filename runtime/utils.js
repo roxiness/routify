@@ -69,3 +69,20 @@ export const getUrlFromClick = boundaryElement => event => {
     event.preventDefault()
     return relativeUrl
 }
+
+const paramsFromPath = (pattern, path) => {
+    const re = /\[(.+?)\]/gm
+    const matches = pattern.match(re).map(name => name.slice(1, -1))
+    if (!matches) return false
+
+    const reStr = pattern.replace(re, '(.+)')
+    const matches2 = path.match(new RegExp(reStr))
+    if (!matches2) return false
+
+    return matches.reduce((last, curr, index) => {
+        last[curr] = matches2[index + 1]
+        return last
+    }, {})
+}
+
+console.log(paramsFromPath('a[slug]from[mug]', 'atitlefromme'))
