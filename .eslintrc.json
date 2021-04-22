@@ -24,6 +24,6 @@
     "no-regex-spaces": "off",
     "object-curly-spacing": ["error", "always"],
     "arrow-spacing": "error",
-    "space-before-function-paren": "error"
+    "space-before-function-paren": "off"
   }
 }
