@@ -46,14 +46,14 @@ export class RNode {
     }
 
     get descendants() {
-        return this.instance.nodeIndex.filter((node) =>
-            node.ancestors.find((n) => n === this),
+        return this.instance.nodeIndex.filter(node =>
+            node.ancestors.find(n => n === this),
         )
     }
 
     remove() {
         const { nodeIndex } = this.instance
-        const index = nodeIndex.findIndex((node) => node === this)
+        const index = nodeIndex.findIndex(node => node === this)
         nodeIndex.splice(index, 1)
     }
 
@@ -77,13 +77,13 @@ export class RNode {
     }
 
     get children() {
-        return this.instance.nodeIndex.filter((node) => node.parent === this)
+        return this.instance.nodeIndex.filter(node => node.parent === this)
     }
 
     get map() {
         return {
             ...this,
-            children: this.children.map((node) => node.map),
+            children: this.children.map(node => node.map),
         }
     }
 }
