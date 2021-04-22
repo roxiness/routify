@@ -17,23 +17,21 @@ import '../typedef.js'
  */
 
 export class Routify {
+    Node = RNode
+    /** @type {RNode[]} */
+    nodeIndex = []
+
     /** @param {Partial<RoutifyOptions>} options */
     constructor(options) {
         this.options = deepAssign(this.options, options)
         Object.assign(this.plugins, this.options.plugins)
-        this.init(options)
     }
 
-    init(options) {}
-
-    /** @type {RNode[]} */
-    nodeIndex = []
+    superNode = new this.Node('_ROOT', null, this)
 
     createNode(name, component) {
-        return new RNode(name, component, this)
+        return new this.Node(name, component, this)
     }
-
-    superNode = new RNode('_ROOT', null, this)
 
     /** @type {Partial<RoutifyOptions>} */
     options = {}

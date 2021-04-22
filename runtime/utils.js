@@ -70,19 +70,50 @@ export const getUrlFromClick = boundaryElement => event => {
     return relativeUrl
 }
 
-const paramsFromPath = (pattern, path) => {
-    const re = /\[(.+?)\]/gm
-    const matches = pattern.match(re).map(name => name.slice(1, -1))
-    if (!matches) return false
+const defaultRe = /\[(.+?)\]/gm
+export const createInstanceUtils = (RE = defaultRe) => ({
+    /**
+     * returns ["slug", "id"] from "my[slug]and[id]"
+     * @param {string} name
+     * @returns {string[]}
+     */
+    getFieldsFromName: name => [...name.matchAll(RE)].map(v => v[1]),
 
-    const reStr = pattern.replace(re, '(.+)')
-    const matches2 = path.match(new RegExp(reStr))
-    if (!matches2) return false
+    /**
+     * converts "my[slug]and[id]" to /my(.+)and(.+)/gm
+     * @param {string} name
+     * @returns {RegExp}
+     */
+    getRegexFromName: name => new RegExp(name.replace(RE, '(.+)')),
 
-    return matches.reduce((last, curr, index) => {
-        last[curr] = matches2[index + 1]
-        return last
-    }, {})
+    /**
+     * returns an array of values matching a regular expresion and path
+     * @param {RegExp} re
+     * @param {string} path
+     * @returns {string[]}
+     */
+    getValuesFromPath: (re, path) => (path.match(re) || []).slice(1),
+
+    /**
+     * converts (['a', 'b', 'c'], [1, 2, 3]) to {a: 1, b: 2, c: 3}
+     * @param {string[]} fields
+     * @param {string[]} values
+     * @returns
+     */
+    mapFieldsWithValues: (fields, values) =>
+        haveEqualLength(fields, values) &&
+        fields.reduce((map, field, index) => {
+            map[field] = values[index]
+            return map
+        }, {}),
+})
+
+const haveEqualLength = (fields, values) => {
+    if (fields.length !== values.length)
+        throw new Error(
+            'fields and values should be of same length' +
+                `\nfields: ${JSON.stringify(fields)}` +
+                `\nvalues: ${JSON.stringify(values)}`,
+        )
+    return true
 }
-
-console.log(paramsFromPath('a[slug]from[mug]', 'atitlefromme'))

@@ -2,7 +2,9 @@ import { derived, writable } from 'svelte/store'
 import { Routify } from '../common/Routify.js'
 import { deepAssign, sortPlugins } from '../common/utils.js'
 import { importerPlugin } from '../plugins/importer/index.js'
+import { RNodeRuntime } from './RNodeRuntime.js'
 import { createUrlStoreInternal } from './urlStores/internal.js'
+import { createInstanceUtils } from './utils.js'
 
 const getDefaults = () => ({
     plugins: [importerPlugin],
@@ -10,9 +12,13 @@ const getDefaults = () => ({
 })
 
 export class RoutifyRuntime extends Routify {
-    init(options) {
+    Node = RNodeRuntime
+
+    constructor(options) {
+        super(options)
         deepAssign(this.options, options)
         this.plugins.push(...getDefaults().plugins)
+        this.utils = createInstanceUtils()
         // if (this.options.autoStart)
         this.start()
     }
@@ -35,29 +41,41 @@ export class RoutifyRuntime extends Routify {
         const [, ...parts] = $url.replace(/\/$/, '').split('/')
 
         let node = this.superNode.children[0]
-        const nodes = [node] // start with rootNode
+        const renders = [{ node, part: '' }] // start with rootNode
+        console.log(node.children)
+        console.log(node.children.map(c => c.regex))
         for (const part of parts) {
-            const child = node.children.find(child => child.name === part)
+            // child by name
+            const child =
+                node.children.find(child => child.name === part) ||
+                node.children.find(child => child.regex.test(part))
+
+            // console.log(child)
             if (child) {
                 node = child
-                nodes.push(node)
+                renders.push({ node, part })
             } else {
-                const fallbackIndex = nodes.findIndex(fbNode => fbNode.fallback)
+                const fallbackIndex = renders.findIndex(
+                    render => render.node.fallback,
+                )
                 if (fallbackIndex === -1)
                     throw new Error(`could not find route: ${$url}`)
-                nodes.splice(fallbackIndex)
-                nodes.push(nodes[fallbackIndex].fallback)
+                renders.splice(fallbackIndex)
+                renders.push(renders.node[fallbackIndex].fallback)
                 break
             }
         }
 
-        let lastNode = nodes[nodes.length - 1]
+        let lastNode = renders[renders.length - 1].node
         while (lastNode) {
             lastNode = lastNode.children.find(node => node.name === 'index')
-            if (lastNode) nodes.push(lastNode)
+            if (lastNode) renders.push({ node: lastNode, part: '' })
         }
 
-        const activeNodes = nodes.filter(Boolean).filter(node => node.component)
+        const activeNodes = renders
+            .filter(Boolean)
+            .filter(render => render.node.component)
+        // .map(render => RenderNode(render, instance))
 
         if (!activeNodes.length)
             throw new Error(`could not find route: ${$url}`)
@@ -66,3 +84,17 @@ export class RoutifyRuntime extends Routify {
 
     params = writable({})
 }
+
+// class RenderNode {
+//     #part
+//     constructor(render, instance) {
+//         this.node = render.node
+//         this.#part = render.part
+//         this.params = mapField
+//         // this.params = mapFieldsW
+//         //       mapFieldsWithValues (
+//         //     getFieldsFromName(this.name),
+//         //     getValuesFromPath(this.regex, this.dynamic.part),
+//         // )
+//     }
+// }
