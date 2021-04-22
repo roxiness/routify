@@ -7,9 +7,14 @@
 
 {#if instance.options.debugger}
     <main>
-        <div>
-            <strong>urlStore:</strong>
-            {$urlStore}
+        <div class="bar">
+            <strong>path:</strong>
+            <span class="url">
+                {$urlStore}
+            </span>
+            <span class="filepath">
+                {pathNodes[0].node.file.path}
+            </span>
         </div>
         <Component {instance} {pathNodes} />
     </main>
@@ -18,10 +23,20 @@
 {/if}
 
 <style>
+    * {
+        font-family: sans-serif;
+    }
     main {
         position: relative;
         padding: 30px;
         border: 2px solid #eee;
+    }
+    .bar {
+        display: grid;
+        grid-template-columns: min-content auto min-content;
+    }
+    .filepath {
+        text-align: right;
     }
     div {
         position: absolute;

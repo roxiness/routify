@@ -9,9 +9,10 @@
 
     $: [pathNode, ...restpathNodes] = [...pathNodes]
     $: node = pathNode.node
+    $: payload = { instance, node, localParams: pathNode.params }
 </script>
 
-<svelte:component this={pathNode.node.component} {instance} {node}>
+<svelte:component this={pathNode.node.component} {payload}>
     {#if restpathNodes.length}
         <svelte:self pathNodes={restpathNodes} {instance} />
     {/if}
