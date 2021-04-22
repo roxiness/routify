@@ -1,4 +1,4 @@
-import '../typedef'
+import '../typedef.js'
 
 export class RNode {
     /** @type {Routify} */
