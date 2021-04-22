@@ -1,3 +1,5 @@
+import '../typedef'
+
 export class RNode {
     /** @type {Routify} */
     instance
