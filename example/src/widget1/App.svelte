@@ -4,7 +4,7 @@
     const instance = new Routify({ routes, debugger: true })
 </script>
 
-<h1>App.svelte</h1>
+<h1>widget1/App.svelte</h1>
 
 <div class="main">
     <Router {instance} />
