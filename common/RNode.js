@@ -1,7 +1,10 @@
 import '../typedef.js'
 
+/**
+ * @template {Routify|RoutifyRuntime|RoutifyBuildtime} Instance
+ */
 export class RNode {
-    /** @type {Routify} */
+    /** @type {Instance} */
     instance
 
     /** @type {RNode} */
@@ -17,6 +20,11 @@ export class RNode {
     /** @type {String} */
     id
 
+    /**
+     * @param {string} name
+     * @param {string|Object} component
+     * @param {Instance} instance
+     */
     constructor(name, component, instance) {
         this.name = name
         instance.nodeIndex.push(this)

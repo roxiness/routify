@@ -1,6 +1,9 @@
 import '../typedef.js'
 import { RNode } from '../common/RNode.js'
 
+/**
+ * @extends {RNode<RoutifyRuntime>}
+ */
 export class RNodeRuntime extends RNode {
     /** @type {Object.<string,RegExp>} */
     #regex = {}

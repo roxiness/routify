@@ -16,9 +16,13 @@ import '../typedef.js'
  * @prop {Object<string, string>|string} routesDir
  */
 
+/**
+ * @template {RNodeConstructor|RNodeRuntimeConstructor} NodeType
+ */
 export class Routify {
+    /** @type {NodeType} */
     Node = RNode
-    /** @type {RNode[]} */
+    /** @type {NodeType[]} */
     nodeIndex = []
 
     /** @param {Partial<RoutifyOptions>} options */

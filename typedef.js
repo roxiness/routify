@@ -1,5 +1,10 @@
 /**
- * @typedef {import('./common/RNode')['RNode']['prototype']} RNode
+ * @typedef {import('./common/RNode')['RNode']} RNodeConstructor
+ * @typedef {import('./runtime/RNodeRuntime')['RNodeRuntime']} RNodeRuntimeConstructor
+ *
+ * @typedef {RNodeConstructor['prototype']} RNode
+ * @typedef {RNodeRuntimeConstructor['prototype']} RNodeRuntime
+ *
  *
  * @typedef {import('./common/Routify')['Routify']['prototype']} Routify
  * @typedef {import('./lib/RoutifyBuildtime')['RoutifyBuildtime']['prototype']} RoutifyBuildtime
@@ -23,4 +28,10 @@
  * @prop {RoutifyCallback<Boolean>=} condition run plugin if true
  * @prop {RoutifyCallback<any>} run plugin script
  * @prop {'compile'|'runtime'} mode
+ */
+
+/**
+ * @typedef {Object} PathNode
+ * @prop {string} pathFragment
+ * @prop {RNodeRuntime} node
  */
