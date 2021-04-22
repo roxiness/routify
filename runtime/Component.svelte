@@ -1,17 +1,18 @@
 <script>
     import '../typedef.js'
 
-    /** @type {RNode[]}*/
-    export let nodes
+    /** @type {PathNode[]}*/
+    export let pathNodes
 
     /** @type {RoutifyRuntime}*/
     export let instance
 
-    $: [node, ...restNodes] = [...nodes]
+    $: [pathNode, ...restpathNodes] = [...pathNodes]
+    $: node = pathNode.node
 </script>
 
-<svelte:component this={node.component} {instance} {node}>
-    {#if restNodes.length}
-        <svelte:self nodes={restNodes} />
+<svelte:component this={pathNode.node.component} {instance} {node}>
+    {#if restpathNodes.length}
+        <svelte:self pathNodes={restpathNodes} {instance} />
     {/if}
 </svelte:component>

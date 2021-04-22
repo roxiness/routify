@@ -1,8 +1,8 @@
 <script>
     import Component from './Component.svelte'
     export let instance
-    const { urlStore, activeNodes } = instance
-    $: nodes = $activeNodes
+    const { urlStore, activePathNodes } = instance
+    $: pathNodes = $activePathNodes
 </script>
 
 {#if instance.options.debugger}
@@ -11,10 +11,10 @@
             <strong>urlStore:</strong>
             {$urlStore}
         </div>
-        <Component {instance} {nodes} />
+        <Component {instance} {pathNodes} />
     </main>
 {:else}
-    <Component {instance} {nodes} />
+    <Component {instance} {pathNodes} />
 {/if}
 
 <style>
