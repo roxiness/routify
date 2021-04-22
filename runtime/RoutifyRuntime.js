@@ -17,21 +17,24 @@ const getDefaults = () => ({
  */
 export class RoutifyRuntime extends Routify {
     Node = RNodeRuntime
+    #plugins = []
 
     constructor(options) {
         super(options)
         deepAssign(this.options, options)
-        this.plugins.push(...getDefaults().plugins)
+        this.#plugins.push(...getDefaults().plugins)
         this.utils = new InstanceUtils()
         // if (this.options.autoStart)
         this.start()
     }
 
     start() {
-        this.plugins = this.plugins.filter(plugin => plugin.mode === 'runtime')
-        this.plugins = sortPlugins(this.plugins)
+        this.#plugins = this.#plugins.filter(
+            plugin => plugin.mode === 'runtime',
+        )
+        this.#plugins = sortPlugins(this.#plugins)
         const instance = this
-        for (const plugin of this.plugins) {
+        for (const plugin of this.#plugins) {
             const shouldRun =
                 typeof plugin.condition === 'undefined' ||
                 plugin.condition({ instance })

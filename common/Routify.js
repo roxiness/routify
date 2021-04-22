@@ -23,11 +23,15 @@ export class Routify {
     /** @type {NodeType} */
     Node = RNode
     /** @type {NodeType[]} */
-    nodeIndex = []
+    #nodeIndex = []
+
+    get nodeIndex() {
+        return this.#nodeIndex
+    }
 
     /** @param {Partial<RoutifyOptions>} options */
     constructor(options) {
-        this.options = deepAssign(this.options, options)
+        this.#options = deepAssign(this.options, options)
         Object.assign(this.plugins, this.options.plugins)
     }
 
@@ -38,7 +42,11 @@ export class Routify {
     }
 
     /** @type {Partial<RoutifyOptions>} */
-    options = {}
+    #options = {}
+
+    get options() {
+        return this.#options
+    }
 
     /** @type {RoutifyPlugin[]} */
     plugins = []
