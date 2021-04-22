@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import '../typedef.js'
 
 /**
  * writable with subscription hooks
@@ -70,50 +71,78 @@ export const getUrlFromClick = boundaryElement => event => {
     return relativeUrl
 }
 
-const defaultRe = /\[(.+?)\]/gm
-export const createInstanceUtils = (RE = defaultRe) => ({
-    /**
-     * returns ["slug", "id"] from "my[slug]and[id]"
-     * @param {string} name
-     * @returns {string[]}
-     */
-    getFieldsFromName: name => [...name.matchAll(RE)].map(v => v[1]),
+/**
+ * @param {RNodeRuntime} rootNode
+ * @param {string} $url
+ * @returns {PathNode[]}
+ */
+export const getPathNodesFromUrlAndNodes = (rootNode, $url) => {
+    const [, ...pathFragments] = $url.replace(/\/$/, '').split('/')
 
-    /**
-     * converts "my[slug]and[id]" to /my(.+)and(.+)/gm
-     * @param {string} name
-     * @returns {RegExp}
-     */
-    getRegexFromName: name => new RegExp(name.replace(RE, '(.+)')),
+    let node = rootNode
 
-    /**
-     * returns an array of values matching a regular expresion and path
-     * @param {RegExp} re
-     * @param {string} path
-     * @returns {string[]}
-     */
-    getValuesFromPath: (re, path) => (path.match(re) || []).slice(1),
+    /** @type {PathNode[]} */
+    const pathNodes = [new PathNode(node, '')] // start with rootNode
 
-    /**
-     * converts (['a', 'b', 'c'], [1, 2, 3]) to {a: 1, b: 2, c: 3}
-     * @param {string[]} fields
-     * @param {string[]} values
-     * @returns
-     */
-    mapFieldsWithValues: (fields, values) =>
-        haveEqualLength(fields, values) &&
-        fields.reduce((map, field, index) => {
-            map[field] = values[index]
-            return map
-        }, {}),
-})
+    for (const pathFragment of pathFragments) {
+        // child by name
+        const child =
+            node.children.find(child => child.name === pathFragment) ||
+            node.children.find(child => child.regex.test(pathFragment))
 
-const haveEqualLength = (fields, values) => {
-    if (fields.length !== values.length)
-        throw new Error(
-            'fields and values should be of same length' +
-                `\nfields: ${JSON.stringify(fields)}` +
-                `\nvalues: ${JSON.stringify(values)}`,
+        if (child) {
+            node = child
+            pathNodes.push(new PathNode(node, pathFragment))
+        } else {
+            const fallbackIndex = pathNodes
+                .map(pn => !!pn.node.fallback)
+                .lastIndexOf(true)
+
+            if (fallbackIndex === -1)
+                throw new Error(`could not find route: ${$url}`)
+
+            pathNodes.splice(fallbackIndex + 1)
+            pathNodes.push(pathNodes[fallbackIndex].node.fallback)
+            break
+        }
+    }
+
+    let lastNode = pathNodes[pathNodes.length - 1].node
+    while (lastNode) {
+        lastNode = lastNode.children.find(node => node.name === 'index')
+        if (lastNode) pathNodes.push(new PathNode(lastNode, ''))
+    }
+
+    const pathNodesWithComponent = pathNodes.filter(
+        pathNode => pathNode && pathNode.node.component,
+    )
+
+    if (!pathNodesWithComponent.length)
+        throw new Error(`could not find route: ${$url}`)
+
+    return pathNodesWithComponent
+}
+
+class PathNode {
+    /**
+     *
+     * @param {RNodeRuntime} node
+     * @param {String} pathFragment
+     */
+    constructor(node, pathFragment) {
+        this.node = node
+        this.pathFragment = pathFragment
+    }
+
+    get params() {
+        const {
+            getFieldsFromName,
+            getValuesFromPath,
+            mapFieldsWithValues,
+        } = this.node.instance.utils
+        return mapFieldsWithValues(
+            getFieldsFromName(this.node.name),
+            getValuesFromPath(this.node.regex, this.pathFragment),
         )
-    return true
+    }
 }
