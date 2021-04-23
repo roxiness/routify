@@ -12,7 +12,7 @@ test('sortPlugins can sort plugins', async () => {
     ]
 
     const res = sortPlugins(plugins)
-    assert.snapshot(res.map((p) => p.name).join(','), 'first,second,third')
+    assert.snapshot(res.map(p => p.name).join(','), 'first,second,third')
 })
 
 test('sortPlugins preserves order when possible', async () => {
@@ -27,7 +27,7 @@ test('sortPlugins preserves order when possible', async () => {
 
     const res = sortPlugins(plugins)
     assert.snapshot(
-        res.map((p) => p.name).join(','),
+        res.map(p => p.name).join(','),
         'first,second,third,fourth,fifth,sixth',
     )
 })

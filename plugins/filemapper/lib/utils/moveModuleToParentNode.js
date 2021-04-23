@@ -5,11 +5,11 @@ import { nameFilter } from '../../utils.js'
  * `file` prop and component is moved to node.parent and the old node is removed
  * @param {RNode} node
  */
-export const moveModuleToParentNode = (node) => {
+export const moveModuleToParentNode = node => {
     const { options } = node.instance
     const { moduleFiles } = options.filemapper
 
-    node.descendants.filter(nameFilter(moduleFiles)).forEach((node) => {
+    node.descendants.filter(nameFilter(moduleFiles)).forEach(node => {
         node.parent.component = node.component
         node.parent.file = node.file
         node.parent.meta = { ...node.parent.meta, ...node.meta }

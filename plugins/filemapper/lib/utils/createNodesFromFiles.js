@@ -27,7 +27,7 @@ export async function createNodesFromFiles(firstNode, path) {
         if (node.file.stat.isDirectory()) {
             // for each child create a node, attach a file and add it to the queue
             const children = await fse.readdir(node.file.path)
-            const promises = children.map((filename) => {
+            const promises = children.map(filename => {
                 const file = new File(resolve(node.file.path, filename))
                 const component = !file.stat.isDirectory() && file.path
                 const childNode = node.createChild(file.name, component)

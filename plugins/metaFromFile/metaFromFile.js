@@ -9,7 +9,7 @@ const { readFile, existsSync } = fse
  * return meta data from comments
  * @param {string} body
  */
-export const parseComment = (body) => {
+export const parseComment = body => {
     body = body.trim()
 
     const matches = body.match(/^routify:meta +([^=]+) *= *(.+)/)
@@ -19,7 +19,7 @@ export const parseComment = (body) => {
 /**
  * @param {string} filepath file to check for inlined html meta comments
  */
-export const htmlComments = async (filepath) => {
+export const htmlComments = async filepath => {
     const meta = {}
     // todo can we get rid of this div? It won't parse files with only comments in them
     const content = '<div />' + (await readFile(filepath, 'utf-8'))
@@ -44,7 +44,7 @@ export const externalComments = async (filepath, output) => {
     if (existsSync(metaFilePath)) {
         const meta = await import(
             pathToFileURL(metaFilePath).pathname
-        ).then((r) => r.default())
+        ).then(r => r.default())
 
         // replace <name>.$split props with <name> getters
         Object.entries(meta).forEach(([oldKey, value]) => {
@@ -72,7 +72,7 @@ export const externalComments = async (filepath, output) => {
  * @param {{instance: Routify}} param0
  */
 const metaFromFile = async ({ instance }) => {
-    const promises = instance.nodeIndex.map(async (node) => {
+    const promises = instance.nodeIndex.map(async node => {
         if (node.file && !node.file.stat.isDirectory()) {
             const metaPromises = [
                 externalComments(node.file.path, instance.options.routifyDir),

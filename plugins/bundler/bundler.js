@@ -5,7 +5,7 @@ const { outputFile } = fse
 const relativeUnix = (path, path2) => relative(path, path2).replace(/\\/g, '/')
 
 class Bundles {
-    constructor (outputDir) {
+    constructor(outputDir) {
         this.outputDir = outputDir
     }
 
@@ -13,14 +13,14 @@ class Bundles {
     bundles = {}
 
     /** @param {RNode} node */
-    upsert (node) {
+    upsert(node) {
         const { path } = node.file
         this.bundles[path] =
             this.bundles[path] || new Bundle(node, this.outputDir)
         return this.bundles[path]
     }
-    async apply () {
-        const promises = Object.values(this.bundles).map((bundle) =>
+    async apply() {
+        const promises = Object.values(this.bundles).map(bundle =>
             bundle.apply(),
         )
         return Promise.all(promises)
@@ -35,23 +35,23 @@ class Bundle {
      * @param {RNode} node
      * @param {string} outputDir
      * */
-    constructor (node, outputDir) {
+    constructor(node, outputDir) {
         this.outputDir = outputDir
         this.instructor = node
         this.filename = 'bundles/' + node.id + '-bundle.js'
     }
 
-    include (node) {
+    include(node) {
         this.members.push(node)
     }
 
-    async apply () {
+    async apply() {
         ensureDirSync(this.outputDir)
         const output = resolve(this.outputDir, this.filename)
 
         const exportStr = this.members
             .map(
-                (node) =>
+                node =>
                     `export { default as ${node.id} } from '${relativeUnix(
                         this.outputDir + '/bundles',
                         node.component,
@@ -59,14 +59,14 @@ class Bundle {
             )
             .join('\n')
 
-        this.members.forEach((node) => {
+        this.members.forEach(node => {
             node.component = `import("./${this.filename}").then(r => r.${node.id})`
         })
         await outputFile(output, [exportStr].join('\n'))
     }
 }
 
-const bundleIsNotNullOrUndefined = (val) =>
+const bundleIsNotNullOrUndefined = val =>
     ![null, undefined].includes(val.meta.bundle)
 
 /**
@@ -98,7 +98,7 @@ export const createBundles = async (node, outputDir) => {
  * @param {RoutifyBuildtimePayload} param0
  */
 export const bundler = async ({ instance }) => {
-    const promises = instance.superNode.children.map((rootNode) =>
+    const promises = instance.superNode.children.map(rootNode =>
         createBundles(rootNode, instance.options.routifyDir),
     )
     return await Promise.all(promises)

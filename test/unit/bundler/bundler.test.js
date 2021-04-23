@@ -9,7 +9,6 @@ import { createBundles } from '../../../plugins/bundler/bundler.js'
 import { metaFromFile } from '../../../plugins/metaFromFile/metaFromFile.js'
 import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const test = suite('bundler')
 
@@ -39,10 +38,10 @@ test('bundler writes files', async () => {
 })
 
 test('bundled files have correct component', () => {
-    const adminNode = instance.nodeIndex.find((node) => node.name === 'admin')
+    const adminNode = instance.nodeIndex.find(node => node.name === 'admin')
 
     const adminImports = [adminNode, ...adminNode.descendants].map(
-        (node) => node.component,
+        node => node.component,
     )
 
     assert.equal(adminImports, [

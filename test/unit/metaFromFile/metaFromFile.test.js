@@ -28,7 +28,7 @@ const expectedInline = {
     'an-array': ['item1', 'item2'],
     'an-object': { prop: { nested: 'value' } },
 }
-const classless = (val) => JSON.parse(JSON.stringify(val))
+const classless = val => JSON.parse(JSON.stringify(val))
 
 const options = {
     routifyDir: `${__dirname}/temp`,
@@ -65,10 +65,10 @@ test('metaFromFile middleware', async () => {
     await metaFromFile({ instance })
 
     const inlineMetaFile = instance.nodeIndex.find(
-        (node) => node.name === 'inlineMeta',
+        node => node.name === 'inlineMeta',
     )
     const externalMetaFile = instance.nodeIndex.find(
-        (node) => node.name === 'externalMeta',
+        node => node.name === 'externalMeta',
     )
 
     assert.equal(classless(inlineMetaFile.meta), expectedInline)
