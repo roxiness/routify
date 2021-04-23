@@ -10,7 +10,7 @@ import { getPathNodesFromUrlAndNodes } from './utils.js'
 const getDefaults = () => ({
     plugins: [importerPlugin],
     autoStart: true,
-    urlHandler: 'internal',
+    urlHandler: typeof window === 'undefined' ? 'internal' : 'address',
 })
 
 const normalizeOptions = options => ({
