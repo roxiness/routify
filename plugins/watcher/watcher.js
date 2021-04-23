@@ -16,8 +16,6 @@ import '../../typedef.js'
 
         instance._chokidar = watcher
 
-        console.log({ dirs })
-
         // event handling
         const eventHandler = createEventHandler(instance)
 
