@@ -148,3 +148,29 @@ class PathNode {
         )
     }
 }
+
+// TODO ADD TEST
+/**
+ *
+ * @param {string} path
+ * @param {Object.<string|number,string|number>} params
+ * @param {function} queryHandler
+ * @returns {string}
+ */
+export const pathAndParamsToUrl = (path, params, queryHandler) => {
+    Object.entries(params).forEach(([key, val]) => {
+        if (path.includes(`[${key}]`)) {
+            path = path.replace(`[${key}]`, val)
+            delete params[key]
+        }
+    })
+
+    return path + queryHandler(params)
+}
+
+export const fromEntries = iterable => {
+    return [...iterable].reduce((obj, [key, val]) => {
+        obj[key] = val
+        return obj
+    }, {})
+}

@@ -5,7 +5,7 @@ import { importerPlugin } from '../plugins/importer/index.js'
 import { InstanceUtils } from './InstanceUtils.js'
 import { RNodeRuntime } from './RNodeRuntime.js'
 import * as urlHandlers from './urlHandler/index.js'
-import { getPathNodesFromUrlAndNodes } from './utils.js'
+import { getPathNodesFromUrlAndNodes, fromEntries } from './utils.js'
 
 const getDefaults = () => ({
     plugins: [importerPlugin],
@@ -38,6 +38,11 @@ export class RoutifyRuntime extends Routify {
                 plugin.condition({ instance })
             if (shouldRun) plugin.run({ instance })
         }
+    }
+
+    queryHandler = {
+        parse: search => fromEntries(new URLSearchParams(search)),
+        stringify: params => '?' + new URLSearchParams(params).toString(),
     }
 
     get urlHandler() {

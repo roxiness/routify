@@ -10,7 +10,7 @@
         "test:uvu": "uvu test/ test\\.js$",
         "build:documentation": "documentation readme typedef.js -f md --section API",
         "build:prettier": "npm run format",
-        "test-watch": "nodemon --ignore {fixtures,temp}/** --exec npm run test:uvu",
+        "test-watch": "nodemon --ignore {fixtures,temp,example}/** --exec npm run test:uvu",
         "format": "prettier --write --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\""
     },
     "author": "jakobrosenberg@gmail.com",
