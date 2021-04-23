@@ -99,7 +99,9 @@ export const getPathNodesFromUrlAndNodes = (rootNode, $url) => {
                 .lastIndexOf(true)
 
             if (fallbackIndex === -1)
-                throw new Error(`could not find route: ${$url}`)
+                throw new Error(
+                    `${rootNode.rootName} could not find route: ${$url}`,
+                )
 
             pathNodes.splice(fallbackIndex + 1)
             pathNodes.push(pathNodes[fallbackIndex].node.fallback)
