@@ -1,3 +1,10 @@
+<script>
+    import FileTree from '../components/FileTree.svelte'
+    export let payload
+</script>
+
+<FileTree node={payload.node} />
+
 <h1>Module</h1>
 
 <nav>

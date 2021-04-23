@@ -96,4 +96,12 @@ export class RNode {
             children: this.children.map(node => node.map),
         }
     }
+
+    get path() {
+        return [this, ...this.ancestors]
+            .reverse()
+            .slice(1)
+            .map(node => node.name)
+            .join('/')
+    }
 }
