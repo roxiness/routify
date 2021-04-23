@@ -23,9 +23,8 @@ export class RoutifyRuntime extends Routify {
         deepAssign(this.options, options)
         this.plugins.push(...getDefaults().plugins)
         this.utils = new InstanceUtils()
-        // if (this.options.autoStart)
-        this.start()
         Object.defineProperty(this, 'plugins', { enumerable: false })
+        this.start()
     }
 
     start() {

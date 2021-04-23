@@ -1,6 +1,6 @@
 <script>
     import Wrapper from './Wrapper.svelte'
-    import { getUrlFromClick, isDescendantElem } from './utils'
+    import { getUrlFromClick } from './utils'
     export let instance
 
     const initialize = elem => {
