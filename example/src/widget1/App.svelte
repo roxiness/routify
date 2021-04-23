@@ -1,7 +1,6 @@
 <script>
-    import { Routify, Router } from '../../../runtime/index.js'
-    import { routes } from '../../.routify/routes.widget1.js'
-    const instance = new Routify({ routes, debugger: true })
+    import { Router, instance } from '../../.routify/instance.widget1.js'
+    instance.options.debugger = true
 </script>
 
 <h1>widget1/App.svelte</h1>

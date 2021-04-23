@@ -1,11 +1,15 @@
 import { relative, resolve } from 'path'
 import fse from 'fs-extra'
+import '../../typedef.js'
+import { createDirname } from '../../lib/utils.js'
+const __dirname = createDirname(import.meta)
 
 /** @param {{instance: Routify}} param0 */
 export const exporter = ({ instance }) => {
-    const promises = instance.superNode.children.map((rootNode) =>
-        exportNode(rootNode, instance.options.routifyDir),
-    )
+    const promises = instance.superNode.children.map(rootNode => {
+        exportNode(rootNode, instance.options.routifyDir)
+        exportInstance(rootNode, instance.options.routifyDir)
+    })
     return Promise.all(promises)
 }
 
@@ -31,11 +35,9 @@ const stringifyWithEscape = (obj, keys) => {
 export const exportNode = (rootNode, outputDir) => {
     // create imports
     const imports = [rootNode, ...rootNode.descendants]
-        .filter(
-            (node) => node.component && !node.component.startsWith('import('),
-        )
+        .filter(node => node.component && !node.component.startsWith('import('))
         .map(
-            (node) =>
+            node =>
                 `import ${node.id} from '${relative(
                     outputDir,
                     node.component,
@@ -45,16 +47,33 @@ export const exportNode = (rootNode, outputDir) => {
 
     // set component to id
     ;[rootNode, ...rootNode.descendants]
-        .filter(
-            (node) => node.component && !node.component.startsWith('import('),
-        )
-        .forEach((node) => (node.component = node.id))
+        .filter(node => node.component && !node.component.startsWith('import('))
+        .forEach(node => (node.component = node.id))
 
     const treeString = stringifyWithEscape(rootNode.map, ['component'])
-    const outputPath = resolve(outputDir, `routes.${rootNode.rootName}.js`)
     const content = [imports, `export const routes = ${treeString}`].join(
         '\n\n',
     )
 
+    const outputPath = resolve(outputDir, `routes.${rootNode.rootName}.js`)
     fse.outputFileSync(outputPath, content)
+}
+
+export const exportInstance = (rootNode, outputDir) => {
+    const outputPath = resolve(outputDir, `instance.${rootNode.rootName}.js`)
+    const relativeRoutifyPath = relative(
+        outputDir,
+        resolve(__dirname + '../../runtime/index.js'),
+    ).replace(/\\/g, '/')
+
+    const content = [
+        `import { Routify, Router } from '${relativeRoutifyPath}'`,
+        `import {routes} from './routes.${rootNode.rootName}.js'`,
+        '',
+        'export const instance = new Routify({routes})',
+        'export { Router }',
+        '',
+    ]
+
+    fse.outputFileSync(outputPath, content.join('\n'))
 }
