@@ -2,6 +2,6 @@
     "scripts": {
         "dev": "run-p dev:*",
         "dev:rollup": "rollup -c -w",
-        "dev:server": "npx spassr -a public"
+        "dev:server": "npx spassr -a public -e public/index.html"
     }
 }
