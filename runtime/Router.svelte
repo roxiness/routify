@@ -1,7 +1,10 @@
 <script>
     import Wrapper from './Wrapper.svelte'
     import { getUrlFromClick } from './utils'
+    import { setContext } from 'svelte'
     export let instance
+
+    setContext('routify-instance', instance)
 
     const initialize = elem => {
         instance.element = elem
