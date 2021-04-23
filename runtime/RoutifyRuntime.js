@@ -13,23 +13,15 @@ const getDefaults = () => ({
     urlHandler: typeof window === 'undefined' ? 'internal' : 'address',
 })
 
-const normalizeOptions = options => ({
-    ...options,
-    urlHandler:
-        typeof options.urlHandler === 'string'
-            ? urlHandlers[options.urlHandler]
-            : options.urlHandler,
-})
-
 /**
  * @extends {Routify<RNodeRuntimeConstructor>}
  */
 export class RoutifyRuntime extends Routify {
     Node = RNodeRuntime
+    #urlHandler
 
     constructor(options) {
-        super(normalizeOptions(deepAssign(getDefaults(), options)))
-        this.urlHandler = this.options.urlHandler()
+        super(deepAssign(getDefaults(), options))
         this.plugins.push(this.options.plugins)
         this.utils = new InstanceUtils()
         Object.defineProperty(this, 'plugins', { enumerable: false })
@@ -46,6 +38,17 @@ export class RoutifyRuntime extends Routify {
                 plugin.condition({ instance })
             if (shouldRun) plugin.run({ instance })
         }
+    }
+
+    get urlHandler() {
+        if (!this.#urlHandler) this.urlHandler = this.options.urlHandler
+
+        return this.#urlHandler
+    }
+
+    set urlHandler(urlHandler) {
+        if (typeof urlHandler === 'string') urlHandler = urlHandlers[urlHandler]
+        this.#urlHandler = urlHandler(this)
     }
 
     /**
