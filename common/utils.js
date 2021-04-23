@@ -22,11 +22,11 @@ export function deepAssign(target, ...sources) {
     return target
 }
 
-const isObject = (v) =>
+const isObject = v =>
     v &&
     typeof v === 'object' &&
     !['Array', 'Date', 'Regexp'].includes(v.constructor.name)
-const isObjectOrArray = (v) => Array.isArray(v) || isObject(v)
+const isObjectOrArray = v => Array.isArray(v) || isObject(v)
 
 /**
  * checks for repeating patterns to prevent infinite loops
@@ -40,7 +40,7 @@ class RepetitionChecker {
      * @param {any} entry
      * @returns {false|any[]}
      */
-    pushAndCheck = (entry) => {
+    pushAndCheck = entry => {
         const { history } = this
         const prevIndexCursor = history.lastIndexOf(entry) + 1
         history.push(entry)
@@ -64,7 +64,7 @@ class RepetitionChecker {
  */
 export function sortPlugins(_plugins) {
     // clone, flatten and normalize
-    const plugins = [...[].concat(_plugins)].map((plugin) => ({
+    const plugins = [...[].concat(_plugins)].map(plugin => ({
         ...plugin,
         before: [].concat(plugin.before).filter(Boolean), //convert to, or keep as array
         after: [].concat(plugin.after).filter(Boolean), //convert to, or keep as array
@@ -92,10 +92,10 @@ export function sortPlugins(_plugins) {
                             'found infinite loop in plugins. Repeating pattern:\n' +
                                 `${loop
                                     .map(
-                                        (p) =>
+                                        p =>
                                             `${p.name} (${['before', 'after']
                                                 .map(
-                                                    (name) =>
+                                                    name =>
                                                         `${name}: ${p[name]}`,
                                                 )
                                                 .join('; ')} )`,
@@ -116,4 +116,3 @@ export function sortPlugins(_plugins) {
 
     return plugins
 }
-
