@@ -11,7 +11,7 @@
 
     const handleClick = event => {
         const url = getUrlFromClick(instance.element)(event)
-        if (url) instance.urlStore.set(url)
+        if (url) instance.urlHandler.set(url)
     }
 </script>
 

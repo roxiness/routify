@@ -1,7 +1,7 @@
 <script>
     import Component from './Component.svelte'
     export let instance
-    const { urlStore, activePathNodes } = instance
+    const { urlHandler, activePathNodes } = instance
     $: pathNodes = $activePathNodes
 </script>
 
@@ -10,7 +10,7 @@
         <div class="bar">
             <strong>path:</strong>
             <span class="url">
-                {$urlStore}
+                {$urlHandler}
             </span>
             <span class="filepath">
                 {pathNodes[0].node.file.path}
