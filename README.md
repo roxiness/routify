@@ -39,12 +39,17 @@ rootNode.appendChild(childNode)
 
 #### Table of Contents
 
+-   [RoutifyRuntimePayload](#routifyruntimepayload)
 -   [RoutifyCallback](#routifycallback)
     -   [Parameters](#parameters)
 -   [RoutifyPlugin](#routifyplugin)
     -   [Properties](#properties)
+-   [PathNode](#pathnode)
+    -   [Properties](#properties-1)
 
-### 
+### RoutifyRuntimePayload
+
+Type: {instance: RoutifyRuntime}
 
 ### RoutifyCallback
 
@@ -67,3 +72,12 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 -   `condition` **[RoutifyCallback](#routifycallback)&lt;[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)>?** run plugin if true
 -   `run` **[RoutifyCallback](#routifycallback)&lt;any>** plugin script
 -   `mode` **(`"compile"` \| `"runtime"`)** 
+
+### PathNode
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+#### Properties
+
+-   `pathFragment` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `node` **RNodeRuntime** 
