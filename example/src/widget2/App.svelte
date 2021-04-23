@@ -8,8 +8,6 @@
     })
 </script>
 
-<h1>widget2/App.svelte</h1>
-
 <div class="main">
     <Router {instance} />
 </div>
