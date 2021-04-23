@@ -12,27 +12,13 @@ const currentUrl = () => {
  */
 export const address = instance => {
     // todo should be urlTransformed - instance.urlTransformers
-
-    const { set, subscribe, update, hooks, subscribers } = writable2(
-        currentUrl(),
-    )
+    const { set, subscribe, hooks } = writable2(currentUrl())
 
     return {
-        set,
+        set: (value, title) => {
+            history.pushState({}, title, value)
+            set(value)
+        },
         subscribe,
-        update,
     }
 }
-
-// // pushstate: () => updatePage(),
-// // replacestate: () => updatePage(),
-
-// export { createUrlStoreAddress }
-
-// const test = createUrlStoreAddress()
-
-// const handle = test.subscribe(() => {})
-// const handle2 = test.subscribe(() => {})
-// const handle3 = test.subscribe(() => {})
-
-// handle()
