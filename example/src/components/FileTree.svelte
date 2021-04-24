@@ -5,8 +5,10 @@
 
 <ul>
     {#each node.children as child}
-        <li class:active={$isActive(child.path)}>
-            <a href={child.path}>{child.name}</a>
+        <li>
+            <a href={child.path} class:active={$isActive(child.path)}
+                >{child.name}</a>
+            {child.path}
             <svelte:self node={child} />
         </li>
     {/each}
