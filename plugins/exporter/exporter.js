@@ -36,6 +36,7 @@ export const exportNode = (rootNode, outputDir) => {
     // create imports
     const imports = [rootNode, ...rootNode.descendants]
         .filter(node => node.component && !node.component.startsWith('import('))
+        .filter(node => !node.meta.async)
         .map(
             node =>
                 `import ${node.id} from '${relative(
@@ -45,15 +46,23 @@ export const exportNode = (rootNode, outputDir) => {
         )
         .join('\n')
 
-    // set component to id
+    // set component to either id or import(component).then(r => r.default)
     ;[rootNode, ...rootNode.descendants]
         .filter(node => node.component && !node.component.startsWith('import('))
-        .forEach(node => (node.component = node.id))
+        .forEach(node => {
+            if (node.meta.async)
+                node.component = `import(${node.component}).then(r => r.default)`
+            else node.component = node.id
+        })
 
     const treeString = stringifyWithEscape(rootNode.map, ['component'])
-    const content = [imports, `export const routes = ${treeString}`].join(
-        '\n\n',
-    )
+
+    // prettier-ignore
+    const content =
+        `${imports}` +
+        '\n' +
+        '\n' +
+        `export const routes = ${treeString}`
 
     const outputPath = resolve(outputDir, `routes.${rootNode.rootName}.js`)
     fse.outputFileSync(outputPath, content)
