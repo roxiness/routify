@@ -157,7 +157,7 @@ class PathNode {
  * @param {function} queryHandler
  * @returns {string}
  */
-export const pathAndParamsToUrl = (path, params, queryHandler) => {
+export const pathAndParamsToUrl = (path, params = {}, queryHandler) => {
     Object.entries(params).forEach(([key, val]) => {
         if (path.includes(`[${key}]`)) {
             path = path.replace(`[${key}]`, val)
