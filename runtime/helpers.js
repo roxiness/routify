@@ -1,11 +1,13 @@
 import '../typedef.js'
 import { getContext } from 'svelte'
 import { derived, readable, writable } from 'svelte/store'
+import { pathAndParamsToUrl } from './utils.js'
 
-/**
- * @returns {RoutifyRuntime}
- */
-const getInstance = () => getContext('routify-instance')
+export const _get = {
+    /** @returns {RoutifyRuntime} */
+    instance: () => getContext('routify-instance'),
+    urlHandler: () => _get.instance().urlHandler,
+}
 
 /**
  * @typedef {Object.<String,String>} UrlParams
@@ -22,9 +24,18 @@ const getInstance = () => getContext('routify-instance')
 
 /** @type {import('svelte/store').Readable<IsActiveHelper>} */
 export const isActive = readable(
-    (...params) => false,
-    set =>
-        getInstance().urlHandler.subscribe($url =>
-            set((path, params, options) => $url.startsWith(path)),
-        ),
+    /** initial value */
+    () => false,
+    set => _get.urlHandler().subscribe($url => set(_isActive($url))),
 )
+
+export const _isActive = $url => (path, params, options = {}) => {
+    path = pathAndParamsToUrl(path, params, x => '')
+    if (!options.strict) path = path.replace(/\/index\/?$/, '')
+
+    // ensure uniform string endings to prevent /foo matching /foobar
+    path = path.replace(/\/+$/, '') + '/'
+    $url = $url + '/'
+
+    return $url.startsWith(path)
+}
