@@ -35,7 +35,5 @@ export const _isActive = $url => (path, params, options = {}) => {
 
     // ensure uniform string endings to prevent /foo matching /foobar
     path = path.replace(/\/+$/, '') + '/'
-    $url = $url + '/'
-
-    return $url.startsWith(path)
+    return ($url + '/').startsWith(path)
 }
