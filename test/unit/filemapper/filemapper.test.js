@@ -28,18 +28,18 @@ rootNode.rootName = 'default'
 test('files are mapped', async () => {
     await createNodesFromFiles(rootNode, options.filemapper.routesDir.default)
     assert.equal(instance.nodeIndex.length, 13)
-    assertSnapshot('1.filemap-only', rootNode.map, 0)
+    assertSnapshot('1.filemap-only', rootNode, 0)
 })
 
 test('modules are merged with parent node', async () => {
     moveModuleToParentNode(rootNode)
     assert.equal(instance.nodeIndex.length, 11)
-    assertSnapshot('2.filemap-with-modules', rootNode.map, 0)
+    assertSnapshot('2.filemap-with-modules', rootNode, 0)
 })
 
 test('options get added', async () => {
     filenameToOptions(rootNode)
-    assertSnapshot('3.filemap-with-resets', rootNode.map, 0)
+    assertSnapshot('3.filemap-with-resets', rootNode, 0)
 })
 
 test('filemapper', async () => {
@@ -47,7 +47,7 @@ test('filemapper', async () => {
     await filemapper({ instance })
     assertSnapshot(
         '4.filemap-with-components',
-        instance.superNode.children[0].map,
+        instance.superNode.children[0],
         0,
     )
 })

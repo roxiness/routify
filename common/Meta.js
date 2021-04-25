@@ -23,7 +23,8 @@ const metaProxy = {
 
         if (directives.length) target._directives[name] = directives
 
-        return (target[name] = value)
+        target[name] = value
+        return true
     },
 }
 
@@ -53,7 +54,7 @@ export class Meta {
         return Object.entries(this).reduce((map, [key, val]) => {
             if (this._directives[key])
                 key = [key, ...this._directives[key]].join('|')
-            if (typeof val === 'function') map[`_EVAL::${key}`] = val.toString()
+            if (typeof val === 'function') map[key] = val.toString() + '::_EVAL'
             else map[key] = val
             return map
         }, {})

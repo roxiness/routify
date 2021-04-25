@@ -7,7 +7,7 @@ import { resolve } from 'path'
 import { readFileSync } from 'fs'
 import fse from 'fs-extra'
 
-const test = suite('routify')
+const test = suite('bundles')
 
 const __dirname = createDirname(import.meta)
 

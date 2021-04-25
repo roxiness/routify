@@ -1,7 +1,11 @@
 import { relative, resolve } from 'path'
 import fse from 'fs-extra'
 import '../../typedef.js'
-import { createDirname, writeDynamicImport } from '../../lib/utils.js'
+import {
+    createDirname,
+    stringifyWithEscape,
+    writeDynamicImport,
+} from '../../lib/utils.js'
 const __dirname = createDirname(import.meta)
 
 /** @param {{instance: Routify}} param0 */
@@ -15,20 +19,6 @@ export const exporter = ({ instance }) => {
 }
 
 /**
- * JSON.stringify wrapper that leaves specified keys unquoted
- * @param {any} obj
- * @param {string[]} keys
- * @returns {string}
- */
-const stringifyWithEscape = (obj, keys) => {
-    const re = new RegExp(`^( *)"(${keys.join('|')})": (".+")`, 'gm')
-    return JSON.stringify(obj, null, 2).replace(
-        re,
-        (m, spaces, key, value) => `${spaces}"${key}": ${JSON.parse(value)}`,
-    )
-}
-
-/**
  *
  * @param {RNode} rootNode
  * @param {string} outputDir
@@ -37,7 +27,7 @@ export const exportNode = (rootNode, outputDir) => {
     // create imports
     const imports = [rootNode, ...rootNode.descendants]
         .filter(node => node.component && !node.component.startsWith('import('))
-        .filter(node => !node.meta.async)
+        .filter(node => !node.meta.split)
         .map(
             node =>
                 `import ${node.id} from '${relative(
@@ -51,12 +41,15 @@ export const exportNode = (rootNode, outputDir) => {
     ;[rootNode, ...rootNode.descendants]
         .filter(node => node.component && !node.component.startsWith('import('))
         .forEach(node => {
-            if (node.meta.async)
-                node.component = `import(${node.component}).then(r => r.default)`
+            if (node.meta.split)
+                node.component = `() => import('${relative(
+                    outputDir,
+                    node.component,
+                ).replace(/\\/g, '/')}').then(r => r.default)`
             else node.component = node.id
         })
 
-    const treeString = stringifyWithEscape(rootNode.map, ['component'])
+    const treeString = stringifyWithEscape(rootNode)
 
     // prettier-ignore
     const content =
@@ -69,18 +62,23 @@ export const exportNode = (rootNode, outputDir) => {
     fse.outputFileSync(outputPath, content)
 }
 
+/**
+ * creates instance.default.js
+ * @param {RNode} rootNode
+ * @param {String} outputDir
+ */
 export const exportInstance = (rootNode, outputDir) => {
     const outputPath = resolve(outputDir, `instance.${rootNode.rootName}.js`)
     const relativeRoutifyPath = relative(
         outputDir,
-        resolve(__dirname + '../../runtime/index.js'),
+        resolve(__dirname, '../../runtime/index.js'),
     ).replace(/\\/g, '/')
 
     const content = [
         `import { Routify, Router } from '${relativeRoutifyPath}'`,
-        `import {routes} from './routes.${rootNode.rootName}.js'`,
+        `import { routes } from './routes.${rootNode.rootName}.js'`,
         '',
-        'export const instance = new Routify({routes})',
+        'export const instance = new Routify({ routes })',
         'export { Router }',
         '',
     ]
@@ -89,14 +87,14 @@ export const exportInstance = (rootNode, outputDir) => {
 }
 
 /**
- * replace <name>.|async props with <name> getters
+ * replace <name>.|split props with <name> getters
  * @param {RNodeRuntime} rootNode
  * @param {string} outputDir
  */
 export const exportMeta = (rootNode, outputDir) => {
     for (const { meta } of rootNode.instance.nodeIndex)
         Object.entries(meta).forEach(([oldKey, value]) => {
-            const matches = oldKey.match(/^(.+)\|async/)
+            const matches = oldKey.match(/^(.+)\|split/)
             if (matches) {
                 // create a getter
                 const [, key] = matches
@@ -108,7 +106,7 @@ export const exportMeta = (rootNode, outputDir) => {
                     get,
                     enumerable: true,
                 })
-                // delete the <name>.|async key
+                // delete the <name>.|split key
                 delete meta[oldKey]
             }
         })

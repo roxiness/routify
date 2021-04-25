@@ -6,7 +6,10 @@ import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
 const test = suite('importer')
 
 const exported = {
-    meta: {},
+    meta: {
+        aString: 'my-string',
+        'withDirective|directive': 'my-directive',
+    },
     component: '_default',
     id: '_default',
     rootName: 'default',
@@ -48,6 +51,14 @@ test('nodes created by instance have correct constructor', () => {
 test('imported nodes have correct constructor', () => {
     const instance = new RoutifyRuntime({ routes: exported })
     assert.is(instance.superNode.children[0].constructor.name, 'RNodeRuntime')
+})
+
+test('meta is imported', () => {
+    const instance = new RoutifyRuntime({ routes: exported })
+    const { meta } = instance.superNode.children[0]
+    assert.is(meta.constructor.name, 'Meta')
+    assert.equal(meta.aString, exported.meta.aString)
+    assert.equal(meta.withDirective, exported.meta['withDirective|directive'])
 })
 
 test.run()

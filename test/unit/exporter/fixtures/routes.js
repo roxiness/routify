@@ -7,9 +7,9 @@ import _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
 import _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
 
 export const routes = {
-  "meta": {},
   "component": _default,
   "id": "_default",
+  "meta": {},
   "rootName": "default",
   "file": {
     "path": "test/unit/exporter/example/_module.svelte",
@@ -20,12 +20,12 @@ export const routes = {
   },
   "children": [
     {
-      "meta": {
-        "reset": true
-      },
       "component": _default_admin,
       "id": "_default_admin",
       "name": "admin",
+      "meta": {
+        "reset": true
+      },
       "file": {
         "path": "test/unit/exporter/example/admin/_reset.svelte",
         "dir": "test/unit/exporter/example/admin",
@@ -35,10 +35,10 @@ export const routes = {
       },
       "children": [
         {
-          "meta": {},
           "component": _default_admin_index_svelte,
           "id": "_default_admin_index_svelte",
           "name": "index",
+          "meta": {},
           "file": {
             "path": "test/unit/exporter/example/admin/index.svelte",
             "dir": "test/unit/exporter/example/admin",
@@ -49,10 +49,10 @@ export const routes = {
           "children": []
         },
         {
-          "meta": {},
           "component": _default_admin_page_svelte,
           "id": "_default_admin_page_svelte",
           "name": "page",
+          "meta": {},
           "file": {
             "path": "test/unit/exporter/example/admin/page.svelte",
             "dir": "test/unit/exporter/example/admin",
@@ -65,10 +65,10 @@ export const routes = {
       ]
     },
     {
-      "meta": {},
       "component": false,
       "id": "_default_blog",
       "name": "blog",
+      "meta": {},
       "file": {
         "path": "test/unit/exporter/example/blog",
         "dir": "test/unit/exporter/example",
@@ -78,12 +78,12 @@ export const routes = {
       },
       "children": [
         {
-          "meta": {
-            "dynamic": true
-          },
           "component": _default_blog__slug__svelte,
           "id": "_default_blog__slug__svelte",
           "name": "[slug]",
+          "meta": {
+            "dynamic": true
+          },
           "file": {
             "path": "test/unit/exporter/example/blog/[slug].svelte",
             "dir": "test/unit/exporter/example/blog",
@@ -94,12 +94,12 @@ export const routes = {
           "children": []
         },
         {
-          "meta": {
-            "dynamic": true
-          },
           "component": _default_blog_prefixed_slug__svelte,
           "id": "_default_blog_prefixed_slug__svelte",
           "name": "prefixed[slug]",
+          "meta": {
+            "dynamic": true
+          },
           "file": {
             "path": "test/unit/exporter/example/blog/prefixed[slug].svelte",
             "dir": "test/unit/exporter/example/blog",
@@ -112,10 +112,10 @@ export const routes = {
       ]
     },
     {
-      "meta": {},
       "component": _default_index_svelte,
       "id": "_default_index_svelte",
       "name": "index",
+      "meta": {},
       "file": {
         "path": "test/unit/exporter/example/index.svelte",
         "dir": "test/unit/exporter/example",

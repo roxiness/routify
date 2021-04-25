@@ -52,7 +52,7 @@ testJson('can export functions to json with __EVAL::', () => {
 
     assert.equal(json, {
         hello: 'normal',
-        '_EVAL::greeter': 'name => `hello ${name}`',
+        greeter: 'name => `hello ${name}`::_EVAL',
         'scopedHello|scoped': 'scoped',
     })
 })

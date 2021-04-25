@@ -12,7 +12,7 @@ export class RNode {
     parent
 
     /** @type {Meta & Object.<any, any>} */
-    meta = new Meta(this)
+    #meta = new Meta(this)
 
     /** @type {String} */
     component
@@ -36,6 +36,15 @@ export class RNode {
             enumerable: false,
         })
         Object.defineProperty(this, 'parent', { enumerable: false })
+        Object.defineProperty(this, 'meta', {
+            enumerable: true,
+            set(meta) {
+                Object.entries(meta).forEach(
+                    ([key, val]) => (this.#meta[key] = val),
+                )
+            },
+            get: () => this.#meta,
+        })
     }
 
     /** @param {RNode} child */
@@ -90,10 +99,11 @@ export class RNode {
         return this.instance.nodeIndex.filter(node => node.parent === this)
     }
 
-    get map() {
+    toJSON() {
         return {
             ...this,
-            children: this.children.map(node => node.map),
+            children: [...this.children],
+            component: `${this.component}::_EVAL`,
         }
     }
 

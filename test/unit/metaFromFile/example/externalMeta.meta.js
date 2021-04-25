@@ -3,5 +3,5 @@ export default async () => ({
     nested: {
         nestedProp: 'nestedValue',
     },
-    'codesplitted|async': "I'm split",
+    'codesplitted|split': "I'm split",
 })
