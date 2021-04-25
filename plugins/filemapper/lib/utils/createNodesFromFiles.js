@@ -29,10 +29,15 @@ export async function createNodesFromFiles(firstNode, path) {
             const children = await fse.readdir(node.file.path)
             const promises = children.map(filename => {
                 const file = new File(resolve(node.file.path, filename))
-                const component = !file.stat.isDirectory() && file.path
-                const childNode = node.createChild(file.name, component)
-                childNode.file = file
-                queue.unshift(childNode)
+                if (
+                    file.stat.isDirectory() ||
+                    firstNode.instance.options.extensions.includes(file.ext)
+                ) {
+                    const component = !file.stat.isDirectory() && file.path
+                    const childNode = node.createChild(file.name, component)
+                    childNode.file = file
+                    queue.unshift(childNode)
+                }
             })
             await Promise.all(promises)
         }
