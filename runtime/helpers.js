@@ -3,10 +3,11 @@ import { getContext } from 'svelte'
 import { derived, readable, writable } from 'svelte/store'
 import { pathAndParamsToUrl } from './utils.js'
 
-export const _get = {
+export const _ctx = {
     /** @returns {RoutifyRuntime} */
     instance: () => getContext('routify-instance'),
-    urlHandler: () => _get.instance().urlHandler,
+    urlHandler: () => _ctx.instance().urlHandler,
+    node: () => getContext('routify-node'), // todo add use
 }
 
 /**
@@ -26,7 +27,7 @@ export const _get = {
 export const isActive = readable(
     /** initial value */
     () => false,
-    set => _get.urlHandler().subscribe($url => set(_isActive($url))),
+    set => _ctx.urlHandler().subscribe($url => set(_isActive($url))),
 )
 
 export const _isActive = $url => (path, params, options = {}) => {
