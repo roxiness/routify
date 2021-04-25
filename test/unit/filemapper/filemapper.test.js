@@ -8,7 +8,6 @@ import { filenameToOptions } from '../../../plugins/filemapper/lib/utils/filenam
 import { readFileSync, writeFileSync } from 'fs'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
 import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
-import sortAny from 'sort-any'
 
 const test = suite('filemapper')
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -62,30 +61,3 @@ function assertSnapshot(name, content, update) {
     const expect = JSON.parse(readFileSync(filepath, 'utf-8'))
     assert.equal(content, expect)
 }
-// todo get rid of this or find a way to use it
-// const faketest = suite('faketest')
-
-// faketest('faketest', () => {
-//     const unsorted = { a: [2,1,3] }
-//     const sorted = { a: [1,2,3] }
-//     assert.equal(sortDeep(unsorted), (sorted))
-// })
-
-// faketest.run()
-
-// const sortDeep = (object) => {
-//     if (!Array.isArray(object)) {
-//         if (typeof object !== 'object' || object === null) {
-//             return object
-//         }
-//         Object.keys(object).forEach(key => {
-//             // console.log(key)
-//             object[key] = sortDeep(object[key])
-//         })
-//         return object
-//     }
-
-//     console.log(object.map(o => o.name))
-//     object = sortAny(object)
-//     return object
-// }

@@ -22,7 +22,7 @@ import '../typedef.js'
 export class Routify {
     /** @type {NodeType} */
     Node = RNode
-    /** @type {NodeType[]} */
+    /** @type {NodeType['prototype'][]} */
     #nodeIndex = []
 
     get nodeIndex() {

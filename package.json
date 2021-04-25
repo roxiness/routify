@@ -7,7 +7,7 @@
         "test": "run-s test:*",
         "build": "run-s build:*",
         "test:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
-        "test:uvu": "uvu test/ test\\.js$",
+        "test:uvu": "uvu . \"(spec|test)\\.js$\"",
         "build:documentation": "documentation readme typedef.js -f md --section API",
         "build:prettier": "npm run format",
         "test-watch": "nodemon --ignore {fixtures,temp,example}/** --exec npm run test:uvu",
@@ -29,7 +29,6 @@
         "prettier-plugin-svelte": "^2.2.0",
         "rollup-plugin-livereload": "^2.0.0",
         "rollup-plugin-svelte": "^7.1.0",
-        "sort-any": "^1.2.3",
         "uvu": "^0.5.1"
     },
     "dependencies": {
