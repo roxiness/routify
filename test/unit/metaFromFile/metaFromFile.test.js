@@ -24,6 +24,7 @@ const expectedInline = {
     'equal-sign-center ': 'meta',
     'an-array': ['item1', 'item2'],
     'an-object': { prop: { nested: 'value' } },
+    implied: true,
 }
 const classless = val => JSON.parse(JSON.stringify(val))
 
@@ -67,6 +68,7 @@ test('metaFromFile middleware', async () => {
     assert.equal(classless(externalMetaNode.meta), {
         ...(await externalMetaJS),
         inlined: true,
+        implied: true,
     })
 })
 

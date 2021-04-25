@@ -12,3 +12,4 @@
 
 <!-- routify:meta an-array=["item1", "item2"] -->
 <!-- routify:meta an-object={"prop": {"nested": "value"}} -->
+<!-- routify:meta implied -->

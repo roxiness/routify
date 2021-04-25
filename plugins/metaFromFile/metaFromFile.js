@@ -31,6 +31,9 @@ export const parseComment = body => {
 
     const matches = body.match(/^routify:meta +([^=]+) *= *(.+)/)
     if (matches) return { [matches[1]]: JSON.parse(matches[2]) }
+
+    const flagMatch = body.match(/^routify:meta ([^ ]+)/)
+    if (flagMatch) return { [flagMatch[1]]: true }
 }
 
 /**
