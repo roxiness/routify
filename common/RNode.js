@@ -1,4 +1,5 @@
 import '../typedef.js'
+import { Meta } from './Meta.js'
 
 /**
  * @template {Routify|RoutifyRuntime|RoutifyBuildtime} Instance
@@ -10,9 +11,8 @@ export class RNode {
     /** @type {RNode} */
     parent
 
-    meta = {
-        bundle: undefined,
-    }
+    /** @type {Meta & Object.<any, any>} */
+    meta = new Meta(this)
 
     /** @type {String} */
     component

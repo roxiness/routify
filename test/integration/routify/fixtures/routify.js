@@ -20,8 +20,8 @@ export const routes = {
   "children": [
     {
       "meta": {
-        "bundle": true,
-        "reset": true
+        "reset": true,
+        "bundle": true
       },
       "component": import("./bundles/_default_admin-bundle.js").then(r => r._default_admin),
       "id": "_default_admin",

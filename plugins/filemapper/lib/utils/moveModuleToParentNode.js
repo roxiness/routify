@@ -12,7 +12,7 @@ export const moveModuleToParentNode = node => {
     node.descendants.filter(nameFilter(moduleFiles)).forEach(node => {
         node.parent.component = node.component
         node.parent.file = node.file
-        node.parent.meta = { ...node.parent.meta, ...node.meta }
+        node.parent.meta = node.meta
         node.remove()
     })
 }

@@ -1,12 +1,13 @@
 import { relative, resolve } from 'path'
 import fse from 'fs-extra'
 import '../../typedef.js'
-import { createDirname } from '../../lib/utils.js'
+import { createDirname, writeDynamicImport } from '../../lib/utils.js'
 const __dirname = createDirname(import.meta)
 
 /** @param {{instance: Routify}} param0 */
 export const exporter = ({ instance }) => {
     const promises = instance.superNode.children.map(rootNode => {
+        exportMeta(rootNode, instance.options.routifyDir)
         exportNode(rootNode, instance.options.routifyDir)
         exportInstance(rootNode, instance.options.routifyDir)
     })
@@ -85,4 +86,30 @@ export const exportInstance = (rootNode, outputDir) => {
     ]
 
     fse.outputFileSync(outputPath, content.join('\n'))
+}
+
+/**
+ * replace <name>.|async props with <name> getters
+ * @param {RNodeRuntime} rootNode
+ * @param {string} outputDir
+ */
+export const exportMeta = (rootNode, outputDir) => {
+    for (const { meta } of rootNode.instance.nodeIndex)
+        Object.entries(meta).forEach(([oldKey, value]) => {
+            const matches = oldKey.match(/^(.+)\|async/)
+            if (matches) {
+                // create a getter
+                const [, key] = matches
+                const get = writeDynamicImport(
+                    `${outputDir}/_meta_${key}.js`,
+                    value,
+                )
+                Object.defineProperty(meta, key, {
+                    get,
+                    enumerable: true,
+                })
+                // delete the <name>.|async key
+                delete meta[oldKey]
+            }
+        })
 }

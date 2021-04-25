@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 import {
     metaFromFile,
     htmlComments,
-    externalComments,
+    externalMeta,
 } from '../../../plugins/metaFromFile/metaFromFile.js'
 import { emptyDirSync } from 'fs-extra'
 import { filemapper } from '../../../plugins/filemapper/lib/index.js'
@@ -13,13 +13,10 @@ import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
 
 const test = suite('meta from file')
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const expectedExternal = {
-    prop: 'value',
-    nested: {
-        nestedProp: 'nestedValue',
-    },
-    codesplitted: {},
-}
+const externalMetaJS = import('./example/externalMeta.meta.js').then(r =>
+    r.default(),
+)
+
 const expectedInline = {
     'equal-sign-trimmed': 'meta',
     'equal-sign-right ': 'meta',
@@ -46,16 +43,11 @@ test('inline meta', async () => {
     assert.equal(meta, expectedInline)
 })
 
-test('external meta', async () => {
+test('external meta util', async () => {
     const path = `${__dirname}/example/externalMeta.svelte`
-    const meta = await externalComments(path, options.routifyDir)
-    assert.equal(classless(meta), expectedExternal)
-    assert.ok(meta.codesplitted.then, 'should be a promise')
-    assert.snapshot(
-        await meta.codesplitted,
-        "I'm split",
-        'accessing codesplit prop should return Promise<value>',
-    )
+    const meta = await externalMeta(path, options.routifyDir)
+
+    assert.equal(meta, await externalMetaJS)
 })
 
 test('metaFromFile middleware', async () => {
@@ -64,24 +56,18 @@ test('metaFromFile middleware', async () => {
     await filemapper({ instance })
     await metaFromFile({ instance })
 
-    const inlineMetaFile = instance.nodeIndex.find(
+    const inlineMetaNode = instance.nodeIndex.find(
         node => node.name === 'inlineMeta',
     )
-    const externalMetaFile = instance.nodeIndex.find(
+    const externalMetaNode = instance.nodeIndex.find(
         node => node.name === 'externalMeta',
     )
 
-    assert.equal(classless(inlineMetaFile.meta), expectedInline)
-    assert.equal(classless(externalMetaFile.meta), {
-        ...expectedExternal,
+    assert.equal(classless(inlineMetaNode.meta), expectedInline)
+    assert.equal(classless(externalMetaNode.meta), {
+        ...(await externalMetaJS),
         inlined: true,
     })
-    assert.ok(externalMetaFile.meta.codesplitted.then, 'should be a promise')
-    assert.snapshot(
-        await externalMetaFile.meta.codesplitted,
-        "I'm split",
-        'accessing codesplit prop should return Promise<value>',
-    )
 })
 
 test.run()
