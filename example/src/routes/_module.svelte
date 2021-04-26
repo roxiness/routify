@@ -3,7 +3,7 @@
     export let payload
 </script>
 
-<!-- routify:meta split -->
+<!-- routify:meta split|scoped -->
 
 <div class="app">
     <aside>
