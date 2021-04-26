@@ -1,7 +1,14 @@
 // import '../typedef.js'
 
-/** @type {ProxyHandler<Meta>} */
+/**
+ * Proxies meta
+ * @type {ProxyHandler<Meta>}
+ **/
 const metaProxy = {
+    /**
+     * Returns property value from the meta or from its nearest ancestor
+     * where the `|scoped` directive has been used
+     */
     get: function (target, prop, receiver) {
         if (typeof target[prop] !== 'undefined') return target[prop]
 
@@ -29,6 +36,15 @@ const metaProxy = {
 }
 
 /**
+ * Meta class returns value from self as well as scoped values from parent nodes.
+ * Scoped values are set with the `scoped` directive. Example meta['myprop|scoped'] = value
+ * Directives (meta['key|directive'] = value) are stripped a
+ *
+ * @example <caption>foobar</caption>
+ * // setting a scoped value
+ * node.meta['myKey|scoped'] = value
+ * // scoped values can be retrieved by current meta as well as descendant metas
+ * node.meta.myKey === node.descendants[0].meta.myKey
  * @template {RNode|RNodeRuntime} Node
  */
 export class Meta {
@@ -47,7 +63,7 @@ export class Meta {
      * converts { key: "value": "fn": x => x }
      * to {
      *   "key|directive1|directive2": "value",
-     *   "_EVAL::fn": "x => x"
+     *   "fn": "x => x::_EVAL"
      * }
      */
     toJSON() {
@@ -60,3 +76,7 @@ export class Meta {
         }, {})
     }
 }
+
+const meta = new Meta()
+
+new Meta()
