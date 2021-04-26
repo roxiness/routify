@@ -25,12 +25,21 @@ const metaProxy = {
         return undefined
     },
     set(target, prop, value) {
+        const isRuntime =
+            target._node.instance &&
+            target._node.instance.constructor.name === 'RoutifyRuntime'
+
         prop = prop.toString()
         const [name, ...directives] = prop.split('|')
 
         if (directives.length) target._directives[name] = directives
 
-        target[name] = value
+        if (isRuntime && directives.includes('split')) {
+            Object.defineProperty(target, name, {
+                get: value,
+                enumerable: true,
+            })
+        } else target[name] = value
         return true
     },
 }
@@ -76,7 +85,3 @@ export class Meta {
         }, {})
     }
 }
-
-const meta = new Meta()
-
-new Meta()

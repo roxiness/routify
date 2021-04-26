@@ -25,9 +25,19 @@ testBuildtime('buildtime node can see own meta', async () => {
     assert.is(rootNode.meta.plain, 'Im plain')
     assert.is(rootNode.meta.function(), 'Im a function')
     assert.is(rootNode.meta.scopedPlain, 'Im scoped')
-    assert.is(rootNode.meta.scopedSplitPlain, 'Im scoped split')
+
+    const scopedSplitPlain = await rootNode.meta.scopedSplitPlain
+    assert.is(
+        scopedSplitPlain,
+        "() => import('./_meta_scopedSplitPlain.js').then(r => r.default)::_EVAL",
+    )
     assert.is(rootNode.meta.scopedFunction(), 'Im a scoped function')
-    assert.is(rootNode.meta.scopedSplitFunction(), 'Im a scoped split function')
+
+    const scopedSplitFunction = await rootNode.meta.scopedSplitFunction
+    assert.is(
+        scopedSplitFunction,
+        `() => import('./_meta_scopedSplitFunction.js').then(r => r.default)::_EVAL`,
+    )
     assert.is(rootNode.meta.overwritten, 'original')
 })
 
@@ -40,12 +50,30 @@ testBuildtime(
         assert.not(node.meta.plain)
         assert.not(node.meta.function)
         assert.is(node.meta.scopedPlain, 'Im scoped')
-        assert.is(node.meta.scopedSplitPlain, 'Im scoped split')
+
+        assert.is(
+            await node.meta.scopedSplitPlain,
+            "() => import('./_meta_scopedSplitPlain.js').then(r => r.default)::_EVAL",
+        )
         assert.is(node.meta.scopedFunction(), 'Im a scoped function')
-        assert.is(node.meta.scopedSplitFunction(), 'Im a scoped split function')
+
+        assert.is(
+            await node.meta.scopedSplitFunction,
+            `() => import('./_meta_scopedSplitFunction.js').then(r => r.default)::_EVAL`,
+        )
         assert.is(node.meta.overwritten, 'new value')
     },
 )
+
+testRuntime('runtime split meta data is imported with getter', async () => {
+    const { routes } = await import('./temp/routes.default.js')
+    const instance = new RoutifyRuntime({ routes })
+    const rootNode = instance.superNode.children[0]
+    assert.is(
+        rootNode.meta.__lookupGetter__('scopedSplitPlain').toString(),
+        `() => import('./_meta_scopedSplitPlain.js').then(r => r.default)`,
+    )
+})
 
 testRuntime('runtime node can see own meta', async () => {
     const { routes } = await import('./temp/routes.default.js')
@@ -54,9 +82,12 @@ testRuntime('runtime node can see own meta', async () => {
     assert.is(rootNode.meta.plain, 'Im plain')
     assert.is(rootNode.meta.function(), 'Im a function')
     assert.is(rootNode.meta.scopedPlain, 'Im scoped')
-    assert.is(rootNode.meta.scopedSplitPlain, 'Im scoped split')
+    assert.is(await rootNode.meta.scopedSplitPlain, 'Im scoped split')
     assert.is(rootNode.meta.scopedFunction(), 'Im a scoped function')
-    assert.is(rootNode.meta.scopedSplitFunction(), 'Im a scoped split function')
+    assert.is(
+        (await rootNode.meta.scopedSplitFunction)(),
+        'Im a scoped split function',
+    )
     assert.is(rootNode.meta.overwritten, 'original')
 })
 
@@ -67,9 +98,12 @@ testRuntime('runtime node can see parents scoped meta', async () => {
     assert.not(node.meta.plain)
     assert.not(node.meta.function)
     assert.is(node.meta.scopedPlain, 'Im scoped')
-    assert.is(node.meta.scopedSplitPlain, 'Im scoped split')
+    assert.is(await node.meta.scopedSplitPlain, 'Im scoped split')
     assert.is(node.meta.scopedFunction(), 'Im a scoped function')
-    assert.is(node.meta.scopedSplitFunction(), 'Im a scoped split function')
+    assert.is(
+        (await node.meta.scopedSplitFunction)(),
+        'Im a scoped split function',
+    )
     assert.is(node.meta.overwritten, 'new value')
 })
 

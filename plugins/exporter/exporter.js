@@ -87,27 +87,30 @@ export const exportInstance = (rootNode, outputDir) => {
 }
 
 /**
- * replace <name>.|split props with <name> getters
  * @param {RNodeRuntime} rootNode
  * @param {string} outputDir
  */
 export const exportMeta = (rootNode, outputDir) => {
     for (const { meta } of rootNode.instance.nodeIndex)
-        Object.entries(meta).forEach(([oldKey, value]) => {
-            const matches = oldKey.match(/^(.+)\|split/)
-            if (matches) {
-                // create a getter
-                const [, key] = matches
-                const get = writeDynamicImport(
-                    `${outputDir}/_meta_${key}.js`,
-                    value,
-                )
+        Object.entries(meta._directives).forEach(([key, directives]) => {
+            let value = meta[key]
+
+            // if meta value is a function convert it to a string,
+            // otherwise convert it to a JSON object
+            value =
+                value instanceof Function
+                    ? value.toString()
+                    : JSON.stringify(value)
+
+            // if this is a dynamically imported value, create a getter
+            if (directives.includes('split')) {
                 Object.defineProperty(meta, key, {
-                    get,
+                    value: writeDynamicImport(
+                        `${outputDir}/_meta_${key}.js`,
+                        value,
+                    ),
                     enumerable: true,
                 })
-                // delete the <name>.|split key
-                delete meta[oldKey]
             }
         })
 }
