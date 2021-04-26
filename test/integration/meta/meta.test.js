@@ -44,8 +44,8 @@ testBuildtime('buildtime node can see own meta', async () => {
 testBuildtime(
     'buildtime node can see parents scoped meta and own meta',
     async () => {
-        const node =
-            buildtimeInstance.superNode.children[0].children[0].children[0]
+        const node = buildtimeInstance.nodeIndex.find(c => c.name === 'page')
+            .children[0]
         assert.is(node.name, 'hello')
         assert.not(node.meta.plain)
         assert.not(node.meta.function)
@@ -94,7 +94,7 @@ testRuntime('runtime node can see own meta', async () => {
 testRuntime('runtime node can see parents scoped meta', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
-    const node = instance.superNode.children[0].children[0].children[0]
+    const node = instance.nodeIndex.find(c => c.name === 'page').children[0]
     assert.not(node.meta.plain)
     assert.not(node.meta.function)
     assert.is(node.meta.scopedPlain, 'Im scoped')
@@ -105,6 +105,14 @@ testRuntime('runtime node can see parents scoped meta', async () => {
         'Im a scoped split function',
     )
     assert.is(node.meta.overwritten, 'new value')
+})
+
+testRuntime('split metadata gets compiled', async () => {
+    const { routes } = await import('./temp/routes.default.js')
+    const instance = new RoutifyRuntime({ routes })
+    const node = instance.nodeIndex.find(c => c.name === 'compiled')
+    assert.is(node.meta.asyncData, 'Im async')
+    assert.is(await node.meta.asyncDataSplit, 'Im async split123')
 })
 
 testBuildtime.run()
