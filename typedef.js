@@ -15,6 +15,14 @@
  */
 
 /**
+ * @typedef {import('./runtime/route/RouteFragment')['RouteFragment']} RouteFragmentConstructor
+ * @typedef {RouteFragmentConstructor['prototype']} RouteFragment
+ *
+ * @typedef {import('./runtime/route/Route')['Route']} RouteConstructor
+ * @typedef {RouteConstructor['prototype']} Route
+ */
+
+/**
  * @template T
  * @callback RoutifyCallback
  * @param {{instance: Routify}} first
