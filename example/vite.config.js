@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import svelte from '@sveltejs/vite-plugin-svelte'
+import pkg from 'vite-plugin-restart'
+const VitePluginRestart = pkg.default
 
 const production = process.env.NODE_ENV === 'production'
 
@@ -9,6 +11,7 @@ export default defineConfig({
     },
     clearScreen: false,
     plugins: [
+        VitePluginRestart({ restart: ['../lib/**/*'] }),
         svelte({
             emitCss: true,
             compilerOptions: {
