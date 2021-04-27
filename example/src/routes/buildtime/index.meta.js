@@ -1,7 +1,9 @@
-export default async function (instance) {
-    await new Promise(resolve => setTimeout(resolve, 1))
+import axios from 'axios'
 
+export default async function () {
+    const kanye = await axios.get('https://api.kanye.rest/')
+    console.log(kanye)
     return {
-        'processEnv|split': process.env,
+        'kanye|split': kanye.data.quote,
     }
 }

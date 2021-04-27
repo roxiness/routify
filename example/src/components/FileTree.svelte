@@ -1,5 +1,5 @@
 <script>
-    import { isActive } from '../../../runtime/helpers'
+    import { isActive } from '../../../lib/runtime/helpers'
     export let node
 </script>
 

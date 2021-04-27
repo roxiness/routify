@@ -1,4 +1,4 @@
-import { RoutifyBuildtime } from '../lib/RoutifyBuildtime.js'
+import { RoutifyBuildtime } from '../lib/buildtime/RoutifyBuildtime.js'
 
 const instance = new RoutifyBuildtime({
     filemapper: {

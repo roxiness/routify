@@ -5,5 +5,8 @@
         "dev:rollup": "rollup -c -w",
         "dev:routifiy": "node run-routify.js",
         "dev:server": "npx spassr -a public -e public/index.html"
+    },
+    "devDependencies": {
+        "axios": "^0.21.1"
     }
 }
