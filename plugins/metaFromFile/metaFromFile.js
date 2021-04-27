@@ -1,10 +1,10 @@
 import cheerio from 'cheerio'
 import fse from 'fs-extra'
-import { pathToFileURL } from 'url'
+import { relative } from 'path'
+import { createDirname } from '../../lib/utils.js'
 
 const { readFile, existsSync } = fse
-
-//TODO need async meta test
+const __dirname = createDirname(import.meta)
 
 /**
  * @param {{instance: Routify}} param0
@@ -60,7 +60,7 @@ export const externalMeta = async filepath => {
     const metaFilePath = filepath.replace(/(.+)\.[^.]+$/, '$1.meta.js')
     if (existsSync(metaFilePath)) {
         const meta = await import(
-            pathToFileURL(metaFilePath).pathname
+            './' + relative(__dirname, metaFilePath).replace(/\\/gm, '/')
         ).then(r => r.default())
         return meta
     }

@@ -116,7 +116,7 @@ export const getPathNodesFromUrlAndNodes = (rootNode, $url) => {
     }
 
     const pathNodesWithComponent = pathNodes.filter(
-        pathNode => pathNode && pathNode.node.component,
+        pathNode => pathNode.node.component,
     )
 
     if (!pathNodesWithComponent.length)

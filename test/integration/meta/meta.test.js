@@ -3,6 +3,7 @@ import * as assert from 'uvu/assert'
 import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
 import { createDirname } from '../../../lib/utils.js'
 import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
+import fse from 'fs-extra'
 const testBuildtime = suite('buildtime')
 const testRuntime = suite('runtime')
 
@@ -16,7 +17,9 @@ const buildtimeInstance = new RoutifyBuildtime({
         },
     },
 })
+
 testBuildtime.before(async () => {
+    fse.emptyDirSync(__dirname + '/temp')
     await buildtimeInstance.start()
 })
 
@@ -111,7 +114,7 @@ testRuntime('split metadata gets compiled', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const node = instance.nodeIndex.find(c => c.name === 'compiled')
-    assert.is(node.meta.asyncData, 'Im async')
+    assert.is(node.meta.plain, 'Im plain')
     assert.is(await node.meta.asyncDataSplit, 'Im async split123')
 })
 

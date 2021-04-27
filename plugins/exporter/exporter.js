@@ -91,7 +91,7 @@ export const exportInstance = (rootNode, outputDir) => {
  * @param {string} outputDir
  */
 export const exportMeta = (rootNode, outputDir) => {
-    for (const { meta } of rootNode.instance.nodeIndex)
+    for (const { meta } of [rootNode, ...rootNode.descendants]) {
         Object.entries(meta._directives).forEach(([key, directives]) => {
             let value = meta[key]
 
@@ -113,4 +113,5 @@ export const exportMeta = (rootNode, outputDir) => {
                 })
             }
         })
+    }
 }
