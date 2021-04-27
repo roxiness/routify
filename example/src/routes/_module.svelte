@@ -3,8 +3,6 @@
     export let payload
 </script>
 
-<!-- routify:meta split|scoped -->
-
 <div class="app">
     <aside>
         <h1>Routify 3</h1>
