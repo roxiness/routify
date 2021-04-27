@@ -40,6 +40,6 @@
 
 /**
  * @typedef {Object} PathNode
- * @prop {string} pathFragment
+ * @prop {string} urlFragment
  * @prop {RNodeRuntime} node
  */

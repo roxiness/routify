@@ -37,11 +37,11 @@ const exported = {
 const instance = new RoutifyRuntime({ routes: exported })
 instance.urlHandler.set('/blog/my-story')
 
-test('activePathNodes show currently active nodes', () => {
+test('activeRoute.fragments show currently active nodes', () => {
     assert.equal(
-        get(instance.activePathNodes).map(apn => [
+        get(instance.activeRoute).fragments.map(apn => [
             apn.node.name,
-            apn.pathFragment,
+            apn.urlFragment,
         ]),
         [
             ['', ''],

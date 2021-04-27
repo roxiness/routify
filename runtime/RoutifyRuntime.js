@@ -4,8 +4,9 @@ import { deepAssign, sortPlugins } from '../common/utils.js'
 import { importerPlugin } from '../plugins/importer/index.js'
 import { InstanceUtils } from './InstanceUtils.js'
 import { RNodeRuntime } from './RNodeRuntime.js'
+import { Route } from './route/Route.js'
 import * as urlHandlers from './urlHandler/index.js'
-import { getPathNodesFromUrlAndNodes, fromEntries } from './utils.js'
+import { fromEntries } from './utils.js'
 
 const getDefaults = () => ({
     plugins: [importerPlugin],
@@ -56,23 +57,16 @@ export class RoutifyRuntime extends Routify {
         this.#urlHandler = urlHandler(this)
     }
 
-    /**
-     * store that returns a list of url fragments and their corresponding nodes
-     */
-    get activePathNodes() {
+    get activeRoute() {
         return derived(this.urlHandler, $url => {
-            const rootNode = this.superNode.children[0]
-            return getPathNodesFromUrlAndNodes(rootNode, $url)
+            const route = new Route(this, $url, this.superNode.children[0])
+            // const rootNode = this.superNode.children[0]
+            // return getPathNodesFromUrlAndNodes(rootNode, $url)
+            return route
         })
     }
 
     get params() {
-        return derived(this.activePathNodes, $activePathNodes =>
-            $activePathNodes.reduce(
-                (map, activePathNode) =>
-                    Object.assign(map, activePathNode.params),
-                {},
-            ),
-        )
+        return derived(this.activeRoute, $activeRoute => $activeRoute.params)
     }
 }

@@ -1,8 +1,8 @@
 <script>
     import Component from './Component.svelte'
     export let instance
-    const { urlHandler, activePathNodes } = instance
-    $: pathNodes = $activePathNodes
+    const { urlHandler, activeRoute } = instance
+    $: fragments = $activeRoute.fragments
 </script>
 
 {#if instance.options.debugger}
@@ -13,13 +13,13 @@
                 {$urlHandler}
             </span>
             <span class="filepath">
-                {pathNodes[0].node.file.path}
+                {fragments[0].node.file.path}
             </span>
         </div>
-        <Component {instance} {pathNodes} />
+        <Component {instance} {fragments} />
     </main>
 {:else}
-    <Component {instance} {pathNodes} />
+    <Component {instance} {fragments} />
 {/if}
 
 <style>

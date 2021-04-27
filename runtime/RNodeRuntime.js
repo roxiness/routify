@@ -19,4 +19,8 @@ export class RNodeRuntime extends RNode {
     set regex(value) {
         this.#regex[this.name] = new RegExp(value)
     }
+
+    async preload() {
+        this.component = await this.component
+    }
 }
