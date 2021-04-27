@@ -41,7 +41,6 @@ import '../../typedef.js'
  * @returns
  */
 const createEventHandler = instance => (hook, msg) => async path => {
-    console.log(msg, path || '')
     instance.on[hook]
     instance.on[hook].callCallbacks(path)
 
