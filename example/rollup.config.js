@@ -2,21 +2,8 @@ import svelte from 'rollup-plugin-svelte'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import livereload from 'rollup-plugin-livereload'
-import { RoutifyBuildtime } from '../lib/RoutifyBuildtime'
 
 const production = !process.env.ROLLUP_WATCH
-
-const instance = new RoutifyBuildtime({
-    filemapper: {
-        routesDir: {
-            default: 'src/routes',
-            widget1: 'src/widget1/routes',
-            widget2: 'src/widget2/routes',
-        },
-    },
-})
-
-instance.start()
 
 export default {
     input: 'src/main.js',

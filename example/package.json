@@ -1,7 +1,9 @@
 {
+    "type": "module",
     "scripts": {
         "dev": "run-p dev:*",
         "dev:rollup": "rollup -c -w",
+        "dev:routifiy": "node run-routify.js",
         "dev:server": "npx spassr -a public -e public/index.html"
     }
 }
