@@ -59,4 +59,6 @@ test('detects renamed files', async () => {
     )
 })
 
+test.after(() => instance.close())
+
 test.run()
