@@ -2,11 +2,12 @@
     "type": "module",
     "scripts": {
         "dev": "run-p dev:*",
-        "dev:rollup": "rollup -c -w",
         "dev:routifiy": "node run-routify.js",
-        "dev:server": "npx spassr -a public -e public/index.html"
+        "dev:vite": "vite"
     },
     "devDependencies": {
-        "axios": "^0.21.1"
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.7",
+        "axios": "^0.21.1",
+        "vite": "^2.2.3"
     }
 }
