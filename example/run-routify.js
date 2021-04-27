@@ -8,5 +8,6 @@ const instance = new RoutifyBuildtime({
             widget2: 'src/widget2/routes',
         },
     },
+    watch: true,
 })
 instance.start()

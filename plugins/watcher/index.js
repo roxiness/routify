@@ -3,7 +3,7 @@ import { watcher } from './watcher.js'
 
 /** @type {RoutifyPlugin} */
 export const watcherPlugin = {
-    condition: () => true,
+    condition: ({ instance }) => instance.options.watch,
     after: 'watcher',
     mode: 'compile',
     run: watcher,
