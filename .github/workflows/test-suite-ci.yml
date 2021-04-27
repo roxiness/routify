@@ -4,13 +4,12 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Test on NodeJS v${{ matrix.node-version }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Test on NodeJS v${{ matrix.node-version }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [12.x, 14.x]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
       - uses: actions/checkout@v2
