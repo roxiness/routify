@@ -1,8 +1,8 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
-import { createDirname } from '../../../lib/utils.js'
-import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
+import { createDirname } from '../../../lib/buildtime/utils.js'
+import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
 import fse from 'fs-extra'
 const testBuildtime = suite('buildtime')
 const testRuntime = suite('runtime')

@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { hookHandler } from '../../../lib/utils.js'
-import '../../../typedef.js'
+import { hookHandler } from '../../../lib/buildtime/utils.js'
+import '../../../lib/../typedef.js'
 
 const test = suite('hookHandler')
 

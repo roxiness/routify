@@ -2,12 +2,12 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { createNodesFromFiles } from '../../../plugins/filemapper/lib/utils/createNodesFromFiles.js'
-import { moveModuleToParentNode } from '../../../plugins/filemapper/lib/utils/moveModuleToParentNode.js'
-import { filenameToOptions } from '../../../plugins/filemapper/lib/utils/filenameToOptions.js'
+import { createNodesFromFiles } from '../../../lib/plugins/filemapper/lib/utils/createNodesFromFiles.js'
+import { moveModuleToParentNode } from '../../../lib/plugins/filemapper/lib/utils/moveModuleToParentNode.js'
+import { filenameToOptions } from '../../../lib/plugins/filemapper/lib/utils/filenameToOptions.js'
 import { readFileSync, writeFileSync } from 'fs'
-import { filemapper } from '../../../plugins/filemapper/lib/index.js'
-import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
+import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 const test = suite('filemapper')
 const __dirname = dirname(fileURLToPath(import.meta.url))

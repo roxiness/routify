@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { Routify } from '../../../common/Routify.js'
-import '../../../typedef.js'
+import { Routify } from '../../../lib/common/Routify.js'
+import '../../../lib/../typedef.js'
 
 const test = suite('node')
 const instance = new Routify({})

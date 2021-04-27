@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
-import '../../../typedef.js'
+import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
+import '../../../lib/../typedef.js'
 
 const test = suite('plugins')
 

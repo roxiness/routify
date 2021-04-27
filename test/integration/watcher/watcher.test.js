@@ -1,10 +1,10 @@
-import '../../../typedef.js'
+import '../../../lib/../typedef.js'
 
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
-import '../../../typedef.js'
-import { createDirname } from '../../../lib/utils.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
+import '../../../lib/../typedef.js'
+import { createDirname } from '../../../lib/buildtime/utils.js'
 import { resolve } from 'path'
 import { unlinkSync, writeFileSync } from 'fs'
 import fse, { emptyDirSync } from 'fs-extra'
@@ -25,6 +25,7 @@ test.before(async () => {
         filemapper: {
             routesDir: resolve(__dirname, 'example'),
         },
+        watch: true,
     })
     await instance.start()
 })

@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { _isActive } from '../../../runtime/helpers.js'
-import '../../../typedef.js'
+import { _isActive } from '../../../lib/runtime/helpers.js'
+import '../../../lib/../typedef.js'
 
 const isActiveTest = suite('isActive')
 

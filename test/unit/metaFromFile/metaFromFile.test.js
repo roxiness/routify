@@ -6,10 +6,10 @@ import {
     metaFromFile,
     htmlComments,
     externalMeta,
-} from '../../../plugins/metaFromFile/metaFromFile.js'
+} from '../../../lib/plugins/metaFromFile/metaFromFile.js'
 import { emptyDirSync } from 'fs-extra'
-import { filemapper } from '../../../plugins/filemapper/lib/index.js'
-import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
+import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 const test = suite('meta from file')
 const __dirname = dirname(fileURLToPath(import.meta.url))

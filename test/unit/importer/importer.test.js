@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { populateNodeTreeFromSnapshot } from '../../../plugins/importer/importer.js'
-import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
+import { populateNodeTreeFromSnapshot } from '../../../lib/plugins/importer/importer.js'
+import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
 
 const test = suite('importer')
 

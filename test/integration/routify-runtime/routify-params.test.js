@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { RoutifyRuntime } from '../../../runtime/RoutifyRuntime.js'
+import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
 const test = suite('routify')
 
 const exported = {

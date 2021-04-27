@@ -3,9 +3,9 @@ import fse from 'fs-extra'
 import * as assert from 'uvu/assert'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
-import { exportNode } from '../../../plugins/exporter/exporter.js'
-import { filemapper } from '../../../plugins/filemapper/lib/index.js'
-import { RoutifyBuildtime } from '../../../lib/RoutifyBuildtime.js'
+import { exportNode } from '../../../lib/plugins/exporter/exporter.js'
+import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const test = suite('exporter')

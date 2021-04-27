@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { writable2 } from '../../../runtime/utils.js'
-import '../../../typedef.js'
+import { writable2 } from '../../../lib/runtime/utils.js'
+import '../../../lib/../typedef.js'
 
 const test = suite('writable2')
 

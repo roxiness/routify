@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { createUtils } from '../../../plugins/dynamic/utils.js'
-import '../../../typedef.js'
+import { createUtils } from '../../../lib/plugins/dynamic/utils.js'
+import '../../../lib/../typedef.js'
 
 const test = suite('dynamic utils')
 
