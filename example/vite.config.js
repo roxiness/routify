@@ -4,9 +4,6 @@ import svelte from '@sveltejs/vite-plugin-svelte'
 const production = process.env.NODE_ENV === 'production'
 
 export default defineConfig({
-    server: {
-        open: true,
-    },
     clearScreen: false,
     plugins: [
         svelte({
