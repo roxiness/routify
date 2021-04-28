@@ -8,7 +8,6 @@
         <li>
             <a href={child.path} class:active={$isActive(child.path)}
                 >{child.name}</a>
-            {child.path}
             <svelte:self node={child} />
         </li>
     {/each}

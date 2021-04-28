@@ -18,6 +18,10 @@
 
 import axios from 'axios'
 
-export default async () => ({
-    'kanye|split': (await axios.get('https://api.kanye.rest/')).data.quote,
-})
+export default async () => {
+    return {
+        luke: (await axios.get('https://swapi.dev/api/people/1/')).data,
+        'darth|split': (await axios.get('https://swapi.dev/api/people/4/'))
+            .data,
+    }
+}
