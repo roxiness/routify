@@ -32,14 +32,14 @@ testBuildtime('buildtime node can see own meta', async () => {
     const scopedSplitPlain = await rootNode.meta.scopedSplitPlain
     assert.is(
         scopedSplitPlain,
-        "() => import('./_meta_scopedSplitPlain.js').then(r => r.default)::_EVAL",
+        "() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)::_EVAL",
     )
     assert.is(rootNode.meta.scopedFunction(), 'Im a scoped function')
 
     const scopedSplitFunction = await rootNode.meta.scopedSplitFunction
     assert.is(
         scopedSplitFunction,
-        `() => import('./_meta_scopedSplitFunction.js').then(r => r.default)::_EVAL`,
+        `() => import('./meta/_default/scopedSplitFunction.js').then(r => r.default)::_EVAL`,
     )
     assert.is(rootNode.meta.overwritten, 'original')
 })
@@ -56,13 +56,13 @@ testBuildtime(
 
         assert.is(
             await node.meta.scopedSplitPlain,
-            "() => import('./_meta_scopedSplitPlain.js').then(r => r.default)::_EVAL",
+            "() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)::_EVAL",
         )
         assert.is(node.meta.scopedFunction(), 'Im a scoped function')
 
         assert.is(
             await node.meta.scopedSplitFunction,
-            `() => import('./_meta_scopedSplitFunction.js').then(r => r.default)::_EVAL`,
+            `() => import('./meta/_default/scopedSplitFunction.js').then(r => r.default)::_EVAL`,
         )
         assert.is(node.meta.overwritten, 'new value')
     },
@@ -74,7 +74,7 @@ testRuntime('runtime split meta data is imported with getter', async () => {
     const rootNode = instance.superNode.children[0]
     assert.is(
         rootNode.meta.__lookupGetter__('scopedSplitPlain').toString(),
-        `() => import('./_meta_scopedSplitPlain.js').then(r => r.default)`,
+        `() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)`,
     )
 })
 
