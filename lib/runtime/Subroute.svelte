@@ -1,9 +1,8 @@
 <script>
     import Component from './Component.svelte'
-    export let route
-    $: ({ fragments } = route)
-    $: instance = route.instance
-    $: ({ activeUrl } = instance)
+    export let router
+    $: ({ activeRoute, activeUrl, instance } = $router)
+    $: ({ fragments } = $activeRoute)
 </script>
 
 {#if instance.options.debugger}

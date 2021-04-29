@@ -1,7 +1,9 @@
 import { get } from 'svelte/store'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
+import { Router } from '../../../lib/runtime/Router.js'
 import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
+
 const test = suite('routify')
 
 const exported = {
@@ -35,11 +37,13 @@ const exported = {
 }
 
 const instance = new RoutifyRuntime({ routes: exported })
-instance.activeUrl.set('/blog/my-story')
+const router = new Router(instance)
+
+router.activeUrl.set('/blog/my-story')
 
 test('activeRoute.fragments show currently active nodes', () => {
     assert.equal(
-        get(instance.activeRoute).fragments.map(apn => [
+        get(router.activeRoute).fragments.map(apn => [
             apn.node.name,
             apn.urlFragment,
         ]),
@@ -53,18 +57,18 @@ test('activeRoute.fragments show currently active nodes', () => {
 })
 
 test('can get params', async () => {
-    instance.activeUrl.set('/blog/my-story')
-    assert.equal(get(instance.params), { slug: 'my-story' })
+    router.activeUrl.set('/blog/my-story')
+    assert.equal(get(router.params), { slug: 'my-story' })
 })
 
 test('params are reactive', async () => {
     let value = {}
-    const unsub = instance.params.subscribe(val => (value = val))
+    const unsub = router.params.subscribe(val => (value = val))
     assert.equal(value, { slug: 'my-story' })
-    instance.activeUrl.set('/blog/my-story-2')
+    router.activeUrl.set('/blog/my-story-2')
     assert.equal(value, { slug: 'my-story-2' })
     unsub()
-    instance.activeUrl.set('/blog/my-story-3')
+    router.activeUrl.set('/blog/my-story-3')
     assert.equal(value, { slug: 'my-story-2' })
 })
 
