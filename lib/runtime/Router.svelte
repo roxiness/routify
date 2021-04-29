@@ -4,10 +4,6 @@
     import { setContext } from 'svelte'
     export let instance
 
-    setContext('routify-instance', instance)
-    window.__routify = window.__routify || { instances: [] }
-    window.__routify.instances.push(instance)
-
     const initialize = elem => {
         instance.element = elem
         addEventListener('click', handleClick)
