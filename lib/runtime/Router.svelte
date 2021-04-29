@@ -1,5 +1,5 @@
 <script>
-    import Wrapper from './Wrapper.svelte'
+    import Subroute from './Subroute.svelte'
     import { getUrlFromClick } from './utils'
     import { setContext } from 'svelte'
     export let instance
@@ -17,5 +17,5 @@
 </script>
 
 <div style="display: contents" use:initialize>
-    <Wrapper {instance} />
+    <Subroute route={$activeRoute} />
 </div>
