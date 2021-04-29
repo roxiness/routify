@@ -3,7 +3,7 @@
     export let route
     $: ({ fragments } = route)
     $: instance = route.instance
-    $: ({ urlHandler } = instance)
+    $: ({ activeUrl } = instance)
 </script>
 
 {#if instance.options.debugger}
@@ -11,7 +11,7 @@
         <div class="bar">
             <strong>path:</strong>
             <span class="url">
-                {$urlHandler}
+                {$activeUrl}
             </span>
             <span class="filepath">
                 {fragments[0].node.file.path}

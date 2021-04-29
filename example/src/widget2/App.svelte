@@ -4,7 +4,7 @@
     const instance = new Routify({
         routes,
         debugger: true,
-        urlHandler: 'internal',
+        activeUrl: 'internal',
     })
 </script>
 

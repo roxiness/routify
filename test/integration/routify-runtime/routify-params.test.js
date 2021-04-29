@@ -35,7 +35,7 @@ const exported = {
 }
 
 const instance = new RoutifyRuntime({ routes: exported })
-instance.urlHandler.set('/blog/my-story')
+instance.activeUrl.set('/blog/my-story')
 
 test('activeRoute.fragments show currently active nodes', () => {
     assert.equal(
@@ -53,7 +53,7 @@ test('activeRoute.fragments show currently active nodes', () => {
 })
 
 test('can get params', async () => {
-    instance.urlHandler.set('/blog/my-story')
+    instance.activeUrl.set('/blog/my-story')
     assert.equal(get(instance.params), { slug: 'my-story' })
 })
 
@@ -61,10 +61,10 @@ test('params are reactive', async () => {
     let value = {}
     const unsub = instance.params.subscribe(val => (value = val))
     assert.equal(value, { slug: 'my-story' })
-    instance.urlHandler.set('/blog/my-story-2')
+    instance.activeUrl.set('/blog/my-story-2')
     assert.equal(value, { slug: 'my-story-2' })
     unsub()
-    instance.urlHandler.set('/blog/my-story-3')
+    instance.activeUrl.set('/blog/my-story-3')
     assert.equal(value, { slug: 'my-story-2' })
 })
 
