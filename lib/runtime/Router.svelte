@@ -2,14 +2,16 @@
     import Subroute from './Subroute.svelte'
     import { getUrlFromClick } from './utils'
     import { Router } from './Router.js'
-    import { setContext } from 'svelte'
+    import { getContext } from 'svelte'
     import { writable } from 'svelte/store'
     export let instance
-    export let activeUrl = instance.activeUrl
+    export let activeUrl
+    export let offset
 
-    const router = writable(null)
-    setContext('routify-router', router)
-    $: $router = new Router(instance, activeUrl)
+    const parentCmpCtx = getContext('routify-component')
+    instance = instance || parentCmpCtx.route.router.instance
+
+    const router = new Router(instance, { activeUrl, offset, parentCmpCtx })
 
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
@@ -18,7 +20,7 @@
 
     const handleClick = event => {
         const url = getUrlFromClick(event)
-        if (url) $router.activeUrl.set(url)
+        if (url) router.activeUrl.set(url)
     }
 </script>
 

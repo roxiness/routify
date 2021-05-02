@@ -1,7 +1,7 @@
 <script>
     import Component from './Component.svelte'
     export let router
-    $: ({ activeRoute, activeUrl, instance } = $router)
+    $: ({ activeRoute, activeUrl, instance } = router)
     $: ({ fragments } = $activeRoute)
 </script>
 
@@ -16,10 +16,10 @@
                 {fragments[0].node.file.path}
             </span>
         </div>
-        <Component {instance} {fragments} />
+        <Component route={$activeRoute} {fragments} />
     </main>
 {:else}
-    <Component {instance} {fragments} />
+    <Component route={$activeRoute} {fragments} />
 {/if}
 
 <style>
