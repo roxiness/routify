@@ -1,10 +1,25 @@
 <script>
+    import Router from '@roxi/routify/lib/runtime/Router.svelte'
     export let payload
-    let subRoutes = []
+
+    $: pages = [
+        // { activeUrl: Internal().set('/experiments/numbers/102') },
+        // { activeUrl: Address },
+        // { activeUrl: Internal() },
+    ]
+
+    let useInternal = true
 </script>
 
-{#each subRoutes as subRoute}
+{#each Array(10) as entry, index}
     <div>
-        <!-- <SubRoute route={params.slug === index ? activeRoute : someRoute({slug: index})} /> -->
+        <a href="/experiments/numbers/{index + 95}">{95 + index}</a>
     </div>
 {/each}
+
+<Router offset="-1" />
+<Router offset={payload.node} />
+<Router offset />
+
+<button on:click={() => (useInternal = !useInternal)}
+    >useInternal: {useInternal}</button>

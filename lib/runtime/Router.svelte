@@ -3,15 +3,17 @@
     import { getUrlFromClick } from './utils'
     import { Router } from './Router.js'
     import { getContext } from 'svelte'
-    import { writable } from 'svelte/store'
+    import { AddressReflector } from './urlReflectors/Address.js'
     export let instance
-    export let activeUrl
+    export let urlReflector = AddressReflector
     export let offset
 
     const parentCmpCtx = getContext('routify-component')
     instance = instance || parentCmpCtx.route.router.instance
 
-    const router = new Router(instance, { activeUrl, offset, parentCmpCtx })
+    const router = new Router(instance, parentCmpCtx)
+    $: router.urlReflector = urlReflector
+    $: router.offset = offset
 
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
@@ -20,7 +22,7 @@
 
     const handleClick = event => {
         const url = getUrlFromClick(event)
-        if (url) router.activeUrl.set(url)
+        if (url) router.activeUrl.set({ url, mode: 'pushState' })
     }
 </script>
 
