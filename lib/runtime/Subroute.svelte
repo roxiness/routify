@@ -3,6 +3,7 @@
     export let router
     $: ({ activeRoute, activeUrl, instance } = router)
     $: ({ fragments } = $activeRoute)
+    $: fragments = fragments.filter(fragment => fragment.node.component)
 </script>
 
 {#if instance.options.debugger}

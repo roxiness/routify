@@ -7,13 +7,15 @@
     export let instance
     export let urlReflector = AddressReflector
     export let offset
+    export let url
 
     const parentCmpCtx = getContext('routify-component')
     instance = instance || parentCmpCtx.route.router.instance
 
-    const router = new Router(instance, parentCmpCtx)
+    const router = new Router(instance, { parentCmpCtx })
     $: router.urlReflector = urlReflector
     $: router.offset = offset
+    $: router.url = url
 
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
