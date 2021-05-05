@@ -19,21 +19,34 @@ function getRoutifyContext() {
   return getContext('routify') || rootContext
 }
 
-export const components = {
+export const nodes = {
   subscribe(run) {
-    const components = []
+    const nodes = []
     return derived(routes, routes => {
       routes.forEach(route => {
         const layouts = route.layouts
           .map(layout => layout.api)
-          .filter(api => !components.includes(api))
-
-        components.push(route.api, ...layouts)
+          .filter(api => !nodes.includes(api))
+        nodes.push(route.api, ...layouts)
       })
-      return components
+
+      // enhance find method
+      const find = nodes.find
+      nodes.find = (value, ...args) => {
+        // if value is string, return route which name or path matches value
+        if (typeof value === 'string')
+          return nodes.find(n => n.meta.name === value) ||
+            nodes.find(n => n.path === value)
+        // or default to Array.find
+        else return find.bind(nodes)(value, ...args)
+      }
+
+      return nodes
     }).subscribe(run)
   }
 }
+
+export const components = nodes
 
 /**
  * @typedef {import('svelte/store').Readable<ClientNodeApi>} ClientNodeHelperStore
@@ -119,7 +132,10 @@ function hookHandler(listener) {
   const hooks = this._hooks
   const index = hooks.length
   listener(callback => { hooks[index] = callback })
-  return () => delete hooks[index]
+  return (...params) => {
+    delete hooks[index]
+    listener(...params)
+  }
 }
 
 /**
@@ -416,6 +432,10 @@ let focusIsSet = false
 
 
 const _metatags = {
+  subscribe(listener) {
+    this._origin = this.getOrigin()
+    return listener(metatags)
+  },
   props: {},
   templates: {},
   services: {
@@ -481,17 +501,20 @@ const _metatags = {
     head.appendChild(newElement)
   },
   set(prop, value) {
-    _metatags.plugins.forEach(plugin => {
-      if (plugin.condition(prop, value))
-        [prop, value] = plugin.action(prop, value) || [prop, value]
-    })
+    // we only want strings. If metatags is used as a store, svelte will try to assign an object to prop
+    if (typeof prop === 'string') {
+      _metatags.plugins.forEach(plugin => {
+        if (plugin.condition(prop, value))
+          [prop, value] = plugin.action(prop, value) || [prop, value]
+      })
+    }
   },
   clear() {
     const oldElement = document.querySelector(`meta`)
     if (oldElement) oldElement.remove()
   },
   template(name, fn) {
-    const origin = _metatags.getOrigin()
+    const origin = _metatags.getOrigin
     _metatags.templates[name] = _metatags.templates[name] || {}
     _metatags.templates[name][origin] = fn
   },
@@ -516,7 +539,9 @@ const _metatags = {
     }
   },
   _updateQueued: false,
+  _origin: false,
   getOrigin() {
+    if (this._origin) return this._origin
     const routifyCtx = getRoutifyContext()
     return routifyCtx && get(routifyCtx).path || '/'
   },
@@ -530,13 +555,13 @@ const _metatags = {
  */
 export const metatags = new Proxy(_metatags, {
   set(target, name, value, receiver) {
-    const { props, getOrigin } = target
+    const { props } = target
 
     if (Reflect.has(target, name))
       Reflect.set(target, name, value, receiver)
     else {
       props[name] = props[name] || {}
-      props[name][getOrigin()] = value
+      props[name][target.getOrigin()] = value
     }
 
     if (window['routify'].appLoaded)
