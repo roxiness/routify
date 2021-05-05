@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+        "baseUrl": ".",
+        "paths": {
+            "#lib/*": ["./lib/*"]
+        }
+    }
+}
