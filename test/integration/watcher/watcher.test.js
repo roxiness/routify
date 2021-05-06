@@ -24,6 +24,11 @@ beforeAll(async () => {
     })
     await instance.start()
 })
+
+afterAll(async () => {
+    await instance.close()
+})
+
 const filepath = resolve(__dirname, 'example', 'temp', 'NewFile.svelte')
 const renamedFilepath = resolve(__dirname, 'example', 'temp', 'NewFile2.svelte')
 

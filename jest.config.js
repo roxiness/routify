@@ -1,41 +1,40 @@
-const watchPathIgnorePatterns = [
-    '/node_modules/',
-    '/.routify/',
-    '/build/',
-    '/temp/',
-    '/output/',
-]
-
-export default {
-    rootDir: '.',
-    transform: {},
+const common = {
+    watchPathIgnorePatterns: [
+        '/node_modules/',
+        '/.routify/',
+        '/build/',
+        '/temp/',
+        '/output/',
+    ],
     moduleNameMapper: {
         '^#lib(.+)$': '<rootDir>/lib$1',
     },
-    watchPathIgnorePatterns,
     testTimeout: 2000,
+}
+
+export default {
     projects: [
         {
+            ...common,
             displayName: 'unit',
             testMatch: [
                 '**/test/unit/**/?(*.)+(spec|test).[jt]s?(x)',
                 '**/lib/**/?(*.)+(spec|test).[jt]s?(x)',
             ],
-            watchPathIgnorePatterns,
         },
         {
+            ...common,
             displayName: 'integration',
             testMatch: ['**/test/integration/**/?(*.)+(spec|test).[jt]s?(x)'],
-            watchPathIgnorePatterns,
         },
         {
+            ...common,
             displayName: 'e2e',
             moduleNameMapper: {
                 '^#lib(.+)$': '<rootDir>/lib$1',
             },
             testMatch: ['**/test/e2e/**/?(*.)+(spec|test).[jt]s?(x)'],
             preset: 'jest-playwright-preset',
-            watchPathIgnorePatterns,
         },
     ],
 }
