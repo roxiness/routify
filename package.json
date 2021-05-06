@@ -15,7 +15,7 @@
         "build:documentation": "documentation readme typedef.js -f md --section API",
         "build:prettier": "npm run format",
         "format": "prettier --write --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
-        "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js ."
+        "test:jest": "jest ."
     },
     "author": "jakobrosenberg@gmail.com",
     "license": "MIT",
