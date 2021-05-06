@@ -1,12 +1,9 @@
 import { rollup } from 'rollup'
 import { createDirname } from '#lib/buildtime/utils'
 import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime'
-import fs from 'fs'
-import replace from '@rollup/plugin-replace'
-import resolve from '@rollup/plugin-node-resolve'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import fse from 'fs-extra'
-
 import { spassr } from 'spassr'
 import svelte from 'rollup-plugin-svelte'
 
@@ -28,7 +25,7 @@ const inputOptions = {
                 dev: true,
             },
         }),
-        resolve({
+        nodeResolve({
             browser: true,
             dedupe: ['svelte'],
         }),
@@ -63,23 +60,29 @@ const routifyInstance = new RoutifyBuildtime({
         },
     },
     routifyDir: `${__dirname}/runtime/.routify`,
-    watch: true,
+    watch: false,
 })
 
-const startSpassr = () => {
+const startSpassr = () =>
     spassr({
         assetsDir: `${__dirname}/runtime/public`,
         script: `${__dirname}/runtime/public/build/bundle.js`,
         port: 3334,
         entrypoint: `${__dirname}/runtime/public/index.html`,
     })
-}
 
 export const setupRuntime = async () => {
     console.log('setting up runtime...', __dirname)
     fse.existsSync(buildDir) && fse.rmdirSync(buildDir, { recursive: true })
     await routifyInstance.start()
     await buildRollup()
-    startSpassr()
+    const spassrHandle = await startSpassr()
     console.log('setting up runtime... done!')
+
+    return async () => {
+        console.log('tearing down runtime...')
+        await spassrHandle.close()
+        // routifyInstance.close()
+        console.log('tearing down runtime... done!')
+    }
 }

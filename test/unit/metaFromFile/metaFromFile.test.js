@@ -1,5 +1,3 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import {
@@ -7,11 +5,10 @@ import {
     htmlComments,
     externalMeta,
 } from '../../../lib/plugins/metaFromFile/metaFromFile.js'
-import { emptyDirSync } from 'fs-extra'
+import fse from 'fs-extra'
 import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
-const test = suite('meta from file')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const externalMetaJS = import('./example/externalMeta.meta.js').then(r =>
     r.default(),
@@ -34,21 +31,21 @@ const options = {
         routesDir: { default: `${__dirname}/example` },
     },
 }
-test.before.each(() => {
-    emptyDirSync(options.routifyDir)
+beforeEach(() => {
+    fse.emptyDirSync(options.routifyDir)
 })
 
 test('inline meta', async () => {
     const path = `${__dirname}/example/inlineMeta.svelte`
     const meta = await htmlComments(path)
-    assert.equal(meta, expectedInline)
+    expect(meta).toEqual(expectedInline)
 })
 
 test('external meta util', async () => {
     const path = `${__dirname}/example/externalMeta.svelte`
-    const meta = await externalMeta(path, options.routifyDir)
+    const meta = await externalMeta(path)
 
-    assert.equal(meta, await externalMetaJS)
+    expect(meta).toEqual(await externalMetaJS)
 })
 
 test('metaFromFile middleware', async () => {
@@ -64,12 +61,10 @@ test('metaFromFile middleware', async () => {
         node => node.name === 'externalMeta',
     )
 
-    assert.equal(classless(inlineMetaNode.meta), expectedInline)
-    assert.equal(classless(externalMetaNode.meta), {
+    expect(classless(inlineMetaNode.meta)).toEqual(expectedInline)
+    expect(classless(externalMetaNode.meta)).toEqual({
         ...(await externalMetaJS),
         inlined: true,
         implied: true,
     })
 })
-
-test.run()

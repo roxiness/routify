@@ -1,9 +1,5 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
 import '../../../lib/../typedef.js'
-
-const test = suite('plugins')
 
 /**
  * @type {RoutifyPlugin}
@@ -31,8 +27,8 @@ test('can run plugin', async () => {
         plugins: [aPlugin],
     })
     await instance.start()
-    assert.ok(instance.superNode.descendants[0])
-    assert.is(instance.superNode.descendants[0].name, 'my-node')
+    expect(instance.superNode.descendants[0]).toBeTruthy()
+    expect(instance.superNode.descendants[0].name).toBe('my-node')
 })
 
 test('can run multiple plugins', async () => {
@@ -40,8 +36,6 @@ test('can run multiple plugins', async () => {
         plugins: [aPlugin, anotherPlugin],
     })
     await instance.start()
-    assert.is(instance.superNode.descendants[0].name, 'my-node')
-    assert.is(instance.superNode.descendants[1].name, 'my-2nd-node')
+    expect(instance.superNode.descendants[0].name).toBe('my-node')
+    expect(instance.superNode.descendants[1].name).toBe('my-2nd-node')
 })
-
-test.run()

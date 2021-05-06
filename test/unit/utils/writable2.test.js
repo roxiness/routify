@@ -1,13 +1,9 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { writable2 } from '../../../lib/runtime/utils.js'
 import '../../../lib/../typedef.js'
 
-const test = suite('writable2')
-
 test('can create a store', async () => {
     const store = writable2('initial')
-    assert.equal(Object.keys(store), [
+    expect(Object.keys(store)).toEqual([
         'set',
         'subscribe',
         'update',
@@ -18,11 +14,11 @@ test('can create a store', async () => {
 
 test('subscribers show the correct number', async () => {
     const store = writable2('initial')
-    assert.is(store.subscribers.length, 0)
+    expect(store.subscribers.length).toBe(0)
     store.subscribe(x => x)
     store.subscribe(x => x)
     store.subscribe(x => x)
-    assert.is(store.subscribers.length, 3)
+    expect(store.subscribers.length).toBe(3)
 })
 
 test('hooks.onSub & hooks.onUnsub runs on every sub', async () => {
@@ -35,13 +31,13 @@ test('hooks.onSub & hooks.onUnsub runs on every sub', async () => {
     const handle2 = store.subscribe(x => x)
     const handle3 = store.subscribe(x => x)
 
-    assert.is(subCount, 3)
+    expect(subCount).toBe(3)
 
     handle1()
     handle2()
     handle3()
 
-    assert.is(subCount, 0)
+    expect(subCount).toBe(0)
 })
 
 test('hooks.onFirstSub & hooks.onLastUnsub runs on every sub', async () => {
@@ -54,13 +50,11 @@ test('hooks.onFirstSub & hooks.onLastUnsub runs on every sub', async () => {
     const handle2 = store.subscribe(x => x)
     const handle3 = store.subscribe(x => x)
 
-    assert.is(subCount, 1)
+    expect(subCount).toBe(1)
 
     handle1()
     handle2()
     handle3()
 
-    assert.is(subCount, 0)
+    expect(subCount).toBe(0)
 })
-
-test.run()

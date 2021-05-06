@@ -1,15 +1,11 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { createNodesFromFiles } from '../../../lib/plugins/filemapper/lib/utils/createNodesFromFiles.js'
 import { moveModuleToParentNode } from '../../../lib/plugins/filemapper/lib/utils/moveModuleToParentNode.js'
 import { filenameToOptions } from '../../../lib/plugins/filemapper/lib/utils/filenameToOptions.js'
-import { readFileSync, writeFileSync } from 'fs'
 import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
-const test = suite('filemapper')
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const options = {
@@ -27,37 +23,25 @@ rootNode.rootName = 'default'
 
 test('files are mapped', async () => {
     await createNodesFromFiles(rootNode, options.filemapper.routesDir.default)
-    assert.equal(instance.nodeIndex.length, 13)
-    assertSnapshot('1.filemap-only', rootNode, 0)
+    expect(instance.nodeIndex.length).toBe(13)
+    expect(rootNode).toMatchSnapshot('1.filemap-only')
 })
 
 test('modules are merged with parent node', async () => {
     moveModuleToParentNode(rootNode)
-    assert.equal(instance.nodeIndex.length, 11)
-    assertSnapshot('2.filemap-with-modules', rootNode, 0)
+    expect(instance.nodeIndex.length).toBe(11)
+    expect(rootNode).toMatchSnapshot('2.filemap-with-modules')
 })
 
 test('options get added', async () => {
     filenameToOptions(rootNode)
-    assertSnapshot('3.filemap-with-resets', rootNode, 0)
+    expect(rootNode).toMatchSnapshot('3.filemap-with-resets')
 })
 
 test('filemapper', async () => {
     const instance = new RoutifyBuildtime(options)
     await filemapper({ instance })
-    assertSnapshot(
+    expect(instance.superNode.children[0]).toMatchSnapshot(
         '4.filemap-with-components',
-        instance.superNode.children[0],
-        0,
     )
 })
-
-test.run()
-
-function assertSnapshot(name, content, update) {
-    content = JSON.parse(JSON.stringify(content))
-    const filepath = `${__dirname}/fixtures/${name}.json`
-    if (update) writeFileSync(filepath, JSON.stringify(content, null, 2))
-    const expect = JSON.parse(readFileSync(filepath, 'utf-8'))
-    assert.equal(content, expect)
-}

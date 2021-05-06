@@ -1,6 +1,4 @@
-import { suite } from 'uvu'
 import fse from 'fs-extra'
-import * as assert from 'uvu/assert'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { exportNode } from '../../../lib/plugins/exporter/exporter.js'
@@ -8,7 +6,6 @@ import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const test = suite('exporter')
 const options = {
     filemapper: {
         routesDir: { default: __dirname + '/example' },
@@ -19,7 +16,7 @@ const instance = new RoutifyBuildtime(options)
 
 test('can build route tree', async () => {
     await filemapper({ instance })
-    assert.is(instance.superNode.children[0].descendants.length, 7)
+    expect(instance.superNode.children[0].descendants.length).toEqual(7)
 })
 
 test('can export a route tree', async () => {
@@ -31,15 +28,5 @@ test('can export a route tree', async () => {
         resolve(__dirname, 'temp/.routify', 'routes.default.js'),
         'utf-8',
     )
-    assertSnapshot('routes.js', content, 0)
+    expect(content).toMatchSnapshot()
 })
-
-test.run()
-
-function assertSnapshot(name, content, update) {
-    content = JSON.parse(JSON.stringify(content))
-    const filepath = `${__dirname}/fixtures/${name}`
-    if (update) fse.outputFileSync(filepath, content)
-    const expect = fse.readFileSync(filepath, 'utf-8')
-    assert.snapshot(content, expect)
-}

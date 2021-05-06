@@ -1,8 +1,4 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { sortPlugins } from '../../../lib/common/utils.js'
-
-const test = suite('sort plugins')
 
 test('sortPlugins can sort plugins', async () => {
     const plugins = [
@@ -12,7 +8,7 @@ test('sortPlugins can sort plugins', async () => {
     ]
 
     const res = sortPlugins(plugins)
-    assert.snapshot(res.map(p => p.name).join(','), 'first,second,third')
+    expect(res.map(p => p.name).join(',')).toBe('first,second,third')
 })
 
 test('sortPlugins preserves order when possible', async () => {
@@ -26,8 +22,7 @@ test('sortPlugins preserves order when possible', async () => {
     ]
 
     const res = sortPlugins(plugins)
-    assert.snapshot(
-        res.map(p => p.name).join(','),
+    expect(res.map(p => p.name).join(',')).toBe(
         'first,second,third,fourth,fifth,sixth',
     )
 })
@@ -43,8 +38,7 @@ test('sortPlugins reports loops', async () => {
     try {
         sortPlugins(plugins)
     } catch (err) {
-        assert.snapshot(
-            err.message,
+        expect(err.message).toBe(
             'found infinite loop in plugins. Repeating pattern:\n' +
                 'impossible (before: second; after: third )\n' +
                 'third ( after: second )\n' +
@@ -52,5 +46,3 @@ test('sortPlugins reports loops', async () => {
         )
     }
 })
-
-test.run()

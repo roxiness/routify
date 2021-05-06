@@ -1,5 +1,3 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -10,7 +8,6 @@ import { metaFromFile } from '../../../lib/plugins/metaFromFile/metaFromFile.js'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const test = suite('bundler')
 
 const options = {
     filemapper: {
@@ -26,11 +23,12 @@ test('bundler writes files', async () => {
     await metaFromFile({ instance })
     await createBundles(instance.superNode.children[0], __dirname + '/temp')
 
-    assert.snapshot(
+    expect(
         readFileSync(
             __dirname + '/temp/bundles/_default_admin-bundle.js',
             'utf-8',
         ),
+    ).toBe(
         "export { default as _default_admin } from '../../example/admin/_reset.svelte'" +
             "\nexport { default as _default_admin_index_svelte } from '../../example/admin/index.svelte'" +
             "\nexport { default as _default_admin_page_svelte } from '../../example/admin/page.svelte'",
@@ -44,11 +42,9 @@ test('bundled files have correct component', () => {
         node => node.component,
     )
 
-    assert.equal(adminImports, [
+    expect(adminImports).toEqual([
         'import("./bundles/_default_admin-bundle.js").then(r => r._default_admin)',
         'import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_index_svelte)',
         'import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_page_svelte)',
     ])
 })
-
-test.run()
