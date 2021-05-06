@@ -1,13 +1,8 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 import '../../../lib/../typedef.js'
 import { createDirname } from '../../../lib/buildtime/utils.js'
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
-import fse from 'fs-extra'
-
-const test = suite('bundles')
 
 const __dirname = createDirname(import.meta)
 
@@ -19,16 +14,14 @@ test('can run routify with bundled plugins', async () => {
         },
     })
     await instance.start()
-    assertSnapshot(
-        'routify',
+    expect(
         readFileSync(
             resolve(__dirname, 'temp', '.routify', 'routes.default.js'),
             'utf-8',
         ),
-        0,
-    )
-    assertSnapshot(
-        'bundles',
+    ).toMatchSnapshot('routify')
+
+    expect(
         readFileSync(
             resolve(
                 __dirname,
@@ -39,15 +32,5 @@ test('can run routify with bundled plugins', async () => {
             ),
             'utf-8',
         ),
-        0,
-    )
+    ).toMatchSnapshot('bundles')
 })
-
-test.run()
-
-function assertSnapshot(name, content, update) {
-    const filepath = `${__dirname}/fixtures/${name}.js`
-    if (update) fse.outputFileSync(filepath, content)
-    const expect = readFileSync(filepath, 'utf-8')
-    assert.equal(content, expect)
-}

@@ -7,15 +7,13 @@ expect.extend({
         const active = _isActive(url)(path, params, options)
         const pathInfo = () =>
             `path: "${path}", params: ${JSON.stringify(params)}`
-        return active
-            ? {
-                  message: () => `url: "${url}" should not match ${pathInfo()}`,
-                  pass: true,
-              }
-            : {
-                  message: () => `url: "${url}" should match ${pathInfo()}`,
-                  pass: false,
-              }
+        return {
+            message: () =>
+                `url: "${url}" should ${
+                    active ? 'not' : ''
+                } match ${pathInfo()}`,
+            pass: !!active,
+        }
     },
 })
 

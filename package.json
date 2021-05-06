@@ -16,8 +16,7 @@
         "build:prettier": "npm run format",
         "test-watch": "nodemon --ignore {fixtures,temp,example,dist,build}/** --exec npm run test:uvu",
         "format": "prettier --write --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
-        "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/unit --watch",
-        "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/e2e --watch --preset jest-playwright-preset"
+        "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js ."
     },
     "author": "jakobrosenberg@gmail.com",
     "license": "MIT",
@@ -65,6 +64,7 @@
         "svelteIndentScriptAndStyle": true
     },
     "jest": {
+        "rootDir": ".",
         "transform": {},
         "moduleNameMapper": {
             "^#lib(.+)$": "<rootDir>/lib$1"
@@ -76,6 +76,48 @@
             "/temp/",
             "/output/"
         ],
-        "testTimeout": 2000
-    }
+        "testTimeout": 2000,
+        "projects": [
+            {
+                "displayName": "unit",
+                "testMatch": [
+                    "**/test/unit/**/?(*.)+(spec|test).[jt]s?(x)",
+                    "**/lib/**/?(*.)+(spec|test).[jt]s?(x)"
+                ],
+                "watchPathIgnorePatterns": [
+                    "/node_modules/",
+                    "/.routify/",
+                    "/build/",
+                    "/temp/",
+                    "/output/"
+                ]
+            },
+            {
+                "displayName": "integration",
+                "testMatch": ["**/test/integration/**/?(*.)+(spec|test).[jt]s?(x)"],
+                "watchPathIgnorePatterns": [
+                    "/node_modules/",
+                    "/.routify/",
+                    "/build/",
+                    "/temp/",
+                    "/output/"
+                ]
+            },
+            {
+                "displayName": "e2e",
+                "moduleNameMapper": {
+                    "^#lib(.+)$": "<rootDir>/lib$1"
+                },
+                "testMatch": ["**/test/e2e/**/?(*.)+(spec|test).[jt]s?(x)"],
+                "preset": "jest-playwright-preset",
+                "watchPathIgnorePatterns": [
+                    "/node_modules/",
+                    "/.routify/",
+                    "/build/",
+                    "/temp/",
+                    "/output/"
+                ]
+            }
+        ]
+    }    
 }

@@ -1,11 +1,7 @@
-import { suite } from 'uvu'
-import * as assert from 'uvu/assert'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 import { createDirname } from '../../../lib/buildtime/utils.js'
 import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
 import fse from 'fs-extra'
-const testBuildtime = suite('buildtime')
-const testRuntime = suite('runtime')
 
 const __dirname = createDirname(import.meta)
 
@@ -18,105 +14,92 @@ const buildtimeInstance = new RoutifyBuildtime({
     },
 })
 
-testBuildtime.before(async () => {
+beforeAll(async () => {
     fse.emptyDirSync(__dirname + '/temp')
     await buildtimeInstance.start()
 })
 
-testBuildtime('buildtime node can see own meta', async () => {
+test('buildtime node can see own meta', async () => {
     const rootNode = buildtimeInstance.superNode.children[0]
-    assert.is(rootNode.meta.plain, 'Im plain')
-    assert.is(rootNode.meta.function(), 'Im a function')
-    assert.is(rootNode.meta.scopedPlain, 'Im scoped')
+    expect(rootNode.meta.plain).toBe('Im plain')
+    expect(rootNode.meta.function()).toBe('Im a function')
+    expect(rootNode.meta.scopedPlain).toBe('Im scoped')
 
     const scopedSplitPlain = await rootNode.meta.scopedSplitPlain
-    assert.is(
-        scopedSplitPlain,
+    expect(scopedSplitPlain).toBe(
         "() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)::_EVAL",
     )
-    assert.is(rootNode.meta.scopedFunction(), 'Im a scoped function')
+    expect(rootNode.meta.scopedFunction()).toBe('Im a scoped function')
 
     const scopedSplitFunction = await rootNode.meta.scopedSplitFunction
-    assert.is(
-        scopedSplitFunction,
+    expect(scopedSplitFunction).toBe(
         `() => import('./meta/_default/scopedSplitFunction.js').then(r => r.default)::_EVAL`,
     )
-    assert.is(rootNode.meta.overwritten, 'original')
+    expect(rootNode.meta.overwritten).toBe('original')
 })
 
-testBuildtime(
-    'buildtime node can see parents scoped meta and own meta',
-    async () => {
-        const node = buildtimeInstance.nodeIndex.find(c => c.name === 'page')
-            .children[0]
-        assert.is(node.name, 'hello')
-        assert.not(node.meta.plain)
-        assert.not(node.meta.function)
-        assert.is(node.meta.scopedPlain, 'Im scoped')
+test('buildtime node can see parents scoped meta and own meta', async () => {
+    const node = buildtimeInstance.nodeIndex.find(c => c.name === 'page')
+        .children[0]
+    expect(node.name).toBe('hello')
+    expect(node.meta.plain).toBeFalsy()
+    expect(node.meta.function).toBeFalsy()
+    expect(node.meta.scopedPlain).toBe('Im scoped')
 
-        assert.is(
-            await node.meta.scopedSplitPlain,
-            "() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)::_EVAL",
-        )
-        assert.is(node.meta.scopedFunction(), 'Im a scoped function')
+    expect(await node.meta.scopedSplitPlain).toBe(
+        "() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)::_EVAL",
+    )
+    expect(node.meta.scopedFunction()).toBe('Im a scoped function')
 
-        assert.is(
-            await node.meta.scopedSplitFunction,
-            `() => import('./meta/_default/scopedSplitFunction.js').then(r => r.default)::_EVAL`,
-        )
-        assert.is(node.meta.overwritten, 'new value')
-    },
-)
+    expect(await node.meta.scopedSplitFunction).toBe(
+        `() => import('./meta/_default/scopedSplitFunction.js').then(r => r.default)::_EVAL`,
+    )
+    expect(node.meta.overwritten).toBe('new value')
+})
 
-testRuntime('runtime split meta data is imported with getter', async () => {
+test('runtime split meta data is imported with getter', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
-    assert.is(
-        rootNode.meta.__lookupGetter__('scopedSplitPlain').toString(),
+    expect(rootNode.meta.__lookupGetter__('scopedSplitPlain').toString()).toBe(
         `() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)`,
     )
 })
 
-testRuntime('runtime node can see own meta', async () => {
+test('runtime node can see own meta', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
-    assert.is(rootNode.meta.plain, 'Im plain')
-    assert.is(rootNode.meta.function(), 'Im a function')
-    assert.is(rootNode.meta.scopedPlain, 'Im scoped')
-    assert.is(await rootNode.meta.scopedSplitPlain, 'Im scoped split')
-    assert.is(rootNode.meta.scopedFunction(), 'Im a scoped function')
-    assert.is(
-        (await rootNode.meta.scopedSplitFunction)(),
+    expect(rootNode.meta.plain).toBe('Im plain')
+    expect(rootNode.meta.function()).toBe('Im a function')
+    expect(rootNode.meta.scopedPlain).toBe('Im scoped')
+    expect(await rootNode.meta.scopedSplitPlain).toBe('Im scoped split')
+    expect(rootNode.meta.scopedFunction()).toBe('Im a scoped function')
+    expect((await rootNode.meta.scopedSplitFunction)()).toBe(
         'Im a scoped split function',
     )
-    assert.is(rootNode.meta.overwritten, 'original')
+    expect(rootNode.meta.overwritten).toBe('original')
 })
 
-testRuntime('runtime node can see parents scoped meta', async () => {
+test('runtime node can see parents scoped meta', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const node = instance.nodeIndex.find(c => c.name === 'page').children[0]
-    assert.not(node.meta.plain)
-    assert.not(node.meta.function)
-    assert.is(node.meta.scopedPlain, 'Im scoped')
-    assert.is(await node.meta.scopedSplitPlain, 'Im scoped split')
-    assert.is(node.meta.scopedFunction(), 'Im a scoped function')
-    assert.is(
-        (await node.meta.scopedSplitFunction)(),
+    expect(node.meta.plain).toBeFalsy()
+    expect(node.meta.function).toBeFalsy()
+    expect(node.meta.scopedPlain).toBe('Im scoped')
+    expect(await node.meta.scopedSplitPlain).toBe('Im scoped split')
+    expect(node.meta.scopedFunction()).toBe('Im a scoped function')
+    expect((await node.meta.scopedSplitFunction)()).toBe(
         'Im a scoped split function',
     )
-    assert.is(node.meta.overwritten, 'new value')
+    expect(node.meta.overwritten).toBe('new value')
 })
 
-testRuntime('split metadata gets compiled', async () => {
+test('split metadata gets compiled', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const node = instance.nodeIndex.find(c => c.name === 'compiled')
-    assert.is(node.meta.plain, 'Im plain')
-    assert.is(await node.meta.asyncDataSplit, 'Im async split123')
+    expect(node.meta.plain).toBe('Im plain')
+    expect(await node.meta.asyncDataSplit).toBe('Im async split123')
 })
-
-testBuildtime.run()
-testRuntime.run()
