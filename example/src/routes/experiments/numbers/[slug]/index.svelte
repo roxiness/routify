@@ -5,12 +5,12 @@
     export let options
     let subRoutes = []
     const { instance } = payload
-    console.log(payload)
+    console.log('pl', payload)
     // console.log(payload.route)
 </script>
 
 <h1>
-    {payload.localParams.slug}
+    {payload.route.params.slug}
 </h1>
 
 <!-- <Router /> -->
