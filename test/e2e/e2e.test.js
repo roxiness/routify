@@ -4,16 +4,13 @@ import '#typedef'
 import { chromium } from 'playwright'
 import { setupRuntime } from './setup-runtime.js'
 
-const test = suite('e2e')
 /** @type {import('playwright').ChromiumBrowser} */
 let browser
+const promises = Promise.all([chromium.launch(), setupRuntime()])
 
+const test = suite('e2e')
 test.before(async () => {
-    ;[browser] = await Promise.all([chromium.launch(), setupRuntime()])
-})
-
-test.after(async () => {
-    await browser.close()
+    ;[browser] = await promises
 })
 
 test('should see front page', async () => {
@@ -21,9 +18,24 @@ test('should see front page', async () => {
     await page.goto('http://localhost:3334')
     const result = await page.waitForSelector('"test suite"', { timeout: 100 })
     assert.ok(result)
-    await new Promise(resolve => setTimeout(resolve, 200))
-    await page.screenshot({ path: `example.png` })
-    await browser.close()
+    page.close()
+})
+
+const navTest = suite('navigation')
+navTest.after(async () => {
+    // await browser.close()
+})
+
+navTest('Can click a link', async () => {
+    const page = await browser.newPage()
+    await page.goto('http://localhost:3334')
+    await page.waitForSelector('"test suite"', { timeout: 100 })
+    await page.click('"blog"')
+    const result = await page.waitForSelector('"My Blog"', { timeout: 100 })
+    assert.ok(result)
+    page.close()
 })
 
 test.run()
+
+navTest.run()

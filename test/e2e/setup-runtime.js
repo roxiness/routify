@@ -63,7 +63,7 @@ const routifyInstance = new RoutifyBuildtime({
         },
     },
     routifyDir: `${__dirname}/runtime/.routify`,
-    watch: false,
+    watch: true,
 })
 
 const startSpassr = () => {
@@ -76,11 +76,10 @@ const startSpassr = () => {
 }
 
 export const setupRuntime = async () => {
-    console.log('setting up runtime...')
+    console.log('setting up runtime...', __dirname)
     fse.existsSync(buildDir) && fse.rmdirSync(buildDir, { recursive: true })
     await routifyInstance.start()
     await buildRollup()
     startSpassr()
     console.log('setting up runtime... done!')
 }
-setupRuntime()
