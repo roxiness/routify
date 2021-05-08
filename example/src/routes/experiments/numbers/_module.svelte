@@ -19,7 +19,7 @@
 
 <Router offset="-2" url="/experiments/numbers/102/index" />
 <Router offset={payload.node} />
-<Router offset url="/experiments/numbers/104" state="internal" />
+<Router offset url="/experiments/numbers/104" />
 
 <button on:click={() => (useInternal = !useInternal)}
     >useInternal: {useInternal}</button>

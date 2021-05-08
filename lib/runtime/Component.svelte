@@ -6,8 +6,6 @@
     /** @type {RouteFragment}*/
     export let fragments
 
-    export let options
-
     /** @type {import('svelte/store').Readable<Route>}*/
     export let route
 
@@ -17,15 +15,14 @@
         route,
         node,
         localParams: fragment.params,
-        options,
     }
     $: setContext('routify-component', payload)
 </script>
 
 {#if restFragments.length}
-    <svelte:component this={fragment.node.component} {payload} let:options>
-        <svelte:self fragments={restFragments} {route} {options} />
+    <svelte:component this={fragment.node.component} {payload}>
+        <svelte:self fragments={restFragments} {route} />
     </svelte:component>
 {:else}
-    <svelte:component this={fragment.node.component} {payload} let:options />
+    <svelte:component this={fragment.node.component} {payload} />
 {/if}

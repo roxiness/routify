@@ -2,7 +2,6 @@
     import Router from '@roxi/routify/lib/runtime/Router.svelte'
 
     export let payload
-    export let options
     let subRoutes = []
     const { instance } = payload
     console.log('pl', payload)

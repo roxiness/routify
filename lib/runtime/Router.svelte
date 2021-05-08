@@ -4,10 +4,10 @@
     import { Router } from './Router.js'
     import { getContext } from 'svelte'
     import { AddressReflector } from './urlReflectors/Address.js'
-    export let instance
+    export let instance = null
     export let urlReflector = AddressReflector
-    export let offset
-    export let url
+    export let offset = null
+    export let url = null
 
     const parentCmpCtx = getContext('routify-component')
     instance = instance || parentCmpCtx.route.router.instance
@@ -24,7 +24,7 @@
 
     const handleClick = event => {
         const url = getUrlFromClick(event)
-        if (url) router.activeUrl.set({ url, mode: 'pushState' })
+        if (url) router.activeUrl.set({ url, mode: 'pushState', origin: 'internal' })
     }
 </script>
 
