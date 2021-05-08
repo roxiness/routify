@@ -35,7 +35,11 @@ const exported = {
 const instance = new RoutifyRuntime({ routes: exported })
 const router = new Router(instance)
 
-router.activeUrl.set({ url: '/blog/my-story' })
+router.activeUrl.set({
+    url: '/blog/my-story',
+    mode: 'pushState',
+    origin: 'internal',
+})
 
 test('activeRoute.fragments show currently active nodes', () => {
     expect(
@@ -52,7 +56,11 @@ test('activeRoute.fragments show currently active nodes', () => {
 })
 
 test('can get params', async () => {
-    router.activeUrl.set({ url: '/blog/my-story' })
+    router.activeUrl.set({
+        url: '/blog/my-story',
+        mode: 'pushState',
+        origin: 'internal',
+    })
     expect(get(router.params)).toEqual({ slug: 'my-story' })
 })
 
@@ -60,9 +68,17 @@ test('params are reactive', async () => {
     let value = {}
     const unsub = router.params.subscribe(val => (value = val))
     expect(value).toEqual({ slug: 'my-story' })
-    router.activeUrl.set({ url: '/blog/my-story-2' })
+    router.activeUrl.set({
+        url: '/blog/my-story-2',
+        mode: 'pushState',
+        origin: 'internal',
+    })
     expect(value).toEqual({ slug: 'my-story-2' })
     unsub()
-    router.activeUrl.set({ url: '/blog/my-story-3' })
+    router.activeUrl.set({
+        url: '/blog/my-story-3',
+        mode: 'pushState',
+        origin: 'internal',
+    })
     expect(value).toEqual({ slug: 'my-story-2' })
 })
