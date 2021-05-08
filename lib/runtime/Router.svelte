@@ -24,7 +24,7 @@
 
     const handleClick = event => {
         const url = getUrlFromClick(event)
-        if (url) router.activeUrl.set({ url, mode: 'pushState', origin: 'internal' })
+        if (url) router.activeUrl.push(url, 'internal')
     }
 </script>
 
