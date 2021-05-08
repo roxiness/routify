@@ -4,7 +4,6 @@
     export let payload
     let subRoutes = []
     const { instance } = payload
-    console.log('pl', payload)
     // console.log(payload.route)
 </script>
 
