@@ -79,10 +79,18 @@ export const setupRuntime = async () => {
     const spassrHandle = await startSpassr()
     console.log('setting up runtime... done!')
 
-    return async () => {
+    const teardown = async () => {
         console.log('tearing down runtime...')
         await spassrHandle.close()
         // routifyInstance.close()
         console.log('tearing down runtime... done!')
     }
+
+    global.__TEARDOWN__ = teardown
+
+    return teardown
 }
+
+export default setupRuntime
+
+if (process.argv.includes('run')) setupRuntime()

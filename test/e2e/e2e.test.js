@@ -1,14 +1,14 @@
-import { setupRuntime } from './setup-runtime.js'
+// import { setupRuntime } from './setup-runtime.js'
 
-let teardown
+// let teardown
 
-beforeAll(async () => {
-    teardown = await setupRuntime()
-})
+// beforeAll(async () => {
+//     teardown = await setupRuntime()
+// })
 
-afterAll(async () => {
-    teardown()
-})
+// afterAll(async () => {
+//     teardown()
+// })
 
 test('should see front page', async () => {
     await page.goto('http://localhost:3334')
