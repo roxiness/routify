@@ -1,6 +1,7 @@
 <script>
     import FileTree from '../components/FileTree.svelte'
     export let payload
+    $: console.log('n', payload.node)
 </script>
 
 <div class="app">
@@ -14,10 +15,17 @@
 </div>
 
 <style>
+    h1 {
+        white-space: nowrap
+    }
     .app {
         display: grid;
-        grid-template-columns: 200px auto;
+        grid-template-columns: min-content auto;
         height: 100vh;
+    }
+    aside {
+        padding-top: 32px;
+        padding-left: 32px;
     }
     main {
         background: #f4f7f9;
