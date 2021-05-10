@@ -8,13 +8,12 @@
         "#typedef": "./typedef.js"
     },
     "scripts": {
-        "test": "run-s test:*",
         "build": "run-s build:*",
-        "test:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
+        "build:format": "prettier --write --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
         "build:documentation": "documentation readme typedef.js -f md --section API",
-        "build:prettier": "npm run format",
-        "format": "prettier --write --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
-        "test:jest": "jest . --selectProjects unit integration"
+        "test": "run-s test:*",
+        "test:jest": "jest . --selectProjects unit integration",
+        "test:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\""
     },
     "author": "jakobrosenberg@gmail.com",
     "license": "MIT",
