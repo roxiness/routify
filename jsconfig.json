@@ -3,7 +3,8 @@
         "checkJs": true,
         "baseUrl": ".",
         "paths": {
-            "#lib/*": ["./lib/*"]
+            "#lib/*": ["./lib/*"],
+            "#typedef.js": ["./typedef.js"]
         },
         "target": "es2020"
     }

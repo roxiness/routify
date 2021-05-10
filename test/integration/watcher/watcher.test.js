@@ -1,4 +1,4 @@
-import '#typedef'
+import '#typedef.js'
 import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime.js'
 import { createDirname } from '#lib/buildtime/utils.js'
 import { resolve } from 'path'

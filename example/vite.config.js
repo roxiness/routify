@@ -22,5 +22,9 @@ export default defineConfig({
     },
     resolve: {
         dedupe: ['svelte'],
+        alias: {
+            '#typedef.js': process.cwd() + '/../typedef.js',
+            '#lib': process.cwd() + '/../lib',
+        },
     },
 })

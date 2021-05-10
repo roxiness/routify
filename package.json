@@ -5,7 +5,7 @@
     "type": "module",
     "imports": {
         "#lib/*": "./lib/*.js",
-        "#typedef": "./typedef.js"
+        "#typedef.js": "./typedef.js"
     },
     "scripts": {
         "build": "run-s build:*",

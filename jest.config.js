@@ -8,6 +8,7 @@ const common = {
     ],
     moduleNameMapper: {
         '^#lib(.+)$': '<rootDir>/lib$1',
+        '^#typedef.js$': '<rootDir>/typedef.js',
     },
     testTimeout: 2000,
 }

@@ -1,9 +1,9 @@
 <script>
     import Subroute from './Subroute.svelte'
-    import { getUrlFromClick } from './utils'
+    import { getUrlFromClick } from '../utils.js'
     import { Router } from './Router.js'
     import { getContext } from 'svelte'
-    import { AddressReflector } from './urlReflectors/Address.js'
+    import { AddressReflector } from '#lib/runtime/urlReflectors/Address.js'
     export let instance = null
     export let urlReflector = AddressReflector
     export let offset = null

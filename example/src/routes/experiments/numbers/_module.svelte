@@ -1,5 +1,5 @@
 <script>
-    import Router from '@roxi/routify/lib/runtime/Router.svelte'
+    import Router from '@roxi/routify/lib/runtime/Router/Router.svelte'
     export let payload
 
     $: pages = [

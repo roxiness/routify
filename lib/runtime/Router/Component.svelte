@@ -1,7 +1,7 @@
 <script>
     import { getContext, setContext } from 'svelte'
 
-    import '#typedef'
+    import '#typedef.js'
 
     /** @type {RouteFragment}*/
     export let fragments

@@ -1,5 +1,5 @@
 import test from 'ava'
-import '#typedef'
+import '#typedef.js'
 import { chromium } from 'playwright'
 
 // /** @type {import('playwright').ChromiumBrowser} */
