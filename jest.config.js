@@ -12,9 +12,11 @@ const common = {
     },
     testTimeout: 2000,
     modulePaths: ['<rootDir>'],
+    roots: ['<rootDir>'],
 }
 
 export default {
+    ...common,
     projects: [
         {
             ...common,
