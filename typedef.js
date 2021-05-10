@@ -2,19 +2,19 @@
  * @typedef {import('./lib/common/RNode')['RNode']} RNodeConstructor
  * @typedef {RNodeConstructor['prototype']} RNode
  *
- * @typedef {import('./lib/runtime/RNodeRuntime')['RNodeRuntime']} RNodeRuntimeConstructor
+ * @typedef {import('./lib/runtime/Instance/RNodeRuntime')['RNodeRuntime']} RNodeRuntimeConstructor
  * @typedef {RNodeRuntimeConstructor['prototype']} RNodeRuntime
  *
  * @typedef {import('./lib/runtime/route/Route')['Route']} RouteConstructor
  * @typedef {RouteConstructor['prototype']} Route
  *
- * @typedef {import('./lib/runtime/Router')['Router']} RouterConstructor
+ * @typedef {import('./lib/runtime/Router/Router')['Router']} RouterConstructor
  * @typedef {RouterConstructor['prototype']} Router
  *
  * @typedef {import('./lib/runtime/route/RouteFragment')['RouteFragment']} RouteFragmentConstructor
  * @typedef {RouteFragmentConstructor['prototype']} RouteFragment
  *
- * @typedef {import('./lib/runtime/RoutifyRuntime')['RoutifyRuntime']} RoutifyRuntimeConstructor
+ * @typedef {import('./lib/runtime/Instance/RoutifyRuntime')['RoutifyRuntime']} RoutifyRuntimeConstructor
  * @typedef {RoutifyRuntimeConstructor['prototype']} RoutifyRuntime
  *
  * @typedef {import('./lib/buildtime/RoutifyBuildtime')['RoutifyBuildtime']} RoutifyBuildtimeConstructor

@@ -1,5 +1,5 @@
-import { populateNodeTreeFromSnapshot } from '../../../lib/plugins/importer/importer.js'
-import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
+import { populateNodeTreeFromSnapshot } from '#lib/plugins/importer/importer.js'
+import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
 
 const exported = {
     meta: {

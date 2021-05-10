@@ -4,10 +4,10 @@ import {
     metaFromFile,
     htmlComments,
     externalMeta,
-} from '../../../lib/plugins/metaFromFile/metaFromFile.js'
+} from '#lib/plugins/metaFromFile/metaFromFile.js'
 import fse from 'fs-extra'
-import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
-import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
+import { filemapper } from '#lib/plugins/filemapper/lib/index.js'
+import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const externalMetaJS = import('./example/externalMeta.meta.js').then(r =>

@@ -1,4 +1,4 @@
-import { RoutifyRuntime } from '../../../lib/runtime/RoutifyRuntime.js'
+import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
 
 test('RoutifyRuntimes supernode uses RNodeRuntime', async () => {
     const instance = new RoutifyRuntime({})
