@@ -7,8 +7,8 @@ const common = {
         '/output/',
     ],
     moduleNameMapper: {
-        '^#lib(.+)$': '<rootDir>/lib$1',
-        '^#typedef.js$': '<rootDir>/typedef.js',
+        '^#lib(.+)$': '<rootDir>lib$1',
+        '^#typedef.js$': '<rootDir>typedef.js',
     },
     testTimeout: 2000,
     modulePaths: ['<rootDir>'],
