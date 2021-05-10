@@ -11,6 +11,7 @@ const common = {
         '^#typedef.js$': '<rootDir>/typedef.js',
     },
     testTimeout: 2000,
+    modulePaths: ['<rootDir>'],
 }
 
 export default {
