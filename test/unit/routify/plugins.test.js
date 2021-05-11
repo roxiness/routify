@@ -1,5 +1,5 @@
 import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
-import '#typedef.js'
+import '#root/typedef.js'
 
 /**
  * @type {RoutifyPlugin}

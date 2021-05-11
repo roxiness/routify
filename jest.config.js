@@ -8,7 +8,7 @@ const common = {
     ],
     moduleNameMapper: {
         '^#lib(.+)$': '<rootDir>lib$1',
-        '^#typedef.js$': '<rootDir>typedef.js',
+        '^#root(.+)$': '<rootDir>$1',
     },
     testTimeout: 2000,
     modulePaths: ['<rootDir>'],
@@ -41,8 +41,8 @@ export default {
             },
             testMatch: ['**/test/e2e/**/?(*.)+(spec|test).[jt]s?(x)'],
             preset: 'jest-playwright-preset',
-            // globalSetup: './test/e2e/setup-runtime.mjs',
-            // globalTeardown: './test/e2e/teardown-runtime.js',
+            globalSetup: './test/e2e/setup-runtime.mjs',
+            globalTeardown: './test/e2e/teardown-runtime.js',
         },
     ],
 }

@@ -1,6 +1,6 @@
 import { rollup } from 'rollup'
-import { createDirname } from '#lib/buildtime/utils'
-import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime'
+import { createDirname } from '../../lib/buildtime/utils.js'
+import { RoutifyBuildtime } from '../../lib/buildtime/RoutifyBuildtime.js'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import fse from 'fs-extra'

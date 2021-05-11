@@ -4,7 +4,7 @@
         "baseUrl": ".",
         "paths": {
             "#lib/*": ["./lib/*"],
-            "#typedef.js": ["./typedef.js"]
+            "#root/*": ["./*"]
         },
         "target": "es2020"
     }
