@@ -2,7 +2,7 @@
     import Subroute from './Subroute.svelte'
     import { getUrlFromClick } from '../utils.js'
     import { Router } from './Router.js'
-    import { getContext } from 'svelte'
+    import { getContext, onDestroy } from 'svelte'
     import { AddressReflector } from '#lib/runtime/urlReflectors/Address.js'
     export let instance = null
     export let urlReflector = AddressReflector
@@ -12,7 +12,7 @@
     const parentCmpCtx = getContext('routify-component')
     instance = instance || parentCmpCtx.route.router.instance
 
-    const router = new Router(instance, { parentCmpCtx })
+    const router = new Router(instance, { parentCmpCtx, name })
     $: router.urlReflector = urlReflector
     $: router.offset = offset
     $: router.url = url
@@ -26,6 +26,8 @@
         const url = getUrlFromClick(event)
         if (url) router.activeUrl.push(url, 'internal')
     }
+
+    onDestroy(() => router.destroy())
 </script>
 
 <div style="display: contents" use:initialize>
