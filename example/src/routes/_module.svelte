@@ -1,7 +1,6 @@
 <script>
     import FileTree from '../components/FileTree.svelte'
     export let payload
-    $: console.log('n', payload.node)
 </script>
 
 <div class="app">
