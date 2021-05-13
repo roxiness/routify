@@ -6,6 +6,6 @@
             "#lib/*": ["./lib/*"],
             "#root/*": ["./*"]
         },
-        "target": "es2020"
+        "target": "esnext"
     }
 }
