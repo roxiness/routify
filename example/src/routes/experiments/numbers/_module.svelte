@@ -18,7 +18,6 @@
 {/each}
 
 <Router offset="-2" url="/experiments/numbers/102/index" />
-<Router offset={payload.node} />
 <Router offset url="/experiments/numbers/104" />
 
 <button on:click={() => (useInternal = !useInternal)}
