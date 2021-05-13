@@ -3,7 +3,7 @@
     import { getUrlFromClick } from '../utils.js'
     import { Router } from './Router.js'
     import { getContext, onDestroy } from 'svelte'
-    import { AddressReflector } from '#lib/runtime/urlReflectors/Address.js'
+    import { AddressReflector } from './urlReflectors/Address.js'
     export let instance = null
     export let urlReflector = AddressReflector
     export let offset = null
