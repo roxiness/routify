@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
-        "checkJs": true,
         "baseUrl": ".",
         "paths": {
             "#lib/*": ["./lib/*"],
             "#root/*": ["./*"]
         },
-        "target": "esnext"
-    }
+        "target": "esnext",
+        "moduleResolution": "node"
+    },
+    "exclude": ["node_modules", "dist", "example", "temp", "output"]
 }
