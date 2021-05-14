@@ -8,11 +8,13 @@
     export let urlReflector = AddressReflector
     export let offset = null
     export let url = null
+    export let name = ""
+    export let router
 
     const parentCmpCtx = getContext('routify-component')
     instance = instance || parentCmpCtx.route.router.instance
 
-    const router = new Router(instance, { parentCmpCtx, name })
+    router = new Router(instance, { parentCmpCtx, name })
     $: router.urlReflector = urlReflector
     $: router.offset = offset
     $: router.url = url
