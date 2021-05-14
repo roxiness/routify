@@ -4,8 +4,8 @@
     let rightRouter = {}
     let inputLeft = ''
     let inputRight = ''
-    $: ({ leftActiveUrl } = leftRouter)
-    $: ({ rightActiveUrl } = rightRouter)
+    $: leftActiveUrl = leftRouter.activeUrl
+    $: rightActiveUrl = rightRouter.activeUrl
 
     $: setInputLeft(leftActiveUrl && $leftActiveUrl.url)
     $: setInputRight(rightActiveUrl && $rightActiveUrl.url)
