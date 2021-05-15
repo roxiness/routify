@@ -1,10 +1,10 @@
-import { _isActive } from '../../../lib/runtime/helpers.js'
+import { isActiveUrl } from '../../../lib/runtime/helpers.js'
 import '../../../lib/../typedef.js'
 
 expect.extend({
     toBeActive(input) {
         const [url, path, params, options] = input
-        const active = _isActive(url)(path, params, options)
+        const active = isActiveUrl(url)(path, params, options)
         const pathInfo = () =>
             `path: "${path}", params: ${JSON.stringify(params)}`
         return {
@@ -17,7 +17,7 @@ expect.extend({
     },
 })
 
-test('no "strict" should ignore index', () => {
+test('should ignore index', () => {
     const shouldBeTrue = [
         ['', '/index'],
         ['/', '/index'],
@@ -38,19 +38,19 @@ test('no "strict" should ignore index', () => {
     shouldBeFalse.forEach(assertIsNotActive)
 })
 
-test('"strict" should not ignore index', () => {
-    const strict = true
+test('recursive set to false should not ignore index', () => {
+    const recursive = false
     const shouldBeTrue = [
-        ['/blog', '/blog', {}, { strict }],
-        ['/blog/', '/blog', {}, { strict }],
-        ['/blog/index', '/blog/index', {}, { strict }],
+        ['/blog', '/blog', {}, { recursive }],
+        ['/blog/', '/blog', {}, { recursive }],
+        ['/blog/index', '/blog/index', {}, { recursive }],
     ]
 
     const shouldBeFalse = [
-        ['', '/index', {}, { strict }],
-        ['/', '/index', {}, { strict }],
-        ['/blog', '/blog/index', {}, { strict }],
-        ['/blog/', '/blog/index', {}, { strict }],
+        ['', '/index', {}, { recursive }],
+        ['/', '/index', {}, { recursive }],
+        ['/blog', '/blog/index', {}, { recursive }],
+        ['/blog/', '/blog/index', {}, { recursive }],
         ['/foobar', '/foo'],
     ]
 
