@@ -8,5 +8,11 @@
         "target": "esnext",
         "moduleResolution": "node"
     },
-    "exclude": ["node_modules", "dist", "example", "temp", "output"]
+    "exclude": [
+        "**/node_modules",
+        "**/dist",
+        "**/example",
+        "**/temp",
+        "**/output"
+    ]
 }
