@@ -13,6 +13,7 @@
     }
 
     export let router
+    let show = false
 
     const urlHooks = derived(router.urlReflector, urlReflector => {
         return Object.entries(reflectors).map(([name, reflector]) => ({
@@ -22,26 +23,33 @@
         }))
     })
 
-    const handleClick = reflector => {
-        console.log('hello')
-        router.urlReflector = reflector
+    const toggleMenu = () => {
+        console.log('toggle')
+        show = !show
     }
+    const selectReflector = reflector => (router.urlReflector = reflector)
 </script>
 
 <div class="options">
-    <div class="cog">⚙</div>
-    <ul class="menu">
-        {#each $urlHooks as { name, isActive, reflector }}
-            <li class:isActive on:click={() => handleClick(reflector)}>
-                {name}
-            </li>
-        {/each}
-    </ul>
+    <div class="cog" on:click={toggleMenu}>⚙</div>
+    {#if show}
+        <ul class="menu">
+            {#each $urlHooks as { name, isActive, reflector }}
+                <li class:isActive on:click={() => selectReflector(reflector)}>
+                    {name}
+                </li>
+            {/each}
+        </ul>
+    {/if}
 </div>
 
 {JSON.stringify(router.urlReflector)}
 
 <style>
+    .cog,
+    li {
+        cursor: pointer;
+    }
     .options {
         position: absolute;
         top: 4px;
