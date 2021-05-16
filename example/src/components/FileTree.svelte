@@ -9,7 +9,7 @@
 </script>
 
 <ul transition:t|local={anim}>
-    {#each node.children as child (child.path)}
+    {#each node.children.indexed as child (child.path)}
         <li>
             <a href={child.path} class:active={$isActive(child.path)}
                 >{child.name}</a>
