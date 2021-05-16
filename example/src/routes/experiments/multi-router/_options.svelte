@@ -43,8 +43,6 @@
     {/if}
 </div>
 
-{JSON.stringify(router.urlReflector)}
-
 <style>
     .cog,
     li {
