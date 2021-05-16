@@ -30,7 +30,7 @@
 
     const handleClick = event => {
         const url = getUrlFromClick(event)
-        if (url) router.activeUrl.push(url, 'internal')
+        if (url) router.activeUrl.push(url)
     }
 
     onDestroy(() => router.destroy())
