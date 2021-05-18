@@ -13,7 +13,7 @@
         <li>
             <a href={child.path} class:active={$isActive(child.path)}
                 >{child.name}</a>
-            {#if $isActive(child.path) && child.children.length}
+            {#if $isActive(child.path) && child.children.indexed.length}
                 <svelte:self node={child} nested={nested + 1} />
             {/if}
         </li>
