@@ -27,7 +27,9 @@ export const routes = {
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
       \\"meta\\": {
-        \\"reset\\": true
+        \\"reset\\": {
+          \\"value\\": true
+        }
       },
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/admin/_reset.svelte\\",
@@ -85,7 +87,9 @@ export const routes = {
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
           \\"meta\\": {
-            \\"dynamic\\": true
+            \\"dynamic\\": {
+              \\"value\\": true
+            }
           },
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/blog/[slug].svelte\\",
@@ -101,7 +105,9 @@ export const routes = {
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
           \\"meta\\": {
-            \\"dynamic\\": true
+            \\"dynamic\\": {
+              \\"value\\": true
+            }
           },
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/blog/prefixed[slug].svelte\\",

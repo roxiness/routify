@@ -25,14 +25,19 @@ export const routes = {
     \\"ext\\": \\".svelte\\",
     \\"name\\": \\"_module\\"
   },
+  \\"routifyDir\\": import.meta.url,
   \\"children\\": [
     {
       \\"component\\": import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin),
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
       \\"meta\\": {
-        \\"reset\\": true,
-        \\"bundle\\": true
+        \\"reset\\": {
+          \\"value\\": true
+        },
+        \\"bundle\\": {
+          \\"value\\": true
+        }
       },
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/admin/_reset.svelte\\",
@@ -76,7 +81,9 @@ export const routes = {
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
           \\"meta\\": {
-            \\"dynamic\\": true
+            \\"dynamic\\": {
+              \\"value\\": true
+            }
           },
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/[slug].svelte\\",
@@ -92,7 +99,9 @@ export const routes = {
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
           \\"meta\\": {
-            \\"dynamic\\": true
+            \\"dynamic\\": {
+              \\"value\\": true
+            }
           },
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/prefixed[slug].svelte\\",

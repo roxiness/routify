@@ -15,7 +15,9 @@ Object {
       },
       "id": "_default_admin",
       "meta": Object {
-        "reset": true,
+        "reset": Object {
+          "value": true,
+        },
       },
       "name": "admin",
     },
@@ -33,7 +35,9 @@ Object {
           },
           "id": "_default_blog__slug__svelte",
           "meta": Object {
-            "dynamic": true,
+            "dynamic": Object {
+              "value": true,
+            },
           },
           "name": "[slug]",
         },
@@ -49,7 +53,9 @@ Object {
           },
           "id": "_default_blog_prefixed_slug__svelte",
           "meta": Object {
-            "dynamic": true,
+            "dynamic": Object {
+              "value": true,
+            },
           },
           "name": "prefixed[slug]",
         },
@@ -494,7 +500,9 @@ Object {
       },
       "id": "_default_admin",
       "meta": Object {
-        "reset": true,
+        "reset": Object {
+          "value": true,
+        },
       },
       "name": "admin",
     },
@@ -512,7 +520,9 @@ Object {
           },
           "id": "_default_blog__slug__svelte",
           "meta": Object {
-            "dynamic": true,
+            "dynamic": Object {
+              "value": true,
+            },
           },
           "name": "[slug]",
         },
@@ -528,7 +538,9 @@ Object {
           },
           "id": "_default_blog_prefixed_slug__svelte",
           "meta": Object {
-            "dynamic": true,
+            "dynamic": Object {
+              "value": true,
+            },
           },
           "name": "prefixed[slug]",
         },

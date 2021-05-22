@@ -26,15 +26,11 @@ test('buildtime node can see own meta', async () => {
     expect(rootNode.meta.scopedPlain).toBe('Im scoped')
 
     const scopedSplitPlain = await rootNode.meta.scopedSplitPlain
-    expect(scopedSplitPlain).toBe(
-        "() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)::_EVAL",
-    )
+    expect(scopedSplitPlain).toBe('Im scoped split')
     expect(rootNode.meta.scopedFunction()).toBe('Im a scoped function')
 
     const scopedSplitFunction = await rootNode.meta.scopedSplitFunction
-    expect(scopedSplitFunction).toBe(
-        `() => import('./meta/_default/scopedSplitFunction.js').then(r => r.default)::_EVAL`,
-    )
+    expect(scopedSplitFunction()).toBe(`Im a scoped split function`)
     expect(rootNode.meta.overwritten).toBe('original')
 })
 
@@ -45,24 +41,20 @@ test('buildtime node can see parents scoped meta and own meta', async () => {
     expect(node.meta.plain).toBeFalsy()
     expect(node.meta.function).toBeFalsy()
     expect(node.meta.scopedPlain).toBe('Im scoped')
-
-    expect(await node.meta.scopedSplitPlain).toBe(
-        "() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)::_EVAL",
-    )
+    expect(await node.meta.scopedSplitPlain).toBe('Im scoped split')
     expect(node.meta.scopedFunction()).toBe('Im a scoped function')
-
-    expect(await node.meta.scopedSplitFunction).toBe(
-        `() => import('./meta/_default/scopedSplitFunction.js').then(r => r.default)::_EVAL`,
+    expect((await node.meta.scopedSplitFunction)()).toBe(
+        `Im a scoped split function`,
     )
     expect(node.meta.overwritten).toBe('new value')
 })
 
-test('runtime split meta data is imported with getter', async () => {
+test('runtime split meta data to be imported with getter', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
-    expect(rootNode.meta.__lookupGetter__('scopedSplitPlain').toString()).toBe(
-        `() => import('./meta/_default/scopedSplitPlain.js').then(r => r.default)`,
+    expect(rootNode.meta._props.scopedSplitPlain.value).toBe(
+        `cached/test/integration/meta/example/_module.svelte-scopedSplitPlain-split.js`,
     )
 })
 
@@ -71,10 +63,12 @@ test('runtime node can see own meta', async () => {
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
     expect(rootNode.meta.plain).toBe('Im plain')
-    expect(rootNode.meta.function()).toBe('Im a function')
+    // todo should we support functions?
+    // expect(rootNode.meta.function()).toBe('Im a function')
     expect(rootNode.meta.scopedPlain).toBe('Im scoped')
     expect(await rootNode.meta.scopedSplitPlain).toBe('Im scoped split')
-    expect(rootNode.meta.scopedFunction()).toBe('Im a scoped function')
+    // todo should we support functions?
+    // expect(rootNode.meta.scopedFunction()).toBe('Im a scoped function')
     expect((await rootNode.meta.scopedSplitFunction)()).toBe(
         'Im a scoped split function',
     )
@@ -89,7 +83,8 @@ test('runtime node can see parents scoped meta', async () => {
     expect(node.meta.function).toBeFalsy()
     expect(node.meta.scopedPlain).toBe('Im scoped')
     expect(await node.meta.scopedSplitPlain).toBe('Im scoped split')
-    expect(node.meta.scopedFunction()).toBe('Im a scoped function')
+    // todo should we support functions?
+    // expect(node.meta.scopedFunction()).toBe('Im a scoped function')
     expect((await node.meta.scopedSplitFunction)()).toBe(
         'Im a scoped split function',
     )
