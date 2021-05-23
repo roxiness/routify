@@ -10,11 +10,12 @@
     },
     "scripts": {
         "build": "run-s build:*",
-        "build:format": "prettier --write --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\"",
+        "build:lint": "npm run util:prettier -- --write",
         "build:documentation": "documentation readme typedef.js -f md --section API",
         "test": "run-s test:*",
         "test:jest": "jest .",
-        "test:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\""
+        "test:lint": "npm run util:prettier -- --check",
+        "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore"
     },
     "author": "jakobrosenberg@gmail.com",
     "license": "MIT",
