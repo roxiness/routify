@@ -1,5 +1,5 @@
 <script>
-    import {  setContext } from 'svelte'
+    import { setContext } from 'svelte'
     import '#root/typedef.js'
 
     /** @type {RouteFragment}*/

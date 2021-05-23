@@ -33,26 +33,25 @@ const childNode = instance.createNode('my-child-node')
 rootNode.appendChild(childNode)
 ```
 
-## Structure _(draft)_
+## Structure *(draft)*
 
-- Instance _(class)_
-  - nodeIndex _(array)_
-  - superNode _(class)_
-  - Router* _(component)_
-    - Router _(class)_
-      - params
-      - activeUrl** _(ActiveUrl)_
-      - activeRoute** _(Route)_
-        - fragments _(RouteFragment[])_    
-    - Component* _(component)_
-      - Component* _(component)_
-        - Component* _(component)_ ...
+*   Instance *(class)*
+    *   nodeIndex *(array)*
+    *   superNode *(class)*
+    *   Router\* *(component)*
+        *   Router *(class)*
+            *   params
+            *   activeUrl\*\* *(ActiveUrl)*
+            *   activeRoute\*\* *(Route)*
+                *   fragments *(RouteFragment\[])*
+        *   Component\* *(component)*
+            *   Component\* *(component)*
+                *   Component\* *(component)* ...
 
 <small>
 *: Component
 
-**: Store
-</small>
+\*\*: Store </small>
 
 ## API
 
@@ -60,13 +59,13 @@ rootNode.appendChild(childNode)
 
 #### Table of Contents
 
--   [RoutifyRuntimePayload](#routifyruntimepayload)
--   [RoutifyCallback](#routifycallback)
-    -   [Parameters](#parameters)
--   [RoutifyPlugin](#routifyplugin)
-    -   [Properties](#properties)
--   [PathNode](#pathnode)
-    -   [Properties](#properties-1)
+*   [RoutifyRuntimePayload](#routifyruntimepayload)
+*   [RoutifyCallback](#routifycallback)
+    *   [Parameters](#parameters)
+*   [RoutifyPlugin](#routifyplugin)
+    *   [Properties](#properties)
+*   [PathNode](#pathnode)
+    *   [Properties](#properties-1)
 
 ### RoutifyRuntimePayload
 
@@ -78,9 +77,9 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 #### Parameters
 
--   `first` **{instance: Routify}** 
+*   `first` **{instance: Routify}** 
 
-Returns **(T | [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;T>)** 
+Returns **(T | [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<T>)** 
 
 ### RoutifyPlugin
 
@@ -88,11 +87,11 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 #### Properties
 
--   `before` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run before
--   `after` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run after
--   `condition` **[RoutifyCallback](#routifycallback)&lt;[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)>?** run plugin if true
--   `run` **[RoutifyCallback](#routifycallback)&lt;any>** plugin script
--   `mode` **(`"compile"` \| `"runtime"`)** 
+*   `before` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run before
+*   `after` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run after
+*   `condition` **[RoutifyCallback](#routifycallback)<[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)>?** run plugin if true
+*   `run` **[RoutifyCallback](#routifycallback)\<any>** plugin script
+*   `mode` **(`"compile"` | `"runtime"`)** 
 
 ### PathNode
 
@@ -100,5 +99,5 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 #### Properties
 
--   `urlFragment` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `node` **RNodeRuntime** 
+*   `urlFragment` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `node` **RNodeRuntime** 
