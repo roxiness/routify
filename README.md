@@ -8,6 +8,28 @@
 const instance = new Routify({/* options */})
 ```
 
+#### Creating a router
+Basic
+```html
+<script>
+    import { Router } from '@roxi/routify'
+    import { routes } from '../.routify/routes.default.js'
+</script>
+
+<Router {routes} />
+```
+
+Create instance manually
+```html
+<script>
+    import { Routify, Router } from '@roxi/routify'
+    import { routes } from '../.routify/routes.default.js'
+    const instance = new Routify({ routes, /* options */ })
+</script>
+
+<Router {instance} />
+```
+
 #### Creating nodes
 
 ```javascript
