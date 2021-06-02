@@ -35,18 +35,19 @@ rootNode.appendChild(childNode)
 
 ## Structure *(draft)*
 
-*   Instance *(class)*
-    *   nodeIndex *(array)*
-    *   superNode *(class)*
-    *   Router\* *(component)*
-        *   Router *(class)*
-            *   params
-            *   activeUrl\*\* *(ActiveUrl)*
-            *   activeRoute\*\* *(Route)*
-                *   fragments *(RouteFragment\[])*
-        *   Component\* *(component)*
+* Global *(class)*
+    *   Instance *(class)*
+        *   nodeIndex *(array)*
+        *   superNode *(class)*
+        *   Router\* *(component)*
+            *   Router *(class)*
+                *   params
+                *   activeUrl\*\* *(ActiveUrl)*
+                *   activeRoute\*\* *(Route)*
+                    *   fragments *(RouteFragment\[])*
             *   Component\* *(component)*
-                *   Component\* *(component)* ...
+                *   Component\* *(component)*
+                    *   Component\* *(component)* ...
 
 <small>
 *: Component
