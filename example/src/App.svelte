@@ -1,7 +1,7 @@
 <script>
-    import { Routify, Router } from '../../lib/runtime/index.js'
+    import { Routify, Router } from '@roxi/routify'
     import { routes } from '../.routify/routes.default.js'
     const instance = new Routify({ routes, debugger: false })
 </script>
 
-<Router {instance} />
+<Router {routes} />

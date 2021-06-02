@@ -5,6 +5,7 @@
     import { getContext, onDestroy } from 'svelte'
     import { AddressReflector } from './urlReflectors/Address.js'
     import Noop from '../decorators/Noop.svelte'
+    import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js'
     export let instance = null
     export let urlReflector = AddressReflector
     export let offset = null
@@ -12,10 +13,15 @@
     export let name = ''
     export let router = null
     export let activeUrl = null
+    export let routes = null
     export let decorator = Noop
 
     const parentCmpCtx = getContext('routify-component')
-    instance = instance || parentCmpCtx.route.router.instance
+    instance =
+        instance ||
+        (routes
+            ? new RoutifyRuntime({ routes, debugger: false })
+            : parentCmpCtx.route.router.instance)
 
     router = new Router(instance, { parentCmpCtx, name })
     activeUrl = router.activeUrl
