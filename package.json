@@ -39,8 +39,7 @@
         "rollup": "^2.47.0",
         "rollup-plugin-livereload": "^2.0.0",
         "rollup-plugin-svelte": "^7.1.0",
-        "spassr": "^2.6.0",
-        "uvu": "^0.5.1"
+        "spassr": "^2.6.0"
     },
     "dependencies": {
         "cheerio": "^0.x",
