@@ -7,4 +7,5 @@
         "editor.defaultFormatter": "svelte.svelte-vscode",
         "editor.formatOnSave": true
     },
+    "jest.jestCommandLine": "npm run test:jest --",
 }
