@@ -5,6 +5,7 @@ const common = {
         '/build/',
         '/temp/',
         '/output/',
+        '.history',
     ],
     moduleNameMapper: {
         '^#lib(.+)$': '<rootDir>lib$1',
