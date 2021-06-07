@@ -73,7 +73,8 @@ function resolveRedirects(route, routes, redirectPath, rewritePath) {
         const redirectParams = redirect && redirect.params
         const rewriteParams = rewrite && rewrite.params
 
-        const newRoute = routes.find(r => r.path === rewritePath)
+        const newRoute = routes.find(r => r.path.replace(/\/index$/,'') === rewritePath)
+
         if (newRoute === route) console.error(`${rewritePath} is redirecting to itself`)
         if (!newRoute) console.error(`${route.path} is redirecting to non-existent path: ${rewritePath}`)
         if (redirectParams || rewriteParams)
