@@ -18,10 +18,14 @@
 
 import axios from 'axios'
 
-export default async () => {
+export default async ({ cache }) => {
     return {
         luke: (await axios.get('https://swapi.dev/api/people/1/')).data,
         'darth|split': (await axios.get('https://swapi.dev/api/people/4/'))
             .data,
+        leia: {
+            value: async () =>
+                (await axios.get('https://swapi.dev/api/people/5/')).data,
+        },
     }
 }

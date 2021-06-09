@@ -15,6 +15,12 @@
         {data.name}
     {/await}
 </div>
+<div>
+    {#await payload.node.meta.who then data}
+        <strong>Leia:</strong>
+        {data.name}
+    {/await}
+</div>
 
 {count}
 
