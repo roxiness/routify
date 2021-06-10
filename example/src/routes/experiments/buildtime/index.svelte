@@ -16,7 +16,7 @@
     {/await}
 </div>
 <div>
-    {#await payload.node.meta.who then data}
+    {#await payload.node.meta.leia then data}
         <strong>Leia:</strong>
         {data.name}
     {/await}
