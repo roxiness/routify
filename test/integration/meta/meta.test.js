@@ -26,11 +26,15 @@ test('buildtime node can see own meta', async () => {
     expect(rootNode.meta.scopedPlain).toBe('Im scoped')
 
     const scopedSplitPlain = await rootNode.meta.scopedSplitPlain
-    expect(scopedSplitPlain).toBe('Im scoped split')
+    expect(scopedSplitPlain).toBe(
+        "()=> import('./cached/test/integration/meta/example/_module.svelte-scopedSplitPlain-split.js').then(r => r.default)::_EVAL",
+    )
     expect(rootNode.meta.scopedFunction()).toBe('Im a scoped function')
 
     const scopedSplitFunction = await rootNode.meta.scopedSplitFunction
-    expect(scopedSplitFunction()).toBe(`Im a scoped split function`)
+    expect(scopedSplitFunction).toBe(
+        `()=> import('./cached/test/integration/meta/example/_module.svelte-scopedSplitFunction-split.js').then(r => r.default)::_EVAL`,
+    )
     expect(rootNode.meta.overwritten).toBe('original')
 })
 
@@ -41,10 +45,12 @@ test('buildtime node can see parents scoped meta and own meta', async () => {
     expect(node.meta.plain).toBeFalsy()
     expect(node.meta.function).toBeFalsy()
     expect(node.meta.scopedPlain).toBe('Im scoped')
-    expect(await node.meta.scopedSplitPlain).toBe('Im scoped split')
+    expect(await node.meta.scopedSplitPlain).toBe(
+        "()=> import('./cached/test/integration/meta/example/_module.svelte-scopedSplitPlain-split.js').then(r => r.default)::_EVAL",
+    )
     expect(node.meta.scopedFunction()).toBe('Im a scoped function')
-    expect((await node.meta.scopedSplitFunction)()).toBe(
-        `Im a scoped split function`,
+    expect(await node.meta.scopedSplitFunction).toBe(
+        `()=> import('./cached/test/integration/meta/example/_module.svelte-scopedSplitFunction-split.js').then(r => r.default)::_EVAL`,
     )
     expect(node.meta.overwritten).toBe('new value')
 })
@@ -53,8 +59,8 @@ test('runtime split meta data to be imported with getter', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
-    expect(rootNode.meta._props.scopedSplitPlain.value).toBe(
-        `cached/test/integration/meta/example/_module.svelte-scopedSplitPlain-split.js`,
+    expect(await rootNode.meta._props.scopedSplitPlain.value()).toBe(
+        `Im scoped split`,
     )
 })
 
