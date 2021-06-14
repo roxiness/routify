@@ -5,8 +5,7 @@ import '#root/typedef.js'
  * @type {RoutifyPlugin}
  */
 const aPlugin = {
-    mode: 'runtime',
-    run: ({ instance }) => {
+    init: ({ instance }) => {
         const node = instance.createNode('my-node')
         instance.superNode.appendChild(node)
     },
@@ -15,8 +14,7 @@ const aPlugin = {
  * @type {RoutifyPlugin}
  */
 const anotherPlugin = {
-    mode: 'runtime',
-    run: ({ instance }) => {
+    init: ({ instance }) => {
         const node = instance.createNode('my-2nd-node')
         instance.superNode.appendChild(node)
     },

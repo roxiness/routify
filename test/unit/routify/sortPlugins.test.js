@@ -1,4 +1,4 @@
-import { sortPlugins } from '../../../lib/common/utils.js'
+import { normalizePlugins, sortPlugins } from '../../../lib/common/utils.js'
 
 test('sortPlugins can sort plugins', async () => {
     const plugins = [
@@ -7,7 +7,7 @@ test('sortPlugins can sort plugins', async () => {
         { name: 'first', before: 'second' },
     ]
 
-    const res = sortPlugins(plugins)
+    const res = sortPlugins(normalizePlugins(plugins))
     expect(res.map(p => p.name).join(',')).toBe('first,second,third')
 })
 
@@ -21,7 +21,7 @@ test('sortPlugins preserves order when possible', async () => {
         { name: 'sixth' },
     ]
 
-    const res = sortPlugins(plugins)
+    const res = sortPlugins(normalizePlugins(plugins))
     expect(res.map(p => p.name).join(',')).toBe(
         'first,second,third,fourth,fifth,sixth',
     )
@@ -36,7 +36,7 @@ test('sortPlugins reports loops', async () => {
     ]
 
     try {
-        sortPlugins(plugins)
+        sortPlugins(normalizePlugins(plugins))
     } catch (err) {
         expect(err.message).toBe(
             'found infinite loop in plugins. Repeating pattern:\n' +
