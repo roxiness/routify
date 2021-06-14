@@ -2,10 +2,10 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { readFileSync } from 'fs'
-import { filemapper } from '../../../lib/plugins/filemapper/lib/index.js'
-import { createBundles } from '../../../lib/plugins/bundler/bundler.js'
-import { metaFromFile } from '../../../lib/plugins/metaFromFile/metaFromFile.js'
-import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
+import { filemapper } from '#lib/buildtime/plugins/filemapper/lib/index.js'
+import { createBundles } from '#lib/buildtime/plugins/bundler/bundler.js'
+import { metaFromFile } from '#lib/buildtime/plugins/metaFromFile/metaFromFile.js'
+import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 

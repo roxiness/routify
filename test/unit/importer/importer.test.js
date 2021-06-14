@@ -1,4 +1,4 @@
-import { populateNodeTreeFromSnapshot } from '#lib/plugins/importer/importer.js'
+import { populateNodeTreeFromSnapshot } from '#lib/runtime/plugins/importer/importer.js'
 import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
 
 const exported = {
