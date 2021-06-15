@@ -2,7 +2,7 @@
     "type": "module",
     "scripts": {
         "dev": "run-p dev:*",
-        "dev:routifiy": "node run-routify.js",
+        "dev:routifiy": "routify3 --watch",
         "dev:vite": "vite"
     },
     "devDependencies": {
