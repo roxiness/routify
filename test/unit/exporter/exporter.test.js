@@ -7,9 +7,7 @@ import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const options = {
-    filemapper: {
-        routesDir: { default: __dirname + '/example' },
-    },
+    routesDir: { default: __dirname + '/example' },
 }
 
 const instance = new RoutifyBuildtime(options)
@@ -20,10 +18,7 @@ test('can build route tree', async () => {
 })
 
 test('can export a route tree', async () => {
-    await exportNode(
-        instance.superNode.children[0],
-        __dirname + '/temp/.routify',
-    )
+    await exportNode(instance.superNode.children[0], __dirname + '/temp/.routify')
     const content = fse.readFileSync(
         resolve(__dirname, 'temp/.routify', 'routes.default.js'),
         'utf-8',

@@ -9,9 +9,7 @@ const __dirname = createDirname(import.meta)
 test('can run routify with bundled plugins', async () => {
     const instance = new RoutifyBuildtime({
         routifyDir: resolve(__dirname, 'temp', '.routify'),
-        filemapper: {
-            routesDir: resolve(__dirname, 'example'),
-        },
+        routesDir: resolve(__dirname, 'example'),
     })
     await instance.start()
     expect(
@@ -23,13 +21,7 @@ test('can run routify with bundled plugins', async () => {
 
     expect(
         readFileSync(
-            resolve(
-                __dirname,
-                'temp',
-                '.routify',
-                'bundles',
-                '_default_admin-bundle.js',
-            ),
+            resolve(__dirname, 'temp', '.routify', 'bundles', '_default_admin-bundle.js'),
             'utf-8',
         ),
     ).toMatchSnapshot('bundles')

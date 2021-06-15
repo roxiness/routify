@@ -9,10 +9,10 @@ import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const options = {
+    routesDir: { default: `${__dirname}/example` },
     filemapper: {
         moduleFiles: ['_module.svelte', '_reset.svelte'],
         resetFiles: ['_reset.svelte'],
-        routesDir: { default: `${__dirname}/example` },
     },
 }
 
@@ -22,7 +22,7 @@ let rootNode = instance.createNode()
 rootNode.rootName = 'default'
 
 test('files are mapped', async () => {
-    await createNodesFromFiles(rootNode, options.filemapper.routesDir.default)
+    await createNodesFromFiles(rootNode, options.routesDir.default)
     expect(instance.nodeIndex.length).toBe(13)
     expect(rootNode).toMatchSnapshot('1.filemap-only')
 })
@@ -41,7 +41,5 @@ test('options get added', async () => {
 test('filemapper', async () => {
     const instance = new RoutifyBuildtime(options)
     await filemapper({ instance })
-    expect(instance.superNode.children[0]).toMatchSnapshot(
-        '4.filemap-with-components',
-    )
+    expect(instance.superNode.children[0]).toMatchSnapshot('4.filemap-with-components')
 })

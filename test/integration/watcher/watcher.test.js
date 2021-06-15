@@ -16,9 +16,7 @@ beforeAll(async () => {
 
     instance = new RoutifyBuildtime({
         routifyDir: resolve(__dirname, 'temp', '.routify'),
-        filemapper: {
-            routesDir: resolve(__dirname, 'example'),
-        },
+        routesDir: resolve(__dirname, 'example'),
         watch: true,
     })
     await instance.start()
@@ -52,8 +50,6 @@ test('detects renamed files', async () => {
     fse.renameSync(filepath, renamedFilepath)
     await new Promise(resolve => instance.on.buildComplete(resolve))
     expect(
-        instance.superNode.children[0].descendants.find(
-            node => node.name === 'NewFile2',
-        ),
+        instance.superNode.children[0].descendants.find(node => node.name === 'NewFile2'),
     ).toBeTruthy()
 })

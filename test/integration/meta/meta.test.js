@@ -7,10 +7,8 @@ const __dirname = createDirname(import.meta)
 
 const buildtimeInstance = new RoutifyBuildtime({
     routifyDir: __dirname + '/temp',
-    filemapper: {
-        routesDir: {
-            default: __dirname + '/example',
-        },
+    routesDir: {
+        default: __dirname + '/example',
     },
 })
 
@@ -39,8 +37,7 @@ test('buildtime node can see own meta', async () => {
 })
 
 test('buildtime node can see parents scoped meta and own meta', async () => {
-    const node = buildtimeInstance.nodeIndex.find(c => c.name === 'page')
-        .children[0]
+    const node = buildtimeInstance.nodeIndex.find(c => c.name === 'page').children[0]
     expect(node.name).toBe('hello')
     expect(node.meta.plain).toBeFalsy()
     expect(node.meta.function).toBeFalsy()
@@ -59,9 +56,7 @@ test('runtime split meta data to be imported with getter', async () => {
     const { routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
-    expect(await rootNode.meta._props.scopedSplitPlain.value()).toBe(
-        `Im scoped split`,
-    )
+    expect(await rootNode.meta._props.scopedSplitPlain.value()).toBe(`Im scoped split`)
 })
 
 test('runtime node can see own meta', async () => {
@@ -75,9 +70,7 @@ test('runtime node can see own meta', async () => {
     expect(await rootNode.meta.scopedSplitPlain).toBe('Im scoped split')
     // todo should we support functions?
     // expect(rootNode.meta.scopedFunction()).toBe('Im a scoped function')
-    expect((await rootNode.meta.scopedSplitFunction)()).toBe(
-        'Im a scoped split function',
-    )
+    expect((await rootNode.meta.scopedSplitFunction)()).toBe('Im a scoped split function')
     expect(rootNode.meta.overwritten).toBe('original')
 })
 
@@ -91,9 +84,7 @@ test('runtime node can see parents scoped meta', async () => {
     expect(await node.meta.scopedSplitPlain).toBe('Im scoped split')
     // todo should we support functions?
     // expect(node.meta.scopedFunction()).toBe('Im a scoped function')
-    expect((await node.meta.scopedSplitFunction)()).toBe(
-        'Im a scoped split function',
-    )
+    expect((await node.meta.scopedSplitFunction)()).toBe('Im a scoped split function')
     expect(node.meta.overwritten).toBe('new value')
 })
 

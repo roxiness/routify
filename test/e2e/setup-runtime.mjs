@@ -52,12 +52,10 @@ async function buildRollup() {
 }
 
 const routifyInstance = new RoutifyBuildtime({
-    filemapper: {
-        routesDir: {
-            default: `${__dirname}/runtime/routes`,
-            // widget1: `${__dirname}/src/widget1/routes`,
-            // widget2: `${__dirname}/src/widget2/routes`,
-        },
+    routesDir: {
+        default: `${__dirname}/runtime/routes`,
+        // widget1: `${__dirname}/src/widget1/routes`,
+        // widget2: `${__dirname}/src/widget2/routes`,
     },
     routifyDir: `${__dirname}/runtime/.routify`,
     watch: false,
