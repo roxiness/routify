@@ -13,9 +13,10 @@
     </main>
 </div>
 
+<!-- routify:meta split|scoped -->
 <style>
     h1 {
-        white-space: nowrap
+        white-space: nowrap;
     }
     .app {
         display: grid;
