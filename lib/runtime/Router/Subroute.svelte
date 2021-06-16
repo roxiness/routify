@@ -2,25 +2,27 @@
     import Component from './Component.svelte'
     export let router
     $: ({ activeRoute, activeUrl, instance } = router)
-    $: ({ fragments } = $activeRoute)
+    $: ({ fragments } = $activeRoute || { fragments: [] })
     $: fragments = fragments.filter(fragment => fragment.node.component)
 </script>
 
-{#if instance.options.debugger}
-    <main>
-        <div class="bar">
-            <strong>path:</strong>
-            <span class="url">
-                {$activeUrl}
-            </span>
-            <span class="filepath">
-                {fragments[0].node.file.path}
-            </span>
-        </div>
+{#if $activeRoute}
+    {#if instance.options.debugger}
+        <main>
+            <div class="bar">
+                <strong>path:</strong>
+                <span class="url">
+                    {$activeUrl}
+                </span>
+                <span class="filepath">
+                    {fragments[0].node.file.path}
+                </span>
+            </div>
+            <Component route={$activeRoute} {fragments} />
+        </main>
+    {:else}
         <Component route={$activeRoute} {fragments} />
-    </main>
-{:else}
-    <Component route={$activeRoute} {fragments} />
+    {/if}
 {/if}
 
 <style>
