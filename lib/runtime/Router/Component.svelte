@@ -19,9 +19,9 @@
 </script>
 
 {#if restFragments.length}
-    <svelte:component this={fragment.node.component} {payload}>
+    <svelte:component this={fragment.node.component.default} {payload}>
         <svelte:self fragments={restFragments} {route} />
     </svelte:component>
 {:else}
-    <svelte:component this={fragment.node.component} {payload} />
+    <svelte:component this={fragment.node.component.default} {payload} />
 {/if}
