@@ -10,6 +10,7 @@
 
     $: [fragment, ...restFragments] = [...fragments]
     $: node = fragment.node
+    $: load = fragment.load
     $: payload = {
         route,
         node,
@@ -20,8 +21,8 @@
 
 {#if restFragments.length}
     <svelte:component this={fragment.node.component.default} {payload}>
-        <svelte:self fragments={restFragments} {route} />
+        <svelte:self fragments={restFragments} {route} {...load} />
     </svelte:component>
 {:else}
-    <svelte:component this={fragment.node.component.default} {payload} />
+    <svelte:component this={fragment.node.component.default} {payload} {...load} />
 {/if}
