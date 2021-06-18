@@ -6,12 +6,12 @@ export { default as _default_admin_bundleme_svelte } from '../../../example/admi
 `;
 
 exports[`can run routify with bundled plugins: routify 1`] = `
-"import _default from '../../example/_module.svelte'
-import _default_index_svelte from '../../example/index.svelte'
-import _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
-import _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
-import _default_no_layouts_nested_foo_svelte from '../../example/no-layouts/nested/foo.svelte'
-import _default_no_layouts_nested_index_svelte from '../../example/no-layouts/nested/index.svelte'
+"import * as _default from '../../example/_module.svelte'
+import * as _default_index_svelte from '../../example/index.svelte'
+import * as _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
+import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
+import * as _default_no_layouts_nested_foo_svelte from '../../example/no-layouts/nested/foo.svelte'
+import * as _default_no_layouts_nested_index_svelte from '../../example/no-layouts/nested/index.svelte'
 
 export const routes = {
   \\"component\\": _default,

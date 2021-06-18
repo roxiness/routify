@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`can export a route tree 1`] = `
-"import _default from '../../example/_module.svelte'
-import _default_admin from '../../example/admin/_reset.svelte'
-import _default_index_svelte from '../../example/index.svelte'
-import _default_admin_index_svelte from '../../example/admin/index.svelte'
-import _default_admin_page_svelte from '../../example/admin/page.svelte'
-import _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
-import _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
+"import * as _default from '../../example/_module.svelte'
+import * as _default_admin from '../../example/admin/_reset.svelte'
+import * as _default_index_svelte from '../../example/index.svelte'
+import * as _default_admin_index_svelte from '../../example/admin/index.svelte'
+import * as _default_admin_page_svelte from '../../example/admin/page.svelte'
+import * as _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
+import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
 
 export const routes = {
   \\"component\\": _default,
