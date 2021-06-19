@@ -23,9 +23,9 @@
             : parentCmpCtx.route.router.instance)
 
     router = new Router(instance, { parentCmpCtx, name })
-    $: router.urlReflector = urlReflector
     $: router.offset = offset
     $: if (url) router.url.replace(url)
+    $: router.urlReflector = urlReflector
 
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
