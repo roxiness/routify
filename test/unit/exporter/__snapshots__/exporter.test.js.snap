@@ -10,8 +10,8 @@ import * as _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
 import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
 
 export const routes = {
-  \\"component\\": _default,
   \\"id\\": \\"_default\\",
+  \\"component\\": _default,
   \\"meta\\": {},
   \\"rootName\\": \\"default\\",
   \\"file\\": {
@@ -23,9 +23,9 @@ export const routes = {
   },
   \\"children\\": [
     {
-      \\"component\\": _default_admin,
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
+      \\"component\\": _default_admin,
       \\"meta\\": {
         \\"reset\\": {
           \\"value\\": true
@@ -40,9 +40,9 @@ export const routes = {
       },
       \\"children\\": [
         {
-          \\"component\\": _default_admin_index_svelte,
           \\"id\\": \\"_default_admin_index_svelte\\",
           \\"name\\": \\"index\\",
+          \\"component\\": _default_admin_index_svelte,
           \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/admin/index.svelte\\",
@@ -54,9 +54,9 @@ export const routes = {
           \\"children\\": []
         },
         {
-          \\"component\\": _default_admin_page_svelte,
           \\"id\\": \\"_default_admin_page_svelte\\",
           \\"name\\": \\"page\\",
+          \\"component\\": _default_admin_page_svelte,
           \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/admin/page.svelte\\",
@@ -70,9 +70,9 @@ export const routes = {
       ]
     },
     {
-      \\"component\\": false,
       \\"id\\": \\"_default_blog\\",
       \\"name\\": \\"blog\\",
+      \\"component\\": false,
       \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/blog\\",
@@ -83,9 +83,9 @@ export const routes = {
       },
       \\"children\\": [
         {
-          \\"component\\": _default_blog__slug__svelte,
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
+          \\"component\\": _default_blog__slug__svelte,
           \\"meta\\": {
             \\"dynamic\\": {
               \\"value\\": true
@@ -101,9 +101,9 @@ export const routes = {
           \\"children\\": []
         },
         {
-          \\"component\\": _default_blog_prefixed_slug__svelte,
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
+          \\"component\\": _default_blog_prefixed_slug__svelte,
           \\"meta\\": {
             \\"dynamic\\": {
               \\"value\\": true
@@ -121,9 +121,9 @@ export const routes = {
       ]
     },
     {
-      \\"component\\": _default_index_svelte,
       \\"id\\": \\"_default_index_svelte\\",
       \\"name\\": \\"index\\",
+      \\"component\\": _default_index_svelte,
       \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/index.svelte\\",
