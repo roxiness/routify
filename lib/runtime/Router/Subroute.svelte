@@ -1,9 +1,9 @@
 <script>
     import Component from './Component.svelte'
     export let router
-    $: ({ activeRoute, activeUrl, instance } = router)
-    $: ({ fragments } = $activeRoute || { fragments: [] })
-    $: fragments = fragments.filter(fragment => fragment.node.component)
+    $: ({ activeRoute, instance } = router)
+    $: fragments =
+        $activeRoute && $activeRoute.fragments.filter(fragment => fragment.node.component)
 </script>
 
 {#if $activeRoute}
@@ -12,7 +12,7 @@
             <div class="bar">
                 <strong>path:</strong>
                 <span class="url">
-                    {$activeUrl}
+                    {$activeRoute.url}
                 </span>
                 <span class="filepath">
                     {fragments[0].node.file.path}

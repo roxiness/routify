@@ -12,7 +12,6 @@
     export let url = null
     export let name = ''
     export let router = null
-    export let activeUrl = null
     export let routes = null
     export let decorator = Noop
 
@@ -24,10 +23,9 @@
             : parentCmpCtx.route.router.instance)
 
     router = new Router(instance, { parentCmpCtx, name })
-    activeUrl = router.activeUrl
     $: router.urlReflector = urlReflector
     $: router.offset = offset
-    $: router.url = url
+    $: if (url) router.url.replace(url)
 
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
@@ -36,7 +34,7 @@
 
     const handleClick = event => {
         const url = getUrlFromClick(event)
-        if (url) router.activeUrl.push(url)
+        if (url) router.url.push(url)
     }
 
     onDestroy(() => router.destroy())
