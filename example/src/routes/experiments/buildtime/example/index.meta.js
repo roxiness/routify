@@ -21,8 +21,7 @@ import axios from 'axios'
 export default async context => {
     return {
         luke: (await axios.get('https://swapi.dev/api/people/1/')).data,
-        'darth|split': (await axios.get('https://swapi.dev/api/people/4/'))
-            .data,
+        'darth|split': (await axios.get('https://swapi.dev/api/people/4/')).data,
         leia: {
             value: (await axios.get('https://swapi.dev/api/people/5/')).data,
             split: true,
