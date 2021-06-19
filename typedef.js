@@ -132,8 +132,36 @@
  * @return {string}
  */
 
+/*****************
+ * COMPONENT     *
+ *****************/
+/**
+ * @callback ComponentGuardFn
+ * @param {Route} route
+ */
+
+/**
+ * @callback ComponentPreloadFn
+ */
+
+/**
+ * @typedef RerservedCmpProps
+ * @prop {ComponentGuardFn=} guard
+ * @prop {ComponentPreloadFn=} preload
+ */
+
+/** @typedef {RerservedCmpProps & Object.<string, any>} Component */
+
+/** @typedef {Component & function} MixedComponent */
+
+/*****************
+ * MISC          *
+ *****************/
+
 /**
  * @typedef {Object} PathNode
  * @prop {string} urlFragment
  * @prop {RNodeRuntime} node
  */
+
+/** @typedef  {'pushState'|'replaceState'|'popState'} UrlState  */
