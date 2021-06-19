@@ -3,8 +3,6 @@
     const {meta} = payload.node
 </script>
 
-<!-- routify:meta order=false -->
-<!-- routify:meta wrf=cmon -->
 
 ### Example
 
