@@ -1,11 +1,12 @@
 <script>
-    export let activeUrl
+    export let router
     let input = ''
 
-    $: if (activeUrl) onUrlChange($activeUrl.url)
+    $: ({ activeRoute } = router)
+    $: if ($activeRoute) updateInput($activeRoute.url)
 
-    const onUrlChange = val => (input = val)
-    const onSubmit = () => activeUrl.set(input, 'pushState', 'internal')
+    const updateInput = val => (input = val)
+    const onSubmit = () => router.url.push(input)
 </script>
 
 <form on:submit|preventDefault={onSubmit}>

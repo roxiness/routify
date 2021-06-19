@@ -2,11 +2,10 @@
     import AddressInput from './_addressInput.svelte'
     import Options from './_options.svelte'
     export let router
-    const { activeUrl } = router
 </script>
 
 <div class="bar">
-    <AddressInput {activeUrl} />
+    <AddressInput {router} />
     <Options {router} />
 </div>
 <slot {router} />
