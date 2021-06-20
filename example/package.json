@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "run-p dev:*",
         "build": "routify3 && vite build",
-        "dev:routifiy": "routify3 --watch",
+        "dev:routify": "routify3 --watch",
         "dev:vite": "vite"
     },
     "devDependencies": {
