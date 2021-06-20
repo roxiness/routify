@@ -1,17 +1,14 @@
-import { isActiveUrl } from '../../../lib/runtime/helpers.js'
+import { isActiveUrl } from '../../../lib/runtime/helpers/index.js'
 import '../../../lib/../typedef.js'
 
 expect.extend({
     toBeActive(input) {
         const [url, path, params, options] = input
         const active = isActiveUrl(url)(path, params, options)
-        const pathInfo = () =>
-            `path: "${path}", params: ${JSON.stringify(params)}`
+        const pathInfo = () => `path: "${path}", params: ${JSON.stringify(params)}`
         return {
             message: () =>
-                `url: "${url}" should ${
-                    active ? 'not' : ''
-                } match ${pathInfo()}`,
+                `url: "${url}" should ${active ? 'not' : ''} match ${pathInfo()}`,
             pass: !!active,
         }
     },

@@ -15,7 +15,7 @@
     export let routes = null
     export let decorator = Noop
 
-    const parentCmpCtx = getContext('routify-component')
+    const parentCmpCtx = getContext('routify-fragment-context')
     instance =
         instance ||
         (routes

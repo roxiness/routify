@@ -1,5 +1,5 @@
 <script>
-    import { isActive } from '../../../lib/runtime/helpers'
+    import { isActive } from '@roxi/routify'
     import { slide } from 'svelte/transition'
     import { cubicOut } from 'svelte/easing'
     export let node
@@ -11,8 +11,7 @@
 <ul transition:t|local={anim}>
     {#each node.children.indexed as child (child.path)}
         <li>
-            <a href={child.path} class:active={$isActive(child.path)}
-                >{child.name}</a>
+            <a href={child.path} class:active={$isActive(child.path)}>{child.name}</a>
             {#if $isActive(child.path) && child.children.indexed.length}
                 <svelte:self node={child} nested={nested + 1} />
             {/if}

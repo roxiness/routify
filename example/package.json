@@ -1,5 +1,9 @@
 {
     "type": "module",
+    "imports": {
+        "#cmp/*": "./src/components/*",
+        "#root/*": "./*"
+    },
     "scripts": {
         "dev": "run-p dev:*",
         "build": "routify3 && vite build",

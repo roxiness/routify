@@ -8,7 +8,7 @@
     $: [fragment, ...restFragments] = [...fragments]
     $: ({ node, load, route, params } = fragment)
     $: context = { route, node, load, localParams: params }
-    $: setContext('routify-component', context)
+    $: setContext('routify-fragment-context', context)
 </script>
 
 {#if restFragments.length}

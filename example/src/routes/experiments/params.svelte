@@ -1,5 +1,5 @@
 <script>
-    import { isActive } from '../../../../lib/runtime/helpers'
+    import { isActive } from '@roxi/routify'
 </script>
 
 {$isActive('foo')}
