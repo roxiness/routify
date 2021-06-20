@@ -1,6 +1,6 @@
 <script>
-    import AddressInput from './_addressInput.svelte'
-    import Options from './_options.svelte'
+    import AddressInput from './AddressInput.svelte'
+    import Options from './Options.svelte'
     export let router
 </script>
 

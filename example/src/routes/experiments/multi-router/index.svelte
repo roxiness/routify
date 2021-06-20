@@ -1,5 +1,5 @@
 <script>
-    import decorator from './_miniBrowser.svelte'
+    import MiniBrowser from '#cmp/minibrowser/MiniBrowser.svelte'
     import { Router } from '@roxi/routify'
 </script>
 
@@ -7,11 +7,11 @@
 
 <div class="split">
     <div class="left">
-        <Router name="left" {decorator} />
+        <Router name="left" decorator={MiniBrowser} />
     </div>
 
     <div class="right">
-        <Router name="right" {decorator} />
+        <Router name="right" decorator={MiniBrowser} />
     </div>
 </div>
 

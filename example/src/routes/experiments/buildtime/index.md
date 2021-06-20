@@ -1,8 +1,11 @@
 <script>
     import { Router, InternalReflector } from '@roxi/routify'
+    import MiniBrowser from '#cmp/minibrowser/MiniBrowser.svelte'
 </script>
 
-<Router name="example" offset url="/experiments/buildtime/example" urlReflector={InternalReflector} />
+
+<Router decorator={MiniBrowser} name="example" offset url="/experiments/buildtime/example" urlReflector={InternalReflector} />
+
 
 # Buildtime
 

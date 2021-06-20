@@ -3,7 +3,7 @@
          "checkJs": true,
         "baseUrl": ".",
         "paths": {
-            "#lib/*": ["./lib/*"],
+            "#cmp/*": ["./src/cmp/*"],
             "#root/*": ["./*"]
         },
         "target": "esnext",

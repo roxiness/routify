@@ -25,6 +25,7 @@ export default defineConfig({
         alias: {
             '#root': process.cwd() + '/../',
             '#lib': process.cwd() + '/../lib',
+            '#cmp': process.cwd() + '/src/components',
         },
     },
 })
