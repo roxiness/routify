@@ -80,18 +80,20 @@
 
 /**
  * @typedef {RoutifyBasePlugin & RoutifyRuntimeOptions} RoutifyRuntimePlugin
+ * @typedef {RoutifyBasePlugin & RoutifyBuildtimePluginType} RoutifyBuildtimePlugin
  */
 
 /**
  * @typedef {Object} RoutifyBasePlugin
+ * @prop {string=} name name of plugin
  * @prop {string|string[]=} before name of plugin(s) to run before
  * @prop {string|string[]=} after name of plugin(s) to run after
  */
 
 /**
  * @typedef {Object} RoutifyBuildtimePluginType
- * @prop {function(RoutifyBuildtime)} build
- * @prop {RoutifyExternalMetaHelper} meta
+ * @prop {function({instance: RoutifyBuildtime}):(Promise<any>|any)=} build
+ * @prop {RoutifyExternalMetaHelper=} meta
  */
 
 /*****************
