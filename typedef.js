@@ -167,3 +167,11 @@
  */
 
 /** @typedef  {'pushState'|'replaceState'|'popState'} UrlState  */
+
+/**
+ * @typedef {Object} FragmentContext
+ * @prop {Route} route
+ * @prop {RNodeRuntime} node
+ * @prop {any} load
+ * @prop {Object.<string,any>} localParams
+ */

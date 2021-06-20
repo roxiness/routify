@@ -2,7 +2,7 @@
     import { setContext } from 'svelte'
     import '#root/typedef.js'
 
-    /** @type {RouteFragment}*/
+    /** @type {RouteFragment[]}*/
     export let fragments
 
     $: [fragment, ...restFragments] = [...fragments]
