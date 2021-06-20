@@ -5,17 +5,9 @@
     /** @type {RouteFragment}*/
     export let fragments
 
-    /** @type {import('svelte/store').Readable<Route>}*/
-    export let route
-
     $: [fragment, ...restFragments] = [...fragments]
-    $: node = fragment.node
-    $: load = fragment.load
-    $: payload = {
-        route,
-        node,
-        localParams: fragment.params,
-    }
+    $: ({ node, load, route, params } = fragment)
+    $: payload = { route, node, load, localParams: params }
     $: setContext('routify-component', payload)
 </script>
 
