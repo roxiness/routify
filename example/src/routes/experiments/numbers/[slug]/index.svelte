@@ -1,14 +1,14 @@
 <script>
     import Router from '@roxi/routify/lib/runtime/Router/Router.svelte'
 
-    export let payload
+    export let context
     let subRoutes = []
-    const { instance } = payload
-    // console.log(payload.route)
+    const { instance } = context
+    // console.log(context.route)
 </script>
 
 <h1>
-    {payload.route.params.slug}
+    {context.route.params.slug}
 </h1>
 
 <!-- <Router /> -->

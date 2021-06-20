@@ -1,9 +1,9 @@
 <script>
-    export let payload
+    export let context
 </script>
 
 <h1>[slug].svelte</h1>
 
 <pre>
-    {JSON.stringify(payload, null, 2)}
+    {JSON.stringify(context, null, 2)}
 </pre>

@@ -1,13 +1,13 @@
 <script>
-    export let payload
-    const {meta} = payload.node
+    export let context
+    const {meta} = context.node
 </script>
 
 
 ### Example
 
 **Luke:**
-{payload.node.meta.luke.name}
+{context.node.meta.luke.name}
 
 
 **Darth:**

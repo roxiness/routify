@@ -1,12 +1,12 @@
 <script>
     import FileTree from '../components/FileTree.svelte'
-    export let payload
+    export let context
 </script>
 
 <div class="app">
     <aside>
         <h1>Routify 3</h1>
-        <FileTree node={payload.node} />
+        <FileTree node={context.node} />
     </aside>
     <main>
         <slot />

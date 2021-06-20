@@ -7,14 +7,14 @@
 
     $: [fragment, ...restFragments] = [...fragments]
     $: ({ node, load, route, params } = fragment)
-    $: payload = { route, node, load, localParams: params }
-    $: setContext('routify-component', payload)
+    $: context = { route, node, load, localParams: params }
+    $: setContext('routify-component', context)
 </script>
 
 {#if restFragments.length}
-    <svelte:component this={fragment.node.component.default} {payload}>
+    <svelte:component this={fragment.node.component.default} {context}>
         <svelte:self fragments={restFragments} {route} {...load} />
     </svelte:component>
 {:else}
-    <svelte:component this={fragment.node.component.default} {payload} {...load} />
+    <svelte:component this={fragment.node.component.default} {context} {...load} />
 {/if}
