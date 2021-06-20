@@ -55,6 +55,6 @@ test('recursive set to false should not ignore index', () => {
     shouldBeFalse.forEach(assertIsNotActive)
 })
 
-const assertIsActive = input => expect(input).toBeActive()
+const assertIsActive = input => expect(input)['toBeActive']()
 
-const assertIsNotActive = input => expect(input).not.toBeActive()
+const assertIsNotActive = input => expect(input).not['toBeActive']()
