@@ -1,10 +1,11 @@
 <script>
-    import { Router, InternalReflector } from '@roxi/routify'
+    import { Router, InternalReflector, resolveNode } from '@roxi/routify'
     import MiniBrowser from '#cmp/minibrowser/MiniBrowser.svelte'
+    console.log(resolveNode('../example'))
 </script>
 
 
-<Router decorator={MiniBrowser} name="example" offset url="/experiments/buildtime/example" urlReflector={InternalReflector} />
+<Router decorator={MiniBrowser} name="example" offset="../example" url="/" urlReflector={InternalReflector} />
 
 
 # Buildtime
