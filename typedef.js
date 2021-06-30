@@ -5,6 +5,9 @@
  * @typedef {import('./lib/runtime/Instance/RNodeRuntime')['RNodeRuntime']} RNodeRuntimeConstructor
  * @typedef {RNodeRuntimeConstructor['prototype']} RNodeRuntime
  *
+ * @typedef {import('./lib/runtime/Instance/RNodeRuntime')['RNodeRuntime']} RNodeBuildtimeConstructor
+ * @typedef {RNodeRuntimeConstructor['prototype']} RNodeBuildtime
+ *
  * @typedef {import('./lib/runtime/route/Route')['Route']} RouteConstructor
  * @typedef {RouteConstructor['prototype']} Route
  *
@@ -93,6 +96,7 @@
 /**
  * @typedef {Object} RoutifyBuildtimePluginType
  * @prop {function({instance: RoutifyBuildtime}):(Promise<any>|any)=} build
+ * @prop {string=} path
  * @prop {RoutifyExternalMetaHelper=} meta
  */
 
