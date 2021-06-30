@@ -16,6 +16,7 @@ export default defineConfig({
             preprocess: [mdsvex({ extension: 'md' })],
         }),
     ],
+    server: { port: 1337 },
     build: {
         polyfillDynamicImport: false,
         cssCodeSplit: false,
