@@ -4,8 +4,6 @@
 </script>
 
 
-### Example
-
 **Luke:**
 {context.node.meta.luke.name}
 

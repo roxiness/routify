@@ -5,8 +5,6 @@
 </script>
 
 
-<Router decorator={MiniBrowser} name="example" offset="../example" url="/" urlReflector={InternalReflector} />
-
 
 # Buildtime
 
@@ -50,3 +48,18 @@ export default async context => ({
 
 ```
 
+## Example
+
+<div class="example">
+    <Router decorator={MiniBrowser} name="example" offset="../example" url="/" urlReflector={InternalReflector} />
+</div>
+
+
+<style>
+    .example {
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        padding: 48px 64px 32px 64px;
+        margin: 64px;
+        background: #FCFDFF;
+    }
+</style>
