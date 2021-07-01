@@ -176,6 +176,6 @@
  * @typedef {Object} FragmentContext
  * @prop {Route} route
  * @prop {RNodeRuntime} node
- * @prop {any} load
+ * @prop {function=} load preload functionality for pages and modules
  * @prop {Object.<string,any>} localParams
  */
