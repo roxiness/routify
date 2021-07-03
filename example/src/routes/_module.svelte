@@ -1,7 +1,18 @@
 <script>
     import FileTree from '../components/FileTree.svelte'
+    import { SideNav } from 'polykit'
     export let context
 </script>
+
+<!-- <SideNav class="shadow bg-white">
+    <aside slot="aside">
+        <h1>Routify 3</h1>
+        <FileTree node={context.node} />
+    </aside>
+    <main class="bg-gray-100  p-8">
+        <slot />
+    </main>
+</SideNav> -->
 
 <div class="app">
     <aside>
@@ -24,14 +35,14 @@
         height: 100vh;
     }
     aside {
-        padding-top: 32px;
+        padding-top: 64px;
         padding-left: 32px;
     }
     main {
         background: #f4f7f9;
         border-radius: 32px;
         margin: 32px;
-        padding: 40px 32px;
+        padding: 96px 96px;
         min-height: calc(100%-32px);
         box-sizing: border-box;
     }
