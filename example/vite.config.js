@@ -21,6 +21,7 @@ export default defineConfig({
         polyfillDynamicImport: false,
         cssCodeSplit: false,
     },
+    optimizeDeps: { include: ['prismjs'] },
     resolve: {
         dedupe: ['svelte'],
         alias: {
