@@ -16,11 +16,17 @@ export default {
     before: 'metaSplit',
     build: ({ instance }) => {
         instance.nodeIndex.forEach(node => {
-            if (node.file.stat.isDirectory()) {
+            const dir =
+                node.file.name === '_module'
+                    ? node.file.dir
+                    : node.file.stat.isDirectory()
+                    ? node.file.path
+                    : null
+
+            console.log(node.file, dir)
+            if (dir) {
                 node.meta.files = {
-                    value: readdirSync(node.file.path)
-                        .map(GetContent(node.file.path))
-                        .filter(Boolean),
+                    value: readdirSync(dir).map(GetContent(dir)).filter(Boolean),
                     split: true,
                 }
             }
