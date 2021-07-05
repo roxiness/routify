@@ -25,7 +25,7 @@ export default options => ({
     before: 'exporter', 
     
     
-    build: ({ instance }) => {       
+    build: ({ instance }) => {
 
         // iterate over all nodes
         instance.nodeIndex.forEach(node => {
@@ -39,5 +39,50 @@ export default options => ({
                 node.meta.index = index
             }
         })
-    },
+    }
+})
+```
+
+---
+
+### Using a plugin
+
+**package.json**
+```json
+{
+    "routify": {
+        "plugins": [
+            "indexByName"
+        ]
+    }
+}
+```
+
+---
+
+**package.json with options**
+```json
+{
+    "routify": {
+        "plugins": [
+            {
+                "path": "indexByName",
+                "options": { }
+            }
+        ]
+    }
+}
+```
+
+---
+
+**routify.config.js**
+```javascript
+import indexedByName from './path/to/plugin'
+
+export default {
+  plugins: [
+      indexedByName({/** options*/})
+  ]
+}
 ```

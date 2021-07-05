@@ -16,7 +16,9 @@
 
 <div class="app">
     <aside>
-        <h1>Routify 3</h1>
+        <img src="/assets/routify3.svg" />
+        <br />
+        <br />
         <FileTree node={context.node} />
     </aside>
     <main>
@@ -33,17 +35,21 @@
         display: grid;
         grid-template-columns: min-content auto;
         height: 100vh;
+        max-width: 1280px;
+        color: var(--indigo-300);
+        margin-left: auto;
+        margin-right: auto;
     }
     aside {
-        padding-top: 64px;
-        padding-left: 32px;
+        width: var(--spacing-11);
+        padding-top: var(--spacing-7);
+        padding-left: var(--spacing-5);
     }
     main {
         background: #f4f7f9;
-        border-radius: 32px;
-        margin: 32px;
-        padding: 96px 96px;
-        min-height: calc(100%-32px);
+        border-radius: var(--spacing-5);
+        margin: var(--spacing-5);
+        padding: var(--spacing-6) var(--spacing-8);
         box-sizing: border-box;
     }
 </style>

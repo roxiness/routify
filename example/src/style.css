@@ -4,26 +4,26 @@
  * For consistency across UI and motion
  */
  :root {
-    --spacing-0000: 2px
-    --spacing-000: 3px
-    --spacing-00: 4px
-    --spacing-0: 6px
-    --spacing-1: 8px
-    --spacing-2: 12px
-    --spacing-3: 16px
-    --spacing-4: 24px
-    --spacing-5: 32px
-    --spacing-6: 48px
-    --spacing-7: 64px
-    --spacing-8: 96px
-    --spacing-9: 128px
-    --spacing-10: 192px
-    --spacing-11: 256px
-    --spacing-12: 384px
-    --spacing-13: 512px
-    --spacing-14: 768px
-    --spacing-15: 1024px
-    --spacing-16: 1536px
+    --spacing-0000: 2px;
+    --spacing-000: 3px;
+    --spacing-00: 4px;
+    --spacing-0: 6px;
+    --spacing-1: 8px;
+    --spacing-2: 12px;
+    --spacing-3: 16px;
+    --spacing-4: 24px;
+    --spacing-5: 32px;
+    --spacing-6: 48px;
+    --spacing-7: 64px;
+    --spacing-8: 96px;
+    --spacing-9: 128px;
+    --spacing-10: 192px;
+    --spacing-11: 256px;
+    --spacing-12: 384px;
+    --spacing-13: 512px;
+    --spacing-14: 768px;
+    --spacing-15: 1024px;
+    --spacing-16: 1536px;
 
 
     /**
