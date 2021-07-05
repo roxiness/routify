@@ -23,7 +23,6 @@ export default {
                     ? node.file.path
                     : null
 
-            console.log(node.file, dir)
             if (dir) {
                 node.meta.files = {
                     value: readdirSync(dir).map(GetContent(dir)).filter(Boolean),
