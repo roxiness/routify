@@ -11,7 +11,7 @@ const GetContent = basedir => name => {
         return { name, content: readFileSync(filepath, 'utf-8') }
 }
 
-export default {
+export default () => ({
     name: 'sourceMeta',
     before: 'metaSplit',
     build: ({ instance }) => {
@@ -31,4 +31,4 @@ export default {
             }
         })
     },
-}
+})

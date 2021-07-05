@@ -21,9 +21,8 @@
     },
     "routify": {
         "plugins": [
-            {
-                "path": "sourceMetaPlugin"
-            }
+            "plugins/sourceMetaPlugin",
+            "plugins/indexByName"
         ]
     },
     "dependencies": {
