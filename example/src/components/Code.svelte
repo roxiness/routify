@@ -1,6 +1,6 @@
 <script>
     import Prism from 'svelte-prism'
-    import './prismjs.css'
+    // import './prismjs.css'
     export let language
 </script>
 
