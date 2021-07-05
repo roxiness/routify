@@ -1,0 +1,125 @@
+
+/**
+ * UI library
+ * For consistency across UI and motion
+ */
+ :root {
+    --spacing-0000: 2px
+    --spacing-000: 3px
+    --spacing-00: 4px
+    --spacing-0: 6px
+    --spacing-1: 8px
+    --spacing-2: 12px
+    --spacing-3: 16px
+    --spacing-4: 24px
+    --spacing-5: 32px
+    --spacing-6: 48px
+    --spacing-7: 64px
+    --spacing-8: 96px
+    --spacing-9: 128px
+    --spacing-10: 192px
+    --spacing-11: 256px
+    --spacing-12: 384px
+    --spacing-13: 512px
+    --spacing-14: 768px
+    --spacing-15: 1024px
+    --spacing-16: 1536px
+
+
+    /**
+     * Elevation
+     * Applied as box-shadow
+     * Inspired by Material Design https://material.io/design/environment/elevation.html
+     */
+    --elevation-1: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    --elevation-2: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+      0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    --elevation-3: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+      0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --elevation-4: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+      0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+    --elevation-5: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+      0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+    --elevation-6: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+      0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  
+    /**
+     * Motion easing curves
+     * Applied in transitions and animations
+     * Inspired by Material Design https://material.io/design/motion/speed.html#easing
+     */
+    --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+    --easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+
+    --color-black: #1a202c;
+
+    /* Greyscale */
+    --color-grey-100: #f7fafc;
+    --color-grey-300: #e2e8f0;
+    --color-grey-500: #a0aec0;
+    --color-grey-700: #4a5568;
+    --color-grey: var(--color-grey-500);
+  
+    /* Red */
+    --color-red-300: #fc8181;
+    --color-red-500: #e53e3e;
+    --color-red-700: #c53030;
+    --color-red: var(--color-red-500);
+  
+    /* Green */
+    --color-green-300: #9ae6b4;
+    --color-green-500: #48bb78;
+    --color-green-700: #2f855a;
+    --color-green: var(--color-green-500);
+  
+    /* Blue */
+    --color-blue-300: #63b3ed;
+    --color-blue-500: #4299e1;
+    --color-blue-700: #3182ce;
+    --color-blue: var(--color-blue-500);
+  
+    /* Pink */
+    --color-pink-300: #fbb6ce;
+    --color-pink-500: #ed64a6;
+    --color-pink-700: #d53f8c;
+    --color-pink: var(--color-pink-500);
+  
+    /* Purple */
+    --color-purple-300: #b794f4;
+    --color-purple-500: #805ad5;
+    --color-purple-700: #6b46c1;
+    --color-purple: var(--color-purple-500);
+  
+    /* Teal */
+    --color-teal-300: #81e6d9;
+    --color-teal-500: #38b2ac;
+    --color-teal-700: #2c7a7b;
+    --color-teal: var(--color-teal-500);
+  
+    /* Indigo */
+    --color-indigo-300: #7f9cf5;
+    --color-indigo-500: #5a67d8;
+    --color-indigo-700: #4c51bf;
+    --color-indigo: var(--color-indigo-500);
+  
+    /* Yellow */
+    --color-yellow-300: #faf089;
+    --color-yellow-500: #ecc94b;
+    --color-yellow-700: #d69e2e;
+    --color-yellow: var(--color-yellow-500);
+  
+    /* Orange */
+    --color-orange-300: #fbd38d;
+    --color-orange-500: #ed8936;
+    --color-orange-700: #dd6b20;
+    --color-orange: var(--color-orange-500);
+  
+    /* Brown */
+    --color-brown-300: #a1887f;
+    --color-brown-500: #795548;
+    --color-brown-700: #5d4037;
+    --color-brown: var(--color-brown-500);
+
+ }
