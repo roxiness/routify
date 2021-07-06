@@ -26,6 +26,8 @@
     --spacing-16: 1536px;
 
 
+    --left-nav: var(--spacing-11);
+
     /**
      * Elevation
      * Applied as box-shadow
