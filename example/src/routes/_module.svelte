@@ -1,45 +1,46 @@
 <script>
     import FileTree from '#cmp/FileTree.svelte'
     import TopNav from '#cmp/TopNav.svelte'
-    import { SideNav } from 'polykit'
+    import SideNav from '#cmp/Sidenav/Sidenav.svelte'
+    import Backdrop from '#cmp/Sidenav/Backdrop.svelte'
     export let context
+    let open
 </script>
 
 <!-- routify:meta split|scoped -->
 
 <div class="app">
     <TopNav />
-    <div class="container main">
-        <aside>
-            <br />
-            <br />
-            <FileTree node={context.node} />
-        </aside>
-        <main>
-            <slot />
-        </main>
+    <div class="container">
+        <SideNav desktop="shrink" mobile="" bind:open>
+            <aside slot="aside">
+                <br />
+                <br />
+                <FileTree node={context.node} />
+            </aside>
+            <Backdrop bind:show={open} />
+            <main>
+                <slot />
+            </main>
+        </SideNav>
     </div>
 </div>
 
 <style>
     :global(.container) {
         max-width: 1240px;
+        padding: 0;
     }
     .app {
         height: 100vh;
     }
-    .main {
-        display: grid;
-        grid-template-columns: var(--left-nav) auto;
-        color: var(--color-grey-700);
-        margin-left: auto;
-        margin-right: auto;
-    }
     main {
+        display: inline-block; /* prevent collapsing margins */
+        width: 100%;
+        min-height: 400px;
         background: #f4f7f9;
+        margin: var(--spacing-5) var(--spacing-4);
         border-radius: var(--spacing-5);
-        margin: var(--spacing-5) 0;
         padding: var(--spacing-6) var(--spacing-8);
-        box-sizing: border-box;
     }
 </style>
