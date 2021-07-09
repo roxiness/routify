@@ -1,40 +1,44 @@
 <script>
     import Icon from '#cmp/Icon.svelte'
+    import { Sticky } from 'polykit'
 </script>
 
-<nav>
-    <div class="container">
-        <img src="/assets/routify3.svg" height="56px" />
-        <div class="middle">
-            <a href="/docs">Docs</a>
-            <a href="/blog">Blog</a>
-            <div class="spacer" />
-            <a href="https://github.com/roxiness/routify" class="icon">
-                <Icon name="IconGithub" />
-            </a>
-            <a href="https://discord.gg/ntKJD5B" class="icon">
-                <Icon name="IconDiscord" />
-            </a>
-            <a href="https://twitter.com/routifyjs" class="icon">
-                <Icon name="IconTwitter" />
-            </a>
+<Sticky --z-index="1" boundary={{ top: 0 }}>
+    <nav>
+        <div class="container">
+            <img src="/assets/routify3.svg" height="56px" />
+            <div class="middle">
+                <a href="/docs">Docs</a>
+                <a href="/blog">Blog</a>
+                <div class="spacer" />
+                <a href="https://github.com/roxiness/routify" class="icon">
+                    <Icon name="IconGithub" />
+                </a>
+                <a href="https://discord.gg/ntKJD5B" class="icon">
+                    <Icon name="IconDiscord" />
+                </a>
+                <a href="https://twitter.com/routifyjs" class="icon">
+                    <Icon name="IconTwitter" />
+                </a>
+            </div>
+            <div
+                class="right"
+                style="text-align: right; font-weight: bold; color: var(--color-grey-500)">
+                <Icon name="IconSearch" />
+                Search...
+            </div>
         </div>
-        <div
-            class="right"
-            style="text-align: right; font-weight: bold; color: var(--color-grey-500)">
-            <Icon name="IconSearch" />
-            Search...
-        </div>
-    </div>
-</nav>
+    </nav>
+</Sticky>
 
 <style>
     nav {
         height: var(--spacing-8);
-        box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 18px -3px rgba(0, 0, 0, 0.2);
         border-bottom: solid 1px #ddd;
         align-items: center;
         display: flex;
+        background: white;
     }
     .spacer {
         width: var(--spacing-4);

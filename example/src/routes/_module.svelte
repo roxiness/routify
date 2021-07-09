@@ -1,8 +1,7 @@
 <script>
     import FileTree from '#cmp/FileTree.svelte'
     import TopNav from '#cmp/TopNav.svelte'
-    import SideNav from '#cmp/Sidenav/Sidenav.svelte'
-    import Backdrop from '#cmp/Sidenav/Backdrop.svelte'
+    import { Sidenav, Backdrop, Sticky } from 'polykit'
     export let context
     let open
 </script>
@@ -12,17 +11,18 @@
 <div class="app">
     <TopNav />
     <div class="container">
-        <SideNav desktop="shrink" mobile="" bind:open>
+        <Sidenav desktop="shrink" mobile="" bind:open>
             <aside slot="aside">
                 <br />
-                <br />
-                <FileTree node={context.node} />
+                <Sticky boundary={{ top: 160 }} mode="transform">
+                    <FileTree node={context.node} />
+                </Sticky>
             </aside>
-            <Backdrop bind:show={open} />
+            <!-- <Backdrop bind:show={open} --background="black" --opacity="0.1" /> -->
             <main>
                 <slot />
             </main>
-        </SideNav>
+        </Sidenav>
     </div>
 </div>
 
