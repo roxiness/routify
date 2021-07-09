@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import svelte from '@sveltejs/vite-plugin-svelte'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'
 import { readFileSync } from 'fs'
 

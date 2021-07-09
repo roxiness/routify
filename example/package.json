@@ -12,11 +12,11 @@
     },
     "devDependencies": {
         "@roxi/routify": "file:../",
-        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.9",
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
         "axios": "^0.21.1",
         "mdsvex": "^0.9.3",
         "polykit": "^0.0.0",
-        "svelte": "^3.37.0",
+        "svelte": "^3.38.3",
         "svelte-prism": "^1.1.3",
         "vite": "^2.2.3"
     },
