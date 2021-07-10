@@ -3,10 +3,10 @@
     import { Sticky } from 'polykit'
 </script>
 
-<Sticky --z-index="1" boundary={{ top: 0 }}>
-    <nav>
+<Sticky --z-index="1" boundary={{ top: 0 }} let:stuck>
+    <nav class:stuck>
         <div class="container">
-            <img src="/assets/routify3.svg" height="56px" />
+            <img class="brand" src="/assets/routify3.svg" />
             <div class="middle">
                 <a href="/docs">Docs</a>
                 <a href="/blog">Blog</a>
@@ -34,11 +34,18 @@
 <style>
     nav {
         height: var(--spacing-8);
-        box-shadow: 0 0 18px -3px rgba(0, 0, 0, 0.2);
-        border-bottom: solid 1px #ddd;
         align-items: center;
         display: flex;
         background: white;
+        border-bottom: solid 1px white;
+    }
+    nav.stuck {
+        box-shadow: 0 0 18px -3px rgba(0, 0, 0, 0.2);
+        border-bottom: solid 1px #ddd;
+    }
+
+    .brand {
+        height: 56px;
     }
     .spacer {
         width: var(--spacing-4);
@@ -49,7 +56,7 @@
     }
     .middle {
         display: flex;
-        padding-left: calc(var(--spacing-8) + var(--spacing-2));
+        padding-left: var(--spacing-8);
         align-items: center;
     }
     .middle a {
@@ -58,13 +65,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 var(--spacing-2);
+        margin: 0 var(--spacing-2);
         /* font-weight: 500; */
+    }
+    .middle a:first-of-type {
+        margin-left: 0;
     }
     .middle a.icon {
         opacity: 0.5;
-        width: 48px;
-        height: 48px;
+        padding: 0;
+        margin: 0 8px;
     }
     .middle a:hover {
         opacity: 1;
