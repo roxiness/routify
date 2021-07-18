@@ -7,6 +7,7 @@
     "scripts": {
         "dev": "run-p dev:*",
         "build": "routify3 && vite build",
+        "serve": "vite serve",
         "dev:routify": "routify3 --watch",
         "dev:vite": "vite"
     },

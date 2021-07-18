@@ -5,21 +5,29 @@
     export let node
     export let nested = 0
     const anim = { duration: 150, easing: cubicOut }
-    const t = nested ? slide : x => x
 </script>
 
-<ul transition:t|local={anim}>
+<ul>
     {#each node.children.indexed as child (child.path)}
         <li>
             <a href={child.path} class:active={$isActive(child.path)}>{child.name}</a>
             {#if $isActive(child.path) && child.children.indexed.length}
-                <svelte:self node={child} nested={nested + 1} />
+                <div transition:slide|local>
+                    <svelte:self node={child} nested={nested + 1} />
+                </div>
             {/if}
         </li>
     {/each}
 </ul>
 
 <style>
+    ul {
+        display: block;
+        margin: 0;
+    }
+    div {
+        margin-top: 1rem;
+    }
     .active {
         font-weight: bold;
     }

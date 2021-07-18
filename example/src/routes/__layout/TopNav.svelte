@@ -6,7 +6,9 @@
 
 <nav class:scrollY>
     <div class="container">
-        <img class="brand" src="/assets/routify3.svg" />
+        <a href="/">
+            <img class="brand" src="/assets/routify3.svg" />
+        </a>
         <div class="middle">
             <Links />
         </div>
