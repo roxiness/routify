@@ -4,10 +4,12 @@
     import { Router } from './Router.js'
     import { getContext, onDestroy } from 'svelte'
     import { AddressReflector } from './urlReflectors/Address.js'
+    import { InternalReflector } from './urlReflectors/Internal.js'
     import Noop from '../decorators/Noop.svelte'
     import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js'
     export let instance = null
-    export let urlReflector = AddressReflector
+    export let urlReflector =
+        typeof window != 'undefined' ? AddressReflector : InternalReflector
     export let offset = null
     export let url = null
     export let name = ''
@@ -22,7 +24,7 @@
             ? new RoutifyRuntime({ routes, debugger: false })
             : parentCmpCtx.route.router.instance)
 
-    router = new Router(instance, { parentCmpCtx, name })
+    router = router || new Router(instance, { parentCmpCtx, name })
     $: if (offset) router.offset = offset
     $: if (url) router.url.replace(url)
     $: if (urlReflector) router.urlReflector = urlReflector
@@ -37,7 +39,7 @@
         if (url) router.url.push(url)
     }
 
-    onDestroy(() => router.destroy())
+    if (typeof window !== 'undefined') onDestroy(() => router.destroy())
 </script>
 
 <div style="display: contents" use:initialize>
