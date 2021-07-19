@@ -110,6 +110,8 @@
         height: 100%;
         z-index: 1;
         background: white;
+        padding-left: 24px;
+        padding-right: 24px;
     }
 
     .mobile.open aside {
@@ -119,14 +121,16 @@
     /**
     * Mobile
     */
-    .tablet.open aside {
-        /* box-shadow: 0 0 12px -12px rgba(0 0 0 / 0.4); */
+    .mobile main {
+        margin: 0;
+        border-radius: 0;
     }
 
     /**
     * Desktop
     */
 
+    .desktop .links,
     .desktop .sidenav-activator {
         display: none;
     }

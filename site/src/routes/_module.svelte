@@ -1,10 +1,13 @@
 <script>
     import TopNav from './__layout/TopNav.svelte'
+    import { Window } from 'polykit'
 </script>
 
 <!-- routify:meta split|scoped -->
 
-<div class="app">
-    <TopNav />
-    <slot />
-</div>
+<Window let:screenSize>
+    <div class="app {screenSize}">
+        <TopNav />
+        <slot />
+    </div>
+</Window>
