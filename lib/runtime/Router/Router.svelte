@@ -19,10 +19,9 @@
 
     const parentCmpCtx = getContext('routify-fragment-context')
     instance =
-        instance ||
-        (routes
+        instance || routes
             ? new RoutifyRuntime({ routes, debugger: false })
-            : parentCmpCtx.route.router.instance)
+            : parentCmpCtx?.route.router.instance || null
 
     router = router || new Router(instance, { parentCmpCtx, name })
     $: if (offset) router.offset = offset
