@@ -5,6 +5,8 @@ console.log(context)
 
 # Navigation
 
+---
+
 Navigating in Routify is straight forward and requires no special semantics as Routify works with native `<a>` anchors* and `history.pushState`/`history.replaceState`.
 
 ### Exceptions
@@ -23,6 +25,7 @@ $url('/blog/[slug]/comments', {slug: 'welcome', sort: 'descending'})
 ```
 For more information, please see [$url](/api/helpers/url)
 
+---
 
 ### Writing URLs from files
 Routify lets you iterate over nodes (files) in your project.
@@ -49,7 +52,7 @@ Routify lets you iterate over nodes (files) in your project.
     {/each}
 </ul>
 ```
-Hint: To retrieve a node, please refer to [nodes](/guide/nodes)
+Hint: To retrieve a node, please refer to [nodes](/docs/guide/nodes).
 
 ### Helpers
 
