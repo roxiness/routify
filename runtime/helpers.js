@@ -205,13 +205,12 @@ export const meta = {
  * @typedef {import('svelte/store').Readable<UrlHelper>} UrlHelperStore
  * @type {UrlHelperStore} 
  * */
-export const url = {
+ export const url = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
-    const { route, routes } = get(ctx)
     return derived(
       ctx,
-      ctx => makeUrlHelper(ctx, route, routes)
+      ctx => makeUrlHelper(ctx, ctx.route, ctx.routes)
     ).subscribe(
       listener
     )
@@ -342,13 +341,13 @@ export const redirect = {
  * @typedef {import('svelte/store').Readable<IsActiveHelper>} IsActiveHelperStore
  * @type {IsActiveHelperStore} 
  * */
-export const isActive = {
+ export const isActive = {
   subscribe(run) {
     return derived(
       [url, route],
       ([url, route]) => function isActive(path = "", params = {}, { strict } = { strict: true }) {
         path = url(path, params, { strict })
-        const currentPath = url(route.path, null, { strict })
+        const currentPath = url(route.path, params, { strict })
         const re = new RegExp('^' + path + '($|/)')
         return !!currentPath.match(re)
       }
