@@ -6,8 +6,6 @@
     let open
     let state
     let screenSize
-
-    console.log(context)
 </script>
 
 <!-- routify:meta split|scoped -->
