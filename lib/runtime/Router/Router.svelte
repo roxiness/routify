@@ -43,6 +43,6 @@
 
 <div style="display: contents" use:initialize>
     <svelte:component this={decorator} {router}>
-        <Subroute {router} />
+        <Subroute {router} activeRoute={router.activeRoute} />
     </svelte:component>
 </div>
