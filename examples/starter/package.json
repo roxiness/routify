@@ -1,0 +1,21 @@
+{
+    "type": "module",
+    "imports": {
+        "#cmp/*": "./src/components/*",
+        "#root/*": "./*"
+    },
+    "scripts": {
+        "dev": "run-p dev:*",
+        "build": "routify3 && vite build",
+        "serve": "vite serve",
+        "dev:routify": "routify3 --watch",
+        "dev:vite": "vite"
+    },
+    "devDependencies": {
+        "@roxi/routify": "file:../..",
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.13",
+        "mdsvex": "^0.9.3",
+        "svelte": "^3.39.0",
+        "vite": "^2.2.3"
+    }
+}
