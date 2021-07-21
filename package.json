@@ -52,7 +52,7 @@
         "configent": "^3.0.0-0",
         "fs-extra": "^9.1.0",
         "pino": "^6.11.3",
-        "svelte": "^3.37.0"
+        "svelte": "^3.39.0"
     },
     "prettier": {
         "singleQuote": true,
