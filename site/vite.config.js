@@ -23,6 +23,13 @@ export default defineConfig({
                     ? 'export default ' + JSON.stringify(readFileSync(id, 'utf-8'))
                     : null,
         },
+        {
+            name: 'meta-in-md',
+            transform: (code, id) =>
+                id.endsWith('.md')
+                    ? code.replace(/routify::meta/g, 'routify:meta')
+                    : null,
+        },
     ],
     server: { port: 1337 },
     build: {
