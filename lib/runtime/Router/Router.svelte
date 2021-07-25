@@ -5,7 +5,6 @@
     import { getContext, onDestroy } from 'svelte'
     import { AddressReflector } from './urlReflectors/Address.js'
     import { InternalReflector } from './urlReflectors/Internal.js'
-    import Noop from '../decorators/Noop.svelte'
     import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js'
     export let instance = null
     export let urlReflector =
@@ -15,7 +14,7 @@
     export let name = ''
     export let router = null
     export let routes = null
-    export let decorator = Noop
+    export let decorator = null
 
     const parentCmpCtx = getContext('routify-fragment-context')
     instance =
@@ -45,6 +44,6 @@
 
 {#if $activeRoute}
     <div style="display: contents" use:initialize>
-        <Component fragments={$activeRoute.fragments} />
+        <Component fragments={$activeRoute.fragments} {decorator} />
     </div>
 {/if}
