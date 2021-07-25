@@ -19,8 +19,6 @@
         svelte: 'svelte',
         md: 'svelte',
     }
-
-    console.log('tabs', Tabs)
 </script>
 
 <div class="tabs">
