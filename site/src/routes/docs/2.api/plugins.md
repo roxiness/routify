@@ -78,11 +78,11 @@ export default options => ({
 
 **routify.config.js**
 ```javascript
-import indexedByName from './path/to/plugin'
+import indexByName from './path/to/plugin'
 
 export default {
   plugins: [
-      indexedByName({/** options*/})
+      indexByName({/** options*/})
   ]
 }
 ```

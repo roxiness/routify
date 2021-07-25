@@ -1,10 +1,8 @@
 <script>
     import { isActive } from '@roxi/routify'
     import { slide } from 'svelte/transition'
-    import { cubicOut } from 'svelte/easing'
     export let node
     export let nested = 0
-    const anim = { duration: 150, easing: cubicOut }
     const getName = node => node.name + (node.meta.status ? ` [${node.meta.status}]` : '')
 </script>
 
