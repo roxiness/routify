@@ -14,6 +14,7 @@
 </script>
 
 {#if restFragments.length}
+    <!-- <svelte:component this={decorator} {router}> -->
     <svelte:component
         this={fragment.node.component.default}
         {context}
@@ -21,6 +22,7 @@
         let:props>
         <svelte:self fragments={restFragments} {route} {...load} {props} />
     </svelte:component>
+    <!-- </svelte:component> -->
 {:else}
     <svelte:component
         this={fragment.node.component.default}

@@ -1,5 +1,5 @@
 <script>
-    import Subroute from './Subroute.svelte'
+    import Component from './Component.svelte'
     import { getUrlFromClick } from '../utils.js'
     import { Router } from './Router.js'
     import { getContext, onDestroy } from 'svelte'
@@ -28,6 +28,8 @@
     $: if (url) router.url.replace(url)
     $: if (urlReflector) router.urlReflector = urlReflector
 
+    $: activeRoute = router.activeRoute
+
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
         elem.addEventListener('keydown', handleClick)
@@ -41,8 +43,8 @@
     if (typeof window !== 'undefined') onDestroy(() => router.destroy())
 </script>
 
-<div style="display: contents" use:initialize>
-    <svelte:component this={decorator} {router}>
-        <Subroute activeRoute={router.activeRoute} />
-    </svelte:component>
-</div>
+{#if $activeRoute}
+    <div style="display: contents" use:initialize>
+        <Component fragments={$activeRoute.fragments} />
+    </div>
+{/if}
