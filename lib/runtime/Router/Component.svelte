@@ -5,7 +5,7 @@
     /** @type {RouteFragment[]}*/
     export let fragments
 
-    export let props
+    export let props = {}
 
     $: [fragment, ...restFragments] = [...fragments]
     $: ({ node, load, route, params } = fragment)
