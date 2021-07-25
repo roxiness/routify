@@ -1,7 +1,8 @@
 <script>
     import AddressInput from './AddressInput.svelte'
     import Options from './Options.svelte'
-    export let router
+    export let context
+    const { router } = context.route
 </script>
 
 <div class="bar">
