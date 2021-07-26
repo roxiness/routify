@@ -17,12 +17,13 @@
     export let decorator = null
 
     const parentCmpCtx = getContext('routify-fragment-context')
-    instance =
-        instance || routes
+    if (!instance)
+        instance = routes
             ? new RoutifyRuntime({ routes, debugger: false })
             : parentCmpCtx?.route.router.instance || null
 
-    router = router || new Router(instance, { parentCmpCtx, name })
+    if (!router) router = new Router(instance, { parentCmpCtx, name })
+
     $: if (offset) router.offset = offset
     $: if (url) router.url.replace(url)
     $: if (urlReflector) router.urlReflector = urlReflector
