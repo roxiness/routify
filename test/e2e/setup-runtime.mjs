@@ -42,9 +42,9 @@ async function buildRollup() {
     // or write the bundle to disk
     await bundle.write({
         sourcemap: true,
-        format: 'iife',
+        format: 'esm',
         name: 'app',
-        file: `${__dirname}/runtime/public/build/bundle.js`,
+        dir: `${__dirname}/runtime/public/build`,
     })
 
     // closes the bundle
