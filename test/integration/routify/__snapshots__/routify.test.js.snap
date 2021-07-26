@@ -1,13 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`can run routify with bundled plugins: bundles 1`] = `
-"export { default as _default_admin } from '../../../example/admin/_reset.svelte'
-export { default as _default_admin_bundleme_svelte } from '../../../example/admin/bundleme.svelte'"
+"export * as _default_admin from '../../../example/admin/_reset.svelte'
+export * as _default_admin_bundleme_svelte from '../../../example/admin/bundleme.svelte'"
 `;
 
 exports[`can run routify with bundled plugins: routify 1`] = `
 "import * as _default from '../../example/_module.svelte'
+import * as _default_admin from '../../../../../() => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin)'
 import * as _default_index_svelte from '../../example/index.svelte'
+import * as _default_admin_bundleme_svelte from '../../../../../() => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin_bundleme_svelte)'
 import * as _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
 import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
 import * as _default_no_layouts_nested_foo_svelte from '../../example/no-layouts/nested/foo.svelte'
@@ -30,7 +32,7 @@ export const routes = {
     {
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
-      \\"component\\": import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin),
+      \\"component\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin),
       \\"meta\\": {
         \\"reset\\": {
           \\"value\\": true
@@ -50,7 +52,7 @@ export const routes = {
         {
           \\"id\\": \\"_default_admin_bundleme_svelte\\",
           \\"name\\": \\"bundleme\\",
-          \\"component\\": import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin_bundleme_svelte),
+          \\"component\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin_bundleme_svelte),
           \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/admin/bundleme.svelte\\",
