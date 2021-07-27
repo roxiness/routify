@@ -10,9 +10,9 @@ export default options => ({
         instance.nodeIndex.forEach(node => {
             const matches = node.name?.match(RE)
             if (matches) {
-                const [, index, name] = matches
+                const [, order, name] = matches
                 node.name = name
-                node.meta.index = index
+                node.meta.order = Number(order)
             }
         })
     },

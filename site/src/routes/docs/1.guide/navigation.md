@@ -1,7 +1,8 @@
 <script>
 export let context
-console.log(context)
 </script>
+
+<!-- routify:meta order=0 -->
 
 # Navigation
 
