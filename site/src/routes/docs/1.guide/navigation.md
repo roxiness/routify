@@ -18,13 +18,13 @@ To bypass Routify for programmatic navigation, please use `history.pushStateNati
 ---
 
 ### Writing URLs
-While writing URLs can be done manually, it's often much easier to use the `$url` helper.
+URLs can be written manually or with the `$url` helper.
 
 ```javascript
 $url('/blog/[slug]/comments', {slug: 'welcome', sort: 'descending'})
 // outputs /blog/welcome/comments?sort=descending
 ```
-For more information, please see [$url](/api/helpers/url)
+For more information, please see [$url](/docs/api/helpers/url)
 
 ---
 
