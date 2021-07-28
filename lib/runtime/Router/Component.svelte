@@ -19,7 +19,7 @@
 <svelte:component this={decorator || Noop} {context}>
     {#if restFragments.length}
         <svelte:component
-            this={fragment.node.component.default}
+            this={fragment.node.component().default}
             {context}
             {...props}
             let:props
@@ -33,7 +33,7 @@
         </svelte:component>
     {:else}
         <svelte:component
-            this={fragment.node.component.default}
+            this={fragment.node.component().default}
             {context}
             {...load}
             {...props} />
