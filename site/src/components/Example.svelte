@@ -5,11 +5,13 @@
     export let url = '/'
     export let urlReflector = InternalReflector
     export let name = 'example'
-    export let decorator = MiniBrowser
+    let router
 </script>
 
 <div class="example">
-    <Router {name} {decorator} {offset} {url} {urlReflector} />
+    <MiniBrowser {router}>
+        <Router {name} {offset} {url} {urlReflector} bind:router />
+    </MiniBrowser>
 </div>
 
 <style>

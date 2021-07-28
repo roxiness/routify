@@ -1,15 +1,19 @@
 <script>
     import AddressInput from './AddressInput.svelte'
     import Options from './Options.svelte'
-    export let context
-    const { router } = context.route
+    export let router = null
+    export let context = null
+    // if we're using MiniBrowser as a decorator, we only get context
+    $: router = router || context?.route?.router
 </script>
 
-<div class="bar">
-    <AddressInput {router} />
-    <Options {router} />
-</div>
-<slot {router} />
+{#if router}
+    <div class="bar">
+        <AddressInput {router} />
+        <Options {router} />
+    </div>
+{/if}
+<slot />
 
 <style>
     .bar {

@@ -6,13 +6,18 @@
     export let files = []
     export let exclude = []
     export let include = []
+    export let focus = ''
 
     $: if (filesPromise) filesPromise.then(r => (files = r))
 
     const filesFilter = file =>
         !exclude.includes(file.name) && (!include.length || include.includes(file.name))
 
-    $: filteredFiles = files.filter(filesFilter)
+    $: filteredFiles = files
+        .filter(filesFilter)
+        .sort((node1, node2) =>
+            node1.name === focus ? -1 : node2.name === focus ? 1 : 0,
+        )
 
     const langMap = {
         js: 'javascript',
