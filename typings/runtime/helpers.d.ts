@@ -195,7 +195,10 @@ export type LeftoverHelperStore = import("svelte/store").Readable<string>;
 export type MetaHelperStore = import("svelte/store").Readable<{
     [x: string]: any;
 }>;
-export type UrlHelper = (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined) => string;
+export type UrlHelper = {
+    (el: Node): {update: (args: any) => void;}
+    (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined): string;
+};
 export type UrlHelperStore = import("svelte/store").Readable<UrlHelper>;
 export type GotoHelper = (path?: string | undefined, params?: UrlParams | undefined, options?: GotoOptions | undefined) => any;
 export type GotoHelperStore = import("svelte/store").Readable<GotoHelper>;
