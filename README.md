@@ -37,10 +37,10 @@ Create instance manually
 const rootNode = instance.superNode.createChild('my-root-node')
 
 // create a page node
-rootNode.createChild('im-page-1', component)
-rootNode.createChild('im-page-2', component)
+rootNode.createChild('im-page-1', module)
+rootNode.createChild('im-page-2', module)
 
-// Note: component can be a component or its path
+// Note: module can be a module or its path
 ```
 
 #### Appending nodes
@@ -61,18 +61,18 @@ rootNode.appendChild(childNode)
     *   Instance *(class)*
         *   nodeIndex *(array)*
         *   superNode *(class)*
-        *   Router\* *(component)*
+        *   Router\* *(module)*
             *   Router *(class)*
                 *   params
                 *   activeUrl\*\* *(ActiveUrl)*
                 *   activeRoute\*\* *(Route)*
                     *   fragments *(RouteFragment\[])*
-            *   Component\* *(component)*
-                *   Component\* *(component)*
-                    *   Component\* *(component)* ...
+            *   module\* *(module)*
+                *   module\* *(module)*
+                    *   module\* *(module)* ...
 
 <small>
-*: Component
+*: module
 
 \*\*: Store </small>
 

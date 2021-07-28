@@ -156,9 +156,9 @@
  * @prop {ComponentPreloadFn=} preload
  */
 
-/** @typedef {RerservedCmpProps & Object.<string, any>} Component */
+/** @typedef {RerservedCmpProps & Object.<string, any>} module */
 
-/** @typedef {Component & function} MixedComponent */
+/** @typedef {module & function} MixedComponent */
 
 /*****************
  * MISC          *

@@ -5,7 +5,6 @@ Object {
   "children": Array [
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "file": File {
         "base": "_reset.svelte",
         "dir": "test/unit/filemapper/example/admin",
@@ -19,13 +18,13 @@ Object {
           "value": true,
         },
       },
+      "module": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "name": "admin",
     },
     Object {
       "children": Array [
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -39,11 +38,11 @@ Object {
               "value": true,
             },
           },
+          "module": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "name": "[slug]",
         },
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -57,10 +56,10 @@ Object {
               "value": true,
             },
           },
+          "module": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "name": "prefixed[slug]",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "blog",
         "dir": "test/unit/filemapper/example",
@@ -70,11 +69,11 @@ Object {
       },
       "id": "_default_blog",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "blog",
     },
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/index.svelte::_EVAL",
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example",
@@ -84,6 +83,7 @@ Object {
       },
       "id": "_default_index_svelte",
       "meta": Object {},
+      "module": "test/unit/filemapper/example/index.svelte::_EVAL",
       "name": "index",
     },
     Object {
@@ -92,7 +92,6 @@ Object {
           "children": Array [
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -102,11 +101,11 @@ Object {
               },
               "id": "_default_no_layouts_nested_foo_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "name": "foo",
             },
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -116,10 +115,10 @@ Object {
               },
               "id": "_default_no_layouts_nested_index_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "name": "index",
             },
           ],
-          "component": "false::_EVAL",
           "file": File {
             "base": "nested",
             "dir": "test/unit/filemapper/example/no-layouts",
@@ -129,10 +128,10 @@ Object {
           },
           "id": "_default_no_layouts_nested",
           "meta": Object {},
+          "module": "false::_EVAL",
           "name": "nested",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "no-layouts",
         "dir": "test/unit/filemapper/example",
@@ -142,10 +141,10 @@ Object {
       },
       "id": "_default_no_layouts",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "no-layouts",
     },
   ],
-  "component": "test/unit/filemapper/example/_module.svelte::_EVAL",
   "file": File {
     "base": "_module.svelte",
     "dir": "test/unit/filemapper/example",
@@ -155,6 +154,7 @@ Object {
   },
   "id": "_default",
   "meta": Object {},
+  "module": "test/unit/filemapper/example/_module.svelte::_EVAL",
   "name": undefined,
   "rootName": "default",
 }
@@ -165,7 +165,6 @@ Object {
   "children": Array [
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/_module.svelte::_EVAL",
       "file": File {
         "base": "_module.svelte",
         "dir": "test/unit/filemapper/example",
@@ -175,13 +174,13 @@ Object {
       },
       "id": "_default__module_svelte",
       "meta": Object {},
+      "module": "test/unit/filemapper/example/_module.svelte::_EVAL",
       "name": "_module",
     },
     Object {
       "children": Array [
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
           "file": File {
             "base": "_reset.svelte",
             "dir": "test/unit/filemapper/example/admin",
@@ -191,10 +190,10 @@ Object {
           },
           "id": "_default_admin__reset_svelte",
           "meta": Object {},
+          "module": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
           "name": "_reset",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "admin",
         "dir": "test/unit/filemapper/example",
@@ -204,13 +203,13 @@ Object {
       },
       "id": "_default_admin",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "admin",
     },
     Object {
       "children": Array [
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -220,11 +219,11 @@ Object {
           },
           "id": "_default_blog__slug__svelte",
           "meta": Object {},
+          "module": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "name": "[slug]",
         },
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -234,10 +233,10 @@ Object {
           },
           "id": "_default_blog_prefixed_slug__svelte",
           "meta": Object {},
+          "module": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "name": "prefixed[slug]",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "blog",
         "dir": "test/unit/filemapper/example",
@@ -247,11 +246,11 @@ Object {
       },
       "id": "_default_blog",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "blog",
     },
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/index.svelte::_EVAL",
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example",
@@ -261,6 +260,7 @@ Object {
       },
       "id": "_default_index_svelte",
       "meta": Object {},
+      "module": "test/unit/filemapper/example/index.svelte::_EVAL",
       "name": "index",
     },
     Object {
@@ -269,7 +269,6 @@ Object {
           "children": Array [
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -279,11 +278,11 @@ Object {
               },
               "id": "_default_no_layouts_nested_foo_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "name": "foo",
             },
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -293,10 +292,10 @@ Object {
               },
               "id": "_default_no_layouts_nested_index_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "name": "index",
             },
           ],
-          "component": "false::_EVAL",
           "file": File {
             "base": "nested",
             "dir": "test/unit/filemapper/example/no-layouts",
@@ -306,10 +305,10 @@ Object {
           },
           "id": "_default_no_layouts_nested",
           "meta": Object {},
+          "module": "false::_EVAL",
           "name": "nested",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "no-layouts",
         "dir": "test/unit/filemapper/example",
@@ -319,10 +318,10 @@ Object {
       },
       "id": "_default_no_layouts",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "no-layouts",
     },
   ],
-  "component": "undefined::_EVAL",
   "file": File {
     "base": "example",
     "dir": "test/unit/filemapper",
@@ -332,6 +331,7 @@ Object {
   },
   "id": "_default",
   "meta": Object {},
+  "module": "undefined::_EVAL",
   "name": undefined,
   "rootName": "default",
 }
@@ -342,7 +342,6 @@ Object {
   "children": Array [
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "file": File {
         "base": "_reset.svelte",
         "dir": "test/unit/filemapper/example/admin",
@@ -352,13 +351,13 @@ Object {
       },
       "id": "_default_admin",
       "meta": Object {},
+      "module": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "name": "admin",
     },
     Object {
       "children": Array [
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -368,11 +367,11 @@ Object {
           },
           "id": "_default_blog__slug__svelte",
           "meta": Object {},
+          "module": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "name": "[slug]",
         },
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -382,10 +381,10 @@ Object {
           },
           "id": "_default_blog_prefixed_slug__svelte",
           "meta": Object {},
+          "module": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "name": "prefixed[slug]",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "blog",
         "dir": "test/unit/filemapper/example",
@@ -395,11 +394,11 @@ Object {
       },
       "id": "_default_blog",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "blog",
     },
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/index.svelte::_EVAL",
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example",
@@ -409,6 +408,7 @@ Object {
       },
       "id": "_default_index_svelte",
       "meta": Object {},
+      "module": "test/unit/filemapper/example/index.svelte::_EVAL",
       "name": "index",
     },
     Object {
@@ -417,7 +417,6 @@ Object {
           "children": Array [
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -427,11 +426,11 @@ Object {
               },
               "id": "_default_no_layouts_nested_foo_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "name": "foo",
             },
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -441,10 +440,10 @@ Object {
               },
               "id": "_default_no_layouts_nested_index_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "name": "index",
             },
           ],
-          "component": "false::_EVAL",
           "file": File {
             "base": "nested",
             "dir": "test/unit/filemapper/example/no-layouts",
@@ -454,10 +453,10 @@ Object {
           },
           "id": "_default_no_layouts_nested",
           "meta": Object {},
+          "module": "false::_EVAL",
           "name": "nested",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "no-layouts",
         "dir": "test/unit/filemapper/example",
@@ -467,10 +466,10 @@ Object {
       },
       "id": "_default_no_layouts",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "no-layouts",
     },
   ],
-  "component": "test/unit/filemapper/example/_module.svelte::_EVAL",
   "file": File {
     "base": "_module.svelte",
     "dir": "test/unit/filemapper/example",
@@ -480,6 +479,7 @@ Object {
   },
   "id": "_default",
   "meta": Object {},
+  "module": "test/unit/filemapper/example/_module.svelte::_EVAL",
   "name": undefined,
   "rootName": "default",
 }
@@ -490,7 +490,6 @@ Object {
   "children": Array [
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "file": File {
         "base": "_reset.svelte",
         "dir": "test/unit/filemapper/example/admin",
@@ -504,13 +503,13 @@ Object {
           "value": true,
         },
       },
+      "module": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "name": "admin",
     },
     Object {
       "children": Array [
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -524,11 +523,11 @@ Object {
               "value": true,
             },
           },
+          "module": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "name": "[slug]",
         },
         Object {
           "children": Array [],
-          "component": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/blog",
@@ -542,10 +541,10 @@ Object {
               "value": true,
             },
           },
+          "module": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "name": "prefixed[slug]",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "blog",
         "dir": "test/unit/filemapper/example",
@@ -555,11 +554,11 @@ Object {
       },
       "id": "_default_blog",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "blog",
     },
     Object {
       "children": Array [],
-      "component": "test/unit/filemapper/example/index.svelte::_EVAL",
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example",
@@ -569,6 +568,7 @@ Object {
       },
       "id": "_default_index_svelte",
       "meta": Object {},
+      "module": "test/unit/filemapper/example/index.svelte::_EVAL",
       "name": "index",
     },
     Object {
@@ -577,7 +577,6 @@ Object {
           "children": Array [
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -587,11 +586,11 @@ Object {
               },
               "id": "_default_no_layouts_nested_foo_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/foo.svelte::_EVAL",
               "name": "foo",
             },
             Object {
               "children": Array [],
-              "component": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/no-layouts/nested",
@@ -601,10 +600,10 @@ Object {
               },
               "id": "_default_no_layouts_nested_index_svelte",
               "meta": Object {},
+              "module": "test/unit/filemapper/example/no-layouts/nested/index.svelte::_EVAL",
               "name": "index",
             },
           ],
-          "component": "false::_EVAL",
           "file": File {
             "base": "nested",
             "dir": "test/unit/filemapper/example/no-layouts",
@@ -614,10 +613,10 @@ Object {
           },
           "id": "_default_no_layouts_nested",
           "meta": Object {},
+          "module": "false::_EVAL",
           "name": "nested",
         },
       ],
-      "component": "false::_EVAL",
       "file": File {
         "base": "no-layouts",
         "dir": "test/unit/filemapper/example",
@@ -627,10 +626,10 @@ Object {
       },
       "id": "_default_no_layouts",
       "meta": Object {},
+      "module": "false::_EVAL",
       "name": "no-layouts",
     },
   ],
-  "component": "test/unit/filemapper/example/_module.svelte::_EVAL",
   "file": File {
     "base": "_module.svelte",
     "dir": "test/unit/filemapper/example",
@@ -640,6 +639,7 @@ Object {
   },
   "id": "_default",
   "meta": Object {},
+  "module": "test/unit/filemapper/example/_module.svelte::_EVAL",
   "name": undefined,
   "rootName": "default",
 }

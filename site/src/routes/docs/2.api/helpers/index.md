@@ -10,7 +10,7 @@ index
 {#each context.node.parent.children.indexed as node}
     <div>
         <Cmp node={node.children.index} />
-        <!-- {#await node.children.index.component() then cmp}
+        <!-- {#await node.children.index.module() then cmp}
         {@debug cmp}
             <svelte:component this={cmp.default} />
         {/await} -->

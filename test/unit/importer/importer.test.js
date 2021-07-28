@@ -6,14 +6,14 @@ const exported = {
         aString: { value: 'my-string' },
         withDirective: { value: 'my-directive', directive: true },
     },
-    component: '_default',
+    module: '_default',
     id: '_default',
     rootName: 'default',
     file: { path: 'test/unit/exporter/example/_module.svelte' },
     children: [
         {
             meta: { reset: { value: true } },
-            component: '_default_admin',
+            module: '_default_admin',
             id: '_default_admin',
             name: 'admin',
             file: { path: 'test/unit/exporter/example/admin/_reset.svelte' },

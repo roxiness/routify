@@ -32,10 +32,10 @@ test('bundler writes files', async () => {
     )
 })
 
-test('bundled files have correct component', () => {
+test('bundled files have correct module', () => {
     const adminNode = instance.nodeIndex.find(node => node.name === 'admin')
 
-    const adminImports = [adminNode, ...adminNode.descendants].map(node => node.component)
+    const adminImports = [adminNode, ...adminNode.descendants].map(node => node.module)
 
     expect(adminImports).toEqual([
         '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin)',

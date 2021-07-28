@@ -17,7 +17,7 @@ import * as _default_no_layouts_nested_index_svelte from '../../example/no-layou
 
 export const routes = {
   \\"id\\": \\"_default\\",
-  \\"component\\": () => _default,
+  \\"module\\": () => _default,
   \\"meta\\": {},
   \\"rootName\\": \\"default\\",
   \\"file\\": {
@@ -32,7 +32,7 @@ export const routes = {
     {
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
-      \\"component\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin),
+      \\"module\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin),
       \\"meta\\": {
         \\"reset\\": {
           \\"value\\": true
@@ -52,7 +52,7 @@ export const routes = {
         {
           \\"id\\": \\"_default_admin_bundleme_svelte\\",
           \\"name\\": \\"bundleme\\",
-          \\"component\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin_bundleme_svelte),
+          \\"module\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin_bundleme_svelte),
           \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/admin/bundleme.svelte\\",
@@ -68,7 +68,7 @@ export const routes = {
     {
       \\"id\\": \\"_default_blog\\",
       \\"name\\": \\"blog\\",
-      \\"component\\": false,
+      \\"module\\": false,
       \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/blog\\",
@@ -81,7 +81,7 @@ export const routes = {
         {
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
-          \\"component\\": () => _default_blog__slug__svelte,
+          \\"module\\": () => _default_blog__slug__svelte,
           \\"meta\\": {
             \\"dynamic\\": {
               \\"value\\": true
@@ -99,7 +99,7 @@ export const routes = {
         {
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
-          \\"component\\": () => _default_blog_prefixed_slug__svelte,
+          \\"module\\": () => _default_blog_prefixed_slug__svelte,
           \\"meta\\": {
             \\"dynamic\\": {
               \\"value\\": true
@@ -119,7 +119,7 @@ export const routes = {
     {
       \\"id\\": \\"_default_index_svelte\\",
       \\"name\\": \\"index\\",
-      \\"component\\": () => _default_index_svelte,
+      \\"module\\": () => _default_index_svelte,
       \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/index.svelte\\",
@@ -133,7 +133,7 @@ export const routes = {
     {
       \\"id\\": \\"_default_no_layouts\\",
       \\"name\\": \\"no-layouts\\",
-      \\"component\\": false,
+      \\"module\\": false,
       \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/no-layouts\\",
@@ -146,7 +146,7 @@ export const routes = {
         {
           \\"id\\": \\"_default_no_layouts_nested\\",
           \\"name\\": \\"nested\\",
-          \\"component\\": false,
+          \\"module\\": false,
           \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/no-layouts/nested\\",
@@ -159,7 +159,7 @@ export const routes = {
             {
               \\"id\\": \\"_default_no_layouts_nested_foo_svelte\\",
               \\"name\\": \\"foo\\",
-              \\"component\\": () => _default_no_layouts_nested_foo_svelte,
+              \\"module\\": () => _default_no_layouts_nested_foo_svelte,
               \\"meta\\": {},
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/foo.svelte\\",
@@ -173,7 +173,7 @@ export const routes = {
             {
               \\"id\\": \\"_default_no_layouts_nested_index_svelte\\",
               \\"name\\": \\"index\\",
-              \\"component\\": () => _default_no_layouts_nested_index_svelte,
+              \\"module\\": () => _default_no_layouts_nested_index_svelte,
               \\"meta\\": {},
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/index.svelte\\",
