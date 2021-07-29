@@ -24,12 +24,7 @@
             {...props}
             let:props
             let:decorator>
-            <svelte:self
-                fragments={restFragments}
-                {route}
-                {...load}
-                {props}
-                {decorator} />
+            <svelte:self fragments={restFragments} {...load} {props} {decorator} />
         </svelte:component>
     {:else}
         <svelte:component
