@@ -1,7 +1,6 @@
 <script>
     export let context
     console.log(context.node.parent.children.indexed[0])
-    import Cmp from './__Cmp.svelte'
 </script>
 
 index
@@ -9,11 +8,6 @@ index
 
 {#each context.node.parent.children.indexed as node}
     <div>
-        <Cmp node={node.children.index} />
-        <!-- {#await node.children.index.module() then cmp}
-        {@debug cmp}
-            <svelte:component this={cmp.default} />
-        {/await} -->
-
+        <svelte:component this={node.children.index.component} />
     </div>
 {/each}
