@@ -4,10 +4,11 @@
     import Example from '#cmp/Example.svelte'
 </script>
 
+# Parameters
 
+Parameters can be accessed in Routify with the `$params` helper. 
 
-
-<FilesViewer filesPromise={resolveNode('../example').meta.files} exclude={['_module.svelte']} />
+<FilesViewer filesPromise={resolveNode('../example').meta.files} />
 
 ---
 
