@@ -9,7 +9,7 @@
 
 {#if router}
     <div class="bar">
-        <AddressInput {router} />
+        <AddressInput activeRoute={router.activeRoute} />
         <Options {router} />
     </div>
 {/if}
