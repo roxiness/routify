@@ -28,7 +28,7 @@ For more information, please see [$url](/docs/api/helpers/url)
 
 ---
 
-### Writing URLs from files
+### Generating URLs from files
 Routify lets you iterate over nodes (files) in your project.
 ```html
 <script>
