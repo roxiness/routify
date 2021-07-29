@@ -21,7 +21,7 @@ Routify can execute calls prior to loading components. This can be done with `lo
         //simulate slow api
         await new Promise(resolve => setTimeout(resolve, 1500))
         return {
-            hello: await 'preloaded world',
+            hello: 'preloaded world',
         }
     }
 </script>
