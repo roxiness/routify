@@ -1,23 +1,17 @@
 <script>
     import FileTree from '#cmp/FileTree.svelte'
-    import { Sidenav, Backdrop } from 'polykit'
+    import { Sidenav, Backdrop, screenSize } from 'polykit'
     import Links from '../__layout/Links.svelte'
     export let context
     let open
     let state
-    let screenSize
 </script>
 
 <!-- routify:meta split|scoped -->
 
-<div class="app {screenSize} {state}">
+<div class="app {$screenSize} {state}">
     <div class="container outer">
-        <Sidenav
-            bind:open
-            bind:screenSize
-            bind:state
-            let:toggle
-            asidePositioning="absolute">
+        <Sidenav bind:open bind:state let:toggle asidePositioning="absolute">
             <aside slot="aside">
                 <div class="sidenav-activator" on:click={toggle}>☰</div>
                 <div class="container">
@@ -28,7 +22,7 @@
                     <FileTree node={context.node} />
                 </div>
             </aside>
-            {#if ['mobile', 'tablet'].includes(screenSize)}
+            {#if ['mobile', 'tablet'].includes($screenSize)}
                 <Backdrop bind:show={open} />
             {/if}
 

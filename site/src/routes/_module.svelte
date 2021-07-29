@@ -5,8 +5,8 @@
 
 <!-- routify:meta split|scoped -->
 
-<Window let:screenSize>
-    <div class="app {screenSize}">
+<Window let:size>
+    <div class="app {size}">
         <TopNav />
         <slot />
     </div>
