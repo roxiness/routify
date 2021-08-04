@@ -28,7 +28,7 @@ export function prefetch(path: string | ClientNodeApi, options: any): void;
  * @typedef {function(ClientNodeApi, ClientNodeApi):ConcestorReturn} GetConcestor
  * @type {GetConcestor}
  */
-export function getConcestor(nodeApi1: ClientNodeApi, nodeApi2: ClientNodeApi): ConcestorReturn;
+export function getConcestor(nodeApi1: ClientNodeApi, nodeApi2: ClientNodeApi): [ClientNodeApi, ClientNodeApi, ClientNodeApi];
 /**
  * Get index difference between two paths
  *
@@ -45,10 +45,11 @@ export function getDirection(paths: any[], newPath: object, oldPath: object): nu
  * @type {FocusHelper}
  */
 export function focus(element: HTMLElement): void;
-export namespace components {
-    function subscribe(run: any): () => void;
-    function subscribe(run: any): () => void;
+export namespace nodes {
+    export function subscribe(run: any): import("svelte/store").Unsubscriber;
+    export function subscribe(run: any): import("svelte/store").Unsubscriber;
 }
+export namespace components { }
 /**
  * @typedef {import('svelte/store').Readable<ClientNodeApi>} ClientNodeHelperStore
  * @type { ClientNodeHelperStore }
@@ -63,13 +64,15 @@ export const layout: import("svelte/store").Readable<ClientNodeApi>;
 * @typedef {import('svelte/store').Readable<ContextHelper>} ContextHelperStore
 * @type {ContextHelperStore}
 */
-export const context: import("svelte/store").Readable<ContextHelper>;
+export const context: import("svelte/store").Readable<{
+    component: ClientNode;
+}>;
 /**
  * @typedef {function():void} ReadyHelper
  * @typedef {import('svelte/store').Readable<ReadyHelper>} ReadyHelperStore
  * @type {ReadyHelperStore}
 */
-export const ready: import("svelte/store").Readable<ReadyHelper>;
+export const ready: import("svelte/store").Readable<() => void>;
 /**
  * @callback AfterPageLoadHelper
  * @param {function} callback
@@ -110,16 +113,19 @@ export const meta: import("svelte/store").Readable<{
     [x: string]: any;
 }>;
 /**
- * @callback UrlHelper
- * @param {String=} path
- * @param {UrlParams=} params
- * @param {UrlOptions=} options
- * @return {String}
- *
+ * @typedef {{
+ *   (el: Node): {update: (args: any) => void;}
+ *   (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined): string;
+ * }} UrlHelper
  * @typedef {import('svelte/store').Readable<UrlHelper>} UrlHelperStore
  * @type {UrlHelperStore}
  * */
-export const url: import("svelte/store").Readable<UrlHelper>;
+export const url: import("svelte/store").Readable<{
+    (el: Node): {
+        update: (args: any) => void;
+    };
+    (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined): string;
+}>;
 /**
 * @callback GotoHelper
 * @param {String=} path
@@ -156,7 +162,7 @@ export type RoutifyContext = {
     componentFile: any;
 };
 export type ConcestorReturn = [ClientNodeApi, ClientNodeApi, ClientNodeApi];
-export type GetConcestor = (arg0: ClientNodeApi, arg1: ClientNodeApi) => ConcestorReturn;
+export type GetConcestor = (arg0: ClientNodeApi, arg1: ClientNodeApi) => [ClientNodeApi, ClientNodeApi, ClientNodeApi];
 /**
  * Sets element to active
  */
@@ -165,9 +171,11 @@ export type ClientNodeHelperStore = import("svelte/store").Readable<ClientNodeAp
 export type ContextHelper = {
     component: ClientNode;
 };
-export type ContextHelperStore = import("svelte/store").Readable<ContextHelper>;
+export type ContextHelperStore = import("svelte/store").Readable<{
+    component: ClientNode;
+}>;
 export type ReadyHelper = () => void;
-export type ReadyHelperStore = import("svelte/store").Readable<ReadyHelper>;
+export type ReadyHelperStore = import("svelte/store").Readable<() => void>;
 export type AfterPageLoadHelper = (callback: Function) => any;
 export type AfterPageLoadHelperStore = import("svelte/store").Readable<AfterPageLoadHelper> & {
     _hooks: Array<Function>;
@@ -196,10 +204,17 @@ export type MetaHelperStore = import("svelte/store").Readable<{
     [x: string]: any;
 }>;
 export type UrlHelper = {
-    (el: Node): {update: (args: any) => void;}
+    (el: Node): {
+        update: (args: any) => void;
+    };
     (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined): string;
 };
-export type UrlHelperStore = import("svelte/store").Readable<UrlHelper>;
+export type UrlHelperStore = import("svelte/store").Readable<{
+    (el: Node): {
+        update: (args: any) => void;
+    };
+    (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined): string;
+}>;
 export type GotoHelper = (path?: string | undefined, params?: UrlParams | undefined, options?: GotoOptions | undefined) => any;
 export type GotoHelperStore = import("svelte/store").Readable<GotoHelper>;
 export type IsActiveHelper = (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined) => boolean;

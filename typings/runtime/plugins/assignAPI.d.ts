@@ -1,4 +1,4 @@
 export const assignAPI: {
-    (payload: TreePayload): Promise<any>;
-    sync(payload: TreePayload): any;
+    (payload: TreePayload): Promise<boolean>;
+    sync(payload: TreePayload): boolean;
 };

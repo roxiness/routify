@@ -1,12 +1,12 @@
 declare namespace _default {
-    namespace queryHandler {
-        function parse(search: any): any;
-        function stringify(params: any): string;
+    export namespace queryHandler {
+        export function parse(search: any): any;
+        export function stringify(params: any): string;
     }
-    namespace urlTransform {
-        function apply(x: any): any;
-        function remove(x: any): any;
+    export namespace urlTransform {
+        export function apply(x: any): any;
+        export function remove(x: any): any;
     }
-    const useHash: boolean;
+    export const useHash: boolean;
 }
 export default _default;

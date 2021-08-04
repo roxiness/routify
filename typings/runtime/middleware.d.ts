@@ -41,13 +41,13 @@ export type NodeWalkerProxy = (NodePayload: NodePayload) => any;
  * @param {NodeWalkerProxy} fn function to be called for each file
  * @param {NodePayload=} payload
  */
-export function nodeMiddleware(fn: NodeWalkerProxy, payload?: NodePayload | undefined): Promise<any>;
+export function nodeMiddleware(fn: NodeWalkerProxy, payload?: NodePayload | undefined): Promise<boolean>;
 /**
  * Node walker (sync version)
  * @param {NodeWalkerProxy} fn function to be called for each file
  * @param {NodePayload=} payload
  */
-export function nodeMiddlewareSync(fn: NodeWalkerProxy, payload?: NodePayload | undefined): any;
+export function nodeMiddlewareSync(fn: NodeWalkerProxy, payload?: NodePayload | undefined): boolean;
 /**
  * Node payload
  * @typedef {Object} NodePayload
@@ -71,10 +71,10 @@ export function nodeMiddlewareSync(fn: NodeWalkerProxy, payload?: NodePayload | 
  * @param {NodeWalkerProxy} fn
  */
 export function createNodeMiddleware(fn: NodeWalkerProxy): {
-    (payload: TreePayload): Promise<any>;
+    (payload: TreePayload): Promise<boolean>;
     /**
      * NodeMiddleware sync payload receiver
      * @param {TreePayload} payload
      */
-    sync(payload: TreePayload): any;
+    sync(payload: TreePayload): boolean;
 };
