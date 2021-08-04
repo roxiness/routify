@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "noEmit": false,
+    "declarationDir": "typings",
+    "emitDeclarationOnly": true
+  },
+  "extends": "./tsconfig.json",
+  "include": ["**/*.js"],
+  "exclude": [
+    "**/node_modules/*",
+    "**/*.spec.ts",
+    "test",
+    "**/tmp/*",
+    "example",
+    "**/dist/*",
+    "**/.history/*",
+    "index.d.ts"
+  ]
+}
