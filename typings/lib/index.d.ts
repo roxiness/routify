@@ -4,4 +4,4 @@ export var routify: (inputOptions: any) => {
     renderStart(): Promise<void>;
 };
 export var getConfig: any;
-export let config: {};
+export var config: {};

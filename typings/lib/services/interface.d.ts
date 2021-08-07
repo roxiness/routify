@@ -1,6 +1,6 @@
 export function Builder(options: any, returnResult?: boolean, metaParser?: {
     get: (file: any) => Promise<{}>;
-    hasMetaChanged: (file: any) => Promise<boolean>;
+    fileChange: (file: any) => Promise<"new" | "uncached" | "changed" | "unchanged">;
     deleteFile: (file: any) => boolean;
 }): () => Promise<any>;
 export function start(inputOptions: any): {

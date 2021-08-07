@@ -1,10 +1,10 @@
-import { getContext, tick } from 'svelte'
-import { derived, get, writable } from 'svelte/store'
-import { route, routes, rootContext, isChangingPage } from './store'
-import { resolveUrl } from './utils'
-import { onPageLoaded } from './utils/onPageLoaded.js'
-import { urlToRoute } from './utils/urlToRoute'
-import { prefetch as _prefetch } from './Prefetcher.svelte'
+import {getContext, tick} from 'svelte'
+import {derived, get, writable} from 'svelte/store'
+import {route, routes, rootContext, isChangingPage} from './store'
+import {resolveUrl} from './utils'
+import {onPageLoaded} from './utils/onPageLoaded.js'
+import {urlToRoute} from './utils/urlToRoute'
+import {prefetch as _prefetch} from './Prefetcher.svelte'
 /// <reference path="../typedef.js" />
 
 /** @ts-check */
@@ -95,10 +95,10 @@ export const ready = {
     window['routify'].stopAutoReady = true
     async function ready() {
       await tick()
-      await onPageLoaded({ page: get(route), metatags, afterPageLoad })
+      await onPageLoaded({page: get(route), metatags, afterPageLoad})
     }
     run(ready)
-    return () => { }
+    return () => {}
   }
 }
 
@@ -131,7 +131,7 @@ export const beforeUrlChange = {
 function hookHandler(listener) {
   const hooks = this._hooks
   const index = hooks.length
-  listener(callback => { hooks[index] = callback })
+  listener(callback => {hooks[index] = callback})
   return (...params) => {
     delete hooks[index]
     listener(...params)
@@ -196,16 +196,14 @@ export const meta = {
 }
 
 /**
- * @callback UrlHelper
- * @param {String=} path
- * @param {UrlParams=} params
- * @param {UrlOptions=} options
- * @return {String}
- *
+ * @typedef {{
+ *   (el: Node): {update: (args: any) => void;}
+ *   (path?: string | undefined, params?: UrlParams | undefined, options?: UrlOptions | undefined): string;
+ * }} UrlHelper
  * @typedef {import('svelte/store').Readable<UrlHelper>} UrlHelperStore
  * @type {UrlHelperStore} 
  * */
- export const url = {
+export const url = {
   subscribe(listener) {
     const ctx = getRoutifyContext()
     return derived(
@@ -225,7 +223,7 @@ export const meta = {
  */
 export function makeUrlHelper($ctx, $currentRoute, $routes) {
   return function url(path, params = {}, options) {
-    const { component } = $ctx
+    const {component} = $ctx
     const inheritedParams = Object.assign({}, $currentRoute.params, component.params)
     let el = path && path.nodeType && path
 
@@ -251,7 +249,7 @@ export function makeUrlHelper($ctx, $currentRoute, $routes) {
     if (el) {
       el.href = url
       return {
-        update(changedParams) { el.href = resolveUrl(path, changedParams, inheritedParams) }
+        update(changedParams) {el.href = resolveUrl(path, changedParams, inheritedParams)}
       }
     }
 
@@ -341,13 +339,13 @@ export const redirect = {
  * @typedef {import('svelte/store').Readable<IsActiveHelper>} IsActiveHelperStore
  * @type {IsActiveHelperStore} 
  * */
- export const isActive = {
+export const isActive = {
   subscribe(run) {
     return derived(
       [url, route],
-      ([url, route]) => function isActive(path = "", params = {}, { strict } = { strict: true }) {
-        path = url(path, params, { strict })
-        const currentPath = url(route.path, params, { strict })
+      ([url, route]) => function isActive(path = "", params = {}, {strict} = {strict: true}) {
+        path = url(path, params, {strict})
+        const currentPath = url(route.path, params, {strict})
         const re = new RegExp('^' + path + '($|/)')
         return !!currentPath.match(re)
       }
@@ -438,9 +436,9 @@ const _metatags = {
   props: {},
   templates: {},
   services: {
-    plain: { propField: 'name', valueField: 'content' },
-    twitter: { propField: 'name', valueField: 'content' },
-    og: { propField: 'property', valueField: 'content' },
+    plain: {propField: 'name', valueField: 'content'},
+    twitter: {propField: 'name', valueField: 'content'},
+    og: {propField: 'property', valueField: 'content'},
   },
   plugins: [
     {
@@ -489,7 +487,7 @@ const _metatags = {
     const head = document.getElementsByTagName('head')[0]
     const match = prop.match(/(.+)\:/)
     const serviceName = match && match[1] || 'plain'
-    const { propField, valueField } = metatags.services[serviceName] || metatags.services.plain
+    const {propField, valueField} = metatags.services[serviceName] || metatags.services.plain
     const oldElement = document.querySelector(`meta[${propField}='${prop}']`)
     if (oldElement) oldElement.remove()
 
@@ -554,7 +552,7 @@ const _metatags = {
  */
 export const metatags = new Proxy(_metatags, {
   set(target, name, value, receiver) {
-    const { props } = target
+    const {props} = target
 
     if (Reflect.has(target, name))
       Reflect.set(target, name, value, receiver)

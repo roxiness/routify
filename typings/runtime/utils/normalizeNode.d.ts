@@ -4,18 +4,18 @@ export function stripDefaultsAndDevProps(node: TreePayload): {
 };
 export function restoreDefaults(node: any): any;
 export namespace defaultNode {
-    const isDir: boolean;
-    const ext: string;
-    const isLayout: boolean;
-    const isReset: boolean;
-    const isIndex: boolean;
-    const isFallback: boolean;
-    const isPage: boolean;
-    const ownMeta: {};
-    namespace meta {
-        const recursive: boolean;
-        const preload: boolean;
-        const prerender: boolean;
+    export const isDir: boolean;
+    export const ext: string;
+    export const isLayout: boolean;
+    export const isReset: boolean;
+    export const isIndex: boolean;
+    export const isFallback: boolean;
+    export const isPage: boolean;
+    export const ownMeta: {};
+    export namespace meta {
+        export const recursive: boolean;
+        export const preload: boolean;
+        export const prerender: boolean;
     }
-    const id: string;
+    export const id: string;
 }

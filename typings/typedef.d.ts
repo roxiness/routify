@@ -114,8 +114,8 @@ type BuildConfig = {
     dynamicImports?: boolean | undefined;
     singleBuild?: boolean | undefined;
     distDir?: string | undefined;
-    extensions?: (string | any[]) | undefined;
-    ignore?: (string | any[]) | undefined;
+    extensions?: (string | Array) | undefined;
+    ignore?: (string | Array) | undefined;
     noHashScroll?: boolean | undefined;
 };
 type UrlParams = {

@@ -2,8 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "declaration": true,
-    "declarationDir": "typings",
-    "emitDeclarationOnly": true,
+    "noEmit": true,
     "resolveJsonModule": true,
     "moduleResolution": "Node",
     "rootDirs": ["runtime", "lib"],

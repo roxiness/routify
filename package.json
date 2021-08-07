@@ -50,7 +50,9 @@
     "test": "cd test && ava tests/** --timeout 300s",
     "test:cli": "cd test && ava tests/cli/** --timeout 300s",
     "test:e2e": "start-server-and-test start:example 5000 \"cd test && npm install && npx ava tests/e2e/** --watch\"",
-    "test:mock-api": "cd test && ava tests/mock-server/**"
+    "test:mock-api": "cd test && ava tests/mock-server/**",
+    "test:typings": "tsc --noEmit",
+    "build:typings": "tsc --project ./tsconfig.typings.json"
   },
   "prettier": {
     "semi": false,

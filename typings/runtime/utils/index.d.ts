@@ -1,4 +1,4 @@
-export function handleScroll(element: any): boolean;
+export function handleScroll(element: any, scrollToTop: any): boolean;
 export function handleHash(): boolean;
 export function scrollAncestorsToTop(element: any): void;
 /** Supresses Routify caused logs and warnings for one tick */

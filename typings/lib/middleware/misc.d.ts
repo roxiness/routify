@@ -1,17 +1,17 @@
 export const addPath: {
-    (payload: TreePayload): Promise<any>;
-    sync(payload: TreePayload): any;
+    (payload: TreePayload): Promise<boolean>;
+    sync(payload: TreePayload): boolean;
 };
 export const addId: {
-    (payload: TreePayload): Promise<any>;
-    sync(payload: TreePayload): any;
+    (payload: TreePayload): Promise<boolean>;
+    sync(payload: TreePayload): boolean;
 };
 export const removeUnderscoredDirs: {
-    (payload: TreePayload): Promise<any>;
-    sync(payload: TreePayload): any;
+    (payload: TreePayload): Promise<boolean>;
+    sync(payload: TreePayload): boolean;
 };
 export function removeNonSvelteFiles(payload: any): void;
 export const defineFiles: {
-    (payload: TreePayload): Promise<any>;
-    sync(payload: TreePayload): any;
+    (payload: TreePayload): Promise<boolean>;
+    sync(payload: TreePayload): boolean;
 };
