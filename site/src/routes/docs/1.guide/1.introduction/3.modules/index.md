@@ -4,7 +4,7 @@
 
 Modules are components that can control logic, layout and access for descendent components.
 
-Components are written as `_module.svelte`.
+Modules are created as `_module.svelte`.
 
 ```html
 <!-- _module.svelte -->
