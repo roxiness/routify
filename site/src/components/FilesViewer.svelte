@@ -56,14 +56,14 @@
 
 <style>
     .filetree {
-        background: #fafafa !important;
+        background: #fdf3fd !important;
         padding-bottom: 16px;
     }
     .file {
         width: 100%;
     }
     .files-header {
-        background: #999;
+        background: rgb(160, 110, 170);
         color: #fff;
         font-weight: bold;
         font-size: 12px;
@@ -77,7 +77,7 @@
         background: none !important;
         text-align: left;
         border: none !important;
-        color: #606c76;
+        color: #76606f;
         text-transform: none;
         font-weight: normal;
         font-size: 12px;
@@ -92,7 +92,7 @@
         line-height: 32px;
     }
     * :global(button.selected) {
-        color: #606c76;
+        color: #76606f;
         transform: translateY(0px);
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
         font-weight: bold;
