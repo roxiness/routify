@@ -57,6 +57,7 @@
 <style>
     .filetree {
         background: #fafafa !important;
+        padding-bottom: 16px;
     }
     .file {
         width: 100%;
