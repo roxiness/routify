@@ -44,9 +44,12 @@
                 <TabsPage>
                     <!-- <div class="files-header">{file.node.file.base}</div> -->
                     <div>
-                        <Code language={langMap[file.node.file.base.split('.').pop()]}>
-                            {file.node.meta.src}
-                        </Code>
+                        {#await file.node.meta.src then src}
+                            <Code
+                                language={langMap[file.node.file.base.split('.').pop()]}>
+                                {src}
+                            </Code>
+                        {/await}
                     </div>
                 </TabsPage>
             {/each}
