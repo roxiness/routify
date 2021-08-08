@@ -2,8 +2,6 @@
 export let context
 </script>
 
-<!-- routify:meta order=0 -->
-
 # Navigation
 
 ---
