@@ -68,7 +68,7 @@
         font-size: 12px;
         padding-left: 24px;
         line-height: 32px;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
     }
     .filetree :global(button) {
         width: 100%;
