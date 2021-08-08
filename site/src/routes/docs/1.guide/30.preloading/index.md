@@ -6,8 +6,7 @@
 
 
 
-
-<FilesViewer filesPromise={resolveNode('../example').meta.files} exclude={['_module.svelte']} />
+<FilesViewer root={resolveNode('../example')} focus="index.svelte" />
 
 ---
 

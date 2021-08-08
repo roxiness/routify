@@ -8,7 +8,7 @@
 
 Parameters can be accessed in Routify with the `$params` helper. 
 
-<FilesViewer filesPromise={resolveNode('../example').meta.files} />
+<FilesViewer root={resolveNode('../example')}  />
 
 ---
 

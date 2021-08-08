@@ -11,8 +11,7 @@ Routify supports buildtime data through meta files.
 
 Buildtime data can be dynamically imported by setting `split` to true
 
-
-<FilesViewer filesPromise={resolveNode('../example').meta.files} exclude={['_module.svelte']} />
+<FilesViewer root={resolveNode('../example')} focus="index.svelte" />
 
 ---
 

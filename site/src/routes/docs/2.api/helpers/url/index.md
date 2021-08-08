@@ -7,7 +7,7 @@
 
 The `$url` helper creates URLs from paths and parameters.
 
-<FilesViewer filesPromise={resolveNode('../example').meta.files} exclude={['_module.svelte']} focus="index.svelte" />
+<FilesViewer root={resolveNode('../example')} focus="index.svelte" />
 
 ---
 
