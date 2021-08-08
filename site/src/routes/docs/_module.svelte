@@ -58,7 +58,7 @@
         background: #f4f7f9;
         margin-top: var(--spacing-4);
         border-radius: var(--spacing-5);
-        padding: var(--spacing-6) var(--spacing-8);
+        padding: var(--spacing-7) var(--spacing-8) var(--spacing-8);
     }
     aside {
         padding-top: 72px;
