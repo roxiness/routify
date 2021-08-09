@@ -6,16 +6,19 @@
     const getName = node => node.name + (node.meta.status ? ` [${node.meta.status}]` : '')
 </script>
 
-<ul>
-    {#each node.children.indexed as child (child.path)}
-        <li>
-            <a href={child.path} class:active={$isActive(child.path)}>{getName(child)}</a>
-            {#if $isActive(child.path) && child.children.indexed.length}
-                <div transition:slide|local>
-                    <svelte:self node={child} nested={nested + 1} />
-                </div>
-            {/if}
-        </li>
+<ul class="nested-{nested}">
+    {#each node.children.indexed as child}
+        {#if child.name !== 'example'}
+            <li>
+                <a href={child.path} class:active={$isActive(child.path)}
+                    >{getName(child)}</a>
+                {#if child.children.indexed.length}
+                    <div transition:slide|local>
+                        <svelte:self node={child} nested={nested + 1} />
+                    </div>
+                {/if}
+            </li>
+        {/if}
     {/each}
 </ul>
 
