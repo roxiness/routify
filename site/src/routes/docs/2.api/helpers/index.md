@@ -1,9 +1,7 @@
 <script>
+    import {context as context2} from '@roxi/routify'
     export let context
-    console.log(context.node.parent.children.indexed[0])
 </script>
-
-index
 
 
 {#each context.node.parent.children.indexed as node}
