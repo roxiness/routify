@@ -4,6 +4,9 @@
         "#cmp/*": "./src/components/*",
         "#root/*": "./*"
     },
+    "engines": {
+        "node": ">=14"
+    },
     "scripts": {
         "dev": "run-p dev:*",
         "build": "routify3 && vite build",
