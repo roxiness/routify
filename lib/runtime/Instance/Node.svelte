@@ -2,7 +2,7 @@
     import { getContext, setContext } from 'svelte'
     export let node
     export let passthrough
-    const context = getContext('routify-fragment-context') || {}
+    const context = { ...getContext('routify-fragment-context') }
     context.node = node
     setContext('routify-fragment-context', context)
 </script>
