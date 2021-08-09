@@ -80,6 +80,7 @@
         font-weight: bolder;
         background: white;
         border-radius: 4px;
+        cursor: pointer;
     }
 
     :global(.closed) .sidenav-activator {
