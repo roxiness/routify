@@ -59,7 +59,6 @@
         width: 100%;
         min-height: 400px;
         margin-top: var(--spacing-4);
-        padding: var(--spacing-7) var(--spacing-8) var(--spacing-8);
     }
     aside {
         padding-top: 72px;

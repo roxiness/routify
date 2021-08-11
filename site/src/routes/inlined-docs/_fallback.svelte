@@ -4,27 +4,29 @@
 </script>
 
 <div class="inlined-layout">
-    <div class="container">
-        {#if true}
-            {#each $context.node.parent.parent.children.docs.children as category}
-                <h1>
-                    {category.name}
-                </h1>
-                {#each category.children.filter(isNotUnderscored) as topic}
-                    <div class="block">
-                        <h2>
-                            {topic.name}
-                        </h2>
-                        <svelte:component this={topic.component}>
-                            {#each topic.children as subject}
-                                <svelte:component this={subject.component} />
-                            {/each}
-                        </svelte:component>
-                    </div>
-                {/each}
+    {#if true}
+        {#each $context.node.parent.parent.children.docs.children as category}
+            <h1>
+                {category.name}
+            </h1>
+            {#each category.children.filter(isNotUnderscored) as topic}
+                <div class="block">
+                    <h2>
+                        {topic.name}
+                    </h2>
+                    <svelte:component this={topic.component}>
+                        {#each topic.children as subject}
+                            <svelte:component this={subject.component}>
+                                {#each subject.children as entry}
+                                    <svelte:component this={entry.component} />
+                                {/each}
+                            </svelte:component>
+                        {/each}
+                    </svelte:component>
+                </div>
             {/each}
-        {/if}
-    </div>
+        {/each}
+    {/if}
 </div>
 
 <style>
