@@ -28,6 +28,7 @@
         "@babel/plugin-syntax-class-properties": "^7.12.13",
         "@rollup/plugin-commonjs": "^18.0.0",
         "@rollup/plugin-node-resolve": "^11.2.1",
+        "@testing-library/svelte": "^3.0.3",
         "@types/jest": "^26.0.23",
         "cachewrap": "^0.0.1",
         "documentation": "^13.2.5",
@@ -43,7 +44,8 @@
         "rollup": "^2.47.0",
         "rollup-plugin-livereload": "^2.0.0",
         "rollup-plugin-svelte": "^7.1.0",
-        "spassr": "^2.6.0"
+        "spassr": "^2.6.0",
+        "svelte-jester": "^1.7.0"
     },
     "dependencies": {
         "cheerio": "^0.x",
