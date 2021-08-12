@@ -14,6 +14,15 @@ const common = {
     testTimeout: 2000,
     modulePaths: ['<rootDir>'],
     roots: ['<rootDir>'],
+
+    transform: {
+        '^.+\\.svelte$': [
+            'svelte-jester',
+            {
+                preprocess: true,
+            },
+        ],
+    },
 }
 
 export default {
