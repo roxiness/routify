@@ -49,6 +49,8 @@ test('detects renamed files', async () => {
     expect(instance.superNode.children[0].descendants.length).toBe(3)
     fse.renameSync(filepath, renamedFilepath)
     await new Promise(resolve => instance.on.buildComplete(resolve))
+    // required
+    await new Promise(resolve => setTimeout(resolve, 50))
     expect(
         instance.superNode.children[0].descendants.find(node => node.name === 'NewFile2'),
     ).toBeTruthy()
