@@ -1,13 +1,11 @@
 <script>
-    import FileTree from '#cmp/FileTree.svelte'
     import Navbar from './_navbar.svelte'
     import { Sidenav, Backdrop, screenSize } from 'polykit'
     import Links from '../__layout/Links.svelte'
     export let context
     let open
     let state
-    const rewrite = path => path.replace(/.*\/docs/, '/inlined-docs')
-    // const rewrite = path => path
+    const rewrite = path => path.replace(/.*\/docs\/?/, '/inlined-docs/#')
 </script>
 
 <!-- routify:meta split|scoped -->

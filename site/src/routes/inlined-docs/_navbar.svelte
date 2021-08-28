@@ -1,17 +1,22 @@
 <script>
-    import { isActive } from '@roxi/routify'
+    // import { isActive } from '@roxi/routify'
     import { slide } from 'svelte/transition'
+    import { activeHash } from './stores'
     export let node
     export let nested = 0
     export let rewrite = path => path
     const getName = node => node.name + (node.meta.status ? ` [${node.meta.status}]` : '')
+
+    $: $activeHash = $activeHash || 'guide'
+    $: history.replaceState({}, null, `/inlined-docs/#${$activeHash}`)
+    $: isActive = path => `/inlined-docs/#${$activeHash}`.startsWith(path)
 </script>
 
 <ul class="nested-{nested}">
     {#each node.children.indexed as child}
         {#if child.name !== 'example'}
             <li>
-                <a href={rewrite(child.path)} class:active={$isActive(child.path)}
+                <a href={rewrite(child.path)} class:active={isActive(rewrite(child.path))}
                     >{getName(child)}</a>
                 {#if child.children.indexed.length}
                     <div transition:slide|local>
