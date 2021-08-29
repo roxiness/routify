@@ -30,6 +30,8 @@
 
     $: activeRoute = router.activeRoute
 
+    const setParentElem = elem => (router.parentElem = elem.parentElement)
+
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
         elem.addEventListener('keydown', handleClick)
@@ -47,4 +49,8 @@
     <div style="display: contents" use:initialize>
         <Component fragments={$activeRoute.fragments} {decorator} />
     </div>
+{/if}
+
+{#if !router.parentElem}
+    <div use:setParentElem />
 {/if}
