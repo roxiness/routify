@@ -6,49 +6,54 @@
     const noExample = node => node.name !== 'example'
     const noInternal = node => node.name !== 'internal'
 
-    $: history.replaceState({}, null, `/inlined-docs/#${$activeHash}`)
+    const { isScrolling } = $context.route.router.scrollHandler
+
+    $: if (!$isScrolling)
+        history.replaceStateNative({}, null, `/inlined-docs/#${$activeHash}`)
 </script>
 
-<LiveAnchor bind:activeHash={$activeHash}>
+<LiveAnchor bind:activeHash={$activeHash} let:anchors>
     <div class="inlined-layout">
         {#if true}
             {#each $context.node.parent.parent.children.docs.children.indexed.filter(noInternal) as category}
-                <Anchor id={category.name} />
-                <!-- <div id={category.name} use:addAnchor /> -->
-                <h1 class="section-header">
-                    {category.name}
-                </h1>
+                <div class="section">
+                    <!-- <div id={category.name} use:addAnchor /> -->
+                    <h1 class="section-header" id={category.name} use:anchors.push>
+                        {category.name}
+                    </h1>
 
-                {#if category.children.index}
-                    <svelte:component this={category.children.index.component} />
-                {/if}
+                    {#if category.children.index}
+                        <svelte:component this={category.children.index.component} />
+                    {/if}
 
-                {#each category.children.indexed as topic}
-                    <Anchor id="{category.name}/{topic.name}" />
-                    <!-- <div id="{category.name}/{topic.name}" use:addAnchor /> -->
-                    <h2 class="category-header">
-                        {topic.name}
-                    </h2>
-                    <div class="block">
-                        <!-- {JSON.stringify(topic)} -->
-                        <svelte:component this={topic.component}>
-                            {#each topic.children as subject}
-                                <Anchor
-                                    id="{category.name}/{topic.name}/{subject.name}" />
-                                <!-- <div
+                    {#each category.children.indexed as topic}
+                        <Anchor id="{category.name}/{topic.name}" />
+                        <!-- <div id="{category.name}/{topic.name}" use:addAnchor /> -->
+                        <h2 class="category-header">
+                            {topic.name}
+                        </h2>
+                        <div class="block">
+                            <!-- {JSON.stringify(topic)} -->
+                            <svelte:component this={topic.component}>
+                                {#each topic.children as subject}
+                                    <Anchor
+                                        id="{category.name}/{topic.name}/{subject.name}" />
+                                    <!-- <div
                                     id="{category.name}/{topic.name}/{subject.name}"
                                     use:addAnchor /> -->
-                                <div class="subject">
-                                    <svelte:component this={subject.component}>
-                                        {#each subject.children.filter(noExample) as entry}
-                                            <svelte:component this={entry.component} />
-                                        {/each}
-                                    </svelte:component>
-                                </div>
-                            {/each}
-                        </svelte:component>
-                    </div>
-                {/each}
+                                    <div class="subject">
+                                        <svelte:component this={subject.component}>
+                                            {#each subject.children.filter(noExample) as entry}
+                                                <svelte:component
+                                                    this={entry.component} />
+                                            {/each}
+                                        </svelte:component>
+                                    </div>
+                                {/each}
+                            </svelte:component>
+                        </div>
+                    {/each}
+                </div>
             {/each}
         {/if}
     </div>
