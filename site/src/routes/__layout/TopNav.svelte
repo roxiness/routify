@@ -1,10 +1,9 @@
 <script>
     import Links from './Links.svelte'
     import Icon from '#cmp/Icon.svelte'
-    let scrollY
 </script>
 
-<nav class:scrollY>
+<nav>
     <div class="container">
         <a href="/">
             <img class="brand" src="/assets/routify3.svg" />
@@ -22,7 +21,7 @@
 </nav>
 <div class="filler" />
 
-<svelte:window bind:scrollY />
+<svelte:window />
 
 <style>
     .filler {
