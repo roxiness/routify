@@ -7,8 +7,6 @@
     export let rewrite = path => path
     const getName = node => node.name + (node.meta.status ? ` [${node.meta.status}]` : '')
 
-    $: $activeHash = $activeHash || 'guide'
-    $: history.replaceState({}, null, `/inlined-docs/#${$activeHash}`)
     $: isActive = path => `/inlined-docs/#${$activeHash}`.startsWith(path)
 </script>
 

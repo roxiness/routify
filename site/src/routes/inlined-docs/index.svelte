@@ -2,10 +2,11 @@
     import { context } from '@roxi/routify'
     import { LiveAnchor, Anchor } from 'polykit'
     import { activeHash } from './stores'
-    // import Anchor, { addAnchor } from './_anchor.svelte'
-    // const isNotUnderscored = node => !node.file.base.startsWith('_')
+
     const noExample = node => node.name !== 'example'
     const noInternal = node => node.name !== 'internal'
+
+    $: history.replaceState({}, null, `/inlined-docs/#${$activeHash}`)
 </script>
 
 <LiveAnchor bind:activeHash={$activeHash}>
