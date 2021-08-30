@@ -22,7 +22,7 @@
             {#each $context.node.parent.parent.children.docs.children.indexed.filter(noInternal) as category}
                 <div class="section">
                     <Anchor id={category.name} />
-                    <h1 class="section-hero" use:anchors.push>
+                    <h1 class="section-hero">
                         {category.name}
                     </h1>
 
