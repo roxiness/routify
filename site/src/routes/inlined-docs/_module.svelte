@@ -53,10 +53,8 @@
     }
 
     main {
-        display: inline-block; /* prevent collapsing margins */
-        width: 100%;
         min-height: 400px;
-        margin-top: var(--spacing-4);
+        padding-top: 72px;
     }
     aside {
         padding-top: 72px;

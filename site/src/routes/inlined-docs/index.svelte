@@ -12,36 +12,42 @@
         history.replaceStateNative({}, null, `/inlined-docs/#${$activeHash}`)
 </script>
 
-<LiveAnchor bind:activeHash={$activeHash} let:anchors offset={200}>
+<LiveAnchor
+    bind:activeHash={$activeHash}
+    let:anchors
+    offset={96 + 72}
+    anchorOffset="-{96 + 72}px">
     <div class="inlined-layout">
         {#if true}
             {#each $context.node.parent.parent.children.docs.children.indexed.filter(noInternal) as category}
                 <div class="section">
-                    <!-- <div id={category.name} use:addAnchor /> -->
-                    <h1 class="section-header" id={category.name} use:anchors.push>
+                    <Anchor id={category.name} />
+                    <h1 class="section-hero" use:anchors.push>
                         {category.name}
                     </h1>
 
                     {#if category.children.index}
-                        <svelte:component this={category.children.index.component} />
+                        <div class="small-container">
+                            <svelte:component this={category.children.index.component} />
+                        </div>
                     {/if}
 
                     {#each category.children.indexed as topic}
-                        <Anchor id="{category.name}/{topic.name}" />
                         <!-- <div id="{category.name}/{topic.name}" use:addAnchor /> -->
                         <h2 class="category-header">
+                            <Anchor id="{category.name}/{topic.name}" />
                             {topic.name}
                         </h2>
                         <div class="block">
                             <!-- {JSON.stringify(topic)} -->
                             <svelte:component this={topic.component}>
                                 {#each topic.children.filter(noExample) as subject}
-                                    <Anchor
-                                        id="{category.name}/{topic.name}/{subject.name}" />
                                     <!-- <div
                                     id="{category.name}/{topic.name}/{subject.name}"
                                     use:addAnchor /> -->
                                     <div class="subject">
+                                        <Anchor
+                                            id="{category.name}/{topic.name}/{subject.name}" />
                                         <svelte:component this={subject.component}>
                                             {#each subject.children.filter(noExample) as entry}
                                                 <svelte:component
@@ -63,22 +69,30 @@
     .inlined-layout {
         /* display: ; */
     }
+    .small-container {
+        padding-left: var(--spacing-8);
+        padding-right: var(--spacing-8);
+    }
     .block {
-        display: inline-block; /* prevent collapsing margins */
-        width: 100%;
         min-height: 400px;
         background: #f4f7f9;
         margin-top: var(--spacing-4);
         border-radius: var(--spacing-5);
         padding: var(--spacing-7) var(--spacing-8) var(--spacing-8);
     }
-    .section-header {
-        font-size: 96px;
-        margin-top: 96px;
+    .section {
+        margin-top: 50vh;
+    }
+    .section:first-of-type {
+        margin-top: 0;
+    }
+    .section-hero {
+        padding-top: 64px;
+        font-size: 128px;
         padding-left: 96px;
         text-transform: uppercase;
         font-weight: bold;
-        border-bottom: 4px solid #606c76;
+        border-bottom: 8px solid #606c76;
     }
     .category-header {
         font-size: 48px;
