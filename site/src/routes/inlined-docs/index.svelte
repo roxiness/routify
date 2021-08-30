@@ -12,7 +12,7 @@
         history.replaceStateNative({}, null, `/inlined-docs/#${$activeHash}`)
 </script>
 
-<LiveAnchor bind:activeHash={$activeHash} let:anchors>
+<LiveAnchor bind:activeHash={$activeHash} let:anchors offset={200}>
     <div class="inlined-layout">
         {#if true}
             {#each $context.node.parent.parent.children.docs.children.indexed.filter(noInternal) as category}
@@ -35,7 +35,7 @@
                         <div class="block">
                             <!-- {JSON.stringify(topic)} -->
                             <svelte:component this={topic.component}>
-                                {#each topic.children as subject}
+                                {#each topic.children.filter(noExample) as subject}
                                     <Anchor
                                         id="{category.name}/{topic.name}/{subject.name}" />
                                     <!-- <div
