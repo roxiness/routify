@@ -1,5 +1,5 @@
 # Node traversal
-Node traversal is a handy way to link or get content, such as meta, from other nodes.
+Node traversal is a great way to link or get content, such as meta, from other nodes.
 
 #### Using `resolveNode`
 ```javascript
