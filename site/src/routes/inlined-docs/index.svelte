@@ -32,33 +32,33 @@
                         </div>
                     {/if}
 
-                    {#each category.children.indexed as topic}
-                        <!-- <div id="{category.name}/{topic.name}" use:addAnchor /> -->
-                        <h2 class="category-header">
-                            <Anchor id="{category.name}/{topic.name}" />
-                            {topic.name}
-                        </h2>
-                        <div class="block">
-                            <!-- {JSON.stringify(topic)} -->
-                            <svelte:component this={topic.component}>
-                                {#each topic.children.filter(noExample) as subject}
-                                    <!-- <div
-                                    id="{category.name}/{topic.name}/{subject.name}"
-                                    use:addAnchor /> -->
-                                    <div class="subject">
-                                        <Anchor
-                                            id="{category.name}/{topic.name}/{subject.name}" />
-                                        <svelte:component this={subject.component}>
-                                            {#each subject.children.filter(noExample) as entry}
+                    <div class="categories">
+                        {#each category.children.indexed as topic}
+                            <div class="category">
+                                <h2 class="category-header">
+                                    <Anchor id="{category.name}/{topic.name}" />
+                                    {topic.name}
+                                </h2>
+                                <div class="block">
+                                    <svelte:component this={topic.component}>
+                                        {#each topic.children.filter(noExample) as subject}
+                                            <div class="subject">
+                                                <Anchor
+                                                    id="{category.name}/{topic.name}/{subject.name}" />
                                                 <svelte:component
-                                                    this={entry.component} />
-                                            {/each}
-                                        </svelte:component>
-                                    </div>
-                                {/each}
-                            </svelte:component>
-                        </div>
-                    {/each}
+                                                    this={subject.component}>
+                                                    {#each subject.children.filter(noExample) as entry}
+                                                        <svelte:component
+                                                            this={entry.component} />
+                                                    {/each}
+                                                </svelte:component>
+                                            </div>
+                                        {/each}
+                                    </svelte:component>
+                                </div>
+                            </div>
+                        {/each}
+                    </div>
                 </div>
             {/each}
         {/if}
@@ -94,11 +94,15 @@
         font-weight: bold;
         border-bottom: 8px solid #606c76;
     }
+    .category:first-of-type .category-header {
+        margin-top: 128px;
+    }
     .category-header {
-        font-size: 48px;
+        font-size: 56px;
         padding-left: 96px;
         text-transform: capitalize;
-        margin-top: 128px;
+        margin-top: 196px;
+        margin-bottom: 48px;
         font-weight: bold;
     }
     .subject:not(:first-child) {
