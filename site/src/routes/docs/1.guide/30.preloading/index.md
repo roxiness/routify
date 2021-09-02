@@ -6,9 +6,4 @@
 
 
 
-<FilesViewer root={resolveNode('../example')} focus="index.svelte" />
-
----
-
-# Example
-<Example offset="../example" />
+<Example path="../example" title="Preloading Example "/>

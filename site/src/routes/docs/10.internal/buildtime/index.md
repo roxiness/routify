@@ -11,9 +11,4 @@ Routify supports buildtime data through meta files.
 
 Buildtime data can be dynamically imported by setting `split` to true
 
-<FilesViewer root={resolveNode('../example')} focus="index.svelte" />
-
----
-
-# Example
-<Example offset="../example" />
+<Example path="../example" title="todo title" />

@@ -7,9 +7,4 @@
 
 The `$url` helper creates URLs from paths and parameters.
 
-<FilesViewer root={resolveNode('../example')} focus="index.svelte" />
-
----
-
-# URL Example
-<Example offset="../example" />
+<Example path="../example" title="URL Example" />

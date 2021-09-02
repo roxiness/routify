@@ -8,9 +8,4 @@
 
 Parameters can be accessed in Routify with the `$params` helper. 
 
-<FilesViewer root={resolveNode('../example')}  />
-
----
-
-# Example
-<Example offset="../example" />
+<Example path="../example" title="Parameters example" />
