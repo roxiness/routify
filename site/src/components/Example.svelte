@@ -1,23 +1,52 @@
 <script>
-    import MiniBrowser from '#cmp/minibrowser/MiniBrowser.svelte'
-    import { Router, InternalReflector } from '@roxi/routify'
-    export let offset
-    export let url = '/'
-    export let urlReflector = InternalReflector
-    export let name = 'example'
-    let router
+    import { Details } from 'polykit'
+    import { resolveNode } from '@roxi/routify'
+    import FilesViewer from '#cmp/FilesViewer.svelte'
+    import Browser from '#cmp/minibrowser/MiniBrowser.svelte'
+    export let path
+    export let title
+    export let focus = null
+    export let show = false
 </script>
 
-<div class="example">
-    <MiniBrowser {router}>
-        <Router {name} {offset} {url} {urlReflector} bind:router />
-    </MiniBrowser>
-</div>
+<Details {show}>
+    <button slot="activator">Show example</button>
+    <div class="example">
+        <h3>{title}</h3>
+        <div class="left-bar" />
+        <div class="fv">
+            <FilesViewer root={resolveNode(path)} {focus} />
+        </div>
+        <div class="ex">
+            <Browser offset={path} slot="browser" />
+        </div>
+    </div>
+</Details>
 
 <style>
     .example {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        padding: 48px 64px 32px 64px;
-        background: #fcfdff;
+        position: relative;
+        margin-bottom: 96px;
+    }
+    .left-bar {
+        position: absolute;
+        width: 16px;
+        top: 16px;
+        bottom: -16px;
+        left: -40px;
+
+        border-left: 4px solid var(--color-grey-300);
+        border-top: 4px solid var(--color-grey-300);
+        border-bottom: 4px solid var(--color-grey-300);
+        border-bottom-left-radius: 16px;
+        border-top-left-radius: 16px;
+    }
+    h3 {
+        margin: 16px 0 16px;
+        padding-bottom: 0;
+        font-weight: bold;
+    }
+    .fv {
+        padding-bottom: 32px;
     }
 </style>

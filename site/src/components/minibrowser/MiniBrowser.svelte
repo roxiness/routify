@@ -1,22 +1,23 @@
 <script>
-    import AddressInput from './AddressInput.svelte'
-    import Options from './Options.svelte'
-    export let router = null
-    export let context = null
-    // if we're using MiniBrowser as a decorator, we only get context
-    $: router = router || context?.route?.router
+    import Bar from '#cmp/minibrowser/Bar.svelte'
+    import { Router, InternalReflector } from '@roxi/routify'
+    export let offset
+    export let url = '/'
+    export let urlReflector = InternalReflector
+    export let name = 'example'
+    let router
 </script>
 
-{#if router}
-    <div class="bar">
-        <AddressInput activeRoute={router.activeRoute} />
-        <Options {router} />
-    </div>
-{/if}
-<slot />
+<div class="example">
+    <Bar {router}>
+        <Router {name} {offset} {url} {urlReflector} bind:router />
+    </Bar>
+</div>
 
 <style>
-    .bar {
-        position: relative;
+    .example {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        padding: 48px 64px 32px 64px;
+        background: #fcfdff;
     }
 </style>

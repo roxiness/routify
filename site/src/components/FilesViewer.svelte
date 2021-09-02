@@ -109,5 +109,6 @@
     .tabs {
         background: #310541;
         display: flex;
+        box-shadow: 0 0 5px rgb(0 0 0 / 10%);
     }
 </style>
