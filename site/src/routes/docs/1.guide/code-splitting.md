@@ -1,13 +1,10 @@
 <!-- routify:meta order=100 -->
 
-# Code-splitting
 
 #### Code-splitting a file
 ```
 <!-- routify::meta split -->
 ```
-
----
 
 #### Code-splitting all files in a module
 To use a meta option for all descendent files, we can use the `scoped` directive.

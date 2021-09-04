@@ -1,4 +1,3 @@
-# Metadata
 Metadata represents page and module specific data that is available at runtime regardless of whether the page or module has been loaded.
 
 It can be used for custom fields such as 

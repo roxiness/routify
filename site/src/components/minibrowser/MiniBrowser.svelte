@@ -16,8 +16,8 @@
 
 <style>
     .example {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--elevation-1);
         padding: 48px 64px 32px 64px;
-        background: #fcfdff;
+        background: #fefbfe;
     }
 </style>

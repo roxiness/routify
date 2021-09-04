@@ -12,7 +12,7 @@
 <Details {show}>
     <button slot="activator">Show example</button>
     <div class="example">
-        <h3>{title}</h3>
+        <h4>{title}</h4>
         <div class="left-bar" />
         <div class="fv">
             <FilesViewer root={resolveNode(path)} {focus} />
@@ -41,7 +41,7 @@
         border-bottom-left-radius: 16px;
         border-top-left-radius: 16px;
     }
-    h3 {
+    h4 {
         margin: 16px 0 16px;
         padding-bottom: 0;
         font-weight: bold;

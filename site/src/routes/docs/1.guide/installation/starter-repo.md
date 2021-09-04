@@ -1,4 +1,3 @@
-# Starter Repo
 
 The easiest way to get started with Routify 3 is to clone the starter repo.
 

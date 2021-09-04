@@ -83,7 +83,7 @@
         color: #76606f;
         text-transform: none;
         font-weight: normal;
-        font-size: 12px;
+        font-size: 14px;
         margin: 0;
         z-index: 0;
         position: relative;
@@ -109,6 +109,6 @@
     .tabs {
         background: #310541;
         display: flex;
-        box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+        box-shadow: var(--elevation-1);
     }
 </style>

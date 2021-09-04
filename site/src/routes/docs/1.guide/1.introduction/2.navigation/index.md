@@ -2,9 +2,6 @@
 export let context
 </script>
 
-# Navigation
-
----
 
 ```html
 <a href="/blog">Blog</a>
@@ -18,9 +15,7 @@ However, Routify will *not* intercept:
 
 To bypass Routify for programmatic navigation, please use `history.pushStateNative` and  `history.replaceStateNative`.
 
----
-
-### Writing URLs
+#### Writing URLs
 URLs can be written manually or with the [`$url`](/docs/api/helpers/url) helper.
 
 ```javascript
@@ -29,9 +24,7 @@ $url('/blog/[slug]/comments', {slug: 'welcome', sort: 'descending'})
 ```
 For more information, please see [$url](/docs/api/helpers/url)
 
----
-
-### Generating URLs from files
+#### Generating URLs from files
 Routify lets you iterate over nodes (files) in your project.
 ```html
 <script>
@@ -58,7 +51,7 @@ Routify lets you iterate over nodes (files) in your project.
 ```
 Hint: To retrieve a node, please refer to [nodes](/docs/guide/nodes).
 
-### Helpers
+#### Helpers
 
 ##### $url (path, params, options)
 

@@ -4,8 +4,6 @@
     import Example from '#cmp/Example.svelte'
 </script>
 
-# Parameters
-
 Parameters can be accessed in Routify with the `$params` helper. 
 
 <Example path="../example" title="Parameters example" />

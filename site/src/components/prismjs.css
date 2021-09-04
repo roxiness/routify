@@ -13,7 +13,6 @@ https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javasc
     padding: 0.2rem;
     color: #CE2F55;
     background: #FFF6FF;
-    font-size: 1.4rem;
     font-family: "Source Code Pro", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   }
   
@@ -25,7 +24,6 @@ https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javasc
   
     font-family: "Source Code Pro", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     font-weight: 500;
-    font-size: 1.4rem;
     text-align: left;
     white-space: pre;
     word-spacing: normal;

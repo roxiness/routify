@@ -1,4 +1,3 @@
-# Plugins
 
 Plugins can be created with the following structure
 
@@ -13,7 +12,7 @@ export default options => ({
 
 ---
 
-### Example
+#### Example
 
 ```javascript
 // this plugin sorts routes by the index prefixed to their names
@@ -45,7 +44,7 @@ export default options => ({
 
 ---
 
-### Using a plugin
+#### Using a plugin
 
 **package.json**
 ```json

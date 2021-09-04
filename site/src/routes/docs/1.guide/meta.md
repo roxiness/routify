@@ -1,4 +1,4 @@
-# Meta
+
 <!-- routify:meta order=20 -->
 
 Metadata is the heart of Routify. Each page and module has its own metadata. Metadata can be accessed without loading or visiting the component and it can contain anything from Routify settings to custom data.
