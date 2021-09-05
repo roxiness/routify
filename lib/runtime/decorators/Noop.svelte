@@ -1,5 +1,5 @@
 <script>
-    export let context = null
+    export const context = null
 </script>
 
 <slot />
