@@ -46,6 +46,7 @@
 /**
  * @typedef {Object} RoutifyBuildtimeOptions
  * @prop {string} routifyDir defaults to '.routify'
+ * @prop {boolean} clearRoutifyDir
  * @prop {object} filemapper
  * @prop {string[]} filemapper.moduleFiles defaults to ['_module.svelte', '_reset.svelte']
  * @prop {string[]} filemapper.resetFiles defaults to ['_reset.svelte']
