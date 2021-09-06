@@ -2,11 +2,14 @@ import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'
 
+import routify from '@roxi/routify/lib/extra/vite-plugin.js'
+
 const production = process.env.NODE_ENV === 'production'
 
 export default defineConfig({
     clearScreen: false,
     plugins: [
+        routify(),
         svelte({
             emitCss: true,
             compilerOptions: {
@@ -17,15 +20,8 @@ export default defineConfig({
         }),
     ],
     server: { port: 1337 },
-    build: {
-        polyfillDynamicImport: false,
-        cssCodeSplit: false,
-    },
     resolve: {
-        dedupe: ['svelte'],
         alias: {
-            '#root': process.cwd() + '/../..', // todo remove
-            '#lib': process.cwd() + '/../../lib', // todo remove
             '#cmp': process.cwd() + '/src/components',
         },
     },

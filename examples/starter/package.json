@@ -1,15 +1,12 @@
 {
     "type": "module",
     "imports": {
-        "#cmp/*": "./src/components/*",
-        "#root/*": "./*"
+        "#cmp/*": "./src/components/*"
     },
     "scripts": {
-        "dev": "run-p dev:*",
-        "build": "routify3 && vite build",
+        "build": "vite build",
         "serve": "vite serve",
-        "dev:routify": "routify3 --watch",
-        "dev:vite": "vite"
+        "dev": "vite"
     },
     "devDependencies": {
         "@roxi/routify": "file:../..",
