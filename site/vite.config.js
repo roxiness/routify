@@ -2,12 +2,14 @@ import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'
 import { readFileSync } from 'fs'
+import routify from '../lib/extra/vite-plugin.js'
 
 const production = process.env.NODE_ENV === 'production'
 
 export default defineConfig({
     clearScreen: false,
     plugins: [
+        routify(),
         svelte({
             emitCss: true,
             compilerOptions: {
@@ -32,16 +34,9 @@ export default defineConfig({
         },
     ],
     server: { port: 1337 },
-    build: {
-        polyfillDynamicImport: false,
-        cssCodeSplit: false,
-    },
     optimizeDeps: { include: ['prismjs'] },
     resolve: {
-        dedupe: ['svelte'],
         alias: {
-            '#root': process.cwd() + '/../',
-            '#lib': process.cwd() + '/../lib',
             '#cmp': process.cwd() + '/src/components',
         },
     },
