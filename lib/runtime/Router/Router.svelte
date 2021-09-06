@@ -1,6 +1,6 @@
 <script>
     import Component from './Component.svelte'
-    import { getUrlFromClick } from '../utils.js'
+    import { getUrlFromClick } from '../utils/index.js'
     import { Router } from './Router.js'
     import { getContext, onDestroy } from 'svelte'
     import { AddressReflector } from './urlReflectors/Address.js'
