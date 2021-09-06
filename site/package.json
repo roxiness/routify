@@ -8,11 +8,9 @@
         "node": ">=14"
     },
     "scripts": {
-        "dev": "run-p dev:*",
-        "build": "routify3 && vite build",
-        "serve": "vite preview",
-        "dev:routify": "routify3 --watch",
-        "dev:vite": "vite"
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
     },
     "devDependencies": {
         "@roxi/routify": "file:../",
