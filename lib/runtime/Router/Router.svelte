@@ -25,7 +25,8 @@
     if (!router) router = new Router(instance, { parentCmpCtx, name })
 
     $: if (offset) router.offset = offset
-    $: if (url) router.url.replace(url)
+    $: if (url && url !== router.url.get()) router.url.replace(url)
+
     $: if (urlReflector) router.urlReflector = urlReflector
 
     $: activeRoute = router.activeRoute
