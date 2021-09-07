@@ -1,4 +1,4 @@
-import routify from '@roxi/routify/lib/extra/vite-plugin.js'
+import routify from '@roxi/routify/vite-plugin'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,8 +10,6 @@ const config = {
             resolve: {
                 dedupe: ['svelte'],
                 alias: {
-                    '#root': process.cwd() + '/../..',
-                    '#lib': process.cwd() + '/../../lib',
                     '#cmp': process.cwd() + '/src/components',
                 },
             },

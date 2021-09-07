@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'
 import { readFileSync } from 'fs'
-import routify from '../lib/extra/vite-plugin.js'
+import routify from '@roxi/routify/vite-plugin'
 
 const production = process.env.NODE_ENV === 'production'
 
