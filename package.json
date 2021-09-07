@@ -11,6 +11,10 @@
         "#root/*": "./*",
         "#typedef.js": "./typedef.js"
     },
+    "exports": {
+        ".": "lib/runtime/index.js",
+        "./vite-plugin": "./lib/extra/vite-plugin.js"
+    },
     "scripts": {
         "build": "run-s build:*",
         "build:lint": "npm run util:prettier -- --write",
