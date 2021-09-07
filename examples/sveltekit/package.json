@@ -2,10 +2,8 @@
   "name": "~TODO~",
   "version": "0.0.1",
   "scripts": {
-    "dev:routify": "routify3 --watch",
-    "dev:sveltekit": "svelte-kit dev",
-    "dev": "run-p dev:*",
-    "build": "routify3 && svelte-kit build",
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
     "preview": "svelte-kit preview"
   },
   "dependencies": {
@@ -13,7 +11,6 @@
   },
   "devDependencies": {
     "@sveltejs/kit": "next",
-    "npm-run-all": "^4.1.5",
     "svelte": "^3.34.0"
   },
   "type": "module",
