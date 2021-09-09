@@ -1,35 +1,20 @@
 /**
- * @typedef {import('./lib/common/RNode')['RNode']} RNodeConstructor
- * @typedef {RNodeConstructor['prototype']} RNode
+ * COMMON
+ * @typedef {import('./lib/common/RNode').RNode} RNode
  *
- * @typedef {import('./lib/runtime/Instance/RNodeRuntime')['RNodeRuntime']} RNodeRuntimeConstructor
- * @typedef {RNodeRuntimeConstructor['prototype']} RNodeRuntime
- *
- * @typedef {import('./lib/runtime/Instance/RNodeRuntime')['RNodeRuntime']} RNodeBuildtimeConstructor
- * @typedef {RNodeRuntimeConstructor['prototype']} RNodeBuildtime
- *
- * @typedef {import('./lib/runtime/route/Route')['Route']} RouteConstructor
- * @typedef {RouteConstructor['prototype']} Route
- *
- * @typedef {import('./lib/runtime/Router/Router')['Router']} RouterConstructor
- * @typedef {RouterConstructor['prototype']} Router
- *
- * @typedef {import('./lib/runtime/route/RouteFragment')['RouteFragment']} RouteFragmentConstructor
- * @typedef {RouteFragmentConstructor['prototype']} RouteFragment
- *
- * @typedef {import('./lib/runtime/Instance/RoutifyRuntime')['RoutifyRuntime']} RoutifyRuntimeConstructor
- * @typedef {RoutifyRuntimeConstructor['prototype']} RoutifyRuntime
- *
- * @typedef {import('./lib/buildtime/RoutifyBuildtime')['RoutifyBuildtime']} RoutifyBuildtimeConstructor
- * @typedef {RoutifyBuildtimeConstructor['prototype']} RoutifyBuildtime
- *
- * @typedef {import('./lib/common/Routify')['Routify']} RoutifyConstructor
- * @typedef {RoutifyConstructor['prototype']} Routify
- *
- *
- * @typedef {{instance: Routify}} RoutifyPayload
- * @typedef {{instance: RoutifyBuildtime}} RoutifyBuildtimePayload
+ * RUNTIME
  * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
+ * @typedef {import('./lib/runtime/Instance/RNodeRuntime').RNodeRuntime} RNodeRuntime
+ * @typedef {import('./lib/runtime/route/Route').Route} Route
+ * @typedef {import('./lib/runtime/Router/Router').Router} Router
+ * @typedef {import('./lib/runtime/route/RouteFragment').RouteFragment} RouteFragment
+ * @typedef {import('./lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
+ *
+ *  BUILDTIME
+ * @typedef {import('./lib/common/RNode').RNode<RoutifyBuildtime>} RNodeBuildtime
+ * @typedef {import('./lib/buildtime/RoutifyBuildtime').RoutifyBuildtime} RoutifyBuildtime
+ * @typedef {{instance: RoutifyBuildtime}} RoutifyBuildtimePayload
+ *
  */
 
 /**
