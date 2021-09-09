@@ -1,12 +1,12 @@
-import { Routify } from '../../../lib/common/Routify.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime'
 
-/** @type {Routify} */
+/** @type {RoutifyBuildtime} */
 let instance
 /** @type {RNode} */
 let rootNode
 
 test('new instance has one empty super node', () => {
-    instance = new Routify({})
+    instance = new RoutifyBuildtime({})
     expect(instance.nodeIndex.length).toBe(1)
     expect(instance.nodeIndex[0].name).toBe('_ROOT')
     expect(instance.superNode).toBe(instance.nodeIndex[0])

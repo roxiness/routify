@@ -1,7 +1,7 @@
-import { Routify } from '../../../lib/common/Routify.js'
-import '../../../lib/../typedef.js'
+import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime'
+import '#root/typedef.js'
 
-const instance = new Routify({})
+const instance = new RoutifyBuildtime({})
 const node = instance.createNode('my-node')
 
 test('can create node', async () => {
