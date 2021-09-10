@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {        
+        "checkJs": true,
+        "paths": {
+            "#lib/*": ["./lib/*"],
+            "#root/*": ["./*"]
+        },
+        "allowJs": true,
+        "declaration": true,
+        "noEmit": true,
+        "moduleResolution": "Node",
+        "rootDirs": ["."],
+        "target": "es6",
+        "baseUrl": "."
+    }, 
+    "include": ["**/*.js"],
+    "exclude": [
+        "**/node_modules/*",
+        "**/tmp/*",
+        "**/.history/*",
+        "test",
+        "examples",
+        "site",
+        "jest.config.js"
+    ]
+}

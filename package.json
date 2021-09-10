@@ -13,15 +13,18 @@
     },
     "exports": {
         ".": "lib/runtime/index.js",
-        "./vite-plugin": "./lib/extra/vite-plugin.js"
+        "./vite-plugin": "./lib/extra/vite-plugin.js",
+        "./typings/*": "./typings/*"
     },
     "scripts": {
         "build": "run-s build:*",
         "build:lint": "npm run util:prettier -- --write",
         "build:documentation": "documentation readme typedef.js -f md --section API",
+        "build:typings": "tsc --project ./tsconfig.typings.json",
         "test": "run-s test:*",
         "test:jest": "jest .",
         "test:lint": "npm run util:prettier -- --check",
+        "test:typings": "tsc --noEmit",
         "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore"
     },
     "author": "jakobrosenberg@gmail.com",
@@ -51,7 +54,8 @@
         "rollup-plugin-livereload": "^2.0.5",
         "rollup-plugin-svelte": "^7.1.0",
         "spassr": "^2.6.0",
-        "svelte-jester": "^1.8.2"
+        "svelte-jester": "^1.8.2",
+        "typescript": "^4.4.2"
     },
     "dependencies": {
         "cheap-watch": "^1.0.3",
