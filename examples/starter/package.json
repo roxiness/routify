@@ -5,7 +5,7 @@
     },
     "scripts": {
         "build": "vite build",
-        "serve": "vite serve",
+        "preview": "vite preview",
         "dev": "vite"
     },
     "devDependencies": {
