@@ -9,7 +9,7 @@ import * as _default_admin_page_svelte from '../../example/admin/page.svelte'
 import * as _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
 import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
 
-export const routes = {
+export default {
   \\"id\\": \\"_default\\",
   \\"module\\": () => _default,
   \\"meta\\": {},

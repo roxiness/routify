@@ -15,7 +15,7 @@ import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixe
 import * as _default_no_layouts_nested_foo_svelte from '../../example/no-layouts/nested/foo.svelte'
 import * as _default_no_layouts_nested_index_svelte from '../../example/no-layouts/nested/index.svelte'
 
-export const routes = {
+export default {
   \\"id\\": \\"_default\\",
   \\"module\\": () => _default,
   \\"meta\\": {},

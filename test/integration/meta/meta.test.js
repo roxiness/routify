@@ -53,14 +53,15 @@ test('buildtime node can see parents scoped meta and own meta', async () => {
 })
 
 test('runtime split meta data to be imported with getter', async () => {
-    const { routes } = await import('./temp/routes.default.js')
+    const { default: routes } = await import('./temp/routes.default.js')
+
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
     expect(await rootNode.meta._props.scopedSplitPlain.value()).toBe(`Im scoped split`)
 })
 
 test('runtime node can see own meta', async () => {
-    const { routes } = await import('./temp/routes.default.js')
+    const { default: routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const rootNode = instance.superNode.children[0]
     expect(rootNode.meta.plain).toBe('Im plain')
@@ -75,7 +76,7 @@ test('runtime node can see own meta', async () => {
 })
 
 test('runtime node can see parents scoped meta', async () => {
-    const { routes } = await import('./temp/routes.default.js')
+    const { default: routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const node = instance.nodeIndex.find(c => c.name === 'page').children[0]
     expect(node.meta.plain).toBeFalsy()
@@ -89,7 +90,7 @@ test('runtime node can see parents scoped meta', async () => {
 })
 
 test('split metadata gets compiled', async () => {
-    const { routes } = await import('./temp/routes.default.js')
+    const { default: routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
     const node = instance.nodeIndex.find(c => c.name === 'compiled')
     expect(node.meta.plain).toBe('Im plain')
