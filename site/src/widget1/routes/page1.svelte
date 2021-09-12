@@ -1,1 +1,0 @@
-<h1>page1.svelte</h1>
