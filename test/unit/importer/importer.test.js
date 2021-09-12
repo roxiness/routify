@@ -24,8 +24,7 @@ const exported = {
 
 test('populateNodeTreeFromSnapshot', () => {
     const instance = new RoutifyRuntime({})
-    const node = instance.superNode.createChild('ROOT')
-    populateNodeTreeFromSnapshot(node, exported)
+    populateNodeTreeFromSnapshot(instance.superNode, exported)
 
     expect(instance.superNode.children[0].id).toBe('_default')
     expect(instance.superNode.children[0].children[0].id).toBe('_default_admin')
