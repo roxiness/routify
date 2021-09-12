@@ -1,11 +1,10 @@
 <script>
-    import Navbar from './_navbar.svelte'
+    import FileTree from '#cmp/FileTree.svelte'
     import { Sidenav, Backdrop, screenSize } from 'polykit'
     import Links from '../__layout/Links.svelte'
     export let context
     let open
     let state
-    const rewrite = path => path.replace(/.*\/docs\/pages\/?/, '/docs/#')
 </script>
 
 <!-- routify:meta split|scoped -->
@@ -20,7 +19,7 @@
                         <Links />
                         <hr />
                     </div>
-                    <Navbar node={context.node.children.pages} {rewrite} />
+                    <FileTree node={context.node} />
                 </div>
             </aside>
             {#if ['mobile', 'tablet'].includes($screenSize)}
@@ -53,8 +52,13 @@
     }
 
     main {
+        display: inline-block; /* prevent collapsing margins */
+        width: 100%;
         min-height: 400px;
-        padding-top: 72px;
+        background: #f4f7f9;
+        margin-top: var(--spacing-4);
+        border-radius: var(--spacing-5);
+        padding: var(--spacing-7) var(--spacing-8) var(--spacing-8);
     }
     aside {
         padding-top: 72px;

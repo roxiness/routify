@@ -18,7 +18,7 @@
     anchorOffset="-{96 + 72}px">
     <div class="copy">
         {#if true}
-            {#each $context.node.parent.parent.children['docs-pages'].children.indexed.filter(noInternal) as category}
+            {#each $context.node.parent.children.pages.children.indexed.filter(noInternal) as category}
                 <div class="section">
                     <h1 class="section-hero">
                         <a href="#{category.name}">
