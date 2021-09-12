@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+         "checkJs": true,
+        "baseUrl": ".",
+        "paths": {
+            "#cmp/*": ["./src/cmp/*"],
+            "#root/*": ["./*"]
+        },
+        "target": "esnext",
+        "moduleResolution": "node"
+    },
+    "exclude": [
+        "**/node_modules",
+        "**/dist",
+        "**/example",
+        "**/temp",
+        "**/output",
+        "**/.history"
+    ]
+}
