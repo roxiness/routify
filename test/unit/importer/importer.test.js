@@ -24,7 +24,7 @@ const exported = {
 
 test('importTree', () => {
     const instance = new RoutifyRuntime({})
-    importTree(instance.superNode, exported)
+    importTree(exported, instance.superNode)
 
     expect(instance.superNode.children[0].id).toBe('_default')
     expect(instance.superNode.children[0].children[0].id).toBe('_default_admin')
