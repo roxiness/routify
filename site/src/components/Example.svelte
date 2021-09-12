@@ -31,7 +31,7 @@
     .left-bar {
         position: absolute;
         width: 16px;
-        top: 16px;
+        top: 24px;
         bottom: -16px;
         left: -40px;
 
