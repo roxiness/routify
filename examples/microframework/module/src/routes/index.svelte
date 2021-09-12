@@ -4,4 +4,4 @@
 
 <h1>Module A</h1>
 
-<a href={$url('../page-in-a')}>page-in-a</a>
+<a href={$url('../external-page')}>external-page</a>

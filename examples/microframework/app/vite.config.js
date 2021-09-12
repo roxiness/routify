@@ -10,7 +10,7 @@ export default defineConfig({
     plugins: [
         routify({
             routesDir: {
-                default: './src/routes',
+                main: './src/routes',
                 moduleA: '../module/src/routes',
             },
         }),
