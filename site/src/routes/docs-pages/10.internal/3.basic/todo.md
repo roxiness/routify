@@ -1,0 +1,1 @@
+- node proxy should also fetch meta as well as warn if there are conflicts between native, meta and children props.
