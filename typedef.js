@@ -165,3 +165,15 @@
  * @prop {function=} load preload functionality for pages and modules
  * @prop {Object.<string,any>} localParams
  */
+
+/**
+ * @typedef {Object} NodeTreeExport
+ * @prop {string} id
+ * @prop {string=} name
+ * @prop {any} module
+ * @prop {string=} rootName
+ * @prop {any=} file
+ * @prop {NodeTreeExport[]} children
+ */
+
+// todo is routifyDir needed in generated routes files?

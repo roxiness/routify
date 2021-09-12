@@ -3,8 +3,9 @@ export class RoutifyBuildtime {
     constructor(options: Partial<RoutifyBuildtimeOptions>);
     mode: string;
     Node: typeof RNode;
+    /** @type {RNodeBuildtime[]} */
+    nodeIndex: RNode<RoutifyBuildtime>[];
     superNode: RNode<RoutifyBuildtime>;
-    get nodeIndex(): RNode<RoutifyBuildtime>[];
     /**
      * @param {string} name
      * @param {string|any} module

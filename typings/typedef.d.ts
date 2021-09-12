@@ -147,3 +147,11 @@ type FragmentContext = {
         [x: string]: any;
     };
 };
+type NodeTreeExport = {
+    id: string;
+    name?: string | undefined;
+    module: any;
+    rootName?: string | undefined;
+    file?: any | undefined;
+    children: NodeTreeExport[];
+};
