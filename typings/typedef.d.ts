@@ -105,6 +105,16 @@ type RoutifyBuildtimePluginType = {
     }) => (Promise<any> | any)) | undefined;
     path?: string | undefined;
     meta?: RoutifyExternalMetaHelper | undefined;
+    metaContext: (context: MetaContext & {
+        [x: string]: any;
+    }) => {};
+};
+type MetaContext = {
+    instance: RoutifyBuildtime;
+    node: import("./lib/common/RNode").RNode<import("./lib/buildtime/RoutifyBuildtime").RoutifyBuildtime>;
+    options: RoutifyBuildtimeOptions;
+    split: (value: any, name?: string) => {};
+    tempPath: string;
 };
 type UrlTransformFn = (url: string) => string;
 type UrlTransform = {

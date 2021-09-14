@@ -44,6 +44,8 @@ export function resolveNamedNode(node: any, name: any): void;
  * @type {Readable<FragmentContext>}
  */
 export const context: Readable<FragmentContext>;
+export const node: import("svelte/store").Readable<import("../Instance/RNodeRuntime.js").RNodeRuntime>;
+export const meta: import("svelte/store").Readable<any>;
 export type Readable<T> = import('svelte/store').Readable<T>;
 export type IsActiveOptions = {
     /**
