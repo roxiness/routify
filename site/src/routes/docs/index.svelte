@@ -98,12 +98,10 @@
     }
     .category-header {
         text-transform: capitalize;
-        margin-bottom: 32px;
         font-weight: bold;
     }
     .subject-header {
         text-transform: capitalize;
-        margin-bottom: 32px;
         font-weight: bold;
     }
     a:visited {

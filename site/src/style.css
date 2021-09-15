@@ -785,17 +785,14 @@ html, body {
    margin-top: 4.8rem;
    margin-bottom: 1.6rem;
 }
-.copy h3 {
-   font-size: calc(var(--font-size-h3) * 1rem);
-   font-kerning: normal;
-}
 .copy h3 { 
   font-size: calc(var(--font-size-h3) * 1rem);
-  margin-top: 3.2rem;
+  font-kerning: normal;
+  margin-top: 8rem;
 }
 .copy h4 { 
   font-size: calc(var(--font-size-h4) * 1rem);
-  margin-top: 1.6rem;
+  margin-top: 4.8rem;
   line-height: 3.2rem;
   margin-bottom: 0;
  }
