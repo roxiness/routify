@@ -2,12 +2,6 @@
 
 ## Using Routify
 
-#### Creating a Routify instance
-
-```javascript
-const instance = new Routify({/* options */})
-```
-
 #### Creating a router
 Basic
 ```html
