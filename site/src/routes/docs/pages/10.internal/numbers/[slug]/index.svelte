@@ -1,6 +1,4 @@
 <script>
-    import Router from '@roxi/routify/lib/runtime/Router/Router.svelte'
-
     export let context
     let subRoutes = []
     const { instance } = context

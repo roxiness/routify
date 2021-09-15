@@ -1,7 +1,7 @@
 <script>
     import FileTree from '#cmp/FileTree.svelte'
     import { Sidenav, Backdrop, screenSize } from 'polykit'
-    import Links from '../__layout/Links.svelte'
+    import Links from '../../__layout/Links.svelte'
     export let context
     let open
     let state
