@@ -16,9 +16,9 @@ import * as _default_no_layouts_nested_foo_svelte from '../../example/no-layouts
 import * as _default_no_layouts_nested_index_svelte from '../../example/no-layouts/nested/index.svelte'
 
 export default {
+  \\"meta\\": {},
   \\"id\\": \\"_default\\",
   \\"module\\": () => _default,
-  \\"meta\\": {},
   \\"rootName\\": \\"default\\",
   \\"file\\": {
     \\"path\\": \\"test/integration/routify/example/_module.svelte\\",
@@ -30,17 +30,13 @@ export default {
   \\"routifyDir\\": import.meta.url,
   \\"children\\": [
     {
+      \\"meta\\": {
+        \\"reset\\": true,
+        \\"bundle\\": true
+      },
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
       \\"module\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin),
-      \\"meta\\": {
-        \\"reset\\": {
-          \\"value\\": true
-        },
-        \\"bundle\\": {
-          \\"value\\": true
-        }
-      },
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/admin/_reset.svelte\\",
         \\"dir\\": \\"test/integration/routify/example/admin\\",
@@ -50,10 +46,10 @@ export default {
       },
       \\"children\\": [
         {
+          \\"meta\\": {},
           \\"id\\": \\"_default_admin_bundleme_svelte\\",
           \\"name\\": \\"bundleme\\",
           \\"module\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin_bundleme_svelte),
-          \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/admin/bundleme.svelte\\",
             \\"dir\\": \\"test/integration/routify/example/admin\\",
@@ -66,10 +62,10 @@ export default {
       ]
     },
     {
+      \\"meta\\": {},
       \\"id\\": \\"_default_blog\\",
       \\"name\\": \\"blog\\",
       \\"module\\": false,
-      \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/blog\\",
         \\"dir\\": \\"test/integration/routify/example\\",
@@ -79,14 +75,12 @@ export default {
       },
       \\"children\\": [
         {
+          \\"meta\\": {
+            \\"dynamic\\": true
+          },
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
           \\"module\\": () => _default_blog__slug__svelte,
-          \\"meta\\": {
-            \\"dynamic\\": {
-              \\"value\\": true
-            }
-          },
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/[slug].svelte\\",
             \\"dir\\": \\"test/integration/routify/example/blog\\",
@@ -97,14 +91,12 @@ export default {
           \\"children\\": []
         },
         {
+          \\"meta\\": {
+            \\"dynamic\\": true
+          },
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
           \\"module\\": () => _default_blog_prefixed_slug__svelte,
-          \\"meta\\": {
-            \\"dynamic\\": {
-              \\"value\\": true
-            }
-          },
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/prefixed[slug].svelte\\",
             \\"dir\\": \\"test/integration/routify/example/blog\\",
@@ -117,10 +109,10 @@ export default {
       ]
     },
     {
+      \\"meta\\": {},
       \\"id\\": \\"_default_index_svelte\\",
       \\"name\\": \\"index\\",
       \\"module\\": () => _default_index_svelte,
-      \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/index.svelte\\",
         \\"dir\\": \\"test/integration/routify/example\\",
@@ -131,10 +123,10 @@ export default {
       \\"children\\": []
     },
     {
+      \\"meta\\": {},
       \\"id\\": \\"_default_no_layouts\\",
       \\"name\\": \\"no-layouts\\",
       \\"module\\": false,
-      \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/no-layouts\\",
         \\"dir\\": \\"test/integration/routify/example\\",
@@ -144,10 +136,10 @@ export default {
       },
       \\"children\\": [
         {
+          \\"meta\\": {},
           \\"id\\": \\"_default_no_layouts_nested\\",
           \\"name\\": \\"nested\\",
           \\"module\\": false,
-          \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/no-layouts/nested\\",
             \\"dir\\": \\"test/integration/routify/example/no-layouts\\",
@@ -157,10 +149,10 @@ export default {
           },
           \\"children\\": [
             {
+              \\"meta\\": {},
               \\"id\\": \\"_default_no_layouts_nested_foo_svelte\\",
               \\"name\\": \\"foo\\",
               \\"module\\": () => _default_no_layouts_nested_foo_svelte,
-              \\"meta\\": {},
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/foo.svelte\\",
                 \\"dir\\": \\"test/integration/routify/example/no-layouts/nested\\",
@@ -171,10 +163,10 @@ export default {
               \\"children\\": []
             },
             {
+              \\"meta\\": {},
               \\"id\\": \\"_default_no_layouts_nested_index_svelte\\",
               \\"name\\": \\"index\\",
               \\"module\\": () => _default_no_layouts_nested_index_svelte,
-              \\"meta\\": {},
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/index.svelte\\",
                 \\"dir\\": \\"test/integration/routify/example/no-layouts/nested\\",

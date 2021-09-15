@@ -10,9 +10,9 @@ import * as _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
 import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
 
 export default {
+  \\"meta\\": {},
   \\"id\\": \\"_default\\",
   \\"module\\": () => _default,
-  \\"meta\\": {},
   \\"rootName\\": \\"default\\",
   \\"file\\": {
     \\"path\\": \\"test/unit/exporter/example/_module.svelte\\",
@@ -23,14 +23,12 @@ export default {
   },
   \\"children\\": [
     {
+      \\"meta\\": {
+        \\"reset\\": true
+      },
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
       \\"module\\": () => _default_admin,
-      \\"meta\\": {
-        \\"reset\\": {
-          \\"value\\": true
-        }
-      },
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/admin/_reset.svelte\\",
         \\"dir\\": \\"test/unit/exporter/example/admin\\",
@@ -40,10 +38,10 @@ export default {
       },
       \\"children\\": [
         {
+          \\"meta\\": {},
           \\"id\\": \\"_default_admin_index_svelte\\",
           \\"name\\": \\"index\\",
           \\"module\\": () => _default_admin_index_svelte,
-          \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/admin/index.svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/admin\\",
@@ -54,10 +52,10 @@ export default {
           \\"children\\": []
         },
         {
+          \\"meta\\": {},
           \\"id\\": \\"_default_admin_page_svelte\\",
           \\"name\\": \\"page\\",
           \\"module\\": () => _default_admin_page_svelte,
-          \\"meta\\": {},
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/admin/page.svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/admin\\",
@@ -70,10 +68,10 @@ export default {
       ]
     },
     {
+      \\"meta\\": {},
       \\"id\\": \\"_default_blog\\",
       \\"name\\": \\"blog\\",
       \\"module\\": false,
-      \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/blog\\",
         \\"dir\\": \\"test/unit/exporter/example\\",
@@ -83,14 +81,12 @@ export default {
       },
       \\"children\\": [
         {
+          \\"meta\\": {
+            \\"dynamic\\": true
+          },
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
           \\"module\\": () => _default_blog__slug__svelte,
-          \\"meta\\": {
-            \\"dynamic\\": {
-              \\"value\\": true
-            }
-          },
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/blog/[slug].svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/blog\\",
@@ -101,14 +97,12 @@ export default {
           \\"children\\": []
         },
         {
+          \\"meta\\": {
+            \\"dynamic\\": true
+          },
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
           \\"module\\": () => _default_blog_prefixed_slug__svelte,
-          \\"meta\\": {
-            \\"dynamic\\": {
-              \\"value\\": true
-            }
-          },
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/blog/prefixed[slug].svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/blog\\",
@@ -121,10 +115,10 @@ export default {
       ]
     },
     {
+      \\"meta\\": {},
       \\"id\\": \\"_default_index_svelte\\",
       \\"name\\": \\"index\\",
       \\"module\\": () => _default_index_svelte,
-      \\"meta\\": {},
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/index.svelte\\",
         \\"dir\\": \\"test/unit/exporter/example\\",

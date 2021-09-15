@@ -14,9 +14,7 @@ Object {
       },
       "id": "_default_admin",
       "meta": Object {
-        "reset": Object {
-          "value": true,
-        },
+        "reset": true,
       },
       "module": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "name": "admin",
@@ -34,9 +32,7 @@ Object {
           },
           "id": "_default_blog__slug__svelte",
           "meta": Object {
-            "dynamic": Object {
-              "value": true,
-            },
+            "dynamic": true,
           },
           "module": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "name": "[slug]",
@@ -52,9 +48,7 @@ Object {
           },
           "id": "_default_blog_prefixed_slug__svelte",
           "meta": Object {
-            "dynamic": Object {
-              "value": true,
-            },
+            "dynamic": true,
           },
           "module": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "name": "prefixed[slug]",
@@ -499,9 +493,7 @@ Object {
       },
       "id": "_default_admin",
       "meta": Object {
-        "reset": Object {
-          "value": true,
-        },
+        "reset": true,
       },
       "module": "test/unit/filemapper/example/admin/_reset.svelte::_EVAL",
       "name": "admin",
@@ -519,9 +511,7 @@ Object {
           },
           "id": "_default_blog__slug__svelte",
           "meta": Object {
-            "dynamic": Object {
-              "value": true,
-            },
+            "dynamic": true,
           },
           "module": "test/unit/filemapper/example/blog/[slug].svelte::_EVAL",
           "name": "[slug]",
@@ -537,9 +527,7 @@ Object {
           },
           "id": "_default_blog_prefixed_slug__svelte",
           "meta": Object {
-            "dynamic": Object {
-              "value": true,
-            },
+            "dynamic": true,
           },
           "module": "test/unit/filemapper/example/blog/prefixed[slug].svelte::_EVAL",
           "name": "prefixed[slug]",
