@@ -54,7 +54,7 @@
         "rollup-plugin-livereload": "^2.0.5",
         "rollup-plugin-svelte": "^7.1.0",
         "spassr": "^2.6.0",
-        "svelte-jester": "^1.8.2",
+        "svelte-jester": "^2.1.2",
         "typescript": "^4.4.2"
     },
     "dependencies": {

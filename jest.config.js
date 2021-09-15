@@ -2,6 +2,7 @@ const common = {
     watchPathIgnorePatterns: [
         '/node_modules/',
         '/.routify/',
+        'routes.default.js',
         '/build/',
         '/temp/',
         '/output/',
@@ -19,7 +20,7 @@ const common = {
         '^.+\\.svelte$': [
             'svelte-jester',
             {
-                preprocess: true,
+                preprocess: false,
             },
         ],
     },
