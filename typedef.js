@@ -84,6 +84,20 @@
  * @prop {function({instance: RoutifyBuildtime}):(Promise<any>|any)=} build
  * @prop {string=} path
  * @prop {RoutifyExternalMetaHelper=} meta
+ * @prop {(context:MetaContext & Object.<string,any>)=>{}} metaContext
+ */
+
+/**
+ * @callback
+ */
+
+/**
+ * @typedef {Object} MetaContext
+ * @prop {RoutifyBuildtime} instance
+ * @prop {RNodeBuildtime} node
+ * @prop {RoutifyBuildtimeOptions} options
+ * @prop {(value:any, name?: string)=>{}} split
+ * @prop {string} tempPath
  */
 
 /*****************
