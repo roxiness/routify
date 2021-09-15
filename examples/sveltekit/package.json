@@ -7,7 +7,7 @@
     "preview": "svelte-kit preview"
   },
   "dependencies": {
-    "@roxi/routify": "file:../.."
+    "@roxi/routify": "^3.0.0"
   },
   "devDependencies": {
     "@sveltejs/kit": "next",
