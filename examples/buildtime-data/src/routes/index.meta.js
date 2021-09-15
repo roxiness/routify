@@ -24,14 +24,17 @@ import axios from 'axios'
  * @param {MetaContext} context
  */
 export default async ({ split }) => {
+    // fetch luke skywalker data
     const luke = (await axios.get('https://swapi.dev/api/people/1/')).data
-    const { name, gender, ...data } = luke
+    const { name, gender, ...rest } = luke
 
     return {
         luke: {
             name,
             gender,
-            data: split(data),
+            // we're using `split` to exclude `rest` from the Routify bundle
+            // we can access it from our app with `await meta.luke.data()`
+            data: split(rest),
         },
     }
 }
