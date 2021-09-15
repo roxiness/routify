@@ -25,7 +25,8 @@
         "test:jest": "jest .",
         "test:lint": "npm run util:prettier -- --check",
         "test:typings": "tsc --noEmit",
-        "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore"
+        "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore",
+        "semantic-release": "semantic-release"
     },
     "author": "jakobrosenberg@gmail.com",
     "license": "MIT",
@@ -53,6 +54,7 @@
         "rollup": "^2.47.0",
         "rollup-plugin-livereload": "^2.0.5",
         "rollup-plugin-svelte": "^7.1.0",
+        "semantic-release": "^17.4.7",
         "spassr": "^2.6.0",
         "svelte-jester": "^2.1.2",
         "typescript": "^4.4.2"
