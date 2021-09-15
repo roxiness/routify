@@ -3,8 +3,7 @@ import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
 
 const exported = {
     meta: {
-        aString: { value: 'my-string' },
-        withDirective: { value: 'my-directive', directive: true },
+        aString: 'my-string',
     },
     module: '_default',
     id: '_default',
@@ -12,7 +11,7 @@ const exported = {
     file: { path: 'test/unit/exporter/example/_module.svelte' },
     children: [
         {
-            meta: { reset: { value: true } },
+            meta: { reset: true },
             module: '_default_admin',
             id: '_default_admin',
             name: 'admin',
@@ -51,8 +50,5 @@ test('imported nodes have correct constructor', () => {
 test('meta is imported', () => {
     const instance = new RoutifyRuntime({ routes: exported })
     const { meta } = instance.superNode.children[0]
-    expect(meta.constructor.name).toBe('Meta')
-    expect(meta.aString).toEqual(exported.meta.aString.value)
-    expect(meta.withDirective).toEqual(exported.meta.withDirective.value)
-    expect(meta._props.withDirective.directive).toEqual(true)
+    expect(meta.aString).toEqual(exported.meta.aString)
 })
