@@ -206,7 +206,7 @@
    border-radius: .4rem;
    box-shadow: none;
    box-sizing: inherit;
-   height: 2.4rem;
+   height: 3.8rem;
    padding: .6rem 1.0rem .7rem;
    width: 100%;
  }
@@ -630,8 +630,8 @@
 
     --font-ratio: 1.6;
 
-    --font-size-h6: calc(1 / var(--font-ratio));
-    --font-size-h5: 1;
+    --font-size-h6: calc(1.6 / var(--font-ratio));
+    --font-size-h5: 1.6;
     --font-size-h4: calc(var(--font-size-h5) * var(--font-ratio));
     --font-size-h3: calc(var(--font-size-h4) * var(--font-ratio));
     --font-size-h2: calc(var(--font-size-h3) * var(--font-ratio));
@@ -762,7 +762,7 @@
 
 
 html, body {
-  font-size: 16px;
+  /* font-size: 16px; */
 } 
 
 .copy {
