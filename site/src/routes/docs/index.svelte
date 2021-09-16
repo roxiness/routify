@@ -8,7 +8,12 @@
 
     const { isScrolling } = $context.route.router.scrollHandler
 
-    $: if (!$isScrolling) history.replaceStateNative({}, null, `/docs/#${$activeHash}`)
+    // todo could be cleaner
+    let ready
+    setTimeout(() => (ready = true), 500)
+
+    $: if (ready && !$isScrolling)
+        history.replaceStateNative({}, null, `/docs/#${$activeHash}`)
 </script>
 
 <LiveAnchor
