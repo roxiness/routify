@@ -567,6 +567,15 @@
    margin-bottom: 2.0rem;
    margin-top: 0;
  }
+
+ h1 a,
+ h2 a,
+ h3 a,
+ h4 a,
+ h5 a,
+ h6 a {
+   color: #606C76;
+ }
  
  h1 {
    font-size: 4.6rem;

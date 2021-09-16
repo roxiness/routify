@@ -31,7 +31,7 @@
     .left-bar {
         position: absolute;
         width: 16px;
-        top: 24px;
+        top: 16px;
         bottom: -16px;
         left: -40px;
 
@@ -43,7 +43,7 @@
     }
     h4 {
         margin: 16px 0 16px;
-        padding-bottom: 0;
+        padding-bottom: 1rem;
         font-weight: bold;
     }
     .fv {
