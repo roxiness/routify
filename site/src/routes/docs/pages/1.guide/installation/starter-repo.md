@@ -1,6 +1,6 @@
 
-The easiest way to get started with Routify 3 is to clone the starter repo.
+The easiest way to get started with Routify 3 is to run the CLI
 
 ```
-git clone --single-branch --branch v3 git@github.com:roxiness/routify-starter.git
+npx @roxi/routify@next create myapp
 ```

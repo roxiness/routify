@@ -1,5 +1,15 @@
 # Routify 3
 
+## !IMPORTANT!
+**This repo is under heavy development and everything from code to documentation is far from complete.
+If you have questions about how to use Routify 3, please visit us on Discord. If you want to try building the docs your self, you can run `cd site && npm install && npm run dev`**
+
+## Install
+Create a new Routify project with
+```
+npx @roxi/routify@next create myapp
+```
+
 ## Using Routify
 
 #### Creating a router
