@@ -1,7 +1,3 @@
-<script>
-    export let context
-    console.log(context)
-</script>
 
 
 
