@@ -25,7 +25,6 @@
     },
     "routify": {
         "plugins": [
-            "plugins/sourceMetaPlugin",
             "plugins/indexByName",
             "plugins/ownSourceMetaPlugin"
         ]

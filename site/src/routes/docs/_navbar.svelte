@@ -9,6 +9,7 @@
     const noExample = node => node.name !== 'example'
     const noInternal = node => node.name !== 'internal'
 
+    $activeHash = '' // we don't want the store to persist the hash when we navigate to and from
     $: isActive = path => `/docs/#${$activeHash}`.startsWith(path)
 </script>
 

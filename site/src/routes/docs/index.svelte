@@ -8,9 +8,9 @@
 
     const { isScrolling } = $context.route.router.scrollHandler
 
-    // todo could be cleaner
+    // todo could be cleaner - possibly if(hasScrolled && !$isScrolling)
     let ready
-    setTimeout(() => (ready = true), 500)
+    setTimeout(() => (ready = true), 0)
 
     $: if (ready && !$isScrolling)
         history.replaceStateNative({}, null, `/docs/#${$activeHash}`)

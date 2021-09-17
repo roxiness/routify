@@ -44,7 +44,7 @@
                 <TabsPage>
                     <!-- <div class="files-header">{file.node.file.base}</div> -->
                     <div>
-                        {#await file.node.meta.src then src}
+                        {#await file.node.meta.src() then src}
                             <Code
                                 language={langMap[file.node.file.base.split('.').pop()]}>
                                 {src}
