@@ -4,7 +4,7 @@
     import { Window } from 'polykit'
 </script>
 
-<!-- routify:meta split|scoped -->
+<!-- routify:meta split -->
 
 <Window let:size>
     <div class="app {size}">

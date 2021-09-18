@@ -28,5 +28,3 @@ Metadata can be written as HTML comments.
 <!-- routify::meta property=[value] -->
 ```
 The value is parsed as a JSON value. If the value is omitted it will set to true. Hence `property=true` can be written simply as `property`.
-
-Metadata can also be used with directives, eg.: `property|scoped=true`. The scoped directive would then set the metadata for all descending nodes.

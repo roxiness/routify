@@ -7,7 +7,7 @@
     let state
 </script>
 
-<!-- routify:meta split|scoped -->
+<!-- routify:meta split -->
 
 <div class="app {$screenSize} {state}">
     <div class="container outer">
