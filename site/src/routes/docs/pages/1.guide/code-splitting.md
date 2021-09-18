@@ -7,7 +7,7 @@
 ```
 
 ## Bundling
-Sometimes you don't want each file imported individually. Maybe you have an `/admin` module which should load as a single bundle.
+Sometimes you don't want each file imported individually. Maybe you have an `/admin` module which should load as a separate bundle.
 
 #### Bundling a module
 ```
