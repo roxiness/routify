@@ -3,15 +3,9 @@
     export let context
 </script>
 
-# Post
+###### Movie
 
-asd
 
 <pre>
 {JSON.stringify($params, null, 2)}
-</pre>
-
-
-<pre>
-{JSON.stringify(context.route.params, null, 2)}
 </pre>

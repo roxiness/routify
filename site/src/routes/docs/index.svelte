@@ -3,7 +3,7 @@
     import { LiveAnchor, Anchor } from 'polykit'
     import { activeHash } from './stores'
 
-    const noExample = node => node.name !== 'example'
+    const noExample = node => !node.name.match(/^example\.?/)
     const noInternal = node => node.name !== 'internal'
 
     const { isScrolling } = $context.route.router.scrollHandler

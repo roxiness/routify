@@ -6,7 +6,7 @@
     export let nested = 0
     export let rewrite = path => path
     const getName = node => node.name + (node.meta.status ? ` [${node.meta.status}]` : '')
-    const noExample = node => node.name !== 'example'
+    const noExample = node => !node.name.match(/^example\.?/)
     const noInternal = node => node.name !== 'internal'
 
     $activeHash = '' // we don't want the store to persist the hash when we navigate to and from

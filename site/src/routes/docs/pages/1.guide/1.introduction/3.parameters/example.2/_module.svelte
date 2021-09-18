@@ -1,8 +1,4 @@
-<script>
-    import { url } from '@roxi/routify'
-</script>
-
 <a href="/">Home</a>
-<a href="/foo/bar/baz">spreads</a>
+<a href="/john/peter/paul">people</a>
 
 <slot />
