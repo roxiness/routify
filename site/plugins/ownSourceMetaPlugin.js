@@ -12,7 +12,7 @@ export default () => ({
             if (!node.file.stat.isDirectory())
                 node.meta.src = tools.split(
                     readFileSync(node.file.path, 'utf-8'),
-                    routifyDir + '/ownSourcePlugin/' + node.file.path + 'src.js',
+                    routifyDir + '/ownSourcePlugin/' + node.file.path + '.src.js',
                 )
         })
     },
