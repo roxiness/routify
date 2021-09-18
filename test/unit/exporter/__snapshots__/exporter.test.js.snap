@@ -1,18 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`can export a route tree 1`] = `
-"import * as _default from '../../example/_module.svelte'
-import * as _default_admin from '../../example/admin/_reset.svelte'
-import * as _default_index_svelte from '../../example/index.svelte'
-import * as _default_admin_index_svelte from '../../example/admin/index.svelte'
-import * as _default_admin_page_svelte from '../../example/admin/page.svelte'
-import * as _default_blog__slug__svelte from '../../example/blog/[slug].svelte'
-import * as _default_blog_prefixed_slug__svelte from '../../example/blog/prefixed[slug].svelte'
+"
 
 export default {
   \\"meta\\": {},
   \\"id\\": \\"_default\\",
-  \\"module\\": () => _default,
+  \\"module\\": \\"test/unit/exporter/example/_module.svelte\\",
   \\"rootName\\": \\"default\\",
   \\"file\\": {
     \\"path\\": \\"test/unit/exporter/example/_module.svelte\\",
@@ -28,7 +22,7 @@ export default {
       },
       \\"id\\": \\"_default_admin\\",
       \\"name\\": \\"admin\\",
-      \\"module\\": () => _default_admin,
+      \\"module\\": \\"test/unit/exporter/example/admin/_reset.svelte\\",
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/admin/_reset.svelte\\",
         \\"dir\\": \\"test/unit/exporter/example/admin\\",
@@ -41,7 +35,7 @@ export default {
           \\"meta\\": {},
           \\"id\\": \\"_default_admin_index_svelte\\",
           \\"name\\": \\"index\\",
-          \\"module\\": () => _default_admin_index_svelte,
+          \\"module\\": \\"test/unit/exporter/example/admin/index.svelte\\",
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/admin/index.svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/admin\\",
@@ -55,7 +49,7 @@ export default {
           \\"meta\\": {},
           \\"id\\": \\"_default_admin_page_svelte\\",
           \\"name\\": \\"page\\",
-          \\"module\\": () => _default_admin_page_svelte,
+          \\"module\\": \\"test/unit/exporter/example/admin/page.svelte\\",
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/admin/page.svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/admin\\",
@@ -86,7 +80,7 @@ export default {
           },
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
-          \\"module\\": () => _default_blog__slug__svelte,
+          \\"module\\": \\"test/unit/exporter/example/blog/[slug].svelte\\",
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/blog/[slug].svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/blog\\",
@@ -102,7 +96,7 @@ export default {
           },
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
-          \\"module\\": () => _default_blog_prefixed_slug__svelte,
+          \\"module\\": \\"test/unit/exporter/example/blog/prefixed[slug].svelte\\",
           \\"file\\": {
             \\"path\\": \\"test/unit/exporter/example/blog/prefixed[slug].svelte\\",
             \\"dir\\": \\"test/unit/exporter/example/blog\\",
@@ -118,7 +112,7 @@ export default {
       \\"meta\\": {},
       \\"id\\": \\"_default_index_svelte\\",
       \\"name\\": \\"index\\",
-      \\"module\\": () => _default_index_svelte,
+      \\"module\\": \\"test/unit/exporter/example/index.svelte\\",
       \\"file\\": {
         \\"path\\": \\"test/unit/exporter/example/index.svelte\\",
         \\"dir\\": \\"test/unit/exporter/example\\",
