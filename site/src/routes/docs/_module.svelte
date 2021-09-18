@@ -8,7 +8,7 @@
     const rewrite = path => path.replace(/.*\/docs\/pages\/?/, '/docs/#')
 </script>
 
-<!-- routify:meta split -->
+<!-- routify:meta bundle -->
 
 <div class="app {$screenSize} {state}">
     <div class="container outer">
