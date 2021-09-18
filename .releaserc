@@ -1,0 +1,10 @@
+{
+    branches: [
+        '+([0-9])?(.{+([0-9]),x}).x',
+        'master',
+        { name: 'next', prerelease: true },
+        'next-major',
+        { name: 'beta', prerelease: true },
+        { name: 'alpha', prerelease: true },
+    ]
+}
