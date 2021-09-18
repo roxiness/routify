@@ -7,3 +7,5 @@
 Parameters can be accessed in Routify with the `$params` helper. 
 
 <Example path="../example" title="Parameters example" />
+
+<Example path="../example.2" title="Spread operator example" />
