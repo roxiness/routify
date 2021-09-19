@@ -10,22 +10,30 @@ import fkill from 'fkill'
  */
 export const runViteDev = path =>
     new Promise((resolve, reject) => {
-        const child = spawn('npm', ['run', 'dev'], { cwd: path })
-        child.stdout.setEncoding('utf8')
-        child.stderr.setEncoding('utf8')
+        try {
+            const child = spawn('npms', ['run', 'dev'], { cwd: path })
 
-        child.stdout.on('data', msg => {
-            const match = msg.match(/Local: .+?(\d{4})/i)
-            if (match) {
-                const port = Number(match[1])
-                resolve({
-                    child,
-                    port,
-                    kill: () => fkill(child.pid, { force: true }),
-                })
-            }
-        })
-        child.stderr.on('data', reject)
+            child.stdout.setEncoding('utf8')
+            child.stderr.setEncoding('utf8')
+
+            child.stdout.on('data', msg => {
+                const match = msg.match(/Local: .+?(\d{4})/i)
+                if (match) {
+                    const port = Number(match[1])
+                    resolve({
+                        child,
+                        port,
+                        kill: () => fkill(child.pid, { force: true }),
+                    })
+                }
+            })
+            child.stderr.on('data', msg => {
+                console.error('stderr', msg)
+            })
+        } catch (e) {
+            console.error('couldnt spawn child', e)
+            throw e
+        }
     })
 
 const dirname = createDirname(import.meta)
