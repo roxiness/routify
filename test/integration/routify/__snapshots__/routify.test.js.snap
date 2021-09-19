@@ -11,7 +11,7 @@ exports[`can run routify with bundled plugins: routify 1`] = `
 export default {
   \\"meta\\": {},
   \\"id\\": \\"_default\\",
-  \\"module\\": () => import('..\\\\..\\\\example\\\\_module.svelte'),
+  \\"module\\": () => import('../../example/_module.svelte'),
   \\"rootName\\": \\"default\\",
   \\"file\\": {
     \\"path\\": \\"test/integration/routify/example/_module.svelte\\",
@@ -73,7 +73,7 @@ export default {
           },
           \\"id\\": \\"_default_blog__slug__svelte\\",
           \\"name\\": \\"[slug]\\",
-          \\"module\\": () => import('..\\\\..\\\\example\\\\blog\\\\[slug].svelte'),
+          \\"module\\": () => import('../../example/blog/[slug].svelte'),
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/[slug].svelte\\",
             \\"dir\\": \\"test/integration/routify/example/blog\\",
@@ -89,7 +89,7 @@ export default {
           },
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
           \\"name\\": \\"prefixed[slug]\\",
-          \\"module\\": () => import('..\\\\..\\\\example\\\\blog\\\\prefixed[slug].svelte'),
+          \\"module\\": () => import('../../example/blog/prefixed[slug].svelte'),
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/prefixed[slug].svelte\\",
             \\"dir\\": \\"test/integration/routify/example/blog\\",
@@ -105,7 +105,7 @@ export default {
       \\"meta\\": {},
       \\"id\\": \\"_default_index_svelte\\",
       \\"name\\": \\"index\\",
-      \\"module\\": () => import('..\\\\..\\\\example\\\\index.svelte'),
+      \\"module\\": () => import('../../example/index.svelte'),
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/index.svelte\\",
         \\"dir\\": \\"test/integration/routify/example\\",
@@ -145,7 +145,7 @@ export default {
               \\"meta\\": {},
               \\"id\\": \\"_default_no_layouts_nested_foo_svelte\\",
               \\"name\\": \\"foo\\",
-              \\"module\\": () => import('..\\\\..\\\\example\\\\no-layouts\\\\nested\\\\foo.svelte'),
+              \\"module\\": () => import('../../example/no-layouts/nested/foo.svelte'),
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/foo.svelte\\",
                 \\"dir\\": \\"test/integration/routify/example/no-layouts/nested\\",
@@ -159,7 +159,7 @@ export default {
               \\"meta\\": {},
               \\"id\\": \\"_default_no_layouts_nested_index_svelte\\",
               \\"name\\": \\"index\\",
-              \\"module\\": () => import('..\\\\..\\\\example\\\\no-layouts\\\\nested\\\\index.svelte'),
+              \\"module\\": () => import('../../example/no-layouts/nested/index.svelte'),
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/index.svelte\\",
                 \\"dir\\": \\"test/integration/routify/example/no-layouts/nested\\",
