@@ -12,7 +12,7 @@ const common = {
         '^#lib(.+)$': '<rootDir>lib$1',
         '^#root(.+)$': '<rootDir>$1',
     },
-    testTimeout: 2000,
+    testTimeout: 5000,
     modulePaths: ['<rootDir>'],
     roots: ['<rootDir>'],
 
