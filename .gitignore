@@ -1,5 +1,7 @@
 node_modules
-package-lock.json
+examples/package-lock.json
+test/package-lock.json
+site/package-lock.json
 temp
 .history
 .routify
