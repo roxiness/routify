@@ -38,8 +38,8 @@ test('bundled files have correct module', () => {
     const adminImports = [adminNode, ...adminNode.descendants].map(node => node.module)
 
     expect(adminImports).toEqual([
-        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin)',
-        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_index_svelte)',
-        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_page_svelte)',
+        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin)::_EVAL',
+        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_index_svelte)::_EVAL',
+        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_page_svelte)::_EVAL',
     ])
 })
