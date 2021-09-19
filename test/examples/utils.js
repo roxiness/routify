@@ -10,7 +10,7 @@ import fkill from 'fkill'
  */
 export const runViteDev = path =>
     new Promise((resolve, reject) => {
-        const child = spawn('npm', ['run', 'dev'], { cwd: path, shell: true })
+        const child = spawn('npm', ['run', 'dev'], { cwd: path, shell: false })
         child.stdout.setEncoding('utf8')
         child.stderr.setEncoding('utf8')
 
