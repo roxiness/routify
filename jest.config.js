@@ -55,5 +55,11 @@ export default {
             globalSetup: './test/e2e/setup-runtime.mjs',
             globalTeardown: './test/e2e/teardown-runtime.js',
         },
+        {
+            ...common,
+            displayName: 'examples',
+            preset: 'jest-playwright-preset',
+            testMatch: ['**/test/examples/**/?(*.)+(spec|test).[jt]s?(x)'],
+        },
     ],
 }

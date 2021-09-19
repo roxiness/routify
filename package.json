@@ -23,6 +23,7 @@
         "build:typings": "tsc --project ./tsconfig.typings.json",
         "test": "run-s test:*",
         "test:jest": "jest .",
+        "test:jest:examples": "jest ./test/examples",
         "test:lint": "npm run util:prettier -- --check",
         "test:typings": "tsc --noEmit",
         "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore",
@@ -43,6 +44,7 @@
         "documentation": "^13.2.5",
         "eslint": "^7.27.0",
         "eslint-plugin-jest": "^24.4.0",
+        "fkill": "^7.2.1",
         "jest": "^27.0.6",
         "jest-playwright-preset": "^1.6.1",
         "nodemon": "^2.0.7",
@@ -83,5 +85,8 @@
         "svelteBracketNewLine": false,
         "svelteIndentScriptAndStyle": true
     },
-    "workspaces": ["examples/*", "examples/microframework/*"]
+    "workspaces": [
+        "examples/*",
+        "examples/microframework/*"
+    ]
 }
