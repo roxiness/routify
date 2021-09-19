@@ -1,6 +1,6 @@
 import { getPath, runViteDev } from './utils.js'
 
-page.setDefaultTimeout(3000)
+page.setDefaultTimeout(process.env.GITHUB_ACTIONS ? 30000 : 5000)
 
 test('should see buildtime-data front page', async () => {
     const { kill, port } = await runViteDev(getPath('buildtime-data'))

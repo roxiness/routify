@@ -1,6 +1,6 @@
 import { getPath, runViteDev } from './utils.js'
 
-page.setDefaultTimeout(3000)
+page.setDefaultTimeout(process.env.GITHUB_ACTIONS ? 30000 : 5000)
 test('should see sveltekit front page', async () => {
     const { kill, port } = await runViteDev(getPath('sveltekit'))
     await page.goto(`http://localhost:${port}`)

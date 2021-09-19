@@ -1,6 +1,6 @@
 import { getPath, runViteDev } from './utils.js'
 
-page.setDefaultTimeout(3000)
+page.setDefaultTimeout(process.env.GITHUB_ACTIONS ? 30000 : 5000)
 test('should see starter front page', async () => {
     const { kill, port } = await runViteDev(getPath('starter'))
     await page.goto(`http://localhost:${port}`)
