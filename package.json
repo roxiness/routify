@@ -82,5 +82,6 @@
         "svelteAllowShorthand": true,
         "svelteBracketNewLine": false,
         "svelteIndentScriptAndStyle": true
-    }
+    },
+    "workspaces": ["examples/*", "examples/microframework/*"]
 }
