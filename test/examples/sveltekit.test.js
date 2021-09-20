@@ -7,5 +7,5 @@ test('should see sveltekit front page', async () => {
     await page.goto(`http://localhost:${port}`)
     const result = await page.waitForSelector('"Welcome to SvelteKit + Routify"')
     expect(result).toBeTruthy()
-    kill()
+    await kill()
 })

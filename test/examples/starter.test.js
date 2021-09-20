@@ -7,5 +7,5 @@ test('should see starter front page', async () => {
     await page.goto(`http://localhost:${port}`)
     const result = await page.waitForSelector('h1')
     expect(result).toBeTruthy()
-    kill()
+    await kill()
 })

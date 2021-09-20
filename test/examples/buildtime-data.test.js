@@ -11,5 +11,5 @@ test('should see buildtime-data front page', async () => {
     await page.click('"show dynamic imported meta"')
     expect(await page.waitForSelector('pre:has-text("homeworld")')).toBeTruthy()
 
-    kill()
+    await kill()
 })
