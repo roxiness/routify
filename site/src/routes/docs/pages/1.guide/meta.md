@@ -6,7 +6,7 @@ Metadata is the heart of Routify. Each page and module has its own metadata. Met
 ### Using meta for custom logic
 Say you wanted to build auto generated navigation, but you don't want unpublished pages to be included. To solve this we can add a custom metadata prop as such
 ```
-<!-- routify::meta draft=true >
+<!-- routify::meta draft=true -->
 ```
 
 In our navigation generation we can then filter pages and modules based on our new custom property.
