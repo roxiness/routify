@@ -1,6 +1,6 @@
 {
     "name": "@roxi/routify",
-    "version": "3.0.0-0",
+    "version": "3.0.0-next.1",
     "main": "lib/runtime/index.js",
     "type": "module",
     "bin": {
@@ -22,8 +22,7 @@
         "build:documentation": "documentation readme typedef.js -f md --section API",
         "build:typings": "tsc --project ./tsconfig.typings.json",
         "test": "run-s test:*",
-        "test:jest": "jest .",
-        "test:jest:examples": "jest ./test/examples",
+        "test:jest": "jest . --detectOpenHandles",
         "test:lint": "npm run util:prettier -- --check",
         "test:typings": "tsc --noEmit",
         "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore",

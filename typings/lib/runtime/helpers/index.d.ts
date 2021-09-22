@@ -38,7 +38,7 @@ export function isActiveUrl(url: any): (path: string, params: {
 }, options?: IsActiveOptions) => boolean;
 export function resolveNode(path: string): void | import("../Instance/RNodeRuntime.js").RNodeRuntime;
 export function resolveAbsoluteNode(node: any, path: any): void;
-export function resolveRelativeNode(node: RNodeRuntime, path: string): RNodeRuntime;
+export function traverseNode(node: RNodeRuntime, path: string): RNodeRuntime;
 export function resolveNamedNode(node: any, name: any): void;
 /**
  * @type {Readable<FragmentContext>}

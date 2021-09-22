@@ -9,12 +9,12 @@
     export let instance = null
     export let urlReflector =
         typeof window != 'undefined' ? AddressReflector : InternalReflector
-    export let offset = null
     export let url = null
     export let name = ''
     export let router = null
     export let routes = null
     export let decorator = null
+    export let rootNode = null
 
     const parentCmpCtx = getContext('routify-fragment-context')
     if (!instance)
@@ -22,9 +22,8 @@
             ? new RoutifyRuntime({ routes, debugger: false })
             : parentCmpCtx?.route.router.instance || null
 
-    if (!router) router = new Router(instance, { parentCmpCtx, name })
+    if (!router) router = new Router(instance, { rootNode, parentCmpCtx, name })
 
-    $: if (offset) router.offset = offset
     $: if (url && url !== router.url.get()) router.url.replace(url)
 
     $: if (urlReflector) router.urlReflector = urlReflector
