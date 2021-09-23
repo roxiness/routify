@@ -1,0 +1,35 @@
+name: Bug Report
+description: Let's squash a bug!
+labels: ["bug", "needs triage"] 
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: What happened?
+      placeholder: Cat exploded in the microwave, but it was expected to dry.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: How can we recreate the bug to test it and patch it
+      placeholder: How does it happen?...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Please copy and paste the errors from console
+      render: shell
+  - type: textarea
+    id: system-info
+    attributes:
+      label: System Info
+      description: Output of `npx envinfo --system --binaries --npmPackages @roxi/routify,vite,svelte` in the __same folder__ as your project
+      render: shell
+      placeholder: System Information...
+    validations:
+      required: true

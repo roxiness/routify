@@ -1,0 +1,21 @@
+name: "Feature Request"
+description: Request a new feature in Routify
+labels: [enhancement]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+      description: A detailed description of the feature would be awesome, but not required.
+      placeholder: I want x because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Examples
+      description: Some examples of where this featue can be seen in the wild.
+      placeholder: X has this because y...
+    validations:
+      required: false
