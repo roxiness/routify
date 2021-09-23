@@ -1,3 +1,4 @@
+  
 {
     "compilerOptions": {        
         "checkJs": true,
@@ -11,7 +12,8 @@
         "moduleResolution": "Node",
         "rootDirs": ["."],
         "target": "es6",
-        "baseUrl": "."
+        "baseUrl": ".",
+        "allowSyntheticDefaultImports": true
     }, 
     "include": ["**/*.js"],
     "exclude": [
