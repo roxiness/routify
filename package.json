@@ -12,6 +12,7 @@
         "#typedef.js": "./typedef.js"
     },
     "exports": {
+        "./package.json": "./package.json",
         ".": "./lib/runtime/index.js",
         "./vite-plugin": "./lib/extra/vite-plugin.js",
         "./typings/*": "./typings/*"
