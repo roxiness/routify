@@ -11,8 +11,8 @@
 
 <div class="app {$screenSize} {state}">
     <div class="container outer">
-        <Sidenav bind:open bind:state let:toggle asidePositioning="absolute">
-            <aside slot="aside">
+        <Sidenav bind:open bind:state let:toggle>
+            <aside slot="aside" style="height: calc(100% - 200px); overflow: auto;">
                 <div class="sidenav-activator" on:click={toggle}>☰</div>
                 <div class="container">
                     <div class="links">
