@@ -1,7 +1,7 @@
 <script>
     import { setContext } from 'svelte'
     import Noop from '../decorators/Noop.svelte'
-    import '#root/typedef.js'
+    import '../../../typedef.js'
 
     /** @type {RouteFragment[]}*/
     export let fragments
