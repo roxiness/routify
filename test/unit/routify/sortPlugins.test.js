@@ -22,9 +22,7 @@ test('sortPlugins preserves order when possible', async () => {
     ]
 
     const res = sortPlugins(normalizePlugins(plugins))
-    expect(res.map(p => p.name).join(',')).toBe(
-        'first,second,third,fourth,fifth,sixth',
-    )
+    expect(res.map(p => p.name).join(',')).toBe('first,second,third,fourth,fifth,sixth')
 })
 
 test('sortPlugins reports loops', async () => {
