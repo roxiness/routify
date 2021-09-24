@@ -1,7 +1,7 @@
 import { createDirname } from '../../lib/buildtime/utils.js'
 import { resolve } from 'path'
 import { spawn } from 'child_process'
-import fkill from 'fkill'
+import kill from 'tree-kill'
 
 /**
  *
@@ -23,7 +23,7 @@ export const runViteDev = path =>
                     resolve({
                         child,
                         port,
-                        kill: () => fkill(child.pid, { force: true }),
+                        kill: () => kill(child.pid),
                     })
                 }
             })

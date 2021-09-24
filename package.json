@@ -52,6 +52,7 @@
         "semantic-release": "^17.4.7",
         "spassr": "^2.6.0",
         "svelte-jester": "^2.1.3",
+        "tree-kill": "^1.2.2",
         "typescript": "^4.4.2"
     },
     "dependencies": {
