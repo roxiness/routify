@@ -5,6 +5,8 @@ export class RoutifyBuildtime {
     Node: typeof RNode;
     /** @type {RNodeBuildtime[]} */
     nodeIndex: RNode<RoutifyBuildtime>[];
+    /** @type {RoutifyBuildtimePlugin[]} */
+    plugins: RoutifyBuildtimePlugin[];
     superNode: RNode<RoutifyBuildtime>;
     /**
      * @param {string} name
@@ -13,7 +15,7 @@ export class RoutifyBuildtime {
      */
     createNode(name: string, module: string | any): RNode<RoutifyBuildtime>;
     options: any;
-    build: () => Promise<void>;
+    build: (trigger: any) => Promise<void>;
     on: {
         buildStart: {
             (cb: any): () => void;
@@ -46,8 +48,7 @@ export class RoutifyBuildtime {
             runHooks(attr: any): void;
         };
     };
-    plugins: any[];
-    start: () => Promise<void>;
+    start(): Promise<void>;
     #private;
 }
 export type RoutifyOptions = {

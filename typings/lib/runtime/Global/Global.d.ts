@@ -1,7 +1,7 @@
 export class Global {
     /** @type {RoutifyRuntime[]} */
     instances: RoutifyRuntime[];
-    log: import("consola").Consola;
+    log: any;
     /** @type {Router[]} */
     get routers(): import("../index.js").RouterClass[];
     browserAdapter: {

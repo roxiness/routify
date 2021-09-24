@@ -3,13 +3,6 @@ declare function _default(): Promise<{
     nested: {
         nestedProp: string;
     };
-    'codesplitted|split': string;
-    explicit: {
-        value: string;
-    };
-    explicitSplit: {
-        value: string;
-        split: boolean;
-    };
+    explicit: string;
 }>;
 export default _default;

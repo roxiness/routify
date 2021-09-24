@@ -25,7 +25,6 @@
         "test": "run-s test:*",
         "test:jest": "jest . --detectOpenHandles",
         "test:lint": "npm run util:prettier -- --check",
-        "test:typings": "tsc --noEmit",
         "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore",
         "semantic-release": "semantic-release"
     },

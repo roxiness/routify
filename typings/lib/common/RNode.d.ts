@@ -12,6 +12,10 @@ export class RNode<Instance extends import("../runtime/Instance/RoutifyRuntime.j
     instance: Instance;
     /** @type {RNode} */
     parent: RNode<any>;
+    /** @type {Object.<string, any>} */
+    meta: {
+        [x: string]: any;
+    };
     /** @type {String} */
     id: string;
     name: string;
@@ -29,16 +33,14 @@ export class RNode<Instance extends import("../runtime/Instance/RoutifyRuntime.j
     remove(): void;
     get ancestors(): RNode<any>[];
     get superNode(): any;
-    get isSuperNode(): any;
+    get isSuperNode(): boolean;
     get root(): RNode<Instance>;
     get isRoot(): boolean;
     get children(): any;
     get level(): any;
+    traverse(path: any): any;
     toJSON(): RNode<Instance> & {
         children: any[];
-        module: string;
-        meta: any;
     };
     get path(): any;
-    #private;
 }

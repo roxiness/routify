@@ -1,6 +1,7 @@
 /**
  * @typedef {Object} VitePluginOptions
  * @prop {Boolean} run run Routify
+ * @prop {Boolean} forceLogging force logging in production
  */
 /**
  * @param {Partial<RoutifyBuildtimeOptions & VitePluginOptions>=} options
@@ -8,14 +9,8 @@
  */
 export default function RoutifyPlugin(options?: Partial<RoutifyBuildtimeOptions & VitePluginOptions> | undefined): {
     name: string;
-    options: () => Promise<any>;
+    buildStart: () => Promise<any>;
     config: () => {
-        resolve: {
-            alias: {
-                '#root': string;
-                '#lib': string;
-            };
-        };
         build: {
             polyfillDynamicImport: boolean;
             cssCodeSplit: boolean;
@@ -28,4 +23,8 @@ export type VitePluginOptions = {
      * run Routify
      */
     run: boolean;
+    /**
+     * force logging in production
+     */
+    forceLogging: boolean;
 };

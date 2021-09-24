@@ -17,7 +17,7 @@ export class Router {
      * @param {RoutifyRuntime} instance
      * @param {Partial<RouterOptions>} param1
      */
-    constructor(instance: RoutifyRuntime, { rootNode, parentCmpCtx, name, scrollHandler }?: Partial<RouterOptions>);
+    constructor(instance: RoutifyRuntime, { rootNode, parentCmpCtx, name }?: Partial<RouterOptions>);
     /** @type {RouteStore} */
     pendingRoute: import("svelte/store").Writable<Route>;
     /** @type {RouteStore} */
@@ -57,7 +57,7 @@ export class Router {
     name: string;
     parentCmpCtx: ParentCmpCtx;
     rootNode: import("../Instance/RNodeRuntime.js").RNodeRuntime;
-    log: import("consola").Consola;
+    log: any;
     params: import("svelte/store").Readable<any>;
     scrollHandler: {
         isScrolling: import("svelte/store").Writable<boolean>;
@@ -71,8 +71,6 @@ export class Router {
      */
     _setUrl(url: string, mode: UrlState): Promise<true | false>;
     destroy(): void;
-    set offset(arg: any);
-    get offset(): any;
     /** @param {typeof BaseReflector} UrlReflector */
     set urlReflector(arg: import("svelte/store").Writable<BaseReflector>);
     /** @type {import('svelte/store').Writable<BaseReflector>} */

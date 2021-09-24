@@ -13,7 +13,7 @@ export class RoutifyRuntime {
     plugins: any[];
     global: import("../Global/Global.js").Global;
     utils: UrlParamUtils;
-    log: import("consola").Consola;
+    log: any;
     /**
      * @param {string} name relative path for the node
      * @param {any|string} module svelte component

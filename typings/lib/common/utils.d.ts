@@ -16,4 +16,3 @@ export function normalizePlugins(plugins: any): any[];
 export function mockRoutes<T extends any>(instance: T, routes: {
     [x: string]: any;
 }): T;
-export function resolveValues(object: any): {};

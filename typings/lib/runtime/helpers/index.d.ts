@@ -1,3 +1,5 @@
+export function getMRCA(node1: import("../../common/RNode.js").RNode<any>, node2: import("../../common/RNode.js").RNode<any>): import("../../common/RNode.js").RNode<any>;
+export function getPath(node1: any, node2: any): string;
 /**
  * @template T
  * @typedef {import('svelte/store').Readable<T>} Readable
@@ -44,8 +46,18 @@ export function resolveNamedNode(node: any, name: any): void;
  * @type {Readable<FragmentContext>}
  */
 export const context: Readable<FragmentContext>;
-export const node: import("svelte/store").Readable<import("../Instance/RNodeRuntime.js").RNodeRuntime>;
-export const meta: import("svelte/store").Readable<any>;
+export namespace node {
+    function subscribe(run: any): () => void;
+}
+export namespace meta { }
+export namespace activeRoute {
+    export function subscribe_1(run: any): import("svelte/store").Unsubscriber;
+    export { subscribe_1 as subscribe };
+}
+export namespace pendingRoute {
+    export function subscribe_2(run: any): import("svelte/store").Unsubscriber;
+    export { subscribe_2 as subscribe };
+}
 export type Readable<T> = import('svelte/store').Readable<T>;
 export type IsActiveOptions = {
     /**
