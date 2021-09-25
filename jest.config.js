@@ -12,7 +12,7 @@ const common = {
         '^#lib(.+)$': '<rootDir>lib$1',
         '^#root(.+)$': '<rootDir>$1',
     },
-    testTimeout: process.env.GITHUB_ACTIONS ? 30000 : 5000,
+    testTimeout: 30000,
     modulePaths: ['<rootDir>'],
     roots: ['<rootDir>'],
 
