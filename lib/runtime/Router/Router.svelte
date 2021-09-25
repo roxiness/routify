@@ -1,4 +1,5 @@
 <script>
+    import '../../../typedef.js'
     import Component from './Component.svelte'
     import { getUrlFromClick } from '../utils/index.js'
     import { Router } from './Router.js'
@@ -6,6 +7,8 @@
     import { AddressReflector } from './urlReflectors/Address.js'
     import { InternalReflector } from './urlReflectors/Internal.js'
     import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js'
+    import { globalInstance } from '../Global/Global.js'
+    /** @type {RoutifyRuntime} */
     export let instance = null
     export let urlReflector =
         typeof window != 'undefined' ? AddressReflector : InternalReflector
@@ -18,9 +21,12 @@
 
     const parentCmpCtx = getContext('routify-fragment-context')
     if (!instance)
-        instance = routes
-            ? new RoutifyRuntime({ routes, debugger: false })
-            : parentCmpCtx?.route.router.instance || null
+        instance =
+            parentCmpCtx?.route.router.instance ||
+            globalInstance.instances[0] ||
+            new RoutifyRuntime({})
+
+    if (routes) instance.superNode.importTree(routes)
 
     if (!router) router = new Router(instance, { rootNode, parentCmpCtx, name })
 
