@@ -60,7 +60,7 @@
         "cheerio": "^0.x",
         "commander": "^7.2.0",
         "configent": "^3.0.0-0",
-        "consolite": "^0.0.2",
+        "consolite": "^0.1.0",
         "fs-extra": "^9.1.0",
         "kleur": "^4.1.4",
         "prompts": "^2.4.1",
