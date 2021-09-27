@@ -1,5 +1,5 @@
-import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
-import '#root/typedef.js'
+import { RoutifyRuntime } from '../../../lib/runtime/Instance/RoutifyRuntime.js'
+import '../../../typedef.js'
 
 // todo should instance plugins be readded?
 test('dummy', () => {})
