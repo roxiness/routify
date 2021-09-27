@@ -1,6 +1,6 @@
-import { RoutifyBuildtime } from '#lib/buildtime/RoutifyBuildtime.js'
-import { createDirname } from '#lib/buildtime/utils.js'
-import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
+import { createDirname } from '../../../lib/buildtime/utils.js'
+import { RoutifyRuntime } from '../../../lib/runtime/Instance/RoutifyRuntime.js'
 import fse from 'fs-extra'
 
 const __dirname = createDirname(import.meta)

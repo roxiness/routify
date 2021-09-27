@@ -1,5 +1,5 @@
-import { importTree } from '#lib/runtime/plugins/importer/importer.js'
-import { RoutifyRuntime } from '#lib/runtime/Instance/RoutifyRuntime.js'
+import { importTree } from '../../../lib/runtime/plugins/importer/importer.js'
+import { RoutifyRuntime } from '../../../lib/runtime/Instance/RoutifyRuntime.js'
 
 const exported = {
     meta: {

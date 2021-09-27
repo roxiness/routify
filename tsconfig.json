@@ -2,10 +2,6 @@
 {
     "compilerOptions": {        
         "checkJs": true,
-        "paths": {
-            "#lib/*": ["./lib/*"],
-            "#root/*": ["./*"]
-        },
         "allowJs": true,
         "declaration": true,
         "noEmit": true,

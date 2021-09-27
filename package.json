@@ -6,11 +6,6 @@
     "bin": {
         "routify3": "./lib/cli/index.js"
     },
-    "imports": {
-        "#lib/*": "./lib/*",
-        "#root/*": "./*",
-        "#typedef.js": "./typedef.js"
-    },
     "exports": {
         "./package.json": "./package.json",
         ".": "./lib/runtime/index.js",

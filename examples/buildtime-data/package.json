@@ -1,8 +1,5 @@
 {
     "type": "module",
-    "imports": {
-        "#cmp/*": "./src/components/*"
-    },
     "scripts": {
         "build": "vite build",
         "preview": "vite preview",
