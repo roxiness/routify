@@ -2,10 +2,6 @@
     "compilerOptions": {
          "checkJs": true,
         "baseUrl": ".",
-        "paths": {
-            "#cmp/*": ["./src/cmp/*"],
-            "#root/*": ["./*"]
-        },
         "target": "esnext",
         "moduleResolution": "node"
     },
