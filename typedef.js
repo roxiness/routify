@@ -13,7 +13,7 @@
  *  BUILDTIME
  * @typedef {import('./lib/common/RNode').RNode<RoutifyBuildtime>} RNodeBuildtime
  * @typedef {import('./lib/buildtime/RoutifyBuildtime').RoutifyBuildtime} RoutifyBuildtime
- * @typedef {{instance: RoutifyBuildtime}} RoutifyBuildtimePayload
+ * @typedef {{instance: RoutifyBuildtime, tools: any}} RoutifyBuildtimePayload // todo tools should not be any
  *
  */
 
@@ -81,10 +81,10 @@
 
 /**
  * @typedef {Object} RoutifyBuildtimePluginType
- * @prop {function({instance: RoutifyBuildtime}):(Promise<any>|any)=} build
+ * @prop {function(RoutifyBuildtimePayload):(Promise<any>|any)=} build
  * @prop {string=} path
  * @prop {RoutifyExternalMetaHelper=} meta
- * @prop {(context:MetaContext & Object.<string,any>)=>{}} metaContext
+ * @prop {(context:MetaContext & Object.<string,any>)=>{}} [metaContext]
  */
 
 /**

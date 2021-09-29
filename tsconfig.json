@@ -1,17 +1,16 @@
-  
 {
-    "compilerOptions": {        
+    "compilerOptions": {
         "checkJs": true,
         "allowJs": true,
         "declaration": true,
-        "noEmit": true,
         "moduleResolution": "Node",
         "rootDirs": ["."],
         "target": "es6",
-        "baseUrl": ".",
+        "declarationDir": "typings",
+        "emitDeclarationOnly": true,
         "allowSyntheticDefaultImports": true
-    }, 
-    "include": ["**/*.js"],
+    },
+    "include": ["lib/**/*.js", "typings/**/*.js", "typedef.js"],
     "exclude": [
         "**/node_modules/*",
         "**/tmp/*",

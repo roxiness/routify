@@ -16,7 +16,7 @@
         "build": "run-s build:*",
         "build:lint": "npm run util:prettier -- --write",
         "build:documentation": "documentation readme typedef.js -f md --section API",
-        "build:typings": "tsc --project ./tsconfig.typings.json",
+        "build:typings": "tsc ",
         "test": "run-s test:*",
         "test:jest": "jest . --detectOpenHandles",
         "test:lint": "npm run util:prettier -- --check",

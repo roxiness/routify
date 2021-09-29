@@ -29,18 +29,27 @@ export class RNode<Instance extends import("../runtime/Instance/RoutifyRuntime")
      * @returns {RNode}
      */
     createChild(name: string, module: any): RNode<any>;
-    get descendants(): any;
+    /** @returns {RNode[]} */
+    get descendants(): RNode<any>[];
     remove(): void;
     get ancestors(): RNode<any>[];
-    get superNode(): any;
-    get isSuperNode(): boolean;
+    get superNode(): RNode<any>;
+    get isSuperNode(): any;
     get root(): RNode<Instance>;
     get isRoot(): boolean;
-    get children(): any;
-    get level(): any;
-    traverse(path: any): any;
+    /** @returns {RNode[]} */
+    get children(): RNode<any>[];
+    /** @returns {number} */
+    get level(): number;
+    /**
+     * resolve a node relative to this node
+     * @param {string} path
+     * @returns
+     */
+    traverse(path: string): any;
     toJSON(): RNode<Instance> & {
-        children: any[];
+        children: RNode<any>[];
     };
-    get path(): any;
+    /** @returns {string} */
+    get path(): string;
 }
