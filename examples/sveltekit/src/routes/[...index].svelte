@@ -1,5 +1,6 @@
 <script>
-    import Index from './index.svelte'
+    import { Router } from '@roxi/routify'
+    import routes from '../../.routify/routes.default.js'
 </script>
 
-<Index />
+<Router {routes} />
