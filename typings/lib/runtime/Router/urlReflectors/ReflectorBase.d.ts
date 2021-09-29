@@ -1,7 +1,7 @@
 export class BaseReflector {
     /** @param {Router} router */
     constructor(router: Router);
-    router: import("../Router.js").Router;
+    router: import("../Router").Router;
     log: any;
     install(): void;
     uninstall(): void;

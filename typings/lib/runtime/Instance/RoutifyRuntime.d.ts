@@ -1,3 +1,4 @@
+/** @returns {Partial<RoutifyRuntime>} */
 export class RoutifyRuntime {
     /** @param {Partial<RoutifyRuntime>} options */
     constructor(options: Partial<RoutifyRuntime>);
@@ -10,9 +11,8 @@ export class RoutifyRuntime {
     superNode: RNodeRuntime;
     /** @type {Partial<RoutifyRuntime>} */
     options: Partial<RoutifyRuntime>;
-    plugins: any[];
-    global: import("../Global/Global.js").Global;
     utils: UrlParamUtils;
+    global: import("../Global/Global.js").Global;
     log: any;
     /**
      * @param {string} name relative path for the node
@@ -20,7 +20,6 @@ export class RoutifyRuntime {
      * @returns {RNodeRuntime}
      */
     createNode(name: string, module: any | string): RNodeRuntime;
-    start(): void;
 }
 import { RNodeRuntime } from "./RNodeRuntime.js";
 import { UrlParamUtils } from "./UrlParamUtils.js";

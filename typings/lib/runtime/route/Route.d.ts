@@ -10,6 +10,7 @@ export class Route {
     router: import("../index.js").RouterClass;
     url: string;
     mode: UrlState;
+    log: any;
     get params(): any;
     /**
      * converts async module functions to sync functions

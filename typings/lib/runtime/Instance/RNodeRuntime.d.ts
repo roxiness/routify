@@ -10,8 +10,11 @@ export class RNodeRuntime extends RNode<import("./RoutifyRuntime.js").RoutifyRun
     get rawComponent(): Promise<any>;
     /** @returns {() => Node} */
     get component(): () => Node;
-    /** @param {NodeTreeExport} tree */
-    importTree(tree: NodeTreeExport): void;
+    /**
+     * @param {object} snapshotRoot
+     * @returns {RNode}
+     */
+    importTree: (snapshotRoot: object) => RNode<any>;
     get _fallback(): any;
     #private;
 }

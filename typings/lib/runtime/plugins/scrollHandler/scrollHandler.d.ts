@@ -3,5 +3,11 @@ export namespace scrollHandler {
     export { run };
 }
 declare const isScrolling: import("svelte/store").Writable<boolean>;
-declare function run(activeRoute: any, history: any): void;
+/**
+ * runs after each navigation
+ * @param {import('svelte/store').Readable<Route>} activeRoute
+ * @param {*} history
+ * @returns
+ */
+declare function run(activeRoute: import('svelte/store').Readable<Route>, history: any): void;
 export {};

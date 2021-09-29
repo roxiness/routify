@@ -61,7 +61,7 @@ export class Router {
     params: import("svelte/store").Readable<any>;
     scrollHandler: {
         isScrolling: import("svelte/store").Writable<boolean>;
-        run: (activeRoute: any, history: any) => void;
+        run: (activeRoute: import("svelte/store").Readable<Route>, history: any) => void;
     };
     /**
      *
