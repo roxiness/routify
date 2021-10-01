@@ -1,13 +1,11 @@
 <script>
-    import '../../../typedef.js'
-    import Component from './Component.svelte'
-    import { getUrlFromClick } from '../utils/index.js'
     import { Router } from './Router.js'
-    import { getContext, onDestroy } from 'svelte'
+    import { onDestroy } from 'svelte'
     import { AddressReflector } from './urlReflectors/Address.js'
     import { InternalReflector } from './urlReflectors/Internal.js'
     import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js'
-    import { globalInstance } from '../Global/Global.js'
+    import { getUrlFromClick } from '../utils/index.js'
+    import Component from './Component.svelte'
     /** @type {RoutifyRuntime} */
     export let instance = null
     export let urlReflector =
@@ -19,16 +17,7 @@
     export let decorator = null
     export let rootNode = null
 
-    const parentCmpCtx = getContext('routify-fragment-context')
-    if (!instance)
-        instance =
-            parentCmpCtx?.route.router.instance ||
-            globalInstance.instances[0] ||
-            new RoutifyRuntime({})
-
-    if (routes) instance.superNode.importTree(routes)
-
-    if (!router) router = new Router(instance, { rootNode, parentCmpCtx, name })
+    if (!router) router = new Router({ instance, rootNode, name, routes })
 
     $: if (url && url !== router.url.get()) router.url.replace(url)
 
