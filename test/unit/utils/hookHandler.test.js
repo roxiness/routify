@@ -1,5 +1,4 @@
 import { hookHandler } from '../../../lib/buildtime/utils.js'
-import '../../../lib/../typedef.js'
 
 test('can create a hook', () => {
     let counter = 0

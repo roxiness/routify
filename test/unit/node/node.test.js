@@ -1,5 +1,4 @@
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime'
-import '../../../typedef.js'
 
 const instance = new RoutifyBuildtime({})
 const node = instance.createNode('my-node')

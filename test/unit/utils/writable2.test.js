@@ -1,5 +1,4 @@
 import { writable2 } from '../../../lib/runtime/utils/index.js'
-import '../../../lib/../typedef.js'
 
 test('can create a store', async () => {
     const store = writable2('initial')

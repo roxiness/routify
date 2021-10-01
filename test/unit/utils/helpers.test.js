@@ -1,5 +1,4 @@
 import { isActiveUrl } from '../../../lib/runtime/helpers/index.js'
-import '../../../lib/../typedef.js'
 
 expect.extend({
     toBeActive(input) {

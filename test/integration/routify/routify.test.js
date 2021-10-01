@@ -1,5 +1,4 @@
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
-import '../../../lib/../typedef.js'
 import { createDirname } from '../../../lib/buildtime/utils.js'
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
