@@ -2,8 +2,9 @@
  * @typedef {import('svelte/store').Writable<Route>} RouteStore
  *
  * @typedef {Object} RouterOptions
+ * @prop {RoutifyRuntime} instance
  * @prop {RNodeRuntime} rootNode
- * @prop {ParentCmpCtx} parentCmpCtx
+ * @prop {any} routes
  * @prop {string} name
  *
  * @typedef {Object} ParentCmpCtx
@@ -14,10 +15,9 @@
  */
 export class Router {
     /**
-     * @param {RoutifyRuntime} instance
      * @param {Partial<RouterOptions>} param1
      */
-    constructor(instance: RoutifyRuntime, { rootNode, parentCmpCtx, name }?: Partial<RouterOptions>);
+    constructor({ instance, rootNode, name, routes }?: Partial<RouterOptions>);
     /** @type {RouteStore} */
     pendingRoute: import("svelte/store").Writable<Route>;
     /** @type {RouteStore} */
@@ -53,9 +53,9 @@ export class Router {
     ready: Promise<any>;
     /** @type {Route[]} */
     history: Route[];
-    instance: import("../Instance/RoutifyRuntime.js").RoutifyRuntime;
+    instance: RoutifyRuntime;
     name: string;
-    parentCmpCtx: ParentCmpCtx;
+    parentCmpCtx: any;
     rootNode: import("../Instance/RNodeRuntime.js").RNodeRuntime;
     log: any;
     params: import("svelte/store").Readable<any>;
@@ -77,10 +77,12 @@ export class Router {
     get urlReflector(): import("svelte/store").Writable<BaseReflector>;
     #private;
 }
+export function createRouter(options: RouterOptions): Router;
 export type RouteStore = import('svelte/store').Writable<Route>;
 export type RouterOptions = {
+    instance: RoutifyRuntime;
     rootNode: RNodeRuntime;
-    parentCmpCtx: ParentCmpCtx;
+    routes: any;
     name: string;
 };
 export type ParentCmpCtx = {
@@ -90,4 +92,5 @@ export type ParentCmpCtx = {
     options: any;
 };
 import { Route } from "../Route/Route.js";
+import { RoutifyRuntime } from "../Instance/RoutifyRuntime.js";
 import { BaseReflector } from "./urlReflectors/ReflectorBase.js";

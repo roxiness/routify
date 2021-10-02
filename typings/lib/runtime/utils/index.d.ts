@@ -26,3 +26,4 @@ export function urlFromAddress(): string;
 export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;
 export namespace contexts { }
+export function getContextMaybe(name: string): any;
