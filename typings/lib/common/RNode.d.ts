@@ -1,7 +1,7 @@
 /**
  * @template {RoutifyRuntime|RoutifyBuildtime} Instance
  */
-export class RNode<Instance extends import("../runtime/Instance/RoutifyRuntime").RoutifyRuntime | import("../buildtime/RoutifyBuildtime").RoutifyBuildtime> {
+export class RNode<Instance extends import("../buildtime/RoutifyBuildtime").RoutifyBuildtime | import("../runtime/Instance/RoutifyRuntime").RoutifyRuntime> {
     /**
      * @param {string} name
      * @param {MixedModule} module

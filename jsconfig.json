@@ -5,6 +5,7 @@
         "target": "esnext",
         "moduleResolution": "node"
     },
+    "include": ["lib/**/*.js", "*.js"],
     "exclude": [
         "**/node_modules",
         "**/dist",

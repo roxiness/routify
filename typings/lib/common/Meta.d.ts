@@ -10,7 +10,7 @@
  * node.meta.myKey === node.descendants[0].meta.myKey
  * @template {RNode|RNodeRuntime} Node
  */
-export class Meta<Node extends import("./RNode").RNode<any> | import("../runtime/Instance/RNodeRuntime").RNodeRuntime> {
+export class Meta<Node extends import("../runtime/Instance/RNodeRuntime").RNodeRuntime | import("./RNode").RNode<any>> {
     /** @param {Node} node */
     constructor(node: Node);
     _props: {};

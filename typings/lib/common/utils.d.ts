@@ -1,18 +1,18 @@
 /**
  * @template {{}} T
  * @template {{}} T2
- * @param {T} target
+ * @param {T} receiver
  * @param  {...T2} sources
- * @return {T&Partial<T2>} //jsdoc unaware of mutation - incorrectly wants partial T2
+ * @return {T&Partial<T2>} //partial because we're not guaranteed that types are preserved
  */
-export function deepAssign<T extends {}, T2 extends {}>(target: T, ...sources: T2[]): T & Partial<T2>;
+export function deepAssign<T extends {}, T2 extends {}>(receiver: T, ...sources: T2[]): T & Partial<T2>;
 /**
- * @param {RoutifyPlugin[]} _plugins
- * @returns {RoutifyPlugin[]}
+ * @param {RoutifyBuildtimePlugin[]} plugins
+ * @returns {RoutifyBuildtimePlugin[]}
  */
-export function sortPlugins(plugins: any): any[];
+export function sortPlugins(plugins: RoutifyBuildtimePlugin[]): RoutifyBuildtimePlugin[];
 export function isObjectOrArray(v: any): boolean;
-export function normalizePlugins(plugins: any): any[];
-export function mockRoutes<T extends any>(instance: T, routes: {
+export function normalizePlugins(plugins: RoutifyBuildtimePlugin[]): RoutifyBuildtimePlugin[];
+export function mockRoutes<T extends import("../buildtime/RoutifyBuildtime").RoutifyBuildtime | import("../runtime/Instance/RoutifyRuntime").RoutifyRuntime>(instance: T, routes: {
     [x: string]: any;
 }): T;
