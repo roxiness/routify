@@ -1,55 +1,54 @@
-/**
- * @template {RoutifyRuntime|RoutifyBuildtime} Instance
- */
-export class RNode<Instance extends import("../buildtime/RoutifyBuildtime").RoutifyBuildtime | import("../runtime/Instance/RoutifyRuntime").RoutifyRuntime> {
+export class RNode {
     /**
      * @param {string} name
      * @param {MixedModule} module
-     * @param {Instance} instance
+     * @param {any} instance
      */
-    constructor(name: string, module: MixedModule, instance: Instance);
-    /** @type {Instance} */
-    instance: Instance;
-    /** @type {RNode} */
-    parent: RNode<any>;
+    constructor(name: string, module: MixedModule, instance: any);
+    Instance: typeof Routify;
+    /** @type {this["Instance"]["prototype"]['Node']['prototype']} */
+    parent: RNode;
     /** @type {Object.<string, any>} */
     meta: {
         [x: string]: any;
     };
     /** @type {String} */
     id: string;
+    /** @type {typeof this['Instance']['prototype']} */
+    instance: Routify;
     name: string;
     module: MixedModule;
-    /** @param {RNode} child */
-    appendChild(child: RNode<any>): void;
+    /** @param {this["Instance"]["prototype"]['Node']['prototype']} child */
+    appendChild(child: RNode): void;
     /**
      * Creates a new child node
      * Same as `node.appendChild(instance.createNode('my-node'))`
      * @param {string} name
-     * @returns {RNode}
+     * @returns {this["Instance"]["prototype"]['Node']['prototype']}
      */
-    createChild(name: string, module: any): RNode<any>;
-    /** @returns {RNode[]} */
-    get descendants(): RNode<any>[];
+    createChild(name: string, module: any): RNode;
+    /** @returns {this["Instance"]["prototype"]['Node']['prototype'][]} */
+    get descendants(): RNode[];
     remove(): void;
-    get ancestors(): RNode<any>[];
-    get superNode(): RNode<any>;
-    get isSuperNode(): any;
-    get root(): RNode<Instance>;
+    get ancestors(): RNode[];
+    get superNode(): RNode;
+    get isSuperNode(): boolean;
+    get root(): RNode;
     get isRoot(): boolean;
-    /** @returns {RNode[]} */
-    get children(): RNode<any>[];
+    /** @returns {this["Instance"]["prototype"]['Node']['prototype'][]} */
+    get children(): RNode[];
     /** @returns {number} */
     get level(): number;
     /**
      * resolve a node relative to this node
      * @param {string} path
-     * @returns
+     * @returns {this["Instance"]["prototype"]['Node']['prototype']}
      */
-    traverse(path: string): any;
-    toJSON(): RNode<Instance> & {
-        children: RNode<any>[];
+    traverse(path: string): RNode;
+    toJSON(): RNode & {
+        children: RNode[];
     };
     /** @returns {string} */
     get path(): string;
 }
+import { Routify } from "./Routify.js";

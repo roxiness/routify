@@ -1,7 +1,7 @@
 /**
  * RUNTIME
  */
-type RNode = import("./lib/common/RNode").RNode<any>;
+type RNode = import('./lib/common/RNode').RNode;
 /**
  * COMMON
  */
@@ -31,11 +31,17 @@ type RoutifyRuntime = import('./lib/runtime/Instance/RoutifyRuntime').RoutifyRun
 /**
  * COMMON
  */
-type RNodeBuildtime = import('./lib/common/RNode').RNode<RoutifyBuildtime>;
+type RFile = import('./lib/buildtime/plugins/filemapper/lib/File').File;
 /**
  * COMMON
  */
 type RoutifyBuildtime = import('./lib/buildtime/RoutifyBuildtime').RoutifyBuildtime;
+/**
+ * COMMON
+ */
+type RNodeBuildtime = RNode & {
+    file: RFile;
+};
 /**
  * // todo tools should not be any
  */
@@ -81,6 +87,9 @@ type RoutifyRuntimeOptions = {
 };
 type RoutifyExternalMetaHelper = {
     instance: RoutifyRuntime;
+    /**
+     * //todo
+     */
     options: any;
     tempPath: string;
 };
@@ -110,7 +119,7 @@ type RoutifyBuildtimePluginType = {
 };
 type MetaContext = {
     instance: RoutifyBuildtime;
-    node: import("./lib/common/RNode").RNode<import("./lib/buildtime/RoutifyBuildtime").RoutifyBuildtime>;
+    node: RNodeBuildtime;
     options: RoutifyBuildtimeOptions;
     split: (value: any, name?: string) => {};
     tempPath: string;

@@ -11,8 +11,9 @@
  * @typedef {import('./lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  *
  *  BUILDTIME
- * @typedef {import('./lib/common/RNode').RNode<RoutifyBuildtime>} RNodeBuildtime
+ * @typedef {import('./lib/buildtime/plugins/filemapper/lib/File').File} RFile
  * @typedef {import('./lib/buildtime/RoutifyBuildtime').RoutifyBuildtime} RoutifyBuildtime
+ * @typedef {RNode & {file: RFile}} RNodeBuildtime
  * @typedef {{instance: RoutifyBuildtime, tools: any}} RoutifyBuildtimePayload // todo tools should not be any
  *
  */
@@ -59,7 +60,7 @@
 /**
  * @typedef {Object} RoutifyExternalMetaHelper
  * @prop {RoutifyRuntime} instance
- * @prop {options} options
+ * @prop {any} options //todo
  * @prop {string} tempPath
  */
 

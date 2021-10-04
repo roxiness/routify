@@ -179,7 +179,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 #### Properties
 
 *   `instance` **RoutifyRuntime** 
-*   `options` **options** 
+*   `options` **any** //todo
 *   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ###

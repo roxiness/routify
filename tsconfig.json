@@ -15,6 +15,7 @@
         "**/node_modules/*",
         "**/tmp/*",
         "**/.history/*",
+        "**/spec",
         "test",
         "examples",
         "site",

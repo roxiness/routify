@@ -1,1 +1,1 @@
-export function filenameToOptions(node: import("../../../../../common/RNode.js").RNode<any>): void;
+export function filenameToOptions(node: RNode): void;

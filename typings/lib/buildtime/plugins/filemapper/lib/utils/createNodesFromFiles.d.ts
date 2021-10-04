@@ -1,7 +1,7 @@
 /**
  * Maps filestructure to a node tree
- * @param {RNode} firstNode the root node of the specified path
+ * @param {RNodeBuildtime} firstNode the root node of the specified path
  * @param {String} path dir to scan for files
- * @return {Promise<RNode>}
+ * @return {Promise<RNodeBuildtime>}
  */
-export function createNodesFromFiles(firstNode: import("../../../../../common/RNode.js").RNode<any>, path: string): Promise<import("../../../../../common/RNode.js").RNode<any>>;
+export function createNodesFromFiles(firstNode: RNodeBuildtime, path: string): Promise<RNodeBuildtime>;

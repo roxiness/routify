@@ -1,2 +1,2 @@
-export function importTree(snapshotRoot: object, parentNode: RNodeRuntime): import("../../../common/RNode").RNode<any>;
+export function importTree(snapshotRoot: object, parentNode: RNodeRuntime): RNode;
 export function importer({ instance }: RoutifyRuntimePayload): void;

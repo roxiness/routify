@@ -1,19 +1,8 @@
-export class RoutifyBuildtime {
+export class RoutifyBuildtime extends Routify {
     /** @param {Partial<RoutifyBuildtimeOptions>} options */
     constructor(options: Partial<RoutifyBuildtimeOptions>);
-    mode: string;
-    Node: typeof RNode;
-    /** @type {RNodeBuildtime[]} */
-    nodeIndex: RNode<RoutifyBuildtime>[];
     /** @type {RoutifyBuildtimePlugin[]} */
     plugins: RoutifyBuildtimePlugin[];
-    superNode: RNode<RoutifyBuildtime>;
-    /**
-     * @param {string} name
-     * @param {string|any} module
-     * @returns {RNode<this>}
-     */
-    createNode(name: string, module: string | any): RNode<RoutifyBuildtime>;
     options: any;
     build: (trigger: any) => Promise<void>;
     on: {
@@ -62,4 +51,4 @@ export type FilemapperOptions = {
     moduleFiles: string[];
     resetFiles: string[];
 };
-import { RNode } from "../common/RNode.js";
+import { Routify } from "../common/Routify.js";
