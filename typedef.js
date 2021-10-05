@@ -90,6 +90,7 @@
  * @prop {string=} path
  * @prop {RoutifyExternalMetaHelper=} meta
  * @prop {(context:MetaContext & Object.<string,any>)=>MetaContext} [metaContext]
+ * @prop {(RoutifyBuildtimePayload)=>Boolean=} condition
  */
 
 /**

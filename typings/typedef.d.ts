@@ -125,6 +125,7 @@ type RoutifyBuildtimePluginType = {
     metaContext?: (context: MetaContext & {
         [x: string]: any;
     }) => MetaContext;
+    condition?: (RoutifyBuildtimePayload: any) => boolean;
 };
 /**
  * Modify the context available to meta files
