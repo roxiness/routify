@@ -3,6 +3,8 @@ export class RoutifyBuildtime extends Routify {
     constructor(options: Partial<RoutifyBuildtimeOptions>);
     /** @type {RoutifyBuildtimePlugin[]} */
     plugins: RoutifyBuildtimePlugin[];
+    /** @type {Function} */
+    close: Function;
     options: any;
     build: (trigger: any) => Promise<void>;
     on: {

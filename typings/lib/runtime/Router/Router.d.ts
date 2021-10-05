@@ -1,5 +1,6 @@
 /**
- * @typedef {import('svelte/store').Writable<Route>} RouteStore
+ * @typedef {import('../utils/index.js').getable<Route>} RouteStore
+ *
  *
  * @typedef {Object} RouterOptions
  * @prop {RoutifyRuntime} instance
@@ -19,9 +20,9 @@ export class Router {
      */
     constructor({ instance, rootNode, name, routes }?: Partial<RouterOptions>);
     /** @type {RouteStore} */
-    pendingRoute: import("svelte/store").Writable<Route>;
+    pendingRoute: RouteStore;
     /** @type {RouteStore} */
-    activeRoute: import("svelte/store").Writable<Route>;
+    activeRoute: RouteStore;
     urlTransforms: any[];
     beforeUrlChange: {
         (hook: Function): Function;
@@ -78,7 +79,7 @@ export class Router {
     #private;
 }
 export function createRouter(options: RouterOptions): Router;
-export type RouteStore = import('svelte/store').Writable<Route>;
+export type RouteStore = import('../utils/index.js').getable<Route>;
 export type RouterOptions = {
     instance: RoutifyRuntime;
     rootNode: RNodeRuntime;

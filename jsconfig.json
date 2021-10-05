@@ -3,7 +3,8 @@
          "checkJs": true,
         "baseUrl": ".",
         "target": "esnext",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "module": "es2020"
     },
     "include": ["lib/**/*.js", "*.js"],
     "exclude": [

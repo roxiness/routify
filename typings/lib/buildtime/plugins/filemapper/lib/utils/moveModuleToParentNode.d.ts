@@ -1,1 +1,1 @@
-export function moveModuleToParentNode(node: RNode): void;
+export function moveModuleToParentNode(node: RNodeBuildtime): void;

@@ -1,4 +1,3 @@
-import { importTree } from '../../../lib/runtime/plugins/importer/importer.js'
 import { RoutifyRuntime } from '../../../lib/runtime/Instance/RoutifyRuntime.js'
 
 const exported = {
@@ -23,7 +22,7 @@ const exported = {
 
 test('importTree', () => {
     const instance = new RoutifyRuntime({})
-    importTree(exported, instance.superNode)
+    instance.superNode.importTree(exported)
 
     expect(instance.superNode.children[0].id).toBe('_default')
     expect(instance.superNode.children[0].children[0].id).toBe('_default_admin')

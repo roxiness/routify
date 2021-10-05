@@ -17,7 +17,7 @@ export class RNode {
     /** @type {typeof this['Instance']['prototype']} */
     instance: Routify;
     name: string;
-    module: MixedModule;
+    module: any;
     /** @param {this["Instance"]["prototype"]['Node']['prototype']} child */
     appendChild(child: RNode): void;
     /**

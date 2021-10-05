@@ -1,3 +1,3 @@
 export function filemapper({ instance }: {
-    instance: any;
+    instance: RoutifyBuildtime;
 }): Promise<void>;

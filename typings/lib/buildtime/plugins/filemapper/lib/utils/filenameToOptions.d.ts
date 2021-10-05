@@ -1,1 +1,1 @@
-export function filenameToOptions(node: RNode): void;
+export function filenameToOptions(node: RNodeBuildtime): void;

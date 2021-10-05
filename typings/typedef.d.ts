@@ -1,7 +1,17 @@
 /**
- * RUNTIME
+ * COMMON
  */
 type RNode = import('./lib/common/RNode').RNode;
+/**
+ * COMMON
+ */
+type Routify = import('./lib/common/Routify').Routify;
+/**
+ * RUNTIME
+ */
+type RoutifyBaseOptions = {
+    Node: RNode;
+};
 /**
  * COMMON
  */
@@ -39,9 +49,7 @@ type RoutifyBuildtime = import('./lib/buildtime/RoutifyBuildtime').RoutifyBuildt
 /**
  * COMMON
  */
-type RNodeBuildtime = RNode & {
-    file: RFile;
-};
+type RNodeBuildtime = import('./lib/buildtime/RNodeBuildtime').RNodeBuildtime;
 /**
  * // todo tools should not be any
  */
@@ -50,9 +58,10 @@ type RoutifyBuildtimePayload = {
     tools: any;
 };
 type RoutifyCallback<T> = (first: {
-    instance: any;
+    instance: Routify;
 }) => T | Promise<T>;
 type RoutifyBuildtimeOptions = {
+    Node: RNode;
     /**
      * defaults to '.routify'
      */
@@ -115,8 +124,11 @@ type RoutifyBuildtimePluginType = {
     meta?: RoutifyExternalMetaHelper | undefined;
     metaContext?: (context: MetaContext & {
         [x: string]: any;
-    }) => {};
+    }) => MetaContext;
 };
+/**
+ * Modify the context available to meta files
+ */
 type MetaContext = {
     instance: RoutifyBuildtime;
     node: RNodeBuildtime;
@@ -148,7 +160,7 @@ type RerservedCmpProps = {
 type Module = RerservedCmpProps & {
     [x: string]: any;
 };
-type MixedModule = Module & Function;
+type MixedModule = any;
 type PathNode = {
     urlFragment: string;
     node: RNodeRuntime;

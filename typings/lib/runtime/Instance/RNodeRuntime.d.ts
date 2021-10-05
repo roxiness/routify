@@ -4,6 +4,7 @@ export class RNodeRuntime extends RNode {
     get regex(): RegExp;
     /** @returns {this["Instance"]["prototype"]['superNode'][]} */
     get pages(): RNodeRuntime[];
+    /** @ts-ignore SvelteComponentConstructor is only available in VSCode */
     /** @returns {Promise<SvelteComponentConstructor<*, *>>} */
     get rawComponent(): Promise<any>;
     /** @returns {() => Node} */

@@ -1,5 +1,5 @@
 export function metaFromFile({ instance }: {
-    instance: any;
+    instance: RoutifyBuildtime;
 }): Promise<void>;
 export function parseComment(body: string): {
     [x: string]: any;

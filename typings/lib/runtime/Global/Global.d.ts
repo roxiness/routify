@@ -5,7 +5,7 @@ export class Global {
     /** @type {Router[]} */
     get routers(): import("../index.js").RouterClass[];
     browserAdapter: BrowserAdapter;
-    /** @param {Router} router router name */
+    /** @param {Router} router */
     urlFromBrowser: (router: Router) => string;
     register(instance: any): Global;
 }

@@ -12,7 +12,6 @@ export default {
   \\"meta\\": {},
   \\"id\\": \\"_default\\",
   \\"module\\": () => import('../../example/_module.svelte'),
-  \\"rootName\\": \\"default\\",
   \\"file\\": {
     \\"path\\": \\"test/integration/routify/example/_module.svelte\\",
     \\"dir\\": \\"test/integration/routify/example\\",
@@ -20,6 +19,7 @@ export default {
     \\"ext\\": \\".svelte\\",
     \\"name\\": \\"_module\\"
   },
+  \\"rootName\\": \\"default\\",
   \\"routifyDir\\": import.meta.url,
   \\"children\\": [
     {

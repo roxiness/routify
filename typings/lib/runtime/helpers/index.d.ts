@@ -11,7 +11,7 @@ export function getPath(node1: any, node2: any): string;
 /**
  * @callback Url
  * @param {string} inputPath
- * @param {Object.<string, string>} userParams
+ * @param {Object.<string, string>=} userParams
  * @returns {string}
  *
  * @type {Readable<Url>}
@@ -65,9 +65,9 @@ export type IsActiveOptions = {
      */
     recursive?: boolean;
 };
-export type Url = (inputPath: string, userParams: {
+export type Url = (inputPath: string, userParams?: {
     [x: string]: string;
-}) => string;
+} | undefined) => string;
 export type IsActive = (path?: string | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;

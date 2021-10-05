@@ -27,3 +27,8 @@ export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;
 export namespace contexts { }
 export function getContextMaybe(name: string): any;
+export type getable<T> = import('svelte/store').Writable<T> & {
+    get: () => T;
+};
+export function getable<T_1>(value: T_1, start?: import("svelte/store").StartStopNotifier<T_1>): getable<T_1>;
+import { get } from "svelte/types/runtime/store";

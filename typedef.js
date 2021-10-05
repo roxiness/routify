@@ -1,6 +1,9 @@
 /**
  * COMMON
  * @typedef {import('./lib/common/RNode').RNode} RNode
+ * @typedef {import('./lib/common/Routify').Routify} Routify
+ *
+ * @typedef {{Node: RNode}} RoutifyBaseOptions
  *
  * RUNTIME
  * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
@@ -13,7 +16,7 @@
  *  BUILDTIME
  * @typedef {import('./lib/buildtime/plugins/filemapper/lib/File').File} RFile
  * @typedef {import('./lib/buildtime/RoutifyBuildtime').RoutifyBuildtime} RoutifyBuildtime
- * @typedef {RNode & {file: RFile}} RNodeBuildtime
+ * @typedef {import('./lib/buildtime/RNodeBuildtime').RNodeBuildtime} RNodeBuildtime
  * @typedef {{instance: RoutifyBuildtime, tools: any}} RoutifyBuildtimePayload // todo tools should not be any
  *
  */
@@ -31,6 +34,7 @@
 
 /**
  * @typedef {Object} RoutifyBuildtimeOptions
+ * @prop {RNode} Node
  * @prop {string} routifyDir defaults to '.routify'
  * @prop {boolean} clearRoutifyDir
  * @prop {object} filemapper
@@ -85,7 +89,7 @@
  * @prop {function(RoutifyBuildtimePayload):(Promise<any>|any)=} build
  * @prop {string=} path
  * @prop {RoutifyExternalMetaHelper=} meta
- * @prop {(context:MetaContext & Object.<string,any>)=>{}} [metaContext]
+ * @prop {(context:MetaContext & Object.<string,any>)=>MetaContext} [metaContext]
  */
 
 /**
@@ -93,6 +97,7 @@
  */
 
 /**
+ * Modify the context available to meta files
  * @typedef {Object} MetaContext
  * @prop {RoutifyBuildtime} instance
  * @prop {RNodeBuildtime} node
@@ -159,7 +164,7 @@
 
 /** @typedef {RerservedCmpProps & Object.<string, any>} Module */
 
-/** @typedef {Module & function} MixedModule */
+/** @typedef {any} MixedModule */
 
 /*****************
  * MISC          *
