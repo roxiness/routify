@@ -192,3 +192,9 @@
  */
 
 // todo is routifyDir needed in generated routes files?
+
+/**
+ * @typedef {Object} BrowserAdapter
+ * @prop {(browserUrl: string, router: Router)=>string} toRouter Called by each router when the browser URL changes. Returns an internal URL for each respective router.
+ * @prop {(routers: Router[])=>string} toBrowser compiles all router URLS into a single URL for the browser.
+ */

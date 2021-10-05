@@ -173,3 +173,13 @@ type NodeTreeExport = {
     file?: any | undefined;
     children: NodeTreeExport[];
 };
+type BrowserAdapter = {
+    /**
+     * Called by each router when the browser URL changes. Returns an internal URL for each respective router.
+     */
+    toRouter: (browserUrl: string, router: Router) => string;
+    /**
+     * compiles all router URLS into a single URL for the browser.
+     */
+    toBrowser: (routers: Router[]) => string;
+};

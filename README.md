@@ -126,6 +126,7 @@ rootNode.appendChild(childNode)
     *   [Properties](#properties-10)
 *   [NodeTreeExport](#nodetreeexport)
     *   [Properties](#properties-11)
+*   [BrowserAdapter](#browseradapter)
 
 ### RoutifyBuildtimePayload
 
@@ -326,3 +327,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `rootName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
 *   `file` **any?** 
 *   `children` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[NodeTreeExport](#nodetreeexport)>** 
+
+### BrowserAdapter
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
