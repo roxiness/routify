@@ -34,7 +34,7 @@
 
 /**
  * @typedef {Object} RoutifyBuildtimeOptions
- * @prop {RNode} Node
+ * @prop {RNodeBuildtime} Node
  * @prop {string} routifyDir defaults to '.routify'
  * @prop {boolean} clearRoutifyDir
  * @prop {object} filemapper

@@ -61,7 +61,7 @@ type RoutifyCallback<T> = (first: {
     instance: Routify;
 }) => T | Promise<T>;
 type RoutifyBuildtimeOptions = {
-    Node: RNode;
+    Node: RNodeBuildtime;
     /**
      * defaults to '.routify'
      */
