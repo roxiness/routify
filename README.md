@@ -119,6 +119,7 @@ rootNode.appendChild(childNode)
     *   [Parameters](#parameters-4)
 *   [ComponentPreloadFn](#componentpreloadfn)
     *   [Properties](#properties-8)
+*   [MixedModule](#mixedmodule)
 *   [PathNode](#pathnode)
     *   [Properties](#properties-9)
 *   [UrlState](#urlstate)
@@ -150,6 +151,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 #### Properties
 
+*   `Node` **RNode** 
 *   `routifyDir` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** defaults to '.routify'
 *   `clearRoutifyDir` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 *   `filemapper` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
@@ -210,6 +212,8 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
 ### MetaContext
+
+Modify the context available to meta files
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
@@ -289,7 +293,9 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 ###
 
-###
+### MixedModule
+
+Type: any
 
 ### PathNode
 
