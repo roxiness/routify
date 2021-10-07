@@ -1,5 +1,7 @@
-/** @returns {Partial<RoutifyRuntime>} */
-export class RoutifyRuntime extends Routify {
+/**
+ * @extends Routify<typeof import('./RNodeRuntime')['RNodeRuntime']>
+ */
+export class RoutifyRuntime extends Routify<typeof RNodeRuntime> {
     constructor(options: any);
     /**@type {Router[]} routers this instance belongs to */
     routers: Router[];
@@ -8,5 +10,6 @@ export class RoutifyRuntime extends Routify {
     global: import("../Global/Global.js").Global;
     log: any;
 }
+import { RNodeRuntime } from "./RNodeRuntime.js";
 import { Routify } from "../../common/Routify.js";
 import { UrlParamUtils } from "./UrlParamUtils.js";

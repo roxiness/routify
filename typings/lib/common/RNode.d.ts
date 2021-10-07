@@ -1,54 +1,55 @@
-export class RNode {
+/**
+ * @template {typeof import('./Routify')['Routify']} R
+ */
+export class RNode<R extends typeof import("./Routify").Routify> {
     /**
      * @param {string} name
      * @param {MixedModule} module
-     * @param {any} instance
+     * @param {R['prototype']} instance
      */
-    constructor(name: string, module: MixedModule, instance: any);
-    Instance: typeof Routify;
-    /** @type {this["Instance"]["prototype"]['Node']['prototype']} */
-    parent: RNode;
+    constructor(name: string, module: MixedModule, instance: R['prototype']);
+    /** @type {R['prototype']} */
+    instance: R['prototype'];
+    /** @type {this} */
+    parent: RNode<R>;
     /** @type {Object.<string, any>} */
     meta: {
         [x: string]: any;
     };
     /** @type {String} */
     id: string;
-    /** @type {typeof this['Instance']['prototype']} */
-    instance: Routify;
     name: string;
     module: any;
-    /** @param {this["Instance"]["prototype"]['Node']['prototype']} child */
-    appendChild(child: RNode): void;
+    /** @param {this} child */
+    appendChild(child: RNode<R>): void;
     /**
      * Creates a new child node
      * Same as `node.appendChild(instance.createNode('my-node'))`
      * @param {string} name
-     * @returns {this["Instance"]["prototype"]['Node']['prototype']}
+     * @returns {this}
      */
-    createChild(name: string, module: any): RNode;
-    /** @returns {this["Instance"]["prototype"]['Node']['prototype'][]} */
-    get descendants(): RNode[];
+    createChild(name: string, module: any): this;
+    /** @returns {this[]} */
+    get descendants(): RNode<R>[];
     remove(): void;
-    get ancestors(): RNode[];
-    get superNode(): RNode;
+    get ancestors(): RNode<R>[];
+    get superNode(): RNode<R>;
     get isSuperNode(): boolean;
-    get root(): RNode;
+    get root(): RNode<R>;
     get isRoot(): boolean;
-    /** @returns {this["Instance"]["prototype"]['Node']['prototype'][]} */
-    get children(): RNode[];
+    /** @returns {this[]} */
+    get children(): RNode<R>[];
     /** @returns {number} */
     get level(): number;
     /**
      * resolve a node relative to this node
      * @param {string} path
-     * @returns {this["Instance"]["prototype"]['Node']['prototype']}
+     * @returns {this}
      */
-    traverse(path: string): RNode;
-    toJSON(): RNode & {
-        children: RNode[];
+    traverse(path: string): this;
+    toJSON(): RNode<R> & {
+        children: RNode<R>[];
     };
     /** @returns {string} */
     get path(): string;
 }
-import { Routify } from "./Routify.js";

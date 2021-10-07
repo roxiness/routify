@@ -1,16 +1,16 @@
 /**
  * COMMON
  */
-type RNode = import('./lib/common/RNode').RNode;
+type RNode = import("./lib/common/RNode").RNode<any>;
 /**
  * COMMON
  */
-type Routify = import('./lib/common/Routify').Routify;
+type Routify = import("./lib/common/Routify").Routify<any>;
 /**
  * RUNTIME
  */
 type RoutifyBaseOptions = {
-    Node: RNode;
+    Node: import("./lib/common/RNode").RNode<any>;
 };
 /**
  * COMMON
@@ -58,7 +58,7 @@ type RoutifyBuildtimePayload = {
     tools: any;
 };
 type RoutifyCallback<T> = (first: {
-    instance: Routify;
+    instance: import("./lib/common/Routify").Routify<any>;
 }) => T | Promise<T>;
 type RoutifyBuildtimeOptions = {
     Node: RNodeBuildtime;

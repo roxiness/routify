@@ -1,4 +1,7 @@
-export class RoutifyBuildtime extends Routify {
+/**
+ *  @extends {Routify<typeof import('./RNodeBuildtime')['RNodeBuildtime']>}
+ **/
+export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
     /** @param {Partial<RoutifyBuildtimeOptions>} options */
     constructor(options: Partial<RoutifyBuildtimeOptions>);
     /** @type {RoutifyBuildtimePlugin[]} */
@@ -53,4 +56,5 @@ export type FilemapperOptions = {
     moduleFiles: string[];
     resetFiles: string[];
 };
+import { RNodeBuildtime } from "./RNodeBuildtime.js";
 import { Routify } from "../common/Routify.js";

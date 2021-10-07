@@ -57,7 +57,7 @@ export class Router {
     instance: RoutifyRuntime;
     name: string;
     parentCmpCtx: any;
-    rootNode: import("../Instance/RNodeRuntime.js").RNodeRuntime;
+    rootNode: any;
     log: any;
     params: import("svelte/store").Readable<any>;
     scrollHandler: {
@@ -78,7 +78,7 @@ export class Router {
     get urlReflector(): import("svelte/store").Writable<BaseReflector>;
     #private;
 }
-export function createRouter(options: RouterOptions): Router;
+export function createRouter(options: Partial<RouterOptions>): Router;
 export type RouteStore = import('../utils/index.js').getable<Route>;
 export type RouterOptions = {
     instance: RoutifyRuntime;

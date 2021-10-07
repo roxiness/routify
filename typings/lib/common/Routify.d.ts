@@ -1,18 +1,21 @@
-export class Routify {
+/**
+ * @template {typeof import('./RNode')['RNode']} N
+ */
+export class Routify<N extends typeof RNode> {
     constructor({ Node }: {
         Node: any;
     });
     Node: typeof RNode;
     mode: string;
-    /** @type {this['Node']['prototype'][]} */
-    nodeIndex: RNode[];
-    /** @type {typeof this['Node']['prototype']} */
-    superNode: RNode;
+    /** @type {N['prototype'][]} */
+    nodeIndex: N['prototype'][];
+    /** @type {N['prototype']} */
+    superNode: N['prototype'];
     /**
      * @param {string=} name relative path for the node
      * @param {any|string=} module svelte component
-     * @returns {typeof this['Node']['prototype']}
+     * @returns {N['prototype']}
      */
-    createNode(name?: string | undefined, module?: (any | string) | undefined): RNode;
+    createNode(name?: string | undefined, module?: (any | string) | undefined): N['prototype'];
 }
 import { RNode } from "./RNode.js";

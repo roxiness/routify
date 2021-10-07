@@ -1,4 +1,4 @@
-export function getMRCA(node1: RNode, node2: RNode): import("../../common/RNode.js").RNode;
+export function getMRCA(node1: import("../../common/RNode.js").RNode<any>, node2: import("../../common/RNode.js").RNode<any>): import("../../common/RNode.js").RNode<any>;
 export function getPath(node1: any, node2: any): string;
 /**
  * @template T
