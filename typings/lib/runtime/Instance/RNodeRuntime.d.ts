@@ -1,4 +1,3 @@
-/// <reference types="svelte/types/runtime/ambient" />
 /**
  * @extends RNode<typeof import('./RoutifyRuntime')['RoutifyRuntime']>
  */
@@ -10,7 +9,7 @@ export class RNodeRuntime extends RNode<typeof import("./RoutifyRuntime").Routif
     get pages(): RNodeRuntime[];
     /** @ts-ignore SvelteComponentConstructor is only available in VSCode */
     /** @returns {Promise<SvelteComponentConstructor<*, *>>} */
-    get rawComponent(): Promise<any>;
+    get rawComponent(): Promise<SvelteComponentConstructor<any, any>>;
     /** @returns {() => Node} */
     get component(): () => Node;
     /**

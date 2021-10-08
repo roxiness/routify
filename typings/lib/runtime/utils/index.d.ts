@@ -31,4 +31,4 @@ export type getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };
 export function getable<T_1>(value: T_1, start?: import("svelte/store").StartStopNotifier<T_1>): getable<T_1>;
-import { get } from "svelte/types/runtime/store";
+import { get } from "../node_modules/svelte/types/runtime/store/index.js";

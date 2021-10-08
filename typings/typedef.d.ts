@@ -70,6 +70,7 @@ type RoutifyBuildtimeOptions = {
     filemapper: {
         moduleFiles: string[];
         resetFiles: string[];
+        fallbackFiles: string[];
     };
     /**
      * defaults to { default: 'src/routes' }
@@ -133,7 +134,7 @@ type RoutifyBuildtimePluginType = {
 type MetaContext = {
     instance: RoutifyBuildtime;
     node: RNodeBuildtime;
-    options: RoutifyBuildtimeOptions;
+    options: Partial<RoutifyBuildtimeOptions>;
     split: (value: any, name?: string) => {};
     tempPath: string;
 };

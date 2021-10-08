@@ -40,6 +40,7 @@
  * @prop {object} filemapper
  * @prop {string[]} filemapper.moduleFiles defaults to ['_module.svelte', '_reset.svelte']
  * @prop {string[]} filemapper.resetFiles defaults to ['_reset.svelte']
+ * @prop {string[]} filemapper.fallbackFiles defaults to ['_reset.svelte']
  * @prop {string|Object<string,string>} routesDir defaults to { default: 'src/routes' }
  * @prop {string[]} extensions defaults to ['.svelte', '.html', '.md', '.svx'],
  * @prop {string[]|Object[]} plugins
@@ -102,7 +103,7 @@
  * @typedef {Object} MetaContext
  * @prop {RoutifyBuildtime} instance
  * @prop {RNodeBuildtime} node
- * @prop {RoutifyBuildtimeOptions} options
+ * @prop {Partial<RoutifyBuildtimeOptions>} options
  * @prop {(value:any, name?: string)=>{}} split
  * @prop {string} tempPath
  */

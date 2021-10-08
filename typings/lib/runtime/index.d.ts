@@ -1,4 +1,3 @@
-/// <reference types="svelte/types/runtime/ambient" />
 export const Routify: typeof RoutifyRuntime;
 export * from "./helpers/index.js";
 import { RoutifyRuntime } from "./Instance/RoutifyRuntime.js";
