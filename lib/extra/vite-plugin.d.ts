@@ -1,5 +1,4 @@
-/// <reference types="@roxi/routify/typings/typedef.d.ts" />
-/// <reference path="../../typings/typedef.d.ts" />
+/// <reference types="@roxi/routify" />
 
 import * as module from '../../typings/lib/extra/vite-plugin'
 export default module.default
