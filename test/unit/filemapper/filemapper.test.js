@@ -9,7 +9,7 @@ import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const options = {
-    routesDir: { default: `${__dirname}/example` },
+    routesDir: { default: `${__dirname}/example/routes` },
     filemapper: {
         moduleFiles: ['_module.svelte', '_reset.svelte'],
         resetFiles: ['_reset.svelte'],
