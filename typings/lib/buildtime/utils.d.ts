@@ -7,9 +7,6 @@ export function relativeUnix(path: any, path2: any): string;
 export function writeDynamicImport(outputDir: string, file: string, value: any): string;
 export function createDirname(meta: any): string;
 export function stringifyWithEscape(obj: any): string;
-export function sanitizeConfig<T extends {
-    [x: string]: any;
-}>(config: T): Partial<T>;
 export function resolvePlugins(plugins: any[]): Promise<RoutifyBuildtimePlugin[]>;
 export function writeFileIfDifferent(path: any, content: any): Promise<void>;
 export function writeFileIfDifferentSync(path: any, content: any): void;

@@ -21,7 +21,7 @@ const instance = new RoutifyBuildtime(options)
 test('bundler writes files', async () => {
     await filemapper({ instance })
     await metaFromFile({ instance })
-    await createBundles(instance.superNode.children[0], __dirname + '/temp')
+    await createBundles(Object.values(instance.rootNodes)[0], __dirname + '/temp')
 
     expect(
         readFileSync(__dirname + '/temp/bundles/_default_admin-bundle.js', 'utf-8'),

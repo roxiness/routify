@@ -15,4 +15,4 @@ export function isObjectOrArray(v: any): boolean;
 export function normalizePlugins(plugins: RoutifyBuildtimePlugin[]): RoutifyBuildtimePlugin[];
 export function mockRoutes<T extends import("../buildtime/RoutifyBuildtime").RoutifyBuildtime | import("../runtime/Instance/RoutifyRuntime").RoutifyRuntime>(instance: T, routes: {
     [x: string]: any;
-}): T;
+}): import("../buildtime/RNodeBuildtime").RNodeBuildtime | import("../runtime/Instance/RNodeRuntime").RNodeRuntime;

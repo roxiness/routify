@@ -18,7 +18,7 @@ beforeAll(async () => {
 })
 
 test('buildtime node can see own meta', async () => {
-    const rootNode = buildtimeInstance.superNode.children[0]
+    const rootNode = Object.values(buildtimeInstance.rootNodes)[0]
     expect(rootNode.meta.plain).toBe('Im plain')
     expect(rootNode.meta.function()).toBe('Im a function')
 })
@@ -34,7 +34,7 @@ test('buildtime node can see parents scoped meta and own meta', async () => {
 test('runtime node can see own meta', async () => {
     const { default: routes } = await import('./temp/routes.default.js')
     const instance = new RoutifyRuntime({ routes })
-    const rootNode = instance.superNode.children[0]
+    const rootNode = Object.values(instance.rootNodes)[0]
     expect(rootNode.meta.plain).toBe('Im plain')
 })
 

@@ -33,8 +33,6 @@ export class RNode<R extends typeof import("./Routify").Routify> {
     get descendants(): RNode<R>[];
     remove(): void;
     get ancestors(): RNode<R>[];
-    get superNode(): RNode<R>;
-    get isSuperNode(): boolean;
     get root(): RNode<R>;
     get isRoot(): boolean;
     /** @returns {this[]} */

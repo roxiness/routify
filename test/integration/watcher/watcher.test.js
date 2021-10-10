@@ -29,28 +29,30 @@ const filepath = resolve(__dirname, 'example', 'temp', 'NewFile.svelte')
 const renamedFilepath = resolve(__dirname, 'example', 'temp', 'NewFile2.svelte')
 
 test('detects new files', async () => {
-    expect(instance.superNode.children[0].descendants.length).toBe(2)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(2)
     writeFileSync(filepath, '<!-- hello -->')
     await new Promise(resolve => instance.on.buildComplete(resolve))
-    expect(instance.superNode.children[0].descendants.length).toBe(3)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
 })
 
 test('detects removed files', async () => {
-    expect(instance.superNode.children[0].descendants.length).toBe(3)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
     unlinkSync(filepath)
     await new Promise(resolve => instance.on.buildComplete(resolve))
-    expect(instance.superNode.children[0].descendants.length).toBe(2)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(2)
 })
 
 test('detects renamed files', async () => {
     writeFileSync(filepath, '<!-- hello -->')
     await new Promise(resolve => instance.on.buildComplete(resolve))
-    expect(instance.superNode.children[0].descendants.length).toBe(3)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
     fse.renameSync(filepath, renamedFilepath)
     await new Promise(resolve => instance.on.buildComplete(resolve))
     // required
     await new Promise(resolve => setTimeout(resolve, 50))
     expect(
-        instance.superNode.children[0].descendants.find(node => node.name === 'NewFile2'),
+        Object.values(instance.rootNodes)[0].descendants.find(
+            node => node.name === 'NewFile2',
+        ),
     ).toBeTruthy()
 })

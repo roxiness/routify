@@ -8,8 +8,7 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
     plugins: RoutifyBuildtimePlugin[];
     /** @type {Function} */
     close: Function;
-    /** @type {options} */
-    options: Partial<RoutifyBuildtimeOptions>;
+    options: Partial<Partial<RoutifyBuildtimeOptions>>;
     build: (trigger: any) => Promise<void>;
     on: {
         buildStart: {

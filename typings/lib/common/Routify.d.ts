@@ -2,15 +2,15 @@
  * @template {typeof import('./RNode')['RNode']} N
  */
 export class Routify<N extends typeof RNode> {
-    constructor({ Node }: {
-        Node: any;
-    });
+    constructor(options: any);
     Node: typeof RNode;
     mode: string;
     /** @type {N['prototype'][]} */
     nodeIndex: N['prototype'][];
-    /** @type {N['prototype']} */
-    superNode: N['prototype'];
+    /** @type {Object<string, RNode>} */
+    rootNodes: {
+        [x: string]: RNode<any>;
+    };
     /**
      * @param {string=} name relative path for the node
      * @param {any|string=} module svelte component
