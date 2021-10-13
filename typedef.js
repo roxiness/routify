@@ -69,6 +69,17 @@
  * @prop {string} tempPath
  */
 
+/********************************
+ * ROUTIFY LOAD CONTEXT *
+ ********************************/
+/**
+ * @callback RoutifyLoad
+ * @param {RoutifyLoadContext} context
+ *
+ * @typedef {object} RoutifyLoadContext
+ * @prop {Route} route
+ */
+
 /**********
  * PLUGIN *
  **********/
