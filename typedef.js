@@ -42,7 +42,7 @@
  * @prop {string[]} filemapper.resetFiles defaults to ['_reset.svelte']
  * @prop {string[]} filemapper.fallbackFiles defaults to ['_reset.svelte']
  * @prop {string|Object<string,string>} routesDir defaults to { default: 'src/routes' }
- * @prop {string[]} extensions defaults to ['.svelte', '.html', '.md', '.svx'],
+ * @prop {(string|RegExp)[]} extensions defaults to ['.svelte', '.html', '.md', '.svx'],
  * @prop {string[]|Object[]} plugins
  * @prop {boolean} watch rebuild Routify routes on changes
  */

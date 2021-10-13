@@ -3,7 +3,11 @@
 ## !IMPORTANT!
 
 **This repo is under heavy development and everything from code to documentation is far from complete.
-If you have questions about how to use Routify 3, please visit us on Discord. If you want to try building the docs your self, you can run `cd site && npm install && npm run dev`**
+
+[DOCS - work in progress](https://v3.ci.routify.dev/docs#)
+
+
+If you have questions about how to use Routify 3, please see the [docs](https://v3.ci.routify.dev/docs#) or visit us on Discord.
 
 ## Install
 
@@ -99,34 +103,37 @@ rootNode.appendChild(childNode)
     *   [Properties](#properties-1)
 *   [RoutifyExternalMetaHelper](#routifyexternalmetahelper)
     *   [Properties](#properties-2)
-*   [RoutifyBasePlugin](#routifybaseplugin)
-    *   [Properties](#properties-3)
-*   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
-    *   [Properties](#properties-4)
-*   [MetaContext](#metacontext)
-    *   [Properties](#properties-5)
-*   [UrlTransformFn](#urltransformfn)
+*   [RoutifyLoadContext](#routifyloadcontext)
     *   [Parameters](#parameters-1)
-*   [UrlTransform](#urltransform)
+    *   [Properties](#properties-3)
+*   [RoutifyBasePlugin](#routifybaseplugin)
+    *   [Properties](#properties-4)
+*   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
+    *   [Properties](#properties-5)
+*   [MetaContext](#metacontext)
     *   [Properties](#properties-6)
-*   [QueryHandler](#queryhandler)
-    *   [Properties](#properties-7)
-*   [QueryHandlerParse](#queryhandlerparse)
+*   [UrlTransformFn](#urltransformfn)
     *   [Parameters](#parameters-2)
-*   [QueryHandlerStringify](#queryhandlerstringify)
-    *   [Parameters](#parameters-3)
-*   [ComponentGuardFn](#componentguardfn)
-    *   [Parameters](#parameters-4)
-*   [ComponentPreloadFn](#componentpreloadfn)
+*   [UrlTransform](#urltransform)
+    *   [Properties](#properties-7)
+*   [QueryHandler](#queryhandler)
     *   [Properties](#properties-8)
+*   [QueryHandlerParse](#queryhandlerparse)
+    *   [Parameters](#parameters-3)
+*   [QueryHandlerStringify](#queryhandlerstringify)
+    *   [Parameters](#parameters-4)
+*   [ComponentGuardFn](#componentguardfn)
+    *   [Parameters](#parameters-5)
+*   [ComponentPreloadFn](#componentpreloadfn)
+    *   [Properties](#properties-9)
 *   [MixedModule](#mixedmodule)
 *   [PathNode](#pathnode)
-    *   [Properties](#properties-9)
+    *   [Properties](#properties-10)
 *   [UrlState](#urlstate)
 *   [FragmentContext](#fragmentcontext)
-    *   [Properties](#properties-10)
-*   [NodeTreeExport](#nodetreeexport)
     *   [Properties](#properties-11)
+*   [NodeTreeExport](#nodetreeexport)
+    *   [Properties](#properties-12)
 *   [BrowserAdapter](#browseradapter)
 
 ### RoutifyBuildtimePayload
@@ -160,7 +167,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
     *   `filemapper.resetFiles` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** defaults to \['\_reset.svelte']
     *   `filemapper.fallbackFiles` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** defaults to \['\_reset.svelte']
 *   `routesDir` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)** defaults to { default: 'src/routes' }
-*   `extensions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** defaults to \['.svelte', '.html', '.md', '.svx'],
+*   `extensions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [RegExp](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp))>** defaults to \['.svelte', '.html', '.md', '.svx'],
 *   `plugins` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>)** 
 *   `watch` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** rebuild Routify routes on changes
 
@@ -185,6 +192,18 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `instance` **RoutifyRuntime** 
 *   `options` **any** //todo
 *   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### RoutifyLoadContext
+
+Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+#### Parameters
+
+*   `context` **[RoutifyLoadContext](#routifyloadcontext)** 
+
+#### Properties
+
+*   `route` **Route** 
 
 ###
 

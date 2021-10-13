@@ -81,7 +81,7 @@ type RoutifyBuildtimeOptions = {
     /**
      * defaults to ['.svelte', '.html', '.md', '.svx'],
      */
-    extensions: string[];
+    extensions: (string | RegExp)[];
     plugins: string[] | any[];
     /**
      * rebuild Routify routes on changes
@@ -102,6 +102,10 @@ type RoutifyExternalMetaHelper = {
      */
     options: any;
     tempPath: string;
+};
+type RoutifyLoad = (context: RoutifyLoadContext) => any;
+type RoutifyLoadContext = {
+    route: Route;
 };
 type RoutifyRuntimePlugin = RoutifyBasePlugin & RoutifyRuntimeOptions;
 type RoutifyBuildtimePlugin = RoutifyBasePlugin & RoutifyBuildtimePluginType;
