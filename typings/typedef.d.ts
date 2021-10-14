@@ -132,6 +132,7 @@ type RoutifyBuildtimePluginType = {
     }) => MetaContext;
     condition?: (RoutifyBuildtimePayload: any) => boolean;
 };
+type MetaContextSplit = (value: any, name?: string | undefined) => any;
 /**
  * Modify the context available to meta files
  */
@@ -139,7 +140,17 @@ type MetaContext = {
     instance: RoutifyBuildtime;
     node: RNodeBuildtime;
     options: Partial<RoutifyBuildtimeOptions>;
-    split: (value: any, name?: string) => {};
+    /**
+     * dynamically import the value
+     */
+    split?: MetaContextSplit | undefined;
+    /**
+     * persist the return of a callback on disk. Return persisted data on subsequent calls
+     */
+    persist?: Persist | undefined;
+    /**
+     * temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
+     */
     tempPath: string;
 };
 type UrlTransformFn = (url: string) => string;

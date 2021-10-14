@@ -2,10 +2,9 @@
 
 ## !IMPORTANT!
 
-**This repo is under heavy development and everything from code to documentation is far from complete.
+\*\*This repo is under heavy development and everything from code to documentation is far from complete.
 
 [DOCS - work in progress](https://v3.ci.routify.dev/docs#)
-
 
 If you have questions about how to use Routify 3, please see the [docs](https://v3.ci.routify.dev/docs#) or visit us on Discord.
 
@@ -110,20 +109,22 @@ rootNode.appendChild(childNode)
     *   [Properties](#properties-4)
 *   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
     *   [Properties](#properties-5)
+*   [MetaContextSplit](#metacontextsplit)
+    *   [Parameters](#parameters-2)
 *   [MetaContext](#metacontext)
     *   [Properties](#properties-6)
 *   [UrlTransformFn](#urltransformfn)
-    *   [Parameters](#parameters-2)
+    *   [Parameters](#parameters-3)
 *   [UrlTransform](#urltransform)
     *   [Properties](#properties-7)
 *   [QueryHandler](#queryhandler)
     *   [Properties](#properties-8)
 *   [QueryHandlerParse](#queryhandlerparse)
-    *   [Parameters](#parameters-3)
-*   [QueryHandlerStringify](#queryhandlerstringify)
     *   [Parameters](#parameters-4)
-*   [ComponentGuardFn](#componentguardfn)
+*   [QueryHandlerStringify](#queryhandlerstringify)
     *   [Parameters](#parameters-5)
+*   [ComponentGuardFn](#componentguardfn)
+    *   [Parameters](#parameters-6)
 *   [ComponentPreloadFn](#componentpreloadfn)
     *   [Properties](#properties-9)
 *   [MixedModule](#mixedmodule)
@@ -227,9 +228,14 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
 *   `meta` **[RoutifyExternalMetaHelper](#routifyexternalmetahelper)?** 
 
-###
+### MetaContextSplit
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+#### Parameters
+
+*   `value` **any** the value to be split
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** defaults to hashed value
 
 ### MetaContext
 
@@ -242,7 +248,9 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `instance` **RoutifyBuildtime** 
 *   `node` **RNodeBuildtime** 
 *   `options` **Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>** 
-*   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `split` **[MetaContextSplit](#metacontextsplit)?** dynamically import the value
+*   `persist` **Persist?** persist the return of a callback on disk. Return persisted data on subsequent calls
+*   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
 
 ### UrlTransformFn
 
