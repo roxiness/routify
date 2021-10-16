@@ -1,6 +1,13 @@
 export function getMRCA(node1: import("../../common/RNode.js").RNode<any>, node2: import("../../common/RNode.js").RNode<any>): import("../../common/RNode.js").RNode<any>;
 export function getPath(node1: any, node2: any): string;
 /**
+ * @callback Goto
+ * @param {string} path relative, absolute or named URL
+ * @param {Object.<string, string>=} userParams
+ * @param {any} options
+ * @type {Readable<Goto>} */
+export const goto: Readable<Goto>;
+/**
  * @template T
  * @typedef {import('svelte/store').Readable<T>} Readable
  */
@@ -58,6 +65,9 @@ export namespace pendingRoute {
     export function subscribe_2(run: any): import("svelte/store").Unsubscriber;
     export { subscribe_2 as subscribe };
 }
+export type Goto = (path: string, userParams?: {
+    [x: string]: string;
+} | undefined, options: any) => any;
 export type Readable<T> = import('svelte/store').Readable<T>;
 export type IsActiveOptions = {
     /**
