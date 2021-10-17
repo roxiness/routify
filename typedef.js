@@ -55,7 +55,7 @@
 /**
  * @typedef {Object} RoutifyRuntimeOptions
  * @prop {function(RoutifyRuntime):void} init
- * @prop {UrlTransform|UrlTransform[]} urlTransform
+ * @prop {UrlRewrite|UrlRewrite[]} urlRewrite
  * @prop {QueryHandler|QueryHandler[]} queryHandler
  * @prop {function} beforeRouteChange
  * @prop {function} afterRouteChange
@@ -125,19 +125,20 @@
  */
 
 /*****************
- * URL TRANSFORM *
+ * URL REWRITE *
  *****************/
 
 /**
- * @callback UrlTransformFn
+ * @callback UrlRewriteFn
  * @param {string} url
+ * @param {{router: Router}} ctx
  * @returns {string}
  */
 
 /**
- * @typedef {Object} UrlTransform
- * @prop {UrlTransformFn} toInternal
- * @prop {UrlTransformFn} toExgternal
+ * @typedef {Object} UrlRewrite
+ * @prop {UrlRewriteFn} toInternal
+ * @prop {UrlRewriteFn} toExternal
  */
 
 /*****************

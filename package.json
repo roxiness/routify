@@ -11,6 +11,7 @@
         ".": "./lib/runtime/index.js",
         "./vite-plugin": "./lib/extra/vite-plugin.js",
         "./lib/extra/vite-plugin": "./lib/extra/vite-plugin.js",
+        "./lib/*": "./lib/*.js",
         "./typings/*": "./typings/*"
     },
     "scripts": {
