@@ -10,6 +10,7 @@
     export let instance = null
     export let urlReflector =
         typeof window != 'undefined' ? AddressReflector : InternalReflector
+    export let urlRewrite = null
     export let url = null
     export let name = ''
     export let router = null
@@ -17,7 +18,7 @@
     export let decorator = null
     export let rootNode = null
 
-    if (!router) router = new Router({ instance, rootNode, name, routes })
+    if (!router) router = new Router({ instance, rootNode, name, routes, urlRewrite })
 
     $: if (url && url !== router.url.get()) router.url.replace(url)
 
