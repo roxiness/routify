@@ -1,5 +1,6 @@
 export const Routify: typeof RoutifyRuntime;
 export * from "./helpers/index.js";
+export * from "../common/helpers.js";
 import { RoutifyRuntime } from "./Instance/RoutifyRuntime.js";
 import { createRouter } from "./Router/Router.js";
 import Router from "*.svelte";
