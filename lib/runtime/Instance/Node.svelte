@@ -8,7 +8,7 @@
     setContext(CTX, context)
 
     let Component
-    node.getRawComponent().then(r => (Component = r))
+    if (node.module) node.getRawComponent().then(r => (Component = r))
 </script>
 
 {#if node.module}
