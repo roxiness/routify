@@ -2,18 +2,21 @@
     import { getContext, setContext } from 'svelte'
     export let node
     export let passthrough
+    const CTX = 'routify-fragment-context'
 
-    const context = { ...getContext('routify-fragment-context') }
-    context.node = node
-    setContext('routify-fragment-context', context)
+    const context = { ...getContext(CTX), node }
+    setContext(CTX, context)
+
+    let Component
+    node.getRawComponent().then(r => (Component = r))
 </script>
 
 {#if node.module}
-    {#await node.rawComponent then rawComponent}
-        <svelte:component this={rawComponent} {...passthrough} {context}>
+    {#if Component}
+        <Component {...passthrough} {context}>
             <slot />
-        </svelte:component>
-    {/await}
+        </Component>
+    {/if}
 {:else}
     <slot />
 {/if}
