@@ -13,20 +13,25 @@
     export let urlRewrite = null
     export let url = null
     export let name = ''
+    /** @type {Router} */
     export let router = null
     export let routes = null
     export let decorator = null
     export let rootNode = null
 
-    if (!router) router = new Router({ instance, rootNode, name, routes, urlRewrite })
+    $: {
+        const options = { instance, rootNode, name, routes, urlRewrite }
+        // todo move everything to init
+        if (!router) router = new Router(options)
+        else router.init(options)
+
+        // todo merge with above options?
+        // this line starts the router
+        if (urlReflector) router.setUrlReflector(urlReflector)
+    }
 
     $: if (url && url !== router.url.get()) router.url.replace(url)
-
-    $: if (urlReflector) router.urlReflector = urlReflector
-
     $: activeRoute = router.activeRoute
-
-    const setParentElem = elem => (router.parentElem = elem.parentElement)
 
     const initialize = elem => {
         elem.addEventListener('click', handleClick)
@@ -48,5 +53,5 @@
 {/if}
 
 {#if !router.parentElem}
-    <div use:setParentElem />
+    <div use:router.setParentElem />
 {/if}
