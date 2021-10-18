@@ -75,17 +75,17 @@ export const context: import("svelte/store").Readable<{
 export const ready: import("svelte/store").Readable<() => void>;
 /**
  * @callback AfterPageLoadHelper
- * @param {function} callback
+ * @param {(page?: ClientNodeApi) => boolean} callback
  *
- * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<function>}} AfterPageLoadHelperStore
+ * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<(page?: ClientNodeApi) => boolean>}} AfterPageLoadHelperStore
  * @type {AfterPageLoadHelperStore}
  */
 export const afterPageLoad: AfterPageLoadHelperStore;
 /**
  * @callback BeforeUrlChangeHelper
- * @param {function} callback
+ * @param {(event?: PopStateEvent, route?: ClientNodeApi) => boolean} callback
  *
- * @typedef {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<function>}} BeforeUrlChangeHelperStore
+ * @typedef {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<(event?: PopStateEvent, route?: ClientNodeApi) => boolean>}} BeforeUrlChangeHelperStore
  * @type {BeforeUrlChangeHelperStore}
  **/
 export const beforeUrlChange: BeforeUrlChangeHelperStore;
@@ -176,13 +176,13 @@ export type ContextHelperStore = import("svelte/store").Readable<{
 }>;
 export type ReadyHelper = () => void;
 export type ReadyHelperStore = import("svelte/store").Readable<() => void>;
-export type AfterPageLoadHelper = (callback: Function) => any;
+export type AfterPageLoadHelper = (callback: (page?: ClientNodeApi) => boolean) => any;
 export type AfterPageLoadHelperStore = import("svelte/store").Readable<AfterPageLoadHelper> & {
-    _hooks: Array<Function>;
+    _hooks: Array<(page?: ClientNodeApi) => boolean>;
 };
-export type BeforeUrlChangeHelper = (callback: Function) => any;
+export type BeforeUrlChangeHelper = (callback: (event?: PopStateEvent, route?: ClientNodeApi) => boolean) => any;
 export type BeforeUrlChangeHelperStore = import("svelte/store").Readable<BeforeUrlChangeHelper> & {
-    _hooks: Array<Function>;
+    _hooks: Array<(event?: PopStateEvent, route?: ClientNodeApi) => boolean>;
 };
 /**
  * We have to grab params and leftover from the context and not directly from the store.
