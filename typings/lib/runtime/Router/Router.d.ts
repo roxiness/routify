@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../utils/index.js').getable<Route>} RouteStore
+ * @typedef {import('../utils/index.js').Getable<Route>} RouteStore
  *
  *
  * @typedef {Object} RouterOptions
@@ -7,6 +7,7 @@
  * @prop {RNodeRuntime} rootNode
  * @prop {any} routes
  * @prop {string} name
+ * @prop {UrlRewrite|UrlRewrite[]} urlRewrite
  *
  * @typedef {Object} ParentCmpCtx
  * @prop {Route} route
@@ -14,16 +15,27 @@
  * @prop {Object.<String|Number, String|Number>} localParams
  * @prop {Object.<String|Number, any>} options
  */
-export class Router {
+/**
+ * @template T
+ * @typedef {import('svelte/store').Readable} Readable<T>
+ */
+/**
+ * @implements {Readable<Router>}
+ */
+export class Router implements Readable<Router> {
     /**
-     * @param {Partial<RouterOptions>} param1
+     * @param {Partial<RouterOptions>} options
      */
-    constructor({ instance, rootNode, name, routes }?: Partial<RouterOptions>);
+    constructor(options: Partial<RouterOptions>);
+    subscribe: any;
+    /** @private is assigned in constructor  */
+    private set;
     /** @type {RouteStore} */
     pendingRoute: RouteStore;
     /** @type {RouteStore} */
     activeRoute: RouteStore;
-    urlTransforms: any[];
+    /** @type {UrlRewrite[]} */
+    urlRewrites: UrlRewrite[];
     beforeUrlChange: {
         (hook: Function): Function;
         hooks: any[];
@@ -41,50 +53,73 @@ export class Router {
         parse: (search: any) => any;
         stringify: (params: any) => string;
     };
-    url: {
-        set: (url: string, mode: UrlState) => Promise<true | false>;
-        getActive: () => string;
-        getPending: () => string;
-        get: () => string;
-        push: (url: any) => Promise<boolean>;
-        replace: (url: any) => Promise<boolean>;
-        pop: (url: any) => Promise<boolean>;
-        toString: () => string;
-    };
-    ready: Promise<any>;
-    /** @type {Route[]} */
-    history: Route[];
-    instance: RoutifyRuntime;
-    name: string;
-    parentCmpCtx: any;
-    rootNode: import("../Instance/RNodeRuntime.js").RNodeRuntime;
-    log: any;
-    params: import("svelte/store").Readable<any>;
     scrollHandler: {
         isScrolling: import("svelte/store").Writable<boolean>;
         run: (activeRoute: import("svelte/store").Readable<Route>, history: any) => void;
     };
+    url: {
+        internal: () => string;
+        external: () => string;
+        getActive: () => string;
+        getPending: () => string;
+        toString: () => string;
+        set: (url: string, mode: UrlState, isInternal?: boolean) => Promise<true | false>;
+        push: (url: any) => Promise<boolean>;
+        replace: (url: any) => Promise<boolean>;
+        pop: (url: any) => Promise<boolean>;
+    };
+    ready: Promise<any>;
+    /** @type {Route[]} */
+    history: Route[];
+    params: import("svelte/store").Readable<any>;
+    /**
+     * @param {Partial<RouterOptions>} param1
+     */
+    init({ instance, rootNode, name, routes, urlRewrite }?: Partial<RouterOptions>): void;
+    /** @type {RoutifyRuntime} */
+    instance: RoutifyRuntime;
+    name: string;
+    parentCmpCtx: any;
+    /** @type {RNodeRuntime} */
+    rootNode: RNodeRuntime;
+    log: any;
+    setParentElem: (elem: any) => any;
+    importRoutes(routes: any): void;
+    /**
+     * converts a URL or Routify's internal URL to an external URL (for the browser)
+     * @param {string=} url
+     * @returns
+     */
+    getExternalUrl: (url?: string | undefined) => string;
+    /**
+     * converts an external URL (from the browser) to an internal URL
+     * @param {string} url
+     * @returns
+     */
+    getInternalUrl: (url: string) => string;
     /**
      *
      * @param {string} url
-     * @param {UrlState} mode
+     * @param {UrlState} mode pushState, replaceState or popState
+     * @param {boolean} [isInternal=false] if the URL is already internal, skip rewrite.toInternal
      * @returns {Promise<true|false>}
      */
-    _setUrl(url: string, mode: UrlState): Promise<true | false>;
+    _setUrl(url: string, mode: UrlState, isInternal?: boolean): Promise<true | false>;
     destroy(): void;
-    /** @param {typeof BaseReflector} UrlReflector */
-    set urlReflector(arg: import("svelte/store").Writable<BaseReflector>);
     /** @type {import('svelte/store').Writable<BaseReflector>} */
     get urlReflector(): import("svelte/store").Writable<BaseReflector>;
+    /** @param {typeof BaseReflector} UrlReflector */
+    setUrlReflector(UrlReflector: typeof BaseReflector): void;
     #private;
 }
 export function createRouter(options: Partial<RouterOptions>): Router;
-export type RouteStore = import('../utils/index.js').getable<Route>;
+export type RouteStore = import('../utils/index.js').Getable<Route>;
 export type RouterOptions = {
     instance: RoutifyRuntime;
     rootNode: RNodeRuntime;
     routes: any;
     name: string;
+    urlRewrite: UrlRewrite | UrlRewrite[];
 };
 export type ParentCmpCtx = {
     route: Route;
@@ -92,6 +127,10 @@ export type ParentCmpCtx = {
     localParams: any;
     options: any;
 };
+/**
+ * <T>
+ */
+export type Readable<T> = import("svelte/store").Readable<any>;
 import { Route } from "../Route/Route.js";
 import { RoutifyRuntime } from "../Instance/RoutifyRuntime.js";
 import { BaseReflector } from "./urlReflectors/ReflectorBase.js";
