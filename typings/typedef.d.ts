@@ -90,7 +90,7 @@ type RoutifyBuildtimeOptions = {
 };
 type RoutifyRuntimeOptions = {
     init: (arg0: RoutifyRuntime) => void;
-    urlTransform: UrlTransform | UrlTransform[];
+    urlRewrite: UrlRewrite | UrlRewrite[];
     queryHandler: QueryHandler | QueryHandler[];
     beforeRouteChange: Function;
     afterRouteChange: Function;
@@ -153,10 +153,12 @@ type MetaContext = {
      */
     tempPath: string;
 };
-type UrlTransformFn = (url: string) => string;
-type UrlTransform = {
-    toInternal: UrlTransformFn;
-    toExgternal: UrlTransformFn;
+type UrlRewriteFn = (url: string, ctx: {
+    router: Router;
+}) => string;
+type UrlRewrite = {
+    toInternal: UrlRewriteFn;
+    toExternal: UrlRewriteFn;
 };
 type QueryHandler = {
     parse: QueryHandlerParse;

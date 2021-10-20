@@ -27,8 +27,9 @@ export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;
 export namespace contexts { }
 export function getContextMaybe(name: string): any;
-export type getable<T> = import('svelte/store').Writable<T> & {
+export function getable<T>(value: T, start?: import("svelte/store").StartStopNotifier<T>): Getable<T>;
+export function identicalRoutes(...routes: Route[]): string;
+export type Getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };
-export function getable<T_1>(value: T_1, start?: import("svelte/store").StartStopNotifier<T_1>): getable<T_1>;
 import { get } from "../../../../node_modules/svelte/types/runtime/store/index.js";

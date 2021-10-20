@@ -1,1 +1,1 @@
-export function assignNode(target: RNodeBuildtime, source: RNodeBuildtime): import("../buildtime/RNodeBuildtime").RNodeBuildtime;
+export function assignNode(target: RNodeBuildtime, ...sources: RNodeBuildtime[]): import("../buildtime/RNodeBuildtime").RNodeBuildtime;

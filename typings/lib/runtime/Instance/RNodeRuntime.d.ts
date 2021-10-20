@@ -9,7 +9,7 @@ export class RNodeRuntime extends RNode<typeof import("./RoutifyRuntime").Routif
     get pages(): RNodeRuntime[];
     /** @ts-ignore SvelteComponentConstructor is only available in VSCode */
     /** @returns {Promise<SvelteComponentConstructor<*, *>>} */
-    get rawComponent(): Promise<SvelteComponentConstructor<any, any>>;
+    getRawComponent(): Promise<SvelteComponentConstructor<any, any>>;
     /** @returns {() => Node} */
     get component(): () => Node;
     /**

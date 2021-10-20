@@ -30,7 +30,7 @@
         if (urlReflector) router.setUrlReflector(urlReflector)
     }
 
-    $: if (url && url !== router.url.get()) router.url.replace(url)
+    $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
 
     const initialize = elem => {

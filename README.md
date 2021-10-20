@@ -113,9 +113,9 @@ rootNode.appendChild(childNode)
     *   [Parameters](#parameters-2)
 *   [MetaContext](#metacontext)
     *   [Properties](#properties-6)
-*   [UrlTransformFn](#urltransformfn)
+*   [UrlRewriteFn](#urlrewritefn)
     *   [Parameters](#parameters-3)
-*   [UrlTransform](#urltransform)
+*   [UrlRewrite](#urlrewrite)
     *   [Properties](#properties-7)
 *   [QueryHandler](#queryhandler)
     *   [Properties](#properties-8)
@@ -179,7 +179,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 #### Properties
 
 *   `init` **function (RoutifyRuntime): void** 
-*   `urlTransform` **([UrlTransform](#urltransform) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[UrlTransform](#urltransform)>)** 
+*   `urlRewrite` **([UrlRewrite](#urlrewrite) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[UrlRewrite](#urlrewrite)>)** 
 *   `queryHandler` **([QueryHandler](#queryhandler) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[QueryHandler](#queryhandler)>)** 
 *   `beforeRouteChange` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
 *   `afterRouteChange` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
@@ -252,24 +252,25 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `persist` **Persist?** persist the return of a callback on disk. Return persisted data on subsequent calls
 *   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
 
-### UrlTransformFn
+### UrlRewriteFn
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
 
 #### Parameters
 
 *   `url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `ctx` **{router: Router}** 
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-### UrlTransform
+### UrlRewrite
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 #### Properties
 
-*   `toInternal` **[UrlTransformFn](#urltransformfn)** 
-*   `toExgternal` **[UrlTransformFn](#urltransformfn)** 
+*   `toInternal` **[UrlRewriteFn](#urlrewritefn)** 
+*   `toExternal` **[UrlRewriteFn](#urlrewritefn)** 
 
 ### QueryHandler
 
