@@ -12,7 +12,9 @@ const config = {
                 dedupe: ['svelte'],
             },
         },
-    },
-}
+
+        router: false
+    }
+};
 
 export default config
