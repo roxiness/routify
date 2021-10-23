@@ -1,15 +1,13 @@
 <script>
     import { Router } from './Router.js'
     import { onDestroy } from 'svelte'
-    import { AddressReflector } from './urlReflectors/Address.js'
-    import { InternalReflector } from './urlReflectors/Internal.js'
+
     import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js'
     import { getUrlFromClick } from '../utils/index.js'
     import Component from './Component.svelte'
+    export let urlReflector = null
     /** @type {RoutifyRuntime} */
     export let instance = null
-    export let urlReflector =
-        typeof window != 'undefined' ? AddressReflector : InternalReflector
     export let urlRewrite = null
     export let url = null
     export let name = ''
@@ -20,14 +18,11 @@
     export let rootNode = null
 
     $: {
-        const options = { instance, rootNode, name, routes, urlRewrite }
+        const options = { instance, rootNode, name, routes, urlRewrite, urlReflector }
+
         // todo move everything to init
         if (!router) router = new Router(options)
         else router.init(options)
-
-        // todo merge with above options?
-        // this line starts the router
-        if (urlReflector) router.setUrlReflector(urlReflector)
     }
 
     $: if (url && url !== router.url.internal()) router.url.replace(url)
