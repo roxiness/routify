@@ -18,20 +18,14 @@
 </script>
 
 <svelte:component this={decorator || Noop} {context}>
-    {#if restFragments.length}
-        <svelte:component
-            this={fragment.node.module().default}
-            {context}
-            {...props}
-            let:props
-            let:decorator>
+    <svelte:component
+        this={fragment.node.module().default}
+        {context}
+        {...props}
+        let:props
+        let:decorator>
+        {#if restFragments.length}
             <svelte:self fragments={restFragments} {...load} {props} {decorator} />
-        </svelte:component>
-    {:else}
-        <svelte:component
-            this={fragment.node.module().default}
-            {context}
-            {...load}
-            {...props} />
-    {/if}
+        {/if}
+    </svelte:component>
 </svelte:component>
