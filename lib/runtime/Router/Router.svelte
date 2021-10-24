@@ -16,9 +16,18 @@
     export let routes = null
     export let decorator = null
     export let rootNode = null
+    export let passthrough = false
 
     $: {
-        const options = { instance, rootNode, name, routes, urlRewrite, urlReflector }
+        const options = {
+            instance,
+            rootNode,
+            name,
+            routes,
+            urlRewrite,
+            urlReflector,
+            passthrough,
+        }
 
         // todo move everything to init
         if (!router) router = new Router(options)
@@ -27,10 +36,13 @@
 
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
+    $: fragments = router.beforeRender.runHooks($activeRoute?.fragments || [])
 
     const initialize = elem => {
-        elem.addEventListener('click', handleClick)
-        elem.addEventListener('keydown', handleClick)
+        if (!router.passthrough) {
+            elem.addEventListener('click', handleClick)
+            elem.addEventListener('keydown', handleClick)
+        }
     }
 
     const handleClick = event => {
@@ -43,7 +55,7 @@
 
 {#if $activeRoute}
     <div style="display: contents" use:initialize>
-        <Component fragments={$activeRoute.fragments} {decorator} />
+        <Component {fragments} {decorator} />
     </div>
 {/if}
 
