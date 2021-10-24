@@ -9,4 +9,5 @@ import { globalInstance } from "./Global/Global.js";
 import { AddressReflector } from "./Router/urlReflectors/Address.js";
 import { LocalStorageReflector } from "./Router/urlReflectors/LocalStorage.js";
 import { InternalReflector } from "./Router/urlReflectors/Internal.js";
-export { createRouter, Router, RouterClass, globalInstance, AddressReflector, LocalStorageReflector, InternalReflector };
+import Component from "*.svelte";
+export { createRouter, Router, RouterClass, globalInstance, AddressReflector, LocalStorageReflector, InternalReflector, Component };

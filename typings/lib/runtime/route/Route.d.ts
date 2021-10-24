@@ -6,7 +6,9 @@ export class Route {
      */
     constructor(router: Router, url: string, mode: UrlState);
     /** @type {RouteFragment[]} */
-    fragments: RouteFragment[];
+    allFragments: RouteFragment[];
+    /** @type {RouteFragment[]} only fragments with components */
+    get fragments(): RouteFragment[];
     router: import("../index.js").RouterClass;
     url: string;
     mode: UrlState;

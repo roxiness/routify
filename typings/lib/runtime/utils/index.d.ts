@@ -15,10 +15,9 @@ export function isDescendantElem(parent: any): (elem: any) => boolean;
 export function getUrlFromClick(event: any): string;
 export function pathAndParamsToUrl(path: string, params: any, queryHandler: Function): string;
 export function fromEntries(iterable: any): any;
-export function createHook(): {
-    (hook: Function): Function;
-    hooks: any[];
-};
+export function createHook<P>({ pipeline }?: {
+    pipeline?: boolean;
+}): HooksCollection<P>;
 export function populateUrl(path: string, params: {
     [x: string]: string;
 }, queryHandler: QueryHandler): string;
@@ -29,6 +28,12 @@ export namespace contexts { }
 export function getContextMaybe(name: string): any;
 export function getable<T>(value: T, start?: import("svelte/store").StartStopNotifier<T>): Getable<T>;
 export function identicalRoutes(...routes: Route[]): string;
+export type Hook<P> = (pri: P, ...rest: any[]) => (P | void);
+export type AddHookToCollection<P> = (hook: Hook<P>) => Function;
+export type HooksCollection<P> = AddHookToCollection<P> & {
+    runHooks: Hook<P>;
+    hooks: Hook<P>[];
+};
 export type Getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };

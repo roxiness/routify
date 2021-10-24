@@ -5,6 +5,5 @@ export class BaseReflector {
     log: any;
     install(): void;
     uninstall(): void;
-    /** @param {Route} route */
-    reflect(route: Route): void;
+    reflect(): void;
 }

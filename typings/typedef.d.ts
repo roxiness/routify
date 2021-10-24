@@ -60,6 +60,8 @@ type RoutifyBuildtimePayload = {
 type RoutifyCallback<T> = (first: {
     instance: import("./lib/common/Routify").Routify<any>;
 }) => T | Promise<T>;
+type Hook<P> = import('./lib/runtime/utils').Hook<P>;
+type HooksCollection<P> = import('./lib/runtime/utils').HooksCollection<P>;
 type RoutifyBuildtimeOptions = {
     Node: RNodeBuildtime;
     /**
@@ -102,6 +104,12 @@ type RoutifyExternalMetaHelper = {
      */
     options: any;
     tempPath: string;
+};
+type RoutifyContext = {
+    load: RoutifyLoad;
+    localParams: any;
+    node: RNodeRuntime;
+    route: Route;
 };
 type RoutifyLoad = (context: RoutifyLoadContext) => any;
 type RoutifyLoadContext = {
@@ -180,6 +188,22 @@ type Module = RerservedCmpProps & {
     [x: string]: any;
 };
 type MixedModule = any;
+type BeforeUrlChangeInput = {
+    route: Route;
+};
+type BeforeUrlChangeHook = Hook<BeforeUrlChangeInput>;
+type BeforeUrlChangeHooksCollection = HooksCollection<BeforeUrlChangeInput>;
+type AfterUrlChangeInput = {
+    route: Route;
+};
+type AfterUrlChangeHook = Hook<AfterUrlChangeInput>;
+type AfterUrlChangeHooksCollection = HooksCollection<AfterUrlChangeInput>;
+type BeforeRenderInput = RouteFragment[];
+type BeforeRenderHook = Hook<import("./lib/runtime/route/RouteFragment").RouteFragment[]>;
+type BeforeRenderHooksCollection = HooksCollection<import("./lib/runtime/route/RouteFragment").RouteFragment[]>;
+type OnDestroyInput = Router;
+type OnDestroyHook = Hook<OnDestroyInput>;
+type OnDestroyHooksCollection = HooksCollection<OnDestroyInput>;
 type PathNode = {
     urlFragment: string;
     node: RNodeRuntime;

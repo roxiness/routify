@@ -8,6 +8,13 @@
  * @prop {any} routes
  * @prop {string} name
  * @prop {UrlRewrite|UrlRewrite[]} urlRewrite
+ * @prop {typeof BaseReflector} urlReflector
+ * @prop { string } url initial url
+ * @prop { Boolean| typeof Router } passthrough ignore clicks
+ * @prop { BeforeUrlChangeHook } beforeUrlChange
+ * @prop { AfterUrlChangeHook } afterUrlChange
+ * @prop { BeforeRenderHook } beforeRender
+ * @prop { OnDestroyHook } beforeDestroy
  *
  * @typedef {Object} ParentCmpCtx
  * @prop {Route} route
@@ -36,18 +43,14 @@ export class Router implements Readable<Router> {
     activeRoute: RouteStore;
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
-    beforeUrlChange: {
-        (hook: Function): Function;
-        hooks: any[];
-    };
-    afterUrlChange: {
-        (hook: Function): Function;
-        hooks: any[];
-    };
-    onDestroy: {
-        (hook: Function): Function;
-        hooks: any[];
-    };
+    /** @type {BeforeUrlChangeHooksCollection} */
+    beforeUrlChange: BeforeUrlChangeHooksCollection;
+    /** @type {AfterUrlChangeHooksCollection} */
+    afterUrlChange: AfterUrlChangeHooksCollection;
+    /** @type {BeforeRenderHooksCollection} */
+    beforeRender: BeforeRenderHooksCollection;
+    /** @type {OnDestroyHooksCollection} */
+    onDestroy: OnDestroyHooksCollection;
     parentElem: any;
     queryHandler: {
         parse: (search: any) => any;
@@ -55,7 +58,9 @@ export class Router implements Readable<Router> {
     };
     scrollHandler: {
         isScrolling: import("svelte/store").Writable<boolean>;
-        run: (activeRoute: import("svelte/store").Readable<Route>, history: any) => void;
+        run: ({ route }: {
+            route: Route;
+        }, history: any) => void;
     };
     url: {
         internal: () => string;
@@ -75,9 +80,10 @@ export class Router implements Readable<Router> {
     /**
      * @param {Partial<RouterOptions>} param1
      */
-    init({ instance, rootNode, name, routes, urlRewrite }?: Partial<RouterOptions>): void;
+    init({ instance, rootNode, name, routes, urlRewrite, urlReflector, url, passthrough, beforeUrlChange, afterUrlChange, beforeRender, }?: Partial<RouterOptions>): void;
     /** @type {RoutifyRuntime} */
     instance: RoutifyRuntime;
+    passthrough: any;
     name: string;
     parentCmpCtx: any;
     /** @type {RNodeRuntime} */
@@ -106,8 +112,8 @@ export class Router implements Readable<Router> {
      */
     _setUrl(url: string, mode: UrlState, isInternal?: boolean): Promise<true | false>;
     destroy(): void;
-    /** @type {import('svelte/store').Writable<BaseReflector>} */
-    get urlReflector(): import("svelte/store").Writable<BaseReflector>;
+    /** @type {BaseReflector} */
+    get urlReflector(): BaseReflector;
     /** @param {typeof BaseReflector} UrlReflector */
     setUrlReflector(UrlReflector: typeof BaseReflector): void;
     #private;
@@ -120,6 +126,19 @@ export type RouterOptions = {
     routes: any;
     name: string;
     urlRewrite: UrlRewrite | UrlRewrite[];
+    urlReflector: typeof BaseReflector;
+    /**
+     * initial url
+     */
+    url: string;
+    /**
+     * ignore clicks
+     */
+    passthrough: boolean | typeof Router;
+    beforeUrlChange: BeforeUrlChangeHook;
+    afterUrlChange: AfterUrlChangeHook;
+    beforeRender: BeforeRenderHook;
+    beforeDestroy: OnDestroyHook;
 };
 export type ParentCmpCtx = {
     route: Route;
