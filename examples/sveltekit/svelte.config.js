@@ -13,7 +13,7 @@ const config = {
             },
             server: {
                 fs: {
-                    allow: ['.routify']
+                    strict: false
                 }
             }
         },
