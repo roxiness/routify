@@ -11,6 +11,11 @@ const config = {
             resolve: {
                 dedupe: ['svelte'],
             },
+            server: {
+                fs: {
+                    allow: ['.routify']
+                }
+            }
         },
 
         router: false
