@@ -36,7 +36,8 @@
 
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
-    $: fragments = router.beforeRender.runHooks($activeRoute?.fragments || [])
+    $: fragments =
+        $activeRoute && router.beforeRender.runHooks($activeRoute?.fragments || [])
 
     const initialize = elem => {
         if (!router.passthrough) {

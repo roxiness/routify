@@ -1,11 +1,16 @@
 <script>
     import { Router, createRouter, context } from '@roxi/routify'
     import { InternalReflector } from '@roxi/routify/lib/runtime/Router/urlReflectors/Internal'
+    export let rootNode = null
 
     const { route, node } = $context
     const { activeRoute } = route.router
 
-    /** @returns {Router['constructor']} */
+    rootNode = rootNode || node
+
+    /**
+     * @returns {Router['constructor']}
+     * */
     const createRouterCmp = options => {
         return function (opts) {
             opts.props = opts.props || {}
@@ -14,14 +19,17 @@
         }
     }
 
-    const pages = $context.node.pages.map(n => ({
+    const beforeRender = fragments => {
+        const cutoff = fragments.findIndex(
+            fragment => fragment.node.level > rootNode.level,
+        )
+        return fragments.slice(cutoff)
+    }
+
+    const pages = rootNode.pages.map(n => ({
         rootNode: n,
-        url: '/',
         router: createRouter({
-            beforeRender: fragments =>
-                fragments.slice(
-                    fragments.findIndex(fragment => fragment.node.level > node.level),
-                ),
+            beforeRender,
             passthrough: true,
             urlReflector: InternalReflector,
             url: n.path,
