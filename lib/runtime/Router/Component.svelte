@@ -14,7 +14,7 @@
 
     $: [fragment, ...restFragments] = [...fragments]
     $: ({ node, load, route, params } = fragment)
-    $: Object.assign(context, { route, node, load, localParams: params })
+    $: Object.assign(context, { route, node, load, localParams: params, fragments })
 </script>
 
 <svelte:component this={decorator || Noop} {context}>
