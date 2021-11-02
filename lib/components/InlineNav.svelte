@@ -1,12 +1,13 @@
 <script>
     import { Router, createRouter, context } from '@roxi/routify'
     import { InternalReflector } from '@roxi/routify/lib/runtime/Router/urlReflectors/Internal'
-    export let rootNode = null
+    import Nested from './Nested.svelte'
+    export let parentNode = null
 
     const { route, node } = $context
     const { activeRoute } = route.router
 
-    rootNode = rootNode || node
+    parentNode = parentNode || node
 
     /**
      * @returns {Router['constructor']}
@@ -21,12 +22,12 @@
 
     const beforeRender = fragments => {
         const cutoff = fragments.findIndex(
-            fragment => fragment.node.level > rootNode.level,
+            fragment => fragment.node.level > parentNode.level,
         )
         return fragments.slice(cutoff)
     }
 
-    const pages = rootNode.pages.map(n => ({
+    const routers = parentNode.pages.map(n => ({
         rootNode: n,
         router: createRouter({
             beforeRender,
@@ -36,15 +37,18 @@
         }),
     }))
 
-    $: updateRouters($activeRoute)
+    $: pages =
+        typeof window !== 'undefined'
+            ? routers.map(page => ({ Page: createRouterCmp({ router: page.router }) }))
+            : [{ Page: Nested }]
 
-    const updateRouters = activeRoute => {
-        pages
-            .filter(p => activeRoute.allFragments.map(ar => ar.node).includes(p.rootNode))
-            .forEach(p => {
-                p.router.activeRoute.set(activeRoute)
-            })
-    }
+    $: activeSubRoute = routers.find(p =>
+        $activeRoute.allFragments.map(ar => ar.node).includes(p.rootNode),
+    )
+
+    $: index = routers.findIndex(r => r === activeSubRoute)
+    $: console.log(activeSubRoute)
+    $: console.log({ index })
 </script>
 
-<slot pages={pages.map(page => ({ Page: createRouterCmp({ router: page.router }) }))} />
+<slot {pages} {index} />
