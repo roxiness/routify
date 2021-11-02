@@ -12,6 +12,7 @@
         "./vite-plugin": "./lib/extra/vite-plugin.js",
         "./lib/extra/vite-plugin": "./lib/extra/vite-plugin.js",
         "./lib/*": "./lib/*.js",
+        "./lib/cmp/*": "./lib/cmp/*.js",
         "./typings/*": "./typings/*"
     },
     "scripts": {
