@@ -11,6 +11,12 @@ export default function RoutifyPlugin(options?: Partial<RoutifyBuildtimeOptions 
     name: string;
     buildStart: () => Promise<any>;
     config: () => {
+        server: {
+            fs: {
+                strict: boolean;
+                allow: string[];
+            };
+        };
         build: {
             polyfillDynamicImport: boolean;
             cssCodeSplit: boolean;

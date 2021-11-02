@@ -58,11 +58,11 @@ export namespace node {
 }
 export namespace meta { }
 export namespace activeRoute {
-    export function subscribe_1(run: any): import("svelte/store").Unsubscriber;
+    export function subscribe_1(run: any): import("../../../node_modules/svelte/store/index.js").Unsubscriber;
     export { subscribe_1 as subscribe };
 }
 export namespace pendingRoute {
-    export function subscribe_2(run: any): import("svelte/store").Unsubscriber;
+    export function subscribe_2(run: any): import("../../../node_modules/svelte/store/index.js").Unsubscriber;
     export { subscribe_2 as subscribe };
 }
 export type Goto = (path: string, userParams?: {

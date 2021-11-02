@@ -2,7 +2,7 @@ export namespace scrollHandler {
     export { isScrolling };
     export { run };
 }
-declare const isScrolling: import("svelte/store").Writable<boolean>;
+declare const isScrolling: import("../../../../node_modules/svelte/store").Writable<boolean>;
 /**
  * runs after each navigation
  * @param {{route: Route}} ctx

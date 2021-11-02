@@ -1,7 +1,7 @@
 export class Global {
     /** @type {RoutifyRuntime[]} */
     instances: RoutifyRuntime[];
-    log: any;
+    log: import("../../../../node_modules/consolite/typings/index.js").ConsoliteLogger;
     /** @type {Router[]} */
     get routers(): import("../index.js").RouterClass[];
     browserAdapter: BrowserAdapter;
