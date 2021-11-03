@@ -1,4 +1,5 @@
 import routify from '@roxi/routify/vite-plugin'
+import indexByName from '@roxi/routify/plugins/indexByName.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -7,14 +8,18 @@ const config = {
         target: '#svelte',
 
         vite: {
-            plugins: [routify()],
+            plugins: [
+                routify({
+                    plugins: [indexByName()],
+                }),
+            ],
             resolve: {
                 dedupe: ['svelte'],
             },
         },
 
-        router: false
-    }
-};
+        router: false,
+    },
+}
 
 export default config

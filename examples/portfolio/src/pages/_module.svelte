@@ -4,8 +4,8 @@
 
 <h1>Portfolio</h1>
 <a href="/home">home</a>
-<a href="/about-me">about me</a>
 <a href="/projects">projects</a>
+<a href="/about-me">about me</a>
 
 <InlineNav let:pages let:index>
     <div class="container" style="--page-index: {index}">
