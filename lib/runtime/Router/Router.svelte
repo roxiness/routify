@@ -39,6 +39,8 @@
     $: fragments =
         $activeRoute && router.beforeRender.runHooks($activeRoute?.fragments || [])
 
+    $: router.log.debug('before render', fragments) // ROUTIFY-DEV-ONLY
+
     const initialize = elem => {
         if (!router.passthrough) {
             elem.addEventListener('click', handleClick)
