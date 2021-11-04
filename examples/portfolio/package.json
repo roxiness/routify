@@ -1,5 +1,5 @@
 {
-  "name": "@example/sveltekit",
+  "name": "@example/portfolio",
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
