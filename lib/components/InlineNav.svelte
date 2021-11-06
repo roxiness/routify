@@ -7,9 +7,12 @@
 
     const { route, node } = $context
     const { activeRoute } = route.router
+    let payload
 
     singlePage = singlePage || typeof window === 'undefined'
     parentNode = parentNode || node
+    const isActiveNode = node => $activeRoute.allFragments.find(ar => ar.node === node)
+    $: refresh($activeRoute)
 
     /**
      * we're going to add the router class to the Router
@@ -47,21 +50,22 @@
         }),
     }))
 
-    $: activeSubRouter = routers.find(p =>
-        $activeRoute.allFragments.map(ar => ar.node).includes(p.rootNode),
-    )
-
-    $: activeSubRouter.router.activeRoute.set($activeRoute)
-
-    $: payload = {
-        index: singlePage ? 0 : routers.findIndex(r => r === activeSubRouter),
-        pages: !singlePage
-            ? routers.map(page => ({ Page: createRouterCmp(page.router) }))
-            : [{ Page: Nested }],
-        inBrowser: !singlePage,
+    const refresh = $activeRoute => {
+        // find the nested router that matches the url
+        const activeSubRouter = routers.find(router => isActiveNode(router.rootNode))
+        // set the nested router to use the route of the parent router
+        activeSubRouter.router.activeRoute.set($activeRoute)
+        payload = {
+            index: singlePage ? 0 : routers.indexOf(activeSubRouter),
+            pages: !singlePage
+                ? routers.map(page => ({
+                      Page: createRouterCmp(page.router),
+                      router: page.router,
+                  }))
+                : [{ Page: Nested }],
+            inBrowser: !singlePage,
+        }
     }
-
-    let id = singlePage
 </script>
 
 {#if !singlePage}
