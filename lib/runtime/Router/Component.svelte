@@ -9,12 +9,12 @@
 
     export let props = {}
 
-    const context = {}
+    let context = {}
     setContext('routify-fragment-context', context)
 
     $: [fragment, ...restFragments] = [...fragments]
-    $: ({ node, load, route, params } = fragment)
-    $: Object.assign(context, { route, node, load, localParams: params, fragments })
+    $: ({ node, load, route } = fragment)
+    $: context = Object.assign(context, { route, node, load, fragment })
 </script>
 
 <svelte:component this={decorator || Noop} {context}>
