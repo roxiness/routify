@@ -17,7 +17,6 @@ const config = {
                 dedupe: ['svelte'],
             },
         },
-
         router: false,
     },
 }

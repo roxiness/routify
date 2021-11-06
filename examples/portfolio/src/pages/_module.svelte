@@ -1,23 +1,23 @@
 <script>
     import { InlineNav } from '@roxi/routify/lib/components/index'
+    import Navigation from './_navigation.svelte'
 </script>
 
-<h1>Portfolio</h1>
-<a href="/home">home</a>
-<a href="/projects">projects</a>
-<a href="/about-me">about me</a>
-
 <InlineNav let:pages let:index>
-    <div class="container" style="--page-index: {index}">
+    <Navigation {pages} />
+    <div class="container" style="--page-index: {index};">
         {#each pages as { Page }}
-            <article class="page">
+            <div class="page">
                 <Page />
-            </article>
+            </div>
         {/each}
     </div>
 </InlineNav>
 
 <style>
+    :global(*) {
+        max-height: 100%;
+    }
     :global(html),
     :global(body) {
         overflow: hidden;
@@ -28,8 +28,10 @@
         display: flex;
         padding: 0 80px;
     }
-    article {
+    .page {
         flex: 0 0 100%;
         margin-right: 160px;
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
     }
 </style>
