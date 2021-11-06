@@ -5,9 +5,11 @@
 
 <InlineNav let:pages let:index>
     <Navigation {pages} />
-    <div class="container" style="--page-index: {index};">
-        {#each pages as { Page }}
-            <div class="page">
+    <div class="container" style="--page-index: {index}">
+        {#each pages as { Page, router }}
+            <div
+                class="page"
+                on:click={history.pushState(null, null, router.url.external())}>
                 <Page />
             </div>
         {/each}

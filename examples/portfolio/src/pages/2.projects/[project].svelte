@@ -1,6 +1,5 @@
 <script context="module">
     export const load = async ctx => {
-        console.log('params', ctx.route.params)
         const meta = [...ctx.route.fragments].pop().node.traverse('..').meta
         const project = ctx.route.params.project
         const repo = meta.repos.find(repo => repo.data.name === project)
@@ -12,14 +11,16 @@
 </script>
 
 <script>
+    import { url } from '@roxi/routify'
     export let context
 </script>
 
 <article class="project">
-    <div class="readme">
+    <div>
         {@html context.load.repo.readmeResolved}
     </div>
 </article>
+<a class="close" href={$url('../')}> <button> close </button></a>
 
 <style>
     article {
@@ -29,5 +30,11 @@
         bottom: 0;
         right: 0;
         overflow: auto;
+    }
+    .close {
+        position: absolute;
+        top: 56px;
+        right: 32px;
+        display: inline-block;
     }
 </style>

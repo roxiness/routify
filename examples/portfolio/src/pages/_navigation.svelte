@@ -1,6 +1,7 @@
 <script>
     import { node } from '@roxi/routify'
     export let pages
+    $: liveUrl = index => pages && pages[index]?.router?.url.external()
 </script>
 
 <nav class="container">
@@ -12,9 +13,9 @@
         </li>
     </ul>
     <ul>
-        {#each $node.pages as page}
+        {#each $node.pages as page, index}
             <li>
-                <a href="/{page.name}">{page.name}</a>
+                <a href={liveUrl(index) || page.path}>{page.name}</a>
             </li>
         {/each}
     </ul>
