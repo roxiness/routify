@@ -16,4 +16,16 @@
         "editor.formatOnSave": true
     },
     "jest.jestCommandLine": "npm run test:jest --",
+    "cSpell.words": [
+        "cachewrap",
+        "jakobrosenberg",
+        "poindexter",
+        "probs",
+        "reponame",
+        "reponames",
+        "roxiness",
+        "spassr",
+        "stackmix",
+        "tossr"
+    ],
 }
