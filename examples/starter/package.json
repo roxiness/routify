@@ -1,4 +1,5 @@
 {
+    "name": "starter",
     "type": "module",
     "scripts": {
         "build": "vite build",
