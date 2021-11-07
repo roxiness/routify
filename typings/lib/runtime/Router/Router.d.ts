@@ -57,7 +57,7 @@ export class Router implements Readable<Router> {
         stringify: (params: any) => string;
     };
     scrollHandler: {
-        isScrolling: import("../../../node_modules/svelte/store/index.js").Writable<boolean>;
+        isScrolling: import("svelte/store").Writable<boolean>;
         run: ({ route }: {
             route: Route;
         }, history: any) => void;
@@ -76,19 +76,19 @@ export class Router implements Readable<Router> {
     ready: Promise<any>;
     /** @type {Route[]} */
     history: Route[];
-    params: import("../../../node_modules/svelte/store/index.js").Readable<any>;
+    params: import("svelte/store").Readable<any>;
     /**
      * @param {Partial<RouterOptions>} param1
      */
     init({ instance, rootNode, name, routes, urlRewrite, urlReflector, url, passthrough, beforeUrlChange, afterUrlChange, beforeRender, }?: Partial<RouterOptions>): void;
     /** @type {RoutifyRuntime} */
     instance: RoutifyRuntime;
+    name: any;
+    log: any;
     passthrough: any;
-    name: string;
     parentCmpCtx: any;
     /** @type {RNodeRuntime} */
     rootNode: RNodeRuntime;
-    log: any;
     setParentElem: (elem: any) => any;
     importRoutes(routes: any): void;
     /**
@@ -149,7 +149,7 @@ export type ParentCmpCtx = {
 /**
  * <T>
  */
-export type Readable<T> = import("../../../node_modules/svelte/store/index.js").Readable<any>;
+export type Readable<T> = import("svelte/store").Readable<any>;
 import { Route } from "../Route/Route.js";
 import { RoutifyRuntime } from "../Instance/RoutifyRuntime.js";
 import { BaseReflector } from "./urlReflectors/ReflectorBase.js";

@@ -4,7 +4,7 @@ export function getPath(node1: any, node2: any): string;
  * @callback Goto
  * @param {string} path relative, absolute or named URL
  * @param {Object.<string, string>=} userParams
- * @param {any} options
+ * @param {any=} options
  * @type {Readable<Goto>} */
 export const goto: Readable<Goto>;
 /**
@@ -58,16 +58,16 @@ export namespace node {
 }
 export namespace meta { }
 export namespace activeRoute {
-    export function subscribe_1(run: any): import("../../../node_modules/svelte/store/index.js").Unsubscriber;
+    export function subscribe_1(run: any): import("svelte/store").Unsubscriber;
     export { subscribe_1 as subscribe };
 }
 export namespace pendingRoute {
-    export function subscribe_2(run: any): import("../../../node_modules/svelte/store/index.js").Unsubscriber;
+    export function subscribe_2(run: any): import("svelte/store").Unsubscriber;
     export { subscribe_2 as subscribe };
 }
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
-} | undefined, options: any) => any;
+} | undefined, options?: any | undefined) => any;
 export type Readable<T> = import('svelte/store').Readable<T>;
 export type IsActiveOptions = {
     /**

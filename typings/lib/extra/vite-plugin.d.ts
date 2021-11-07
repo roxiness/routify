@@ -19,7 +19,6 @@ export default function RoutifyPlugin(options?: Partial<RoutifyBuildtimeOptions 
         };
         build: {
             polyfillDynamicImport: boolean;
-            cssCodeSplit: boolean;
         };
     };
     transform: (code: any, id: any) => any;

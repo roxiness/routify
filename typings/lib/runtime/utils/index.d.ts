@@ -2,7 +2,7 @@ export * from "./logger.js";
 export function writable2(value: any): {
     set: (this: void, value: any) => void;
     subscribe: (run: any, invalidator: any) => () => void;
-    update: (this: void, updater: import("../../../node_modules/svelte/store/index.js").Updater<any>) => void;
+    update: (this: void, updater: import("svelte/store").Updater<any>) => void;
     subscribers: any[];
     hooks: {
         onSub: () => void;
@@ -26,7 +26,7 @@ export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;
 export namespace contexts { }
 export function getContextMaybe(name: string): any;
-export function getable<T>(value: T, start?: import("../../../node_modules/svelte/store/index.js").StartStopNotifier<T>): Getable<T>;
+export function getable<T>(value: T, start?: import("svelte/store").StartStopNotifier<T>): Getable<T>;
 export function identicalRoutes(...routes: Route[]): string;
 export type Hook<P> = (pri: P, ...rest: any[]) => (P | void);
 export type AddHookToCollection<P> = (hook: Hook<P>) => Function;
@@ -37,4 +37,4 @@ export type HooksCollection<P> = AddHookToCollection<P> & {
 export type Getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };
-import { get } from "../../../node_modules/svelte/types/runtime/store/index.js";
+import { get } from "../../../../node_modules/svelte/types/runtime/store/index.js";
