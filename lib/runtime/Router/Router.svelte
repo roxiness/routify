@@ -33,11 +33,9 @@
         if (!router) router = new Router(options)
         else router.init(options)
     }
-
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
-    $: fragments =
-        $activeRoute && router.beforeRender.runHooks($activeRoute?.fragments || [])
+    $: fragments = $activeRoute && router.beforeRender.run($activeRoute.fragments || [])
 
     $: router.log.debug('before render', fragments) // ROUTIFY-DEV-ONLY
 

@@ -1,8 +1,3 @@
-export function hookHandler(): {
-    (cb: any): () => void;
-    callbacks: any[];
-    runHooks(attr: any): void;
-};
 export function relativeUnix(path: any, path2: any): string;
 export function writeDynamicImport(outputDir: string, file: string, value: any): string;
 export function createDirname(meta: any): string;

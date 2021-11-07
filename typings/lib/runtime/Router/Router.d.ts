@@ -1,4 +1,10 @@
 /**
+ * @typedef {function({route: Route}): any} BeforeUrlChangeCallback
+ * @typedef {function({route: Route}, Route[]): any} afterUrlChangeCallback
+ * @typedef {function(RouteFragment[]):RouteFragment[]} BeforeRenderCallback
+ * @typedef {function({router: typeof this}):void} OnDestroyRouterCallback
+ */
+/**
  * @typedef {import('../utils/index.js').Getable<Route>} RouteStore
  *
  *
@@ -11,10 +17,10 @@
  * @prop {typeof BaseReflector} urlReflector
  * @prop { string } url initial url
  * @prop { Boolean| typeof Router } passthrough ignore clicks
- * @prop { BeforeUrlChangeHook } beforeUrlChange
- * @prop { AfterUrlChangeHook } afterUrlChange
- * @prop { BeforeRenderHook } beforeRender
- * @prop { OnDestroyHook } beforeDestroy
+ * @prop { BeforeUrlChangeCallback } beforeUrlChange
+ * @prop { afterUrlChangeCallback } afterUrlChange
+ * @prop { BeforeRenderCallback } beforeRender
+ * @prop { OnDestroyRouterCallback } beforeDestroy
  *
  * @typedef {Object} ParentCmpCtx
  * @prop {Route} route
@@ -43,14 +49,14 @@ export class Router implements Readable<Router> {
     activeRoute: RouteStore;
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
-    /** @type {BeforeUrlChangeHooksCollection} */
-    beforeUrlChange: BeforeUrlChangeHooksCollection;
-    /** @type {AfterUrlChangeHooksCollection} */
-    afterUrlChange: AfterUrlChangeHooksCollection;
-    /** @type {BeforeRenderHooksCollection} */
-    beforeRender: BeforeRenderHooksCollection;
-    /** @type {OnDestroyHooksCollection} */
-    onDestroy: OnDestroyHooksCollection;
+    /** @type {import('hookar').HooksCollection<BeforeUrlChangeCallback>} */
+    beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
+    /** @type {import('hookar').HooksCollection<afterUrlChangeCallback>} */
+    afterUrlChange: import('hookar').HooksCollection<afterUrlChangeCallback>;
+    /** @type {import('hookar').HooksCollection<BeforeRenderCallback>} */
+    beforeRender: import('hookar').HooksCollection<BeforeRenderCallback>;
+    /** @type {import('hookar').HooksCollection<OnDestroyRouterCallback>} */
+    onDestroy: import("hookar").HooksCollection<OnDestroyRouterCallback>;
     parentElem: any;
     queryHandler: {
         parse: (search: any) => any;
@@ -119,6 +125,16 @@ export class Router implements Readable<Router> {
     #private;
 }
 export function createRouter(options: Partial<RouterOptions>): Router;
+export type BeforeUrlChangeCallback = (arg0: {
+    route: Route;
+}) => any;
+export type afterUrlChangeCallback = (arg0: {
+    route: Route;
+}, arg1: Route[]) => any;
+export type BeforeRenderCallback = (arg0: RouteFragment[]) => RouteFragment[];
+export type OnDestroyRouterCallback = (arg0: {
+    router: typeof this;
+}) => void;
 export type RouteStore = import('../utils/index.js').Getable<Route>;
 export type RouterOptions = {
     instance: RoutifyRuntime;
@@ -135,10 +151,10 @@ export type RouterOptions = {
      * ignore clicks
      */
     passthrough: boolean | typeof Router;
-    beforeUrlChange: BeforeUrlChangeHook;
-    afterUrlChange: AfterUrlChangeHook;
-    beforeRender: BeforeRenderHook;
-    beforeDestroy: OnDestroyHook;
+    beforeUrlChange: BeforeUrlChangeCallback;
+    afterUrlChange: afterUrlChangeCallback;
+    beforeRender: BeforeRenderCallback;
+    beforeDestroy: OnDestroyRouterCallback;
 };
 export type ParentCmpCtx = {
     route: Route;

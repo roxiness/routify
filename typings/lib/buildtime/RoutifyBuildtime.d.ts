@@ -11,36 +11,12 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
     options: Partial<Partial<RoutifyBuildtimeOptions>>;
     build: (trigger: any) => Promise<void>;
     on: {
-        buildStart: {
-            (cb: any): () => void;
-            callbacks: any[];
-            runHooks(attr: any): void;
-        };
-        buildComplete: {
-            (cb: any): () => void;
-            callbacks: any[];
-            runHooks(attr: any): void;
-        };
-        fileAdded: {
-            (cb: any): () => void;
-            callbacks: any[];
-            runHooks(attr: any): void;
-        };
-        fileRemoved: {
-            (cb: any): () => void;
-            callbacks: any[];
-            runHooks(attr: any): void;
-        };
-        fileChanged: {
-            (cb: any): () => void;
-            callbacks: any[];
-            runHooks(attr: any): void;
-        };
-        fileWatcherReady: {
-            (cb: any): () => void;
-            callbacks: any[];
-            runHooks(attr: any): void;
-        };
+        buildStart: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        buildComplete: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileAdded: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileRemoved: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileChanged: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileWatcherReady: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
     };
     start(): Promise<void>;
     #private;
