@@ -28,12 +28,12 @@
         transition: transform 0.3s;
         transform: translateX(calc(-100% * var(--page-index)));
         display: flex;
-        padding: 0 80px;
+        padding: 0 40px;
     }
     .page {
         flex: 0 0 100%;
-        margin-right: 160px;
-        max-height: calc(100vh - 200px);
+        margin-right: 80px;
+        max-height: calc(100vh - 100px);
         overflow-y: auto;
     }
 </style>

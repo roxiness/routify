@@ -4,20 +4,20 @@
 
 <div class="page">
     <h1>projects</h1>
-    <div class="projects">
+    <ul class="projects">
         {#each $meta.repos as repo}
-            <article>
+            <div>
                 <h3>
                     <a href={$url('./[project]', { project: repo.data.name })}>
                         {repo.data.name}
                     </a>
+                    <p>
+                        {repo.data.description || ''}
+                    </p>
                 </h3>
-                <p>
-                    {repo.data.description}
-                </p>
-            </article>
+            </div>
         {/each}
-    </div>
+    </ul>
     <slot />
 </div>
 
@@ -26,7 +26,13 @@
         position: relative;
     }
     .projects {
-        height: 400px;
-        overflow-y: auto;
+        /* overflow-y: auto; */
+        /* display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly; */
+    }
+    article {
+        /* margin: 10; */
+        flex: 0 0 30%;
     }
 </style>

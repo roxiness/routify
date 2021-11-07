@@ -13,9 +13,10 @@
         </li>
     </ul>
     <ul>
-        {#each $node.pages as page, index}
+        {#each $node.pages as childNode, index}
             <li>
-                <a href={liveUrl(index) || page.path}>{page.name}</a>
+                <a href={liveUrl(index) || childNode.path}
+                    >{childNode.meta.title || childNode.name}</a>
             </li>
         {/each}
     </ul>
@@ -23,6 +24,6 @@
 
 <style>
     .container {
-        padding: 0 80px;
+        padding: 0 40px;
     }
 </style>
