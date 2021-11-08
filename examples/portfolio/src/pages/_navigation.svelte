@@ -1,5 +1,5 @@
 <script>
-    import { node } from '@roxi/routify'
+    import { isActive, node } from '@roxi/routify'
     export let pages
     $: liveUrl = index => pages && pages[index]?.router?.url.external()
 </script>
@@ -14,7 +14,7 @@
     </ul>
     <ul>
         {#each $node.pages as childNode, index}
-            <li>
+            <li class:isActive={$isActive(childNode.path)}>                
                 <a href={liveUrl(index) || childNode.path}
                     >{childNode.meta.title || childNode.name}</a>
             </li>
@@ -26,4 +26,5 @@
     .container {
         padding: 0 40px;
     }
+    .isActive a {text-decoration: underline;}
 </style>

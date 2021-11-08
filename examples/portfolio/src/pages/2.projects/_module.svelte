@@ -25,14 +25,4 @@
     .page {
         position: relative;
     }
-    .projects {
-        /* overflow-y: auto; */
-        /* display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly; */
-    }
-    article {
-        /* margin: 10; */
-        flex: 0 0 30%;
-    }
 </style>

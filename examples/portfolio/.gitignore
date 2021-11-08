@@ -6,3 +6,4 @@ node_modules
 
 .vercel
 .vercel_build_output
+.history

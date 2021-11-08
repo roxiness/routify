@@ -75,7 +75,7 @@
         "clone_url": "https://github.com/roxiness/routify.git",
         "svn_url": "https://github.com/roxiness/routify",
         "homepage": "https://routify.dev",
-        "size": 8558,
+        "size": 8556,
         "stargazers_count": 1376,
         "watchers_count": 1376,
         "language": "JavaScript",
@@ -1298,5 +1298,5 @@
       "readme": "<div ALIGN=\"center\">\n  <img src=\"./logo.svg\" WIDTH=200>\n\n# cachewrap\n\n</div>\n\n### cache the return of a function\n\n#### Install\n\n```\nnpm install cachewrap\n```\n\n#### Usage\n\n```javascript\nconst wrappedFunction = require('cachewrap')()(someFunction)\n```\n\n#### Example\n\n```javascript\nconst createCacheWrap = require('cachewrap')\n\nconst cacheWrap = createcacheWrap()\n\nfunction random(min, max) {\n  return Math.random() * (max - min) + min\n}\n\nconst wrappedRandom = cacheWrap(random)\n\nwrappedRandom(10, 100) === wrappedRandom(10, 100) // true\n```\n\n##### Refreshing\n\nCached data can be refreshed by using the refresh prop\n\n```javascript\nwrappedRandom.refresh(10, 100) === wrappedRandom(10, 100) // true\nwrappedRandom(10, 100) === wrappedRandom.refresh(10, 100) // false\n```\n\n#### Cache hash\n\nBy default all function calls are hashed with `params => params.map(p => p.toString).join()`.\nContinuing the above example, the hash function can be overwritten by:\n\n```javascript\nconst cacheWrap = createCache(myCustomDefaultHasher)\n\nconst wrappedRandom = cacheWrap(random) // uses myCustomDefaultHasher\n\nconst wrappedRandom2 = cacheWrap(random, myCustomHasher) // uses myCustomHasher\n```\n\n<a href='https://www.freepik.com/free-photos-vectors/baby'>Baby vector created by catalyststuff - www.freepik.com</a>\n"
     }
   ],
-  "updated": "2021-11-06T18:24:16.738Z"
+  "updated": "2021-11-06T17:24:48.134Z"
 }

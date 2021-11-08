@@ -1,12 +1,12 @@
 <script context="module">
-    export const load = async ctx => {
-        const meta = [...ctx.route.fragments].pop().node.traverse('..').meta
-        const project = ctx.route.params.project
+    export const load = async ({ route, node }) => {
+        const { meta } = node.traverse('..')
+        const { project } = route.params
         const repo = meta.repos.find(repo => repo.data.name === project)
-        if (repo) {
-            repo.readmeResolved = await repo.readme()
-            return { repo }
-        }
+        if (repo)
+            return {
+                readme: await repo.readme(),
+            }
     }
 </script>
 
@@ -17,7 +17,7 @@
 
 <article class="project">
     <div>
-        {@html context.load.repo.readmeResolved}
+        {@html context.load.readme}
     </div>
 </article>
 <a class="close" href={$url('../')}> <button> close </button></a>
