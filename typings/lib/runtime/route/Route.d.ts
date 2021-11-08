@@ -9,18 +9,26 @@ export class Route {
     allFragments: RouteFragment[];
     /** @type {RouteFragment[]} only fragments with components */
     get fragments(): RouteFragment[];
+    /** @type {Promise<{route: Route}>} */
+    loaded: Promise<{
+        route: Route;
+    }>;
+    invalid: any;
     router: import("../index.js").RouterClass;
     url: string;
     mode: UrlState;
     log: any;
     get params(): any;
+    loadRoute(): Promise<{
+        route: Route;
+    }>;
     /**
      * converts async module functions to sync functions
      */
-    loadComponents(): Promise<void>;
-    runPreloads(): Promise<void>;
+    loadComponents(): Promise<boolean>;
+    runPreloads(): Promise<boolean>;
     runGuards(): Promise<boolean>;
-    runBeforeUrlChangeHooks(): Promise<boolean>;
+    runBeforeUrlChangeHooks(): Promise<any>;
     /**
      * creates fragments. A fragment is the section between each / in the URL
      */

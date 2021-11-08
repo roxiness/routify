@@ -205,6 +205,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 #### Properties
 
 *   `route` **Route** 
+*   `node` **RNodeRuntime** 
 
 ###
 

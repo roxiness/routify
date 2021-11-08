@@ -106,6 +106,7 @@ type RoutifyExternalMetaHelper = {
 type RoutifyLoad = (context: RoutifyLoadContext) => any;
 type RoutifyLoadContext = {
     route: Route;
+    node: RNodeRuntime;
 };
 type RoutifyRuntimePlugin = RoutifyBasePlugin & RoutifyRuntimeOptions;
 type RoutifyBuildtimePlugin = RoutifyBasePlugin & RoutifyBuildtimePluginType;

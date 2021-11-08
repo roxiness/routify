@@ -80,6 +80,7 @@
  *
  * @typedef {object} RoutifyLoadContext
  * @prop {Route} route
+ * @prop {RNodeRuntime} node
  */
 
 /**********
