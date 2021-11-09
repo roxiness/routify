@@ -3,6 +3,7 @@
         const { meta } = node.traverse('..')
         const { project } = route.params
         const repo = meta.repos.find(repo => repo.data.name === project)
+        // await new Promise(resolve => setTimeout(resolve, 500))
         if (repo)
             return {
                 readme: await repo.readme(),

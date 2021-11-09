@@ -1,8 +1,10 @@
 <script>
     import { InlineNav } from '@roxi/routify/lib/components/index'
     import Navigation from './_navigation.svelte'
+    import Loader from './_loader.svelte'
 </script>
 
+<Loader />
 <InlineNav let:pages let:index>
     <Navigation {pages} />
     <div class="container" style="--page-index: {index}">

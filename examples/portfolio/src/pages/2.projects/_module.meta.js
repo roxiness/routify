@@ -8,14 +8,9 @@ const reponames = [
     'roxiness/routify',
     'roxiness/configent',
     'roxiness/tossr',
-    'roxiness/spassr',
-    'roxiness/spank',
     'roxiness/stackmix',
     'roxiness/poindexter',
     'jakobrosenberg/consolite',
-    'jakobrosenberg/probs',
-    'jakobrosenberg/persistable',
-    'jakobrosenberg/cachewrap',
 ]
 
 /**
