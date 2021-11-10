@@ -49,22 +49,15 @@ export function resolveNode(path: string): void | import("../Instance/RNodeRunti
 export function resolveAbsoluteNode(node: any, path: any): void;
 export function traverseNode(node: RNodeRuntime, path: string): RNodeRuntime;
 export function resolveNamedNode(node: any, name: any): void;
-/**
- * @type {Readable<FragmentContext>}
- */
-export const context: Readable<FragmentContext>;
-export namespace node {
-    function subscribe(run: any): () => void;
-}
-export namespace meta { }
-export namespace activeRoute {
-    export function subscribe_1(run: any): import("svelte/store").Unsubscriber;
-    export { subscribe_1 as subscribe };
-}
-export namespace pendingRoute {
-    export function subscribe_2(run: any): import("svelte/store").Unsubscriber;
-    export { subscribe_2 as subscribe };
-}
+export const context: import("svelte/store").Readable<FragmentContext>;
+export const node: import("svelte/store").Readable<import("../Instance/RNodeRuntime.js").RNodeRuntime>;
+export const meta: import("svelte/store").Readable<{
+    [x: string]: any;
+}>;
+/** @type {Readable<Route>} */
+export const activeRoute: Readable<Route>;
+/** @type {Readable<Route>} */
+export const pendingRoute: Readable<Route>;
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
 } | undefined, options?: any | undefined) => any;
