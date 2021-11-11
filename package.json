@@ -3,7 +3,7 @@
     "version": "3.0.0-next.22",
     "main": "lib/runtime/index.js",
     "type": "module",
-    "types": "typings/typedef.d.ts",
+    "types": "typings/lib/runtime/index.d.ts",
     "bin": {
         "routify3": "./lib/cli/index.js"
     },
