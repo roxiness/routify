@@ -1,0 +1,16 @@
+{
+    "name": "starter",
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "preview": "vite preview",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@roxi/routify": "^3.0.0-next.1",
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.13",
+        "mdsvex": "^0.9.3",
+        "svelte": "^3.39.0",
+        "vite": "^2.2.3"
+    }
+}
