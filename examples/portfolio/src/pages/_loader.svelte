@@ -1,9 +1,7 @@
 <script>
     import { pendingRoute } from '@roxi/routify'
     $: value = $pendingRoute && 0
-    setInterval(() => {
-        value++
-    }, 1000 / 120)
+    setInterval(() => value++, 10)
 </script>
 
 {#if $pendingRoute}

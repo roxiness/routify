@@ -1,5 +1,5 @@
 <script>
-    import { meta, url, activeRoute } from '@roxi/routify'
+    import { meta, url } from '@roxi/routify'
 </script>
 
 <div class="page">

@@ -1,4 +1,3 @@
-/// <reference types="@roxi/routify" />
 
 import { fetchRepos, fixGithubImages, parseReadme } from '../../utils/github.js'
 
@@ -17,9 +16,9 @@ const reponames = [
  * @param {MetaContext} context
  */
 export default async ({ split, persist }) => {
+    
     /**
      *  Github has a rate limit of 60 requests pr hour.
-     *  With 11 repos, that means less than 6 requests.
      *  To get around this we persist the return call.
      *  This will save our data to disk and use it on subsequent requests.
      */

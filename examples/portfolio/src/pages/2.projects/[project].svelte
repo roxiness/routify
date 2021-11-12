@@ -12,7 +12,7 @@
 </script>
 
 <script>
-    import { url } from '@roxi/routify'
+    import { url } from '@roxi/routify'    
     export let context
 </script>
 
@@ -27,7 +27,7 @@
     article {
         position: absolute;
         top: 0;
-        left: 200px;
+        left: 0;
         bottom: 0;
         right: 0;
         overflow: auto;
