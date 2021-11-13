@@ -5,11 +5,7 @@ export namespace scrollHandler {
 declare const isScrolling: import("svelte/store").Writable<boolean>;
 /**
  * runs after each navigation
- * @param {{route: Route}} ctx
- * @param {*} history
- * @returns
+ * @type {import('../../Router/Router').AfterUrlChangeCallback}
  */
-declare function run({ route }: {
-    route: Route;
-}, history: any): void;
+declare const run: import('../../Router/Router').AfterUrlChangeCallback;
 export {};

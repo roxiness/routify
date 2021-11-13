@@ -1,6 +1,9 @@
 /**
  * @typedef {function({route: Route}): any} BeforeUrlChangeCallback
- * @typedef {function({route: Route}, Route[]): any} afterUrlChangeCallback
+ * @typedef {function({
+ *   route: Route,
+ *   history: Route[]
+ * }): any} AfterUrlChangeCallback
  * @typedef {function(RouteFragment[]):RouteFragment[]} BeforeRenderCallback
  * @typedef {function({router: typeof this}):void} OnDestroyRouterCallback
  */
@@ -18,7 +21,7 @@
  * @prop { string } url initial url
  * @prop { Boolean| typeof Router } passthrough ignore clicks
  * @prop { BeforeUrlChangeCallback } beforeUrlChange
- * @prop { afterUrlChangeCallback } afterUrlChange
+ * @prop { AfterUrlChangeCallback } afterUrlChange
  * @prop { BeforeRenderCallback } beforeRender
  * @prop { OnDestroyRouterCallback } beforeDestroy
  *
@@ -40,9 +43,6 @@ export class Router implements Readable<Router> {
      * @param {Partial<RouterOptions>} options
      */
     constructor(options: Partial<RouterOptions>);
-    subscribe: any;
-    /** @private is assigned in constructor  */
-    private set;
     /** @type {RouteStore} */
     pendingRoute: RouteStore;
     /** @type {RouteStore} */
@@ -51,8 +51,8 @@ export class Router implements Readable<Router> {
     urlRewrites: UrlRewrite[];
     /** @type {import('hookar').HooksCollection<BeforeUrlChangeCallback>} */
     beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
-    /** @type {import('hookar').HooksCollection<afterUrlChangeCallback>} */
-    afterUrlChange: import('hookar').HooksCollection<afterUrlChangeCallback>;
+    /** @type {import('hookar').HooksCollection<AfterUrlChangeCallback>} */
+    afterUrlChange: import('hookar').HooksCollection<AfterUrlChangeCallback>;
     /** @type {import('hookar').HooksCollection<BeforeRenderCallback>} */
     beforeRender: import('hookar').HooksCollection<BeforeRenderCallback>;
     /** @type {import('hookar').HooksCollection<OnDestroyRouterCallback>} */
@@ -64,9 +64,7 @@ export class Router implements Readable<Router> {
     };
     scrollHandler: {
         isScrolling: import("svelte/store").Writable<boolean>;
-        run: ({ route }: {
-            route: Route;
-        }, history: any) => void;
+        run: AfterUrlChangeCallback;
     };
     url: {
         internal: () => string;
@@ -82,6 +80,8 @@ export class Router implements Readable<Router> {
     ready: Promise<any>;
     /** @type {Route[]} */
     history: Route[];
+    subscribe: (this: void, run: import("svelte/store").Subscriber<Router>, invalidate?: (value?: Router) => void) => import("svelte/store").Unsubscriber;
+    triggerStore: () => void;
     params: import("svelte/store").Readable<any>;
     /**
      * @param {Partial<RouterOptions>} param1
@@ -128,9 +128,10 @@ export function createRouter(options: Partial<RouterOptions>): Router;
 export type BeforeUrlChangeCallback = (arg0: {
     route: Route;
 }) => any;
-export type afterUrlChangeCallback = (arg0: {
+export type AfterUrlChangeCallback = (arg0: {
     route: Route;
-}, arg1: Route[]) => any;
+    history: Route[];
+}) => any;
 export type BeforeRenderCallback = (arg0: RouteFragment[]) => RouteFragment[];
 export type OnDestroyRouterCallback = (arg0: {
     router: typeof this;
@@ -152,7 +153,7 @@ export type RouterOptions = {
      */
     passthrough: boolean | typeof Router;
     beforeUrlChange: BeforeUrlChangeCallback;
-    afterUrlChange: afterUrlChangeCallback;
+    afterUrlChange: AfterUrlChangeCallback;
     beforeRender: BeforeRenderCallback;
     beforeDestroy: OnDestroyRouterCallback;
 };

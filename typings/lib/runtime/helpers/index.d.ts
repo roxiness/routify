@@ -58,6 +58,10 @@ export const meta: import("svelte/store").Readable<{
 export const activeRoute: Readable<Route>;
 /** @type {Readable<Route>} */
 export const pendingRoute: Readable<Route>;
+/**@type {Readable<function(import('../Router/Router.js').AfterUrlChangeCallback):any>} */
+export const afterUrlChange: Readable<(arg0: import('../Router/Router.js').AfterUrlChangeCallback) => any>;
+/**@type {Readable<function(import('../Router/Router.js').BeforeUrlChangeCallback):any>} */
+export const beforeUrlChange: Readable<(arg0: import('../Router/Router.js').BeforeUrlChangeCallback) => any>;
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
 } | undefined, options?: any | undefined) => any;
