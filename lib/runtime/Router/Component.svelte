@@ -22,10 +22,11 @@
         this={fragment.node.module().default}
         {context}
         {...props}
+        {...load?.props}
         let:props
         let:decorator>
         {#if restFragments.length}
-            <svelte:self fragments={restFragments} {...load} {props} {decorator} />
+            <svelte:self fragments={restFragments} {props} {decorator} />
         {/if}
     </svelte:component>
 </svelte:component>
