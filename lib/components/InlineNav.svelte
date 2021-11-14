@@ -1,6 +1,7 @@
 <script>
     import { Router, createRouter, context } from '@roxi/routify'
     import { InternalReflector } from '@roxi/routify/lib/runtime/Router/urlReflectors/Internal'
+    import { clone } from '../runtime/utils'
     import Nested from './Nested.svelte'
     export let parentNode = null
     export let singlePage = null
@@ -32,7 +33,7 @@
      * that have already been rendered by the parent router
      * @param fragments
      */
-    const beforeRender = fragments => {
+    const transformFragments = fragments => {
         const cutoff = fragments.findIndex(
             fragment => fragment.node.level > parentNode.level,
         )
@@ -42,7 +43,7 @@
     const routers = parentNode.pages.map(n => ({
         rootNode: n,
         router: createRouter({
-            beforeRender,
+            transformFragments,
             passthrough: true,
             urlReflector: InternalReflector,
             url: n.path,
@@ -54,7 +55,8 @@
         // find the nested router that matches the url
         const activeSubRouter = routers.find(router => isActiveNode(router.rootNode))
         // set the nested router to use the route of the parent router
-        activeSubRouter.router.activeRoute.set($activeRoute)
+        const clonedRoute = clone($activeRoute, { router: activeSubRouter.router })
+        activeSubRouter.router.activeRoute.set(clonedRoute)
         payload = {
             index: singlePage ? 0 : routers.indexOf(activeSubRouter),
             pages: !singlePage
