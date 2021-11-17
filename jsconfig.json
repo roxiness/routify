@@ -6,7 +6,7 @@
         "moduleResolution": "node",
         "module": "es2020"
     },
-    "include": ["lib/**/*.js", "*.js"],
+    "include": ["lib/**/*.js", "*.js", "types/**.js"],
     "exclude": [
         "**/node_modules",
         "**/dist",

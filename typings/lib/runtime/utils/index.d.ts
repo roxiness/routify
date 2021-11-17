@@ -13,6 +13,7 @@ export namespace contexts { }
 export function getContextMaybe(name: string): any;
 export function getable<T>(value: T, start?: import("svelte/store").StartStopNotifier<T>): Getable<T>;
 export function identicalRoutes(...routes: Route[]): string;
+export function clone<T>(obj: T, ...rest: any[]): T;
 export type Getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };

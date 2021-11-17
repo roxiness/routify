@@ -2,23 +2,23 @@
 
 /**
  * COMMON
- * @typedef {import('./lib/common/RNode').RNode} RNode
- * @typedef {import('./lib/common/Routify').Routify} Routify
+ * @typedef {import('../lib/common/RNode').RNode} RNode
+ * @typedef {import('../lib/common/Routify').Routify} Routify
  *
  * @typedef {{Node: RNode}} RoutifyBaseOptions
  *
  * RUNTIME
  * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
- * @typedef {import('./lib/runtime/Instance/RNodeRuntime').RNodeRuntime} RNodeRuntime
- * @typedef {import('./lib/runtime/route/Route').Route} Route
- * @typedef {import('./lib/runtime/Router/Router').Router} Router
- * @typedef {import('./lib/runtime/route/RouteFragment').RouteFragment} RouteFragment
- * @typedef {import('./lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
+ * @typedef {import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime} RNodeRuntime
+ * @typedef {import('../lib/runtime/route/Route').Route} Route
+ * @typedef {import('../lib/runtime/Router/Router').Router} Router
+ * @typedef {import('../lib/runtime/route/RouteFragment').RouteFragment} RouteFragment
+ * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  *
  *  BUILDTIME
- * @typedef {import('./lib/buildtime/plugins/filemapper/lib/File').File} RFile
- * @typedef {import('./lib/buildtime/RoutifyBuildtime').RoutifyBuildtime} RoutifyBuildtime
- * @typedef {import('./lib/buildtime/RNodeBuildtime').RNodeBuildtime} RNodeBuildtime
+ * @typedef {import('../lib/buildtime/plugins/filemapper/lib/File').File} RFile
+ * @typedef {import('../lib/buildtime/RoutifyBuildtime').RoutifyBuildtime} RoutifyBuildtime
+ * @typedef {import('../lib/buildtime/RNodeBuildtime').RNodeBuildtime} RNodeBuildtime
  * @typedef {{instance: RoutifyBuildtime, tools: any}} RoutifyBuildtimePayload // todo tools should not be any
  *
  */
