@@ -68,27 +68,27 @@
         "releases_url": "https://api.github.com/repos/roxiness/routify/releases{/id}",
         "deployments_url": "https://api.github.com/repos/roxiness/routify/deployments",
         "created_at": "2019-09-25T18:13:42Z",
-        "updated_at": "2021-11-08T09:44:02Z",
-        "pushed_at": "2021-11-08T21:09:03Z",
+        "updated_at": "2021-11-17T18:52:40Z",
+        "pushed_at": "2021-11-14T16:38:20Z",
         "git_url": "git://github.com/roxiness/routify.git",
         "ssh_url": "git@github.com:roxiness/routify.git",
         "clone_url": "https://github.com/roxiness/routify.git",
         "svn_url": "https://github.com/roxiness/routify",
         "homepage": "https://routify.dev",
-        "size": 9032,
-        "stargazers_count": 1379,
-        "watchers_count": 1379,
+        "size": 9092,
+        "stargazers_count": 1387,
+        "watchers_count": 1387,
         "language": "JavaScript",
         "has_issues": true,
         "has_projects": true,
         "has_downloads": true,
         "has_wiki": true,
         "has_pages": false,
-        "forks_count": 60,
+        "forks_count": 61,
         "mirror_url": null,
         "archived": false,
         "disabled": false,
-        "open_issues_count": 16,
+        "open_issues_count": 14,
         "license": {
           "key": "mit",
           "name": "MIT License",
@@ -100,9 +100,9 @@
         "is_template": false,
         "topics": [],
         "visibility": "public",
-        "forks": 60,
-        "open_issues": 16,
-        "watchers": 1379,
+        "forks": 61,
+        "open_issues": 14,
+        "watchers": 1387,
         "default_branch": "master",
         "temp_clone_token": null,
         "organization": {
@@ -125,7 +125,7 @@
           "type": "Organization",
           "site_admin": false
         },
-        "network_count": 60,
+        "network_count": 61,
         "subscribers_count": 26
       },
       "readme": "<div align=\"center\">\n    <img src=\"routify.png\" alt=\"routify\" width=\"512\" /><br>\n    <img src=\"https://badgen.net/npm/v/@roxi/routify\" alt=\"Badge\" />\n</div> \n\n\n----\n\n## Install\n\n* Install the Router only: `npm install --save-dev @roxi/routify`\n* Clone the [starter template](https://github.com/roxiness/routify-starter):\n    * `npx @roxi/routify init`\n    * The starter template contains a lot more than just the router, for more info see [here](https://routify.dev/guide/starter-Template).\n\n## Documentation\n\n[routify.dev](https://routify.dev/guide/introduction)\n\n## Template\n\n[Routify starter template](https://github.com/roxiness/routify-starter)\nIncludes SSR, prerendering, code splitting and much more.\n\n## Example\n\n[Starter example](https://example.routify.dev/example) Example from the starter template. Refresh a page to see how it is loaded.\n\n## Tutorials\n\n* [Easy client-side SPA routing with Routify](https://www.youtube.com/watch?v=AGLUJlOC6f0) by Jitesh\n* [How to add PostSCSS to Routify Starter](https://johanronsse.be/2020/05/01/how-to-add-postcss-to-routify/) by Wolfr\n* [Add SCSS to a Routify project](https://johanronsse.be/2020/04/05/how-to-add-scss-to-a-svelte-project-using-routify/) by Wolfr (slightly outdated)\n\n## Support\nPlease feel free to open an issue or a pull request. All feedback is welcome.\n\n<img height=\"32px\" src=\"https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg\" /> **Join us on Discord** \n\nWant help? Have ideas about Routify? Chat with us on Discord. \nhttps://discord.gg/ntKJD5B\n"
@@ -322,7 +322,7 @@
         "releases_url": "https://api.github.com/repos/roxiness/tossr/releases{/id}",
         "deployments_url": "https://api.github.com/repos/roxiness/tossr/deployments",
         "created_at": "2020-01-28T20:08:35Z",
-        "updated_at": "2021-11-02T15:39:35Z",
+        "updated_at": "2021-11-14T20:21:46Z",
         "pushed_at": "2021-07-07T11:47:07Z",
         "git_url": "git://github.com/roxiness/tossr.git",
         "ssh_url": "git@github.com:roxiness/tossr.git",
@@ -330,8 +330,8 @@
         "svn_url": "https://github.com/roxiness/tossr",
         "homepage": "",
         "size": 188,
-        "stargazers_count": 32,
-        "watchers_count": 32,
+        "stargazers_count": 33,
+        "watchers_count": 33,
         "language": "JavaScript",
         "has_issues": true,
         "has_projects": true,
@@ -350,7 +350,7 @@
         "visibility": "public",
         "forks": 6,
         "open_issues": 2,
-        "watchers": 32,
+        "watchers": 33,
         "default_branch": "master",
         "temp_clone_token": null,
         "organization": {
@@ -731,5 +731,5 @@
       "readme": "<img src=\"./consolite.svg\" style=\"width:100%\">\n\n## Features\n- **It's tiny** - 371 bytes gzip + minify.\n- **It preserves line numbers** - so you can find exactly where your code was logged.\n- **Prefixing** - provide context for your logs by adding a prefix.\n- **Nesting** - sometimes you need to add extra context. This can be handled by creating a child logger\n- **Log levels** - log levels can be customized and are inherited by child instances\n- **Native console methods** - consolite wraps around `console` so any method available on console will be available on consolite.\n\n## Install\n```\nnpm install consolite\n```\n\n## Basic Usage\n```javascript\nimport { createLogger } from 'consolite'\n\nconst log = createLog()\n\nlog.log('hello world') // prints \"hello world\"\n```\n\n\n## Examples\n\n### Using prefix\n```javascript\nconst log = createLog('[my-prefix]')\n\nlog.log('hello world') // prints \"[my-prefix] hello world\"\n```\n### Using a function prefix\n```javascript\nconst log = createLog(method => `${method} ->`)\nlog.debug('hello world') // prints \"debug -> hello world\"\n```\n\n\n### Child logger\nChild loggers inherit prefixes, levels and level from their parents.\n```javascript\nconst log = createLog('[parent]')\nconst childLog = log.createChild('[child]')\n\nlog.log('hello world') // prints \"[parent] [child] hello world\"\n```\n\n### Changing log level\n```javascript\nconst log = createLog()\n\nlog.debug('hello world') // does nothing\nlog.level = 4 // 3 by default\nlog.debug('hello world') // prints \"hello world\"\n\n```\n\n### Changing default levels\n```javascript\nconst log = createLog()\n\nlog.debug('hello world') // does nothing\nlog.levels.debug = 3 // set debug to match current logging level\nlog.debug('hello world') // prints \"hello world\"\n```\n"
     }
   ],
-  "updated": "2021-11-09T15:10:09.113Z"
+  "updated": "2021-11-18T19:28:04.177Z"
 }

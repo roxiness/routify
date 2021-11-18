@@ -4,7 +4,8 @@
 
     const router = createRouter({ routes })
 
-    // for SSR we need to tell Sveltekit to wait for Routify to finish loading its components
+    /* for SSR we need to tell Sveltekit to wait for
+       Routify to finish loading its components */
     export const load = ({ page }) => router.url.replace(page.path)
 </script>
 
