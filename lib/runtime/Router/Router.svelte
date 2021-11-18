@@ -1,24 +1,47 @@
 <script>
-    import { Router } from './Router.js'
-    import { onDestroy } from 'svelte'
+    /** @typedef {import('./Router').RouterOptions} RouterOptions */
 
-    import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js'
+    import { Router } from './Router.js'
+    import { onDestroy as _onDestroy } from 'svelte'
     import { getUrlFromClick } from '../utils/index.js'
     import Component from './Component.svelte'
-    export let urlReflector = null
-    /** @type {RoutifyRuntime} */
-    export let instance = null
-    export let urlRewrite = null
-    export let url = null
-    export let name = ''
+
     /** @type {Router} */
     export let router = null
     export let routes = null
     export let decorator = null
+
+    /** @type {RouterOptions['urlReflector']} */
+    export let urlReflector = null
+    /** @type {RouterOptions['instance']} */
+    export let instance = null
+    /** @type {RouterOptions['urlRewrite']} */
+    export let urlRewrite = null
+    /** @type {RouterOptions['url']} */
+    export let url = null
+    /** @type {RouterOptions['name']} */
+    export let name = null
+    /** @type {RouterOptions['rootNode']} */
     export let rootNode = null
-    export let passthrough = false
+    /** @type {RouterOptions['passthrough']} */
+    export let passthrough = null
+    /** @type {RouterOptions['beforeRouterInit']} */
+    export let beforeRouterInit = null
+    /** @type {RouterOptions['afterRouterInit']} */
+    export let afterRouterInit = null
+    /** @type {RouterOptions['beforeUrlChange']} */
+    export let beforeUrlChange = null
+    /** @type {RouterOptions['afterUrlChange']} */
+    export let afterUrlChange = null
+    /** @type {RouterOptions['transformFragments']} */
+    export let transformFragments = null
+    /** @type {RouterOptions['onDestroy']} */
+    export let onDestroy = null
+    /** @type {RouterOptions['plugins']} */
+    export let plugins = null
 
     $: {
+        /** @type {import('./Router').RouterOptions}*/
         const options = {
             instance,
             rootNode,
@@ -27,6 +50,13 @@
             urlRewrite,
             urlReflector,
             passthrough,
+            beforeRouterInit,
+            afterRouterInit,
+            beforeUrlChange,
+            afterUrlChange,
+            transformFragments,
+            onDestroy,
+            plugins,
         }
 
         // todo move everything to init
@@ -51,7 +81,7 @@
         if (url) router.url.push(url)
     }
 
-    if (typeof window !== 'undefined') onDestroy(() => router.destroy())
+    if (typeof window !== 'undefined') _onDestroy(() => router.destroy())
 </script>
 
 {#if $activeRoute}
