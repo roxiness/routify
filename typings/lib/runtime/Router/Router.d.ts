@@ -12,6 +12,10 @@ export class Router implements Readable<Router> {
     activeRoute: RouteStore;
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
+    /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
+    beforeRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
+    /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
+    afterRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
     /** @type { import('hookar').HooksCollection<BeforeUrlChangeCallback> } */
     beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
     /** @type { import('hookar').HooksCollection<AfterUrlChangeCallback> } */
@@ -47,9 +51,11 @@ export class Router implements Readable<Router> {
     triggerStore: () => void;
     params: import("svelte/store").Readable<any>;
     /**
-     * @param {Partial<RouterOptions>} options
+     * @param {Partial<RouterOptions>} input
      */
-    init(options: Partial<RouterOptions>): void;
+    init(input: Partial<RouterOptions>): void;
+    /** @type {Partial<RouterOptionsNormalized>} */
+    options: Partial<RouterOptionsNormalized>;
     /** @type {RoutifyRuntime} */
     instance: RoutifyRuntime;
     name: string;
@@ -93,6 +99,10 @@ export function createRouter(options: Partial<RouterOptions>): Router;
  */
 export type Readable<T> = import("svelte/store").Readable<any>;
 export type RouteStore = import('../utils/index.js').Getable<Route>;
+export type RouterInitCallback = (arg0: {
+    router: Router;
+    firstInit: boolean;
+}) => any;
 export type BeforeUrlChangeCallback = (arg0: {
     route: Route;
 }) => any;
@@ -129,11 +139,19 @@ export type RouterOptions = {
     /**
      * initial url - "/" by default
      */
-    url: string;
+    url?: string | undefined;
     /**
      * ignore clicks
      */
     passthrough: boolean | typeof Router;
+    /**
+     * hook: runs before each router initiation
+     */
+    beforeRouterInit: MaybeArray<RouterInitCallback>;
+    /**
+     * hook: runs after each router initiation
+     */
+    afterRouterInit: MaybeArray<RouterInitCallback>;
     /**
      * hook: guard that runs before url changes
      */
@@ -163,6 +181,14 @@ export type RouterOptionsNormalizedOverlay = {
      * hook: transforms paths to and from router and browser
      */
     urlRewrite: UrlRewrite[];
+    /**
+     * hook: runs before each router initiation
+     */
+    beforeRouterInit: RouterInitCallback[];
+    /**
+     * hook: runs after each router initiation
+     */
+    afterRouterInit: RouterInitCallback[];
     /**
      * hook: guard that runs before url changes
      */

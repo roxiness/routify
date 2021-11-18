@@ -20,7 +20,7 @@
     "scripts": {
         "build": "run-s build:*",
         "build:lint": "npm run util:prettier -- --write",
-        "build:documentation": "documentation readme typedef.js -f md --section API",
+        "build:documentation": "documentation readme types/typedef.js -f md --section API",
         "build:typings": "tsc ",
         "test": "run-s test:*",
         "test:jest": "jest . --detectOpenHandles",

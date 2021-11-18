@@ -1,5 +1,3 @@
-/// <reference types="persistable" />
-
 /**
  * COMMON
  * @typedef {import('../lib/common/RNode').RNode} RNode
@@ -121,7 +119,7 @@
  * @prop {RNodeBuildtime} node
  * @prop {Partial<RoutifyBuildtimeOptions>} options
  * @prop {MetaContextSplit=} split dynamically import the value
- * @prop {Persist=} persist persist the return of a callback on disk. Return persisted data on subsequent calls
+ * @prop {import('persistable')['default']['call']=} persist persist the return of a callback on disk. Return persisted data on subsequent calls
  * @prop {string} tempPath temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
  */
 
