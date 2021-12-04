@@ -100,25 +100,29 @@ rootNode.appendChild(childNode)
     *   [Properties](#properties)
 *   [RoutifyRuntimeOptions](#routifyruntimeoptions)
     *   [Properties](#properties-1)
+*   [TransformFragmentsCallback](#transformfragmentscallback)
 *   [RoutifyExternalMetaHelper](#routifyexternalmetahelper)
     *   [Properties](#properties-2)
 *   [RoutifyLoadContext](#routifyloadcontext)
     *   [Parameters](#parameters-1)
     *   [Properties](#properties-3)
-*   [RoutifyBasePlugin](#routifybaseplugin)
+*   [RoutifyBuildtimeRuntimePlugin](#routifybuildtimeruntimeplugin)
     *   [Properties](#properties-4)
-*   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
+*   [RoutifyRuntimePlugin](#routifyruntimeplugin)
+*   [RoutifyBasePlugin](#routifybaseplugin)
     *   [Properties](#properties-5)
+*   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
+    *   [Properties](#properties-6)
 *   [MetaContextSplit](#metacontextsplit)
     *   [Parameters](#parameters-2)
 *   [MetaContext](#metacontext)
-    *   [Properties](#properties-6)
+    *   [Properties](#properties-7)
 *   [UrlRewriteFn](#urlrewritefn)
     *   [Parameters](#parameters-3)
 *   [UrlRewrite](#urlrewrite)
-    *   [Properties](#properties-7)
-*   [QueryHandler](#queryhandler)
     *   [Properties](#properties-8)
+*   [QueryHandler](#queryhandler)
+    *   [Properties](#properties-9)
 *   [QueryHandlerParse](#queryhandlerparse)
     *   [Parameters](#parameters-4)
 *   [QueryHandlerStringify](#queryhandlerstringify)
@@ -126,15 +130,15 @@ rootNode.appendChild(childNode)
 *   [ComponentGuardFn](#componentguardfn)
     *   [Parameters](#parameters-6)
 *   [ComponentPreloadFn](#componentpreloadfn)
-    *   [Properties](#properties-9)
+    *   [Properties](#properties-10)
 *   [MixedModule](#mixedmodule)
 *   [PathNode](#pathnode)
-    *   [Properties](#properties-10)
+    *   [Properties](#properties-11)
 *   [UrlState](#urlstate)
 *   [FragmentContext](#fragmentcontext)
-    *   [Properties](#properties-11)
-*   [NodeTreeExport](#nodetreeexport)
     *   [Properties](#properties-12)
+*   [NodeTreeExport](#nodetreeexport)
+    *   [Properties](#properties-13)
 *   [BrowserAdapter](#browseradapter)
 
 ### RoutifyBuildtimePayload
@@ -178,11 +182,28 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 #### Properties
 
-*   `init` **function (RoutifyRuntime): void** 
-*   `urlRewrite` **([UrlRewrite](#urlrewrite) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[UrlRewrite](#urlrewrite)>)** 
-*   `queryHandler` **([QueryHandler](#queryhandler) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[QueryHandler](#queryhandler)>)** 
-*   `beforeRouteChange` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
-*   `afterRouteChange` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+*   `instance` **RoutifyRuntime** instance to use. Uses global by default
+*   `rootNode` **RNodeRuntime** 
+*   `routes` **any** the routes tree
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of router - leave blank if only only one router is used
+*   `urlRewrite` **([UrlRewrite](#urlrewrite) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[UrlRewrite](#urlrewrite)>)** hook: transforms paths to and from router and browser
+*   `url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** initial url - "/" by default
+*   `passthrough` **([Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean) | Router)** ignore clicks
+*   `beforeRouterInit` **MaybeArray\<RouterInitCallback>** hook: runs before each router initiation
+*   `afterRouterInit` **MaybeArray\<RouterInitCallback>** hook: runs after each router initiation
+*   `beforeUrlChange` **MaybeArray\<BeforeUrlChangeCallback>** hook: guard that runs before url changes
+*   `afterUrlChange` **MaybeArray\<AfterUrlChangeCallback>** hook: runs after url has changed
+*   `transformFragments` **MaybeArray<[TransformFragmentsCallback](#transformfragmentscallback)>** hook: transform route fragments after navigation
+*   `onDestroy` **MaybeArray\<OnDestroyRouterCallback>** hook: runs before router is destroyed
+*   `plugins` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Partial<[RoutifyRuntimeOptions](#routifyruntimeoptions)>>** 
+
+###
+
+###
+
+### TransformFragmentsCallback
+
+Type: function ([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<RouteFragment>): [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<RouteFragment>
 
 ### RoutifyExternalMetaHelper
 
@@ -207,7 +228,19 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `route` **Route** 
 *   `node` **RNodeRuntime** 
 
-###
+### RoutifyBuildtimeRuntimePlugin
+
+Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+#### Properties
+
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** example: '@roxi/routify/plugins/reset'
+*   `importee` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the imported name from the path, defaults to "default"
+*   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** options passed to the runtime plugin
+
+### RoutifyRuntimePlugin
+
+Type: Partial<[RoutifyRuntimeOptions](#routifyruntimeoptions)>
 
 ### RoutifyBasePlugin
 
@@ -218,6 +251,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** name of plugin
 *   `before` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run before
 *   `after` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run after
+*   `options` **function (Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>): Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>** 
 
 ### RoutifyBuildtimePluginType
 
@@ -228,6 +262,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `build` **function ([RoutifyBuildtimePayload](#routifybuildtimepayload)): ([Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any> | any)?** 
 *   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
 *   `meta` **[RoutifyExternalMetaHelper](#routifyexternalmetahelper)?** 
+*   `runtimePlugins` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[RoutifyBuildtimeRuntimePlugin](#routifybuildtimeruntimeplugin)>** 
 
 ### MetaContextSplit
 
@@ -250,7 +285,6 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `node` **RNodeBuildtime** 
 *   `options` **Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>** 
 *   `split` **[MetaContextSplit](#metacontextsplit)?** dynamically import the value
-*   `persist` **Persist?** persist the return of a callback on disk. Return persisted data on subsequent calls
 *   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
 
 ### UrlRewriteFn

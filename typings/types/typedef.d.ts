@@ -89,12 +89,81 @@ type RoutifyBuildtimeOptions = {
     watch: boolean;
 };
 type RoutifyRuntimeOptions = {
-    init: (arg0: RoutifyRuntime) => void;
+    /**
+     * instance to use. Uses global by default
+     */
+    instance: RoutifyRuntime;
+    rootNode: RNodeRuntime;
+    /**
+     * the routes tree
+     */
+    routes: any;
+    /**
+     * name of router - leave blank if only only one router is used
+     */
+    name: string;
+    /**
+     * hook: transforms paths to and from router and browser
+     */
     urlRewrite: UrlRewrite | UrlRewrite[];
-    queryHandler: QueryHandler | QueryHandler[];
-    beforeRouteChange: Function;
-    afterRouteChange: Function;
+    /**
+     * where to store the URL state - browser by default
+     */
+    urlReflector: typeof import("../lib/runtime/Router/urlReflectors/ReflectorBase.js")['BaseReflector'];
+    /**
+     * initial url - "/" by default
+     */
+    url?: string | undefined;
+    /**
+     * ignore clicks
+     */
+    passthrough: boolean | Router;
+    /**
+     * hook: runs before each router initiation
+     */
+    beforeRouterInit: MaybeArray<RouterInitCallback>;
+    /**
+     * hook: runs after each router initiation
+     */
+    afterRouterInit: MaybeArray<RouterInitCallback>;
+    /**
+     * hook: guard that runs before url changes
+     */
+    beforeUrlChange: MaybeArray<BeforeUrlChangeCallback>;
+    /**
+     * hook: runs after url has changed
+     */
+    afterUrlChange: MaybeArray<AfterUrlChangeCallback>;
+    /**
+     * hook: transform route fragments after navigation
+     */
+    transformFragments: MaybeArray<TransformFragmentsCallback>;
+    /**
+     * hook: runs before router is destroyed
+     */
+    onDestroy: MaybeArray<OnDestroyRouterCallback>;
+    plugins: Partial<RoutifyRuntimeOptions>[];
 };
+/**
+ * <T>
+ */
+type Readable<T> = import("svelte/store").Readable<any>;
+type RouteStore = import('../lib/runtime/utils/index.js').Getable<Route>;
+type RouterInitCallback = (arg0: {
+    router: Router;
+    firstInit: boolean;
+}) => any;
+type BeforeUrlChangeCallback = (arg0: {
+    route: Route;
+}) => any;
+type AfterUrlChangeCallback = (arg0: {
+    route: Route;
+    history: Route[];
+}) => any;
+type TransformFragmentsCallback = (arg0: RouteFragment[]) => RouteFragment[];
+type OnDestroyRouterCallback = (arg0: {
+    router: typeof this;
+}) => void;
 type RoutifyExternalMetaHelper = {
     instance: RoutifyRuntime;
     /**
@@ -108,8 +177,22 @@ type RoutifyLoadContext = {
     route: Route;
     node: RNodeRuntime;
 };
-type RoutifyRuntimePlugin = RoutifyBasePlugin & RoutifyRuntimeOptions;
-type RoutifyBuildtimePlugin = RoutifyBasePlugin & RoutifyBuildtimePluginType;
+type RoutifyBuildtimeRuntimePlugin = {
+    /**
+     * example: '@roxi/routify/plugins/reset'
+     */
+    path: string;
+    /**
+     * the imported name from the path, defaults to "default"
+     */
+    importee: string;
+    /**
+     * options passed to the runtime plugin
+     */
+    options: object;
+};
+type RoutifyRuntimePlugin = Partial<RoutifyRuntimeOptions>;
+type RoutifyBuildtimePlugin = Partial<RoutifyBasePlugin & RoutifyBuildtimePluginType>;
 type RoutifyBasePlugin = {
     /**
      * name of plugin
@@ -123,6 +206,7 @@ type RoutifyBasePlugin = {
      * name of plugin(s) to run after
      */
     after?: (string | string[]) | undefined;
+    options: (arg0: Partial<RoutifyBuildtimeOptions>) => Partial<RoutifyBuildtimeOptions>;
 };
 type RoutifyBuildtimePluginType = {
     build?: ((arg0: RoutifyBuildtimePayload) => (Promise<any> | any)) | undefined;
@@ -132,6 +216,7 @@ type RoutifyBuildtimePluginType = {
         [x: string]: any;
     }) => MetaContext;
     condition?: (RoutifyBuildtimePayload: any) => boolean;
+    runtimePlugins: RoutifyBuildtimeRuntimePlugin[];
 };
 type MetaContextSplit = (value: any, name?: string | undefined) => any;
 /**
@@ -148,7 +233,7 @@ type MetaContext = {
     /**
      * persist the return of a callback on disk. Return persisted data on subsequent calls
      */
-    persist?: Persist | undefined;
+    persist?: typeof import("persistable")['default']['call'] | undefined;
     /**
      * temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
      */

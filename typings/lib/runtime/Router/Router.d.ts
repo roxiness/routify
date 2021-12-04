@@ -3,9 +3,9 @@
  */
 export class Router implements Readable<Router> {
     /**
-     * @param {Partial<RouterOptions>} options
+     * @param {Partial<RoutifyRuntimeOptions>} options
      */
-    constructor(options: Partial<RouterOptions>);
+    constructor(options: Partial<RoutifyRuntimeOptions>);
     /** @type { RouteStore } */
     pendingRoute: RouteStore;
     /** @type { RouteStore } */
@@ -29,10 +29,6 @@ export class Router implements Readable<Router> {
         parse: (search: any) => any;
         stringify: (params: any) => string;
     };
-    scrollHandler: {
-        isScrolling: import("svelte/store").Writable<boolean>;
-        run: AfterUrlChangeCallback;
-    };
     url: {
         internal: () => string;
         external: () => string;
@@ -51,9 +47,9 @@ export class Router implements Readable<Router> {
     triggerStore: () => void;
     params: import("svelte/store").Readable<any>;
     /**
-     * @param {Partial<RouterOptions>} input
+     * @param {Partial<RoutifyRuntimeOptions>} input
      */
-    init(input: Partial<RouterOptions>): void;
+    init(input: Partial<RoutifyRuntimeOptions>): void;
     /** @type {Partial<RouterOptionsNormalized>} */
     options: Partial<RouterOptionsNormalized>;
     /** @type {RoutifyRuntime} */
@@ -93,83 +89,7 @@ export class Router implements Readable<Router> {
     setUrlReflector(UrlReflector: typeof BaseReflector): void;
     #private;
 }
-export function createRouter(options: Partial<RouterOptions>): Router;
-/**
- * <T>
- */
-export type Readable<T> = import("svelte/store").Readable<any>;
-export type RouteStore = import('../utils/index.js').Getable<Route>;
-export type RouterInitCallback = (arg0: {
-    router: Router;
-    firstInit: boolean;
-}) => any;
-export type BeforeUrlChangeCallback = (arg0: {
-    route: Route;
-}) => any;
-export type AfterUrlChangeCallback = (arg0: {
-    route: Route;
-    history: Route[];
-}) => any;
-export type TransformFragmentsCallback = (arg0: RouteFragment[]) => RouteFragment[];
-export type OnDestroyRouterCallback = (arg0: {
-    router: typeof this;
-}) => void;
-export type RouterOptions = {
-    /**
-     * instance to use. Uses global by default
-     */
-    instance: RoutifyRuntime;
-    rootNode: RNodeRuntime;
-    /**
-     * the routes tree
-     */
-    routes: any;
-    /**
-     * name of router - leave blank if only only one router is used
-     */
-    name: string;
-    /**
-     * hook: transforms paths to and from router and browser
-     */
-    urlRewrite: UrlRewrite | UrlRewrite[];
-    /**
-     * where to store the URL state - browser by default
-     */
-    urlReflector: typeof BaseReflector;
-    /**
-     * initial url - "/" by default
-     */
-    url?: string | undefined;
-    /**
-     * ignore clicks
-     */
-    passthrough: boolean | typeof Router;
-    /**
-     * hook: runs before each router initiation
-     */
-    beforeRouterInit: MaybeArray<RouterInitCallback>;
-    /**
-     * hook: runs after each router initiation
-     */
-    afterRouterInit: MaybeArray<RouterInitCallback>;
-    /**
-     * hook: guard that runs before url changes
-     */
-    beforeUrlChange: MaybeArray<BeforeUrlChangeCallback>;
-    /**
-     * hook: runs after url has changed
-     */
-    afterUrlChange: MaybeArray<AfterUrlChangeCallback>;
-    /**
-     * hook: transform route fragments after navigation
-     */
-    transformFragments: MaybeArray<TransformFragmentsCallback>;
-    /**
-     * hook: runs before router is destroyed
-     */
-    onDestroy: MaybeArray<OnDestroyRouterCallback>;
-    plugins: RouterOptions[];
-};
+export function createRouter(options: Partial<RoutifyRuntimeOptions>): Router;
 export type ParentCmpCtx = {
     route: Route;
     node: RNodeRuntime;
@@ -206,7 +126,7 @@ export type RouterOptionsNormalizedOverlay = {
      */
     onDestroy: OnDestroyRouterCallback[];
 };
-export type RouterOptionsNormalized = RouterOptions & RouterOptionsNormalizedOverlay;
+export type RouterOptionsNormalized = RoutifyRuntimeOptions & RouterOptionsNormalizedOverlay;
 import { Route } from "../Route/Route.js";
 import { RoutifyRuntime } from "../Instance/RoutifyRuntime.js";
 import { BaseReflector } from "./urlReflectors/ReflectorBase.js";

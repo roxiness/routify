@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-         "checkJs": true,
+        "checkJs": true,
         "baseUrl": ".",
         "target": "esnext",
         "moduleResolution": "node",
         "module": "es2020"
     },
-    "include": ["lib/**/*.js", "*.js", "types/**.js"],
+    "include": ["lib/**/*.js", "types/**/*.js"],
     "exclude": [
         "**/node_modules",
         "**/dist",

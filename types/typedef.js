@@ -51,12 +51,42 @@
  * RUNTIME OPTIONS *
  *******************/
 /**
- * @typedef {Object} RoutifyRuntimeOptions
- * @prop {function(RoutifyRuntime):void} init
- * @prop {UrlRewrite|UrlRewrite[]} urlRewrite
- * @prop {QueryHandler|QueryHandler[]} queryHandler
- * @prop {function} beforeRouteChange
- * @prop {function} afterRouteChange
+ * @typedef { Object } RoutifyRuntimeOptions
+ * @prop { RoutifyRuntime } instance instance to use. Uses global by default
+ * @prop { RNodeRuntime } rootNode
+ * @prop { any } routes the routes tree
+ * @prop { string } name name of router - leave blank if only only one router is used
+ * @prop { UrlRewrite|UrlRewrite[] } urlRewrite hook: transforms paths to and from router and browser
+ * @prop { import('../lib/runtime/Router/urlReflectors/ReflectorBase.js')['BaseReflector'] } urlReflector where to store the URL state - browser by default
+ * @prop { string= } url initial url - "/" by default
+ * @prop { Boolean| Router } passthrough ignore clicks
+ * @prop { MaybeArray<RouterInitCallback> } beforeRouterInit hook: runs before each router initiation
+ * @prop { MaybeArray<RouterInitCallback> } afterRouterInit hook: runs after each router initiation
+ * @prop { MaybeArray<BeforeUrlChangeCallback> } beforeUrlChange hook: guard that runs before url changes
+ * @prop { MaybeArray<AfterUrlChangeCallback> } afterUrlChange hook: runs after url has changed
+ * @prop { MaybeArray<TransformFragmentsCallback> } transformFragments hook: transform route fragments after navigation
+ * @prop { MaybeArray<OnDestroyRouterCallback> } onDestroy hook: runs before router is destroyed
+ * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
+ */
+
+/**
+ * @template T
+ * @typedef { import('svelte/store').Readable } Readable<T>
+ */
+
+/**
+ * @typedef { import('../lib/runtime/utils/index.js').Getable<Route> } RouteStore
+ */
+
+/**
+ * @typedef { function({router: Router, firstInit: Boolean}): any } RouterInitCallback
+ * @typedef { function({route: Route}): any } BeforeUrlChangeCallback
+ * @typedef { function({
+ *   route: Route,
+ *   history: Route[]
+ * }): any } AfterUrlChangeCallback
+ * @typedef { function(RouteFragment[]):RouteFragment[] } TransformFragmentsCallback
+ * @typedef { function({router: typeof this}):void } OnDestroyRouterCallback
  */
 
 /********************************
@@ -86,8 +116,15 @@
  **********/
 
 /**
- * @typedef {RoutifyBasePlugin & RoutifyRuntimeOptions} RoutifyRuntimePlugin
- * @typedef {RoutifyBasePlugin & RoutifyBuildtimePluginType} RoutifyBuildtimePlugin
+ * @typedef {object} RoutifyBuildtimeRuntimePlugin
+ * @prop {string} path example: '@roxi/routify/plugins/reset'
+ * @prop {string} importee the imported name from the path, defaults to "default"
+ * @prop {object} options options passed to the runtime plugin
+ */
+
+/**
+ * @typedef {Partial<RoutifyRuntimeOptions>} RoutifyRuntimePlugin
+ * @typedef {Partial<RoutifyBasePlugin & RoutifyBuildtimePluginType>} RoutifyBuildtimePlugin
  */
 
 /**
@@ -95,6 +132,7 @@
  * @prop {string=} name name of plugin
  * @prop {string|string[]=} before name of plugin(s) to run before
  * @prop {string|string[]=} after name of plugin(s) to run after
+ * @prop {function(Partial<RoutifyBuildtimeOptions>):Partial<RoutifyBuildtimeOptions>} options
  */
 
 /**
@@ -104,6 +142,7 @@
  * @prop {RoutifyExternalMetaHelper=} meta
  * @prop {(context:MetaContext & Object.<string,any>)=>MetaContext} [metaContext]
  * @prop {(RoutifyBuildtimePayload)=>Boolean=} condition
+ * @prop {RoutifyBuildtimeRuntimePlugin[]} runtimePlugins
  */
 
 /**

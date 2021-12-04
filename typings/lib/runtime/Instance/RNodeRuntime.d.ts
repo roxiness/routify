@@ -1,3 +1,4 @@
+/// <reference types="svelte/types/runtime/ambient" />
 /**
  * @extends RNode<typeof import('./RoutifyRuntime')['RoutifyRuntime']>
  */
