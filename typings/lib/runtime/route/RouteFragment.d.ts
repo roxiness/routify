@@ -9,10 +9,13 @@ export class RouteFragment {
     node: import("../Instance/RNodeRuntime").RNodeRuntime;
     load: any;
     urlFragment: string;
+    /** @type {Object.<string, string|string[]>} */
+    _params: {
+        [x: string]: string | string[];
+    };
     get params(): {
         [x: string]: string | string[];
     };
     setParams(params: any): void;
     getParamsFromFragment(): {};
-    #private;
 }

@@ -131,7 +131,7 @@ rootNode.appendChild(childNode)
     *   [Parameters](#parameters-6)
 *   [ComponentPreloadFn](#componentpreloadfn)
     *   [Properties](#properties-10)
-*   [MixedModule](#mixedmodule)
+*   [LoadSvelteModule](#LoadSvelteModule)
 *   [PathNode](#pathnode)
     *   [Properties](#properties-11)
 *   [UrlState](#urlstate)
@@ -357,7 +357,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 ###
 
-### MixedModule
+### LoadSvelteModule
 
 Type: any
 

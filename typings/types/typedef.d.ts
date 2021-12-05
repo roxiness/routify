@@ -172,10 +172,17 @@ type RoutifyExternalMetaHelper = {
     options: any;
     tempPath: string;
 };
-type RoutifyLoad = (context: RoutifyLoadContext) => any;
+type RoutifyLoad = (context: RoutifyLoadContext) => MaybePromise<Partial<RoutifyLoadReturn> | null>;
 type RoutifyLoadContext = {
     route: Route;
     node: RNodeRuntime;
+};
+type RoutifyLoadReturn = {
+    status: number;
+    error: string | Error;
+    redirect: string;
+    maxage: number;
+    props: object;
 };
 type RoutifyBuildtimeRuntimePlugin = {
     /**
@@ -257,15 +264,15 @@ type QueryHandlerStringify = (search: {
     [x: string]: string;
 }) => string;
 type ComponentGuardFn = (route: Route) => any;
-type ComponentPreloadFn = () => any;
 type RerservedCmpProps = {
     guard?: ComponentGuardFn | undefined;
-    preload?: ComponentPreloadFn | undefined;
+    load?: RoutifyLoad | undefined;
+    default?: import('svelte/types/runtime').SvelteComponent | undefined;
 };
 type Module = RerservedCmpProps & {
     [x: string]: any;
 };
-type MixedModule = any;
+type LoadSvelteModule = () => RerservedCmpProps;
 type PathNode = {
     urlFragment: string;
     node: RNodeRuntime;

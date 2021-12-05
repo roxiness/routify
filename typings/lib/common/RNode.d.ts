@@ -4,10 +4,10 @@
 export class RNode<R extends typeof import("./Routify").Routify> {
     /**
      * @param {string} name
-     * @param {MixedModule} module
+     * @param {any} module
      * @param {R['prototype']} instance
      */
-    constructor(name: string, module: MixedModule, instance: R['prototype']);
+    constructor(name: string, module: any, instance: R['prototype']);
     /** @type {R['prototype']} */
     instance: R['prototype'];
     /** @type {this} */

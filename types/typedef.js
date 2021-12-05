@@ -105,10 +105,19 @@
 /**
  * @callback RoutifyLoad
  * @param {RoutifyLoadContext} context
+ * @returns {MaybePromise<Partial<RoutifyLoadReturn>|null>}
+ *
  *
  * @typedef {object} RoutifyLoadContext
  * @prop {Route} route
  * @prop {RNodeRuntime} node
+ *
+ * @typedef {object} RoutifyLoadReturn
+ * @prop {number} status
+ * @prop {string|Error} error
+ * @prop {string} redirect
+ * @prop {number} maxage
+ * @prop {object} props
  */
 
 /**********
@@ -210,18 +219,15 @@
  */
 
 /**
- * @callback ComponentPreloadFn
- */
-
-/**
  * @typedef RerservedCmpProps
  * @prop {ComponentGuardFn=} guard
- * @prop {ComponentPreloadFn=} preload
+ * @prop {RoutifyLoad=} load
+ * @prop {import('svelte/types/runtime').SvelteComponent=} default
  */
 
 /** @typedef {RerservedCmpProps & Object.<string, any>} Module */
 
-/** @typedef {any} MixedModule */
+/** @typedef {()=>RerservedCmpProps} LoadSvelteModule */
 
 /*****************
  * MISC          *
