@@ -26,7 +26,7 @@ export class Route {
      * converts async module functions to sync functions
      */
     loadComponents(): Promise<boolean>;
-    runPreloads(): Promise<boolean>;
+    runPreloads(): Promise<{}>;
     runGuards(): Promise<boolean>;
     runBeforeUrlChangeHooks(): Promise<any>;
     /**

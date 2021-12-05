@@ -7,7 +7,8 @@ export class RouteFragment {
     constructor(route: Route, node: RNodeRuntime, urlFragment: string);
     route: import("./Route").Route;
     node: import("../Instance/RNodeRuntime").RNodeRuntime;
-    load: any;
+    /** @type {RoutifyLoadReturn} */
+    load: RoutifyLoadReturn;
     urlFragment: string;
     /** @type {Object.<string, string|string[]>} */
     _params: {
