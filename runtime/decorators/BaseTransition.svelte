@@ -38,7 +38,7 @@
   const { parentNode } = $context
   parentNode.style.display = 'grid'
   parentNode.style['grid-template-rows'] = '1fr'
-  parentNode.style['grid-template-columns'] = '1fr'
+  parentNode.style['grid-template-columns'] = 'minmax(0, 1fr)'
 </script>
 
 <div
