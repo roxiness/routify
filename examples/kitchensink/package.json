@@ -1,5 +1,5 @@
 {
-    "name": "starter",
+    "name": "kitchensink",
     "type": "module",
     "scripts": {
         "build": "vite build",
