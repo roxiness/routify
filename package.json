@@ -2,6 +2,8 @@
     "name": "@roxi/routify",
     "version": "3.0.0-next.22",
     "main": "lib/runtime/index.js",
+    "module": "lib/runtime/index.js",
+    "svelte": "lib/runtime/index.js",
     "type": "module",
     "types": "index.d.ts",
     "typesVersions": {
@@ -50,7 +52,7 @@
         "jest": "^27.0.6",
         "jest-playwright-preset": "^1.6.1",
         "npm-run-all": "^4.1.5",
-        "playwright": "^1.10.0",
+        "playwright": "^1.17.1",
         "prettier": "^2.2.1",
         "prettier-plugin-svelte": "^2.2.0",
         "probs": "^0.1.4",
