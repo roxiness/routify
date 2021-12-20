@@ -7,14 +7,14 @@ const config = {
         target: '#svelte',
 
         vite: {
-            plugins: [routify()],
+            plugins: [routify({ routesDir: 'src/pages' })],
             resolve: {
                 dedupe: ['svelte'],
             },
         },
 
-        router: false
-    }
-};
+        router: false,
+    },
+}
 
 export default config

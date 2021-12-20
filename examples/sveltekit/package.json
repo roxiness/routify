@@ -13,8 +13,5 @@
     "@sveltejs/kit": "next",
     "svelte": "^3.34.0"
   },
-  "type": "module",
-  "routify": {
-    "routesDir": "src/pages"
-  }
+  "type": "module"
 }
