@@ -24,7 +24,8 @@
         {...props}
         {...load?.props}
         let:props
-        let:decorator>
+        let:decorator
+    >
         {#if restFragments.length}
             <svelte:self fragments={restFragments} {props} {decorator} />
         {/if}
