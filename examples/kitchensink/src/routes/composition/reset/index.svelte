@@ -2,6 +2,5 @@
     import { url } from '@roxi/routify'
 </script>
 
-# I'm all alone!
+<h1>Yay! A clean slate canvas</h1>
 <a href={$url('../..')}>Go back</a>
-<!-- [go back](/composition) -->
