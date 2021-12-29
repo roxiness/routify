@@ -66,6 +66,7 @@
  * @prop { MaybeArray<AfterUrlChangeCallback> } afterUrlChange hook: runs after url has changed
  * @prop { MaybeArray<TransformFragmentsCallback> } transformFragments hook: transform route fragments after navigation
  * @prop { MaybeArray<OnDestroyRouterCallback> } onDestroy hook: runs before router is destroyed
+ * @prop { QueryHandler } queryHandler
  * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
  */
 
@@ -201,12 +202,14 @@
 /**
  * @callback QueryHandlerParse
  * @param {string} search
+ * @param {Route} route
  * @return {Object<string, string>}
  */
 
 /**
  * @callback QueryHandlerStringify
  * @param {Object<string, string>} search
+ * @param {Route} route
  * @return {string}
  */
 
