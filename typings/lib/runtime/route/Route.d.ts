@@ -13,7 +13,8 @@ export class Route {
     loaded: Promise<{
         route: Route;
     }>;
-    invalid: any;
+    /** @type {RoutifyLoadReturn} */
+    load: RoutifyLoadReturn;
     router: import("../index.js").RouterClass;
     url: string;
     mode: UrlState;
@@ -26,7 +27,7 @@ export class Route {
      * converts async module functions to sync functions
      */
     loadComponents(): Promise<boolean>;
-    runPreloads(): Promise<{}>;
+    runPreloads(): Promise<boolean | Route>;
     runGuards(): Promise<boolean>;
     runBeforeUrlChangeHooks(): Promise<any>;
     /**

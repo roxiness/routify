@@ -3,9 +3,9 @@
  */
 export class Router implements Readable<Router> {
     /**
-     * @param {Partial<RoutifyRuntimeOptions>} options
+     * @param {Partial<RoutifyRuntimeOptions>} input
      */
-    constructor(options: Partial<RoutifyRuntimeOptions>);
+    constructor(input: Partial<RoutifyRuntimeOptions>);
     /** @type { RouteStore } */
     pendingRoute: RouteStore;
     /** @type { RouteStore } */
@@ -25,10 +25,8 @@ export class Router implements Readable<Router> {
     /** @type { import('hookar').HooksCollection<OnDestroyRouterCallback> } */
     onDestroy: import('hookar').HooksCollection<OnDestroyRouterCallback>;
     parentElem: any;
-    queryHandler: {
-        parse: (search: any) => any;
-        stringify: (params: any) => string;
-    };
+    /** @type {QueryHandler} */
+    queryHandler: QueryHandler;
     url: {
         internal: () => string;
         external: () => string;

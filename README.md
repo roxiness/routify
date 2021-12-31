@@ -103,7 +103,7 @@ rootNode.appendChild(childNode)
 *   [TransformFragmentsCallback](#transformfragmentscallback)
 *   [RoutifyExternalMetaHelper](#routifyexternalmetahelper)
     *   [Properties](#properties-2)
-*   [RoutifyLoadContext](#routifyloadcontext)
+*   [RoutifyLoadReturn](#routifyloadreturn)
     *   [Parameters](#parameters-1)
     *   [Properties](#properties-3)
 *   [RoutifyBuildtimeRuntimePlugin](#routifybuildtimeruntimeplugin)
@@ -129,9 +129,7 @@ rootNode.appendChild(childNode)
     *   [Parameters](#parameters-5)
 *   [ComponentGuardFn](#componentguardfn)
     *   [Parameters](#parameters-6)
-*   [ComponentPreloadFn](#componentpreloadfn)
     *   [Properties](#properties-10)
-*   [LoadSvelteModule](#LoadSvelteModule)
 *   [PathNode](#pathnode)
     *   [Properties](#properties-11)
 *   [UrlState](#urlstate)
@@ -195,6 +193,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `afterUrlChange` **MaybeArray\<AfterUrlChangeCallback>** hook: runs after url has changed
 *   `transformFragments` **MaybeArray<[TransformFragmentsCallback](#transformfragmentscallback)>** hook: transform route fragments after navigation
 *   `onDestroy` **MaybeArray\<OnDestroyRouterCallback>** hook: runs before router is destroyed
+*   `queryHandler` **[QueryHandler](#queryhandler)** 
 *   `plugins` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Partial<[RoutifyRuntimeOptions](#routifyruntimeoptions)>>** 
 
 ###
@@ -215,18 +214,25 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `options` **any** //todo
 *   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-### RoutifyLoadContext
+### RoutifyLoadReturn
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 #### Parameters
 
-*   `context` **[RoutifyLoadContext](#routifyloadcontext)** 
+*   `context` **RoutifyLoadContext** 
 
 #### Properties
 
 *   `route` **Route** 
 *   `node` **RNodeRuntime** 
+*   `status` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+*   `error` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error))** 
+*   `redirect` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `maxage` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+*   `props` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+Returns **MaybePromise<(Partial<[RoutifyLoadReturn](#routifyloadreturn)> | null)>** 
 
 ### RoutifyBuildtimeRuntimePlugin
 
@@ -323,6 +329,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 #### Parameters
 
 *   `search` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `route` **Route** 
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
 
@@ -333,6 +340,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 #### Parameters
 
 *   `search` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+*   `route` **Route** 
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
@@ -344,22 +352,16 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 *   `route` **Route** 
 
-### ComponentPreloadFn
-
-Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
-
 ###
 
 #### Properties
 
 *   `guard` **[ComponentGuardFn](#componentguardfn)?** 
-*   `preload` **[ComponentPreloadFn](#componentpreloadfn)?** 
+*   `load` **RoutifyLoad?** 
 
 ###
 
-### LoadSvelteModule
-
-Type: any
+###
 
 ### PathNode
 

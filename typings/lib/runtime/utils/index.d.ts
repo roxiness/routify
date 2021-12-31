@@ -5,7 +5,7 @@ export function pathAndParamsToUrl(path: string, params: any, queryHandler: Func
 export function fromEntries(iterable: any): any;
 export function populateUrl(path: string, params: {
     [x: string]: string;
-}, queryHandler: QueryHandler): string;
+}, route: Route): string;
 export function urlFromAddress(): string;
 export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;

@@ -142,6 +142,7 @@ type RoutifyRuntimeOptions = {
      * hook: runs before router is destroyed
      */
     onDestroy: MaybeArray<OnDestroyRouterCallback>;
+    queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
 };
 /**
@@ -257,12 +258,12 @@ type QueryHandler = {
     parse: QueryHandlerParse;
     stringify: QueryHandlerStringify;
 };
-type QueryHandlerParse = (search: string) => {
+type QueryHandlerParse = (search: string, route: Route) => {
     [x: string]: string;
 };
 type QueryHandlerStringify = (search: {
     [x: string]: string;
-}) => string;
+}, route: Route) => string;
 type ComponentGuardFn = (route: Route) => any;
 type RerservedCmpProps = {
     guard?: ComponentGuardFn | undefined;
