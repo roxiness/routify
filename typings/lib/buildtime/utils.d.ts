@@ -1,5 +1,4 @@
 export function relativeUnix(path: any, path2: any): string;
-export function writeDynamicImport(outputDir: string, file: string, value: any): string;
 export function createDirname(meta: any): string;
 export function stringifyWithEscape(obj: any): string;
 export function resolvePlugins(plugins: any[]): Promise<RoutifyBuildtimePlugin[]>;

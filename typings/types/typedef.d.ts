@@ -214,16 +214,29 @@ type RoutifyBasePlugin = {
      * name of plugin(s) to run after
      */
     after?: (string | string[]) | undefined;
+    /**
+     * runs before "build"
+     */
     options: (arg0: Partial<RoutifyBuildtimeOptions>) => Partial<RoutifyBuildtimeOptions>;
 };
 type RoutifyBuildtimePluginType = {
+    /**
+     * runs after "options"
+     */
     build?: ((arg0: RoutifyBuildtimePayload) => (Promise<any> | any)) | undefined;
     path?: string | undefined;
     meta?: RoutifyExternalMetaHelper | undefined;
+    /**
+     * provides context to *.meta.js files
+     */
     metaContext?: (context: MetaContext & {
         [x: string]: any;
     }) => MetaContext;
     condition?: (RoutifyBuildtimePayload: any) => boolean;
+    /**
+     * transform output files
+     */
+    transform?: (id: string, content: string) => string;
     runtimePlugins: RoutifyBuildtimeRuntimePlugin[];
 };
 type MetaContextSplit = (value: any, name?: string | undefined) => any;

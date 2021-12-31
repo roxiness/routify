@@ -18,6 +18,7 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
         fileChanged: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
         fileWatcherReady: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
     };
+    writeFile(id: any, content: any): Promise<void>;
     start(): Promise<void>;
     #private;
 }

@@ -142,16 +142,17 @@
  * @prop {string=} name name of plugin
  * @prop {string|string[]=} before name of plugin(s) to run before
  * @prop {string|string[]=} after name of plugin(s) to run after
- * @prop {function(Partial<RoutifyBuildtimeOptions>):Partial<RoutifyBuildtimeOptions>} options
+ * @prop {function(Partial<RoutifyBuildtimeOptions>):Partial<RoutifyBuildtimeOptions>} options runs before "build"
  */
 
 /**
  * @typedef {Object} RoutifyBuildtimePluginType
- * @prop {function(RoutifyBuildtimePayload):(Promise<any>|any)=} build
+ * @prop {function(RoutifyBuildtimePayload):(Promise<any>|any)=} build runs after "options"
  * @prop {string=} path
  * @prop {RoutifyExternalMetaHelper=} meta
- * @prop {(context:MetaContext & Object.<string,any>)=>MetaContext} [metaContext]
+ * @prop {(context:MetaContext & Object.<string,any>)=>MetaContext} [metaContext] provides context to *.meta.js files
  * @prop {(RoutifyBuildtimePayload)=>Boolean=} condition
+ * @prop {(id:string, content:string) => string} [transform] transform output files
  * @prop {RoutifyBuildtimeRuntimePlugin[]} runtimePlugins
  */
 

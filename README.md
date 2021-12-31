@@ -257,7 +257,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** name of plugin
 *   `before` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run before
 *   `after` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)?** name of plugin(s) to run after
-*   `options` **function (Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>): Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>** 
+*   `options` **function (Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>): Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>** runs before "build"
 
 ### RoutifyBuildtimePluginType
 
@@ -265,7 +265,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 #### Properties
 
-*   `build` **function ([RoutifyBuildtimePayload](#routifybuildtimepayload)): ([Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any> | any)?** 
+*   `build` **function ([RoutifyBuildtimePayload](#routifybuildtimepayload)): ([Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any> | any)?** runs after "options"
 *   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
 *   `meta` **[RoutifyExternalMetaHelper](#routifyexternalmetahelper)?** 
 *   `runtimePlugins` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[RoutifyBuildtimeRuntimePlugin](#routifybuildtimeruntimeplugin)>** 
