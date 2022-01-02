@@ -236,7 +236,7 @@ type RoutifyBuildtimePluginType = {
     /**
      * transform output files
      */
-    transform?: (id: string, content: string) => string;
+    transform?: (id: string, content: string, instance: RoutifyBuildtime) => string;
     runtimePlugins: RoutifyBuildtimeRuntimePlugin[];
 };
 type MetaContextSplit = (value: any, name?: string | undefined) => any;
