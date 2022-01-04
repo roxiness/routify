@@ -11,7 +11,7 @@ export default defineConfig({
     plugins: [
         routify(),
         svelte({
-            emitCss: true,
+            emitCss: false,
             compilerOptions: {
                 dev: !production,
             },

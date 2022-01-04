@@ -21,7 +21,7 @@
         ".": "./lib/runtime/index.js",
         "./vite-plugin": "./lib/extra/vite-plugin.js",
         "./lib/extra/vite-plugin": "./lib/extra/vite-plugin.js",
-        "./lib/*": "./lib/*.js",
+        "./lib/*": "./lib/*",
         "./lib/cmp/*": "./lib/cmp/*.js",
         "./typings/*": "./typings/*",
         "./plugins/*": "./plugins/*"
