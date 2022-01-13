@@ -1,6 +1,4 @@
 <script>
-    /** @typedef {import('./Router').RouterOptions} RouterOptions */
-
     import { Router } from './Router.js'
     import { onDestroy as _onDestroy } from 'svelte'
     import { getUrlFromClick } from '../utils/index.js'
@@ -11,37 +9,39 @@
     export let routes = null
     export let decorator = null
 
-    /** @type {RouterOptions['urlReflector']} */
+    /** @type {RoutifyRuntimeOptions['urlReflector']} */
     export let urlReflector = null
-    /** @type {RouterOptions['instance']} */
+    /** @type {RoutifyRuntimeOptions['instance']} */
     export let instance = null
-    /** @type {RouterOptions['urlRewrite']} */
+    /** @type {RoutifyRuntimeOptions['urlRewrite']} */
     export let urlRewrite = null
-    /** @type {RouterOptions['url']} */
+    /** @type {RoutifyRuntimeOptions['url']} */
     export let url = null
-    /** @type {RouterOptions['name']} */
+    /** @type {RoutifyRuntimeOptions['name']} */
     export let name = null
-    /** @type {RouterOptions['rootNode']} */
+    /** @type {RoutifyRuntimeOptions['rootNode']} */
     export let rootNode = null
-    /** @type {RouterOptions['passthrough']} */
+    /** @type {RoutifyRuntimeOptions['passthrough']} */
     export let passthrough = null
-    /** @type {RouterOptions['beforeRouterInit']} */
+    /** @type {RoutifyRuntimeOptions['beforeRouterInit']} */
     export let beforeRouterInit = null
-    /** @type {RouterOptions['afterRouterInit']} */
+    /** @type {RoutifyRuntimeOptions['afterRouterInit']} */
     export let afterRouterInit = null
-    /** @type {RouterOptions['beforeUrlChange']} */
+    /** @type {RoutifyRuntimeOptions['beforeUrlChange']} */
     export let beforeUrlChange = null
-    /** @type {RouterOptions['afterUrlChange']} */
+    /** @type {RoutifyRuntimeOptions['afterUrlChange']} */
     export let afterUrlChange = null
-    /** @type {RouterOptions['transformFragments']} */
+    /** @type {RoutifyRuntimeOptions['transformFragments']} */
     export let transformFragments = null
-    /** @type {RouterOptions['onDestroy']} */
+    /** @type {RoutifyRuntimeOptions['onDestroy']} */
     export let onDestroy = null
-    /** @type {RouterOptions['plugins']} */
+    /** @type {RoutifyRuntimeOptions['plugins']} */
     export let plugins = null
+    /** @type {RoutifyRuntimeOptions['queryHandler']} */
+    export let queryHandler = null
 
     $: {
-        /** @type {import('./Router').RouterOptions}*/
+        /** @type {RoutifyRuntimeOptions}*/
         const options = {
             instance,
             rootNode,
@@ -57,6 +57,7 @@
             transformFragments,
             onDestroy,
             plugins,
+            queryHandler,
         }
 
         // todo move everything to init
