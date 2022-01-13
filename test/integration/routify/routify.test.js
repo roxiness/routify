@@ -58,11 +58,12 @@ test('can transform output files', async () => {
         ],
     })
 
+    await emptyTransformInstance.start()
+
     expect(ids[0]).toMatch(/_default_admin-bundle.js$/)
     expect(ids[1]).toMatch(/routes.default.js$/)
     expect(ids[2]).toMatch(/instance.default.js$/)
 
-    await emptyTransformInstance.start()
     const emptyTransformExpectedContent = readFileSync(bundlePath, 'utf-8')
     expect(emptyTransformExpectedContent).toEqual(baseExpectedContent)
 
