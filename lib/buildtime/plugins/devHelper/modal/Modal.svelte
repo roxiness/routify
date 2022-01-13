@@ -2,13 +2,14 @@
     import Content from './Content.svelte'
     let show = true
     const hide = () => (show = false)
+    const reveal = () => (show = true)
 </script>
 
 <div class="modal">
     {#if show}
         <Content {hide} />
     {:else}
-        <button>Routify Helper</button>
+        <button on:click={reveal}>Routify Helper</button>
     {/if}
 </div>
 

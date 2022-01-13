@@ -6,11 +6,8 @@
 </script>
 
 <ul>
-    {#each Object.entries(instance.rootNodes) as [rootNodeName, rootNode]}
+    {#each Object.values(instance.rootNodes) as rootNode}
         <li>
-            <b>
-                {rootNodeName}
-            </b>
             <Node node={rootNode} />
         </li>
     {/each}

@@ -1,9 +1,11 @@
 <script>
     import { setContext } from 'svelte'
     import { writable } from 'svelte/store'
-    import Instance from './Instance.svelte'
+    import Header from './Header.svelte'
+    import InstanceTree from './InstanceTree.svelte'
     import NodeInfo from './NodeInfo.svelte'
     import SelectInstance from './SelectInstance.svelte'
+
     export let hide
 
     const { instances } = __routify
@@ -14,11 +16,11 @@
 
 <div class="helper">
     <header>
-        <span on:click={hide}> Routify Helper </span>
+        <Header bind:hide />
     </header>
     <div class="instance">
         <SelectInstance bind:instance {instances} />
-        <Instance {instance} />
+        <InstanceTree {instance} />
     </div>
     <div class="node-info">
         <NodeInfo {node} />
@@ -52,7 +54,7 @@
     }
     footer {
         background: var(--color-pink-500);
-        height: var(--size-2);
+        height: var(--size-1);
         grid-area: footer;
     }
     .instance {

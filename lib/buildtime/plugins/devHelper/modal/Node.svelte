@@ -1,6 +1,7 @@
 <script>
     import { getContext } from 'svelte'
     export let node
+    export let rootName = ''
 
     const nodeStore = getContext('node')
 
@@ -10,13 +11,12 @@
     }
 </script>
 
-<a href={node.path} class="node">
-    {node.name || 'ROOT'}
+<strong href={node.path} class="node">
+    {@html node.name || `<strong>[${node.rootName}]</strong>`}
     <a href="#" on:click={selectNode}>
-        <!-- <span class="info"> 📋 </span> -->
         <span class="info"> i </span>
     </a>
-</a>
+</strong>
 
 <ul>
     {#each node.children as childNode}
