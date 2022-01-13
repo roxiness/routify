@@ -1,1 +1,1 @@
-declare function mountHelper(): Promise<void>;
+export {};

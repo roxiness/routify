@@ -232,7 +232,6 @@ type RoutifyBuildtimePluginType = {
     metaContext?: (context: MetaContext & {
         [x: string]: any;
     }) => MetaContext;
-    condition?: (RoutifyBuildtimePayload: any) => boolean;
     /**
      * transform output files
      */
