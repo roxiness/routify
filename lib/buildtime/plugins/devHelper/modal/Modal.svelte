@@ -1,8 +1,13 @@
 <script>
     import Content from './Content.svelte'
-    let show = true
-    const hide = () => (show = false)
-    const reveal = () => (show = true)
+
+    let show = JSON.parse(localStorage.getItem('show-routify-devHelper'))
+    const hide = () => setShow(false)
+    const reveal = () => setShow(true)
+    const setShow = value => {
+        show = value
+        localStorage.setItem('show-routify-devHelper', value)
+    }
 </script>
 
 <div class="modal">

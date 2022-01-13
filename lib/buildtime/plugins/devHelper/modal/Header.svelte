@@ -7,7 +7,6 @@
         error: 1,
         warn: 2,
         debug: 4,
-        trace: 4,
     }
 
     $: console.log(level)

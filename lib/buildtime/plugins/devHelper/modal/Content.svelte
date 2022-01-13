@@ -41,6 +41,7 @@
         grid-auto-rows: auto;
         width: 700px;
         height: 400px;
+        box-shadow: 8px 8px 16px 0 black;
     }
     header {
         border-top-left-radius: var(--radius-lg);
@@ -64,6 +65,7 @@
     .node-info {
         grid-area: node-info;
         width: 500px;
+        border-left: 2px solid var(--color-grey-300);
     }
     .instance,
     .node-info {

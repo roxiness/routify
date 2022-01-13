@@ -1,8 +1,6 @@
 <script>
     import Node from './Node.svelte'
     export let instance
-
-    console.log(instance)
 </script>
 
 <ul>
