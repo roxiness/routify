@@ -6,7 +6,7 @@
 
     /* for SSR we need to tell Sveltekit to wait for
        Routify to finish loading its components */
-    export const load = ({ page }) => router.url.replace(page.path)
+    export const load = ({ url }) => router.url.replace(url.path)
 </script>
 
 <Router {router} />
