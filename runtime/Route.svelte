@@ -44,7 +44,7 @@
   $: if (lastNodes !== nodes) {
     lastNodes = nodes
     ;[node, ...remainingNodes] = [...nodes]
-    node.api.reset = () => invalidate++
+    node['api'].reset = () => invalidate++
   }
 
   /**  @param {LayoutOrDecorator} node */
