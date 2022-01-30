@@ -95,6 +95,11 @@
         "svelteBracketNewLine": false,
         "svelteIndentScriptAndStyle": true
     },
+    "engines": {
+        "pnpm": "^6.7.0",
+        "yarn": "forbidden, use pnpm",
+        "npm": "forbidden, use pnpm"
+    },
     "workspaces": [
         "examples/*",
         "examples/microframework/*"
