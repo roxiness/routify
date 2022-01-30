@@ -1,7 +1,6 @@
 node_modules
-examples/package-lock.json
-test/package-lock.json
-site/package-lock.json
+package-lock.json
+yarn.lock
 temp
 .history
 .routify
