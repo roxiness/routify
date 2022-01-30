@@ -1,4 +1,7 @@
 {
     "name": "routify-monorepo",
-    "private": true
+    "private": true,
+    "scripts": {
+        "test": "pnpm test -r"
+    }
 }
