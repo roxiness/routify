@@ -80,21 +80,6 @@
         "prompts": "^2.4.1",
         "svelte": "^3.39.0"
     },
-    "prettier": {
-        "singleQuote": true,
-        "quoteProps": "as-needed",
-        "trailingComma": "all",
-        "bracketSpacing": true,
-        "arrowParens": "avoid",
-        "semi": false,
-        "useTabs": false,
-        "tabWidth": 4,
-        "printWidth": 90,
-        "svelteSortOrder": "options-scripts-markup-styles",
-        "svelteAllowShorthand": true,
-        "svelteBracketNewLine": false,
-        "svelteIndentScriptAndStyle": true
-    },
     "engines": {
         "pnpm": "^6.7.0",
         "yarn": "forbidden, use pnpm",
