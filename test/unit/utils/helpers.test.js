@@ -1,4 +1,5 @@
 import { isActiveUrl } from '../../../lib/runtime/helpers/index.js'
+import { test, expect } from 'vitest'
 
 expect.extend({
     toBeActive(input) {
@@ -12,6 +13,9 @@ expect.extend({
         }
     },
 })
+
+const assertIsNotActive = input => expect(input).not['toBeActive']()
+const assertIsActive = input => expect(input)['toBeActive']()
 
 test('should ignore index', () => {
     const shouldBeTrue = [
@@ -53,7 +57,3 @@ test('recursive set to false should not ignore index', () => {
     shouldBeTrue.forEach(assertIsActive)
     shouldBeFalse.forEach(assertIsNotActive)
 })
-
-const assertIsActive = input => expect(input)['toBeActive']()
-
-const assertIsNotActive = input => expect(input).not['toBeActive']()

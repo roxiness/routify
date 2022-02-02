@@ -1,5 +1,6 @@
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 import { createDirname } from '../../../lib/buildtime/utils.js'
+import { test, expect, beforeAll, afterAll } from 'vitest'
 import { resolve } from 'path'
 import { unlinkSync, writeFileSync } from 'fs'
 import fse from 'fs-extra'

@@ -1,4 +1,5 @@
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime'
+import { test, expect } from 'vitest'
 
 const instance = new RoutifyBuildtime({})
 const node = instance.createNode('my-node')

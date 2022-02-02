@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`filemapper: 4.filemap-with-components 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [],
+exports[`filemapper > 4.filemap-with-components 1`] = `
+{
+  "children": [
+    {
+      "children": [],
       "file": File {
         "base": "_reset.svelte",
         "dir": "test/unit/filemapper/example/routes/admin",
@@ -13,16 +13,16 @@ Object {
         "path": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       },
       "id": "_default_admin",
-      "meta": Object {
+      "meta": {
         "reset": true,
       },
       "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       "name": "admin",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
+    {
+      "children": [
+        {
+          "children": [],
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -31,14 +31,14 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           },
           "id": "_default_blog__slug__svelte",
-          "meta": Object {
+          "meta": {
             "dynamic": true,
           },
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
         },
-        Object {
-          "children": Array [],
+        {
+          "children": [],
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -47,7 +47,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           },
           "id": "_default_blog_prefixed_slug__svelte",
-          "meta": Object {
+          "meta": {
             "dynamic": true,
           },
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
@@ -62,12 +62,12 @@ Object {
         "path": "test/unit/filemapper/example/routes/blog",
       },
       "id": "_default_blog",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "blog",
     },
-    Object {
-      "children": Array [],
+    {
+      "children": [],
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example/routes",
@@ -76,16 +76,16 @@ Object {
         "path": "test/unit/filemapper/example/routes/index.svelte",
       },
       "id": "_default_index_svelte",
-      "meta": Object {},
+      "meta": {},
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [
-            Object {
-              "children": Array [],
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -94,12 +94,12 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               },
               "id": "_default_no_layouts_nested_foo_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
             },
-            Object {
-              "children": Array [],
+            {
+              "children": [],
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -108,7 +108,7 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               },
               "id": "_default_no_layouts_nested_index_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
             },
@@ -121,7 +121,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/no-layouts/nested",
           },
           "id": "_default_no_layouts_nested",
-          "meta": Object {},
+          "meta": {},
           "module": false,
           "name": "nested",
         },
@@ -134,7 +134,7 @@ Object {
         "path": "test/unit/filemapper/example/routes/no-layouts",
       },
       "id": "_default_no_layouts",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "no-layouts",
     },
@@ -147,18 +147,18 @@ Object {
     "path": "test/unit/filemapper/example/routes/_module.svelte",
   },
   "id": "_default",
-  "meta": Object {},
+  "meta": {},
   "module": "test/unit/filemapper/example/routes/_module.svelte",
   "name": undefined,
   "rootName": "default",
 }
 `;
 
-exports[`files are mapped: 1.filemap-only 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [],
+exports[`files are mapped > 1.filemap-only 1`] = `
+{
+  "children": [
+    {
+      "children": [],
       "file": File {
         "base": "_module.svelte",
         "dir": "test/unit/filemapper/example/routes",
@@ -167,14 +167,14 @@ Object {
         "path": "test/unit/filemapper/example/routes/_module.svelte",
       },
       "id": "_default__module_svelte",
-      "meta": Object {},
+      "meta": {},
       "module": "test/unit/filemapper/example/routes/_module.svelte",
       "name": "_module",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
+    {
+      "children": [
+        {
+          "children": [],
           "file": File {
             "base": "_reset.svelte",
             "dir": "test/unit/filemapper/example/routes/admin",
@@ -183,7 +183,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/admin/_reset.svelte",
           },
           "id": "_default_admin__reset_svelte",
-          "meta": Object {},
+          "meta": {},
           "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
           "name": "_reset",
         },
@@ -196,14 +196,14 @@ Object {
         "path": "test/unit/filemapper/example/routes/admin",
       },
       "id": "_default_admin",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "admin",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
+    {
+      "children": [
+        {
+          "children": [],
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -212,12 +212,12 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           },
           "id": "_default_blog__slug__svelte",
-          "meta": Object {},
+          "meta": {},
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
         },
-        Object {
-          "children": Array [],
+        {
+          "children": [],
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -226,7 +226,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           },
           "id": "_default_blog_prefixed_slug__svelte",
-          "meta": Object {},
+          "meta": {},
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           "name": "prefixed[slug]",
         },
@@ -239,12 +239,12 @@ Object {
         "path": "test/unit/filemapper/example/routes/blog",
       },
       "id": "_default_blog",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "blog",
     },
-    Object {
-      "children": Array [],
+    {
+      "children": [],
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example/routes",
@@ -253,16 +253,16 @@ Object {
         "path": "test/unit/filemapper/example/routes/index.svelte",
       },
       "id": "_default_index_svelte",
-      "meta": Object {},
+      "meta": {},
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [
-            Object {
-              "children": Array [],
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -271,12 +271,12 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               },
               "id": "_default_no_layouts_nested_foo_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
             },
-            Object {
-              "children": Array [],
+            {
+              "children": [],
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -285,7 +285,7 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               },
               "id": "_default_no_layouts_nested_index_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
             },
@@ -298,7 +298,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/no-layouts/nested",
           },
           "id": "_default_no_layouts_nested",
-          "meta": Object {},
+          "meta": {},
           "module": false,
           "name": "nested",
         },
@@ -311,7 +311,7 @@ Object {
         "path": "test/unit/filemapper/example/routes/no-layouts",
       },
       "id": "_default_no_layouts",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "no-layouts",
     },
@@ -324,18 +324,18 @@ Object {
     "path": "test/unit/filemapper/example/routes",
   },
   "id": "_default",
-  "meta": Object {},
+  "meta": {},
   "module": undefined,
   "name": undefined,
   "rootName": "default",
 }
 `;
 
-exports[`modules are merged with parent node: 2.filemap-with-modules 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [],
+exports[`modules are merged with parent node > 2.filemap-with-modules 1`] = `
+{
+  "children": [
+    {
+      "children": [],
       "file": File {
         "base": "_reset.svelte",
         "dir": "test/unit/filemapper/example/routes/admin",
@@ -344,14 +344,14 @@ Object {
         "path": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       },
       "id": "_default_admin",
-      "meta": Object {},
+      "meta": {},
       "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       "name": "admin",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
+    {
+      "children": [
+        {
+          "children": [],
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -360,12 +360,12 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           },
           "id": "_default_blog__slug__svelte",
-          "meta": Object {},
+          "meta": {},
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
         },
-        Object {
-          "children": Array [],
+        {
+          "children": [],
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -374,7 +374,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           },
           "id": "_default_blog_prefixed_slug__svelte",
-          "meta": Object {},
+          "meta": {},
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           "name": "prefixed[slug]",
         },
@@ -387,12 +387,12 @@ Object {
         "path": "test/unit/filemapper/example/routes/blog",
       },
       "id": "_default_blog",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "blog",
     },
-    Object {
-      "children": Array [],
+    {
+      "children": [],
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example/routes",
@@ -401,16 +401,16 @@ Object {
         "path": "test/unit/filemapper/example/routes/index.svelte",
       },
       "id": "_default_index_svelte",
-      "meta": Object {},
+      "meta": {},
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [
-            Object {
-              "children": Array [],
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -419,12 +419,12 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               },
               "id": "_default_no_layouts_nested_foo_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
             },
-            Object {
-              "children": Array [],
+            {
+              "children": [],
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -433,7 +433,7 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               },
               "id": "_default_no_layouts_nested_index_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
             },
@@ -446,7 +446,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/no-layouts/nested",
           },
           "id": "_default_no_layouts_nested",
-          "meta": Object {},
+          "meta": {},
           "module": false,
           "name": "nested",
         },
@@ -459,7 +459,7 @@ Object {
         "path": "test/unit/filemapper/example/routes/no-layouts",
       },
       "id": "_default_no_layouts",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "no-layouts",
     },
@@ -472,18 +472,18 @@ Object {
     "path": "test/unit/filemapper/example/routes/_module.svelte",
   },
   "id": "_default",
-  "meta": Object {},
+  "meta": {},
   "module": "test/unit/filemapper/example/routes/_module.svelte",
   "name": undefined,
   "rootName": "default",
 }
 `;
 
-exports[`options get added: 3.filemap-with-resets 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [],
+exports[`options get added > 3.filemap-with-resets 1`] = `
+{
+  "children": [
+    {
+      "children": [],
       "file": File {
         "base": "_reset.svelte",
         "dir": "test/unit/filemapper/example/routes/admin",
@@ -492,16 +492,16 @@ Object {
         "path": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       },
       "id": "_default_admin",
-      "meta": Object {
+      "meta": {
         "reset": true,
       },
       "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       "name": "admin",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [],
+    {
+      "children": [
+        {
+          "children": [],
           "file": File {
             "base": "[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -510,14 +510,14 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           },
           "id": "_default_blog__slug__svelte",
-          "meta": Object {
+          "meta": {
             "dynamic": true,
           },
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
         },
-        Object {
-          "children": Array [],
+        {
+          "children": [],
           "file": File {
             "base": "prefixed[slug].svelte",
             "dir": "test/unit/filemapper/example/routes/blog",
@@ -526,7 +526,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           },
           "id": "_default_blog_prefixed_slug__svelte",
-          "meta": Object {
+          "meta": {
             "dynamic": true,
           },
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
@@ -541,12 +541,12 @@ Object {
         "path": "test/unit/filemapper/example/routes/blog",
       },
       "id": "_default_blog",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "blog",
     },
-    Object {
-      "children": Array [],
+    {
+      "children": [],
       "file": File {
         "base": "index.svelte",
         "dir": "test/unit/filemapper/example/routes",
@@ -555,16 +555,16 @@ Object {
         "path": "test/unit/filemapper/example/routes/index.svelte",
       },
       "id": "_default_index_svelte",
-      "meta": Object {},
+      "meta": {},
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
     },
-    Object {
-      "children": Array [
-        Object {
-          "children": Array [
-            Object {
-              "children": Array [],
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
               "file": File {
                 "base": "foo.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -573,12 +573,12 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               },
               "id": "_default_no_layouts_nested_foo_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
             },
-            Object {
-              "children": Array [],
+            {
+              "children": [],
               "file": File {
                 "base": "index.svelte",
                 "dir": "test/unit/filemapper/example/routes/no-layouts/nested",
@@ -587,7 +587,7 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               },
               "id": "_default_no_layouts_nested_index_svelte",
-              "meta": Object {},
+              "meta": {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
             },
@@ -600,7 +600,7 @@ Object {
             "path": "test/unit/filemapper/example/routes/no-layouts/nested",
           },
           "id": "_default_no_layouts_nested",
-          "meta": Object {},
+          "meta": {},
           "module": false,
           "name": "nested",
         },
@@ -613,7 +613,7 @@ Object {
         "path": "test/unit/filemapper/example/routes/no-layouts",
       },
       "id": "_default_no_layouts",
-      "meta": Object {},
+      "meta": {},
       "module": false,
       "name": "no-layouts",
     },
@@ -626,7 +626,7 @@ Object {
     "path": "test/unit/filemapper/example/routes/_module.svelte",
   },
   "id": "_default",
-  "meta": Object {},
+  "meta": {},
   "module": "test/unit/filemapper/example/routes/_module.svelte",
   "name": undefined,
   "rootName": "default",

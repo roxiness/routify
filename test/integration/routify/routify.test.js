@@ -1,7 +1,8 @@
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 import { createDirname } from '../../../lib/buildtime/utils.js'
-import { resolve } from 'path'
+import { test, expect, beforeAll, afterAll } from 'vitest'
 import { readFileSync } from 'fs'
+import { resolve } from 'path'
 
 const __dirname = createDirname(import.meta)
 

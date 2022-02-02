@@ -1,9 +1,10 @@
-import fse from 'fs-extra'
-import { dirname, resolve } from 'path'
-import { fileURLToPath } from 'url'
-import { exportNode } from '../../../lib/buildtime/plugins/exporter/exporter.js'
 import { filemapper } from '../../../lib/buildtime/plugins/filemapper/lib/index.js'
+import { exportNode } from '../../../lib/buildtime/plugins/exporter/exporter.js'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
+import { dirname, resolve } from 'path'
+import { test, expect } from 'vitest'
+import { fileURLToPath } from 'url'
+import fse from 'fs-extra'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const options = {

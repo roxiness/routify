@@ -1,4 +1,5 @@
 import { normalizePlugins, sortPlugins } from '../../../lib/common/utils.js'
+import { test, expect } from 'vitest'
 
 test('sortPlugins can sort plugins', async () => {
     const plugins = [

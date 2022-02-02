@@ -1,10 +1,11 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
 import { createNodesFromFiles } from '../../../lib/buildtime/plugins/filemapper/lib/utils/createNodesFromFiles.js'
 import { moveModuleToParentNode } from '../../../lib/buildtime/plugins/filemapper/lib/utils/moveModuleToParentNode.js'
 import { filenameToOptions } from '../../../lib/buildtime/plugins/filemapper/lib/utils/filenameToOptions.js'
 import { filemapper } from '../../../lib/buildtime/plugins/filemapper/lib/index.js'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
+import { test, expect } from 'vitest'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 

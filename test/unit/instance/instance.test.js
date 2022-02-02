@@ -1,5 +1,6 @@
 import { RNodeBuildtime } from '../../../lib/buildtime/RNodeBuildtime'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime'
+import { test, expect } from 'vitest'
 
 /** @type {RoutifyBuildtime} */
 let instance
