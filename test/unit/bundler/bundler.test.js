@@ -1,11 +1,11 @@
-import { metaFromFile } from '../../../lib/buildtime/plugins/metaFromFile/metaFromFile.js'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+import { readFileSync } from 'fs'
 import { filemapper } from '../../../lib/buildtime/plugins/filemapper/lib/index.js'
 import { createBundles } from '../../../lib/buildtime/plugins/bundler/bundler.js'
+import { metaFromFile } from '../../../lib/buildtime/plugins/metaFromFile/metaFromFile.js'
 import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
-import { test, expect } from 'vitest'
-import { fileURLToPath } from 'url'
-import { readFileSync } from 'fs'
-import { dirname } from 'path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
