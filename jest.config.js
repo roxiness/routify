@@ -12,7 +12,7 @@ const common = {
         '^#lib(.+)$': '<rootDir>lib$1',
         '^#root(.+)$': '<rootDir>$1',
     },
-    testTimeout: 30000,
+    testTimeout: 10000,
     modulePaths: ['<rootDir>'],
     roots: ['<rootDir>'],
 
@@ -20,7 +20,9 @@ const common = {
         '^.+\\.svelte$': [
             'svelte-jester',
             {
-                preprocess: false,
+                compilerOptions: {},
+                // preprocess: true,
+                // preprocess: false,
             },
         ],
     },

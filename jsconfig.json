@@ -2,9 +2,9 @@
     "compilerOptions": {
         "checkJs": true,
         "baseUrl": ".",
-        "target": "esnext",
+        "target": "ES2017",
         "moduleResolution": "node",
-        "module": "es2020"
+        "module": "es2022"
     },
     "include": ["lib/**/*.js", "types/**/*.js"],
     "exclude": [
