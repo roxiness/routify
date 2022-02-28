@@ -75,9 +75,9 @@ export const context: import("svelte/store").Readable<{
 export const ready: import("svelte/store").Readable<() => void>;
 /**
  * @callback AfterPageLoadHelper
- * @param {(page?: ClientNodeApi) => boolean} callback
+ * @param {(page?: ClientNodeApi) => void} callback
  *
- * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<(page?: ClientNodeApi) => boolean>}} AfterPageLoadHelperStore
+ * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<(page?: ClientNodeApi) => void>}} AfterPageLoadHelperStore
  * @type {AfterPageLoadHelperStore}
  */
 export const afterPageLoad: AfterPageLoadHelperStore;
