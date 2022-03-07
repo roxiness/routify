@@ -32,7 +32,8 @@
         "build:documentation": "documentation readme types/typedef.js -f md --section API",
         "build:typings": "tsc ",
         "test": "run-s test:*",
-        "test:jest": "jest . --detectOpenHandles",
+        "test:probs": "probs test,lib",
+        "test-bak:jest": "jest . --detectOpenHandles",
         "test:lint": "npm run util:prettier -- --check",
         "util:prettier": "prettier -c --plugin-search-dir=. \"{common,lib,plugins,test}/**/*.{js,svelte}\" --ignore-path .gitignore",
         "semantic-release": "semantic-release"
