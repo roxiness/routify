@@ -22,5 +22,6 @@ const options = {
             execArgv: ['--experimental-loader', 'svelte-esm-loader', '--no-warnings'],
         }
     },
+    runner: 'fork',
 }
 export default options
