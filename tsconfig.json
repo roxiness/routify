@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-        "module": "ES2020",
+        "module": "ES2022",
         "checkJs": true,
         "allowJs": true,
         "declaration": true,
         "moduleResolution": "Node",
         "rootDirs": ["."],
-        "target": "es6",
+        "target": "ES2017",
         "declarationDir": "typings",
         "emitDeclarationOnly": true,
         "allowSyntheticDefaultImports": true
