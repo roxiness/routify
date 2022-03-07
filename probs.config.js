@@ -1,16 +1,14 @@
 /// <reference types="probs" />
 
-import expect from 'expect'
-
 /** @type {ProbsConfig} */
 const options = {
-    setupFile: () => {
-        global['expect'] = expect
-    },
-    worker: ({ file }) => {
-        return {
-            execArgv: ['--experimental-loader', 'svelte-esm-loader', '--no-warnings'],
-        }
-    },
+    worker: ({ file }) => ({
+        execArgv: [
+            '--experimental-loader',
+            'svelte-esm-loader',
+            '--experimental-specifier-resolution',
+            'node',
+        ],
+    }),
 }
 export default options
