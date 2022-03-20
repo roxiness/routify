@@ -3,17 +3,12 @@ import routify from '@roxi/routify/vite-plugin'
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
     kit: {
-        // hydrate the <div id="svelte"> element in src/app.html
-        target: '#svelte',
-
         vite: {
             plugins: [routify({ routesDir: 'src/pages' })],
             resolve: {
                 dedupe: ['svelte'],
             },
         },
-
-        router: false,
     },
 }
 
