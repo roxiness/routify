@@ -9,9 +9,11 @@ export default defineConfig({
     clearScreen: false,
 
     plugins: [
-        routify(),
+        routify({
+            devHelper: !production,
+        }),
         svelte({
-            emitCss: true,
+            emitCss: false,
             compilerOptions: {
                 dev: !production,
             },
