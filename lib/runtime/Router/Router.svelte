@@ -1,6 +1,6 @@
 <script>
     import { Router } from './Router.js'
-    import { onDestroy as _onDestroy } from 'svelte'
+    import { onDestroy as _onDestroy, onMount } from 'svelte'
     import { getUrlFromClick } from '../utils/index.js'
     import Component from './Component.svelte'
 
@@ -70,12 +70,16 @@
 
     $: router.log.debug('before render', fragments) // ROUTIFY-DEV-ONLY
 
-    const initialize = elem => {
+    onMount(() => {
         if (!router.passthrough) {
-            elem.addEventListener('click', handleClick)
-            elem.addEventListener('keydown', handleClick)
+            document.addEventListener('click', handleClick)
+            document.addEventListener('keydown', handleClick)
         }
-    }
+        return () => {
+            document.removeEventListener('click', handleClick)
+            document.removeEventListener('keydown', handleClick)
+        }
+    })
 
     const handleClick = event => {
         const url = getUrlFromClick(event)
@@ -86,9 +90,7 @@
 </script>
 
 {#if $activeRoute}
-    <div style="display: contents" use:initialize>
-        <Component {fragments} {decorator} />
-    </div>
+    <Component {fragments} {decorator} />
 {/if}
 
 {#if !router.parentElem}
