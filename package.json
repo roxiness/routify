@@ -55,7 +55,7 @@
         "playwright": "^1.17.1",
         "prettier": "^2.5.1",
         "prettier-plugin-svelte": "^2.5.1",
-        "probs": "^1.1.0-1",
+        "probs": "^1.1.0-5",
         "rollup": "^2.47.0",
         "rollup-plugin-livereload": "^2.0.5",
         "rollup-plugin-svelte": "^7.1.0",
