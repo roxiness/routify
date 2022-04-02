@@ -5,8 +5,8 @@ export class RouteFragment {
      * @param {String} urlFragment a fragment of the url (fragments = url.split('/'))
      */
     constructor(route: Route, node: RNodeRuntime, urlFragment: string);
-    route: import("./Route").Route;
-    node: import("../Instance/RNodeRuntime").RNodeRuntime;
+    route: import("./Route.js").Route;
+    node: import("../Instance/RNodeRuntime.js").RNodeRuntime;
     /** @type {RoutifyLoadReturn} */
     load: RoutifyLoadReturn;
     urlFragment: string;
@@ -14,9 +14,7 @@ export class RouteFragment {
     _params: {
         [x: string]: string | string[];
     };
-    get params(): {
-        [x: string]: string | string[];
-    };
+    get params(): {};
     setParams(params: any): void;
     getParamsFromFragment(): {};
 }

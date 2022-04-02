@@ -1,7 +1,8 @@
 export * from "./logger.js";
 export function isDescendantElem(parent: any): (elem: any) => boolean;
 export function getUrlFromClick(event: any): string;
-export function pathAndParamsToUrl(path: string, params: any, queryHandler: Function): string;
+export function pathAndParamsToUrl(path: string, params: any, queryHandler: Function, useWildcards: boolean): string;
+export function insertWildcards(str: string): string;
 export function fromEntries(iterable: any): any;
 export function populateUrl(path: string, params: {
     [x: string]: string;

@@ -39,10 +39,10 @@ export const params: Readable<{
  *
  * @type {Readable<IsActive>} */
 export const isActive: Readable<IsActive>;
-export function isActiveRoute($route: any): (path: string, params: {
+export function isActiveRoute($route: Route): (path: string, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
-export function isActiveUrl(url: any): (path: string, params: {
+export function isActiveUrl(url: any, actualParams?: {}): (path: string, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
 export function resolveNode(path: string): void | import("../Instance/RNodeRuntime.js").RNodeRuntime;

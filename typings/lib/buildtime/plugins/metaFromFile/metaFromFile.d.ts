@@ -4,5 +4,7 @@ export function metaFromFile({ instance }: {
 export function parseComment(body: string): {
     [x: string]: any;
 };
-export function htmlComments(filepath: string): Promise<{}>;
+export function htmlComments(filepath: string): Promise<{
+    [x: string]: any;
+}>;
 export function getExternalMeta(filepath: string, context: any): Promise<any>;
