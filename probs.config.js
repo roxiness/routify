@@ -2,10 +2,11 @@
 
 /** @type {ProbsConfig} */
 const options = {
+    ignore: ['**/temp/**'],
     worker: ({ file }) => ({
         execArgv: [
             '--experimental-loader',
-            'svelte-esm-loader',
+            'esm-loader-svelte',
             '--experimental-specifier-resolution',
             'node',
         ],

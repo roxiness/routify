@@ -27,7 +27,7 @@ const options = {
     },
     worker: ({ file }) => {
         return {
-            execArgv: ['--experimental-loader', 'svelte-esm-loader', '--no-warnings'],
+            execArgv: ['--experimental-loader', 'esm-loader-svelte', '--no-warnings'],
         }
     },
     runner: 'fork',
