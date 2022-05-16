@@ -99,9 +99,8 @@ function createEventListeners(updatePage) {
 }
 
 function handleClick(event) {
-  const el = event.target.closest('a')
+  const el = event.target.closest('a') || event.composedPath().find(el => el.tagName === 'A')
   const href = el && el.href
-
   if (
     event.ctrlKey ||
     event.metaKey ||

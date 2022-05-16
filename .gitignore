@@ -8,3 +8,4 @@ tmp/**
 *.bak
 *.orig
 **/.routify
+yarn.lock
