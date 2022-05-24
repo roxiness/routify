@@ -3,6 +3,8 @@
 const { Command } = require('commander')
 const program = new Command()
 const defaults = require('../lib/utils/config')()
+const logSymbols = require('log-symbols')
+const chalk = require('chalk')
 const stdio = 'inherit'
 
 program
@@ -40,6 +42,14 @@ program
   .option('-b, --branch [name]', 'branch to checkout (can also be commit hash or release tag)', 'master')
 
   .action(init => {
+    console.log(
+      '\n',
+      chalk.red(`${logSymbols.warning} routify init is ${chalk.bold('deprecated')}!`),
+      '\n',
+      ` > Please use ${chalk.bold.magenta('npm init routify')} instead`,
+      '\n'
+    )
+
     const fs = require('fs-extra')
     const log = require('../lib/utils/log')
     const { execSync } = require('child_process')
