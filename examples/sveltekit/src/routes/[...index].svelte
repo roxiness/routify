@@ -6,7 +6,10 @@
 
     /* for SSR we need to tell Sveltekit to wait for
        Routify to finish loading its components */
-    export const load = ({ url }) => router.url.replace(url.pathname + url.search + url.hash)
+    export const load = async ({ url }) => {
+        await router.url.replace(url.pathname + url.search)
+        return {}
+    }
 </script>
 
 <Router {router} />
