@@ -86,7 +86,7 @@
 </script>
 
 {#if $activeRoute}
-    <div style="display: contents" use:initialize>
+    <div data-routify="router" style="display: contents" use:initialize>
         <Component {fragments} {decorator} />
     </div>
 {/if}
