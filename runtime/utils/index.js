@@ -12,12 +12,8 @@ export function handleHash() {
   if (navigator.userAgent.includes('jsdom')) return false
   const { hash } = window.location
   if (hash) {
-    const validElementIdRegex = /^[A-Za-z]+[\w\-\:\.]*$/
-    const elementId = hash.substring(1)
-    if (validElementIdRegex.test(elementId)) {
-      const el = document.querySelector(`[id='${elementId}']`)
-      if (el) el.scrollIntoView()
-    }
+    const el = document.getElementById(hash.substring(1))
+    if (el) el.scrollIntoView()
   }
 }
 
