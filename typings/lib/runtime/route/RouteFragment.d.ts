@@ -20,5 +20,4 @@ export class RouteFragment {
      * @type {Object.<string, string|string[]>}
      **/
     private _params;
-    getParamsFromFragment(): {};
 }
