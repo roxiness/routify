@@ -10,8 +10,8 @@ export class RouteFragment {
     });
     route: import("./Route.js").Route;
     node: import("../Instance/RNodeRuntime.js").RNodeRuntime;
-    /** @type {RoutifyLoadReturn} */
-    load: RoutifyLoadReturn;
+    /** @type {Partial<RoutifyLoadReturn>} */
+    load: Partial<RoutifyLoadReturn>;
     urlFragment: string;
     set params(arg: {});
     get params(): {};

@@ -277,15 +277,15 @@ type QueryHandlerStringify = (search: {
     [x: string]: string;
 }, route: Route) => string;
 type ComponentGuardFn = (route: Route) => any;
-type RerservedCmpProps = {
+type ReservedCmpProps = {
     guard?: ComponentGuardFn | undefined;
     load?: RoutifyLoad | undefined;
     default?: import('svelte/types/runtime').SvelteComponent | undefined;
 };
-type Module = RerservedCmpProps & {
+type Module = ReservedCmpProps & {
     [x: string]: any;
 };
-type LoadSvelteModule = () => RerservedCmpProps;
+type LoadSvelteModule = () => (Promise<ReservedCmpProps> | ReservedCmpProps);
 type PathNode = {
     urlFragment: string;
     node: RNodeRuntime;

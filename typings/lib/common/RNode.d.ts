@@ -4,10 +4,10 @@
 export class RNode<R extends typeof import("./Routify").Routify> {
     /**
      * @param {string} name
-     * @param {LoadSvelteModule} module
+     * @param {LoadSvelteModule|string} module
      * @param {R['prototype']} instance
      */
-    constructor(name: string, module: LoadSvelteModule, instance: R['prototype']);
+    constructor(name: string, module: LoadSvelteModule | string, instance: R['prototype']);
     /** @type {R['prototype']} */
     instance: R['prototype'];
     /** @type {this} */
@@ -19,7 +19,7 @@ export class RNode<R extends typeof import("./Routify").Routify> {
     /** @type {String} */
     id: string;
     name: string;
-    module: LoadSvelteModule;
+    module: string | LoadSvelteModule;
     /** @param {this} child */
     appendChild(child: RNode<R>): void;
     /**

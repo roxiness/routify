@@ -222,15 +222,15 @@
  */
 
 /**
- * @typedef RerservedCmpProps
+ * @typedef ReservedCmpProps
  * @prop {ComponentGuardFn=} guard
  * @prop {RoutifyLoad=} load
  * @prop {import('svelte/types/runtime').SvelteComponent=} default
  */
 
-/** @typedef {RerservedCmpProps & Object.<string, any>} Module */
+/** @typedef {ReservedCmpProps & Object.<string, any>} Module */
 
-/** @typedef {()=>RerservedCmpProps} LoadSvelteModule */
+/** @typedef {()=>(Promise<ReservedCmpProps>|ReservedCmpProps)} LoadSvelteModule */
 
 /*****************
  * MISC          *

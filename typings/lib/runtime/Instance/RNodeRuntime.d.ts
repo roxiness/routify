@@ -3,7 +3,12 @@
  * @extends RNode<typeof import('./RoutifyRuntime')['RoutifyRuntime']>
  */
 export class RNodeRuntime extends RNode<typeof import("./RoutifyRuntime").RoutifyRuntime> {
-    constructor(name: string, module: LoadSvelteModule, instance: import("./RoutifyRuntime").RoutifyRuntime);
+    /**
+     * @param {string} name
+     * @param {LoadSvelteModule} module
+     * @param {RoutifyRuntime} instance
+     */
+    constructor(name: string, module: LoadSvelteModule, instance: RoutifyRuntime);
     /** @returns {this[]} */
     get pages(): RNodeRuntime[];
     /** @ts-ignore SvelteComponentConstructor is only available in VSCode */
