@@ -4,10 +4,10 @@
 export class RNode<R extends typeof import("./Routify").Routify> {
     /**
      * @param {string} name
-     * @param {any} module
+     * @param {LoadSvelteModule} module
      * @param {R['prototype']} instance
      */
-    constructor(name: string, module: any, instance: R['prototype']);
+    constructor(name: string, module: LoadSvelteModule, instance: R['prototype']);
     /** @type {R['prototype']} */
     instance: R['prototype'];
     /** @type {this} */
@@ -19,7 +19,7 @@ export class RNode<R extends typeof import("./Routify").Routify> {
     /** @type {String} */
     id: string;
     name: string;
-    module: any;
+    module: LoadSvelteModule;
     /** @param {this} child */
     appendChild(child: RNode<R>): void;
     /**
@@ -39,15 +39,37 @@ export class RNode<R extends typeof import("./Routify").Routify> {
     get children(): RNode<R>[];
     /** @returns {number} */
     get level(): number;
+    set regex(arg: RegExp);
+    get regex(): RegExp;
+    get paramKeys(): string[];
+    /**
+     * returns parameters for a given urlFragment
+     * @param {string} urlFragment
+     */
+    getParams(urlFragment: string): {};
     /**
      * resolve a node relative to this node
      * @param {string} path
      * @returns {this}
      */
-    traverse(path: string): this;
+    traverse(path: string, allowDynamic?: boolean, includeIndex?: boolean): this;
+    /**
+     * Returns an array of steps to reach a path. Each path contains a node and params
+     * @param {string} path
+     * @param {boolean} allowDynamic
+     * @param {boolean} includeIndex
+     * @returns
+     */
+    getChainTo(path: string, allowDynamic?: boolean, includeIndex?: boolean): {
+        node: RNode<R>;
+        params: any;
+        stepsToLeaf: string[];
+        fragment: string;
+    }[];
     toJSON(): RNode<R> & {
         children: RNode<R>[];
     };
     /** @returns {string} */
     get path(): string;
+    #private;
 }

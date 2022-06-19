@@ -13,17 +13,17 @@ export class Router implements Readable<Router> {
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
-    beforeRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
+    beforeRouterInit: any;
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
-    afterRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
+    afterRouterInit: any;
     /** @type { import('hookar').HooksCollection<BeforeUrlChangeCallback> } */
-    beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
+    beforeUrlChange: any;
     /** @type { import('hookar').HooksCollection<AfterUrlChangeCallback> } */
-    afterUrlChange: import('hookar').HooksCollection<AfterUrlChangeCallback>;
+    afterUrlChange: any;
     /** @type { import('hookar').HooksCollection<TransformFragmentsCallback> } */
-    transformFragments: import('hookar').HooksCollection<TransformFragmentsCallback>;
+    transformFragments: any;
     /** @type { import('hookar').HooksCollection<OnDestroyRouterCallback> } */
-    onDestroy: import('hookar').HooksCollection<OnDestroyRouterCallback>;
+    onDestroy: any;
     parentElem: any;
     /** @type {QueryHandler} */
     queryHandler: QueryHandler;

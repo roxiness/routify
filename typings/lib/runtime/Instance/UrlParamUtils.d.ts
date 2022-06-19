@@ -14,7 +14,7 @@ export class UrlParamUtils {
      */
     getRegexFromName: (name: string) => RegExp;
     /**
-     * returns an array of values matching a regular expresion and path
+     * returns an array of values matching a regular expression and path
      * @param {RegExp} re
      * @param {string} path
      * @returns {string[]}

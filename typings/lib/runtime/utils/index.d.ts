@@ -5,7 +5,7 @@ export function pathAndParamsToUrl(path: string, params: any, queryHandler: Func
 export function insertWildcards(str: string): string;
 export function fromEntries(iterable: any): any;
 export function populateUrl(path: string, params: {
-    [x: string]: string;
+    [x: string]: (string | string[]);
 }, route: Route): string;
 export function urlFromAddress(): string;
 export function autoIncrementer(storeObj?: {}, name?: string): any;

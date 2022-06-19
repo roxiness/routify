@@ -11,12 +11,12 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
     options: Partial<Partial<RoutifyBuildtimeOptions>>;
     build(trigger: any): Promise<void>;
     on: {
-        buildStart: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
-        buildComplete: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
-        fileAdded: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
-        fileRemoved: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
-        fileChanged: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
-        fileWatcherReady: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        buildStart: any;
+        buildComplete: any;
+        fileAdded: any;
+        fileRemoved: any;
+        fileChanged: any;
+        fileWatcherReady: any;
     };
     writeFile(id: any, content: any): Promise<void>;
     start(): Promise<void>;

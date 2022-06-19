@@ -17,5 +17,7 @@ export class Routify<N extends typeof RNode> {
      * @returns {N['prototype']}
      */
     createNode(name?: string | undefined, module?: (any | string) | undefined): N['prototype'];
+    utils: UrlParamUtils;
 }
 import { RNode } from "./RNode.js";
+import { UrlParamUtils } from "../runtime/Instance/UrlParamUtils.js";

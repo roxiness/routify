@@ -45,10 +45,8 @@ export function isActiveRoute($route: Route): (path: string, params?: {
 export function isActiveUrl(url: any, actualParams?: {}): (path: string, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
-export function resolveNode(path: string): void | import("../Instance/RNodeRuntime.js").RNodeRuntime;
-export function resolveAbsoluteNode(node: any, path: any): void;
-export function traverseNode(node: RNodeRuntime, path: string): RNodeRuntime;
-export function resolveNamedNode(node: any, name: any): void;
+export function resolveNode(path: string): import("../Instance/RNodeRuntime.js").RNodeRuntime;
+export function traverseNode(node: RNodeRuntime, path: string, router: Router): RNodeRuntime;
 export const context: import("svelte/store").Readable<FragmentContext>;
 export const node: import("svelte/store").Readable<import("../Instance/RNodeRuntime.js").RNodeRuntime>;
 export const meta: import("svelte/store").Readable<{
