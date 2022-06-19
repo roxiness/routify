@@ -6,8 +6,9 @@ export class RNodeBuildtime extends RNode<typeof import("./RoutifyBuildtime").Ro
      * @param {string} name
      * @param {string} module
      * @param {RoutifyBuildtime} instance
+     * @param {string} asyncModule
      */
-    constructor(name: string, module: string, instance: RoutifyBuildtime);
+    constructor(name: string, module: string, instance: RoutifyBuildtime, asyncModule: string);
     /** @type {RFile} */
     file: RFile;
     #private;

@@ -6,8 +6,9 @@ export class RNode<R extends typeof import("./Routify").Routify> {
      * @param {string} name
      * @param {ReservedCmpProps|string} module
      * @param {R['prototype']} instance
+     * @param {LoadSvelteModule|string=} asyncModule
      */
-    constructor(name: string, module: ReservedCmpProps | string, instance: R['prototype']);
+    constructor(name: string, module: ReservedCmpProps | string, instance: R['prototype'], asyncModule?: (LoadSvelteModule | string) | undefined);
     /** @type {R['prototype']} */
     instance: R['prototype'];
     /** @type {this} */
