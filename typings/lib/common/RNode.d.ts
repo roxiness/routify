@@ -4,10 +4,10 @@
 export class RNode<R extends typeof import("./Routify").Routify> {
     /**
      * @param {string} name
-     * @param {LoadSvelteModule|string} module
+     * @param {ReservedCmpProps|string} module
      * @param {R['prototype']} instance
      */
-    constructor(name: string, module: LoadSvelteModule | string, instance: R['prototype']);
+    constructor(name: string, module: ReservedCmpProps | string, instance: R['prototype']);
     /** @type {R['prototype']} */
     instance: R['prototype'];
     /** @type {this} */
@@ -18,8 +18,10 @@ export class RNode<R extends typeof import("./Routify").Routify> {
     };
     /** @type {String} */
     id: string;
+    /** @type {String|LoadSvelteModule} */
+    asyncModule: string | LoadSvelteModule;
     name: string;
-    module: string | LoadSvelteModule;
+    module: string | ReservedCmpProps;
     /** @param {this} child */
     appendChild(child: RNode<R>): void;
     /**

@@ -2,8 +2,10 @@
 
 exports[`filemapper: 4.filemap-with-components 1`] = `
 Object {
+  "asyncModule": undefined,
   "children": Array [
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "_reset.svelte",
@@ -20,8 +22,10 @@ Object {
       "name": "admin",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "[slug].svelte",
@@ -38,6 +42,7 @@ Object {
           "name": "[slug]",
         },
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "prefixed[slug].svelte",
@@ -67,6 +72,7 @@ Object {
       "name": "blog",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "index.svelte",
@@ -81,10 +87,13 @@ Object {
       "name": "index",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "foo.svelte",
@@ -99,6 +108,7 @@ Object {
               "name": "foo",
             },
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "index.svelte",
@@ -156,8 +166,10 @@ Object {
 
 exports[`files are mapped: 1.filemap-only 1`] = `
 Object {
+  "asyncModule": undefined,
   "children": Array [
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "_module.svelte",
@@ -172,8 +184,10 @@ Object {
       "name": "_module",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "_reset.svelte",
@@ -201,8 +215,10 @@ Object {
       "name": "admin",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "[slug].svelte",
@@ -217,6 +233,7 @@ Object {
           "name": "[slug]",
         },
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "prefixed[slug].svelte",
@@ -244,6 +261,7 @@ Object {
       "name": "blog",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "index.svelte",
@@ -258,10 +276,13 @@ Object {
       "name": "index",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "foo.svelte",
@@ -276,6 +297,7 @@ Object {
               "name": "foo",
             },
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "index.svelte",
@@ -333,8 +355,10 @@ Object {
 
 exports[`modules are merged with parent node: 2.filemap-with-modules 1`] = `
 Object {
+  "asyncModule": undefined,
   "children": Array [
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "_reset.svelte",
@@ -349,8 +373,10 @@ Object {
       "name": "admin",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "[slug].svelte",
@@ -365,6 +391,7 @@ Object {
           "name": "[slug]",
         },
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "prefixed[slug].svelte",
@@ -392,6 +419,7 @@ Object {
       "name": "blog",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "index.svelte",
@@ -406,10 +434,13 @@ Object {
       "name": "index",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "foo.svelte",
@@ -424,6 +455,7 @@ Object {
               "name": "foo",
             },
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "index.svelte",
@@ -481,8 +513,10 @@ Object {
 
 exports[`options get added: 3.filemap-with-resets 1`] = `
 Object {
+  "asyncModule": undefined,
   "children": Array [
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "_reset.svelte",
@@ -499,8 +533,10 @@ Object {
       "name": "admin",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "[slug].svelte",
@@ -517,6 +553,7 @@ Object {
           "name": "[slug]",
         },
         Object {
+          "asyncModule": undefined,
           "children": Array [],
           "file": File {
             "base": "prefixed[slug].svelte",
@@ -546,6 +583,7 @@ Object {
       "name": "blog",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [],
       "file": File {
         "base": "index.svelte",
@@ -560,10 +598,13 @@ Object {
       "name": "index",
     },
     Object {
+      "asyncModule": undefined,
       "children": Array [
         Object {
+          "asyncModule": undefined,
           "children": Array [
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "foo.svelte",
@@ -578,6 +619,7 @@ Object {
               "name": "foo",
             },
             Object {
+              "asyncModule": undefined,
               "children": Array [],
               "file": File {
                 "base": "index.svelte",

@@ -5,15 +5,17 @@
 export class RNodeRuntime extends RNode<typeof import("./RoutifyRuntime").RoutifyRuntime> {
     /**
      * @param {string} name
-     * @param {LoadSvelteModule} module
+     * @param {ReservedCmpProps} module
      * @param {RoutifyRuntime} instance
+     * @param {LoadSvelteModule} asyncModule
      */
-    constructor(name: string, module: LoadSvelteModule, instance: RoutifyRuntime);
+    constructor(name: string, module: ReservedCmpProps, instance: RoutifyRuntime, asyncModule: LoadSvelteModule);
     /** @returns {this[]} */
     get pages(): RNodeRuntime[];
     /** @ts-ignore SvelteComponentConstructor is only available in VSCode */
-    /** @returns {Promise<SvelteComponentConstructor<*, *>>} */
-    getRawComponent(): Promise<SvelteComponentConstructor<any, any>>;
+    /** @returns {Promise<SvelteComponentDev<*, *>>} */
+    getRawComponent(): Promise<SvelteComponentDev<any, any>>;
+    loadModule(): Promise<ReservedCmpProps>;
     /** @returns {() => Node} */
     get component(): () => Node;
     /**

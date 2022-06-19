@@ -230,7 +230,7 @@
 
 /** @typedef {ReservedCmpProps & Object.<string, any>} Module */
 
-/** @typedef {()=>(Promise<ReservedCmpProps>|ReservedCmpProps)} LoadSvelteModule */
+/** @typedef {()=>(Promise<ReservedCmpProps>)} LoadSvelteModule */
 
 /*****************
  * MISC          *

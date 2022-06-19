@@ -7,8 +7,8 @@
     const context = { ...getContext(CTX), node }
     setContext(CTX, context)
 
-    let Component
-    if (node.module) node.getRawComponent().then(r => (Component = r))
+    let Component = node.module
+    if (!Component && node.asyncModule) node.asyncModule().then(r => (Component = r))
 </script>
 
 {#if node.module}

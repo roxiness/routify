@@ -19,7 +19,7 @@
 
 <svelte:component this={decorator || Noop} {context}>
     <svelte:component
-        this={fragment.node.module().default}
+        this={fragment.node.module.default}
         {context}
         {...props}
         {...load?.props}

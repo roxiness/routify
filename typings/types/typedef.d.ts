@@ -285,7 +285,7 @@ type ReservedCmpProps = {
 type Module = ReservedCmpProps & {
     [x: string]: any;
 };
-type LoadSvelteModule = () => (Promise<ReservedCmpProps> | ReservedCmpProps);
+type LoadSvelteModule = () => (Promise<ReservedCmpProps>);
 type PathNode = {
     urlFragment: string;
     node: RNodeRuntime;
