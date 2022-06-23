@@ -53,9 +53,11 @@ export class RNode<R extends typeof import("./Routify").Routify> {
     /**
      * resolve a node relative to this node
      * @param {string} path
+     * @param {boolean} allowDynamic allow traversing dynamic components (parameterized)
+     * @param {boolean} includeIndex
      * @returns {this}
      */
-    traverse(path: string, allowDynamic?: boolean, includeIndex?: boolean): this;
+    traverse(path: string, allowDynamic?: boolean, includeIndex?: boolean, silent?: boolean): this;
     /**
      * Returns an array of steps to reach a path. Each path contains a node and params
      * @param {string} path
@@ -63,7 +65,7 @@ export class RNode<R extends typeof import("./Routify").Routify> {
      * @param {boolean} includeIndex
      * @returns
      */
-    getChainTo(path: string, allowDynamic?: boolean, includeIndex?: boolean): {
+    getChainTo(path: string, allowDynamic: boolean, includeIndex: boolean, silent: any): {
         node: RNode<R>;
         params: any;
         stepsToLeaf: string[];
