@@ -18,4 +18,4 @@ export function clone<T>(obj: T, ...rest: any[]): T;
 export type Getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };
-import { get } from "svelte/types/runtime/store";
+import { get } from "svelte/types/runtime/store/index.js";

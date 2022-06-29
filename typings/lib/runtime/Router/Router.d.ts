@@ -10,20 +10,22 @@ export class Router implements Readable<Router> {
     pendingRoute: RouteStore;
     /** @type { RouteStore } */
     activeRoute: RouteStore;
+    /** @private */
+    private _urlReflector;
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
-    beforeRouterInit: any;
+    beforeRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
-    afterRouterInit: any;
+    afterRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
     /** @type { import('hookar').HooksCollection<BeforeUrlChangeCallback> } */
-    beforeUrlChange: any;
+    beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
     /** @type { import('hookar').HooksCollection<AfterUrlChangeCallback> } */
-    afterUrlChange: any;
+    afterUrlChange: import('hookar').HooksCollection<AfterUrlChangeCallback>;
     /** @type { import('hookar').HooksCollection<TransformFragmentsCallback> } */
-    transformFragments: any;
+    transformFragments: import('hookar').HooksCollection<TransformFragmentsCallback>;
     /** @type { import('hookar').HooksCollection<OnDestroyRouterCallback> } */
-    onDestroy: any;
+    onDestroy: import('hookar').HooksCollection<OnDestroyRouterCallback>;
     parentElem: any;
     /** @type {QueryHandler} */
     queryHandler: QueryHandler;
@@ -85,7 +87,6 @@ export class Router implements Readable<Router> {
     get urlReflector(): BaseReflector;
     /** @param {typeof BaseReflector} UrlReflector */
     setUrlReflector(UrlReflector: typeof BaseReflector): void;
-    #private;
 }
 export function createRouter(options: Partial<RoutifyRuntimeOptions>): Router;
 export type ParentCmpCtx = {

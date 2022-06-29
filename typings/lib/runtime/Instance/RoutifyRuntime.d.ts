@@ -1,10 +1,16 @@
 /**
- * @extends Routify<typeof import('./RNodeRuntime')['RNodeRuntime']>
+ * @extends {Routify<typeof RNodeRuntime>}
  */
 export class RoutifyRuntime extends Routify<typeof RNodeRuntime> {
     constructor(options: any);
+    NodeConstructor: typeof RNodeRuntime;
+    mode: string;
     /**@type {Router[]} routers this instance belongs to */
     routers: Router[];
+    /** @type {Object<string, RNodeRuntime>} */
+    rootNodes: {
+        [x: string]: RNodeRuntime;
+    };
     options: any;
     global: import("../Global/Global.js").Global;
     log: import("consolite").ConsoliteLogger;

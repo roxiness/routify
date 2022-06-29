@@ -1,16 +1,17 @@
 /**
- * @extends RNode<typeof import('./RoutifyBuildtime')['RoutifyBuildtime']>
+ * @extends {RNode<RoutifyBuildtime>}
  */
-export class RNodeBuildtime extends RNode<typeof import("./RoutifyBuildtime").RoutifyBuildtime> {
+export class RNodeBuildtime extends RNode<RoutifyBuildtime> {
     /**
      * @param {string} name
      * @param {string} module
      * @param {RoutifyBuildtime} instance
-     * @param {string} asyncModule
      */
-    constructor(name: string, module: string, instance: RoutifyBuildtime, asyncModule: string);
+    constructor(name: string, module: string, instance: RoutifyBuildtime);
     /** @type {RFile} */
     file: RFile;
-    #private;
+    /** @type {String} */
+    asyncModule: string;
 }
+import { RoutifyBuildtime } from "./RoutifyBuildtime.js";
 import { RNode } from "../common/RNode.js";

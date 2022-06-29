@@ -1,20 +1,23 @@
-/// <reference types="svelte/types/runtime/ambient" />
+/// <reference types="svelte/types/runtime/ambient.js" />
 /**
- * @extends RNode<typeof import('./RoutifyRuntime')['RoutifyRuntime']>
+ * @extends {RNode<RoutifyRuntime>}
  */
-export class RNodeRuntime extends RNode<typeof import("./RoutifyRuntime").RoutifyRuntime> {
+export class RNodeRuntime extends RNode<RoutifyRuntime> {
     /**
      * @param {string} name
      * @param {ReservedCmpProps} module
      * @param {RoutifyRuntime} instance
-     * @param {LoadSvelteModule} asyncModule
+     * @param {LoadSvelteModule=} asyncModule
      */
-    constructor(name: string, module: ReservedCmpProps, instance: RoutifyRuntime, asyncModule: LoadSvelteModule);
-    /** @returns {this[]} */
+    constructor(name: string, module: ReservedCmpProps, instance: RoutifyRuntime, asyncModule?: LoadSvelteModule | undefined);
+    /** @type {LoadSvelteModule} */
+    asyncModule: LoadSvelteModule;
+    /** @type {ReservedCmpProps} */
+    module: ReservedCmpProps;
     get pages(): RNodeRuntime[];
     /** @ts-ignore SvelteComponentConstructor is only available in VSCode */
-    /** @returns {Promise<SvelteComponentDev<*, *>>} */
-    getRawComponent(): Promise<SvelteComponentDev<any, any>>;
+    /** @returns {Promise<import('svelte/internal').SvelteComponentDev>} */
+    getRawComponent(): Promise<import('svelte/internal').SvelteComponentDev>;
     loadModule(): Promise<ReservedCmpProps>;
     /** @returns {() => Node} */
     get component(): () => Node;
@@ -23,7 +26,7 @@ export class RNodeRuntime extends RNode<typeof import("./RoutifyRuntime").Routif
      */
     importTree: (snapshotRoot: object) => RNodeRuntime;
     get _fallback(): any;
-    #private;
 }
+import { RoutifyRuntime } from "./RoutifyRuntime.js";
 import { RNode } from "../../common/RNode.js";
 import Node from "*.svelte";

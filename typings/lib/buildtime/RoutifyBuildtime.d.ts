@@ -1,22 +1,28 @@
 /**
- *  @extends {Routify<typeof import('./RNodeBuildtime')['RNodeBuildtime']>}
- **/
+ * @extends {Routify<typeof RNodeBuildtime>}
+ */
 export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
     /** @param {Partial<RoutifyBuildtimeOptions>} options */
     constructor(options: Partial<RoutifyBuildtimeOptions>);
+    NodeConstructor: typeof RNodeBuildtime;
+    mode: string;
     /** @type {RoutifyBuildtimePlugin[]} */
     plugins: RoutifyBuildtimePlugin[];
     /** @type {Function} */
     close: Function;
+    /** @type {Object<string, RNodeBuildtime>} */
+    rootNodes: {
+        [x: string]: RNodeBuildtime;
+    };
     options: Partial<any>;
     build(trigger: any): Promise<void>;
     on: {
-        buildStart: any;
-        buildComplete: any;
-        fileAdded: any;
-        fileRemoved: any;
-        fileChanged: any;
-        fileWatcherReady: any;
+        buildStart: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        buildComplete: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileAdded: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileRemoved: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileChanged: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+        fileWatcherReady: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
     };
     writeFile(id: any, content: any): Promise<void>;
     start(): Promise<void>;

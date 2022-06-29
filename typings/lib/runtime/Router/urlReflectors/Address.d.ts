@@ -4,5 +4,6 @@ export class AddressReflector extends BaseReflector {
     _replacestateHandler: (data: any, title: any, url: any) => boolean;
     _popstateHandler: () => Promise<boolean>;
     hooks: any[];
+    reflect: () => boolean;
 }
 import { BaseReflector } from "./ReflectorBase.js";

@@ -1,45 +1,39 @@
-/**
- * @template {typeof import('./Routify')['Routify']} R
- */
-export class RNode<R extends typeof import("./Routify").Routify> {
+/** @template {import('./Routify').Routify<any>} InstanceType */
+export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     /**
      * @param {string} name
      * @param {ReservedCmpProps|string} module
-     * @param {R['prototype']} instance
-     * @param {LoadSvelteModule|string=} asyncModule
+     * @param {InstanceType} instance
      */
-    constructor(name: string, module: ReservedCmpProps | string, instance: R['prototype'], asyncModule?: (LoadSvelteModule | string) | undefined);
-    /** @type {R['prototype']} */
-    instance: R['prototype'];
-    /** @type {this} */
-    parent: RNode<R>;
+    constructor(name: string, module: ReservedCmpProps | string, instance: InstanceType);
+    /** @type {InstanceType['NodeType']} */
+    parent: InstanceType['NodeType'];
     /** @type {Object.<string, any>} */
     meta: {
         [x: string]: any;
     };
     /** @type {String} */
     id: string;
-    /** @type {String|LoadSvelteModule} */
-    asyncModule: string | LoadSvelteModule;
+    /** @type {InstanceType} */
+    instance: InstanceType;
     name: string;
     module: string | ReservedCmpProps;
     /** @param {this} child */
-    appendChild(child: RNode<R>): void;
+    appendChild(child: RNode<InstanceType>): void;
     /**
      * Creates a new child node
      * Same as `node.appendChild(instance.createNode('my-node'))`
      * @param {string} name
-     * @returns {this}
      */
-    createChild(name: string, module: any): this;
-    /** @returns {this[]} */
-    get descendants(): RNode<R>[];
+    createChild(name: string, module: any): RNode<InstanceType>;
+    /** @type {InstanceType['NodeType'][]} */
+    get descendants(): InstanceType["NodeType"][];
     remove(): void;
-    get ancestors(): RNode<R>[];
-    get root(): RNode<R>;
+    get ancestors(): RNode<InstanceType>[];
+    get root(): RNode<InstanceType>;
     get isRoot(): boolean;
-    /** @returns {this[]} */
-    get children(): RNode<R>[];
+    /** @type {InstanceType['NodeType'][]} */
+    get children(): InstanceType["NodeType"][];
     /** @returns {number} */
     get level(): number;
     set regex(arg: RegExp);
@@ -55,24 +49,25 @@ export class RNode<R extends typeof import("./Routify").Routify> {
      * @param {string} path
      * @param {boolean} allowDynamic allow traversing dynamic components (parameterized)
      * @param {boolean} includeIndex
+     * @param {boolean} silent don't throw errors for 404s
      * @returns {this}
      */
     traverse(path: string, allowDynamic?: boolean, includeIndex?: boolean, silent?: boolean): this;
     /**
      * Returns an array of steps to reach a path. Each path contains a node and params
      * @param {string} path
-     * @param {boolean} allowDynamic
-     * @param {boolean} includeIndex
-     * @returns
+     * @param {boolean=} allowDynamic
+     * @param {boolean=} includeIndex
+     * @param {boolean=} silent don't throw errors for 404s
      */
-    getChainTo(path: string, allowDynamic: boolean, includeIndex: boolean, silent: any): {
-        node: RNode<R>;
-        params: any;
+    getChainTo(path: string, allowDynamic?: boolean | undefined, includeIndex?: boolean | undefined, silent?: boolean | undefined): {
+        node: RNode<InstanceType>;
         stepsToLeaf: string[];
+        params: {};
         fragment: string;
     }[];
-    toJSON(): RNode<R> & {
-        children: RNode<R>[];
+    toJSON(): RNode<InstanceType> & {
+        children: InstanceType["NodeType"][];
     };
     /** @returns {string} */
     get path(): string;
