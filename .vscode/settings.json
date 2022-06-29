@@ -18,6 +18,7 @@
     "jest.jestCommandLine": "npm run test:jest --",
     "cSpell.words": [
         "cachewrap",
+        "hookar",
         "jakobrosenberg",
         "poindexter",
         "probs",
@@ -26,6 +27,7 @@
         "roxiness",
         "spassr",
         "stackmix",
-        "tossr"
+        "tossr",
+        "Unsubscriber"
     ],
 }
