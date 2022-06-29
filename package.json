@@ -32,6 +32,7 @@
         "build:documentation": "documentation readme types/typedef.js -f md --section API",
         "build:typings": "tsc ",
         "test": "run-s test:*",
+        "test:types": "tsc --noEmit --emitDeclarationOnly false",
         "test:probs": "probs test,lib",
         "test-bak:jest": "jest . --detectOpenHandles",
         "test:lint": "npm run util:prettier -- --check",
@@ -56,7 +57,7 @@
         "playwright": "^1.17.1",
         "prettier": "^2.5.1",
         "prettier-plugin-svelte": "^2.5.1",
-        "probs": "^1.1.0-15",
+        "probs": "^1.1.0-17",
         "rollup": "^2.47.0",
         "rollup-plugin-livereload": "^2.0.5",
         "rollup-plugin-svelte": "^7.1.0",
@@ -64,7 +65,7 @@
         "spassr": "^2.6.0",
         "svelte-jester": "^2.1.5",
         "tree-kill": "^1.2.2",
-        "typescript": "^4.5.2"
+        "typescript": "^4.7.4"
     },
     "dependencies": {
         "cachewrap": "^0.0.1",
