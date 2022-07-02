@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`filemapper: 4.filemap-with-components 1`] = `
+exports[`test/unit/filemapper/filemapper.test.js/filemapper: 4.filemap-with-components 1`] = `
 Object {
   "asyncModule": undefined,
   "children": Array [
@@ -164,7 +164,7 @@ Object {
 }
 `;
 
-exports[`files are mapped: 1.filemap-only 1`] = `
+exports[`test/unit/filemapper/filemapper.test.js/files are mapped: 1.filemap-only 1`] = `
 Object {
   "asyncModule": undefined,
   "children": Array [
@@ -353,7 +353,7 @@ Object {
 }
 `;
 
-exports[`modules are merged with parent node: 2.filemap-with-modules 1`] = `
+exports[`test/unit/filemapper/filemapper.test.js/modules are merged with parent node: 2.filemap-with-modules 1`] = `
 Object {
   "asyncModule": undefined,
   "children": Array [
@@ -511,7 +511,7 @@ Object {
 }
 `;
 
-exports[`options get added: 3.filemap-with-resets 1`] = `
+exports[`test/unit/filemapper/filemapper.test.js/options get added: 3.filemap-with-resets 1`] = `
 Object {
   "asyncModule": undefined,
   "children": Array [

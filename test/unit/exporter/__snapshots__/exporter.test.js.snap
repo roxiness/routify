@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`can export a route tree 1`] = `
+exports[`test/unit/exporter/exporter.test.js/can export a route tree 1`] = `
 "
 
 export default {
