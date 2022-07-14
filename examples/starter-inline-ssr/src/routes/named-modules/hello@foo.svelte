@@ -1,0 +1,3 @@
+foo layout
+
+<slot />

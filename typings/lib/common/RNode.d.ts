@@ -18,26 +18,38 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     instance: InstanceType;
     name: string;
     module: string | ReservedCmpProps;
-    /** @param {this} child */
-    appendChild(child: RNode<InstanceType>): void;
+    /** @param {InstanceType['NodeConstructor']['prototype']} child */
+    appendChild(child: InstanceType['NodeConstructor']['prototype']): void;
     /**
      * Creates a new child node
      * Same as `node.appendChild(instance.createNode('my-node'))`
      * @param {string} name
      */
-    createChild(name: string, module: any): RNode<InstanceType>;
-    /** @type {InstanceType['NodeType'][]} */
-    get descendants(): InstanceType["NodeType"][];
+    createChild(name: string, module: any): InstanceType["NodeConstructor"]["prototype"];
+    /** @type {InstanceType['NodeConstructor']['prototype'][]} */
+    get descendants(): InstanceType["NodeConstructor"]["prototype"][];
     remove(): void;
-    get ancestors(): RNode<InstanceType>[];
-    get root(): RNode<InstanceType>;
+    /** @type {InstanceType['NodeConstructor']['prototype'][]} */
+    get ancestors(): InstanceType["NodeConstructor"]["prototype"][];
+    /** @type {InstanceType['NodeConstructor']['prototype']} */
+    get root(): InstanceType["NodeConstructor"]["prototype"];
     get isRoot(): boolean;
     /** @type {InstanceType['NodeType'][]} */
     get children(): InstanceType["NodeType"][];
     /** @returns {number} */
     get level(): number;
+    /** @type {Object.<string,RegExp>} */
+    _regex: {
+        [x: string]: RegExp;
+    };
     set regex(arg: RegExp);
     get regex(): RegExp;
+    /**
+     * @type {Object.<string, string[]>}
+     * */
+    _paramKeys: {
+        [x: string]: string[];
+    };
     get paramKeys(): string[];
     /**
      * returns parameters for a given urlFragment
@@ -56,20 +68,26 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     /**
      * Returns an array of steps to reach a path. Each path contains a node and params
      * @param {string} path
-     * @param {boolean=} allowDynamic
-     * @param {boolean=} includeIndex
-     * @param {boolean=} silent don't throw errors for 404s
+     * @param {object} [options]
+     * @param {boolean} [options.allowDynamic=true]
+     * @param {boolean} [options.includeIndex=true]
+     * @param {boolean} [options.silent=false] don't throw errors for 404s
+     * @param {this} [options.rootNode]
+     
      */
-    getChainTo(path: string, allowDynamic?: boolean | undefined, includeIndex?: boolean | undefined, silent?: boolean | undefined): {
-        node: RNode<InstanceType>;
+    getChainTo(path: string, options?: {
+        allowDynamic?: boolean;
+        includeIndex?: boolean;
+        silent?: boolean;
+        rootNode?: RNode<InstanceType>;
+    }): {
+        node: InstanceType["NodeConstructor"]["prototype"];
         stepsToLeaf: string[];
         params: {};
         fragment: string;
     }[];
-    toJSON(): RNode<InstanceType> & {
-        children: InstanceType["NodeType"][];
-    };
+    /** @returns {InstanceType['NodeConstructor']['prototype']} */
+    toJSON(): InstanceType['NodeConstructor']['prototype'];
     /** @returns {string} */
     get path(): string;
-    #private;
 }

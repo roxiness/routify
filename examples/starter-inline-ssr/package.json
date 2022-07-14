@@ -1,0 +1,18 @@
+{
+    "name": "starter-inline-ssr",
+    "type": "module",
+    "scripts": {
+        "build": "npm run build:client && npm run build:server",
+        "build:client": "vite build",
+        "build:server": "vite build --ssr",
+        "preview": "vite preview",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@roxi/routify": "file:../..",
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.13",
+        "mdsvex": "^0.9.3",
+        "svelte": "^3.39.0",
+        "vite": "^2.9.10"
+    }
+}

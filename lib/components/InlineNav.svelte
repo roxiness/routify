@@ -1,6 +1,6 @@
 <script>
-    import { Router, createRouter, context } from '@roxi/routify'
-    import { InternalReflector } from '@roxi/routify/lib/runtime/Router/urlReflectors/Internal'
+    import { Router, createRouter, context } from '../runtime/index.js'
+    import { InternalReflector } from '../runtime/Router/urlReflectors/Internal'
     import { clone } from '../runtime/utils'
     import Nested from './Nested.svelte'
     export let parentNode = null
@@ -12,7 +12,8 @@
 
     singlePage = singlePage || typeof window === 'undefined'
     parentNode = parentNode || node
-    const isActiveNode = node => $activeRoute.allFragments.find(ar => ar.node === node)
+    const isActiveNode = node =>
+        $activeRoute.allFragments.find(ar => ar.node.id === node.id)
     $: refresh($activeRoute)
 
     /**
@@ -40,7 +41,7 @@
         return fragments.slice(cutoff)
     }
 
-    const routers = parentNode.pages.map(n => ({
+    const routers = parentNode.children.map(n => ({
         rootNode: n,
         router: createRouter({
             transformFragments,
@@ -54,9 +55,17 @@
     const refresh = $activeRoute => {
         // find the nested router that matches the url
         const activeSubRouter = routers.find(router => isActiveNode(router.rootNode))
+        if (!activeSubRouter) console.error('no subrouter is active')
         // set the nested router to use the route of the parent router
         const clonedRoute = clone($activeRoute, { router: activeSubRouter.router })
         activeSubRouter.router.activeRoute.set(clonedRoute)
+        setTimeout(() => {
+            console.log(document.getElementsByTagName('div'))
+            for (const el of document.getElementsByTagName('div')) {
+                console.log(el, el.router)
+            }
+        })
+
         payload = {
             index: singlePage ? 0 : routers.indexOf(activeSubRouter),
             pages: !singlePage
@@ -71,7 +80,7 @@
 </script>
 
 {#if !singlePage}
-    <div style="display: contents">
+    <div style="display: contents" wtf>
         <slot {...payload} />
     </div>
 {:else}
