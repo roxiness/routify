@@ -16,8 +16,9 @@ export class RouteFragment {
     set params(arg: {});
     get params(): {};
     /**
-     * @private
      * @type {Object.<string, string|string[]>}
      **/
-    private _params;
+    _params: {
+        [x: string]: string | string[];
+    };
 }

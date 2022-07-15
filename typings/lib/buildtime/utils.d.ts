@@ -7,3 +7,4 @@ export function writeFileIfDifferentSync(path: any, content: any): void;
 export function throttle(fn: any): Promise<void>;
 export function split(importFrom?: string): (value: any, path: string) => () => Promise<any>;
 export function hashObj(val: any): string;
+export function deepSet(t: any, p: any, ...v: any[]): any;

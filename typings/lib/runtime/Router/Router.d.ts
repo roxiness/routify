@@ -10,8 +10,7 @@ export class Router implements Readable<Router> {
     pendingRoute: RouteStore;
     /** @type { RouteStore } */
     activeRoute: RouteStore;
-    /** @private */
-    private _urlReflector;
+    _urlReflector: any;
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
@@ -35,10 +34,10 @@ export class Router implements Readable<Router> {
         getActive: () => string;
         getPending: () => string;
         toString: () => string;
-        set: (url: string, mode: UrlState, isInternal?: boolean) => Promise<true | false>;
-        push: (url: any) => Promise<boolean>;
-        replace: (url: any) => Promise<boolean>;
-        pop: (url: any) => Promise<boolean>;
+        set: any;
+        push: (url: any, state?: {}) => Promise<boolean>;
+        replace: (url: any, state?: {}) => Promise<boolean>;
+        pop: (url: any, state?: {}) => Promise<boolean>;
     };
     ready: Promise<any>;
     /** @type {Route[]} */
@@ -79,9 +78,10 @@ export class Router implements Readable<Router> {
      * @param {string} url
      * @param {UrlState} mode pushState, replaceState or popState
      * @param {boolean} [isInternal=false] if the URL is already internal, skip rewrite.toInternal
+     * @param {Object=} state a state to attach to the route
      * @returns {Promise<true|false>}
      */
-    _setUrl(url: string, mode: UrlState, isInternal?: boolean): Promise<true | false>;
+    _setUrl(url: string, mode: UrlState, isInternal?: boolean, state?: any | undefined): Promise<true | false>;
     destroy(): void;
     /** @type {BaseReflector} */
     get urlReflector(): BaseReflector;

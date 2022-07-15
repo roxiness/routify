@@ -3,8 +3,9 @@ export class Route {
      * @param {Router} router
      * @param {string} url
      * @param {UrlState} mode
+     * @param {Object} mode a state to attach to the route
      */
-    constructor(router: Router, url: string, mode: UrlState);
+    constructor(router: Router, url: string, mode: UrlState, state: any);
     /** @type {RouteFragment[]} */
     allFragments: RouteFragment[];
     /** @type {RouteFragment[]} only fragments with components */
@@ -18,6 +19,7 @@ export class Route {
     router: import("../index.js").RouterClass;
     url: string;
     mode: UrlState;
+    state: any;
     log: any;
     get params(): any;
     loadRoute(): Promise<{
