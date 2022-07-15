@@ -11,6 +11,8 @@ exports[`test/integration/routify/routify.test.js/can run routify with bundled p
 export default {
   \\"meta\\": {},
   \\"id\\": \\"_default\\",
+  \\"_regex\\": {},
+  \\"_paramKeys\\": {},
   \\"file\\": {
     \\"path\\": \\"test/integration/routify/example/_module.svelte\\",
     \\"dir\\": \\"test/integration/routify/example\\",
@@ -28,6 +30,8 @@ export default {
         \\"bundle\\": true
       },
       \\"id\\": \\"_default_admin\\",
+      \\"_regex\\": {},
+      \\"_paramKeys\\": {},
       \\"name\\": \\"admin\\",
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/admin/_reset.svelte\\",
@@ -41,6 +45,8 @@ export default {
         {
           \\"meta\\": {},
           \\"id\\": \\"_default_admin_bundleme_svelte\\",
+          \\"_regex\\": {},
+          \\"_paramKeys\\": {},
           \\"name\\": \\"bundleme\\",
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/admin/bundleme.svelte\\",
@@ -57,6 +63,8 @@ export default {
     {
       \\"meta\\": {},
       \\"id\\": \\"_default_blog\\",
+      \\"_regex\\": {},
+      \\"_paramKeys\\": {},
       \\"name\\": \\"blog\\",
       \\"module\\": false,
       \\"file\\": {
@@ -72,6 +80,8 @@ export default {
             \\"dynamic\\": true
           },
           \\"id\\": \\"_default_blog__slug__svelte\\",
+          \\"_regex\\": {},
+          \\"_paramKeys\\": {},
           \\"name\\": \\"[slug]\\",
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/[slug].svelte\\",
@@ -88,6 +98,8 @@ export default {
             \\"dynamic\\": true
           },
           \\"id\\": \\"_default_blog_prefixed_slug__svelte\\",
+          \\"_regex\\": {},
+          \\"_paramKeys\\": {},
           \\"name\\": \\"prefixed[slug]\\",
           \\"file\\": {
             \\"path\\": \\"test/integration/routify/example/blog/prefixed[slug].svelte\\",
@@ -104,6 +116,8 @@ export default {
     {
       \\"meta\\": {},
       \\"id\\": \\"_default_index_svelte\\",
+      \\"_regex\\": {},
+      \\"_paramKeys\\": {},
       \\"name\\": \\"index\\",
       \\"file\\": {
         \\"path\\": \\"test/integration/routify/example/index.svelte\\",
@@ -118,6 +132,8 @@ export default {
     {
       \\"meta\\": {},
       \\"id\\": \\"_default_no_layouts\\",
+      \\"_regex\\": {},
+      \\"_paramKeys\\": {},
       \\"name\\": \\"no-layouts\\",
       \\"module\\": false,
       \\"file\\": {
@@ -131,6 +147,8 @@ export default {
         {
           \\"meta\\": {},
           \\"id\\": \\"_default_no_layouts_nested\\",
+          \\"_regex\\": {},
+          \\"_paramKeys\\": {},
           \\"name\\": \\"nested\\",
           \\"module\\": false,
           \\"file\\": {
@@ -144,6 +162,8 @@ export default {
             {
               \\"meta\\": {},
               \\"id\\": \\"_default_no_layouts_nested_foo_svelte\\",
+              \\"_regex\\": {},
+              \\"_paramKeys\\": {},
               \\"name\\": \\"foo\\",
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/foo.svelte\\",
@@ -158,6 +178,8 @@ export default {
             {
               \\"meta\\": {},
               \\"id\\": \\"_default_no_layouts_nested_index_svelte\\",
+              \\"_regex\\": {},
+              \\"_paramKeys\\": {},
               \\"name\\": \\"index\\",
               \\"file\\": {
                 \\"path\\": \\"test/integration/routify/example/no-layouts/nested/index.svelte\\",
