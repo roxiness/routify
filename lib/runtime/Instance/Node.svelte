@@ -12,7 +12,7 @@
         node.asyncModule().then(r => (Component = r.default))
 </script>
 
-{#if node.module?.default}
+{#if Component}
     {#if Component}
         <Component {...passthrough} {context}>
             <slot />
