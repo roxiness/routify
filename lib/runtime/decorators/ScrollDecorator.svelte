@@ -1,6 +1,5 @@
 <script context="module">
     import { scopedScrollIntoView, persistentScrollTo } from '../helpers/scroll.js'
-    import { globalInstance } from '../index.js'
 
     /** @typedef {{elem: HTMLElement, context: import('../Router/types').RenderContext}} ElementHolder */
 
@@ -43,8 +42,6 @@
         /** @param {HTMLElement} elem */
         scrollTo(elem, shouldPersist) {
             setTimeout(async () => {
-                console.log('scroll to', shouldPersist, elem)
-
                 scopedScrollIntoView(elem)
 
                 if (shouldPersist) {
