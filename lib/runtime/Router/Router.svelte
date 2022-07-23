@@ -3,11 +3,12 @@
     import { onDestroy as _onDestroy } from 'svelte'
     import { getUrlFromClick } from '../utils/index.js'
     import Component from './Component.svelte'
+    import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
 
     /** @type {Router} */
     export let router = null
     export let routes = null
-    export let decorator = null
+    export let decorator = ScrollDecorator
 
     /** @type {RoutifyRuntimeOptions['urlReflector']} */
     export let urlReflector = null
@@ -67,6 +68,7 @@
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
     $: fragments = $activeRoute?.fragments || []
+    $: nodeId = $activeRoute?.fragments[0].node.name
 
     $: router.log.debug('before render', fragments) // ROUTIFY-DEV-ONLY
 
@@ -85,9 +87,11 @@
     if (typeof window !== 'undefined') _onDestroy(() => router.destroy())
 </script>
 
+<!-- todo fragments should be context obj -->
+
 {#if $activeRoute}
-    <div data-routify="router" style="display: contents" use:initialize>
-        <Component {fragments} {decorator} />
+    <div data-routify={nodeId} style="display: contents" use:initialize>
+        <Component {fragments} options={{ decorator }} />
     </div>
 {/if}
 

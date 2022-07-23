@@ -20,7 +20,10 @@ export class RNodeRuntime extends RNode<RoutifyRuntime> {
     /** @returns {Promise<import('svelte/internal').SvelteComponentDev>} */
     getRawComponent(): Promise<import('svelte/internal').SvelteComponentDev>;
     loadModule(): Promise<ReservedCmpProps>;
-    /** @returns {() => Node} */
+    /**
+     * Returns in a sync/async component in a synchronous wrapper
+     * @returns {() => Node}
+     **/
     get component(): () => Node;
     /**
      * @param {object} snapshotRoot

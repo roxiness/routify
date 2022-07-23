@@ -109,6 +109,7 @@
 <div
     use:init
     class="decorator-{context.node.id}"
-    style="position: relative; top:-200px" />
+    style="position: relative; top:-200px"
+/>
 
 <slot />

@@ -3,7 +3,7 @@ export class Route {
      * @param {Router} router
      * @param {string} url
      * @param {UrlState} mode
-     * @param {Object} mode a state to attach to the route
+     * @param {Object} state a state to attach to the route
      */
     constructor(router: Router, url: string, mode: UrlState, state: any);
     /** @type {RouteFragment[]} */

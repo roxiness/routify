@@ -1,7 +1,7 @@
 import '../Route/RouteFragment'
 import { CollectionSyncVoid, CollectionAsyncVoid } from 'hookar'
 
-type RenderContext = {
+type RenderContext = Partial<{
     restFragments: import('svelte/store').Writable<RouteFragment[]>
     node: RNodeRuntime
     fragment: RouteFragment
@@ -12,4 +12,4 @@ type RenderContext = {
     parentContext: RenderContext
     decorators: typeof import('svelte/internal').SvelteComponentDev[]
     onDestroy?: CollectionSyncVoid<any> | CollectionAsyncVoid<any>
-}
+}>
