@@ -2,7 +2,7 @@ import '../Route/RouteFragment'
 import { CollectionSyncVoid, CollectionAsyncVoid } from 'hookar'
 
 type RenderContext = Partial<{
-    restFragments: import('svelte/store').Writable<RouteFragment[]>
+    childFragments: import('svelte/store').Writable<RouteFragment[]>
     node: RNodeRuntime
     fragment: RouteFragment
     isActive: import('svelte/store').Writable<Boolean>

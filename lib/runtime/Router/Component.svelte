@@ -6,55 +6,46 @@
     import RenderFragment from './RenderFragment.svelte'
     import { normalizeMulti } from './utils/index.js'
 
-    // TODO ditch fragments prop; rename parentContext to context and use for fragments?
-
-    /** @type {RouteFragment[]}*/
-    export let fragments = []
-    export let options = {}
     /** @type {import('./types').RenderContext}*/
     export let context = null
+    export let options = {}
 
-    const isActive = context?.isActive
-    const single = writable(true)
+    const { childFragments, isActive } = context
     const { multi, decorator, props } = options
     let activeContext
 
     /** @type {import('./utils/index').Multi}*/
-    const setup = normalizeMulti(multi, fragments[0]?.node, context)
+    const setup = normalizeMulti(multi, $childFragments[0]?.node, context)
 
     /** @type {import('./types').RenderContext[] }*/
     const childContexts = setup.pages.map(node => ({
-        restFragments: writable([]),
+        childFragments: writable([]),
         node,
         fragment: new RouteFragment(null, node, null, {}),
         isActive: writable(false),
-        router: fragments[0]?.route.router || context.router,
+        router: $childFragments[0]?.route.router || context.router,
         route: null,
         parentContext: context,
         onDestroy: createSequenceHooksCollection(),
         decorators: [context?.decorators, decorator].flat().filter(Boolean),
-        single,
+        single: writable(setup.single),
     }))
 
     // if parent changes status to inactive, so does children
     $: if (isActive && !$isActive) childContexts.forEach(cc => cc.isActive.set(false))
 
-    $: single.set(setup.single)
-
     /**
      * @param {RouteFragment[]} fragments
      */
     const handlePageChange = fragments => {
-        if (!fragments.length) return
-
-        const [fragment, ...restFragments] = [...fragments]
+        const [fragment, ...childFragments] = [...fragments]
         // todo we should match node, not node.id. For some reason node instances are different
         activeContext = childContexts.find(s => s.node.id === fragment?.node.id)
         if (!activeContext)
             throw new Error(`couldn't find context for ${fragment?.node.id}`)
 
         activeContext.fragment = fragment
-        activeContext.restFragments.set(restFragments)
+        activeContext.childFragments.set(childFragments)
         activeContext.route = fragments[0].route
         // todo issue is caused by routify:meta reset in modules/index.md
 
@@ -62,7 +53,7 @@
         childContexts.forEach(s => s.isActive.set(s === activeContext))
     }
 
-    $: fragments.length && handlePageChange(fragments)
+    $: $childFragments.length && handlePageChange($childFragments)
 </script>
 
 {#each childContexts as context (context.node.id)}

@@ -4,6 +4,7 @@
     import { getUrlFromClick } from '../utils/index.js'
     import Component from './Component.svelte'
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
+    import { get, writable } from 'svelte/store'
 
     /** @type {Router} */
     export let router = null
@@ -41,6 +42,8 @@
     /** @type {RoutifyRuntimeOptions['queryHandler']} */
     export let queryHandler = null
 
+    const context = { childFragments: writable([]) }
+
     $: {
         /** @type {RoutifyRuntimeOptions}*/
         const options = {
@@ -67,10 +70,10 @@
     }
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
-    $: fragments = $activeRoute?.fragments || []
+    $: context.childFragments.set($activeRoute?.fragments || [])
     $: nodeId = $activeRoute?.fragments[0].node.name
 
-    $: router.log.debug('before render', fragments) // ROUTIFY-DEV-ONLY
+    $: router.log.debug('before render', get(context.childFragments)) // ROUTIFY-DEV-ONLY
 
     const initialize = elem => {
         if (!router.passthrough) {
@@ -91,7 +94,7 @@
 
 {#if $activeRoute}
     <div data-routify={nodeId} style="display: contents" use:initialize>
-        <Component {fragments} options={{ decorator }} />
+        <Component {context} options={{ decorator }} />
     </div>
 {/if}
 

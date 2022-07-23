@@ -3,24 +3,21 @@
     import { setContext } from 'svelte'
     import DecoRender from './DecoRender.svelte'
     /** @type {import('./types').RenderContext} */
-    export let context
-    export let props
-    export let activeContext
-    const { isActive, restFragments, single } = context // grab the stores
+    export let context, props, activeContext
+    const { isActive, childFragments, single } = context // grab the stores
     let NodeComponent
 
     setContext('routify-fragment-context', context)
-    $: shouldRender =
-        $isActive ||
-        (!$single &&
-            !activeContext?.node.meta.multi?.exclude &&
-            !context?.node.meta.multi?.exclude)
 
-    $: if (!NodeComponent && shouldRender)
+    const notExcludedCtx = context => !context?.node.meta.multi?.exclude
+    const isPartOfPage = () => !$single && [context, activeContext].every(notExcludedCtx)
+    $: isVisible = $isActive || isPartOfPage()
+
+    $: if (!NodeComponent && isVisible)
         context.node.getRawComponent().then(r => (NodeComponent = r))
 </script>
 
-{#if shouldRender && NodeComponent}
+{#if isVisible && NodeComponent}
     <!-- DECORATOR COMPONENT
          we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
     <svelte:component this={DecoRender} {context}>
@@ -37,15 +34,10 @@
             }}
             let:props
             let:multi
-            let:decorator
-        >
-            {#if $restFragments.length || (multi && !multi?.single)}
+            let:decorator>
+            {#if $childFragments.length || (multi && !multi?.single)}
                 <!-- CHILD PAGES -->
-                <Component
-                    options={{ multi, decorator, props }}
-                    fragments={$restFragments}
-                    {context}
-                />
+                <Component options={{ multi, decorator, props }} {context} />
             {/if}
         </svelte:component>
     </svelte:component>
