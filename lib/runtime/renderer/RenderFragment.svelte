@@ -1,7 +1,7 @@
 <script>
-    import Component from './Component.svelte'
+    import Component from './ComposeFragments.svelte'
     import { setContext } from 'svelte'
-    import DecoRender from './DecoRender.svelte'
+    import DecoratorWrapper from './DecoratorWrapper.svelte'
     /** @type {import('./types').RenderContext} */
     export let context, props, activeContext
     const { isActive, childFragments, single } = context // grab the stores
@@ -20,7 +20,7 @@
 {#if isVisible && NodeComponent}
     <!-- DECORATOR COMPONENT
          we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
-    <svelte:component this={DecoRender} {context}>
+    <svelte:component this={DecoratorWrapper} {context}>
         <!-- PAGE COMPONENT -->
         <svelte:component
             this={NodeComponent}
@@ -34,8 +34,7 @@
             }}
             let:props
             let:multi
-            let:decorator
-        >
+            let:decorator>
             {#if $childFragments.length || (multi && !multi?.single)}
                 <!-- CHILD PAGES -->
                 <Component options={{ multi, decorator, props }} {context} />

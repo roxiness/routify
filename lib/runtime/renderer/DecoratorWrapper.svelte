@@ -2,7 +2,7 @@
 <script>
     import { onDestroy } from 'svelte'
 
-    import DecoRender from './DecoRender.svelte'
+    import DecoratorWrapper from './DecoratorWrapper.svelte'
     export let decorators = null,
         nested = false,
         context
@@ -18,7 +18,7 @@
             context,
             nested: true,
         }
-        return new DecoRender(options)
+        return new DecoratorWrapper(options)
     }
 
     // we only want to trigger onDestroy from the first decorator wrapper
