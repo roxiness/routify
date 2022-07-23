@@ -34,7 +34,8 @@
             }}
             let:props
             let:multi
-            let:decorator>
+            let:decorator
+        >
             {#if $childFragments.length || (multi && !multi?.single)}
                 <!-- CHILD PAGES -->
                 <Component options={{ multi, decorator, props }} {context} />

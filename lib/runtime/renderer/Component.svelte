@@ -4,7 +4,7 @@
     import { writable } from 'svelte/store'
     import { RouteFragment } from '../Route/RouteFragment'
     import RenderFragment from './RenderFragment.svelte'
-    import { normalizeMulti } from './utils/index.js'
+    import { normalizeMulti } from './utils/normalizeMulti.js'
 
     /** @type {import('./types').RenderContext}*/
     export let context = null
