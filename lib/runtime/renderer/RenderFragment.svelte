@@ -5,7 +5,7 @@
     /** @type {import('./types').RenderContext} */
     export let context, props, activeContext
     const { isActive, childFragments, single } = context // grab the stores
-    let NodeComponent
+    let NodeComponent = context.node.module?.default
 
     setContext('routify-fragment-context', context)
 
