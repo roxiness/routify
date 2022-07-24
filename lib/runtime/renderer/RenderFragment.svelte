@@ -15,6 +15,11 @@
 
     $: if (!NodeComponent && isVisible)
         context.node.getRawComponent().then(r => (NodeComponent = r))
+
+    $: ({ params, load, route } = context.fragment)
+
+    $: compProps = { ...params, ...load?.props, ...props }
+    $: userContext = { ...context, load, route }
 </script>
 
 {#if isVisible && NodeComponent}
@@ -24,14 +29,8 @@
         <!-- PAGE COMPONENT -->
         <svelte:component
             this={NodeComponent}
-            {...context.fragment?.load?.props}
-            {...props}
-            {...context.fragment?.params}
-            context={{
-                ...context,
-                load: context.fragment?.load,
-                route: context.fragment?.route,
-            }}
+            {...compProps}
+            context={userContext}
             let:props
             let:multi
             let:decorator>
