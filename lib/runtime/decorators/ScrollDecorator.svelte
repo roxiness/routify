@@ -24,7 +24,8 @@
             this.stopPersistent = () => null
             /** @type {ElementHolder[]} */
             this.elemHolders = []
-            document.addEventListener('scroll', () => this.onScroll())
+            if (typeof document !== 'undefined')
+                document.addEventListener('scroll', () => this.onScroll())
         }
 
         /**
@@ -109,7 +110,6 @@
 <div
     use:init
     class="decorator-{context.node.id}"
-    style="position: relative; top:-200px"
-/>
+    style="position: relative; top:-200px" />
 
 <slot />
