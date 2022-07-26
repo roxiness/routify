@@ -16,3 +16,6 @@ export function normalizePlugins(plugins: RoutifyBuildtimePlugin[]): RoutifyBuil
 export function mockRoutes<T extends import("../buildtime/RoutifyBuildtime").RoutifyBuildtime | import("../runtime/Instance/RoutifyRuntime").RoutifyRuntime>(instance: T, routes: {
     [x: string]: any;
 }): import("../buildtime/RNodeBuildtime").RNodeBuildtime | import("../runtime/Instance/RNodeRuntime").RNodeRuntime;
+export function addPropsToComp<Component extends typeof import("svelte/internal").SvelteComponentDev>(Comp: Component, props: {
+    [x: string]: any;
+}): Component;
