@@ -2,10 +2,12 @@
     import Component from './ComposeFragments.svelte'
     import { setContext } from 'svelte'
     import DecoratorWrapper from './DecoratorWrapper.svelte'
+    import Noop from '../decorators/Noop.svelte'
     /** @type {import('./types').RenderContext} */
     export let context, props, activeContext
     const { isActive, childFragments, single } = context // grab the stores
-    let NodeComponent = context.node.module?.default
+    let NodeComponent =
+        context.node.module?.default || (!context.node.asyncModule && Noop)
 
     setContext('routify-fragment-context', context)
 
