@@ -10,10 +10,12 @@ export default defineConfig({
     plugins: [
         routify({
             devHelper: !production,
-            ssr: {
-                // spank crawls your pages, so you only need to add pages that aren't linked by another spanked page
-                spank: { sitemap: ['/'] },
-            },
+            // SSR defaults
+            // ssr: {
+            //     type: 'esm',
+            //     prerender: true,
+            //     spank: { sitemap: ['/'] },
+            // },
         }),
         svelte({
             emitCss: false,
