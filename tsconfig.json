@@ -20,6 +20,7 @@
         "test",
         "examples",
         "site",
-        "jest.config.js"
+        "jest.config.js",
+        "lib/extra/vite-plugin/assets"
     ]
 }

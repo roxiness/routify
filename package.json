@@ -9,7 +9,7 @@
     "typesVersions": {
         "*": {
             "vite-plugin": [
-                "./lib/extra/vite-plugin.d.ts"
+                "./lib/extra/vite-plugin/vite-plugin.d.ts"
             ]
         }
     },
@@ -19,8 +19,8 @@
     "exports": {
         "./package.json": "./package.json",
         ".": "./lib/runtime/index.js",
-        "./vite-plugin": "./lib/extra/vite-plugin.js",
-        "./lib/extra/vite-plugin": "./lib/extra/vite-plugin.js",
+        "./vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
+        "./lib/extra/vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
         "./lib/*": "./lib/*",
         "./lib/cmp/*": "./lib/cmp/*.js",
         "./typings/*": "./typings/*",
