@@ -20,6 +20,7 @@ export default defineConfig({
         svelte({
             emitCss: false,
             compilerOptions: {
+                hydratable: true,
                 dev: !production,
             },
             extensions: ['.md', '.svelte'],

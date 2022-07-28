@@ -4,7 +4,7 @@
     "scripts": {
         "build": "vite build && vite build --ssr",
         "preview": "vite preview",
-        "dev": "vite"
+        "dev": "routify dev"
     },
     "devDependencies": {
         "spank": "^2.0.0-8",
