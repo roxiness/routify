@@ -6,6 +6,7 @@
  */
 /**
  * @typedef {Object} VitePluginOptions_SSR
+ * @prop {boolean} enable enable ssr in dev
  * @prop {"cjs"|"esm"} type
  * @prop {boolean=} [prerender=true] Prerender pages into dist/client
  * @prop {any} spank Options to use with spank when prerendering
@@ -30,6 +31,7 @@ export default function RoutifyPlugin(options?: Partial<RoutifyBuildtimeOptions 
             polyfillDynamicImport: boolean;
         };
     };
+    configureServer: (server: any) => () => any;
     closeBundle: () => Promise<void>;
     transform: (str: any, id: any) => Promise<any>;
 };
@@ -48,6 +50,10 @@ export type VitePluginOptions = {
     ssr: Partial<VitePluginOptions_SSR>;
 };
 export type VitePluginOptions_SSR = {
+    /**
+     * enable ssr in dev
+     */
+    enable: boolean;
     type: "cjs" | "esm";
     /**
      * Prerender pages into dist/client
