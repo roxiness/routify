@@ -5,6 +5,7 @@
     import Component from '../renderer/ComposeFragments.svelte'
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
+    import { globalInstance } from '../Global/Global.js'
 
     /** @type {Router} */
     export let router = null
@@ -43,6 +44,8 @@
     export let queryHandler = null
 
     const context = { childFragments: writable([]) }
+    const getExistingRouter = name =>
+        globalInstance.routers.find(router => router.name === name)
 
     $: {
         /** @type {RoutifyRuntimeOptions}*/
@@ -65,7 +68,7 @@
         }
 
         // todo move everything to init
-        if (!router) router = new Router(options)
+        if (!router) router = getExistingRouter(options.name) || new Router(options)
         else router.init(options)
     }
     $: if (url && url !== router.url.internal()) router.url.replace(url)
