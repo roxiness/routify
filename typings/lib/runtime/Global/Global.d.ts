@@ -9,4 +9,4 @@ export class Global {
     urlFromBrowser: (router: Router) => string;
     register(instance: any): Global;
 }
-export const globalInstance: Global;
+export let globalInstance: Global;
