@@ -39,7 +39,8 @@ export class Router implements Readable<Router> {
         replace: (url: any, state?: {}) => Promise<boolean>;
         pop: (url: any, state?: {}) => Promise<boolean>;
     };
-    ready: Promise<any>;
+    /** @returns {Promise<Route>} */
+    ready: () => Promise<Route>;
     /** @type {Route[]} */
     history: Route[];
     subscribe: (this: void, run: import("svelte/store").Subscriber<Router>, invalidate?: (value?: Router) => void) => import("svelte/store").Unsubscriber;
