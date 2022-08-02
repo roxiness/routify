@@ -19,3 +19,4 @@ export function mockRoutes<T extends import("../buildtime/RoutifyBuildtime").Rou
 export function addPropsToComp<Component extends typeof import("svelte/internal").SvelteComponentDev>(Comp: Component, props: {
     [x: string]: any;
 }): Component;
+export function next<T extends import("svelte/store").Readable<V>, V>(store: T, wanted?: V | ((wanted: V) => boolean), strict?: boolean | undefined): Promise<V>;

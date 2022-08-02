@@ -39,7 +39,9 @@ export class Router implements Readable<Router> {
         replace: (url: any, state?: {}) => Promise<boolean>;
         pop: (url: any, state?: {}) => Promise<boolean>;
     };
-    /** @returns {Promise<Route>} */
+    /**
+     * function that resolves after the active route has changed
+     * @returns {Promise<Route>} */
     ready: () => Promise<Route>;
     /** @type {Route[]} */
     history: Route[];
