@@ -10,12 +10,12 @@ export default defineConfig({
     plugins: [
         routify({
             devHelper: !production,
-            // SSR defaults
-            // ssr: {
-            //     type: 'esm',
-            //     prerender: true,
-            //     spank: { sitemap: ['/'] },
-            // },
+            ssr: {
+                enable: true, // enable ssr in dev mode
+                // type: 'esm', // default
+                // prerender: true, // default
+                // spank: { sitemap: ['/'] }, // default
+            },
         }),
         svelte({
             emitCss: false,

@@ -7,7 +7,7 @@
         "dev": "vite dev"
     },
     "devDependencies": {
-        "spank": "^2.0.0-8",
+        "spank": "^2.0.0-9",
         "@roxi/routify": "file:../..",
         "@sveltejs/vite-plugin-svelte": "^1.0.0-next.13",
         "mdsvex": "^0.9.3",
