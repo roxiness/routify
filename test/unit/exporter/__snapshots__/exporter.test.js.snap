@@ -137,6 +137,24 @@ export default {
         \\"name\\": \\"index\\"
       },
       \\"children\\": []
+    },
+    {
+      \\"meta\\": {
+        \\"dynamic\\": true,
+        \\"dynamicSpread\\": true
+      },
+      \\"_regex\\": {},
+      \\"_paramKeys\\": {},
+      \\"name\\": \\"[...404]\\",
+      \\"module\\": \\"./.routify/components/[...404].svelte\\",
+      \\"file\\": {
+        \\"path\\": \\".routify/components/[...404].svelte\\",
+        \\"dir\\": \\".routify/components\\",
+        \\"base\\": \\"[...404].svelte\\",
+        \\"ext\\": \\".svelte\\",
+        \\"name\\": \\"[...404]\\"
+      },
+      \\"children\\": []
     }
   ]
 }"

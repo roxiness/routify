@@ -14,7 +14,7 @@ const instance = new RoutifyBuildtime(options)
 
 test('can build route tree', async () => {
     await filemapper({ instance })
-    expect(Object.values(instance.rootNodes)[0].descendants.length).toEqual(7)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toEqual(8)
 })
 
 test('can export a route tree', async () => {

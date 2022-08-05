@@ -168,6 +168,26 @@ Object {
       "module": false,
       "name": "no-layouts",
     },
+    Object {
+      "_paramKeys": Object {},
+      "_regex": Object {},
+      "asyncModule": undefined,
+      "children": Array [],
+      "file": File {
+        "base": "[...404].svelte",
+        "dir": ".routify/components",
+        "ext": ".svelte",
+        "name": "[...404]",
+        "path": ".routify/components/[...404].svelte",
+      },
+      "id": undefined,
+      "meta": Object {
+        "dynamic": true,
+        "dynamicSpread": true,
+      },
+      "module": "./.routify/components/[...404].svelte",
+      "name": "[...404]",
+    },
   ],
   "file": File {
     "base": "_module.svelte",

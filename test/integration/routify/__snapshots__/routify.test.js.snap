@@ -194,6 +194,24 @@ export default {
           ]
         }
       ]
+    },
+    {
+      \\"meta\\": {
+        \\"dynamic\\": true,
+        \\"dynamicSpread\\": true
+      },
+      \\"_regex\\": {},
+      \\"_paramKeys\\": {},
+      \\"name\\": \\"[...404]\\",
+      \\"file\\": {
+        \\"path\\": \\"test/integration/routify/temp/.routify/components/[...404].svelte\\",
+        \\"dir\\": \\"test/integration/routify/temp/.routify/components\\",
+        \\"base\\": \\"[...404].svelte\\",
+        \\"ext\\": \\".svelte\\",
+        \\"name\\": \\"[...404]\\"
+      },
+      \\"asyncModule\\": () => import('../../../../../C:/Users/jakob/development/@roxi/routify/test/integration/routify/temp/.routify/components/[...404].svelte'),
+      \\"children\\": []
     }
   ]
 }"

@@ -29,23 +29,23 @@ const filepath = resolve(__dirname, 'example', 'temp', 'NewFile.svelte')
 const renamedFilepath = resolve(__dirname, 'example', 'temp', 'NewFile2.svelte')
 
 test('detects new files', async () => {
-    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(2)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
     writeFileSync(filepath, '<!-- hello -->')
     await new Promise(resolve => instance.on.buildComplete(resolve))
-    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(4)
 })
 
 test('detects removed files', async () => {
-    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(4)
     unlinkSync(filepath)
     await new Promise(resolve => instance.on.buildComplete(resolve))
-    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(2)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
 })
 
 test('detects renamed files', async () => {
     writeFileSync(filepath, '<!-- hello -->')
     await new Promise(resolve => instance.on.buildComplete(resolve))
-    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(3)
+    expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(4)
     fse.renameSync(filepath, renamedFilepath)
     await new Promise(resolve => instance.on.buildComplete(resolve))
     // required
