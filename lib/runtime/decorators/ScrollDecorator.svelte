@@ -90,7 +90,7 @@
 
     const { isActive, single, router, route, node } = context
     const isLeafFragment = () =>
-        context.route && context.node === [...context.route.fragments].pop().node
+        context.route && context.node.id === [...context.route.fragments].pop().node.id
 
     // assign one scrollHandler per router
     const scrollHandler = fetchScrollHandler(router)
