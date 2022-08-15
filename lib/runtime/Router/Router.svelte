@@ -44,8 +44,6 @@
     export let queryHandler = null
 
     const context = { childFragments: writable([]) }
-    const getExistingRouter = name =>
-        globalInstance.routers.find(router => router.name === name)
 
     $: {
         /** @type {RoutifyRuntimeOptions}*/
@@ -68,7 +66,7 @@
         }
 
         // todo move everything to init
-        if (!router) router = getExistingRouter(options.name) || new Router(options)
+        if (!router) router = new Router(options)
         else router.init(options)
     }
     $: if (url && url !== router.url.internal()) router.url.replace(url)
