@@ -60,9 +60,11 @@ export function suppressComponentWarnings(ctx, tick) {
   suppressComponentWarnings._console = suppressComponentWarnings._console || { log: console.log, warn: console.warn }
   const { _console } = suppressComponentWarnings
 
+  let sPath = ctx.component.shortPath
+  
   const name = ctx.componentFile.name
     .replace(/Proxy<_?(.+)>/, '$1') //nollup wraps names in Proxy<...>
-    .replace(/^Index$/, ctx.component.shortPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
+    .replace(/^Index$/, sPath.length == 0 ? ctx.component.parent.absolutePath.split('/').pop() : sPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
     .replace(/^./, s => s.toUpperCase()) //capitalize first letter
     .replace(/\:(.+)/, 'U5B$1u5D') // :id => U5Bidu5D
 
