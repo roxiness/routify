@@ -64,7 +64,7 @@ export function suppressComponentWarnings(ctx, tick) {
   
   const name = ctx.componentFile.name
     .replace(/Proxy<_?(.+)>/, '$1') //nollup wraps names in Proxy<...>
-    .replace(/^Index$/, sPath.length == 0 ? ctx.component.parent.absolutePath.split('/').pop() : sPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
+    .replace(/^Index$/, (sPath.length == 0 && process.env.NODE_ENV != 'production') ? ctx.component.parent.absolutePath.split('/').pop() : sPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
     .replace(/^./, s => s.toUpperCase()) //capitalize first letter
     .replace(/\:(.+)/, 'U5B$1u5D') // :id => U5Bidu5D
 
@@ -80,7 +80,7 @@ export function suppressComponentWarnings(ctx, tick) {
     }
     tick().then(() => {
       //after component has been created, we want to restore the console method (log or warn)
-      console[log] = _console[log]
+      if(process.env.NODE_ENV == 'production') console[log] = _console[log]
     })
   }
 }
