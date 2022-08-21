@@ -59,14 +59,20 @@ export const pathToRank = ({ path }) => {
 export function suppressComponentWarnings(ctx, tick) {
   suppressComponentWarnings._console = suppressComponentWarnings._console || { log: console.log, warn: console.warn }
   const { _console } = suppressComponentWarnings
-
-  let sPath = ctx.component.shortPath
   
-  const name = ctx.componentFile.name
+  let sPath = ctx.component.shortPath
+
+  let name = ctx.componentFile.name
     .replace(/Proxy<_?(.+)>/, '$1') //nollup wraps names in Proxy<...>
-    .replace(/^Index$/, (sPath.length == 0 && process.env.NODE_ENV != 'production') ? ctx.component.importPath.split('/').slice(-2, -1)[0] : sPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
+    .replace(/^Index$/, (process.env.NODE_ENV != 'production' && sPath.length == 0 || sPath == "/") ? ctx.component?.absolutePath?.split('/').slice(-2, -1)[0] : sPath.split('/').pop()) //nollup names Index.svelte index. We want a real name
     .replace(/^./, s => s.toUpperCase()) //capitalize first letter
     .replace(/\:(.+)/, 'U5B$1u5D') // :id => U5Bidu5D
+
+  //suppress warnings in development
+  if(process.env.NODE_ENV != 'production' && ctx.component.shortPath == '/' && ctx.component.name == "_layout" && ctx.nodes?.[0]?.last === false)
+    name = ctx?.child ? ctx.child.file.split(".").slice(-2, -1)[0].replace(/^./, s => s.toUpperCase()) : "Layout"
+  if (process.env.NODE_ENV != 'production' && ctx.nodes?.[0]?.last !== false && ctx.nodes.length == 1 && name != "Reset" && name != "Layout" || name == "Index")
+    name = ctx.component?.absolutePath?.split('/').slice(-2, -1)[0].replace(/^./, s => s.toUpperCase())
 
   const ignores = [
     `<${name}> received an unexpected slot "default".`,
@@ -80,6 +86,7 @@ export function suppressComponentWarnings(ctx, tick) {
     }
     tick().then(() => {
       //after component has been created, we want to restore the console method (log or warn)
+      //check if in production due to vite hmr causing warnings to reappear until you hard restart vite
       if(process.env.NODE_ENV == 'production') console[log] = _console[log]
     })
   }
