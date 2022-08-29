@@ -14,22 +14,26 @@
     const { multi, decorator, props } = options
     let activeContext
 
-    /** @type {import('./utils/index').Multi}*/
-    const setup = normalizeMulti(multi, $childFragments[0]?.node, context)
+    /** @returns {import('./types').RenderContext[] }*/
+    const buildChildContexts = () => {
+        /** @type {import('./utils/index').Multi}*/
+        const setup = normalizeMulti(multi, $childFragments[0]?.node, context)
 
-    /** @type {import('./types').RenderContext[] }*/
-    const childContexts = setup.pages.map(node => ({
-        childFragments: writable([]),
-        node,
-        fragment: new RouteFragment(null, node, null, {}),
-        isActive: writable(false),
-        router: $childFragments[0]?.route.router || context.router,
-        route: null,
-        parentContext: context,
-        onDestroy: createSequenceHooksCollection(),
-        decorators: [context?.decorators, decorator].flat().filter(Boolean),
-        single: writable(setup.single),
-    }))
+        return setup.pages.map(node => ({
+            childFragments: writable([]),
+            node,
+            fragment: new RouteFragment(null, node, null, {}),
+            isActive: writable(false),
+            router: $childFragments[0]?.route.router || context.router,
+            route: null,
+            parentContext: context,
+            onDestroy: createSequenceHooksCollection(),
+            decorators: [context?.decorators, decorator].flat().filter(Boolean),
+            single: writable(setup.single),
+        }))
+    }
+
+    let childContexts = buildChildContexts()
 
     // if parent changes status to inactive, so does children
     $: if (isActive && !$isActive) childContexts.forEach(cc => cc.isActive.set(false))
@@ -41,8 +45,12 @@
         const [fragment, ...childFragments] = [...fragments]
         // todo we should match node, not node.id. For some reason node instances are different
         activeContext = childContexts.find(s => s.node.id === fragment?.node.id)
-        if (!activeContext)
-            throw new Error(`couldn't find context for ${fragment?.node.id}`)
+        if (!activeContext) {
+            // if we're rendering a node that didn't exist at this level before, we need to rebuild the child contexts
+            // this happens when navigating in or out of a reset module
+            childContexts = buildChildContexts()
+            return handlePageChange(fragments)
+        }
 
         activeContext.fragment = fragment
         activeContext.childFragments.set(childFragments)
