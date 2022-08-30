@@ -5,7 +5,7 @@ export class Route {
      * @param {UrlState} mode
      * @param {Object} state a state to attach to the route
      */
-    constructor(router: Router, url: string, mode: UrlState, state: any);
+    constructor(router: Router, url: string, mode: UrlState, state?: any);
     /** @type {RouteFragment[]} */
     allFragments: RouteFragment[];
     /** @type {RouteFragment[]} only fragments with components */
@@ -22,6 +22,7 @@ export class Route {
     state: any;
     log: any;
     get params(): any;
+    get leaf(): RouteFragment;
     loadRoute(): Promise<{
         route: Route;
     }>;
