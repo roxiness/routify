@@ -8,9 +8,9 @@
  * RUNTIME
  * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
  * @typedef {import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime} RNodeRuntime
- * @typedef {import('../lib/runtime/route/Route').Route} Route
+ * @typedef {import('../lib/runtime/Route/Route').Route} Route
  * @typedef {import('../lib/runtime/Router/Router').Router} Router
- * @typedef {import('../lib/runtime/route/RouteFragment').RouteFragment} RouteFragment
+ * @typedef {import('../lib/runtime/Route/RouteFragment').RouteFragment} RouteFragment
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  *
  *  BUILDTIME
