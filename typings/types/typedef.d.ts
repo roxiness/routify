@@ -25,7 +25,7 @@ type RNodeRuntime = import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime;
 /**
  * COMMON
  */
-type Route = import('../lib/runtime/route/Route').Route;
+type Route = import('../lib/runtime/Route/Route').Route;
 /**
  * COMMON
  */
@@ -33,7 +33,7 @@ type Router = import('../lib/runtime/Router/Router').Router;
 /**
  * COMMON
  */
-type RouteFragment = import('../lib/runtime/route/RouteFragment').RouteFragment;
+type RouteFragment = import('../lib/runtime/Route/RouteFragment').RouteFragment;
 /**
  * BUILDTIME
  */
