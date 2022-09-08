@@ -11,7 +11,7 @@
     export let options = {}
 
     const { childFragments, isActive } = context
-    const { multi, decorator, props } = options
+    const { multi, decorator, props, options: _options } = options
     let activeContext
 
     /** @returns {import('./types').RenderContext[] }*/
@@ -29,6 +29,7 @@
             parentContext: context,
             onDestroy: createSequenceHooksCollection(),
             decorators: [context?.decorators, decorator].flat().filter(Boolean),
+            options: _options || {},
             single: writable(setup.single),
         }))
     }

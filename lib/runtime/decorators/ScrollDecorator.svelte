@@ -1,7 +1,7 @@
 <script context="module">
     import { scopedScrollIntoView, persistentScrollTo } from '../helpers/scroll.js'
 
-    /** @typedef {{elem: HTMLElement, context: import('../Router/types').RenderContext}} ElementHolder */
+    /** @typedef {{elem: HTMLElement, context: import('../renderer/types').RenderContext}} ElementHolder */
 
     /**
      * @type {Map<Router, ScrollHandler>}
@@ -30,7 +30,7 @@
 
         /**
          * @param {HTMLElement} elem
-         * @param {import('../Router/types').RenderContext} context
+         * @param {import('../renderer/types').RenderContext} context
          */
         registerRenderContext(elem, context) {
             const elemHolder = { elem, context }
@@ -84,7 +84,7 @@
 </script>
 
 <script>
-    /** @type {import('../Router/types').RenderContext} */
+    /** @type {import('../renderer/types').RenderContext} */
     export let context
     export let Parent
 
@@ -98,7 +98,13 @@
     /** @type {HTMLElement} */
     let elem
 
-    $: if ($isActive && elem && !context.route.state.dontScroll && isLeafFragment())
+    $: if (
+        $isActive &&
+        elem &&
+        !context.options?.noScroll &&
+        !context.route.state.dontScroll &&
+        isLeafFragment()
+    )
         scrollHandler.scrollTo(elem, true)
 
     const init = el => {

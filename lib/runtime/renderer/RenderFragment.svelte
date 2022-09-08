@@ -35,10 +35,11 @@
             context={userContext}
             let:props
             let:multi
-            let:decorator>
+            let:decorator
+            let:options>
             {#if $childFragments.length || (multi && !multi?.single)}
                 <!-- CHILD PAGES -->
-                <Component options={{ multi, decorator, props }} {context} />
+                <Component options={{ multi, decorator, props, options }} {context} />
             {/if}
         </svelte:component>
     </svelte:component>
