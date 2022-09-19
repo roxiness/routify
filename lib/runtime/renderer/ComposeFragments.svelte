@@ -60,6 +60,7 @@
 
         // set this sibling to active and all other to inactive
         childContexts.forEach(s => s.isActive.set(s === activeContext))
+        childContexts = childContexts
     }
 
     $: $childFragments.length && handlePageChange($childFragments)
