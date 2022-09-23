@@ -48,7 +48,21 @@ export function isActiveUrl(url: any, actualParams?: {}): (path: string, params?
 }, options?: IsActiveOptions) => boolean;
 export function resolveNode(path: string): import("../Instance/RNodeRuntime.js").RNodeRuntime;
 export function traverseNode(node: RNodeRuntime, path: string, router: Router): RNodeRuntime;
-export const context: import("svelte/store").Readable<FragmentContext>;
+export const context: import("svelte/store").Readable<Partial<{
+    childFragments: import("svelte/store").Writable<import("../Route/RouteFragment.js").RouteFragment[]>;
+    node: import("../Instance/RNodeRuntime.js").RNodeRuntime;
+    options: {
+        string: any;
+    };
+    fragment: import("../Route/RouteFragment.js").RouteFragment;
+    isActive: import("svelte/store").Writable<Boolean>;
+    single: import("svelte/store").Writable<Boolean>;
+    route: import("../Route/Route.js").Route;
+    router: import("../index.js").RouterClass;
+    parentContext: Partial<any>;
+    decorators: typeof import("svelte").SvelteComponent[];
+    onDestroy?: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
+}>>;
 export const node: import("svelte/store").Readable<import("../Instance/RNodeRuntime.js").RNodeRuntime>;
 export const meta: import("svelte/store").Readable<{
     [x: string]: any;

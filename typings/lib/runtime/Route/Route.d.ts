@@ -34,6 +34,14 @@ export class Route {
     runGuards(): Promise<boolean>;
     runBeforeUrlChangeHooks(): Promise<any>;
     /**
+     * @param {RNodeRuntime} node the node that corresponds to the fragment
+     * @param {String=} urlFragment a fragment of the url (fragments = url.split('/'))
+     * @param {Object<string, any>=} params
+     */
+    createFragment(node: RNodeRuntime, urlFragment?: string | undefined, params?: {
+        [x: string]: any;
+    } | undefined): RouteFragment;
+    /**
      * creates fragments. A fragment is the section between each / in the URL
      */
     _createFragments(): RouteFragment[];
