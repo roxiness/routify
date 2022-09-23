@@ -6,7 +6,9 @@
 </script>
 
 <script>
+    import { beforeUrlChange } from '@roxi/routify'
     export let date
+    $beforeUrlChange(() => true)
 </script>
 
 Date: {date}
