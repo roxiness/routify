@@ -176,9 +176,9 @@ export type ContextHelperStore = import("svelte/store").Readable<{
 }>;
 export type ReadyHelper = () => void;
 export type ReadyHelperStore = import("svelte/store").Readable<() => void>;
-export type AfterPageLoadHelper = (callback: (page?: ClientNodeApi) => boolean) => any;
+export type AfterPageLoadHelper = (callback: (page?: ClientNodeApi) => void) => any;
 export type AfterPageLoadHelperStore = import("svelte/store").Readable<AfterPageLoadHelper> & {
-    _hooks: Array<(page?: ClientNodeApi) => boolean>;
+    _hooks: Array<(page?: ClientNodeApi) => void>;
 };
 export type BeforeUrlChangeHelper = (callback: (event?: PopStateEvent, route?: ClientNodeApi) => boolean) => any;
 export type BeforeUrlChangeHelperStore = import("svelte/store").Readable<BeforeUrlChangeHelper> & {
