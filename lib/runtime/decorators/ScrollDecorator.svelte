@@ -89,8 +89,7 @@
     export let Parent
 
     const { isActive, single, router, route, node } = context
-    const isLeafFragment = () =>
-        context.route && context.node.id === [...context.route.fragments].pop().node.id
+    const isLeafFragment = () => context.node.id === context.route?.leaf.node.id
 
     // assign one scrollHandler per router
     const scrollHandler = fetchScrollHandler(router)
@@ -107,15 +106,15 @@
     )
         scrollHandler.scrollTo(elem, true)
 
+    /** @param {HTMLElement} el */
     const init = el => {
-        elem = el
+        elem = el.parentElement
         scrollHandler.registerRenderContext(elem, context)
     }
 </script>
 
-<div
-    use:init
-    class="decorator-{context.node.id}"
-    style="position: relative; top:-200px" />
+{#if !elem}
+    <div use:init />
+{/if}
 
 <slot />
