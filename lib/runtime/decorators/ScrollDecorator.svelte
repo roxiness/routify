@@ -86,7 +86,6 @@
 <script>
     /** @type {import('../renderer/types').RenderContext} */
     export let context
-    export let Parent
 
     const { isActive, single, router, route, node } = context
     const isLeafFragment = () => context.node.id === context.route?.leaf.node.id
