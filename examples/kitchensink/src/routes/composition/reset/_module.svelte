@@ -1,2 +1,0 @@
-<slot />
-<!-- routify:meta reset -->

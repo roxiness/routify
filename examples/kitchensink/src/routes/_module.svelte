@@ -3,6 +3,6 @@
 </script>
 
 <Navigation />
-<div class="root-module container">
+<main class="responsive">
     <slot />
-</div>
+</main>
