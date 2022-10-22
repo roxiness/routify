@@ -15,6 +15,8 @@ export class RouteFragment {
     urlFragment: string;
     set params(arg: {});
     get params(): {};
+    parentElem: Promise<any>;
+    setParentElem: (value: any) => void;
     /**
      * @type {Object.<string, string|string[]>}
      **/

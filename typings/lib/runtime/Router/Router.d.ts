@@ -62,7 +62,8 @@ export class Router implements Readable<Router> {
     parentCmpCtx: any;
     /** @type {RNodeRuntime} */
     rootNode: RNodeRuntime;
-    setParentElem: (elem: any) => any;
+    /** @param {HTMLElement} elem */
+    setParentElem: (elem: HTMLElement) => void;
     importRoutes(routes: any): void;
     /**
      * converts a URL or Routify's internal URL to an external URL (for the browser)

@@ -5,7 +5,9 @@ export function getPath(node1: any, node2: any): string;
  * @callback Goto
  * @param {string} path relative, absolute or named URL
  * @param {Object.<string, string>=} userParams
- * @param {any=} options
+ * @param {{
+ *  mode: 'push'|'replace'
+ * }=} options
  * @type {Readable<Goto>} */
 export const goto: Readable<Goto>;
 /**
@@ -77,7 +79,9 @@ export const afterUrlChange: Readable<(arg0: AfterUrlChangeCallback) => any>;
 export const beforeUrlChange: Readable<(arg0: BeforeUrlChangeCallback) => any>;
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
-} | undefined, options?: any | undefined) => any;
+} | undefined, options?: {
+    mode: 'push' | 'replace';
+} | undefined) => any;
 export type Readable<T> = import('svelte/store').Readable<T>;
 export type IsActiveOptions = {
     /**
