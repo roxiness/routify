@@ -11,9 +11,9 @@
 
 <div class="fragment {$isActive ? 'active' : 'inactive'}" style="--degree: {degree}deg">
     <caption> {context.node.id || 'unnamed'} </caption>
-    <Parent>
+    <svelte:component this={Parent}>
         <slot />
-    </Parent>
+    </svelte:component>
 </div>
 
 <style>
