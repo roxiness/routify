@@ -9,11 +9,13 @@
     $: degree = 90 + depth * 22.5
 </script>
 
-<div class="fragment {$isActive ? 'active' : 'inactive'} {context.node.id}" style="--degree: {degree}deg">
+<div
+    class="fragment {$isActive ? 'active' : 'inactive'} {context.node.id}"
+    style="--degree: {degree}deg">
     <caption> {context.node.id || 'unnamed'} </caption>
-    <svelte:component this={Parent}>
+    <Parent>
         <slot />
-    </svelte:component>
+    </Parent>
 </div>
 
 <style>
