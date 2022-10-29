@@ -8,8 +8,16 @@
     const { isActive, childFragments, single } = context // grab the stores
     let NodeComponent =
         context.node.module?.default || (!context.node.asyncModule && Noop)
-
+    let elem
+    const setParentElem = _elem => (elem = _elem)
     setContext('routify-fragment-context', context)
+
+    $: if (elem && context === activeContext) {
+        const _elem = elem.parentElement
+        context.fragment.setParentElem(_elem)
+        _elem['__routify_meta'] = _elem['__routify_meta'] || {}
+        _elem['__routify_meta'].renderContext = context
+    }
 
     const notExcludedCtx = context => !context?.node.meta.multi?.exclude
     const isPartOfPage = () => !$single && [context, activeContext].every(notExcludedCtx)
@@ -24,6 +32,7 @@
     $: userContext = { ...context, load, route }
 </script>
 
+<div use:setParentElem id={context.node.name} />
 {#if isVisible && NodeComponent}
     <!-- DECORATOR COMPONENT
          we don't need to pass props as we provided them with "attachProps" in Component.svelte -->

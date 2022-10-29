@@ -1,4 +1,6 @@
 <script context="module">
+    import { get } from 'svelte/store'
+    import { throttle } from '../../common/utils.js'
     import { scopedScrollIntoView, persistentScrollTo } from '../helpers/scroll.js'
 
     /** @typedef {{elem: HTMLElement, context: import('../renderer/types').RenderContext}} ElementHolder */
@@ -16,32 +18,26 @@
     }
 
     // todo life cycle scroll to -> persistent scroll to -> watch scroll
-
     class ScrollHandler {
         /** @param {Router} router */
         constructor(router) {
             this.router = router
             this.stopPersistent = () => null
-            /** @type {ElementHolder[]} */
-            this.elemHolders = []
-            if (typeof document !== 'undefined')
-                document.addEventListener('scroll', () => this.onScroll())
-        }
+            this.listenForScroll = true
+            if (typeof document !== 'undefined') {
+                addEventListener('scroll', () => this.onScroll(), { capture: true })
+            }
 
-        /**
-         * @param {HTMLElement} elem
-         * @param {import('../renderer/types').RenderContext} context
-         */
-        registerRenderContext(elem, context) {
-            const elemHolder = { elem, context }
-            this.elemHolders.push(elemHolder)
-            context.onDestroy(() =>
-                this.elemHolders.splice(this.elemHolders.indexOf(elemHolder), 1),
-            )
+            router.activeRoute.subscribe(async route => {
+                const elem = await route.leaf.parentElem
+                if (!route.state.dontScroll) this.scrollTo(elem, true)
+            })
         }
 
         /** @param {HTMLElement} elem */
         scrollTo(elem, shouldPersist) {
+            this.listenForScroll = false
+            setTimeout(() => (this.listenForScroll = true), 500)
             setTimeout(async () => {
                 scopedScrollIntoView(elem)
 
@@ -54,25 +50,43 @@
         }
 
         onScroll() {
-            const cutoff = window.innerHeight / 3
-            /** @type {ElementHolder}*/
-            let candidateElementHolder
+            throttle(async () => {
+                this._onScrollThrottled()
+                await new Promise(resolve => setTimeout(resolve, 100))
+            })
+        }
+
+        _onScrollThrottled() {
+            if (!this.listenForScroll) return
+
+            let candidateElement
             let candidateTop = -Infinity
-            for (const elementHolder of this.elemHolders) {
-                const { top } = elementHolder.elem.getBoundingClientRect()
+
+            // get elements that are "multi" pages or modules
+            const renderElements = [...document.querySelectorAll('*')].filter(x => {
+                const ctx = x['__routify_meta']?.renderContext
+                return ctx && get(ctx.single) === false
+            })
+
+            // get the highest element that's not above the cutoff
+            const cutoff = window.innerHeight / 3
+            for (const element of renderElements) {
+                const { top } = element.getBoundingClientRect()
                 if (
                     cutoff > top &&
                     (top > candidateTop ||
-                        elementHolder.context.node.ancestors.includes(
-                            candidateElementHolder.context.node,
+                        element['__routify_meta'].renderContext.node.ancestors.includes(
+                            candidateElement['__routify_meta'].renderContext.node,
                         ))
                 ) {
-                    candidateElementHolder = elementHolder
+                    candidateElement = element
                     candidateTop = top
                 }
             }
-            if (candidateElementHolder) {
-                const { context, elem } = candidateElementHolder
+
+            // if there's a candidate and it's not the current active route, set it as active
+            if (candidateElement) {
+                const context = candidateElement['__routify_meta'].renderContext
                 if (context.router.activeRoute.get() != context.route)
                     context.router.url.set(context.node.path, 'replaceState', true, {
                         // we got to this route by scrolling manually, so we don't want the router to do any scrolling
@@ -86,34 +100,13 @@
 <script>
     /** @type {import('../renderer/types').RenderContext} */
     export let context
+    export let Parent
+    Parent // need this to kill Svelte warnings about unknown/unused export property
 
-    const { isActive, single, router, route, node } = context
-    const isLeafFragment = () => context.node.id === context.route?.leaf.node.id
+    const { router } = context
 
     // assign one scrollHandler per router
-    const scrollHandler = fetchScrollHandler(router)
-
-    /** @type {HTMLElement} */
-    let elem
-
-    $: if (
-        $isActive &&
-        elem &&
-        !context.options?.noScroll &&
-        !context.route.state.dontScroll &&
-        isLeafFragment()
-    )
-        scrollHandler.scrollTo(elem, true)
-
-    /** @param {HTMLElement} el */
-    const init = el => {
-        elem = el.parentElement
-        scrollHandler.registerRenderContext(elem, context)
-    }
+    fetchScrollHandler(router)
 </script>
-
-{#if !elem}
-    <div use:init />
-{/if}
 
 <slot />
