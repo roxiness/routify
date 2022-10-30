@@ -2,7 +2,7 @@
     "name": "kitchensink",
     "type": "module",
     "scripts": {
-        "build": "vite build",
+        "build": "vite build && vite build --ssr",
         "preview": "vite preview",
         "dev": "vite"
     },
