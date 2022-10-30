@@ -5,7 +5,7 @@
     import Component from '../renderer/ComposeFragments.svelte'
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
-    import { globalInstance } from '../Global/Global.js'
+    import { appInstance } from '../Global/Global.js'
 
     /** @type {Router} */
     export let router = null
