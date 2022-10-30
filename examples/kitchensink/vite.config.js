@@ -9,11 +9,14 @@ export default defineConfig({
     clearScreen: false,
 
     plugins: [
-        routify(),
+        routify({
+            ssr: { enable: true },
+        }),
         svelte({
             emitCss: false,
             compilerOptions: {
                 dev: !production,
+                hydratable: true,
             },
             extensions: ['.md', '.svelte'],
             preprocess: [mdsvex({ extension: 'md' })],
