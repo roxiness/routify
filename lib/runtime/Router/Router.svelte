@@ -91,8 +91,6 @@
     if (typeof window !== 'undefined') _onDestroy(() => router.destroy())
 </script>
 
-<!-- todo fragments should be context obj -->
-
 {#if $activeRoute}
     <div data-routify={nodeId} style="display: contents" use:initialize>
         <Component {context} options={{ decorator }} />
