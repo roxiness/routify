@@ -1,6 +1,6 @@
 <script>
     import { isActive, node } from '@roxi/routify'
-    export let pages
+    export let pages = undefined
     $: liveUrl = index => pages?.[index]?.router?.url.external()
 </script>
 
