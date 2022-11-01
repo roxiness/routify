@@ -6,7 +6,7 @@
         node => node.path === '/composition',
     )
 
-    const router = createRouter({ name: 'nested', rootNode })
+    const router = createRouter({ name: 'nested2', rootNode })
 </script>
 
 {#if !hasNestedRouter}
