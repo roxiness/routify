@@ -45,30 +45,28 @@
 
     const context = { childFragments: writable([]) }
 
-    $: {
-        /** @type {RoutifyRuntimeOptions}*/
-        const options = {
-            instance,
-            rootNode,
-            name,
-            routes,
-            urlRewrite,
-            urlReflector,
-            passthrough,
-            beforeRouterInit,
-            afterRouterInit,
-            beforeUrlChange,
-            afterUrlChange,
-            transformFragments,
-            onDestroy,
-            plugins,
-            queryHandler,
-        }
-
-        // todo move everything to init
-        if (!router) router = new Router(options)
-        else router.init(options)
+    /** @type {RoutifyRuntimeOptions}*/
+    const options = {
+        instance,
+        rootNode,
+        name,
+        routes,
+        urlRewrite,
+        urlReflector,
+        passthrough,
+        beforeRouterInit,
+        afterRouterInit,
+        beforeUrlChange,
+        afterUrlChange,
+        transformFragments,
+        onDestroy,
+        plugins,
+        queryHandler,
     }
+
+    // todo move everything to init
+    if (!router) router = new Router(options)
+
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
     $: context.childFragments.set($activeRoute?.fragments || [])
