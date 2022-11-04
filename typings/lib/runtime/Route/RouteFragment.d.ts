@@ -16,7 +16,7 @@ export class RouteFragment {
     set params(arg: {});
     get params(): {};
     parentElem: Promise<any>;
-    setParentElem: (value: any) => void;
+    setElem: (el: any) => void;
     /**
      * @type {Object.<string, string|string[]>}
      **/

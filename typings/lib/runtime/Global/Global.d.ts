@@ -1,4 +1,4 @@
-export class Global {
+export class AppInstance {
     /** @type {RoutifyRuntime[]} */
     instances: RoutifyRuntime[];
     log: import("consolite").ConsoliteLogger;
@@ -7,6 +7,6 @@ export class Global {
     browserAdapter: BrowserAdapter;
     /** @param {Router} router */
     urlFromBrowser: (router: Router) => string;
-    register(instance: any): Global;
+    register(instance: any): AppInstance;
 }
-export let globalInstance: Global;
+export const appInstance: AppInstance;

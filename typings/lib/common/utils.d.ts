@@ -20,3 +20,4 @@ export function addPropsToComp<Component extends typeof import("svelte/internal"
     [x: string]: any;
 }): Component;
 export function next<T extends import("svelte/store").Readable<V>, V>(store: T, wanted?: V | ((wanted: V) => boolean), strict?: boolean | undefined): Promise<V>;
+export function throttle(fn: any): Promise<void>;

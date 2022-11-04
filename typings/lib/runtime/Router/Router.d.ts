@@ -21,6 +21,8 @@ export class Router implements Readable<Router> {
     beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
     /** @type { import('hookar').HooksCollection<AfterUrlChangeCallback> } */
     afterUrlChange: import('hookar').HooksCollection<AfterUrlChangeCallback>;
+    /** @type { import('hookar').HooksCollection<OnUrlClickCallback> } */
+    onUrlClick: import('hookar').HooksCollection<OnUrlClickCallback>;
     /** @type { import('hookar').HooksCollection<TransformFragmentsCallback> } */
     transformFragments: import('hookar').HooksCollection<TransformFragmentsCallback>;
     /** @type { import('hookar').HooksCollection<OnDestroyRouterCallback> } */
@@ -120,6 +122,10 @@ export type RouterOptionsNormalizedOverlay = {
      * hook: runs after url has changed
      */
     afterUrlChange: AfterUrlChangeCallback[];
+    /**
+     * hook: runs after url has changed
+     */
+    onUrlClick: OnUrlClickCallback[];
     /**
      * hook: transform route fragments after navigation
      */

@@ -135,6 +135,10 @@ type RoutifyRuntimeOptions = {
      */
     afterUrlChange: MaybeArray<AfterUrlChangeCallback>;
     /**
+     * hook: runs after url has changed
+     */
+    onUrlClick: MaybeArray<OnUrlClickCallback>;
+    /**
      * hook: transform route fragments after navigation
      */
     transformFragments: MaybeArray<TransformFragmentsCallback>;
@@ -161,6 +165,7 @@ type AfterUrlChangeCallback = (arg0: {
     route: Route;
     history: Route[];
 }) => any;
+type OnUrlClickCallback = (arg0: HTMLElement) => boolean;
 type TransformFragmentsCallback = (arg0: RouteFragment[]) => RouteFragment[];
 type OnDestroyRouterCallback = (arg0: {
     router: typeof this;
