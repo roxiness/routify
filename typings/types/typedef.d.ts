@@ -165,7 +165,7 @@ type AfterUrlChangeCallback = (arg0: {
     route: Route;
     history: Route[];
 }) => any;
-type OnUrlClickCallback = (arg0: HTMLElement) => boolean;
+type OnUrlClickCallback = (arg0: HTMLAnchorElement) => any;
 type TransformFragmentsCallback = (arg0: RouteFragment[]) => RouteFragment[];
 type OnDestroyRouterCallback = (arg0: {
     router: typeof this;

@@ -64,6 +64,7 @@
  * @prop { MaybeArray<RouterInitCallback> } afterRouterInit hook: runs after each router initiation
  * @prop { MaybeArray<BeforeUrlChangeCallback> } beforeUrlChange hook: guard that runs before url changes
  * @prop { MaybeArray<AfterUrlChangeCallback> } afterUrlChange hook: runs after url has changed
+ * @prop { MaybeArray<OnUrlClickCallback> } onUrlClick hook: runs after url has changed
  * @prop { MaybeArray<TransformFragmentsCallback> } transformFragments hook: transform route fragments after navigation
  * @prop { MaybeArray<OnDestroyRouterCallback> } onDestroy hook: runs before router is destroyed
  * @prop { QueryHandler } queryHandler
@@ -86,6 +87,7 @@
  *   route: Route,
  *   history: Route[]
  * }): any } AfterUrlChangeCallback
+ * @typedef { function(HTMLAnchorElement): any } OnUrlClickCallback
  * @typedef { function(RouteFragment[]):RouteFragment[] } TransformFragmentsCallback
  * @typedef { function({router: typeof this}):void } OnDestroyRouterCallback
  */
