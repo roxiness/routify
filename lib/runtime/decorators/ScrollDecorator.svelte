@@ -29,21 +29,25 @@
             }
 
             router.activeRoute.subscribe(async route => {
-                const elem = await route.leaf.parentElem
-                if (!route.state.dontScroll) this.scrollTo(elem, true)
+                if (route.state.dontScroll) return
+
+                const parentElem = await route.leaf.parentElem
+                const anchor = route.anchor && document.getElementById(route.anchor)
+                const elem = anchor || parentElem
+                this.scrollTo(elem, anchor, true)
             })
         }
 
         /** @param {HTMLElement} elem */
-        scrollTo(elem, shouldPersist) {
+        scrollTo(elem, anchor, shouldPersist) {
             this.listenForScroll = false
             setTimeout(() => (this.listenForScroll = true), 500)
             setTimeout(async () => {
-                scopedScrollIntoView(elem)
+                scopedScrollIntoView(elem, anchor)
 
                 if (shouldPersist) {
                     this.stopPersistent() // cancel last scroll
-                    this.stopPersistent = persistentScrollTo(elem, {})
+                    this.stopPersistent = persistentScrollTo(elem, anchor, {})
                     setTimeout(this.stopPersistent, 500)
                 }
             })

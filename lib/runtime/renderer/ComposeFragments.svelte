@@ -13,14 +13,6 @@
     const { childFragments, isActive } = context
     const { multi, decorator, props, options: _options } = options
     let activeContext
-    let parentElem
-
-    /** @param {HTMLElement} elem */
-    const setParentElem = elem => {
-        parentElem = elem.parentElement
-        parentElem['__routify_meta'] = parentElem['__routify_meta'] || {}
-        parentElem['__routify_meta'].renderContext = context
-    }
 
     /** @returns {import('./types').RenderContext[] }*/
     const buildChildContexts = () => {
@@ -73,8 +65,6 @@
 
     $: $childFragments.length && handlePageChange($childFragments)
 </script>
-
-{#if !parentElem} <div use:setParentElem />{/if}
 
 {#each childContexts as context (context.node.id)}
     <RenderFragment {context} {props} {activeContext} />
