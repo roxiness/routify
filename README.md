@@ -191,6 +191,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `afterRouterInit` **MaybeArray\<RouterInitCallback>** hook: runs after each router initiation
 *   `beforeUrlChange` **MaybeArray\<BeforeUrlChangeCallback>** hook: guard that runs before url changes
 *   `afterUrlChange` **MaybeArray\<AfterUrlChangeCallback>** hook: runs after url has changed
+*   `onUrlClick` **MaybeArray\<OnUrlClickCallback>** hook: runs after url has changed
 *   `transformFragments` **MaybeArray<[TransformFragmentsCallback](#transformfragmentscallback)>** hook: transform route fragments after navigation
 *   `onDestroy` **MaybeArray\<OnDestroyRouterCallback>** hook: runs before router is destroyed
 *   `queryHandler` **[QueryHandler](#queryhandler)** 
