@@ -20,6 +20,7 @@ export class Route {
     url: string;
     mode: UrlState;
     state: any;
+    anchor: string;
     log: any;
     get params(): any;
     get leaf(): RouteFragment;
