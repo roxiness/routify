@@ -109,6 +109,6 @@
         "examples/microframework/*"
     ],
     "volta": {
-        "node": "14.19.1"
+        "node": "16.18.1"
     }
 }
