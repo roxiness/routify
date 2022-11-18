@@ -10,12 +10,13 @@ export default defineConfig({
 
     plugins: [
         routify({
-            devHelper: !production,
+            ssr: { enable: false },
         }),
         svelte({
             emitCss: false,
             compilerOptions: {
                 dev: !production,
+                hydratable: false,
             },
             extensions: ['.md', '.svelte'],
             preprocess: [mdsvex({ extension: 'md' })],
