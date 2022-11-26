@@ -10,6 +10,7 @@
         "@roxi/routify": "^3.0.0-next.1",
         "@sveltejs/vite-plugin-svelte": "^1.0.0-next.13",
         "mdsvex": "^0.9.3",
+        "spank": "^2.0.0-12",
         "svelte": "^3.39.0",
         "vite": "^3.0.3"
     }
