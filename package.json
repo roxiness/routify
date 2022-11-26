@@ -89,6 +89,18 @@
         "prompts": "^2.4.2",
         "svelte": "^3.46.1"
     },
+    "peerDependencies": {
+        "spank": "^2.0.0-12",
+        "vite": "^3.2.4"
+    },
+    "peerDependenciesMeta": {
+        "vite": {
+            "optional": true
+        },
+        "spank": {
+            "optional": true
+        }
+    },
     "prettier": {
         "singleQuote": true,
         "quoteProps": "as-needed",
