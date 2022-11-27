@@ -17,7 +17,7 @@ export const runViteDev = path =>
             child.stderr.setEncoding('utf8')
 
             child.stdout.on('data', msg => {
-                const match = msg.match(/Local: .+?(\d{4})/i)
+                const match = msg.match(/Local.*: .+?(\d{4})/i)
                 if (match) {
                     const port = Number(match[1])
                     resolve({
