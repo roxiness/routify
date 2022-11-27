@@ -1,5 +1,5 @@
-import { RNodeBuildtime } from '../../../lib/buildtime/RNodeBuildtime'
-import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime'
+import { RNodeBuildtime } from '../../../lib/buildtime/RNodeBuildtime.js'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 /** @type {RoutifyBuildtime} */
 let instance

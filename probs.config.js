@@ -5,10 +5,8 @@ const options = {
     ignore: ['**/temp/**'],
     worker: ({ file }) => ({
         execArgv: [
-            '--experimental-loader',
-            'esm-loader-svelte',
-            '--experimental-specifier-resolution',
-            'node',
+            '--experimental-specifier-resolution=node',
+            '--experimental-loader=esm-loader-svelte',
         ],
     }),
 }

@@ -2,7 +2,7 @@
     import { createSequenceHooksCollection } from 'hookar'
 
     import { writable } from 'svelte/store'
-    import { RouteFragment } from '../Route/RouteFragment'
+    import { RouteFragment } from '../Route/RouteFragment.js'
     import RenderFragment from './RenderFragment.svelte'
     import { normalizeMulti } from './utils/normalizeMulti.js'
 

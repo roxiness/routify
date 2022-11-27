@@ -1,4 +1,4 @@
-import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime'
+import { RoutifyBuildtime } from '../../../lib/buildtime/RoutifyBuildtime.js'
 
 const instance = new RoutifyBuildtime({})
 const node = instance.createNode('my-node')

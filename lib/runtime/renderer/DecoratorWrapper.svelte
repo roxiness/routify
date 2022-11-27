@@ -1,7 +1,7 @@
 <!-- Looping decorator wrapper. The Parent prop returns a new decorator wrapper with the next decorator -->
 <script>
     import { onDestroy } from 'svelte'
-    import { addPropsToComp } from '../../common/utils'
+    import { addPropsToComp } from '../../common/utils.js'
     import DecoratorWrapper from './DecoratorWrapper.svelte'
 
     export let decorators = null,

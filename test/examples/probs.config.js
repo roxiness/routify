@@ -19,7 +19,7 @@ const options = {
     },
     worker: ({ file }) => {
         return {
-            execArgv: ['--experimental-loader', 'svelte-esm-loader', '--no-warnings'],
+            execArgv: ['--experimental-loader', 'svelte-esm-loader'],
         }
     },
     runner: 'fork',
