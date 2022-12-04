@@ -16,7 +16,7 @@ export default defineConfig({
             emitCss: false,
             compilerOptions: {
                 dev: !production,
-                hydratable: true,
+                hydratable: !!process.env.ROUTIFY_SSR_ENABLE,
             },
             extensions: ['.md', '.svelte'],
             preprocess: [mdsvex({ extension: 'md' })],
