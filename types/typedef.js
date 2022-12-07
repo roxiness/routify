@@ -113,7 +113,8 @@
  *
  * @typedef {object} RoutifyLoadContext
  * @prop {Route} route
- * @prop {RNodeRuntime} node
+ * @prop {Route=} prevRoute
+ * @prop {Boolean} isNew
  *
  * @typedef {object} RoutifyLoadReturn
  * @prop {number} status
@@ -169,8 +170,8 @@
  * @prop {RoutifyBuildtime} instance
  * @prop {RNodeBuildtime} node
  * @prop {Partial<RoutifyBuildtimeOptions>} options
- * @prop {MetaContextSplit=} split dynamically import the value
- * @prop {import('persistable')['default']['call']=} persist persist the return of a callback on disk. Return persisted data on subsequent calls
+ * @prop {MetaContextSplit} split dynamically import the value
+ * @prop {import('persistable')['default']['call']} persist persist the return of a callback on disk. Return persisted data on subsequent calls
  * @prop {string} tempPath temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
  */
 

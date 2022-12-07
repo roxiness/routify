@@ -226,7 +226,8 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 #### Properties
 
 *   `route` **Route** 
-*   `node` **RNodeRuntime** 
+*   `prevRoute` **Route?** 
+*   `isNew` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 *   `status` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 *   `error` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error))** 
 *   `redirect` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
@@ -291,7 +292,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `instance` **RoutifyBuildtime** 
 *   `node` **RNodeBuildtime** 
 *   `options` **Partial<[RoutifyBuildtimeOptions](#routifybuildtimeoptions)>** 
-*   `split` **[MetaContextSplit](#metacontextsplit)?** dynamically import the value
+*   `split` **[MetaContextSplit](#metacontextsplit)** dynamically import the value
 *   `tempPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
 
 ### UrlRewriteFn

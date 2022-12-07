@@ -24,6 +24,7 @@ export class Route {
     log: any;
     get params(): any;
     get leaf(): RouteFragment;
+    get isPending(): boolean;
     loadRoute(): Promise<{
         route: Route;
     }>;

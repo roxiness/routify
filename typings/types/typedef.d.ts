@@ -181,7 +181,8 @@ type RoutifyExternalMetaHelper = {
 type RoutifyLoad = (context: RoutifyLoadContext) => MaybePromise<Partial<RoutifyLoadReturn> | null>;
 type RoutifyLoadContext = {
     route: Route;
-    node: RNodeRuntime;
+    prevRoute?: Route | undefined;
+    isNew: boolean;
 };
 type RoutifyLoadReturn = {
     status: number;
@@ -254,11 +255,11 @@ type MetaContext = {
     /**
      * dynamically import the value
      */
-    split?: MetaContextSplit | undefined;
+    split: MetaContextSplit;
     /**
      * persist the return of a callback on disk. Return persisted data on subsequent calls
      */
-    persist?: typeof import("persistable")['default']['call'] | undefined;
+    persist: typeof import("persistable")['default']['call'];
     /**
      * temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
      */

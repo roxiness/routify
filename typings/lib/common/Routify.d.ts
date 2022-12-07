@@ -5,9 +5,7 @@ export class Routify<NodeConstructor extends {
     new (name: string, module: string | ReservedCmpProps, instance: any): RNode<any>;
 }> {
     /** @type {typeof RNode<any>} */
-    NodeConstructor: {
-        new (name: string, module: string | ReservedCmpProps, instance: any): RNode<any>;
-    };
+    NodeConstructor: typeof RNode<any>;
     /** @type {NodeConstructor['prototype']} */
     NodeType: NodeConstructor['prototype'];
     /** @type {NodeConstructor['prototype'][]} */
