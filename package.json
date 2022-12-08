@@ -74,7 +74,7 @@
         "cheap-watch": "^1.0.4",
         "cheerio": "^1.0.0-rc.10",
         "commander": "^7.2.0",
-        "configent": "^3.0.0-12",
+        "configent": "^3.0.0-13",
         "consolite": "^0.2.10",
         "fs-extra": "^10.0.0",
         "hookar": "^0.0.7-0",
