@@ -2,7 +2,7 @@
     /** @type {RoutifyLoad} */
     const load = () => {
         return {
-            redirect: '/composition',
+            redirect: '/redirect/somewhere',
         }
     }
 
