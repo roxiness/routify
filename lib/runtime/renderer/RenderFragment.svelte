@@ -12,7 +12,7 @@
     const setElem = _elem => (elem = _elem)
     setContext('routify-fragment-context', context)
 
-    $: if (elem && context === activeContext) {
+    $: if (elem) {
         const _elem = elem
         context.fragment.setElem(_elem)
         _elem['__routify_meta'] = _elem['__routify_meta'] || {}
@@ -32,24 +32,27 @@
     $: userContext = { ...context, load, route }
 </script>
 
-<div use:setElem id={context.node.name} />
+<!-- todo create anchor wrapper -->
 {#if isVisible && NodeComponent}
-    <!-- DECORATOR COMPONENT
-         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
-    <svelte:component this={DecoratorWrapper} {context}>
-        <!-- PAGE COMPONENT -->
-        <svelte:component
-            this={NodeComponent}
-            {...compProps}
-            context={userContext}
-            let:props
-            let:multi
-            let:decorator
-            let:options>
-            {#if $childFragments.length || (multi && !multi?.single)}
-                <!-- CHILD PAGES -->
-                <Component options={{ multi, decorator, props, options }} {context} />
-            {/if}
-        </svelte:component>
-    </svelte:component>
+    <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
+    <div use:setElem id={context.node.name}>
+        <!-- DECORATOR COMPONENT
+        we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
+        <DecoratorWrapper {context} root={true}>
+            <!-- PAGE COMPONENT -->
+            <svelte:component
+                this={NodeComponent}
+                {...compProps}
+                context={userContext}
+                let:props
+                let:multi
+                let:decorator
+                let:options>
+                {#if $childFragments.length || (multi && !multi?.single)}
+                    <!-- CHILD PAGES -->
+                    <Component options={{ multi, decorator, props, options }} {context} />
+                {/if}
+            </svelte:component>
+        </DecoratorWrapper>
+    </div>
 {/if}
