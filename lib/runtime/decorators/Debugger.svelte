@@ -1,5 +1,5 @@
 <script>
-    export let context, Parent
+    export let context
 
     const { isActive } = context
 
@@ -13,9 +13,7 @@
     class="fragment {$isActive ? 'active' : 'inactive'} {context.node.id}"
     style="--degree: {degree}deg">
     <caption> {context.node.id || 'unnamed'} </caption>
-    <Parent>
-        <slot />
-    </Parent>
+    <slot />
 </div>
 
 <style>

@@ -1,27 +1,24 @@
 <!-- Looping decorator wrapper. The Parent prop returns a new decorator wrapper with the next decorator -->
 <script>
     import { onDestroy } from 'svelte'
-    import { addPropsToComp } from '../../common/utils.js'
-    import DecoratorWrapper from './DecoratorWrapper.svelte'
 
-    export let decorators = null,
-        nested = false,
-        context
+    export let decorators = null
+    export let root = false
+    export let context
 
-    // TODO insert Noop.svelte as first item
-    $: decoClones = [...(decorators || context.decorators)]
-    $: lastDecorator = decoClones.pop()
-
-    $: Parent = addPropsToComp(DecoratorWrapper, {
-        decorators: decoClones,
-        context,
-        nested: true,
-    })
+    decorators = decorators || context.decorators
+    const [Decorator, ...restOfDecorators] = [...decorators]
 
     // we only want to trigger onDestroy from the first decorator wrapper
-    if (!nested) onDestroy(() => context.onDestroy.run())
+    if (root) onDestroy(() => context.onDestroy.run())
 </script>
 
-<svelte:component this={lastDecorator} {Parent} {context}>
+{#if Decorator}
+    <svelte:component this={Decorator} {context}>
+        <svelte:self decorators={restOfDecorators} {context}>
+            <slot />
+        </svelte:self>
+    </svelte:component>
+{:else}
     <slot />
-</svelte:component>
+{/if}

@@ -104,8 +104,6 @@
 <script>
     /** @type {import('../renderer/types').RenderContext} */
     export let context
-    export let Parent
-    Parent // need this to kill Svelte warnings about unknown/unused export property
 
     const { router } = context
 
