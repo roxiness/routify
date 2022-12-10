@@ -13,11 +13,9 @@
 </script>
 
 {#if Component}
-    {#if Component}
-        <Component {...passthrough} {context}>
-            <slot />
-        </Component>
-    {/if}
+    <Component {...passthrough} {context}>
+        <slot />
+    </Component>
 {:else}
     <slot />
 {/if}
