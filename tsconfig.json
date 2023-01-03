@@ -11,9 +11,8 @@
         "emitDeclarationOnly": true,
         "allowSyntheticDefaultImports": true
     },
-    "include": ["lib/**/*.js", "types/**/*.js", "plugins/**/*.js"],
+    "include": ["lib/**/*.js", "types/**/*.js", "plugins/**/*.js", "node_modules/probs"],
     "exclude": [
-        "**/node_modules/*",
         "**/tmp/*",
         "**/.history/*",
         "**/spec",
