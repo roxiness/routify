@@ -3,6 +3,7 @@
 
     import { writable } from 'svelte/store'
     import { RouteFragment } from '../Route/RouteFragment.js'
+    import { pushToOrReplace } from '../utils/index.js'
     import RenderFragment from './RenderFragment.svelte'
     import { normalizeMulti } from './utils/normalizeMulti.js'
 
@@ -10,7 +11,7 @@
     export let context = null
     export let options = {}
 
-    const { childFragments, isActive } = context
+    const { childFragments, isActive, decorators } = context
     const { multi, decorator, props, options: _options } = options
     let activeContext
 
@@ -28,7 +29,7 @@
             route: null,
             parentContext: context,
             onDestroy: createSequenceHooksCollection(),
-            decorators: [context?.decorators, decorator].flat().filter(Boolean),
+            decorators: pushToOrReplace(decorators, decorator).filter(Boolean),
             options: _options || {},
             single: writable(setup.single),
         }))

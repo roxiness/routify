@@ -5,7 +5,7 @@
     export let decorators = null
     export let root = false
     export let context
-
+    export let isNoop
     decorators = decorators || context.decorators
     const [Decorator, ...restOfDecorators] = [...decorators]
 
@@ -13,7 +13,7 @@
     if (root) onDestroy(() => context.onDestroy.run())
 </script>
 
-{#if Decorator}
+{#if Decorator && !isNoop}
     <svelte:component this={Decorator} {context}>
         <svelte:self decorators={restOfDecorators} {context}>
             <slot />

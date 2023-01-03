@@ -1,7 +1,7 @@
 <script>
     import { Router } from './Router.js'
     import { onDestroy as _onDestroy } from 'svelte'
-    import { getUrlFromClick } from '../utils/index.js'
+    import { getUrlFromClick, pushToOrReplace } from '../utils/index.js'
     import Component from '../renderer/ComposeFragments.svelte'
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
@@ -9,7 +9,7 @@
     /** @type {Router} */
     export let router = null
     export let routes = null
-    export let decorator = ScrollDecorator
+    export let decorator = null
 
     /** @type {RoutifyRuntimeOptions['urlReflector']} */
     export let urlReflector = null
@@ -42,7 +42,7 @@
     /** @type {RoutifyRuntimeOptions['queryHandler']} */
     export let queryHandler = null
 
-    const context = { childFragments: writable([]) }
+    const context = { childFragments: writable([]), decorators: [ScrollDecorator] }
 
     /** @type {RoutifyRuntimeOptions}*/
     const options = {

@@ -8,6 +8,7 @@
     const { isActive, childFragments, single } = context // grab the stores
     let NodeComponent =
         context.node.module?.default || (!context.node.asyncModule && Noop)
+    let isNoop = NodeComponent === Noop
     let elem
     const setElem = _elem => (elem = _elem)
     setContext('routify-fragment-context', context)
@@ -38,7 +39,7 @@
     <div use:setElem id={context.node.name}>
         <!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
-        <DecoratorWrapper {context} root={true}>
+        <DecoratorWrapper {context} root={true} {isNoop}>
             <!-- PAGE COMPONENT -->
             <svelte:component
                 this={NodeComponent}
