@@ -5,6 +5,7 @@
     import Component from '../renderer/ComposeFragments.svelte'
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
+    import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
 
     /** @type {Router} */
     export let router = null
@@ -41,6 +42,8 @@
     export let plugins = null
     /** @type {RoutifyRuntimeOptions['queryHandler']} */
     export let queryHandler = null
+    /** @type {import('../decorators/AnchorDecorator').Location}*/
+    export let anchor = 'wrapper'
 
     const context = { childFragments: writable([]), decorators: [ScrollDecorator] }
 
@@ -73,11 +76,18 @@
 
     $: router.log.debug('before render', get(context.childFragments)) // ROUTIFY-DEV-ONLY
 
+    /** @param {HTMLElement} elem */
     const initialize = elem => {
         if (!router.passthrough) {
             elem.addEventListener('click', handleClick)
             elem.addEventListener('keydown', handleClick)
         }
+
+        elem = anchor === 'parent' || anchor === 'wrapper' ? elem : elem.parentElement
+        router.setParentElem(elem)
+
+        // todo check that a router hasn't already been added to this element
+        elem['__routify_meta'] = { ...elem['__routify_meta'], router: router }
     }
 
     const handleClick = event => {
@@ -88,12 +98,8 @@
     if (typeof window !== 'undefined') _onDestroy(() => router.destroy())
 </script>
 
-{#if $activeRoute}
-    <div data-routify={nodeId} style="display: contents" use:initialize>
+<AnchorDecorator onMount={initialize} style="display: contents" location={anchor}>
+    {#if $activeRoute}
         <Component {context} options={{ decorator }} />
-    </div>
-{/if}
-
-{#if !router.parentElem}
-    <div use:router.setParentElem />
-{/if}
+    {/if}
+</AnchorDecorator>
