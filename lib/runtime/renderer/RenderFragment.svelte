@@ -1,5 +1,5 @@
 <script>
-    import Component from './ComposeFragments.svelte'
+    import Compose from './ComposeFragments.svelte'
     import { setContext } from 'svelte'
     import DecoratorWrapper from './DecoratorWrapper.svelte'
     import Noop from '../decorators/Noop.svelte'
@@ -51,7 +51,7 @@
                 let:options>
                 {#if $childFragments.length || (multi && !multi?.single)}
                     <!-- CHILD PAGES -->
-                    <Component options={{ multi, decorator, props, options }} {context} />
+                    <Compose options={{ multi, decorator, props, options }} {context} />
                 {/if}
             </svelte:component>
         </DecoratorWrapper>
