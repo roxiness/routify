@@ -5,7 +5,7 @@
     export let decorators = null
     export let root = false
     export let context
-    export let isNoop
+    export let isNoop = false
     decorators = decorators || context.decorators
     const [Decorator, ...restOfDecorators] = [...decorators]
 
