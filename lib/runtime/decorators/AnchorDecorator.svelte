@@ -5,27 +5,27 @@
     export let location
     /** @type {Node} */
     let elem
-    /** @type {(Node)=>any} */
+    /** @type {(parent: Node, anchor?: Node)=>any} */
     export let onMount = x => x
 
     /**
-     * @param {Node} _elem
+     * @param {Node} elem
      */
-    const setElem = _elem => {
-        elem = _elem
-        const targetElem = getTarget(location, elem)
-        onMount(targetElem)
+    const setElem = elem => {
+        const { parent, anchor } = getTarget(location, elem)
+        onMount(parent, anchor)
     }
 
     /**
-     *
      * @param {location} location
      * @param {Node} elem
      */
     const getTarget = (location, elem) => {
-        if (location === 'wrapper' || location === 'header') return elem
-        if (location === 'parent') return elem.parentNode
-        if (location === 'firstChild') return elem.firstChild
+        if (location === 'wrapper') return { parent: elem }
+        if (location === 'parent') return { parent: elem.parentNode }
+        if (location === 'header') return { parent: elem.parentElement, anchor: elem }
+        if (location === 'firstChild')
+            return { parent: elem.parentElement, anchor: elem.nextSibling }
         throw new Error(`Incorrect location provided. Got ${location}`)
     }
 </script>
@@ -42,4 +42,5 @@
         <div use:setElem {...$$restProps} />
     {/if}
     <slot />
+    <!-- todo make backstop sibling here to ensure next sibling doesn't belong to the parent scope -->
 {/if}
