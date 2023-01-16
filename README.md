@@ -93,6 +93,7 @@ rootNode.appendChild(childNode)
 
 #### Table of Contents
 
+*   [RoutifyBaseOptions](#routifybaseoptions)
 *   [RoutifyBuildtimePayload](#routifybuildtimepayload)
 *   [RoutifyCallback](#routifycallback)
     *   [Parameters](#parameters)
@@ -100,48 +101,62 @@ rootNode.appendChild(childNode)
     *   [Properties](#properties)
 *   [RoutifyRuntimeOptions](#routifyruntimeoptions)
     *   [Properties](#properties-1)
+*   [RenderContext](#rendercontext)
+    *   [Properties](#properties-2)
 *   [TransformFragmentsCallback](#transformfragmentscallback)
 *   [RoutifyExternalMetaHelper](#routifyexternalmetahelper)
-    *   [Properties](#properties-2)
+    *   [Properties](#properties-3)
 *   [RoutifyLoadReturn](#routifyloadreturn)
     *   [Parameters](#parameters-1)
-    *   [Properties](#properties-3)
-*   [RoutifyBuildtimeRuntimePlugin](#routifybuildtimeruntimeplugin)
     *   [Properties](#properties-4)
+*   [RoutifyBuildtimeRuntimePlugin](#routifybuildtimeruntimeplugin)
+    *   [Properties](#properties-5)
 *   [RoutifyRuntimePlugin](#routifyruntimeplugin)
 *   [RoutifyBasePlugin](#routifybaseplugin)
-    *   [Properties](#properties-5)
-*   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
     *   [Properties](#properties-6)
+*   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
+    *   [Properties](#properties-7)
 *   [MetaContextSplit](#metacontextsplit)
     *   [Parameters](#parameters-2)
 *   [MetaContext](#metacontext)
-    *   [Properties](#properties-7)
+    *   [Properties](#properties-8)
 *   [UrlRewriteFn](#urlrewritefn)
     *   [Parameters](#parameters-3)
 *   [UrlRewrite](#urlrewrite)
-    *   [Properties](#properties-8)
-*   [QueryHandler](#queryhandler)
     *   [Properties](#properties-9)
+*   [QueryHandler](#queryhandler)
+    *   [Properties](#properties-10)
 *   [QueryHandlerParse](#queryhandlerparse)
     *   [Parameters](#parameters-4)
 *   [QueryHandlerStringify](#queryhandlerstringify)
     *   [Parameters](#parameters-5)
 *   [ComponentGuardFn](#componentguardfn)
     *   [Parameters](#parameters-6)
-    *   [Properties](#properties-10)
-*   [PathNode](#pathnode)
     *   [Properties](#properties-11)
+*   [PathNode](#pathnode)
+    *   [Properties](#properties-12)
 *   [UrlState](#urlstate)
 *   [FragmentContext](#fragmentcontext)
-    *   [Properties](#properties-12)
-*   [NodeTreeExport](#nodetreeexport)
     *   [Properties](#properties-13)
+*   [NodeTreeExport](#nodetreeexport)
+    *   [Properties](#properties-14)
 *   [BrowserAdapter](#browseradapter)
+
+###
+
+COMMON
+
+###
+
+###
+
+### RoutifyBaseOptions
+
+Type: {Node: RNode}
 
 ### RoutifyBuildtimePayload
 
-COMMON
+RUNTIME
 
 Type: {instance: RoutifyBuildtime, tools: any}
 
@@ -196,6 +211,17 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `onDestroy` **MaybeArray\<OnDestroyRouterCallback>** hook: runs before router is destroyed
 *   `queryHandler` **[QueryHandler](#queryhandler)** 
 *   `plugins` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Partial<[RoutifyRuntimeOptions](#routifyruntimeoptions)>>** 
+
+### RenderContext
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+#### Properties
+
+*   `node` **RNodeRuntime** 
+*   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), any>** 
+*   `fragment` **RouteFragment** 
+*   `parentContext` **[RenderContext](#rendercontext)** 
 
 ###
 

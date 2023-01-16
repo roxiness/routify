@@ -15,7 +15,9 @@ export class RouteFragment {
     urlFragment: string;
     set params(arg: {});
     get params(): {};
-    parentElem: Promise<any>;
+    /** @type {import('svelte/store').Writable<import('../renderer/types.js').RenderContext>} */
+    renderContext: import('svelte/store').Writable<any>;
+    elem: Promise<any>;
     setElem: (el: any) => void;
     /**
      * @type {Object.<string, string|string[]>}

@@ -52,8 +52,8 @@ export class Router implements Readable<Router> {
      * @param {Partial<RoutifyRuntimeOptions>} input
      */
     init(input: Partial<RoutifyRuntimeOptions>): void;
-    /** @type {Partial<RouterOptionsNormalized>} */
-    options: Partial<RouterOptionsNormalized>;
+    /** @type {Partial<import('./utils').RouterOptionsNormalized>} */
+    options: Partial<import('./utils').RouterOptionsNormalized>;
     /** @type {RoutifyRuntime} */
     instance: RoutifyRuntime;
     name: string;
@@ -99,37 +99,6 @@ export type ParentCmpCtx = {
     localParams: any;
     options: any;
 };
-export type RouterOptionsNormalizedOverlay = {
-    /**
-     * hook: transforms paths to and from router and browser
-     */
-    urlRewrite: UrlRewrite[];
-    /**
-     * hook: runs before each router initiation
-     */
-    beforeRouterInit: RouterInitCallback[];
-    /**
-     * hook: runs after each router initiation
-     */
-    afterRouterInit: RouterInitCallback[];
-    /**
-     * hook: guard that runs before url changes
-     */
-    beforeUrlChange: BeforeUrlChangeCallback[];
-    /**
-     * hook: runs after url has changed
-     */
-    afterUrlChange: AfterUrlChangeCallback[];
-    /**
-     * hook: transform route fragments after navigation
-     */
-    transformFragments: TransformFragmentsCallback[];
-    /**
-     * hook: runs before router is destroyed
-     */
-    onDestroy: OnDestroyRouterCallback[];
-};
-export type RouterOptionsNormalized = RoutifyRuntimeOptions & RouterOptionsNormalizedOverlay;
 import { Route } from "../Route/Route.js";
 import { RoutifyRuntime } from "../Instance/RoutifyRuntime.js";
 import { BaseReflector } from "./urlReflectors/ReflectorBase.js";

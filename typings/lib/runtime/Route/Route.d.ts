@@ -20,7 +20,7 @@ export class Route {
     url: string;
     mode: UrlState;
     state: any;
-    anchor: string;
+    hash: string;
     log: any;
     get params(): any;
     get leaf(): RouteFragment;
@@ -33,7 +33,6 @@ export class Route {
      */
     loadComponents(): Promise<boolean>;
     runPreloads(): Promise<boolean | Route>;
-    runGuards(): Promise<boolean>;
     runBeforeUrlChangeHooks(): Promise<any>;
     /**
      * @param {RNodeRuntime} node the node that corresponds to the fragment

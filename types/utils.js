@@ -7,3 +7,5 @@
  * @template T
  * @typedef { T | Promise<T> } MaybePromise
  */
+
+export {}

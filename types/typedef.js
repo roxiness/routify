@@ -2,9 +2,20 @@
  * COMMON
  * @typedef {import('../lib/common/RNode').RNode} RNode
  * @typedef {import('../lib/common/Routify').Routify} Routify
- *
+ */
+/**
+ * @template T
+ * @typedef {import('./utils').MaybeArray<T>} MaybeArray<T>
+ */
+/**
+ * @template T
+ * @typedef {import('./utils').MaybePromise<T>} MaybePromise<T>
+ */
+/**
  * @typedef {{Node: RNode}} RoutifyBaseOptions
- *
+ */
+
+/**
  * RUNTIME
  * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
  * @typedef {import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime} RNodeRuntime
@@ -12,6 +23,7 @@
  * @typedef {import('../lib/runtime/Router/Router').Router} Router
  * @typedef {import('../lib/runtime/Route/RouteFragment').RouteFragment} RouteFragment
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
+ * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} RoutifyContext
  *
  *  BUILDTIME
  * @typedef {import('../lib/buildtime/plugins/filemapper/lib/File').File} RFile
@@ -69,6 +81,26 @@
  * @prop { MaybeArray<OnDestroyRouterCallback> } onDestroy hook: runs before router is destroyed
  * @prop { QueryHandler } queryHandler
  * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
+ */
+
+/******************
+ * RENDER CONTEXT *
+ ******************/
+/**
+ * @typedef {Object} RenderContext
+ * @prop {import('../lib/runtime/decorators/AnchorDecorator').Location} anchorLocation:
+ * @prop {import('svelte/store').Writable<RouteFragment[]>} childFragments
+ * @prop {RNodeRuntime}  node
+ * @prop {Object<string, any>} options
+ * @prop {RouteFragment} fragment
+ * @prop {import('svelte/store').Writable<boolean>} isActive
+ * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
+ * @prop {import('svelte/store').Writable<boolean>} single
+ * @prop {import('../lib/runtime/Route/Route').Route} route
+ * @prop {import('../lib/runtime/Router/Router').Router} router
+ * @prop {RenderContext} parentContext
+ * @prop {typeof import('svelte/internal').SvelteComponentDev[]} decorators
+ * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
  */
 
 /**

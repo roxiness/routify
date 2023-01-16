@@ -7,47 +7,59 @@ type RNode = import("../lib/common/RNode").RNode<any>;
  */
 type Routify = import("../lib/common/Routify").Routify<any>;
 /**
- * RUNTIME
+ * <T>
  */
+type MaybeArray<T> = import('./utils').MaybeArray<T>;
+/**
+ * <T>
+ */
+type MaybePromise<T> = import('./utils').MaybePromise<T>;
 type RoutifyBaseOptions = {
     Node: import("../lib/common/RNode").RNode<any>;
 };
 /**
- * COMMON
+ * RUNTIME
  */
 type RoutifyRuntimePayload = {
     instance: RoutifyRuntime;
 };
 /**
- * COMMON
+ * RUNTIME
  */
 type RNodeRuntime = import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime;
 /**
- * COMMON
+ * RUNTIME
  */
 type Route = import('../lib/runtime/Route/Route').Route;
 /**
- * COMMON
+ * RUNTIME
  */
 type Router = import('../lib/runtime/Router/Router').Router;
 /**
- * COMMON
+ * RUNTIME
  */
 type RouteFragment = import('../lib/runtime/Route/RouteFragment').RouteFragment;
 /**
- * BUILDTIME
+ * RUNTIME
  */
 type RoutifyRuntime = import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime;
 /**
- * COMMON
+ * BUILDTIME
+ */
+type RoutifyContext = RenderContext & {
+    load: Partial<RoutifyLoadReturn>;
+    route: Route;
+};
+/**
+ * RUNTIME
  */
 type RFile = import('../lib/buildtime/plugins/filemapper/lib/File').File;
 /**
- * COMMON
+ * RUNTIME
  */
 type RoutifyBuildtime = import('../lib/buildtime/RoutifyBuildtime').RoutifyBuildtime;
 /**
- * COMMON
+ * RUNTIME
  */
 type RNodeBuildtime = import('../lib/buildtime/RNodeBuildtime').RNodeBuildtime;
 /**
@@ -148,6 +160,29 @@ type RoutifyRuntimeOptions = {
     onDestroy: MaybeArray<OnDestroyRouterCallback>;
     queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
+};
+type RenderContext = {
+    /**
+     * :
+     */
+    anchorLocation: import('../lib/runtime/decorators/AnchorDecorator').Location;
+    childFragments: import('svelte/store').Writable<RouteFragment[]>;
+    node: RNodeRuntime;
+    options: {
+        [x: string]: any;
+    };
+    fragment: RouteFragment;
+    isActive: import('svelte/store').Writable<boolean>;
+    elem: import('svelte/store').Writable<{
+        parent: HTMLElement;
+        anchor: HTMLElement;
+    }>;
+    single: import('svelte/store').Writable<boolean>;
+    route: import('../lib/runtime/Route/Route').Route;
+    router: import('../lib/runtime/Router/Router').Router;
+    parentContext: RenderContext;
+    decorators: typeof import('svelte/internal').SvelteComponentDev[];
+    onDestroy?: import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>;
 };
 /**
  * <T>

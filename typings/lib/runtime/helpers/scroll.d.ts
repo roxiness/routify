@@ -7,4 +7,4 @@
  */
 export const persistentScrollTo: typeof import("./scroll")['persistentScrollTo'];
 export function getScrollBoundaries(): HTMLElement[];
-export function scopedScrollIntoView(elem: HTMLElement, anchor: HTMLElement, limits?: HTMLElement[] | undefined): void;
+export function scopedScrollIntoView(elem: HTMLElement): void;
