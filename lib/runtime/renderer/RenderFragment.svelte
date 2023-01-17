@@ -30,7 +30,8 @@
     $: ({ params, load, route } = context.fragment)
 
     $: compProps = { ...params, ...load?.props, ...props }
-    $: userContext = { ...context, load, route }
+    /** @type {RoutifyContext}*/
+    $: routifyContext = { ...context, load, route }
 </script>
 
 <!-- todo create anchor wrapper -->
@@ -44,7 +45,7 @@
             <svelte:component
                 this={NodeComponent}
                 {...compProps}
-                context={userContext}
+                context={routifyContext}
                 let:props
                 let:multi
                 let:decorator
