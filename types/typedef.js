@@ -24,6 +24,7 @@
  * @typedef {import('../lib/runtime/Route/RouteFragment').RouteFragment} RouteFragment
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} RoutifyContext
+ * @typedef {import('../lib/runtime/decorators/AnchorDecorator').Location} AnchorLocation
  *
  *  BUILDTIME
  * @typedef {import('../lib/buildtime/plugins/filemapper/lib/File').File} RFile
@@ -88,7 +89,7 @@
  ******************/
 /**
  * @typedef {Object} RenderContext
- * @prop {import('../lib/runtime/decorators/AnchorDecorator').Location} anchorLocation:
+ * @prop {AnchorLocation} anchorLocation
  * @prop {import('svelte/store').Writable<RouteFragment[]>} childFragments
  * @prop {RNodeRuntime}  node
  * @prop {Object<string, any>} options
@@ -101,6 +102,7 @@
  * @prop {RenderContext} parentContext
  * @prop {typeof import('svelte/internal').SvelteComponentDev[]} decorators
  * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
+ * @prop {Multi} multi
  */
 
 /**
@@ -303,4 +305,12 @@
  * @typedef {Object} BrowserAdapter
  * @prop {(browserUrl: string, router: Router)=>string} toRouter Called by each router when the browser URL changes. Returns an internal URL for each respective router.
  * @prop {(routers: Router[])=>string} toBrowser compiles all router URLS into a single URL for the browser.
+ */
+
+/**
+ * @typedef { HTMLElement | Promise<HTMLElement> } MultiScrollBoundaryInput
+ * @typedef { string | RNodeRuntime } MultiPageInput
+ * @typedef { MultiPageInput[] | boolean | Partial<{ scrollBoundary: MultiScrollBoundaryInput, single: boolean, pages: MultiPageInput }> } MultiInput
+ * @typedef { { pages: RNodeRuntime[], single: boolean, scrollBoundary: HTMLElement | Promise<HTMLElement> } } Multi
+ * @typedef { import('svelte').SvelteComponentTyped } SvelteComponentTyped
  */
