@@ -72,7 +72,6 @@
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
     $: context.childFragments.set($activeRoute?.fragments || [])
-    $: nodeId = $activeRoute?.fragments[0].node.name
 
     $: router.log.debug('before render', get(context.childFragments)) // ROUTIFY-DEV-ONLY
 
