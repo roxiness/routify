@@ -31,7 +31,7 @@
         "./lib/*": "./lib/*",
         "./lib/cmp/*": "./lib/cmp/*.js",
         "./typings/*": "./typings/*",
-        "./plugins/*": "./plugins/*",
+        "./plugins": "./plugins",
         "./tools": "./lib/extra/tools/index.js"
     },
     "scripts": {
@@ -85,7 +85,7 @@
     },
     "peerDependencies": {
         "spank": "^2.0.0-13",
-        "vite": "^3.2.4"
+        "vite": "^3.2.4 || ^4.0.0"
     },
     "peerDependenciesMeta": {
         "vite": {
