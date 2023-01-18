@@ -1,10 +1,5 @@
-/**
- * @type {import('./scroll')['persistentScrollTo']}
- * @param {HTMLElement} el
- * @param {HTMLElement!} anchor
- * @param {ScrollIntoViewOptions} options
- * @param {number} timeout
- */
-export const persistentScrollTo: typeof import("./scroll")['persistentScrollTo'];
+export function persistentScopedScrollIntoView(_elem: HTMLElement | ((elem: HTMLElement) => HTMLElement), _boundary?: HTMLElement | ((elem: HTMLElement) => HTMLElement), options?: ScrollIntoViewOptions, timeout?: number): Promise<any> | (() => void);
 export function getScrollBoundaries(): HTMLElement[];
-export function scopedScrollIntoView(elem: HTMLElement): void;
+export function resolveIfAnonFn<T, P>(subject: T | ((...P: any[]) => T), params?: P[]): T;
+export function scopedScrollIntoView(_elem: HTMLElement | ((elem: HTMLElement) => HTMLElement), _boundary: HTMLElement | ((elem: HTMLElement) => HTMLElement)): void;
+export function scrollToContext(context: RenderContext): Promise<void>;

@@ -44,12 +44,16 @@ type RouteFragment = import('../lib/runtime/Route/RouteFragment').RouteFragment;
  */
 type RoutifyRuntime = import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime;
 /**
- * BUILDTIME
+ * RUNTIME
  */
 type RoutifyContext = RenderContext & {
     load: Partial<RoutifyLoadReturn>;
     route: Route;
 };
+/**
+ * BUILDTIME
+ */
+type AnchorLocation = import('../lib/runtime/decorators/AnchorDecorator').Location;
 /**
  * RUNTIME
  */
@@ -162,10 +166,7 @@ type RoutifyRuntimeOptions = {
     plugins: Partial<RoutifyRuntimeOptions>[];
 };
 type RenderContext = {
-    /**
-     * :
-     */
-    anchorLocation: import('../lib/runtime/decorators/AnchorDecorator').Location;
+    anchorLocation: AnchorLocation;
     childFragments: import('svelte/store').Writable<RouteFragment[]>;
     node: RNodeRuntime;
     options: {
@@ -183,6 +184,7 @@ type RenderContext = {
     parentContext: RenderContext;
     decorators: typeof import('svelte/internal').SvelteComponentDev[];
     onDestroy?: import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>;
+    multi: Multi;
 };
 /**
  * <T>
@@ -361,3 +363,16 @@ type BrowserAdapter = {
      */
     toBrowser: (routers: Router[]) => string;
 };
+type MultiScrollBoundaryInput = HTMLElement | Promise<HTMLElement>;
+type MultiPageInput = string | RNodeRuntime;
+type MultiInput = MultiPageInput[] | boolean | Partial<{
+    scrollBoundary: MultiScrollBoundaryInput;
+    single: boolean;
+    pages: MultiPageInput;
+}>;
+type Multi = {
+    pages: RNodeRuntime[];
+    single: boolean;
+    scrollBoundary: HTMLElement | Promise<HTMLElement>;
+};
+type SvelteComponentTyped = import('svelte').SvelteComponentTyped;

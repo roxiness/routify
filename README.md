@@ -141,6 +141,7 @@ rootNode.appendChild(childNode)
 *   [NodeTreeExport](#nodetreeexport)
     *   [Properties](#properties-14)
 *   [BrowserAdapter](#browseradapter)
+*   [MultiInput](#multiinput)
 
 ###
 
@@ -218,10 +219,12 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 #### Properties
 
+*   `anchorLocation` **AnchorLocation** 
 *   `node` **RNodeRuntime** 
 *   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), any>** 
 *   `fragment` **RouteFragment** 
 *   `parentContext` **[RenderContext](#rendercontext)** 
+*   `multi` **Multi** 
 
 ###
 
@@ -431,3 +434,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 ### BrowserAdapter
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+### MultiInput
+
+Type: ([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<MultiPageInput> | [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean) | Partial<{scrollBoundary: MultiScrollBoundaryInput, single: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean), pages: MultiPageInput}>)

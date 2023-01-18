@@ -16,6 +16,7 @@ export function getable<T>(value: T, start?: import("svelte/store").StartStopNot
 export function identicalRoutes(...routes: Route[]): string;
 export function clone<T>(obj: T, ...rest: any[]): T;
 export function pushToOrReplace(arr: any[], input: any): any[];
+export function waitFor<T>(store: import("svelte/store").Writable<T>, cb: (T: any) => boolean): Promise<T>;
 export type Getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };

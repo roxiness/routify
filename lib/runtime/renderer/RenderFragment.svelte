@@ -3,21 +3,27 @@
     import { setContext } from 'svelte'
     import DecoratorWrapper from './DecoratorWrapper.svelte'
     import Noop from '../decorators/Noop.svelte'
-    /** @type {import('./types').RenderContext} */
+    import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
+    /** @type {RenderContext} */
     export let context, props, activeContext
     const { isActive, childFragments, single } = context // grab the stores
     let NodeComponent =
         context.node.module?.default || (!context.node.asyncModule && Noop)
     let isNoop = NodeComponent === Noop
-    let elem
-    const setElem = _elem => (elem = _elem)
     setContext('routify-fragment-context', context)
 
-    $: if (elem) {
-        const _elem = elem
-        context.fragment.setElem(_elem)
-        _elem['__routify_meta'] = _elem['__routify_meta'] || {}
-        _elem['__routify_meta'].renderContext = context
+    /**
+     * @param {HTMLElement} parent
+     * @param {HTMLElement} anchor
+     */
+    const initialize = (parent, anchor) => {
+        context.elem.set({ anchor, parent })
+
+        // todo relying on parent forces multi elements to share the same parent
+        parent['__routify_meta'] = {
+            ...parent['__routify_meta'],
+            renderContext: context,
+        }
     }
 
     const notExcludedCtx = context => !context?.node.meta.multi?.exclude
@@ -34,10 +40,9 @@
     $: routifyContext = { ...context, load, route }
 </script>
 
-<!-- todo create anchor wrapper -->
 {#if isVisible && NodeComponent}
     <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
-    <div use:setElem id={context.node.name}>
+    <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
         <!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
         <DecoratorWrapper {context} root={true} {isNoop}>
@@ -49,12 +54,21 @@
                 let:props
                 let:multi
                 let:decorator
+                let:anchor
                 let:options>
                 {#if $childFragments.length || (multi && !multi?.single)}
                     <!-- CHILD PAGES -->
-                    <Compose options={{ multi, decorator, props, options }} {context} />
+                    <Compose
+                        options={{
+                            multi,
+                            decorator,
+                            props,
+                            options,
+                            anchor: anchor || context.anchorLocation,
+                        }}
+                        {context} />
                 {/if}
             </svelte:component>
         </DecoratorWrapper>
-    </div>
+    </AnchorDecorator>
 {/if}
