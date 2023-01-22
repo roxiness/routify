@@ -55,8 +55,8 @@
                 let:multi
                 let:decorator
                 let:anchor
-                let:options>
-                {#if $childFragments.length || (multi && !multi?.single)}
+                let:options
+                >{#if $childFragments.length || (multi && !multi?.single)}
                     <!-- CHILD PAGES -->
                     <Compose
                         options={{
@@ -67,8 +67,7 @@
                             anchor: anchor || context.anchorLocation,
                         }}
                         {context} />
-                {/if}
-            </svelte:component>
+                {/if}</svelte:component>
         </DecoratorWrapper>
     </AnchorDecorator>
 {/if}
