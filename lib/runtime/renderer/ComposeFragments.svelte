@@ -123,5 +123,5 @@
 </script>
 
 {#each childContexts as context (context.node.id)}
-    <RenderFragment {context} {props} {activeContext} />
+    <RenderFragment {context} {props} />
 {/each}

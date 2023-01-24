@@ -6,7 +6,8 @@
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
     import { isAnonFn } from '../utils'
     /** @type {RenderContext} */
-    export let context, props, activeContext
+    export let context
+    export let props
     const { isVisible, childFragments } = context // grab the stores
     let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
     let isNoop = NodeComponent === Noop
