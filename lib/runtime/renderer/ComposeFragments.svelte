@@ -9,8 +9,10 @@
 
     /** @type {RenderContext}*/
     export let context = null
-    /** @type {{multi: MultiInput, decorator:SvelteComponentTyped , props, options, anchor: AnchorLocation}} */
+    /** @type {{multi: MultiInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation}} */
     export let options
+
+    const decoratorDefaults = { recursive: true }
 
     /** @type {RenderContext}*/
     let activeContext
@@ -23,9 +25,29 @@
         options: _options,
     } = options
 
+    /**
+     * @param {DecoratorInput} decorator
+     * @returns {Decorator}
+     */
+    const normalizeDecorator = decorator => {
+        if ('component' in decorator) return { ...decoratorDefaults, ...decorator }
+        else return { ...decoratorDefaults, component: decorator }
+    }
 
     /** @param {RNodeRuntime} node*/
     const getChildIndex = node => node.children.find(node => node.name === 'index')
+
+    console.log(
+        'node',
+        !context?.node?.module?.default && !context?.node?.asyncModule,
+        context?.node?.id,
+        context?.node,
+    )
+    const newDecorators = decorators.filter(
+        deco =>
+            (!context?.node?.module?.default && !context?.node?.asyncModule) ||
+            deco.recursive,
+    )
 
     /** @returns {RenderContext[] }*/
     const buildChildContexts = () => {
@@ -42,11 +64,13 @@
             isActive: writable(false),
             isVisible: writable(false),
             elem: writable(null),
-            router: $childFragments[0]?.route.router || context.router,
+            router: $childFragments[0]?.route?.router || context.router,
             route: null,
             parentContext: context,
             onDestroy: createSequenceHooksCollection(),
-            decorators: pushToOrReplace(decorators, decorator).filter(Boolean),
+            decorators: pushToOrReplace(newDecorators, decorator)
+                .filter(Boolean)
+                .map(normalizeDecorator),
             options: _options || {},
             multi,
             single: writable(multi.single),

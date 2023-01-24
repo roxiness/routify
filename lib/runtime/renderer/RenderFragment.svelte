@@ -7,8 +7,7 @@
     /** @type {RenderContext} */
     export let context, props, activeContext
     const { isVisible, childFragments } = context // grab the stores
-    let NodeComponent =
-        context.node.module?.default || (!context.node.asyncModule && Noop)
+    let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
     let isNoop = NodeComponent === Noop
     setContext('routify-fragment-context', context)
 
@@ -26,8 +25,8 @@
         }
     }
 
-    $: if (!NodeComponent && $isVisible)
-        context.node.getRawComponent().then(r => (NodeComponent = r))
+    $: if (!NodeComponent.prototype && $isVisible)
+        context.node.loadModule().then(r => (NodeComponent = r.default))
 
     $: ({ params, load, route } = context.fragment)
 
@@ -36,7 +35,7 @@
     $: routifyContext = { ...context, load, route }
 </script>
 
-{#if $isVisible && NodeComponent}
+{#if $isVisible && NodeComponent.prototype}
     <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
     <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
         <!-- DECORATOR COMPONENT

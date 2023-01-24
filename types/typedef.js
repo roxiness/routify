@@ -100,9 +100,19 @@
  * @prop {import('../lib/runtime/Route/Route').Route} route
  * @prop {import('../lib/runtime/Router/Router').Router} router
  * @prop {RenderContext} parentContext
- * @prop {typeof import('svelte/internal').SvelteComponentDev[]} decorators
+ * @prop {Decorator[]} decorators
  * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
  * @prop {Multi} multi
+ */
+
+/**
+ * @typedef {(Partial<Decorator> & {component: SvelteComponentDev}) | SvelteComponentDev} DecoratorInput
+ */
+
+/**
+ * @typedef {Object} Decorator
+ * @prop {boolean} recursive
+ * @prop {SvelteComponentDev} component
  */
 
 /**

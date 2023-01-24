@@ -7,14 +7,14 @@
     export let context
     export let isNoop = false
     decorators = decorators || context.decorators
-    const [Decorator, ...restOfDecorators] = [...decorators]
+    const [decorator, ...restOfDecorators] = [...decorators]
 
     // we only want to trigger onDestroy from the first decorator wrapper
     if (root) onDestroy(() => context.onDestroy.run())
 </script>
 
-{#if Decorator && !isNoop}
-    <svelte:component this={Decorator} {context}>
+{#if decorator && !isNoop}
+    <svelte:component this={decorator.component} {context}>
         <svelte:self decorators={restOfDecorators} {context}>
             <slot />
         </svelte:self>
