@@ -12,6 +12,7 @@
     /** @type {{multi: MultiInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation}} */
     export let options
 
+    const environment = typeof window !== 'undefined' ? 'browser' : 'ssr'
     const decoratorDefaults = { recursive: true }
 
     /** @type {RenderContext}*/
@@ -96,6 +97,7 @@
         childContexts = childContexts
     }
 
+    /** @param {RenderContext[]} childContexts */
     const setVisibility = childContexts => {
         childContexts.forEach(context => {
             const notExcludedCtx = context => !context?.node?.meta.multi?.exclude
@@ -103,7 +105,8 @@
                 // if this isn't part of the active route, activeContext is undefined
                 !get(activeContext?.single) &&
                 !get(context.single) &&
-                [context, activeContext].every(notExcludedCtx)
+                [context, activeContext].every(notExcludedCtx) &&
+                ['always', environment].includes(context.multi?.renderInactive)
 
             const isActive = context === activeContext
             const wasActive = get(context.isActive)
