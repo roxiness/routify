@@ -145,7 +145,7 @@ export function resolveUrl(path, params, inheritedParams) {
  * @param {*} params 
  */
 export function populateUrl(path, params, inheritedParams) {
-  const allParams = Object.assign({}, inheritedParams, params)
+  const allParams = Object.assign({}, params, inheritedParams)
   const queryString = getQueryString(path, params)
 
   for (const [key, value] of Object.entries(allParams))
