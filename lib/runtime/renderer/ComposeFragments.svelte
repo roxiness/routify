@@ -63,7 +63,6 @@
      */
     const handlePageChange = fragments => {
         const [fragment, ...childFragments] = [...fragments]
-        // todo we should match node, not node.id. For some reason node instances are different
         activeContext = childContexts.find(s => s.node === fragment?.node)
         if (!activeContext) {
             // if we're rendering a node that didn't exist at this level before, we need to rebuild the child contexts
@@ -75,28 +74,31 @@
         activeContext.fragment = fragment
         activeContext.childFragments.set(childFragments)
         activeContext.route = fragments[0].route
-        // todo issue is caused by routify:meta reset in modules/index.md
 
-        // set this sibling to active and all other to inactive
-        childContexts.forEach(childContext => {
-            const notExcludedCtx = context => !context?.node?.meta.multi?.exclude
-            const isPartOfPage = () =>
-                !get(activeContext.single) &&
-                !get(childContext.single) &&
-                [childContext, activeContext].every(notExcludedCtx)
-
-            const isActive = childContext === activeContext
-            const wasActive = get(childContext.isActive)
-            if (wasActive != isActive) childContext.isActive.set(isActive)
-
-            const isVisible = isActive || isPartOfPage()
-            const wasVisible = get(childContext.isVisible)
-            if (wasVisible != isVisible) childContext.isVisible.set(isVisible)
-        })
         childContexts = childContexts
     }
 
+    const setVisibility = childContexts => {
+        childContexts.forEach(context => {
+            const notExcludedCtx = context => !context?.node?.meta.multi?.exclude
+            const isPartOfPage = () =>
+                // if this isn't part of the active route, activeContext is undefined
+                !get(activeContext?.single) &&
+                !get(context.single) &&
+                [context, activeContext].every(notExcludedCtx)
+
+            const isActive = context === activeContext
+            const wasActive = get(context.isActive)
+            if (wasActive != isActive) context.isActive.set(isActive)
+
+            const isVisible = isActive || isPartOfPage()
+            const wasVisible = get(context.isVisible)
+            if (wasVisible != isVisible) context.isVisible.set(isVisible)
+        })
+    }
+
     $: $childFragments.length && handlePageChange($childFragments)
+    $: setVisibility(childContexts)
 </script>
 
 {#each childContexts as context (context.node.id)}
