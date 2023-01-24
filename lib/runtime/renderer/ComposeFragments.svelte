@@ -12,8 +12,9 @@
     /** @type {{multi: MultiInput, decorator:SvelteComponentTyped , props, options, anchor: AnchorLocation}} */
     export let options
 
+    /** @type {RenderContext}*/
     let activeContext
-    const { childFragments, isActive, decorators } = context
+    const { childFragments, isActive, decorators, route } = context
     const {
         multi: multiInput,
         decorator,
@@ -22,16 +23,24 @@
         options: _options,
     } = options
 
+
+    /** @param {RNodeRuntime} node*/
+    const getChildIndex = node => node.children.find(node => node.name === 'index')
+
     /** @returns {RenderContext[] }*/
     const buildChildContexts = () => {
         const multi = normalizeMulti(multiInput, $childFragments[0]?.node, context)
-
         return multi.pages.map(node => ({
             anchorLocation: anchorLocation || 'parent',
-            childFragments: writable([]),
+            childFragments: writable(
+                getChildIndex(node)
+                    ? [new RouteFragment(route, getChildIndex(node))]
+                    : [],
+            ),
             node,
-            fragment: new RouteFragment(null, node, null, {}),
+            fragment: new RouteFragment(route, node, null, {}),
             isActive: writable(false),
+            isVisible: writable(false),
             elem: writable(null),
             router: $childFragments[0]?.route.router || context.router,
             route: null,
@@ -70,9 +79,19 @@
 
         // set this sibling to active and all other to inactive
         childContexts.forEach(childContext => {
+            const notExcludedCtx = context => !context?.node?.meta.multi?.exclude
+            const isPartOfPage = () =>
+                !get(activeContext.single) &&
+                !get(childContext.single) &&
+                [childContext, activeContext].every(notExcludedCtx)
+
             const isActive = childContext === activeContext
             const wasActive = get(childContext.isActive)
             if (wasActive != isActive) childContext.isActive.set(isActive)
+
+            const isVisible = isActive || isPartOfPage()
+            const wasVisible = get(childContext.isVisible)
+            if (wasVisible != isVisible) childContext.isVisible.set(isVisible)
         })
         childContexts = childContexts
     }

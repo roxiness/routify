@@ -6,7 +6,7 @@
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
     /** @type {RenderContext} */
     export let context, props, activeContext
-    const { isActive, childFragments, single } = context // grab the stores
+    const { isVisible, childFragments } = context // grab the stores
     let NodeComponent =
         context.node.module?.default || (!context.node.asyncModule && Noop)
     let isNoop = NodeComponent === Noop
@@ -26,11 +26,7 @@
         }
     }
 
-    const notExcludedCtx = context => !context?.node.meta.multi?.exclude
-    const isPartOfPage = () => !$single && [context, activeContext].every(notExcludedCtx)
-    $: isVisible = $isActive || isPartOfPage()
-
-    $: if (!NodeComponent && isVisible)
+    $: if (!NodeComponent && $isVisible)
         context.node.getRawComponent().then(r => (NodeComponent = r))
 
     $: ({ params, load, route } = context.fragment)
@@ -40,7 +36,7 @@
     $: routifyContext = { ...context, load, route }
 </script>
 
-{#if isVisible && NodeComponent}
+{#if $isVisible && NodeComponent}
     <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
     <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
         <!-- DECORATOR COMPONENT
