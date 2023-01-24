@@ -2,6 +2,8 @@
  * COMMON
  * @typedef {import('../lib/common/RNode').RNode} RNode
  * @typedef {import('../lib/common/Routify').Routify} Routify
+ * @typedef {{Node: RNode}} RoutifyBaseOptions
+ * @typedef {typeof import('svelte/internal').SvelteComponentDev } SvelteComponentDev
  */
 /**
  * @template T
@@ -10,9 +12,6 @@
 /**
  * @template T
  * @typedef {import('./utils').MaybePromise<T>} MaybePromise<T>
- */
-/**
- * @typedef {{Node: RNode}} RoutifyBaseOptions
  */
 
 /**
@@ -95,6 +94,7 @@
  * @prop {Object<string, any>} options
  * @prop {RouteFragment} fragment
  * @prop {import('svelte/store').Writable<boolean>} isActive
+ * @prop {import('svelte/store').Writable<boolean>} isVisible
  * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
  * @prop {import('svelte/store').Writable<boolean>} single
  * @prop {import('../lib/runtime/Route/Route').Route} route
