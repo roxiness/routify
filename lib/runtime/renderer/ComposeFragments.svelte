@@ -37,12 +37,6 @@
     /** @param {RNodeRuntime} node*/
     const getChildIndex = node => node.children.find(node => node.name === 'index')
 
-    console.log(
-        'node',
-        !context?.node?.module?.default && !context?.node?.asyncModule,
-        context?.node?.id,
-        context?.node,
-    )
     const newDecorators = decorators.filter(
         deco =>
             (!context?.node?.module?.default && !context?.node?.asyncModule) ||
