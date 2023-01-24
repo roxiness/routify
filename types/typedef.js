@@ -320,7 +320,18 @@
 /**
  * @typedef { HTMLElement | Promise<HTMLElement> } MultiScrollBoundaryInput
  * @typedef { string | RNodeRuntime } MultiPageInput
- * @typedef { MultiPageInput[] | boolean | Partial<{ scrollBoundary: MultiScrollBoundaryInput, single: boolean, pages: MultiPageInput }> } MultiInput
- * @typedef { { pages: RNodeRuntime[], single: boolean, scrollBoundary: HTMLElement | Promise<HTMLElement> } } Multi
  * @typedef { import('svelte').SvelteComponentTyped } SvelteComponentTyped
+ *
+ * @typedef { MultiPageInput[] | boolean | MultiInputObject } MultiInput
+ *
+ * @typedef { object } MultiInputObject
+ * @prop { MultiScrollBoundaryInput } scrollBoundary
+ * @prop { boolean } single
+ * @prop { MultiPageInput } pages
+ *
+ * @typedef { object } Multi
+ * @prop {RNodeRuntime[]} pages
+ * @prop {boolean} single
+ * @prop {HTMLElement | Promise<HTMLElement>} scrollBoundary
+ * @prop {'browser'|'ssr'|'always'} renderInactive
  */

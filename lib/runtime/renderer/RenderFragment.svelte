@@ -4,6 +4,7 @@
     import DecoratorWrapper from './DecoratorWrapper.svelte'
     import Noop from '../decorators/Noop.svelte'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
+    import { isAnonFn } from '../utils'
     /** @type {RenderContext} */
     export let context, props, activeContext
     const { isVisible, childFragments } = context // grab the stores
@@ -19,13 +20,10 @@
         context.elem.set({ anchor, parent })
 
         // todo relying on parent forces multi elements to share the same parent
-        parent['__routify_meta'] = {
-            ...parent['__routify_meta'],
-            renderContext: context,
-        }
+        parent['__routify_meta'] = { ...parent['__routify_meta'], renderContext: context }
     }
 
-    $: if (!NodeComponent.prototype && $isVisible)
+    $: if (isAnonFn(NodeComponent) && $isVisible)
         context.node.loadModule().then(r => (NodeComponent = r.default))
 
     $: ({ params, load, route } = context.fragment)
@@ -35,7 +33,7 @@
     $: routifyContext = { ...context, load, route }
 </script>
 
-{#if $isVisible && NodeComponent.prototype}
+{#if $isVisible && !isAnonFn(NodeComponent)}
     <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
     <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
         <!-- DECORATOR COMPONENT
