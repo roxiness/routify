@@ -21,7 +21,13 @@
         context.elem.set({ anchor, parent })
 
         // todo relying on parent forces multi elements to share the same parent
-        parent['__routify_meta'] = { ...parent['__routify_meta'], renderContext: context }
+        parent['__routify_meta'] = {
+            ...parent['__routify_meta'],
+            renderContext: context,
+            relation: 'parent',
+        }
+        if (anchor)
+            anchor['__routify_meta'] = { renderContext: context, relation: 'anchor' }
     }
 
     $: if (isAnonFn(NodeComponent) && $isVisible)
@@ -50,6 +56,7 @@
                 let:decorator
                 let:anchor
                 let:options
+                let:scrollBoundary
                 >{#if $childFragments.length || (multi && !multi?.single)}
                     <!-- CHILD PAGES -->
                     <Compose
@@ -58,6 +65,7 @@
                             decorator,
                             props,
                             options,
+                            scrollBoundary,
                             anchor: anchor || context.anchorLocation,
                         }}
                         {context} />
