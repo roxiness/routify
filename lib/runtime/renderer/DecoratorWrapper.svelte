@@ -13,7 +13,7 @@
     if (root) onDestroy(() => context.onDestroy.run())
 </script>
 
-{#if decorator && !isNoop}
+{#if decorator && (!isNoop || decorator.renderInNoop)}
     <svelte:component this={decorator.component} {context}>
         <svelte:self decorators={restOfDecorators} {context}>
             <slot />
