@@ -31,7 +31,7 @@
         "./lib/*": "./lib/*",
         "./lib/cmp/*": "./lib/cmp/*.js",
         "./typings/*": "./typings/*",
-        "./plugins": "./plugins",
+        "./plugins/*": "./plugins/*",
         "./tools": "./lib/extra/tools/index.js"
     },
     "scripts": {
