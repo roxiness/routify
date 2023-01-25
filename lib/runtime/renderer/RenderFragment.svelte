@@ -13,6 +13,15 @@
     let isNoop = NodeComponent === Noop
     setContext('routify-fragment-context', context)
 
+    /** @param {HTMLElement} elem */
+    const updateRenderContext = (elem, newMeta) => {
+        elem['__routify_meta'] = {
+            ...elem['__routify_meta'],
+            renderContext: { ...elem['__routify_meta']?.renderContext, ...newMeta },
+        }
+        return elem
+    }
+
     /**
      * @param {HTMLElement} parent
      * @param {HTMLElement} anchor
@@ -20,14 +29,8 @@
     const initialize = (parent, anchor) => {
         context.elem.set({ anchor, parent })
 
-        // todo relying on parent forces multi elements to share the same parent
-        parent['__routify_meta'] = {
-            ...parent['__routify_meta'],
-            renderContext: context,
-            relation: 'parent',
-        }
-        if (anchor)
-            anchor['__routify_meta'] = { renderContext: context, relation: 'anchor' }
+        parent = updateRenderContext(parent, { parent: context })
+        if (anchor) anchor = updateRenderContext(anchor, { anchor: context })
     }
 
     $: if (isAnonFn(NodeComponent) && $isVisible)
