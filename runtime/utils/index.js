@@ -149,7 +149,7 @@ export function populateUrl(path, params, inheritedParams) {
   const queryString = getQueryString(path, params)
 
   for (const [key, value] of Object.entries(allParams))
-    path = path.replace(new RegExp(`:${key}(\/|$)`), value)
+    path = path.replace(new RegExp(`:${key}(\/|$)`), value + "$1")
 
   return `${path}${queryString}`
 }
