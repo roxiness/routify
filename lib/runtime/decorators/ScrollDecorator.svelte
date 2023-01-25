@@ -5,8 +5,10 @@
     const handleContext = context => {
         const { isActive, route, node, router } = context
         if (get(isActive) && !context.route?.state.dontScroll && !route.hash) {
+            // if we're scrolling to a non anchor hash
             scrollToContext(context)
         } else if (node === route?.leaf.node && route?.hash) {
+            // if we're scrolling to an anchor hash
             setTimeout(async () => {
                 const hashElem = globalThis.document?.getElementById(route?.hash)
                 hashElem['routify-hash-nav'] = 'true'

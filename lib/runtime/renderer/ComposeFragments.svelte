@@ -9,7 +9,8 @@
 
     /** @type {RenderContext}*/
     export let context = null
-    /** @type {{multi: MultiInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation}} */
+
+    /** @type {{multi: MultiInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}} */
     export let options
 
     const environment = typeof window !== 'undefined' ? 'browser' : 'ssr'
@@ -24,6 +25,7 @@
         props,
         anchor: anchorLocation,
         options: _options,
+        scrollBoundary = elem => elem.parentElement,
     } = options
 
     /**
@@ -67,6 +69,7 @@
                 .filter(Boolean)
                 .map(normalizeDecorator),
             options: _options || {},
+            scrollBoundary,
             multi,
             single: writable(multi.single),
         }))

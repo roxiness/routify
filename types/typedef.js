@@ -16,6 +16,7 @@
 
 /**
  * RUNTIME
+ * @typedef { HTMLElement | ((HTMLElement) => HTMLElement) | ((HTMLElement) => Promise<HTMLElement>) } scrollBoundary
  * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
  * @typedef {import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime} RNodeRuntime
  * @typedef {import('../lib/runtime/Route/Route').Route} Route
@@ -103,6 +104,7 @@
  * @prop {Decorator[]} decorators
  * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
  * @prop {Multi} multi
+ * @prop {scrollBoundary} scrollBoundary
  */
 
 /**
@@ -112,6 +114,7 @@
 /**
  * @typedef {Object} Decorator
  * @prop {boolean} recursive
+ * @prop {boolean} renderInNoop
  * @prop {SvelteComponentDev} component
  */
 
@@ -318,20 +321,17 @@
  */
 
 /**
- * @typedef { HTMLElement | Promise<HTMLElement> } MultiScrollBoundaryInput
  * @typedef { string | RNodeRuntime } MultiPageInput
  * @typedef { import('svelte').SvelteComponentTyped } SvelteComponentTyped
  *
  * @typedef { MultiPageInput[] | boolean | MultiInputObject } MultiInput
  *
  * @typedef { object } MultiInputObject
- * @prop { MultiScrollBoundaryInput } scrollBoundary
  * @prop { boolean } single
  * @prop { MultiPageInput } pages
  *
  * @typedef { object } Multi
  * @prop {RNodeRuntime[]} pages
  * @prop {boolean} single
- * @prop {HTMLElement | Promise<HTMLElement>} scrollBoundary
  * @prop {'browser'|'ssr'|'always'} renderInactive
  */
