@@ -14,7 +14,7 @@
     export let options
 
     const environment = typeof window !== 'undefined' ? 'browser' : 'ssr'
-    const decoratorDefaults = { recursive: true, renderInNoop: true }
+    const decoratorDefaults = { recursive: true, shouldRender: () => true }
 
     /** @type {RenderContext}*/
     let activeContext

@@ -114,8 +114,16 @@
 /**
  * @typedef {Object} Decorator
  * @prop {boolean} recursive
- * @prop {boolean} renderInNoop
+ * @prop {(payload: DecoratorShouldRenderPayload)=>boolean} shouldRender
  * @prop {SvelteComponentDev} component
+ */
+
+/**
+ * @typedef {Object} DecoratorShouldRenderPayload
+ * @prop { boolean } isNoop
+ * @prop { RenderContext } context
+ * @prop { boolean } root,
+ * @prop { Decorator } decorators
  */
 
 /**
