@@ -10,7 +10,6 @@
     export let props
     const { isVisible, childFragments } = context // grab the stores
     let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
-    let isNoop = NodeComponent === Noop
     setContext('routify-fragment-context', context)
 
     /** @param {HTMLElement} elem */
@@ -48,7 +47,7 @@
     <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
         <!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
-        <DecoratorWrapper {context} {isNoop}>
+        <DecoratorWrapper {context}>
             <!-- PAGE COMPONENT -->
             <svelte:component
                 this={NodeComponent}

@@ -4,11 +4,10 @@
 
     export let decorators = null
     export let isRoot = true
-    export let isNoop = false
     export let context
     decorators = decorators || context.decorators
     let [decorator, ...restOfDecorators] = [...decorators]
-    if (isNoop && !decorator?.shouldRender({ isNoop, context, isRoot, decorators }))
+    while (decorator && !decorator?.shouldRender({ context, isRoot, decorators }))
         [decorator, ...restOfDecorators] = [...restOfDecorators]
 
     // we only want to trigger onDestroy from the first decorator wrapper
@@ -16,8 +15,8 @@
 </script>
 
 {#if decorator}
-    <svelte:component this={decorator.component} {context}>
-        <svelte:self decorators={restOfDecorators} {context} {isNoop} isRoot={false}>
+    <svelte:component this={decorator.component} {context} {isRoot}>
+        <svelte:self decorators={restOfDecorators} {context} isRoot={false}>
             <slot />
         </svelte:self>
     </svelte:component>

@@ -120,7 +120,6 @@
 
 /**
  * @typedef {Object} DecoratorShouldRenderPayload
- * @prop { boolean } isNoop
  * @prop { RenderContext } context
  * @prop { boolean } root,
  * @prop { Decorator } decorators
