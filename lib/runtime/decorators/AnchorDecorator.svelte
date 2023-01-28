@@ -26,10 +26,9 @@
         else if (location === 'header') onMount(elem.parentElement, elem)
         else if (location === 'firstChild') {
             const nextSib = nextValidSibling(elem)
-            // console.log('next sib', rand, nextSib)
             onMount(elem.parentElement, nextSib)
         } else throw new Error(`Incorrect location provided. Got ${location}`)
-        mounted = true
+        mounted = true // only works if firstchild is synchronous
     })
 </script>
 

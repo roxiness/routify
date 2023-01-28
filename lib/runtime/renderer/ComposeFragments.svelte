@@ -5,6 +5,7 @@
     import { RouteFragment } from '../Route/RouteFragment.js'
     import { pushToOrReplace } from '../utils/index.js'
     import RenderFragment from './RenderFragment.svelte'
+    import { normalizeDecorator } from './utils/normalizeDecorator.js'
     import { normalizeMulti } from './utils/normalizeMulti.js'
 
     /** @type {RenderContext}*/
@@ -14,11 +15,10 @@
     export let options
 
     const environment = typeof window !== 'undefined' ? 'browser' : 'ssr'
-    const decoratorDefaults = { recursive: true, shouldRender: () => true }
 
     /** @type {RenderContext}*/
     let activeContext
-    const { childFragments, isActive, decorators, route } = context
+    const { childFragments, isActive, route } = context
     const {
         multi: multiInput,
         decorator,
@@ -28,23 +28,13 @@
         scrollBoundary = elem => elem.parentElement,
     } = options
 
-    /**
-     * @param {DecoratorInput} decorator
-     * @returns {Decorator}
-     */
-    const normalizeDecorator = decorator => {
-        if ('component' in decorator) return { ...decoratorDefaults, ...decorator }
-        else return { ...decoratorDefaults, component: decorator }
-    }
-
     /** @param {RNodeRuntime} node*/
     const getChildIndex = node => node.children.find(node => node.name === 'index')
 
-    const newDecorators = decorators.filter(
-        deco =>
-            (!context?.node?.module?.default && !context?.node?.asyncModule) ||
-            deco.recursive,
-    )
+    const recursiveDecorators = context.decorators.filter(deco => deco.recursive)
+    const newDecorators = pushToOrReplace(recursiveDecorators, decorator)
+        .filter(Boolean)
+        .map(normalizeDecorator)
 
     /** @returns {RenderContext[] }*/
     const buildChildContexts = () => {
@@ -65,9 +55,7 @@
             route: null,
             parentContext: context,
             onDestroy: createSequenceHooksCollection(),
-            decorators: pushToOrReplace(newDecorators, decorator)
-                .filter(Boolean)
-                .map(normalizeDecorator),
+            decorators: newDecorators,
             options: _options || {},
             scrollBoundary,
             multi,

@@ -113,8 +113,8 @@
 
 /**
  * @typedef {Object} Decorator
- * @prop {boolean} recursive
- * @prop {(payload: DecoratorShouldRenderPayload)=>boolean} shouldRender
+ * @prop {boolean=} recursive
+ * @prop {(payload: DecoratorShouldRenderPayload)=>boolean=} shouldRender
  * @prop {SvelteComponentDev} component
  */
 

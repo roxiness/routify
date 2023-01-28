@@ -6,6 +6,7 @@
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
+    import { normalizeDecorator } from '../renderer/utils/normalizeDecorator.js'
 
     /** @type {Router} */
     export let router = null
@@ -45,7 +46,10 @@
     /** @type {import('../decorators/AnchorDecorator').Location}*/
     export let anchor = 'wrapper'
 
-    const context = { childFragments: writable([]), decorators: [ScrollDecorator] }
+    const context = {
+        childFragments: writable([]),
+        decorators: [normalizeDecorator(ScrollDecorator)],
+    }
 
     /** @type {RoutifyRuntimeOptions}*/
     const options = {

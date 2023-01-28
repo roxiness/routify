@@ -11,7 +11,6 @@
     const { isVisible, childFragments } = context // grab the stores
     let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
     setContext('routify-fragment-context', context)
-
     /** @param {HTMLElement} elem */
     const updateRenderContext = (elem, newMeta) => {
         elem['__routify_meta'] = {
@@ -27,7 +26,6 @@
      */
     const initialize = (parent, anchor) => {
         context.elem.set({ anchor, parent })
-
         parent = updateRenderContext(parent, { parent: context })
         if (anchor) anchor = updateRenderContext(anchor, { anchor: context })
     }
@@ -44,7 +42,7 @@
 
 {#if $isVisible && !isAnonFn(NodeComponent)}
     <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
-    <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
+    <AnchorDecorator location={context.anchorLocation} onMount={initialize} {context}>
         <!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
         <DecoratorWrapper {context}>
