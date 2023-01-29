@@ -36,6 +36,19 @@
         .filter(Boolean)
         .map(normalizeDecorator)
 
+    const multiComponent = context?.node?.children.find(
+        node => node.name === '_decorator',
+    )
+    if (multiComponent) {
+        // @ts-ignore
+        const options = multiComponent.module.options || {}
+        newDecorators.push({
+            component: multiComponent.module.default,
+            recursive: options.recursive ?? multiComponent.meta.recursive ?? true,
+            shouldRender: options.shouldRender ?? (() => true),
+        })
+    }
+
     /** @returns {RenderContext[] }*/
     const buildChildContexts = () => {
         const multi = normalizeMulti(multiInput, $childFragments[0]?.node, context)
