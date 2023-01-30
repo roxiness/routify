@@ -82,6 +82,7 @@
  * @prop { MaybeArray<OnDestroyRouterCallback> } onDestroy hook: runs before router is destroyed
  * @prop { QueryHandler } queryHandler
  * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
+ * @prop { ClickHandler } clickHandler
  */
 
 /******************
@@ -268,6 +269,16 @@
  * @param {Object<string, string>} search
  * @param {Route} route
  * @return {string}
+ */
+
+/*****************
+ * CLICK HANDLER *
+ *****************/
+
+/**
+ * @typedef {object} ClickHandler
+ * @prop {(event:PointerEvent, url:string)=>string|false =} callback
+ * @prop {HTMLElement =} elem
  */
 
 /*****************

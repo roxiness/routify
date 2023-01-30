@@ -45,6 +45,8 @@
     export let queryHandler = null
     /** @type {import('../decorators/AnchorDecorator').Location}*/
     export let anchor = 'wrapper'
+    /** @type {ClickHandler}*/
+    export let clickHandler = {}
 
     const context = {
         childFragments: writable([]),
@@ -68,6 +70,7 @@
         onDestroy,
         plugins,
         queryHandler,
+        clickHandler,
     }
 
     // todo move everything to init
@@ -81,6 +84,8 @@
 
     /** @param {HTMLElement} elem */
     const initialize = elem => {
+        elem = clickHandler.elem || elem
+        // passthrough should be handled by clickHandler.callback instead?
         if (!router.passthrough) {
             elem.addEventListener('click', handleClick)
             elem.addEventListener('keydown', handleClick)
@@ -94,8 +99,10 @@
     }
 
     const handleClick = event => {
-        const url = getUrlFromClick(event)
-        if (url) router.url.push(url)
+        /** @type {string|false}*/
+        let url = getUrlFromClick(event)
+        url = clickHandler.callback?.(event, url) ?? url
+        if (typeof url === 'string') router.url.push(url)
     }
 
     if (typeof window !== 'undefined') _onDestroy(() => router.destroy())
