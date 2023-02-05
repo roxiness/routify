@@ -1,7 +1,7 @@
 <script>
     import { Router } from './Router.js'
     import { onDestroy as _onDestroy } from 'svelte'
-    import { getUrlFromClick, pushToOrReplace } from '../utils/index.js'
+    import { getUrlFromClick, resolveIfAnonFn } from '../utils/index.js'
     import Component from '../renderer/ComposeFragments.svelte'
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
@@ -84,18 +84,19 @@
 
     /** @param {HTMLElement} elem */
     const initialize = elem => {
-        elem = clickHandler.elem || elem
-        // passthrough should be handled by clickHandler.callback instead?
-        if (!router.passthrough) {
-            elem.addEventListener('click', handleClick)
-            elem.addEventListener('keydown', handleClick)
-        }
-
         elem = anchor === 'parent' || anchor === 'wrapper' ? elem : elem.parentElement
         router.setParentElem(elem)
 
         // todo check that a router hasn't already been added to this element
         elem['__routify_meta'] = { ...elem['__routify_meta'], router: router }
+
+        let clickScopeElem = resolveIfAnonFn(clickHandler?.elem || elem)(elem)
+
+        // passthrough should be handled by clickHandler.callback instead?
+        if (!router.passthrough) {
+            clickScopeElem.addEventListener('click', handleClick)
+            clickScopeElem.addEventListener('keydown', handleClick)
+        }
     }
 
     const handleClick = event => {
