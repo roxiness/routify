@@ -12,6 +12,11 @@
         "mdsvex": "^0.9.3",
         "spank": "^2.0.0-11",
         "svelte": "^3.39.0",
-        "vite": "^3.2.4"
+        "vite": "^4.0.0"
+    },
+    "routify": {
+        "plugins": [
+            "@roxi/routify/plugins/indexByName"
+        ]
     }
 }

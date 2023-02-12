@@ -10,7 +10,7 @@ export default defineConfig({
 
     plugins: [
         routify({
-            ssr: { enable: true },
+            ssr: { enable: !!production },
         }),
         svelte({
             emitCss: false,
