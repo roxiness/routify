@@ -1,7 +1,10 @@
 <script>
     import { isActive, node } from '@roxi/routify'
+
+    /** @type {RNodeRuntime} pages */
     export let pages = undefined
-    $: liveUrl = index => pages?.[index]?.router?.url.external()
+
+    $: liveUrl = (/** @type {number} */ index) => pages?.[index]?.router?.url.external()
 </script>
 
 <header class="fixed responsive grey3">
@@ -10,7 +13,7 @@
             <a href="/">Kitchensink</a>
         </h5>
         <div class="max" />
-
+        
         {#each $node.pages as childNode, index}
             <a
                 class="button  {$isActive(childNode.path) ? 'border' : 'transparent'}"
@@ -19,9 +22,3 @@
         {/each}
     </nav>
 </header>
-
-<style>
-    .isActive {
-        text-decoration: underline;
-    }
-</style>

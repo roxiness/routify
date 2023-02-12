@@ -2,14 +2,16 @@
     export let context
 </script>
 
-<div class="{context.node.id} {context.node.hasComponent}">
-    {context.node.id}
+<div>
+    routes{context.node.path}.md
     <slot />
 </div>
 
 <style>
     div {
         border: 4px solid green;
-        min-height: 540px;
+        min-height: 100vh;
+        padding-inline: 5px;
+        padding-top: 65px;
     }
 </style>
