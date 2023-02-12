@@ -50,6 +50,7 @@
  * @prop {RNodeBuildtime} Node
  * @prop {string} routifyDir defaults to '.routify'
  * @prop {boolean} clearRoutifyDir
+ * @prop {string[]|boolean} ignoreMetaConflictWarnings
  * @prop {object} filemapper
  * @prop {string[]} filemapper.moduleFiles defaults to ['_module.svelte', '_reset.svelte']
  * @prop {string[]} filemapper.resetFiles defaults to ['_reset.svelte']
