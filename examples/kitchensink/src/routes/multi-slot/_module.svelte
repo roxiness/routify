@@ -1,32 +1,37 @@
 <script>
-    import { url } from '@roxi/routify'
+    import { isActive, node, activeRoute, context } from '@roxi/routify'
     import FrontpageBlock from './__decorators/FrontpageBlock.svelte'
+
     /** @type {Decorator} */
     const decorator = {
         component: FrontpageBlock,
         recursive: false,
-        // shouldRender: ({ context }) => context.node.hasComponent,
     }
 </script>
 
-<nav>
-    <a href={$url('./')}>Home</a>
-    <a href={$url('./hero')}>Hero</a>
-    <a href={$url('./features')}>Features</a>
-    <a href={$url('./examples')}>Examples</a>
-</nav>
+<!-- routify:meta reset=true -->
+<header class="fixed grey3">
+    <nav>
+        <h5>
+            <a href="/">Kitchensink</a>
+        </h5>
+        <div class="max" />
+        <a
+            class="button  {$activeRoute.url === $node.path ? 'border' : 'transparent'}"
+            href={$node.path}>{$node.name}</a>
 
-<div>
+        {#each $node.pages as childNode}
+            <a
+                class="button  {$isActive(childNode.path) ? 'border' : 'transparent'}"
+                href={childNode.path}>{childNode.meta.title || childNode.name}</a>
+        {/each}
+    </nav>
+</header>
+<div class="responsive">
     <slot anchor="firstChild" multi scrollBoundary={null} {decorator} />
 </div>
 
-<!-- routify:meta reset=true -->
 <style>
-    nav {
-        position: fixed;
-        background: white;
-        z-index: 1;
-    }
     :global(*) {
         scroll-behavior: smooth;
     }
