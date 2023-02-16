@@ -4,9 +4,11 @@
     const hashScroll = route => {
         setTimeout(async () => {
             const hashElem = globalThis.document?.getElementById(route?.hash)
-            hashElem['routify-hash-nav'] = 'true'
-            await persistentScopedScrollIntoView(hashElem, null, {}, 500)
-            delete hashElem['routify-hash-nav']
+            if (hashElem) {
+                hashElem['routify-hash-nav'] = 'true'
+                await persistentScopedScrollIntoView(hashElem, null, {}, 500)
+                delete hashElem['routify-hash-nav']
+            }
         }, 0)
     }
 </script>
