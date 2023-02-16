@@ -1,5 +1,5 @@
 {
-    "name": "starter",
+    "name": "routify-ts-starter",
     "type": "module",
     "scripts": {
         "build": "vite build",
