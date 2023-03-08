@@ -1,0 +1,20 @@
+<script context="module">
+    /** @param {RoutifyLoadContext} ctx */
+    export const load = async ({ fetch }) => {
+        return {
+            props: {
+                luke: await fetch('https://swapi.dev/api/people/1').then(res =>
+                    res.json(),
+                ),
+            },
+        }
+    }
+</script>
+
+<script>
+    export let luke
+</script>
+
+<pre>
+{JSON.stringify(luke, null, 2)}
+</pre>
