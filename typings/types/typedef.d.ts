@@ -7,6 +7,20 @@ type RNode = import("../lib/common/RNode").RNode<any>;
  */
 type Routify = import("../lib/common/Routify").Routify<any>;
 /**
+ * COMMON
+ */
+type RoutifyBaseOptions = {
+    Node: import("../lib/common/RNode").RNode<any>;
+};
+/**
+ * COMMON
+ */
+type SvelteComponentDev = typeof import('svelte/internal').SvelteComponentDev;
+/**
+ * COMMON
+ */
+type UniversalFetch = typeof import('../lib/runtime/route/utils')['universalFetch'];
+/**
  * <T>
  */
 type MaybeArray<T> = import('./utils').MaybeArray<T>;
@@ -14,9 +28,10 @@ type MaybeArray<T> = import('./utils').MaybeArray<T>;
  * <T>
  */
 type MaybePromise<T> = import('./utils').MaybePromise<T>;
-type RoutifyBaseOptions = {
-    Node: import("../lib/common/RNode").RNode<any>;
-};
+/**
+ * RUNTIME
+ */
+type scrollBoundary = HTMLElement | ((HTMLElement: any) => HTMLElement) | ((HTMLElement: any) => Promise<HTMLElement>);
 /**
  * RUNTIME
  */
@@ -83,6 +98,7 @@ type RoutifyBuildtimeOptions = {
      */
     routifyDir: string;
     clearRoutifyDir: boolean;
+    ignoreMetaConflictWarnings: string[] | boolean;
     filemapper: {
         moduleFiles: string[];
         resetFiles: string[];
@@ -164,6 +180,7 @@ type RoutifyRuntimeOptions = {
     onDestroy: MaybeArray<OnDestroyRouterCallback>;
     queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
+    clickHandler: ClickHandler;
 };
 type RenderContext = {
     anchorLocation: AnchorLocation;
@@ -174,6 +191,7 @@ type RenderContext = {
     };
     fragment: RouteFragment;
     isActive: import('svelte/store').Writable<boolean>;
+    isVisible: import('svelte/store').Writable<boolean>;
     elem: import('svelte/store').Writable<{
         parent: HTMLElement;
         anchor: HTMLElement;
@@ -182,9 +200,26 @@ type RenderContext = {
     route: import('../lib/runtime/Route/Route').Route;
     router: import('../lib/runtime/Router/Router').Router;
     parentContext: RenderContext;
-    decorators: typeof import('svelte/internal').SvelteComponentDev[];
+    decorators: Decorator[];
     onDestroy?: import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>;
     multi: Multi;
+    scrollBoundary: scrollBoundary;
+};
+type DecoratorInput = (Partial<Decorator> & {
+    component: SvelteComponentDev;
+}) | SvelteComponentDev;
+type Decorator = {
+    recursive?: boolean | undefined;
+    shouldRender?: (payload: DecoratorShouldRenderPayload) => boolean;
+    component: SvelteComponentDev;
+};
+type DecoratorShouldRenderPayload = {
+    context: RenderContext;
+    /**
+     * ,
+     */
+    root: boolean;
+    decorators: Decorator;
 };
 /**
  * <T>
@@ -220,6 +255,7 @@ type RoutifyLoadContext = {
     route: Route;
     prevRoute?: Route | undefined;
     isNew: boolean;
+    fetch: UniversalFetch;
 };
 type RoutifyLoadReturn = {
     status: number;
@@ -319,11 +355,15 @@ type QueryHandlerParse = (search: string, route: Route) => {
 type QueryHandlerStringify = (search: {
     [x: string]: string;
 }, route: Route) => string;
+type ClickHandler = {
+    callback?: (event: PointerEvent, url: string) => string | false;
+    elem?: HTMLElement | ((elem: HTMLElement) => HTMLElement);
+};
 type ComponentGuardFn = (route: Route) => any;
 type ReservedCmpProps = {
     guard?: ComponentGuardFn | undefined;
     load?: RoutifyLoad | undefined;
-    default?: import('svelte/types/runtime').SvelteComponent | undefined;
+    default?: SvelteComponentDev | undefined;
 };
 type Module = ReservedCmpProps & {
     [x: string]: any;
@@ -363,16 +403,15 @@ type BrowserAdapter = {
      */
     toBrowser: (routers: Router[]) => string;
 };
-type MultiScrollBoundaryInput = HTMLElement | Promise<HTMLElement>;
 type MultiPageInput = string | RNodeRuntime;
-type MultiInput = MultiPageInput[] | boolean | Partial<{
-    scrollBoundary: MultiScrollBoundaryInput;
+type SvelteComponentTyped = import('svelte').SvelteComponentTyped;
+type MultiInput = MultiPageInput[] | boolean | MultiInputObject;
+type MultiInputObject = {
     single: boolean;
     pages: MultiPageInput;
-}>;
+};
 type Multi = {
     pages: RNodeRuntime[];
     single: boolean;
-    scrollBoundary: HTMLElement | Promise<HTMLElement>;
+    renderInactive: 'browser' | 'ssr' | 'always';
 };
-type SvelteComponentTyped = import('svelte').SvelteComponentTyped;

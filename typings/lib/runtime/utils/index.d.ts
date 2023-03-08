@@ -15,6 +15,8 @@ export function getContextMaybe(name: string): any;
 export function getable<T>(value: T, start?: import("svelte/store").StartStopNotifier<T>): Getable<T>;
 export function identicalRoutes(...routes: Route[]): string;
 export function clone<T>(obj: T, ...rest: any[]): T;
+export function isAnonFn(input: any): boolean;
+export function resolveIfAnonFn<T>(input: T): T extends (...args: any[]) => any ? T : (...args: any[]) => T;
 export function pushToOrReplace(arr: any[], input: any): any[];
 export function waitFor<T>(store: import("svelte/store").Writable<T>, cb: (T: any) => boolean): Promise<T>;
 export type Getable<T> = import('svelte/store').Writable<T> & {

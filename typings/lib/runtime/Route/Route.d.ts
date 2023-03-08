@@ -34,6 +34,7 @@ export class Route {
     loadComponents(): Promise<boolean>;
     runPreloads(): Promise<boolean | Route>;
     runBeforeUrlChangeHooks(): Promise<any>;
+    get meta(): {};
     /**
      * @param {RNodeRuntime} node the node that corresponds to the fragment
      * @param {String=} urlFragment a fragment of the url (fragments = url.split('/'))

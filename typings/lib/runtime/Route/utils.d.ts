@@ -3,3 +3,4 @@ export function getNearestAncestorNodeWithSpreadParam(routeFragments: RouteFragm
 export function getUrlFragments(url: any): any;
 export function indexOfNode(fragments: any, node: any): any;
 export function URIDecodeObject(obj: any): {};
+export function universalFetch(url: RequestInfo & import('node-fetch').RequestInfo, init?: (RequestInit & import('node-fetch').RequestInit) | undefined): Promise<Response | import('node-fetch').Response>;

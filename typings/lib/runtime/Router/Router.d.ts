@@ -28,6 +28,8 @@ export class Router implements Readable<Router> {
     parentElem: any;
     /** @type {QueryHandler} */
     queryHandler: QueryHandler;
+    /** @type {ClickHandler} */
+    clickHandler: ClickHandler;
     url: {
         internal: () => string;
         external: () => string;

@@ -103,57 +103,61 @@ rootNode.appendChild(childNode)
     *   [Properties](#properties-1)
 *   [RenderContext](#rendercontext)
     *   [Properties](#properties-2)
+*   [Decorator](#decorator)
+    *   [Properties](#properties-3)
+*   [DecoratorShouldRenderPayload](#decoratorshouldrenderpayload)
+    *   [Properties](#properties-4)
 *   [TransformFragmentsCallback](#transformfragmentscallback)
 *   [RoutifyExternalMetaHelper](#routifyexternalmetahelper)
-    *   [Properties](#properties-3)
+    *   [Properties](#properties-5)
 *   [RoutifyLoadReturn](#routifyloadreturn)
     *   [Parameters](#parameters-1)
-    *   [Properties](#properties-4)
+    *   [Properties](#properties-6)
 *   [RoutifyBuildtimeRuntimePlugin](#routifybuildtimeruntimeplugin)
-    *   [Properties](#properties-5)
+    *   [Properties](#properties-7)
 *   [RoutifyRuntimePlugin](#routifyruntimeplugin)
 *   [RoutifyBasePlugin](#routifybaseplugin)
-    *   [Properties](#properties-6)
+    *   [Properties](#properties-8)
 *   [RoutifyBuildtimePluginType](#routifybuildtimeplugintype)
-    *   [Properties](#properties-7)
+    *   [Properties](#properties-9)
 *   [MetaContextSplit](#metacontextsplit)
     *   [Parameters](#parameters-2)
 *   [MetaContext](#metacontext)
-    *   [Properties](#properties-8)
+    *   [Properties](#properties-10)
 *   [UrlRewriteFn](#urlrewritefn)
     *   [Parameters](#parameters-3)
 *   [UrlRewrite](#urlrewrite)
-    *   [Properties](#properties-9)
+    *   [Properties](#properties-11)
 *   [QueryHandler](#queryhandler)
-    *   [Properties](#properties-10)
+    *   [Properties](#properties-12)
 *   [QueryHandlerParse](#queryhandlerparse)
     *   [Parameters](#parameters-4)
 *   [QueryHandlerStringify](#queryhandlerstringify)
     *   [Parameters](#parameters-5)
+*   [ClickHandler](#clickhandler)
 *   [ComponentGuardFn](#componentguardfn)
     *   [Parameters](#parameters-6)
-    *   [Properties](#properties-11)
+    *   [Properties](#properties-13)
 *   [PathNode](#pathnode)
-    *   [Properties](#properties-12)
+    *   [Properties](#properties-14)
 *   [UrlState](#urlstate)
 *   [FragmentContext](#fragmentcontext)
-    *   [Properties](#properties-13)
+    *   [Properties](#properties-15)
 *   [NodeTreeExport](#nodetreeexport)
-    *   [Properties](#properties-14)
+    *   [Properties](#properties-16)
 *   [BrowserAdapter](#browseradapter)
-*   [MultiInput](#multiinput)
-
-###
-
-COMMON
-
-###
-
-###
+*   [Multi](#multi)
+    *   [Properties](#properties-17)
 
 ### RoutifyBaseOptions
 
+COMMON
+
 Type: {Node: RNode}
+
+###
+
+###
 
 ### RoutifyBuildtimePayload
 
@@ -180,6 +184,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `Node` **RNodeBuildtime** 
 *   `routifyDir` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** defaults to '.routify'
 *   `clearRoutifyDir` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+*   `ignoreMetaConflictWarnings` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean))** 
 *   `filemapper` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
     *   `filemapper.moduleFiles` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** defaults to \['\_module.svelte', '\_reset.svelte']
@@ -212,6 +217,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `onDestroy` **MaybeArray\<OnDestroyRouterCallback>** hook: runs before router is destroyed
 *   `queryHandler` **[QueryHandler](#queryhandler)** 
 *   `plugins` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Partial<[RoutifyRuntimeOptions](#routifyruntimeoptions)>>** 
+*   `clickHandler` **[ClickHandler](#clickhandler)** 
 
 ### RenderContext
 
@@ -224,7 +230,30 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), any>** 
 *   `fragment` **RouteFragment** 
 *   `parentContext` **[RenderContext](#rendercontext)** 
-*   `multi` **Multi** 
+*   `decorators` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Decorator](#decorator)>** 
+*   `multi` **[Multi](#multi)** 
+*   `scrollBoundary` **scrollBoundary** 
+
+###
+
+### Decorator
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+#### Properties
+
+*   `recursive` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** 
+*   `component` **SvelteComponentDev** 
+
+### DecoratorShouldRenderPayload
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+#### Properties
+
+*   `context` **[RenderContext](#rendercontext)** 
+*   `root` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** ,
+*   `decorators` **[Decorator](#decorator)** 
 
 ###
 
@@ -257,6 +286,7 @@ Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `route` **Route** 
 *   `prevRoute` **Route?** 
 *   `isNew` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+*   `fetch` **UniversalFetch** 
 *   `status` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 *   `error` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error))** 
 *   `redirect` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
@@ -375,6 +405,10 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
+### ClickHandler
+
+Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
 ### ComponentGuardFn
 
 Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
@@ -389,6 +423,7 @@ Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Sta
 
 *   `guard` **[ComponentGuardFn](#componentguardfn)?** 
 *   `load` **RoutifyLoad?** 
+*   `default` **SvelteComponentDev?** 
 
 ###
 
@@ -435,6 +470,14 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
-### MultiInput
+### Multi
 
-Type: ([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<MultiPageInput> | [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean) | Partial<{scrollBoundary: MultiScrollBoundaryInput, single: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean), pages: MultiPageInput}>)
+Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+#### Properties
+
+*   `single` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+*   `pages` **MultiPageInput** 
+*   `pages` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<RNodeRuntime>** 
+*   `single` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+*   `renderInactive` **(`"browser"` | `"ssr"` | `"always"`)** 

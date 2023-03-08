@@ -16,9 +16,10 @@ export class RNodeRuntime extends RNode<RoutifyRuntime> {
     module: ReservedCmpProps;
     get pages(): RNodeRuntime[];
     get pagesWithIndex(): RNodeRuntime[];
+    get hasComponent(): boolean;
     /** @ts-ignore SvelteComponentConstructor is only available in VSCode */
-    /** @returns {Promise<import('svelte/internal').SvelteComponentDev>} */
-    getRawComponent(): Promise<import('svelte/internal').SvelteComponentDev>;
+    /** @returns {Promise<SvelteComponentDev>} */
+    getRawComponent(): Promise<SvelteComponentDev>;
     loadModule(): Promise<ReservedCmpProps>;
     /**
      * Returns in a sync/async component in a synchronous wrapper

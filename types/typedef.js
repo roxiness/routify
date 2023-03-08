@@ -4,6 +4,7 @@
  * @typedef {import('../lib/common/Routify').Routify} Routify
  * @typedef {{Node: RNode}} RoutifyBaseOptions
  * @typedef {typeof import('svelte/internal').SvelteComponentDev } SvelteComponentDev
+ * @typedef {typeof import('../lib/runtime/route/utils')['universalFetch']} UniversalFetch
  */
 /**
  * @template T
@@ -171,6 +172,7 @@
  * @prop {Route} route
  * @prop {Route=} prevRoute
  * @prop {Boolean} isNew
+ * @prop {UniversalFetch} fetch
  *
  * @typedef {object} RoutifyLoadReturn
  * @prop {number} status
