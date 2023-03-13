@@ -1,6 +1,7 @@
 {
     "workspaces": [
-        "*"
+        "*",
+        ".."
     ],
     "dependencies": {
         "@roxi/routify": ".."
