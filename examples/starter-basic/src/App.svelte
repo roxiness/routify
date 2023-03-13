@@ -1,8 +1,10 @@
 <script context="module">
-    import { Router, createRouter } from '@roxi/routify'
+    import { Router, createRouter, InternalReflector } from '@roxi/routify'
     import routes from '../.routify/routes.default.js'
+    import ProgressBar from './components/ProgressBar.svelte'
 
-    const router = createRouter({ routes })
+    export const router = createRouter({ routes })
 </script>
 
 <Router {router} />
+<ProgressBar {router} />

@@ -1,5 +1,4 @@
 <script>
-    import Loader from '@/components/Loader.svelte'
     import Nav from '@/components/Nav.svelte'
     import ThemePicker from '@/components/ThemePicker.svelte'
     export let context
@@ -20,4 +19,3 @@
 </main>
 
 <ThemePicker />
-<Loader />

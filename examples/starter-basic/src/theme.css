@@ -1,21 +1,11 @@
-@import './vars.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
 @import url('https://fonts.cdnfonts.com/css/pt-root-ui');
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-}
+@import 'https://unpkg.com/open-props';
+@import 'https://unpkg.com/open-props/normalize.min.css';
+@import 'https://unpkg.com/open-props/buttons.min.css';
+@import './vars.css';
 
-html {
-    background-color: var(--surface-1);
-    color: var(--text-1);
-    accent-color: var(--brand);
-}
-
-body {
-    font-family: system-ui, sans-serif;
-}
 
 p {
     max-inline-size: var(--size-content-1);
@@ -151,7 +141,7 @@ body > * > header {
         display: flex;
         padding: var(--size-2) 0 var(--size-3);
 
-        & .brand {
+        & .brand > * {
             font-size: var(--font-size-6);
             text-decoration: none;
             color: var(--brand);
@@ -183,7 +173,6 @@ body > * > header {
 
 label:not(label > label) {
     color: var(--text-2);
-    /* font-size: var(--font-size-1); */
 
     margin: var(--size-4) 0;
     display: inline-flex;
@@ -270,10 +259,10 @@ label:not(label > label) {
 }
 
 .admin {
-    font-size: var(--font-size-8);
-    width: 100%;
-    text-align: center;
-    padding-top: var(--size-10);
+    padding-top: var(--size-10);    
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
 .signout {
@@ -290,42 +279,54 @@ progress {
     padding: 0;
     margin: 0;
     outline: 0;
-    border: 0;
-    height: 4px;
+    height: 8px;
 
-    &::-moz-progress-bar {
-        /* background: lightblue; */
+}
+
+.progress-line,
+.progress-line:before {
+    height: 3px;
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    top: 0;
+}
+.progress-line {
+    background-color: var(--brand);
+    display: -webkit-flex;
+    display: flex;
+}
+.progress-line:before {
+    background-color: var(--surface-2);
+    content: '';
+    -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@-webkit-keyframes running-progress {
+    0% {
+        margin-left: 0px;
+        margin-right: 100%;
     }
-
-    &::-webkit-progress-value {
-        background: var(--brand);
+    50% {
+        margin-left: 25%;
+        margin-right: 0%;
     }
-
-    &::-webkit-progress-bar {
-        background: var(--surface-2);
+    100% {
+        margin-left: 100%;
+        margin-right: 0;
     }
 }
-
-/* input:-webkit-autofill,
-input:-webkit-autofill:focus {
-    background-color: green;
-    border: none;
+@keyframes running-progress {
+    0% {
+        margin-left: 0px;
+        margin-right: 100%;
+    }
+    50% {
+        margin-left: 25%;
+        margin-right: 0%;
+    }
+    100% {
+        margin-left: 100%;
+        margin-right: 0;
+    }
 }
-input[data-autocompleted] {
-    background-color: green;
-    border: none;
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
- background: red;
- border: none;
-}
-input:autofill {
-    border: 3px solid darkorange;
-}
-
-input:-webkit-autofill {
-    border: 3px solid darkorange;
-} */
