@@ -13,9 +13,9 @@
 </script>
 
 {#if Component}
-    <Component {...passthrough} {context}>
+    <svelte:component this={Component} {...passthrough} {context}>
         <slot />
-    </Component>
+    </svelte:component>
 {:else}
     <slot />
 {/if}
