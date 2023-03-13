@@ -16,6 +16,7 @@
 <script>
     /** @type {RenderContext} */
     export let context
+    export let isRoot
     $: ({ route, isActive } = context)
     $: if (route?.hash) hashScroll(route)
     else if (get(isActive) && !route?.state.dontScroll) scrollToContext(context)
