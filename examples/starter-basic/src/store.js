@@ -5,13 +5,13 @@ const GUEST = { username: 'guest', isGuest: true }
 
 const createAuth = () => {
     /** @type {User} */
-    const storedUser = JSON.parse(localStorage.getItem('user') || 'null')
+    const storedUser = JSON.parse(globalThis.localStorage?.getItem('user') || 'null')
     const store = writable(storedUser || GUEST)
 
     /** @param {User} user */
     const setUser = user => {
         store.set(user)
-        localStorage.setItem('user', JSON.stringify(user))
+        globalThis.localStorage?.setItem('user', JSON.stringify(user))
     }
 
     /**
