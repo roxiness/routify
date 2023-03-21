@@ -7,6 +7,7 @@
     import RenderFragment from './RenderFragment.svelte'
     import { normalizeDecorator } from './utils/normalizeDecorator.js'
     import { normalizeMulti } from './utils/normalizeMulti.js'
+    export const isRoot = undefined
 
     /** @type {RenderContext}*/
     export let context = null
