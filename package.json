@@ -85,7 +85,7 @@
         "svelte": "^3.46.1"
     },
     "peerDependencies": {
-        "spank": "^2.0.0-13",
+        "spank": "^2.0.0",
         "vite": "^3.2.4 || ^4.0.0"
     },
     "peerDependenciesMeta": {
