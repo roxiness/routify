@@ -1,0 +1,19 @@
+{
+    "name": "starter-vitest",
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "preview": "vite preview",
+        "dev": "vite",
+        "test": "vitest"
+    },
+    "devDependencies": {
+        "@roxi/routify": "^3.0.0-next.1",
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.13",
+        "mdsvex": "^0.9.3",
+        "spank": "^2.0.0-12",
+        "svelte": "^3.39.0",
+        "vite": "^3.0.3",
+        "vitest": "^0.29.7"
+    }
+}
