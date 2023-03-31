@@ -52,16 +52,17 @@
                 {...compProps}
                 context={routifyContext}
                 let:props
+                let:inline
                 let:multi
                 let:decorator
                 let:anchor
                 let:options
                 let:scrollBoundary
-                >{#if $childFragments.length || (multi && !multi?.single)}
+                >{#if $childFragments.length || (inline && !inline?.single) || (multi && !multi?.single)}
                     <!-- CHILD PAGES -->
                     <Compose
                         options={{
-                            multi,
+                            inline: inline || multi,
                             decorator,
                             props,
                             options,

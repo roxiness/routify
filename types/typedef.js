@@ -106,7 +106,7 @@
  * @prop {RenderContext} parentContext
  * @prop {Decorator[]} decorators
  * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
- * @prop {Multi} multi
+ * @prop {Inline} inline
  * @prop {scrollBoundary} scrollBoundary
  */
 
@@ -342,16 +342,16 @@
  */
 
 /**
- * @typedef { string | RNodeRuntime } MultiPageInput
+ * @typedef { string | RNodeRuntime } InlinePageInput
  * @typedef { import('svelte').SvelteComponentTyped } SvelteComponentTyped
  *
- * @typedef { MultiPageInput[] | boolean | MultiInputObject } MultiInput
+ * @typedef { InlinePageInput[] | boolean | InlineInputObject } InlineInput
  *
- * @typedef { object } MultiInputObject
+ * @typedef { object } InlineInputObject
  * @prop { boolean } single
- * @prop { MultiPageInput } pages
+ * @prop { InlinePageInput } pages
  *
- * @typedef { object } Multi
+ * @typedef { object } Inline
  * @prop {RNodeRuntime[]} pages
  * @prop {boolean} single
  * @prop {'browser'|'ssr'|'always'} renderInactive

@@ -6,13 +6,13 @@
     import { pushToOrReplace } from '../utils/index.js'
     import RenderFragment from './RenderFragment.svelte'
     import { normalizeDecorator } from './utils/normalizeDecorator.js'
-    import { normalizeMulti } from './utils/normalizeMulti.js'
+    import { normalizeInline } from './utils/normalizeInline.js'
     export const isRoot = undefined
 
     /** @type {RenderContext}*/
     export let context = null
 
-    /** @type {{multi: MultiInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}} */
+    /** @type {{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}} */
     export let options
 
     const environment = typeof window !== 'undefined' ? 'browser' : 'ssr'
@@ -21,7 +21,7 @@
     let activeContext
     const { childFragments, isActive, route } = context
     const {
-        multi: multiInput,
+        inline: multiInput,
         decorator,
         props,
         anchor: anchorLocation,
@@ -66,8 +66,8 @@
 
     /** @returns {RenderContext[] }*/
     const buildChildContexts = () => {
-        const multi = normalizeMulti(multiInput, $childFragments[0]?.node, context)
-        return multi.pages.map(node => ({
+        const inline = normalizeInline(multiInput, $childFragments[0]?.node, context)
+        return inline.pages.map(node => ({
             anchorLocation: anchorLocation || 'parent',
             childFragments: writable(
                 getChildIndex(node)
@@ -86,8 +86,8 @@
             decorators: newDecorators,
             options: _options || {},
             scrollBoundary,
-            multi,
-            single: writable(multi.single),
+            inline,
+            single: writable(inline.single),
         }))
     }
 
@@ -119,13 +119,13 @@
     /** @param {RenderContext[]} childContexts */
     const setVisibility = childContexts => {
         childContexts.forEach(context => {
-            const notExcludedCtx = context => !context?.node?.meta.multi?.exclude
+            const notExcludedCtx = context => !context?.node?.meta.inline?.exclude
             const isPartOfPage = () =>
                 // if this isn't part of the active route, activeContext is undefined
                 !get(activeContext?.single) &&
                 !get(context.single) &&
                 [context, activeContext].every(notExcludedCtx) &&
-                ['always', environment].includes(context.multi?.renderInactive)
+                ['always', environment].includes(context.inline?.renderInactive)
 
             const isActive = context === activeContext
             const wasActive = get(context.isActive)
