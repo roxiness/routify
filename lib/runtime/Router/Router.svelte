@@ -90,7 +90,7 @@
         // todo check that a router hasn't already been added to this element
         elem['__routify_meta'] = { ...elem['__routify_meta'], router: router }
 
-        let clickScopeElem = resolveIfAnonFn(clickHandler?.elem || elem)(elem)
+        let clickScopeElem = resolveIfAnonFn(clickHandler?.elem || elem, [elem])
 
         // passthrough should be handled by clickHandler.callback instead?
         if (!router.passthrough) {
