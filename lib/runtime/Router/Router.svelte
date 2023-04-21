@@ -1,7 +1,11 @@
 <script>
     import { Router } from './Router.js'
     import { onDestroy as _onDestroy } from 'svelte'
-    import { getUrlFromClick, resolveIfAnonFn } from '../utils/index.js'
+    import {
+        getUrlFromEvent,
+        resolveIfAnonFn,
+        shouldIgnoreClick,
+    } from '../utils/index.js'
     import Component from '../renderer/ComposeFragments.svelte'
     import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
@@ -96,13 +100,28 @@
         if (!router.passthrough) {
             clickScopeElem.addEventListener('click', handleClick)
             clickScopeElem.addEventListener('keydown', handleClick)
+            clickScopeElem.addEventListener('mouseover', handleHover)
         }
     }
 
+    const handleHover = event => {
+        const eventUrl = getUrlFromEvent(event)
+        const url = router.clickHandler.callback?.(event, eventUrl) ?? eventUrl
+
+        const shouldPrefetch =
+            typeof url === 'string' &&
+            event.target.closest('[data-routify-prefetch-data]')?.dataset
+                .routifyPrefetchData === 'hover'
+
+        if (shouldPrefetch) router.url.push(url, { prefetch: true })
+    }
+
     const handleClick = event => {
-        /** @type {string|false}*/
-        let url = getUrlFromClick(event)
-        url = router.clickHandler.callback?.(event, url) ?? url
+        if (shouldIgnoreClick(event)) return
+
+        const eventUrl = getUrlFromEvent(event)
+        const url = router.clickHandler.callback?.(event, eventUrl) ?? eventUrl
+
         if (typeof url === 'string') router.url.push(url)
     }
 
