@@ -7,13 +7,13 @@
     $: liveUrl = (/** @type {number} */ index) => pages?.[index]?.router?.url.external()
 </script>
 
-<header class="fixed responsive grey3">
+<header class="fixed responsive grey3" data-routify-prefetch-data="hover">
     <nav>
         <h5>
             <a href="/">Kitchensink</a>
         </h5>
         <div class="max" />
-        
+
         {#each $node.pages as childNode, index}
             <a
                 class="button  {$isActive(childNode.path) ? 'border' : 'transparent'}"
