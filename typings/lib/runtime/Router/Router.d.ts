@@ -88,6 +88,7 @@ export class Router implements Readable<Router> {
      * @returns {Promise<true|false>}
      */
     _setUrl(url: string, mode: UrlState, isInternal?: boolean, state?: any | undefined): Promise<true | false>;
+    setActiveRoute(route: any): void;
     destroy(): void;
     /** @type {BaseReflector} */
     get urlReflector(): BaseReflector;

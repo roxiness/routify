@@ -5,9 +5,7 @@ export function getPath(node1: any, node2: any): string;
  * @callback Goto
  * @param {string} path relative, absolute or named URL
  * @param {Object.<string, string>=} userParams
- * @param {{
- *  mode: 'push'|'replace'
- * }=} options
+ * @param {Partial<$UrlOptions & {mode: 'push' | 'replace'}>=} options
  * @type {Readable<Goto>} */
 export const goto: Readable<Goto>;
 /**
@@ -19,9 +17,15 @@ export const goto: Readable<Goto>;
  * @prop {Boolean} [recursive=true] return true if descendant is active
  */
 /**
+ * @typedef {Object} $UrlOptions
+ * @prop {boolean} strict Require internal paths. Eg. `/blog/[slug]` instead of `/blog/hello-world`
+ * @prop {boolean} includeIndex suffix path with `/index`
+ * @prop {boolean} silent suppress errors
+ *
  * @callback Url
  * @param {string} inputPath
  * @param {Object.<string, string>=} userParams
+ * @param {Partial<$UrlOptions>=} options
  * @returns {string}
  *
  * @type {Readable<Url>}
@@ -65,9 +69,9 @@ export const afterUrlChange: Readable<(arg0: AfterUrlChangeCallback) => any>;
 export const beforeUrlChange: Readable<(arg0: BeforeUrlChangeCallback) => any>;
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
-} | undefined, options?: {
+} | undefined, options?: Partial<$UrlOptions & {
     mode: 'push' | 'replace';
-} | undefined) => any;
+}> | undefined) => any;
 export type Readable<T> = import('svelte/store').Readable<T>;
 export type IsActiveOptions = {
     /**
@@ -75,9 +79,23 @@ export type IsActiveOptions = {
      */
     recursive?: boolean;
 };
+export type $UrlOptions = {
+    /**
+     * Require internal paths. Eg. `/blog/[slug]` instead of `/blog/hello-world`
+     */
+    strict: boolean;
+    /**
+     * suffix path with `/index`
+     */
+    includeIndex: boolean;
+    /**
+     * suppress errors
+     */
+    silent: boolean;
+};
 export type Url = (inputPath: string, userParams?: {
     [x: string]: string;
-} | undefined) => string;
+} | undefined, options?: Partial<$UrlOptions> | undefined) => string;
 export type IsActive = (path?: string | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;

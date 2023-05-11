@@ -10,10 +10,6 @@ export class Route {
     allFragments: RouteFragment[];
     /** @type {RouteFragment[]} only fragments with components */
     get fragments(): RouteFragment[];
-    /** @type {Promise<{route: Route}>} */
-    loaded: Promise<{
-        route: Route;
-    }>;
     /** @type {RoutifyLoadReturn} */
     load: RoutifyLoadReturn;
     router: import("../index.js").RouterClass;
@@ -24,10 +20,8 @@ export class Route {
     log: any;
     get params(): any;
     get leaf(): RouteFragment;
-    get isPending(): boolean;
-    loadRoute(): Promise<{
-        route: Route;
-    }>;
+    get isPendingOrPrefetch(): any;
+    loadRoute(): Promise<boolean>;
     /**
      * converts async module functions to sync functions
      */

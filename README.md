@@ -146,7 +146,7 @@ rootNode.appendChild(childNode)
 *   [NodeTreeExport](#nodetreeexport)
     *   [Properties](#properties-16)
 *   [BrowserAdapter](#browseradapter)
-*   [Multi](#multi)
+*   [Inline](#inline)
     *   [Properties](#properties-17)
 
 ### RoutifyBaseOptions
@@ -231,7 +231,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 *   `fragment` **RouteFragment** 
 *   `parentContext` **[RenderContext](#rendercontext)** 
 *   `decorators` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Decorator](#decorator)>** 
-*   `multi` **[Multi](#multi)** 
+*   `inline` **[Inline](#inline)** 
 *   `scrollBoundary` **scrollBoundary** 
 
 ###
@@ -470,14 +470,14 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
-### Multi
+### Inline
 
 Type: [object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 #### Properties
 
 *   `single` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
-*   `pages` **MultiPageInput** 
+*   `pages` **InlinePageInput** 
 *   `pages` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<RNodeRuntime>** 
 *   `single` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 *   `renderInactive` **(`"browser"` | `"ssr"` | `"always"`)** 

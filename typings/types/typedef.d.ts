@@ -202,7 +202,7 @@ type RenderContext = {
     parentContext: RenderContext;
     decorators: Decorator[];
     onDestroy?: import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>;
-    multi: Multi;
+    inline: Inline;
     scrollBoundary: scrollBoundary;
 };
 type DecoratorInput = (Partial<Decorator> & {
@@ -255,7 +255,7 @@ type RoutifyLoadContext = {
     route: Route;
     prevRoute?: Route | undefined;
     isNew: boolean;
-    fetch: UniversalFetch;
+    fetch: any;
 };
 type RoutifyLoadReturn = {
     status: number;
@@ -403,14 +403,14 @@ type BrowserAdapter = {
      */
     toBrowser: (routers: Router[]) => string;
 };
-type MultiPageInput = string | RNodeRuntime;
+type InlinePageInput = string | RNodeRuntime;
 type SvelteComponentTyped = import('svelte').SvelteComponentTyped;
-type MultiInput = MultiPageInput[] | boolean | MultiInputObject;
-type MultiInputObject = {
+type InlineInput = InlinePageInput[] | boolean | InlineInputObject;
+type InlineInputObject = {
     single: boolean;
-    pages: MultiPageInput;
+    pages: InlinePageInput;
 };
-type Multi = {
+type Inline = {
     pages: RNodeRuntime[];
     single: boolean;
     renderInactive: 'browser' | 'ssr' | 'always';
