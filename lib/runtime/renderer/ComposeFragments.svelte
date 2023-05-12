@@ -26,7 +26,7 @@
         props,
         anchor: anchorLocation,
         options: _options,
-        scrollBoundary = elem => elem.parentElement,
+        scrollBoundary = () => get(context.parentContext?.elem)?.parent,
     } = options
 
     /** @param {RNodeRuntime} node*/
