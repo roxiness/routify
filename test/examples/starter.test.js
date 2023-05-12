@@ -1,9 +1,9 @@
-import { getPath, runViteDev } from './utils.js'
+import { getExamplesPath, runViteDev } from '../utils.js'
 
 beforeAll(() => page.setDefaultTimeout(25000))
 
 test('should see starter front page', async () => {
-    const { kill, port } = await runViteDev(getPath('starter'))
+    const { kill, port } = await runViteDev(getExamplesPath('starter'))
     await page.goto(`http://localhost:${port}`)
     const result = await page.waitForSelector('h1')
     expect(result).toBeTruthy()

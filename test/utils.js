@@ -1,4 +1,4 @@
-import { createDirname } from '../../lib/buildtime/utils.js'
+import { createDirname } from '../lib/buildtime/utils.js'
 import { resolve } from 'path'
 import { spawn } from 'child_process'
 import kill from 'tree-kill'
@@ -38,4 +38,4 @@ export const runViteDev = path =>
 
 const dirname = createDirname(import.meta)
 
-export const getPath = name => resolve(dirname, '..', '..', 'examples', name)
+export const getExamplesPath = name => resolve(dirname, '..', 'examples', name)
