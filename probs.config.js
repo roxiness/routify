@@ -2,7 +2,13 @@
 
 /** @type {ProbsConfig} */
 const options = {
-    ignore: ['**/temp/**'],
+    ignore: [
+        '**/temp/**',
+        '**/node_modules/**',
+        '**/dist/**',
+        '**/build/**',
+        '**/e2e/**/app/**',
+    ],
     worker: ({ file }) => ({
         execArgv: [
             '--experimental-specifier-resolution=node',
