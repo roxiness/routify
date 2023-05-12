@@ -8,19 +8,19 @@
 
 <h1>Examples</h1>
 
-<a href={$url('./number-1')}>no1</a>
-<a href={$url('./number-2')}>no2</a>
-<a href={$url('./number-3')}>no3</a>
+<div>
+    <a href={$url('./number-1')}>no1</a>
+    <a href={$url('./number-2')}>no2</a>
+    <a href={$url('./number-3')}>no3</a>
+</div>
 
-<div class="examples-wrapper">
+<div class="examples-tabs-window">
     <slot multi />
 </div>
 
 <!-- todo on leaving route, stamp it's url for later recovery, eg for multi  -->
 <style>
-    /* own stuff */
-    .examples-wrapper {
-        margin-left: 100px;
+    .examples-tabs-window {
         display: flex;
         overflow-x: hidden;
         flex-wrap: nowrap;

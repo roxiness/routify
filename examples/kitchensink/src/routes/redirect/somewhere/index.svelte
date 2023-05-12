@@ -4,7 +4,7 @@
 </script>
 
 {#if referrerUrl}
-    Got redirected from
+    Got redirected to <strong>/redirect/somehwere</strong> from
     <div>
         <strong>
             <a href={referrerUrl}>{referrerUrl}</a>

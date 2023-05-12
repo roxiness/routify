@@ -1,6 +1,7 @@
 <div class="example">
     <slot />
 </div>
+<!-- set recursive to false to make sure the decorator is only applied to the immediate children -->
 
 <!-- routify:meta recursive=false -->
 <style>
