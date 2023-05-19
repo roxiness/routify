@@ -1,12 +1,5 @@
 # Routify 3
 
-## !IMPORTANT!
-
-\*\*This repo is under heavy development and everything from code to documentation is far from complete.
-
-[DOCS - work in progress](https://v3.ci.routify.dev/docs#)
-
-If you have questions about how to use Routify 3, please see the [docs](https://v3.ci.routify.dev/docs#) or visit us on Discord.
 
 ## Install
 
