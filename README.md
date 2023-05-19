@@ -21,3 +21,5 @@ Basic
 
 <Router {routes} />
 ```
+
+[Docs](https://v3.routify.dev/)
