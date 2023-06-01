@@ -5,8 +5,11 @@
     import { RouteFragment } from '../Route/RouteFragment.js'
     import { pushToOrReplace } from '../utils/index.js'
     import RenderFragment from './RenderFragment.svelte'
-    import { normalizeDecorator } from './utils/normalizeDecorator.js'
-    import { normalizeInline } from './utils/normalizeInline.js'
+    import {
+        normalizeDecorator,
+        coerceInlineInputToObject,
+        normalizeInline,
+    } from './utils/normalizeDecorator.js'
     export const isRoot = undefined
 
     /** @type {RenderContext}*/
@@ -21,7 +24,7 @@
     let activeContext
     const { childFragments, isActive, route } = context
     const {
-        inline: multiInput,
+        inline: rawInlineInput,
         decorator,
         props,
         anchor: anchorLocation,
@@ -50,6 +53,13 @@
         })
     }
 
+    /**     *
+     * @param {RNodeRuntime} node
+     */
+    const nodeIsIndexed = node =>
+        // same as node.pagesWithIndex, except includes dynamic pages
+        !node.meta.fallback && !node.name.startsWith('_') && node.meta?.order !== false
+
     let wait = false
 
     if (folderDecorator) {
@@ -66,8 +76,16 @@
 
     /** @returns {RenderContext[] }*/
     const buildChildContexts = () => {
-        const inline = normalizeInline(multiInput, $childFragments[0]?.node, context)
-        return inline.pages.map(node => ({
+        const refNode = $childFragments[0]?.node
+        const parentNode = context?.node || refNode.parent
+
+        const matches = parentNode
+            ? parentNode.children.filter(node => node === refNode || nodeIsIndexed(node))
+            : [refNode]
+
+        const children = matches.length ? matches : [refNode]
+
+        return children.map(node => ({
             anchorLocation: anchorLocation || 'parent',
             childFragments: writable(
                 getChildIndex(node)
@@ -78,6 +96,7 @@
             fragment: new RouteFragment(route, node, null, {}),
             isActive: writable(false),
             isVisible: writable(false),
+            isInline: writable(false),
             elem: writable(null),
             router: $childFragments[0]?.route?.router || context.router,
             route: null,
@@ -86,8 +105,6 @@
             decorators: newDecorators,
             options: _options || {},
             scrollBoundary,
-            inline,
-            single: writable(inline.single),
         }))
     }
 
@@ -116,24 +133,31 @@
         childContexts = childContexts
     }
 
+    const lazySet = (store, value) =>
+        JSON.stringify(get(store)) !== JSON.stringify(value) && store.set(value)
+
+    const isInline = _context => {
+        const inlineInput = {
+            ...coerceInlineInputToObject(rawInlineInput),
+            ...coerceInlineInputToObject(_context?.node.meta.inline),
+        }
+        const inlineCfg = normalizeInline(inlineInput)
+
+        const passedCallback =
+            !_context?.node || inlineCfg.callback(_context?.node, activeContext)
+
+        return passedCallback && ['always', environment].includes(inlineCfg.context)
+    }
+
     /** @param {RenderContext[]} childContexts */
     const setVisibility = childContexts => {
         childContexts.forEach(context => {
-            const notExcludedCtx = context => !context?.node?.meta.inline?.exclude
-            const isPartOfPage = () =>
-                // if this isn't part of the active route, activeContext is undefined
-                !get(activeContext?.single) &&
-                !get(context.single) &&
-                [context, activeContext].every(notExcludedCtx) &&
-                ['always', environment].includes(context.inline?.renderInactive)
+            const inlined = isInline(context)
+            const isBothInlined = inlined && isInline(activeContext)
 
-            const isActive = context === activeContext
-            const wasActive = get(context.isActive)
-            if (wasActive != isActive) context.isActive.set(isActive)
-
-            const isVisible = isActive || isPartOfPage()
-            const wasVisible = get(context.isVisible)
-            if (wasVisible != isVisible) context.isVisible.set(isVisible)
+            lazySet(context.isInline, inlined)
+            lazySet(context.isActive, context === activeContext)
+            lazySet(context.isVisible, get(context.isActive) || isBothInlined)
         })
     }
 

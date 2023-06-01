@@ -99,14 +99,13 @@
  * @prop {RouteFragment} fragment
  * @prop {import('svelte/store').Writable<boolean>} isActive
  * @prop {import('svelte/store').Writable<boolean>} isVisible
+ * @prop {import('svelte/store').Writable<boolean>} isInline
  * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
- * @prop {import('svelte/store').Writable<boolean>} single
  * @prop {import('../lib/runtime/Route/Route').Route} route
  * @prop {import('../lib/runtime/Router/Router').Router} router
  * @prop {RenderContext} parentContext
  * @prop {Decorator[]} decorators
  * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
- * @prop {Inline} inline
  * @prop {scrollBoundary} scrollBoundary
  */
 
@@ -342,17 +341,11 @@
  */
 
 /**
- * @typedef { string | RNodeRuntime } InlinePageInput
  * @typedef { import('svelte').SvelteComponentTyped } SvelteComponentTyped
  *
- * @typedef { InlinePageInput[] | boolean | InlineInputObject } InlineInput
- *
- * @typedef { object } InlineInputObject
- * @prop { boolean } single
- * @prop { InlinePageInput } pages
+ * @typedef { Partial<Inline> | boolean } InlineInput
  *
  * @typedef { object } Inline
- * @prop {RNodeRuntime[]} pages
- * @prop {boolean} single
- * @prop {'browser'|'ssr'|'always'} renderInactive
+ * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } callback
+ * @prop { 'browser'|'ssr'|'always' } context
  */

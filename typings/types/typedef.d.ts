@@ -192,17 +192,16 @@ type RenderContext = {
     fragment: RouteFragment;
     isActive: import('svelte/store').Writable<boolean>;
     isVisible: import('svelte/store').Writable<boolean>;
+    isInline: import('svelte/store').Writable<boolean>;
     elem: import('svelte/store').Writable<{
         parent: HTMLElement;
         anchor: HTMLElement;
     }>;
-    single: import('svelte/store').Writable<boolean>;
     route: import('../lib/runtime/Route/Route').Route;
     router: import('../lib/runtime/Router/Router').Router;
     parentContext: RenderContext;
     decorators: Decorator[];
     onDestroy?: import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>;
-    inline: Inline;
     scrollBoundary: scrollBoundary;
 };
 type DecoratorInput = (Partial<Decorator> & {
@@ -403,15 +402,9 @@ type BrowserAdapter = {
      */
     toBrowser: (routers: Router[]) => string;
 };
-type InlinePageInput = string | RNodeRuntime;
 type SvelteComponentTyped = import('svelte').SvelteComponentTyped;
-type InlineInput = InlinePageInput[] | boolean | InlineInputObject;
-type InlineInputObject = {
-    single: boolean;
-    pages: InlinePageInput;
-};
+type InlineInput = Partial<Inline> | boolean;
 type Inline = {
-    pages: RNodeRuntime[];
-    single: boolean;
-    renderInactive: 'browser' | 'ssr' | 'always';
+    callback: (node: RNodeRuntime, context: RenderContext) => boolean;
+    context: 'browser' | 'ssr' | 'always';
 };
