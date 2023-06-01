@@ -1,5 +1,6 @@
 <script>
     export let context
+    export let isRoot
 
     const { isActive } = context
 
