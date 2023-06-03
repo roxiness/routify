@@ -26,6 +26,7 @@
      */
     const initialize = (parent, anchor) => {
         context.elem.set({ anchor, parent })
+        // TODO parent context should be parent context, not context. But we also need a parent of context if we're using a wrapper.
         parent = updateRenderContext(parent, { parent: context })
         if (anchor) anchor = updateRenderContext(anchor, { anchor: context })
     }
