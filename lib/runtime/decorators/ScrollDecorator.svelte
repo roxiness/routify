@@ -1,4 +1,5 @@
 <script context="module">
+    import { get } from 'svelte/store'
     import { scrollToContext, persistentScopedScrollIntoView } from '../helpers/scroll.js'
     const hashScroll = route => {
         setTimeout(async () => {
@@ -17,15 +18,23 @@
     export let context
     export let isRoot
 
+    function allParentsAreActive(context) {
+        while (context.parentContext) {
+            if (!get(context.isActive)) return false
+            context = context.parentContext
+        }
+        return true
+    }
+
     let wasActive = false
 
     $: ({ route, isActive } = context)
-    $: if (route) {
+    $: if (route && !route?.state.dontScroll) {
         if (route.hash) {
             hashScroll(route)
         } else if ($isActive !== wasActive || route.leaf.node === context.node) {
             wasActive = $isActive
-            if ($isActive) scrollToContext(context)
+            if ($isActive && allParentsAreActive(context)) scrollToContext(context)
         }
     }
 </script>

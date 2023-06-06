@@ -15,6 +15,7 @@
     /** @param {HTMLElement} elem */
     const nextValidSibling = elem => {
         const next = /** @type {HTMLElement}*/ (elem.nextElementSibling)
+        if ('routifyAnchorBackstop' in next.dataset) throw new Error('backstop')
         return next && 'routifyAnchorLocator' in next.dataset
             ? nextValidSibling(next)
             : next
@@ -22,7 +23,7 @@
 
     _onMount(async () => {
         if (location === 'wrapper') onMount(elem)
-        else if (location === 'parent') onMount(elem.parentNode)
+        else if (location === 'parent') onMount(elem.parentElement)
         else if (location === 'header') onMount(elem.parentElement, elem)
         else if (location === 'firstChild') {
             const nextSib = nextValidSibling(elem)
@@ -45,8 +46,11 @@
             data-routify-anchor-locator
             class="anchor"
             bind:this={elem}
-            {...$$restProps} />
+            {...$$restProps}
+        />
     {/if}
     <slot />
+
+    {#if !mounted} <div data-routify-anchor-backstop /> {/if}
     <!-- todo make backstop sibling here to ensure next sibling doesn't belong to the parent scope -->
 {/if}

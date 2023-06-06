@@ -20,6 +20,14 @@
 
     const environment = typeof window !== 'undefined' ? 'browser' : 'ssr'
 
+    function findNearestInlineContext(context) {
+        return context
+            ? context.isInline
+                ? context
+                : findNearestInlineContext(context.parentContext)
+            : null
+    }
+
     /** @type {RenderContext}*/
     let activeContext
     const { childFragments, isActive, route } = context
@@ -29,7 +37,9 @@
         props,
         anchor: anchorLocation,
         options: _options,
-        scrollBoundary = () => get(context.parentContext?.elem)?.parent,
+        scrollBoundary = ownContext =>
+            !ownContext.isInline &&
+            get(findNearestInlineContext(ownContext)?.elem)?.parent,
     } = options
 
     /** @param {RNodeRuntime} node*/
@@ -96,11 +106,12 @@
             fragment: new RouteFragment(route, node, null, {}),
             isActive: writable(false),
             isVisible: writable(false),
-            isInline: writable(false),
+            isInline: false,
+            lastActiveChild: null,
             elem: writable(null),
             router: $childFragments[0]?.route?.router || context.router,
             route: null,
-            parentContext: context,
+            parentContext: context.node && context,
             onDestroy: createSequenceHooksCollection(),
             decorators: newDecorators,
             options: _options || {},
@@ -117,6 +128,7 @@
      * @param {RouteFragment[]} fragments
      */
     const handlePageChange = fragments => {
+        context.lastActiveChild = activeContext
         const [fragment, ...childFragments] = [...fragments]
         activeContext = childContexts.find(s => s.node === fragment?.node)
         if (!activeContext) {
@@ -136,7 +148,7 @@
     const lazySet = (store, value) =>
         JSON.stringify(get(store)) !== JSON.stringify(value) && store.set(value)
 
-    const isInline = _context => {
+    const checkIfInline = _context => {
         const inlineInput = {
             ...coerceInlineInputToObject(rawInlineInput),
             ...coerceInlineInputToObject(_context?.node.meta.inline),
@@ -152,12 +164,13 @@
     /** @param {RenderContext[]} childContexts */
     const setVisibility = childContexts => {
         childContexts.forEach(context => {
-            const inlined = isInline(context)
-            const isBothInlined = inlined && isInline(activeContext)
+            context.isInline = checkIfInline(context)
+            const isBothInlined = context.isInline && checkIfInline(activeContext)
 
-            lazySet(context.isInline, inlined)
             lazySet(context.isActive, context === activeContext)
             lazySet(context.isVisible, get(context.isActive) || isBothInlined)
+            // if it's not visible, the element doesn't exist anymore
+            if (!get(context.isVisible)) context.elem.set(null)
         })
     }
 

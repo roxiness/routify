@@ -4,7 +4,7 @@
     import DecoratorWrapper from './DecoratorWrapper.svelte'
     import Noop from '../decorators/Noop.svelte'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
-    import { isAnonFn } from '../utils'
+    import { isAnonFn, waitFor } from '../utils'
     /** @type {RenderContext} */
     export let context
     export let props
@@ -24,7 +24,9 @@
      * @param {HTMLElement} parent
      * @param {HTMLElement} anchor
      */
-    const initialize = (parent, anchor) => {
+    const initialize = async (parent, anchor) => {
+        // wait for parent to be ready, otherwise context.elm won't be set in the correct order
+        context.parentContext && (await waitFor(context.parentContext.elem, Boolean))
         context.elem.set({ anchor, parent })
         // TODO parent context should be parent context, not context. But we also need a parent of context if we're using a wrapper.
         parent = updateRenderContext(parent, { parent: context })

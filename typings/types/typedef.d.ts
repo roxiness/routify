@@ -192,7 +192,8 @@ type RenderContext = {
     fragment: RouteFragment;
     isActive: import('svelte/store').Writable<boolean>;
     isVisible: import('svelte/store').Writable<boolean>;
-    isInline: import('svelte/store').Writable<boolean>;
+    isInline: boolean;
+    lastActiveChild: RenderContext;
     elem: import('svelte/store').Writable<{
         parent: HTMLElement;
         anchor: HTMLElement;

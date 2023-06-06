@@ -99,7 +99,8 @@
  * @prop {RouteFragment} fragment
  * @prop {import('svelte/store').Writable<boolean>} isActive
  * @prop {import('svelte/store').Writable<boolean>} isVisible
- * @prop {import('svelte/store').Writable<boolean>} isInline
+ * @prop {boolean} isInline
+ * @prop {RenderContext} lastActiveChild
  * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
  * @prop {import('../lib/runtime/Route/Route').Route} route
  * @prop {import('../lib/runtime/Router/Router').Router} router
