@@ -171,6 +171,8 @@
             lazySet(context.isVisible, get(context.isActive) || isBothInlined)
             // if it's not visible, the element doesn't exist anymore
             if (!get(context.isVisible)) context.elem.set(null)
+            // TODO might need this:
+            // if (!get(context.isVisible)) context.scrollBoundary.set(null)
         })
     }
 
