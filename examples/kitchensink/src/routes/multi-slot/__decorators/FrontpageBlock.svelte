@@ -1,4 +1,5 @@
 <script>
+    export let isRoot
     export let context
 </script>
 

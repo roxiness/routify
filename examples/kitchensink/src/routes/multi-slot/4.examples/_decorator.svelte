@@ -1,3 +1,8 @@
+<script>
+    export let isRoot
+    export let context
+</script>
+
 <div class="example">
     <slot />
 </div>
