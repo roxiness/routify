@@ -1,8 +1,6 @@
 <script>
     import Nav from '@/components/Nav.svelte'
     import ThemePicker from '@/components/ThemePicker.svelte'
-    export let context
-    const { node } = context
 </script>
 
 <header>
@@ -11,7 +9,7 @@
             <h4>Routify 3 App</h4>
         </a>
         <div class="spacer" />
-        <Nav {node} />
+        <Nav />
     </nav>
 </header>
 <main>
@@ -19,3 +17,18 @@
 </main>
 
 <ThemePicker />
+
+<style>
+    /* make header float */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+    /* offset content */
+    main {
+        margin-top: 128px;
+    }
+</style>
