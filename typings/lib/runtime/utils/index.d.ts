@@ -21,6 +21,7 @@ export function resolveIfAnonFn<T, P>(subject: T | ((...P: any[]) => T) | ((...P
 export function resolveIfHasCallback(subject: any, params: any, field?: string): any;
 export function pushToOrReplace(arr: any[], input: any): any[];
 export function waitFor<T>(store: import("svelte/store").Writable<T>, cb: (T: any) => boolean): Promise<T>;
+export function createDeferredPromise<T>(): DeferredPromise<T>;
 export type Getable<T> = import('svelte/store').Writable<T> & {
     get: () => T;
 };

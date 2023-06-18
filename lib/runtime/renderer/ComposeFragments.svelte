@@ -3,7 +3,7 @@
 
     import { get, writable } from 'svelte/store'
     import { RouteFragment } from '../Route/RouteFragment.js'
-    import { pushToOrReplace } from '../utils/index.js'
+    import { createDeferredPromise, pushToOrReplace } from '../utils/index.js'
     import RenderFragment from './RenderFragment.svelte'
     import {
         normalizeDecorator,
@@ -32,7 +32,7 @@
     let activeContext
     const { childFragments, isActive, route } = context
     const {
-        inline: rawInlineInput,
+        inline: rawInlineInputFromSlot,
         decorator,
         props,
         anchor: anchorLocation,
@@ -107,6 +107,10 @@
             isActive: writable(false),
             isVisible: writable(false),
             isInline: false,
+            inline: normalizeInline({
+                ...coerceInlineInputToObject(rawInlineInputFromSlot),
+                ...coerceInlineInputToObject(node.meta.inline),
+            }),
             lastActiveChild: null,
             elem: writable(null),
             router: $childFragments[0]?.route?.router || context.router,
@@ -116,6 +120,7 @@
             decorators: newDecorators,
             options: _options || {},
             scrollBoundary,
+            mounted: createDeferredPromise(),
         }))
     }
 
@@ -141,6 +146,7 @@
         activeContext.fragment = fragment
         activeContext.childFragments.set(childFragments)
         activeContext.route = fragments[0].route
+        fragment.renderContext.resolve(activeContext)
 
         childContexts = childContexts
     }
@@ -149,16 +155,10 @@
         JSON.stringify(get(store)) !== JSON.stringify(value) && store.set(value)
 
     const checkIfInline = _context => {
-        const inlineInput = {
-            ...coerceInlineInputToObject(rawInlineInput),
-            ...coerceInlineInputToObject(_context?.node.meta.inline),
-        }
-        const inlineCfg = normalizeInline(inlineInput)
-
         const passedCallback =
-            !_context?.node || inlineCfg.callback(_context?.node, activeContext)
+            !_context?.node || _context.inline.callback(_context?.node, activeContext)
 
-        return passedCallback && ['always', environment].includes(inlineCfg.context)
+        return passedCallback
     }
 
     /** @param {RenderContext[]} childContexts */
@@ -166,9 +166,11 @@
         childContexts.forEach(context => {
             context.isInline = checkIfInline(context)
             const isBothInlined = context.isInline && checkIfInline(activeContext)
+            const envIsOkay = ['always', environment].includes(context.inline.context)
+            const isVisibleAsInlined = isBothInlined && envIsOkay
 
             lazySet(context.isActive, context === activeContext)
-            lazySet(context.isVisible, get(context.isActive) || isBothInlined)
+            lazySet(context.isVisible, get(context.isActive) || isVisibleAsInlined)
             // if it's not visible, the element doesn't exist anymore
             if (!get(context.isVisible)) context.elem.set(null)
             // TODO might need this:

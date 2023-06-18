@@ -108,6 +108,8 @@
  * @prop {Decorator[]} decorators
  * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
  * @prop {scrollBoundary} scrollBoundary
+ * @prop {DeferredPromise<void>} mounted
+ * @prop {Inline} inline *
  */
 
 /**
@@ -347,6 +349,12 @@
  * @typedef { Partial<Inline> | boolean } InlineInput
  *
  * @typedef { object } Inline
- * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } callback
+ * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } callback return true to inline the child node
  * @prop { 'browser'|'ssr'|'always' } context
+ * @prop { (elem: HTMLElement) => void } scrollIntoView
+ */
+
+/**
+ * @template T
+ * @typedef {Promise<T> & {resolve: (T)=>void, reject: (T)=>void}} DeferredPromise
  */

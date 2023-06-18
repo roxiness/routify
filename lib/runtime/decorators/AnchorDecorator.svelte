@@ -7,6 +7,9 @@
     /** @type {(parent: Node, anchor?: Node)=>any} */
     export let onMount = x => x
 
+    /** @type {RenderContext} */
+    export let context
+
     /** @type {HTMLElement} */
     let elem
 
@@ -15,13 +18,19 @@
     /** @param {HTMLElement} elem */
     const nextValidSibling = elem => {
         const next = /** @type {HTMLElement}*/ (elem.nextElementSibling)
-        if ('routifyAnchorBackstop' in next.dataset) throw new Error('backstop')
+        if ('routifyAnchorBackstop' in next.dataset) {
+            console.warn('found no children in', elem.parentElement)
+            throw new Error(
+                'AnchorLocation is set to firstChild, but no children were found',
+            )
+        }
         return next && 'routifyAnchorLocator' in next.dataset
             ? nextValidSibling(next)
             : next
     }
 
     _onMount(async () => {
+        if (mounted) return
         if (location === 'wrapper') onMount(elem)
         else if (location === 'parent') onMount(elem.parentElement)
         else if (location === 'header') onMount(elem.parentElement, elem)
@@ -34,11 +43,11 @@
 </script>
 
 {#if location === 'wrapper'}
-    <div bind:this={elem} {...$$restProps}>
+    <div data-routify-anchor-parent bind:this={elem} {...$$restProps}>
         <slot />
     </div>
 {:else if location === 'header'}
-    <div bind:this={elem} {...$$restProps} />
+    <div data-routify-anchor-header bind:this={elem} {...$$restProps} />
     <slot />
 {:else}
     {#if !mounted}
@@ -46,11 +55,9 @@
             data-routify-anchor-locator
             class="anchor"
             bind:this={elem}
-            {...$$restProps}
-        />
+            {...$$restProps} />
     {/if}
     <slot />
 
-    {#if !mounted} <div data-routify-anchor-backstop /> {/if}
-    <!-- todo make backstop sibling here to ensure next sibling doesn't belong to the parent scope -->
+    {#if !mounted} <div class="anchor-backstop" data-routify-anchor-backstop /> {/if}
 {/if}

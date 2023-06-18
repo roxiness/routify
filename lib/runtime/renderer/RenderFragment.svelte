@@ -33,6 +33,10 @@
         if (anchor) anchor = updateRenderContext(anchor, { anchor: context })
     }
 
+    const childMounted = () => {
+        context.mounted.resolve(context)
+    }
+
     $: if (isAnonFn(NodeComponent) && $isVisible)
         context.node.loadModule().then(r => (NodeComponent = r.default))
 
@@ -45,10 +49,10 @@
 
 {#if $isVisible && !isAnonFn(NodeComponent)}
     <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
-    <AnchorDecorator location={context.anchorLocation} onMount={initialize} {context}>
-        <!-- DECORATOR COMPONENT
+    <!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
-        <DecoratorWrapper {context}>
+    <DecoratorWrapper {context}>
+        <AnchorDecorator location={context.anchorLocation} onMount={initialize} {context}>
             <!-- PAGE COMPONENT -->
             <svelte:component
                 this={NodeComponent}
@@ -74,6 +78,11 @@
                         }}
                         {context} />
                 {/if}</svelte:component>
-        </DecoratorWrapper>
-    </AnchorDecorator>
+            <div use:childMounted />
+        </AnchorDecorator>
+    </DecoratorWrapper>
 {/if}
+
+<!-- TODO if decorator is inside anchor, scrollIntoView doesn't work -->
+<!-- TODO if anchor is inside decorator, scrollToTop doesn't work -->
+<!-- TODO this is a matter of parent anchor vs firstChildAnchor. firstChild wants a nested decoratorWrapper to latch onto. `parent` wants a parentDecorator. -->

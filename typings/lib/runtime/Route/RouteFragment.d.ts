@@ -15,8 +15,8 @@ export class RouteFragment {
     urlFragment: string;
     set params(arg: {});
     get params(): {};
-    /** @type {import('svelte/store').Writable<RenderContext>} */
-    renderContext: import('svelte/store').Writable<RenderContext>;
+    /** @type {DeferredPromise<RenderContext>} */
+    renderContext: DeferredPromise<RenderContext>;
     /**
      * @type {Object.<string, string|string[]>}
      **/

@@ -204,6 +204,11 @@ type RenderContext = {
     decorators: Decorator[];
     onDestroy?: import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>;
     scrollBoundary: scrollBoundary;
+    mounted: DeferredPromise<void>;
+    /**
+     * *
+     */
+    inline: Inline;
 };
 type DecoratorInput = (Partial<Decorator> & {
     component: SvelteComponentDev;
@@ -406,6 +411,14 @@ type BrowserAdapter = {
 type SvelteComponentTyped = import('svelte').SvelteComponentTyped;
 type InlineInput = Partial<Inline> | boolean;
 type Inline = {
+    /**
+     * return true to inline the child node
+     */
     callback: (node: RNodeRuntime, context: RenderContext) => boolean;
     context: 'browser' | 'ssr' | 'always';
+    scrollIntoView: (elem: HTMLElement) => void;
+};
+type DeferredPromise<T> = Promise<T> & {
+    resolve: (T: any) => void;
+    reject: (T: any) => void;
 };
