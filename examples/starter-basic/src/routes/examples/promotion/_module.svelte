@@ -1,0 +1,49 @@
+<script>
+    import { url } from '@roxi/routify'
+    import Nav from '@/components/Nav.svelte'
+    import LandingPageSection from './__components/LandingPageSection.svelte'
+    import './__assets/theme.css'
+    export let context
+    // import './__assets/vars.css'
+</script>
+
+<div class="app">
+    <header>
+        <nav>
+            <a href={$url(context.node.path)} class="brand">
+                <h4>Promotion</h4>
+            </a>
+            <div class="spacer" />
+            <Nav />
+        </nav>
+    </header>
+    <main>
+        <!-- anchor options: 'wrapper' | 'header' | 'parent' | 'firstChild' -->
+        <!-- TODO firstChild does not work for the showcases module -->
+        <slot decorator={{ component: LandingPageSection, recursive: false }} />
+    </main>
+</div>
+
+<!-- routify:meta resets -->
+
+<!-- routify:meta description="A landing page showing inline pages." -->
+<style>
+    /* make header float */
+    header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+    /* offset content */
+    main {
+        margin-top: 128px;
+        /* border: 96px solid green; */
+    }
+    :global(.example.node-promotion .frame) {
+        scroll-behavior: smooth;
+        /* border-radius: 120px; */
+        /* background: hsl(var(--b1)); */
+    }
+</style>

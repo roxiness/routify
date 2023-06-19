@@ -10,7 +10,8 @@
 
 <style>
     div {
-        min-height: 100vh;
-        scroll-margin-top: 92px;
+        min-height: 80vh;
+        padding-top: 96px;
+        /* scroll-margin-top: 96px; */
     }
 </style>

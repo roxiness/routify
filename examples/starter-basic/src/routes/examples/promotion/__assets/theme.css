@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+@import url('https://fonts.cdnfonts.com/css/pt-root-ui');
+
+@import 'https://unpkg.com/open-props';
+@import 'https://unpkg.com/open-props/normalize.min.css';
+@import 'https://unpkg.com/open-props/buttons.min.css';
+@import './vars.css';
+
+.example.node-promotion .frame {
+    /* overflow-x: hidden; */
+    margin-right: calc(-1 * (100vw - 100%));
+    /* 363a3f */
+    background: var(--surface-1);
+    
+    & p {
+        /* max-inline-size: var(--size-content-1); */
+        font-size: var(--font-size-4);
+        line-height: var(--font-lineheight-3);
+    }
+
+    & .surface-1 {
+        background-color: var(--surface-1);
+        color: var(--text-2);
+    }
+
+    & .surface-2 {
+        background-color: var(--surface-2);
+        color: var(--text-2);
+    }
+
+    & .surface-3 {
+        background-color: var(--surface-3);
+        color: var(--text-1);
+    }
+
+    & .surface-4 {
+        background-color: var(--surface-4);
+        color: var(--text-1);
+    }
+
+    & .text-1 {
+        color: var(--text-1);
+        @nest p& {
+            font-weight: var(--font-weight-2);
+        }
+    }
+
+    & .text-2 {
+        color: var(--text-2);
+    }
+
+    & .swatch {
+        display: inline-block;
+        flex-shrink: 0;
+        inline-size: var(--size-8);
+        block-size: var(--size-8);
+        border-radius: var(--radius-round);
+
+        &.text-1 {
+            background-color: var(--text-1);
+        }
+        &.text-2 {
+            background-color: var(--text-2);
+        }
+    }
+
+    & .rad-shadow {
+        border: 1px solid hsl(var(--brand-hue) 10% 50% / 15%);
+        box-shadow: 0 1rem 0.5rem -0.5rem;
+        box-shadow: 0 2.8px 2.2px
+                hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 3%)),
+            0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 1%)),
+            0 12.5px 10px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 2%)),
+            0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 2%)),
+            0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 3%)),
+            0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+    }
+
+    & main {
+        max-width: 1024px;
+        margin: auto;
+    }
+
+
+
+    & .app > header {
+        background: var(--surface-2);
+        
+
+        border: 1px solid hsl(var(--brand-hue) 10% 50% / 15%);
+        box-shadow: 0 1rem 0.5rem -0.5rem;
+        box-shadow: 0 2.8px 2.2px
+                hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 3%)),
+            0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 1%)),
+            0 12.5px 10px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 2%)),
+            0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 2%)),
+            0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 3%)),
+            0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+
+        & nav {
+            max-width: 1024px;
+            margin: auto;
+            display: flex;
+            padding: var(--size-2) 0 var(--size-3);
+
+            & .brand > * {
+                font-size: var(--font-size-6);
+                text-decoration: none;
+                color: var(--brand);
+            }
+            & .spacer {
+                flex-grow: 1;
+            }
+            & ul {
+                align-self: flex-end;
+                display: flex;
+                gap: var(--size-5);
+            }
+            & li {
+                padding-bottom: var(--size-1);
+                list-style: none;
+                & a {
+                    color: var(--text-2);
+                    text-decoration: none;
+                    font-size: var(--font-size-4);
+                    font-family: 'PT Root UI', 'Roboto', 'Courier New', Courier, monospace;
+                    border-bottom: solid 3px transparent;
+                    .isActive & {
+                        border-color: var(--surface-4);
+                    }
+                }
+            }
+        }
+    }
+}
