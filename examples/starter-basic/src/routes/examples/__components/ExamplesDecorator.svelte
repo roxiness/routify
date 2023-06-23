@@ -1,10 +1,8 @@
 <script>
     import { url } from '@roxi/routify'
     export let context
-    console.log('context', context)
     $: ({ isActive, route, node } = context)
     $: path = route?.leaf.node.path || node.path
-    $: console.log('context', context, context.node.path)
 </script>
 
 <div class="example node-{context.node.name}" class:active={$isActive}>
