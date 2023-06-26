@@ -1,4 +1,3 @@
-export function persistentScopedScrollIntoView(_elem: HTMLElement | ((elem: HTMLElement) => HTMLElement), _boundary?: HTMLElement | ((elem: HTMLElement) => HTMLElement), options?: ScrollIntoViewOptions, timeout?: number): Promise<any> | (() => void);
 export function observeDocument(callback: any, runOnInit: any, timeout: any): MutationObserver;
 export function scrollIntoView(elem: HTMLElement, callback: any, instant: boolean): Promise<void>;
 export function scrollToTop(elem: HTMLElement, boundary: HTMLElement): void;

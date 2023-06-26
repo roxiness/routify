@@ -21,16 +21,19 @@ export const goto: Readable<Goto>;
  * @prop {boolean} strict Require internal paths. Eg. `/blog/[slug]` instead of `/blog/hello-world`
  * @prop {boolean} includeIndex suffix path with `/index`
  * @prop {boolean} silent suppress errors
- *
- * @callback Url
- * @param {string} inputPath
- * @param {Object.<string, string>=} userParams
- * @param {Partial<$UrlOptions>=} options
- * @returns {string}
- *
- * @type {Readable<Url>}
- **/
-export const url: Readable<Url>;
+ */
+/**
+ * @typedef {Readable<(<T extends string | HTMLAnchorElement>(
+ *   inputPath: T, userParams?: { [x: string]: string; },
+ *   options?: Partial<$UrlOptions>)
+ * => T extends string ? string : void)>} Url
+ */
+/**
+ * @type {Url}
+ */
+export const url: import("svelte/store").Readable<(<T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
+    [x: string]: string;
+}, options?: Partial<$UrlOptions>) => T extends string ? string : void)>;
 /**
  * @type {Readable<Object.<string, any>>}
  */
@@ -93,9 +96,9 @@ export type $UrlOptions = {
      */
     silent: boolean;
 };
-export type Url = (inputPath: string, userParams?: {
+export type Url = import("svelte/store").Readable<(<T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
     [x: string]: string;
-} | undefined, options?: Partial<$UrlOptions> | undefined) => string;
+}, options?: Partial<$UrlOptions>) => T extends string ? string : void)>;
 export type IsActive = (path?: string | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
