@@ -55,6 +55,7 @@
         transform-origin: top left;
         overflow: auto;
     }
+
     p {
         font-size: 1.5vw;
     }

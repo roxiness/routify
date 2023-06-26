@@ -1,15 +1,13 @@
-@import "https://unpkg.com/open-props";
-@import 'https://unpkg.com/open-props/buttons.min.css';
 @import "https://unpkg.com/open-props/gray-hsl.min.css";
 @import "https://unpkg.com/open-props/purple-hsl.min.css";
 @import "https://unpkg.com/open-props/choco-hsl.min.css";
 
-@use postcss-preset-env {
+/* @use postcss-preset-env {
   stage: 0;
   features: {
     "logical-properties-and-values": false
   }
-} 
+}  */
 
 html {
   /* light */
