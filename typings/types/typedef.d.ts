@@ -258,6 +258,7 @@ type RoutifyExternalMetaHelper = {
 type RoutifyLoad = (context: RoutifyLoadContext) => MaybePromise<Partial<RoutifyLoadReturn> | null>;
 type RoutifyLoadContext = {
     route: Route;
+    url: import('../lib/runtime').Url;
     prevRoute?: Route | undefined;
     isNew: boolean;
     fetch: any;

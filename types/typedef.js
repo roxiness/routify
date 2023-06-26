@@ -172,6 +172,7 @@
  *
  * @typedef {object} RoutifyLoadContext
  * @prop {Route} route
+ * @prop {import('../lib/runtime').Url} url
  * @prop {Route=} prevRoute
  * @prop {Boolean} isNew
  * @prop {UniversalFetch} fetch

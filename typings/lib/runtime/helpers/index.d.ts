@@ -23,17 +23,17 @@ export const goto: Readable<Goto>;
  * @prop {boolean} silent suppress errors
  */
 /**
- * @typedef {Readable<(<T extends string | HTMLAnchorElement>(
- *   inputPath: T, userParams?: { [x: string]: string; },
- *   options?: Partial<$UrlOptions>)
- * => T extends string ? string : void)>} Url
+ * @typedef {(<T extends string | HTMLAnchorElement>(
+ *   inputPath: T,
+ *   userParams?: { [x: string]: string; },
+ *   options?: Partial<$UrlOptions>
+ * ) => T extends HTMLAnchorElement ? void : string)} Url
  */
 /**
- * @type {Url}
+ * @type {Readable<Url>}
  */
-export const url: import("svelte/store").Readable<(<T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
-    [x: string]: string;
-}, options?: Partial<$UrlOptions>) => T extends string ? string : void)>;
+export const url: Readable<Url>;
+export function createUrl(router: Router, originNode: RNodeRuntime, activeRoute: Route): Url;
 /**
  * @type {Readable<Object.<string, any>>}
  */
@@ -96,9 +96,9 @@ export type $UrlOptions = {
      */
     silent: boolean;
 };
-export type Url = import("svelte/store").Readable<(<T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
+export type Url = <T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
     [x: string]: string;
-}, options?: Partial<$UrlOptions>) => T extends string ? string : void)>;
+}, options?: Partial<$UrlOptions>) => T extends HTMLAnchorElement ? void : string;
 export type IsActive = (path?: string | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
