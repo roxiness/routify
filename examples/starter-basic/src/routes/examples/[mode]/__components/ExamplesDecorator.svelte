@@ -16,6 +16,8 @@
         <p>
             {context.node.meta.description}
         </p>
+        <!-- <a href={$url('$leaf', { mode: 'fullscreen' })}>fullscreen</a> -->
+        <a use:$url={{ mode: 'fullscreen' }} href="$leaf">fullscreen</a>
     </div>
     <a href={$url(path)} class="overlay-link">
         <div class="overlay" />

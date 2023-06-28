@@ -1,37 +1,40 @@
-<script>
+<script context="module">
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
+
+    export const load = ctx => {
+        console.log('ctx', ctx)
+        console.log('route', ctx.route.params)
+    }
 </script>
 
-<!-- <script>
-    // hello
-</script> -->
+<script>
+    import { params } from '@roxi/routify'
+
+    console.log('params', $params)
+</script>
 
 <!-- routify:meta reset -->
 
 <!-- add content to the header with svelte -->
 
-<svelte:head>
-    <!-- <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://cdn.jsdelivr.net/npm/daisyui@3.0.5/dist/full.css"
-        rel="stylesheet"
-        type="text/css" /> -->
-</svelte:head>
-
-<div class="wrapper">
-    <div class="grid">
-        <slot
-            inline={{
-                scrollIntoView: (elem, instant) =>
-                    elem.scrollIntoView({
-                        inline: 'center',
-                        behavior: instant ? 'auto' : 'smooth',
-                    }),
-            }}
-            decorator={{ component: ExamplesDecorator, recursive: false }} />
-        <a href="/" class="back">Back</a>
+{#if $params.mode === 'fullscreen'}
+    <slot />
+{:else}
+    <div class="wrapper">
+        <div class="grid">
+            <slot
+                inline={{
+                    scrollIntoView: (elem, instant) =>
+                        elem.scrollIntoView({
+                            inline: 'center',
+                            behavior: instant ? 'auto' : 'smooth',
+                        }),
+                }}
+                decorator={{ component: ExamplesDecorator, recursive: false }} />
+            <a href="/" class="back">Back</a>
+        </div>
     </div>
-</div>
+{/if}
 
 <style>
     .back {

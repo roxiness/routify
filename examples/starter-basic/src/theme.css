@@ -118,10 +118,10 @@ body {
     overflow-x: hidden;
     margin-right: calc(-1 * (100vw - 100%));
 }
-body > * > main {
+.example > main {
     margin-top: var(--size-9);
 }
-body > * > header {
+.example > header {
     background: var(--surface-2);
     position: relative;
 
