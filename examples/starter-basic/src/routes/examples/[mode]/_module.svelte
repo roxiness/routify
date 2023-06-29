@@ -1,16 +1,6 @@
 <script context="module">
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
-
-    export const load = ctx => {
-        console.log('ctx', ctx)
-        console.log('route', ctx.route.params)
-    }
-</script>
-
-<script>
-    import { params } from '@roxi/routify'
-
-    console.log('params', $params)
+    import './__assets/theme.css'
 </script>
 
 <!-- routify:meta reset -->

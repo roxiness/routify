@@ -1,6 +1,6 @@
-@import "https://unpkg.com/open-props/gray-hsl.min.css";
-@import "https://unpkg.com/open-props/purple-hsl.min.css";
-@import "https://unpkg.com/open-props/choco-hsl.min.css";
+/* @import "https://unpkg.com/open-props/gray-hsl.min.css"; */
+/* @import "https://unpkg.com/open-props/purple-hsl.min.css"; */
+/* @import "https://unpkg.com/open-props/choco-hsl.min.css"; */
 
 /* @use postcss-preset-env {
   stage: 0;
@@ -9,7 +9,7 @@
   }
 }  */
 
-html {
+.routify {
   /* light */
   --brand-light: var(--orange-6);
   --text-1-light: var(--gray-8);
@@ -66,7 +66,7 @@ html {
   --shadow-strength-choco: 50%;
 }
 
-:root {
+.routify {
   color-scheme: light;
 
   /* set defaults */
@@ -82,7 +82,7 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  .routify {
     color-scheme: dark;
 
     --brand: var(--brand-dim);

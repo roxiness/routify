@@ -1,14 +1,27 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
 
-@import 'https://unpkg.com/open-props';
-@import 'https://unpkg.com/open-props/normalize.min.css';
+/* @import 'https://unpkg.com/open-props'; */
+/* @import 'https://unpkg.com/open-props/normalize.min.css'; */
 /* @import 'https://unpkg.com/open-props/buttons.min.css'; */
 @import './colors.css';
+@import './open-props/routify.index.css';
+@import './open-props/extra/normalize.css';
 
-.example .frame {
+.routify .example .frame {
     margin-right: calc(-1 * (100vw - 100%));
     background: var(--surface-1);
+}
 
+.routify {
+    position: fixed;
+    inset: 0;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+.routify {
     & p {
         /* max-inline-size: var(--size-content-1); */
         font-size: var(--font-size-4);

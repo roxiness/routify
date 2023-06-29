@@ -1,0 +1,25 @@
+:where(.routify) {
+  /* --brand: your-brand-color-here; */
+  
+  scrollbar-color: var(--scrollthumb-color) transparent;
+  accent-color: var(--brand, var(--link));
+  caret-color: var(--brand, var(--link));
+  color: var(--text-2);
+  background-color: var(--surface-1);
+}
+
+.routify :where(h1, h2, h3, h4, h5, h6, dt) { 
+  color: var(--text-1);
+}
+
+.routify :where(a[href]) {
+  color: var(--brand, var(--link));
+  
+  &:visited {
+    color: var(--link-visited);
+  }
+}
+
+.routify  :focus-visible { 
+  outline-color: var(--brand, var(--link)); 
+}
