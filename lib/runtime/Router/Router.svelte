@@ -119,10 +119,11 @@
     const handleClick = event => {
         if (shouldIgnoreClick(event)) return
 
-        const eventUrl = getUrlFromEvent(event)
+        const { url: eventUrl, state } = getUrlFromEvent(event)
+
         const url = router.clickHandler.callback?.(event, eventUrl) ?? eventUrl
 
-        if (typeof url === 'string') router.url.push(url)
+        if (typeof url === 'string') router.url.push(url, state)
     }
 
     if (typeof window !== 'undefined') _onDestroy(() => router.destroy())

@@ -10,7 +10,7 @@
     let wasActive = false
 
     $: ({ route, isActive } = context)
-    $: if (route && !route?.state.dontScroll) {
+    $: if (route && !route.state.dontScroll) {
         if (route.hash) {
             if (route.leaf === context.fragment) {
                 scrollToContext(context)

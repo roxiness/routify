@@ -2,7 +2,7 @@ export function observeDocument(callback: any, runOnInit: any, timeout: any): Mu
 export function scrollIntoView(elem: HTMLElement, callback: any, instant: boolean): Promise<void>;
 export function scrollToTop(elem: HTMLElement, boundary: HTMLElement): void;
 export class ScrollIntoViewQueue {
-    currentId: any;
+    currentRoute: any;
     /** @type {{elem: HTMLElement, callback: function, instant: boolean}[]} */
     queue: {
         elem: HTMLElement;
@@ -15,9 +15,9 @@ export class ScrollIntoViewQueue {
      * @param {HTMLElement} elem - The element to be added to the queue.
      * @param {function} callback - The callback function to execute.
      * @param {boolean} instant - Flag to indicate if the function should be executed immediately.
-     * @param {any} id - The identifier of the element being added.
+     * @param {Route} route - The identifier of the element being added.
      */
-    push(elem: HTMLElement, callback: Function, instant: boolean, id: any): void;
+    push(elem: HTMLElement, callback: Function, instant: boolean, route: Route): void;
     /**
      * Processes the queue of elements and callbacks to execute them sequentially.
      * @return {Promise<void>} A promise that resolves when the entire queue has been processed.

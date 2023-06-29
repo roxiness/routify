@@ -1,11 +1,12 @@
 export * from "./scroll.js";
+export * from "./preload.js";
 export function getMRCA(node1: RNodeRuntime, node2: RNodeRuntime): import("../Instance/RNodeRuntime.js").RNodeRuntime;
 export function getPath(node1: any, node2: any): string;
 /**
  * @callback Goto
  * @param {string} path relative, absolute or named URL
  * @param {Object.<string, string>=} userParams
- * @param {Partial<$UrlOptions & {mode: 'push' | 'replace'}>=} options
+ * @param {Partial<$UrlOptions & RouteState>=} options
  * @type {Readable<Goto>} */
 export const goto: Readable<Goto>;
 /**
@@ -21,6 +22,14 @@ export const goto: Readable<Goto>;
  * @prop {boolean} strict Require internal paths. Eg. `/blog/[slug]` instead of `/blog/hello-world`
  * @prop {boolean} includeIndex suffix path with `/index`
  * @prop {boolean} silent suppress errors
+ * @prop {'push'|'replace'} mode push to or replace in navigation history
+ */
+/**
+ * @typedef {Partial<{
+ *  dontscroll: boolean,
+ *  dontsmoothscroll: boolean,
+ * [key:string]: *
+ * }>} RouteState
  */
 /**
  * @typedef {(<T extends string | HTMLAnchorElement>(
@@ -30,10 +39,21 @@ export const goto: Readable<Goto>;
  * ) => T extends HTMLAnchorElement ? void : string)} Url
  */
 /**
+ * @typedef {((
+ *   inputPath: string,
+ *   userParams?: { [x: string]: string; },
+ *   options?: Partial<$UrlOptions>
+ * ) => string)} UrlFromString
+ */
+/**
+ * @type {Readable<Url>}
+ */
+export const _url: Readable<Url>;
+/**
  * @type {Readable<Url>}
  */
 export const url: Readable<Url>;
-export function createUrl(router: Router, originNode: RNodeRuntime, activeRoute: Route): Url;
+export function createUrl(router: Router, originNode: RNodeRuntime, activeRoute: Route): UrlFromString;
 /**
  * @type {Readable<Object.<string, any>>}
  */
@@ -72,9 +92,7 @@ export const afterUrlChange: Readable<(arg0: AfterUrlChangeCallback) => any>;
 export const beforeUrlChange: Readable<(arg0: BeforeUrlChangeCallback) => any>;
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
-} | undefined, options?: Partial<$UrlOptions & {
-    mode: 'push' | 'replace';
-}> | undefined) => any;
+} | undefined, options?: Partial<$UrlOptions & RouteState> | undefined) => any;
 export type Readable<T> = import('svelte/store').Readable<T>;
 export type IsActiveOptions = {
     /**
@@ -95,10 +113,22 @@ export type $UrlOptions = {
      * suppress errors
      */
     silent: boolean;
+    /**
+     * push to or replace in navigation history
+     */
+    mode: 'push' | 'replace';
+};
+export type RouteState = {
+    [x: string]: any;
+    dontscroll?: boolean;
+    dontsmoothscroll?: boolean;
 };
 export type Url = <T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
     [x: string]: string;
 }, options?: Partial<$UrlOptions>) => T extends HTMLAnchorElement ? void : string;
+export type UrlFromString = (inputPath: string, userParams?: {
+    [x: string]: string;
+}, options?: Partial<$UrlOptions>) => string;
 export type IsActive = (path?: string | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
