@@ -2,7 +2,6 @@
     import { url, context } from '@roxi/routify'
     import Nav from '@/components/Nav.svelte'
     import LandingPageSection from './__components/LandingPageSection.svelte'
-    import './__assets/theme.css'
 </script>
 
 <div class="app">

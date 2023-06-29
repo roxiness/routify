@@ -1,4 +1,5 @@
-<script context="module">
+<script>
+    import { params, url } from '@roxi/routify'
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
     import './__assets/theme.css'
 </script>
@@ -7,24 +8,33 @@
 
 <!-- add content to the header with svelte -->
 
-{#if $params.mode === 'fullscreen'}
-    <slot />
-{:else}
-    <div class="wrapper">
-        <div class="grid">
-            <slot
-                inline={{
-                    scrollIntoView: (elem, instant) =>
-                        elem.scrollIntoView({
-                            inline: 'center',
-                            behavior: instant ? 'auto' : 'smooth',
-                        }),
-                }}
-                decorator={{ component: ExamplesDecorator, recursive: false }} />
-            <a href="/" class="back">Back</a>
+<div class="routify">
+    {#if $params.mode === 'fullscreen'}
+        <div class="frame">
+            <slot />
         </div>
-    </div>
-{/if}
+        <div class="go-back">
+            <a
+                data-routify-route-state-dontSmoothScroll="true"
+                href={$url('$leaf', { mode: 'list' })}>Back</a>
+        </div>
+    {:else}
+        <div class="wrapper">
+            <div class="grid">
+                <slot
+                    inline={{
+                        scrollIntoView: (elem, instant) =>
+                            elem.scrollIntoView({
+                                inline: 'center',
+                                behavior: instant ? 'auto' : 'smooth',
+                            }),
+                    }}
+                    decorator={{ component: ExamplesDecorator, recursive: false }} />
+                <a href="/" class="back">Back</a>
+            </div>
+        </div>
+    {/if}
+</div>
 
 <style>
     .back {
@@ -44,10 +54,8 @@
         --frame-inner-height: calc(var(--frame-height) * var(--ratio));
         overflow-x: auto;
         overflow-y: hidden;
-        height: 100vh;
-        width: 100vw;
+        inset: 0;
         position: fixed;
-        top: 0;
         display: flex;
     }
     .grid {
@@ -58,12 +66,16 @@
         gap: 4rem;
         margin: 0 calc(50% - (var(--frame-width) / 2));
     }
-    :global(html) {
+    .wrapper {
         background: rgb(239, 195, 236);
         background: radial-gradient(
             circle,
             rgba(239, 195, 236, 1) 0%,
             rgba(205, 135, 196, 1) 100%
         );
+    }
+    .go-back {
+        position: fixed;
+        inset: auto auto 0 0;
     }
 </style>

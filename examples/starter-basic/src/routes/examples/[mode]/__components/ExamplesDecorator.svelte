@@ -1,6 +1,9 @@
 <script>
     import { url } from '@roxi/routify'
+    import Icons from './icons.svelte'
+
     export let context
+
     $: ({ isActive, route, node } = context)
     $: path = route?.leaf.node.path || node.path
 </script>
@@ -10,14 +13,23 @@
         <div class="frame">
             <slot />
         </div>
+        <div class="utils">
+            <a use:$url={{ mode: 'preview' }} href="$leaf">
+                <Icons icon="aspect-ratio" />
+            </a>
+            <a
+                use:$url={{ mode: 'fullscreen' }}
+                href="$leaf"
+                data-routify-route-state-dontSmoothScroll="true">
+                <Icons icon="fullscreen" />
+            </a>
+        </div>
     </div>
     <div class="body">
         <h1>{context.node.name}</h1>
         <p>
             {context.node.meta.description}
         </p>
-        <!-- <a href={$url('$leaf', { mode: 'fullscreen' })}>fullscreen</a> -->
-        <a use:$url={{ mode: 'fullscreen' }} href="$leaf">fullscreen</a>
     </div>
     <a href={$url(path)} class="overlay-link">
         <div class="overlay" />
@@ -49,6 +61,7 @@
         height: var(--frame-height);
         border-radius: 16px;
         background: white;
+        position: relative;
     }
     .frame {
         width: var(--frame-inner-width);
@@ -56,6 +69,30 @@
         transform: scale(calc(1 / var(--ratio)));
         transform-origin: top left;
         overflow: auto;
+    }
+
+    .utils {
+        position: absolute;
+        inset: auto 0 0 auto;
+        display: flex;
+        gap: 16px;
+        margin-right: 32px;
+        margin-bottom: 16px;
+        opacity: 0;
+        transition: opacity 0.2s;
+        & a {
+            color: white;
+        }
+    }
+    .active.example:hover .utils {
+        opacity: 1;
+    }
+    .utils a {
+        width: 40px;
+        opacity: 0.5;
+        &:hover {
+            opacity: 1;
+        }
     }
 
     p {

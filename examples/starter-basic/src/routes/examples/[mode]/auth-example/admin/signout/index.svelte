@@ -1,8 +1,8 @@
 <script context="module">
     import { auth } from '../../__store'
 
-    export const load = () => {
+    export const load = ctx => {
         auth.signout()
-        return { redirect: '/examples/auth-example/admin' }
+        return { redirect: ctx.url('..') }
     }
 </script>
