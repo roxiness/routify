@@ -1,5 +1,6 @@
 <script>
     import { params, url } from '@roxi/routify'
+    import Icons from './__components/icons.svelte'
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
     import './__assets/theme.css'
 </script>
@@ -13,11 +14,12 @@
         <div class="frame">
             <slot />
         </div>
-        <div class="go-back">
-            <a
-                data-routify-route-state-dontSmoothScroll="true"
-                href={$url('$leaf', { mode: 'list' })}>Back</a>
-        </div>
+
+        <a
+            class="exit-fullscreen"
+            data-routify-route-state-dontSmoothScroll="true"
+            href={$url('$leaf', { mode: 'list' })}>
+            <Icons icon="fullscreen-exit" /></a>
     {:else}
         <div class="wrapper">
             <div class="grid">
@@ -47,11 +49,26 @@
         color: #000;
     }
     .wrapper {
-        --frame-width: 540px;
-        --frame-height: 320px;
+        --card-height-raw: 600;
+        --frame-width-raw: 540;
+        --frame-height-raw: 320;
+
+        --card-grow: calc(var(--card-height-raw) / var(--frame-height-raw));
+
+        --card-height: calc(var(--card-height-raw) * 1px);
+        --frame-width: calc(var(--frame-width-raw) * 1px);
+        --frame-height: calc(var(--frame-height-raw) * 1px);
+
+        --wide-card-width-raw: calc(var(--card-grow) * var(--frame-width-raw));
+        --wide-card-width: calc(var(--wide-card-width-raw) * 1px);
+
         --ratio: 2.3;
         --frame-inner-width: calc(var(--frame-width) * var(--ratio));
         --frame-inner-height: calc(var(--frame-height) * var(--ratio));
+
+        --scale: calc(1 / var(--ratio));
+        --scale-wide: calc(1 / var(--ratio) * var(--card-grow));
+
         overflow-x: auto;
         overflow-y: hidden;
         inset: 0;
@@ -66,6 +83,10 @@
         gap: 4rem;
         margin: 0 calc(50% - (var(--frame-width) / 2));
     }
+    .grid:has(.wide) {
+        transition: all 0.3s ease-in-out;
+        margin: 0 calc(50% - (var(--wide-card-width) / 2));
+    }
     .wrapper {
         background: rgb(239, 195, 236);
         background: radial-gradient(
@@ -74,8 +95,15 @@
             rgba(205, 135, 196, 1) 100%
         );
     }
-    .go-back {
+    .exit-fullscreen {
         position: fixed;
-        inset: auto auto 0 0;
+        inset: auto 32px 16px auto;
+
+        color: white;
+        width: 64px;
+        opacity: 0.5;
+        &:hover {
+            opacity: 1;
+        }
     }
 </style>
