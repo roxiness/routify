@@ -82,9 +82,9 @@
         height: 100%;
         gap: 4rem;
         margin: 0 calc(50% - (var(--frame-width) / 2));
+        transition: all 0.3s ease-in-out;
     }
     .grid:has(.wide) {
-        transition: all 0.3s ease-in-out;
         margin: 0 calc(50% - (var(--wide-card-width) / 2));
     }
     .wrapper {
