@@ -13,10 +13,11 @@
     setContext('routify-fragment-context', context)
     /** @param {HTMLElement} elem */
     const updateRenderContext = (elem, newMeta) => {
-        elem['__routify_meta'] = {
-            ...elem['__routify_meta'],
-            renderContext: { ...elem['__routify_meta']?.renderContext, ...newMeta },
-        }
+        if (elem)
+            elem['__routify_meta'] = {
+                ...(elem && elem['__routify_meta']),
+                renderContext: { ...elem['__routify_meta']?.renderContext, ...newMeta },
+            }
         return elem
     }
 
