@@ -134,7 +134,7 @@
      */
     const handlePageChange = fragments => {
         context.lastActiveChild = activeContext
-        const [fragment, ...childFragments] = [...fragments]
+        const [fragment, ...childFragments] = fragments
         activeContext = childContexts.find(s => s.node === fragment?.node)
         if (!activeContext) {
             // if we're rendering a node that didn't exist at this level before, we need to rebuild the child contexts
@@ -142,6 +142,10 @@
             childContexts = buildChildContexts()
             return handlePageChange(fragments)
         }
+
+        // if we're traversing down the tree, we need to set all old child fragments to inactive
+        const setInactive = cf => cf.renderContext.then(rc => rc.isActive.set(false))
+        if (!childFragments.length) get(activeContext.childFragments).forEach(setInactive)
 
         activeContext.fragment = fragment
         activeContext.childFragments.set(childFragments)
