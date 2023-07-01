@@ -32,14 +32,17 @@
                             }),
                     }}
                     decorator={{ component: ExamplesDecorator, recursive: false }} />
-                <a href="/" class="back">Back</a>
+                <div class="links">
+                    <a href="/" class="back">Back</a>
+                    <a href="." use:$url class="back">overview</a>
+                </div>
             </div>
         </div>
     {/if}
 </div>
 
 <style>
-    .back {
+    .links {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -52,6 +55,7 @@
         --card-height-raw: 600;
         --frame-width-raw: 540;
         --frame-height-raw: 320;
+        --ratio: 1.8;
 
         --card-grow: calc(var(--card-height-raw) / var(--frame-height-raw));
 
@@ -62,7 +66,6 @@
         --wide-card-width-raw: calc(var(--card-grow) * var(--frame-width-raw));
         --wide-card-width: calc(var(--wide-card-width-raw) * 1px);
 
-        --ratio: 2.3;
         --frame-inner-width: calc(var(--frame-width) * var(--ratio));
         --frame-inner-height: calc(var(--frame-height) * var(--ratio));
 
@@ -74,6 +77,10 @@
         inset: 0;
         position: fixed;
         display: flex;
+    }
+    .grid:not(:has(.active)) {
+        /* background: red; */
+        transform: scale(0.2);
     }
     .grid {
         display: grid;

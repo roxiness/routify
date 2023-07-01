@@ -8,7 +8,7 @@
     <header>
         <nav>
             <a href={$url(context.node.path)} class="brand">
-                <h4>Auth Example</h4>
+                <h4>Home</h4>
             </a>
             <div class="spacer" />
             <Nav />

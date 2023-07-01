@@ -34,8 +34,8 @@
 
 <style>
     .card {
-        box-shadow: var(--shadow-3);
-        background: var(--bg);
+        box-shadow: var(--shadow-6);
+        background: var(--surface-1);
         padding: 2rem 4rem 3rem;
         border-radius: var(--radius-2);
     }
@@ -43,6 +43,7 @@
         display: grid;
         place-items: center;
         height: 100%;
+        font-size: x-large;
     }
     header,
     button {

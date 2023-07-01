@@ -1,5 +1,8 @@
 <script context="module">
-    /** @param {RoutifyLoadContext} ctx */
+
+    /**
+     *  The "load" hook in Routify runs before a component loads and can return data via a "props" object.
+     *  @param {RoutifyLoadContext} ctx */
     export const load = async ({ fetch }) => {
         return {
             props: {

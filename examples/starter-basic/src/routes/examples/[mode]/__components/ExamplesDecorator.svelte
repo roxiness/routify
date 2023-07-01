@@ -35,7 +35,7 @@
     <div class="body">
         <h1>{context.node.name}</h1>
         <p>
-            {context.node.meta.description}
+            {@html context.node.meta.description}
         </p>
     </div>
     <a href={$url(path)} class="overlay-link">
@@ -96,6 +96,7 @@
         position: absolute;
         inset: auto 0 0 auto;
         display: flex;
+        align-items: center;
         gap: 16px;
         margin-right: 32px;
         margin-bottom: 16px;
