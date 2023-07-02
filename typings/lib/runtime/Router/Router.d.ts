@@ -58,7 +58,7 @@ export class Router implements Readable<Router> {
     options: Partial<import('./utils').RouterOptionsNormalized>;
     /** @type {RoutifyRuntime} */
     instance: RoutifyRuntime;
-    name: string;
+    name: any;
     log: any;
     passthrough: any;
     parentCmpCtx: any;

@@ -24,7 +24,15 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
         fileChanged: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
         fileWatcherReady: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
     };
-    writeFile(id: any, content: any): Promise<void>;
+    /**
+     *
+     * @param {string} id filename
+     * @param {string} content
+     * @param {{cwd?: string}} options
+     */
+    writeFile(id: string, content: string, options?: {
+        cwd?: string;
+    }): Promise<void>;
     start(): Promise<void>;
 }
 export type RoutifyOptions = {

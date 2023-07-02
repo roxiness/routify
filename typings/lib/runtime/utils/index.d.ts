@@ -2,6 +2,9 @@ export * from "./logger.js";
 export function isDescendantElem(parent: any): (elem: any) => boolean;
 export function shouldIgnoreClick(event: any): any;
 export function getUrlFromEvent(event: any): {
+    url?: undefined;
+    state?: undefined;
+} | {
     url: string;
     state: {};
 };
