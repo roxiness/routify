@@ -3,15 +3,16 @@
     import Icons from './__components/icons.svelte'
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
     import './__assets/theme.css'
+
+    const scrollIntoView = (elem, instant) =>
+        elem.scrollIntoView({ inline: 'center', behavior: instant ? 'auto' : 'smooth' })
 </script>
 
 <!-- routify:meta reset -->
 
-<!-- add content to the header with svelte -->
-
 <div class="routify">
     {#if $params.mode === 'fullscreen'}
-        <div class="frame">
+        <div class="frame fullscreen">
             <slot />
         </div>
 
@@ -24,34 +25,29 @@
         <div class="wrapper">
             <div class="grid">
                 <slot
-                    inline={{
-                        scrollIntoView: (elem, instant) =>
-                            elem.scrollIntoView({
-                                inline: 'center',
-                                behavior: instant ? 'auto' : 'smooth',
-                            }),
-                    }}
+                    inline={{ scrollIntoView }}
                     decorator={{ component: ExamplesDecorator, recursive: false }} />
-                <div class="links">
-                    <a href="/" class="back">Back</a>
-                    <a href="." use:$url class="back">overview</a>
-                </div>
             </div>
         </div>
     {/if}
 </div>
+<div class="links">
+    <a href="/" class="back">Back</a>
+    <a href="." use:$url class="back">overview</a>
+</div>
 
 <style>
     .links {
-        position: absolute;
-        bottom: 0;
-        left: 0;
+        position: fixed;
+        inset: auto auto 0 0;
         padding: 1rem;
         font-size: 1.5rem;
         text-decoration: none;
         color: #000;
     }
-    .wrapper {
+    .routify {
+        --nav-height: 80px;
+
         --card-height-raw: 600;
         --frame-width-raw: 540;
         --frame-height-raw: 320;
@@ -71,16 +67,20 @@
 
         --scale: calc(1 / var(--ratio));
         --scale-wide: calc(1 / var(--ratio) * var(--card-grow));
-
+    }
+    .wrapper {
         overflow-x: auto;
         overflow-y: hidden;
         inset: 0;
         position: fixed;
         display: flex;
-    }
-    .grid:not(:has(.active)) {
-        /* background: red; */
-        transform: scale(0.2);
+
+        background: rgb(239, 195, 236);
+        background: radial-gradient(
+            circle,
+            rgba(239, 195, 236, 1) 0%,
+            rgba(205, 135, 196, 1) 100%
+        );
     }
     .grid {
         display: grid;
@@ -93,14 +93,6 @@
     }
     .grid:has(.wide) {
         margin: 0 calc(50% - (var(--wide-card-width) / 2));
-    }
-    .wrapper {
-        background: rgb(239, 195, 236);
-        background: radial-gradient(
-            circle,
-            rgba(239, 195, 236, 1) 0%,
-            rgba(205, 135, 196, 1) 100%
-        );
     }
     .exit-fullscreen {
         position: fixed;

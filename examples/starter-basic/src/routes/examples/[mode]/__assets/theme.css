@@ -21,7 +21,6 @@
 
 .routify {
     & p {
-        /* max-inline-size: var(--size-content-1); */
         font-size: var(--font-size-4);
         line-height: var(--font-lineheight-3);
         margin-block: var(--size-3);
@@ -49,9 +48,11 @@
             0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
 
         & nav {
+            height: var(--nav-height);
             max-width: min(1024px, 90%);
             margin: auto;
             display: flex;
+            align-items: center;
             padding: var(--size-2) 0 var(--size-3);
 
             & .brand > * {

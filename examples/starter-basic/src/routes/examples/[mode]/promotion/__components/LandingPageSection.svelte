@@ -1,17 +1,19 @@
 <script>
     export let context
-    const hash = Math.random().toString(36).substring(2)
-    console.log('hash', hash)
 </script>
 
-<div class="wtf {context.node.id} {hash}">
+<div class="inline-decorator {context.node.id}">
     <slot />
 </div>
 
 <style>
-    div {
-        min-height: 80vh;
-        padding-top: 96px;
-        /* scroll-margin-top: 96px; */
+    .inline-decorator {
+        --offset: calc(var(--nav-height) + 16px);
+
+        padding-top: calc(var(--offset));
+        min-height: 100vh;
+    }
+    :global(.frame-wrapper) div {
+        min-height: var(--offset);
     }
 </style>
