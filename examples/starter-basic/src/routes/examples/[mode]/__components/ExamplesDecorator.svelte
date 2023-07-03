@@ -38,8 +38,8 @@
             {@html context.node.meta.description}
         </p>
     </div>
-    <a href={$url(path)} class="overlay-link">
-        <div class="overlay" />
+    <a href={$url(path)} class="fade-overlay-link">
+        <div class="fade-overlay" />
     </a>
 </div>
 
@@ -56,12 +56,12 @@
         position: relative;
         width: var(--frame-width);
         height: var(--card-height);
-        border-radius: 16px;
-        background: #f6bbe9;
-        box-shadow: 0px 28px 50px -9px rgba(0, 0, 0, 0.2);
+        background: var(--surface-2);
+        box-shadow: var(--shadow-2);
+        border-radius: var(--radius-3);
     }
     .example.active {
-        box-shadow: 0px 56px 100px -9px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--shadow-6);
         z-index: 100;
     }
 
@@ -69,7 +69,8 @@
         overflow: hidden;
         width: 100%;
         height: var(--frame-height);
-        border-radius: 16px;
+        border-top-right-radius: var(--radius-3);
+        border-top-left-radius: var(--radius-3);
         position: absolute;
     }
     .frame {
@@ -108,7 +109,7 @@
         opacity: 1;
     }
     .utils * {
-        color: white;
+        color: var(--text-2);
         width: 40px;
         opacity: 0.5;
         cursor: pointer;
@@ -126,29 +127,34 @@
         margin-bottom: 1vw;
     }
     .body {
-        position: relative;
+        position: absolute;
+        inset: 0;
+        background: var(--surface-3);
+
+        border-bottom-left-radius: var(--radius-3);
+        border-bottom-right-radius: var(--radius-3);
+
         top: var(--frame-height);
+        /* top: calc(var(--frame-height) - var(--radius-3)); */
+
         padding: 16px 48px;
         color: rgba(0, 0, 0, 0.8);
         cursor: default;
+        /* z-index: 20; */
     }
 
-    .overlay {
+    .fade-overlay {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
         opacity: 0.05;
         background-color: black;
         z-index: 20;
-
-        border-radius: 16px;
+        border-radius: var(--radius-3);
     }
-    .overlay:hover {
+    .fade-overlay:hover {
         opacity: 0;
     }
-    .active .overlay-link {
+    .active .fade-overlay-link {
         display: none;
     }
 </style>

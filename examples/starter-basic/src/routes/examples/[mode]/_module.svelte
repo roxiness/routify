@@ -3,14 +3,15 @@
     import Icons from './__components/icons.svelte'
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
     import './__assets/theme.css'
-
+    import ThemeSelector from './__components/ThemeSelector.svelte'
+    let theme = 'light'
     const scrollIntoView = (elem, instant) =>
         elem.scrollIntoView({ inline: 'center', behavior: instant ? 'auto' : 'smooth' })
 </script>
 
 <!-- routify:meta reset -->
 
-<div class="routify">
+<div class="routify" color-scheme={theme}>
     {#if $params.mode === 'fullscreen'}
         <div class="frame fullscreen">
             <slot />
@@ -30,10 +31,12 @@
             </div>
         </div>
     {/if}
-</div>
-<div class="links">
-    <a href="/" class="back">Back</a>
-    <a href="." use:$url class="back">overview</a>
+    <div class="links">
+        <a href="/" class="back">Back</a>
+        <a href="." use:$url class="back">overview</a>
+    </div>
+
+    <ThemeSelector bind:theme />
 </div>
 
 <style>
@@ -75,12 +78,7 @@
         position: fixed;
         display: flex;
 
-        background: rgb(239, 195, 236);
-        background: radial-gradient(
-            circle,
-            rgba(239, 195, 236, 1) 0%,
-            rgba(205, 135, 196, 1) 100%
-        );
+        background: var(--surface-2);
     }
     .grid {
         display: grid;
