@@ -28,8 +28,7 @@
 
     & main {
         max-width: min(1024px, 90%);
-        margin: auto;
-        margin-top: 1vw;
+        margin: 0 auto;
     }
 
     & .app > header {

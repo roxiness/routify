@@ -12,6 +12,9 @@
     $: if (!$isActive) isWideCard = false
 </script>
 
+<!-- set recursive to false to make sure the decorator is only applied to the immediate children -->
+
+<!-- routify:meta recursive=false -->
 <div
     class="example node-{context.node.name}"
     class:active={$isActive}
