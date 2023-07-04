@@ -47,6 +47,7 @@ export class Router implements Readable<Router> {
     ready: () => Promise<Route>;
     /** @type {Route[]} */
     history: Route[];
+    parentCmpCtx: any;
     subscribe: (this: void, run: import("svelte/store").Subscriber<Router>, invalidate?: (value?: Router) => void) => import("svelte/store").Unsubscriber;
     triggerStore: () => void;
     params: import("svelte/store").Readable<any>;
@@ -61,7 +62,6 @@ export class Router implements Readable<Router> {
     name: any;
     log: any;
     passthrough: any;
-    parentCmpCtx: any;
     /** @type {RNodeRuntime} */
     rootNode: RNodeRuntime;
     /** @param {HTMLElement} elem */

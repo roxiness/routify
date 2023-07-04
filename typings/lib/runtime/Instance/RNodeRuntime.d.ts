@@ -15,6 +15,12 @@ export class RNodeRuntime extends RNode<RoutifyRuntime> {
     /** @type {ReservedCmpProps} */
     module: ReservedCmpProps;
     get pages(): RNodeRuntime[];
+    /**
+     * Returns the title of the node. Looks for meta.title, falls back to capitalized name
+     * Can be transformed with the router transformTitle hook
+     * @returns {string}
+     */
+    get title(): string;
     get pagesWithIndex(): RNodeRuntime[];
     get hasComponent(): boolean;
     /** @ts-ignore SvelteComponentConstructor is only available in VSCode */

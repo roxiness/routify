@@ -85,6 +85,7 @@
  * @prop { QueryHandler } queryHandler
  * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
  * @prop { ClickHandler } clickHandler
+ * @prop { ( getTitle: ()=>string, node: RNodeRuntime ) => string } transformNodeTitle
  */
 
 /******************
@@ -110,6 +111,7 @@
  * @prop {scrollBoundary} scrollBoundary
  * @prop {DeferredPromise<void>} mounted
  * @prop {Inline} inline *
+ * @prop {Boolean} isNew *
  */
 
 /**

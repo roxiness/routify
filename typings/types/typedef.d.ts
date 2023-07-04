@@ -181,6 +181,7 @@ type RoutifyRuntimeOptions = {
     queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
     clickHandler: ClickHandler;
+    transformNodeTitle: (getTitle: () => string, node: RNodeRuntime) => string;
 };
 type RenderContext = {
     anchorLocation: AnchorLocation;
@@ -209,6 +210,10 @@ type RenderContext = {
      * *
      */
     inline: Inline;
+    /**
+     * *
+     */
+    isNew: boolean;
 };
 type DecoratorInput = (Partial<Decorator> & {
     component: SvelteComponentDev;

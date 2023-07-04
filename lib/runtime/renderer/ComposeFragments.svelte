@@ -121,6 +121,7 @@
             options: _options || {},
             scrollBoundary,
             mounted: createDeferredPromise(),
+            isNew: null,
         }))
     }
 
@@ -168,6 +169,7 @@
     /** @param {RenderContext[]} childContexts */
     const setVisibility = childContexts => {
         childContexts.forEach(context => {
+            context.isNew = context.isNew == null ? true : false
             context.isInline = checkIfInline(context)
             const isBothInlined = context.isInline && checkIfInline(activeContext)
             const envIsOkay = ['always', environment].includes(context.inline.context)
