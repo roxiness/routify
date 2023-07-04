@@ -1,16 +1,15 @@
 <script>
     import Compose from './ComposeFragments.svelte'
-    import { setContext } from 'svelte'
     import DecoratorWrapper from './DecoratorWrapper.svelte'
     import Noop from '../decorators/Noop.svelte'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
-    import { isAnonFn, waitFor } from '../utils'
+    import { isAnonFn, setRoutifyFragmentContext, waitFor } from '../utils'
     /** @type {RenderContext} */
     export let context
     export let props
     const { isVisible, childFragments } = context // grab the stores
     let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
-    setContext('routify-fragment-context', context)
+    setRoutifyFragmentContext(context)
     /** @param {HTMLElement} elem */
     const updateRenderContext = (elem, newMeta) => {
         if (elem)

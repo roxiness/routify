@@ -1,11 +1,10 @@
 <script>
-    import { getContext, setContext } from 'svelte'
+    import { getRoutifyFragmentContext, setRoutifyFragmentContext } from '../utils'
     export let node
     export let passthrough
-    const CTX = 'routify-fragment-context'
 
-    const context = { ...getContext(CTX), node }
-    setContext(CTX, context)
+    const context = { ...getRoutifyFragmentContext(), node }
+    setRoutifyFragmentContext(context)
 
     let Component = node.module?.default
     if (!Component && node.asyncModule)
