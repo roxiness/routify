@@ -2,8 +2,7 @@
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    
-    viewBox="0 0 1000 1000"
+    viewBox="0 180 1000 540"
     width="100%"
     id="morning-tea"
     ><g opacity=".15"

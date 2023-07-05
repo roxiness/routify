@@ -1,6 +1,6 @@
 <h3>Coffee</h3>
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" id="takeaway-coffee"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 140 1000 620" id="takeaway-coffee"
     ><g opacity=".15"
         ><line
             x1="169"
