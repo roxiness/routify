@@ -112,7 +112,6 @@
         opacity: 1;
     }
     .utils * {
-        color: var(--text-2);
         width: 40px;
         opacity: 0.5;
         cursor: pointer;

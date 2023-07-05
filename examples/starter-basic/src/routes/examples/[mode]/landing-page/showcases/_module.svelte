@@ -1,6 +1,6 @@
 <!-- routify:meta order=4 -->
 <script>
-    import { url } from '@roxi/routify'
+    import { url, isActive, node } from '@roxi/routify'
     export let context
 </script>
 
@@ -10,9 +10,10 @@
 
 <div class="features-box">
     <div class="features">
-        <a href={$url('./coffee')}>Coffee</a>
-        <a href={$url('./ice-cream')}>Ice cream</a>
-        <a href={$url('./tea')}>Tea</a>
+        {#each $node.pages as node}
+            <a href={node.path} use:$url class:isActive={$isActive(node.path)}
+                >{node.title}</a>
+        {/each}
     </div>
 
     <div class="showcases-tabs-window">
@@ -31,22 +32,26 @@
         margin-top: 16px;
     }
     .features {
-        padding: 2px 32px 0 16px;
-
         border-right: solid 1px #ccc;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
     }
-    a {
-        display: block;
+    .features a.isActive {
+        background: var(--surface-2);
+    }
+    .features a {
+        padding: var(--size-2) min(var(--size-10), 5vw) var(--size-2) var(--size-4);
+        margin: 0;
+        color: var(--text-1);
         font-size: larger;
         text-decoration: none;
+        font-weight: 500;
     }
     .showcases-tabs-window {
-        margin: 0 20px;
         display: flex;
         overflow-x: hidden;
         flex-wrap: nowrap;
-
-        /* width: 800px; */
         scroll-behavior: smooth;
     }
 </style>

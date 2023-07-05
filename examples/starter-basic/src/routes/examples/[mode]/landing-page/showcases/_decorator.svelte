@@ -12,11 +12,16 @@
 <style>
     .example {
         flex: 0 0 auto;
-        height: 100%;
+        width: 100%;
+        padding: 0 20px;
+        position: relative;
+        z-index: -1;
+    }
+    .example :global(svg) {
         width: 100%;
     }
-    :global(svg) {
-        height: 400px;
-        width: 100%;
+    * :global(h3) {
+        color: var(--text-2);
+        position: absolute;
     }
 </style>

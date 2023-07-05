@@ -1,7 +1,4 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
-
 
 @import './open-props/extra/normalize.css';
 @import './open-props/routify.index.css';
@@ -24,6 +21,10 @@
         font-size: var(--font-size-4);
         line-height: var(--font-lineheight-3);
         margin-block: var(--size-3);
+    }
+
+    & svg {
+        color: var(--text-2);
     }
 
     & main {
@@ -54,7 +55,7 @@
             align-items: center;
             padding: var(--size-2) 0 var(--size-3);
 
-            & .brand > * {
+            & > .brand , & > .brand > * {
                 font-size: var(--font-size-6);
                 text-decoration: none;
                 color: var(--brand);
