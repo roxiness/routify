@@ -11,6 +11,9 @@ export default defineConfig({
     plugins: [
         routify({
             ssr: { enable: !!production },
+            routesDir: {
+                nested: 'src/routes/__nestedRoutes',
+            },
         }),
         svelte({
             emitCss: false,

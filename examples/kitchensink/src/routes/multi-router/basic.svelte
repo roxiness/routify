@@ -9,5 +9,5 @@
         <Router name="nested" />
     </article>
 {:else}
-    <p>We could nest routers inifintely, but let's not...</p>
+    <p>We could nest routers infinitely, but let's not...</p>
 {/if}
