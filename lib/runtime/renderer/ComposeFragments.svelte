@@ -10,6 +10,7 @@
         coerceInlineInputToObject,
         normalizeInline,
     } from './utils/normalizeDecorator.js'
+    import { handleRebuildError } from '../utils/messages.js'
     export const isRoot = undefined
 
     /** @type {RenderContext}*/
@@ -130,6 +131,8 @@
     // if parent changes status to inactive, so does children
     $: if (!$isActive) childContexts.forEach(cc => cc.isActive.set(false))
 
+    let lastRebuildRoute = null
+
     /**
      * @param {RouteFragment[]} fragments
      */
@@ -141,6 +144,11 @@
             // if we're rendering a node that didn't exist at this level before, we need to rebuild the child contexts
             // this happens when navigating in or out of a reset module
             childContexts = buildChildContexts()
+
+            if (lastRebuildRoute === context.route)
+                handleRebuildError(context, childContexts)
+            else lastRebuildRoute = context.route
+
             return handlePageChange(fragments)
         }
 

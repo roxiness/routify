@@ -3,7 +3,7 @@
     import DecoratorWrapper from './DecoratorWrapper.svelte'
     import Noop from '../decorators/Noop.svelte'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
-    import { isAnonFn, setRoutifyFragmentContext, waitFor } from '../utils'
+    import { isAnonFn, setRoutifyFragmentContext, waitFor } from '../utils/index.js'
     /** @type {RenderContext} */
     export let context
     export let props

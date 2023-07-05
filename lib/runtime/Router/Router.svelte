@@ -55,6 +55,7 @@
     const context = {
         childFragments: writable([]),
         decorators: [normalizeDecorator(ScrollDecorator)],
+        route: null,
     }
 
     /** @type {RoutifyRuntimeOptions}*/
@@ -83,6 +84,7 @@
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute
     $: context.childFragments.set($activeRoute?.fragments || [])
+    $: context.route = $activeRoute
 
     $: router.log.debug('before render', get(context.childFragments)) // ROUTIFY-DEV-ONLY
 

@@ -1,5 +1,8 @@
 <script>
-    import { getRoutifyFragmentContext, setRoutifyFragmentContext } from '../utils'
+    import {
+        getRoutifyFragmentContext,
+        setRoutifyFragmentContext,
+    } from '../utils/index.js'
     export let node
     export let passthrough
 

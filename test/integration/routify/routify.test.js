@@ -60,9 +60,17 @@ test('can transform output files', async () => {
 
     await emptyTransformInstance.start()
 
-    expect(ids[0]).toMatch(/_default_admin-bundle.js$/)
-    expect(ids[1]).toMatch(/routes.default.js$/)
-    expect(ids[2]).toMatch(/instance.default.js$/)
+    const filenames = ids.map(id => id.replace(/.+[\\/]/g, ''))
+    const expectedFilenames = [
+        '_default_admin-bundle.js',
+        'routes.default.js',
+        'render.js',
+        'routify-init.js',
+        'route-map.js',
+        'instance.default.js',
+        'sitemap.default.txt',
+    ]
+    assert.deepEqual(filenames, expectedFilenames)
 
     const emptyTransformExpectedContent = readFileSync(bundlePath, 'utf-8')
     expect(emptyTransformExpectedContent).toEqual(baseExpectedContent)
