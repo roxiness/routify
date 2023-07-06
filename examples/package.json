@@ -1,6 +1,9 @@
 {
     "workspaces": [
-        "*",
+        "starter-basic",
+        "kitchensink",
+        "typescript-*",
+        "starter-*",
         ".."
     ],
     "dependencies": {
