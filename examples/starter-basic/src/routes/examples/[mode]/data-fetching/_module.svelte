@@ -1,6 +1,7 @@
 <script>
     import { url, context } from '@roxi/routify'
     import Nav from '@/components/Nav.svelte'
+    import Spinner from './__spinner.svelte'
 </script>
 
 <div class="app">
@@ -16,6 +17,7 @@
     <main>
         <slot />
     </main>
+    <Spinner />
 </div>
 
 <!-- routify:meta description="Fetch data with the <code>load</code> hook before component render." -->

@@ -15,6 +15,7 @@
         </nav>
     </header>
     <main>
+        <!-- set recursive to false to make sure the decorator is only used on the child component and not its descendants -->
         <slot decorator={{ component: LandingPageSection, recursive: false }} />
     </main>
 </div>
