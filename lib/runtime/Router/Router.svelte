@@ -107,15 +107,15 @@
     }
 
     const handleHover = event => {
-        const eventUrl = getUrlFromEvent(event)
-        const url = router.clickHandler.callback?.(event, eventUrl) ?? eventUrl
+        let { url, state } = getUrlFromEvent(event)
+        const urlOrFalse = router.clickHandler.callback?.(event, url) ?? url
 
         const shouldPrefetch =
-            typeof url === 'string' &&
+            typeof urlOrFalse === 'string' &&
             event.target.closest('[data-routify-prefetch-data]')?.dataset
                 .routifyPrefetchData === 'hover'
 
-        if (shouldPrefetch) router.url.push(url, { prefetch: true })
+        if (shouldPrefetch) router.url.push(urlOrFalse, { prefetch: true, ...state })
     }
 
     const handleClick = event => {
