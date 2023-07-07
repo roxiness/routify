@@ -4,6 +4,8 @@ export class AppInstance {
     log: import("consolite").ConsoliteLogger;
     /** @type {Router[]} */
     get routers(): import("../index.js").RouterClass[];
+    /** @type {import('../helpers/preload.js').RoutesMap} */
+    routeMaps: import('../helpers/preload.js').RoutesMap;
     browserAdapter: BrowserAdapter;
     /** @param {Router} router */
     urlFromBrowser: (router: Router) => string;

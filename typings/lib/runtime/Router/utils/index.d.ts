@@ -25,6 +25,10 @@ export type RouterOptionsNormalizedOverlay = {
      */
     transformFragments: TransformFragmentsCallback[];
     /**
+     * hook: runs when router is mounted
+     */
+    onMount: OnMountRouterCallback[];
+    /**
      * hook: runs before router is destroyed
      */
     onDestroy: OnDestroyRouterCallback[];

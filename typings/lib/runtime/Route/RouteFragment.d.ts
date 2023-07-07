@@ -23,5 +23,4 @@ export class RouteFragment {
     _params: {
         [x: string]: string | string[];
     };
-    get index(): number;
 }

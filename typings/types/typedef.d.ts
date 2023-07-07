@@ -167,6 +167,10 @@ type RoutifyRuntimeOptions = {
      */
     afterUrlChange: MaybeArray<AfterUrlChangeCallback>;
     /**
+     * hook: runs after a new route has been rendered
+     */
+    AfterRouteRendered: MaybeArray<AfterRouteRenderedCallback>;
+    /**
      * hook: runs after url has changed
      */
     onUrlClick: MaybeArray<OnUrlClickCallback>;
@@ -174,6 +178,10 @@ type RoutifyRuntimeOptions = {
      * hook: transform route fragments after navigation
      */
     transformFragments: MaybeArray<TransformFragmentsCallback>;
+    /**
+     * hook: runs when the router is mounted
+     */
+    onMount: MaybeArray<OnMountRouterCallback>;
     /**
      * hook: runs before router is destroyed
      */
@@ -193,6 +201,7 @@ type RenderContext = {
     fragment: RouteFragment;
     isActive: import('svelte/store').Writable<boolean>;
     isVisible: import('svelte/store').Writable<boolean>;
+    wasVisible: boolean;
     isInline: boolean;
     lastActiveChild: RenderContext;
     elem: import('svelte/store').Writable<{
@@ -210,10 +219,6 @@ type RenderContext = {
      * *
      */
     inline: Inline;
-    /**
-     * *
-     */
-    isNew: boolean;
 };
 type DecoratorInput = (Partial<Decorator> & {
     component: SvelteComponentDev;
@@ -247,10 +252,19 @@ type AfterUrlChangeCallback = (arg0: {
     route: Route;
     history: Route[];
 }) => any;
+type AfterRouteRenderedCallback = (arg0: {
+    route: Route;
+}) => void;
 type OnUrlClickCallback = (arg0: HTMLAnchorElement) => any;
 type TransformFragmentsCallback = (arg0: RouteFragment[]) => RouteFragment[];
+type OnMountRouterCallback = (arg0: {
+    router: Router;
+    context: {
+        decorators: any[];
+    };
+}) => void;
 type OnDestroyRouterCallback = (arg0: {
-    router: typeof this;
+    router: Router;
 }) => void;
 type RoutifyExternalMetaHelper = {
     instance: RoutifyRuntime;

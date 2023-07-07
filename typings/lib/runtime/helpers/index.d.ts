@@ -1,4 +1,3 @@
-export * from "./scroll.js";
 export * from "./preload.js";
 export function getMRCA(node1: RNodeRuntime, node2: RNodeRuntime): import("../Instance/RNodeRuntime.js").RNodeRuntime;
 export function getPath(node1: any, node2: any): string;

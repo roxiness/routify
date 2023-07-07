@@ -9,7 +9,7 @@ export class Route {
     /** @type {RouteFragment[]} */
     allFragments: RouteFragment[];
     /** @type {RouteFragment[]} only fragments with components */
-    get fragments(): RouteFragment[];
+    fragments: RouteFragment[];
     /** @type {RoutifyLoadReturn} */
     load: RoutifyLoadReturn;
     router: import("../index.js").RouterClass;
