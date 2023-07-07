@@ -124,7 +124,6 @@
         font-size: 1.5vw;
     }
     h1 {
-        color: rgba(0, 0, 0, 0.8);
         text-transform: capitalize;
         margin-bottom: 1vw;
     }
@@ -137,12 +136,9 @@
         border-bottom-right-radius: var(--radius-3);
 
         top: var(--frame-height);
-        /* top: calc(var(--frame-height) - var(--radius-3)); */
 
         padding: 16px 48px;
-        color: rgba(0, 0, 0, 0.8);
         cursor: default;
-        /* z-index: 20; */
     }
 
     .fade-overlay {
