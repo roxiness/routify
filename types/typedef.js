@@ -79,6 +79,7 @@
  * @prop { MaybeArray<RouterInitCallback> } afterRouterInit hook: runs after each router initiation
  * @prop { MaybeArray<BeforeUrlChangeCallback> } beforeUrlChange hook: guard that runs before url changes
  * @prop { MaybeArray<AfterUrlChangeCallback> } afterUrlChange hook: runs after url has changed
+ * @prop { MaybeArray<AfterRouteRenderedCallback> } afterRouteRendered hook: runs after a new route has been rendered
  * @prop { MaybeArray<OnUrlClickCallback> } onUrlClick hook: runs after url has changed
  * @prop { MaybeArray<TransformFragmentsCallback> } transformFragments hook: transform route fragments after navigation
  * @prop { MaybeArray<OnMountRouterCallback> } onMount hook: runs when the router is mounted
@@ -101,6 +102,7 @@
  * @prop {RouteFragment} fragment
  * @prop {import('svelte/store').Writable<boolean>} isActive
  * @prop {import('svelte/store').Writable<boolean>} isVisible
+ * @prop {Boolean} wasVisible
  * @prop {boolean} isInline
  * @prop {RenderContext} lastActiveChild
  * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
@@ -112,7 +114,6 @@
  * @prop {scrollBoundary} scrollBoundary
  * @prop {DeferredPromise<void>} mounted
  * @prop {Inline} inline *
- * @prop {Boolean} isNew *
  */
 
 /**
@@ -149,6 +150,7 @@
  *   route: Route,
  *   history: Route[]
  * }): any } AfterUrlChangeCallback
+ * @typedef { function({route:Route}):void } AfterRouteRenderedCallback
  * @typedef { function(HTMLAnchorElement): any } OnUrlClickCallback
  * @typedef { function(RouteFragment[]):RouteFragment[] } TransformFragmentsCallback
  * @typedef { function({router: Router, context: {decorators: any[]}}):void } OnMountRouterCallback

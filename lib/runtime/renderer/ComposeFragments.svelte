@@ -107,6 +107,7 @@
             fragment: new RouteFragment(route, node, null, {}),
             isActive: writable(false),
             isVisible: writable(false),
+            wasVisible: false,
             isInline: false,
             inline: normalizeInline({
                 ...coerceInlineInputToObject(rawInlineInputFromSlot),
@@ -122,7 +123,6 @@
             options: _options || {},
             scrollBoundary,
             mounted: createDeferredPromise(),
-            isNew: null,
         }))
     }
 
@@ -177,12 +177,12 @@
     /** @param {RenderContext[]} childContexts */
     const setVisibility = childContexts => {
         childContexts.forEach(context => {
-            context.isNew = context.isNew == null ? true : false
             context.isInline = checkIfInline(context)
             const isBothInlined = context.isInline && checkIfInline(activeContext)
             const envIsOkay = ['always', environment].includes(context.inline.context)
             const isVisibleAsInlined = isBothInlined && envIsOkay
 
+            context.wasVisible = get(context.isVisible)
             lazySet(context.isActive, context === activeContext)
             lazySet(context.isVisible, get(context.isActive) || isVisibleAsInlined)
             // if it's not visible, the element doesn't exist anymore
