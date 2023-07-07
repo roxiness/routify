@@ -33,7 +33,6 @@
     {/if}
     <div class="links">
         <a href="/" class="back">Back</a>
-        <a href="." use:$url class="back">overview</a>
     </div>
 
     <ThemeSelector bind:theme />

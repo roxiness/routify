@@ -16,6 +16,11 @@
     scroll-behavior: smooth;
 }
 
+.routify .example.node-data-fetching:not(.active) .spinner-wrapper {
+    /* don't display the spinner when other examples are loading */
+    display: none;
+}
+
 .routify {
     & p {
         font-size: var(--font-size-4);
