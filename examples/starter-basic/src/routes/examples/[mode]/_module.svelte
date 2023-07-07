@@ -12,7 +12,7 @@
 <!-- routify:meta reset -->
 
 <div class="routify" color-scheme={theme}>
-    {#if $params.mode === 'fullscreen'}
+    {#if $params.mode === 'full'}
         <div class="frame fullscreen">
             <slot />
         </div>
