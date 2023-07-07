@@ -54,7 +54,7 @@
 
     const context = {
         childFragments: writable([]),
-        decorators: [normalizeDecorator(ScrollDecorator)],
+        decorators: [],
         route: null,
     }
 
@@ -80,6 +80,8 @@
 
     // todo move everything to init
     if (!router) router = new Router(options)
+    router.onMount.run({ context, router })
+    context.decorators = context.decorators.map(normalizeDecorator)
 
     $: if (url && url !== router.url.internal()) router.url.replace(url)
     $: activeRoute = router.activeRoute

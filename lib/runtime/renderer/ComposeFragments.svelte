@@ -16,7 +16,7 @@
     /** @type {RenderContext}*/
     export let context = null
 
-    /** @type {{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}} */
+    /** @type {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} */
     export let options
 
     const environment = typeof window !== 'undefined' ? 'browser' : 'ssr'

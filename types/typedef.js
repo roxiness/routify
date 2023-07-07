@@ -81,6 +81,7 @@
  * @prop { MaybeArray<AfterUrlChangeCallback> } afterUrlChange hook: runs after url has changed
  * @prop { MaybeArray<OnUrlClickCallback> } onUrlClick hook: runs after url has changed
  * @prop { MaybeArray<TransformFragmentsCallback> } transformFragments hook: transform route fragments after navigation
+ * @prop { MaybeArray<OnMountRouterCallback> } onMount hook: runs when the router is mounted
  * @prop { MaybeArray<OnDestroyRouterCallback> } onDestroy hook: runs before router is destroyed
  * @prop { QueryHandler } queryHandler
  * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
@@ -150,7 +151,8 @@
  * }): any } AfterUrlChangeCallback
  * @typedef { function(HTMLAnchorElement): any } OnUrlClickCallback
  * @typedef { function(RouteFragment[]):RouteFragment[] } TransformFragmentsCallback
- * @typedef { function({router: typeof this}):void } OnDestroyRouterCallback
+ * @typedef { function({router: Router, context: {decorators: any[]}}):void } OnMountRouterCallback
+ * @typedef { function({router: Router}):void } OnDestroyRouterCallback
  */
 
 /********************************
