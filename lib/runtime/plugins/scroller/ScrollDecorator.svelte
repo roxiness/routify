@@ -1,7 +1,7 @@
 <script>
     import { get } from 'svelte/store'
-    import { scrollToContext } from '../helpers/scroll.js'
-    import { getLineage } from '../renderer/utils/index.js'
+    import { scrollToContext } from './scroll.js'
+    import { getLineage } from '../../renderer/utils/index.js'
 
     /** @type {RenderContext} */
     export let context

@@ -7,7 +7,7 @@
         shouldIgnoreClick,
     } from '../utils/index.js'
     import Component from '../renderer/ComposeFragments.svelte'
-    import ScrollDecorator from '../decorators/ScrollDecorator.svelte'
+    import ScrollDecorator from '../plugins/scroller/ScrollDecorator.svelte'
     import { get, writable } from 'svelte/store'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
     import { normalizeDecorator } from '../renderer/utils/normalizeDecorator.js'
