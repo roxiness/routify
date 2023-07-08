@@ -10,6 +10,7 @@
 </script>
 
 <!-- routify:meta reset -->
+<!-- routify:meta bundles -->
 
 <div class="routify" color-scheme={theme}>
     {#if $params.mode === 'full'}
@@ -26,7 +27,7 @@
         <div class="wrapper">
             <div class="grid">
                 <slot
-                    inline={{ scrollIntoView }}
+                    inline={{ scrollIntoView, context: 'always' }}
                     decorator={{ component: ExamplesDecorator, recursive: false }} />
             </div>
         </div>
