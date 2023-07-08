@@ -20,7 +20,7 @@
     </main>
 </div>
 
-<!-- routify:meta description="A landing page showing inline pages." -->
+<!-- routify:meta _description="A landing page showing inline pages." -->
 <style>
     :global(.example.node-landing-page .frame) {
         scroll-behavior: smooth;

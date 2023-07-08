@@ -21,9 +21,7 @@
     </main>
 </div>
 
-<!-- routify:meta resets -->
-
-<!-- routify:meta description="An admin page using guard hooks." -->
+<!-- routify:meta _description="An admin page using guard hooks." -->
 <style>
     main {
         padding-top: 3rem;

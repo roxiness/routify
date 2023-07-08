@@ -20,4 +20,4 @@
     <Spinner />
 </div>
 
-<!-- routify:meta description="Fetch data with the <code>load</code> hook before component render." -->
+<!-- routify:meta _description="Fetch data with the <code>load</code> hook before component render." -->

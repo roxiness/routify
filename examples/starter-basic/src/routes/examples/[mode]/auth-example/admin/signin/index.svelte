@@ -1,4 +1,4 @@
-<!-- routify:meta isProtected=false -->
+<!-- routify:meta _isProtected=false -->
 <script>
     import Password from '@/components/PasswordInput.svelte'
     import { auth } from '../../__store'

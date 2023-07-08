@@ -4,15 +4,14 @@
 
     export const load = ctx => {
         const user = auth.get()
-        if (ctx.route.meta.isProtected && user.isGuest)
+        if (ctx.route.meta._isProtected && user.isGuest)
             return { redirect: ctx.url('./signin') }
     }
 </script>
 
 <!-- todo check load return values. Error, maxage, status etc -->
 <!-- routify:meta order=2 -->
-<!-- routify:meta NOreset -->
-<!-- routify:meta isProtected=true -->
+<!-- routify:meta _isProtected=true -->
 
 {#if !$auth.isGuest}
     <a class="signout" href={$url('./signout')}>signout</a>

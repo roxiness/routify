@@ -37,7 +37,7 @@
     <div class="body">
         <h1>{context.node.name}</h1>
         <p>
-            {@html context.node.meta.description}
+            {@html context.node.meta._description}
         </p>
     </div>
     <a href={$url(path)} class="fade-overlay-link">
