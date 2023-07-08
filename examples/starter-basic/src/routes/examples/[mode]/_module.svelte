@@ -4,7 +4,7 @@
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
     import './__assets/theme.css'
     import ThemeSelector from './__components/ThemeSelector.svelte'
-    let theme = 'light'
+    let theme
     const scrollIntoView = (elem, instant) =>
         elem.scrollIntoView({ inline: 'center', behavior: instant ? 'auto' : 'smooth' })
 </script>

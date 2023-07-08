@@ -1,7 +1,6 @@
 <!-- routify:meta order=4 -->
 <script>
     import { url, isActive, node } from '@roxi/routify'
-    export let context
 </script>
 
 <!-- routify:meta inline -->

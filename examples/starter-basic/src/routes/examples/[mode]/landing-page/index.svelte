@@ -13,6 +13,5 @@
         <p class="hero-description">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
-        <a href="#" class="cta-button">Get Started</a>
     </div>
 </section>

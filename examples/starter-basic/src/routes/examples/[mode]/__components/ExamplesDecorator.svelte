@@ -24,7 +24,8 @@
             <slot />
         </div>
         <div class="utils">
-            <span on:click={() => (isWideCard = !isWideCard)}>
+            <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
+            <span aria-controls="widescreen" on:click={() => (isWideCard = !isWideCard)}>
                 <Icons icon="aspect-ratio" />
             </span>
             <a
