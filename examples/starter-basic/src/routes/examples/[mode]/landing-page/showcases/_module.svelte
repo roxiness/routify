@@ -11,7 +11,7 @@
 <div class="features-box">
     <div class="features">
         {#each $node.pages as node}
-            <a href={node.path} use:$url class:isActive={$isActive(node.path)}
+            <a href={$url(node.path)} class:isActive={$isActive(node.path)}
                 >{node.title}</a>
         {/each}
     </div>

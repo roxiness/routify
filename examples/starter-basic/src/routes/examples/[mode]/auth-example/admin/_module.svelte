@@ -15,7 +15,7 @@
 <!-- routify:meta isProtected=true -->
 
 {#if !$auth.isGuest}
-    <a class="signout" use:$url href="./signout">signout</a>
+    <a class="signout" href={$url('./signout')}>signout</a>
 {/if}
 
 <slot />

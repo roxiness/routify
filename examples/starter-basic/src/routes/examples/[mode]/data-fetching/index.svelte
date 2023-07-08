@@ -12,4 +12,4 @@
     API and make it accessible for our component.
 </p>
 
-<a href="../data" use:$url data-routify-prefetch-data="hover">prefetch data on hover</a>
+<a href={$url('../data')} data-routify-prefetch-data="hover">prefetch data on hover</a>

@@ -28,8 +28,7 @@
                 <Icons icon="aspect-ratio" />
             </span>
             <a
-                use:$url={{ mode: 'full' }}
-                href="$leaf"
+                href={$url('$leaf', { mode: 'full' })}
                 data-routify-route-state-dontSmoothScroll="true">
                 <Icons icon="fullscreen" />
             </a>

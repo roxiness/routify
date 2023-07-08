@@ -10,7 +10,7 @@
 </script>
 
 <!-- routify:meta reset -->
-<!-- routify:meta bundles -->
+<!-- routify:meta bundle -->
 
 <div class="routify" color-scheme={theme}>
     {#if $params.mode === 'full'}
