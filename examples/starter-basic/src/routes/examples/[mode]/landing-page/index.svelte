@@ -6,12 +6,17 @@
 <!-- routify:meta order=0 -->
 
 <section class="hero">
-    <Cat />
-
     <div class="hero-content">
-        <h1 class="hero-title">Welcome to Your Website</h1>
-        <p class="hero-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
+        <Cat />
+        <h1 class="hero-title">Inline vs Standalone</h1>
+        <p class="hero-description">An example combining inline and standalone pages</p>
     </div>
 </section>
+
+<style>
+    .hero {
+        display: grid;
+        align-items: end;
+        min-height: calc(var(--frame-inner-height) - var(--nav-height) - 3vw - 3vw);
+    }
+</style>

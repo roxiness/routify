@@ -15,8 +15,8 @@
         <!-- if the child is active adds the isActive class -->
         <li class:isActive={$isActive(childNode.path)}>
             <a href={$url(childNode.path)}>
-                <!-- if the child has a meta name, use it, otherwise use the filename -->
-                {childNode.meta.name || childNode.name}
+                <!-- title can be overwritten using `meta.title` -->
+                {childNode.title}
             </a>
         </li>
     {/each}

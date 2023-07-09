@@ -8,12 +8,11 @@
 
 <style>
     .inline-decorator {
-        --offset: calc(var(--nav-height) + 16px);
-
-        padding-top: calc(var(--offset));
-        min-height: 100vh;
+        padding-block: 3vw;
+        scroll-margin-top: var(--nav-height);
+        min-height: calc(var(--frame-inner-height) - var(--nav-height));
     }
-    :global(.frame-wrapper) div {
-        min-height: var(--offset);
+    :global(.frame-wrapper) .inline-decorator {
+        scroll-margin-top: calc(var(--nav-height) / var(--ratio));
     }
 </style>

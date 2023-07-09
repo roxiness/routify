@@ -71,6 +71,10 @@
         --scale: calc(1 / var(--ratio));
         --scale-wide: calc(1 / var(--ratio) * var(--card-grow));
     }
+    .frame.fullscreen {
+        --frame-height: 100vh;
+        --frame-inner-height: calc(100vh);
+    }
     .wrapper {
         overflow-x: auto;
         overflow-y: hidden;
