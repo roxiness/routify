@@ -7,7 +7,10 @@
     let theme
     const scrollIntoView = (elem, instant) =>
         elem.scrollIntoView({ inline: 'center', behavior: instant ? 'auto' : 'smooth' })
+        import ProgressBar from '../../../components/ProgressBar.svelte'
 </script>
+
+<ProgressBar />
 
 <!-- routify:meta reset -->
 <!-- routify:meta bundle -->

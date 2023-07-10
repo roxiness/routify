@@ -1,6 +1,6 @@
 <!-- routify:meta _isProtected=false -->
 <script>
-    import Password from '@/components/PasswordInput.svelte'
+    import Password from './__components/PasswordInput.svelte'
     import { auth } from '../../__store'
     import { goto } from '@roxi/routify'
 
