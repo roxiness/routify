@@ -21,8 +21,8 @@ export class Router implements Readable<Router> {
     beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
     /** @type { import('hookar').HooksCollection<AfterUrlChangeCallback> } */
     afterUrlChange: import('hookar').HooksCollection<AfterUrlChangeCallback>;
-    /** @type { import('hookar').HooksCollection<AfterRouteRendered> } */
-    afterRouteRendered: import('hookar').HooksCollection<AfterRouteRendered>;
+    /** @type { import('hookar').HooksCollection<AfterRouteRenderedCallback> } */
+    afterRouteRendered: import('hookar').HooksCollection<AfterRouteRenderedCallback>;
     /** @type { import('hookar').HooksCollection<TransformFragmentsCallback> } */
     transformFragments: import('hookar').HooksCollection<TransformFragmentsCallback>;
     onMount: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;

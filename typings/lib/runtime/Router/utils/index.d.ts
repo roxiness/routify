@@ -13,6 +13,10 @@ export type RouterOptionsNormalizedOverlay = {
      */
     afterRouterInit: RouterInitCallback[];
     /**
+     * hook: runs after each router initiation
+     */
+    afterRouteRendered: AfterRouteRenderedCallback[];
+    /**
      * hook: guard that runs before url changes
      */
     beforeUrlChange: BeforeUrlChangeCallback[];

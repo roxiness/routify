@@ -4,7 +4,6 @@
  * @typedef {import('../lib/common/Routify').Routify} Routify
  * @typedef {{Node: RNode}} RoutifyBaseOptions
  * @typedef {typeof import('svelte/internal').SvelteComponentDev } SvelteComponentDev
- * @typedef {typeof import('../lib/runtime/route/utils')['universalFetch']} UniversalFetch
  */
 /**
  * @template T
@@ -26,6 +25,7 @@
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} RoutifyContext
  * @typedef {import('../lib/runtime/decorators/AnchorDecorator').Location} AnchorLocation
+ * @typedef {import('../lib/runtime/plugins/scroller/scroll').ScrollContext} ScrollContext
  *
  *  BUILDTIME
  * @typedef {import('../lib/buildtime/plugins/filemapper/lib/File').File} RFile
@@ -356,12 +356,33 @@
  * @typedef { Partial<Inline> | boolean } InlineInput
  *
  * @typedef { object } Inline
- * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } callback return true to inline the child node
+ * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } shouldInline return true to inline the child node
+ * @prop { InlineCallback<boolean> } shouldScroll return true to inline the child node
  * @prop { 'browser'|'ssr'|'always' } context
- * @prop { (elem: HTMLElement) => void } scrollIntoView
+ * @prop { (elem: HTMLElement, instant: boolean) => void } scrollIntoView
  */
 
 /**
  * @template T
  * @typedef {Promise<T> & {resolve: (T)=>void, reject: (T)=>void}} DeferredPromise
  */
+
+/**
+ * @template T
+ * @callback InlineCallback
+ * @param {ScrollContext} context
+ * @param {number} index
+ * @param {ScrollContext[]} allScrollContexts
+ * @param {InlineCallback<T>} [defaultCb]
+ * @returns {T}
+ */
+
+// /**
+//  * @template T
+//  * @callback InitialInlineCallback
+//  * @param {ScrollContext} context
+//  * @param {number} index
+//  * @param {ScrollContext[]} allScrollContexts
+//  * @param {InlineCallback<T>} [defaultCb]
+//  * @returns {T}
+//  */

@@ -169,7 +169,7 @@
 
     const checkIfInline = _context => {
         const passedCallback =
-            !_context?.node || _context.inline.callback(_context?.node, activeContext)
+            !_context?.node || _context.inline.shouldInline(_context?.node, activeContext)
 
         return passedCallback
     }

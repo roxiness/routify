@@ -17,10 +17,6 @@ type RoutifyBaseOptions = {
  */
 type SvelteComponentDev = typeof import('svelte/internal').SvelteComponentDev;
 /**
- * COMMON
- */
-type UniversalFetch = typeof import('../lib/runtime/route/utils')['universalFetch'];
-/**
  * <T>
  */
 type MaybeArray<T> = import('./utils').MaybeArray<T>;
@@ -66,9 +62,13 @@ type RoutifyContext = RenderContext & {
     route: Route;
 };
 /**
- * BUILDTIME
+ * RUNTIME
  */
 type AnchorLocation = import('../lib/runtime/decorators/AnchorDecorator').Location;
+/**
+ * BUILDTIME
+ */
+type ScrollContext = import('../lib/runtime/plugins/scroller/scroll').ScrollContext;
 /**
  * RUNTIME
  */
@@ -169,7 +169,7 @@ type RoutifyRuntimeOptions = {
     /**
      * hook: runs after a new route has been rendered
      */
-    AfterRouteRendered: MaybeArray<AfterRouteRenderedCallback>;
+    afterRouteRendered: MaybeArray<AfterRouteRenderedCallback>;
     /**
      * hook: runs after url has changed
      */
@@ -280,7 +280,7 @@ type RoutifyLoadContext = {
     url: import('../lib/runtime').Url;
     prevRoute?: Route | undefined;
     isNew: boolean;
-    fetch: any;
+    fetch: UniversalFetch;
 };
 type RoutifyLoadReturn = {
     status: number;
@@ -434,11 +434,16 @@ type Inline = {
     /**
      * return true to inline the child node
      */
-    callback: (node: RNodeRuntime, context: RenderContext) => boolean;
+    shouldInline: (node: RNodeRuntime, context: RenderContext) => boolean;
+    /**
+     * return true to inline the child node
+     */
+    shouldScroll: InlineCallback<boolean>;
     context: 'browser' | 'ssr' | 'always';
-    scrollIntoView: (elem: HTMLElement) => void;
+    scrollIntoView: (elem: HTMLElement, instant: boolean) => void;
 };
 type DeferredPromise<T> = Promise<T> & {
     resolve: (T: any) => void;
     reject: (T: any) => void;
 };
+type InlineCallback<T> = (context: ScrollContext, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;

@@ -7,7 +7,7 @@
     let theme
     const scrollIntoView = (elem, instant) =>
         elem.scrollIntoView({ inline: 'center', behavior: instant ? 'auto' : 'smooth' })
-        import ProgressBar from '../../../components/ProgressBar.svelte'
+    import ProgressBar from '../../../components/ProgressBar.svelte'
 </script>
 
 <ProgressBar />
@@ -30,7 +30,7 @@
         <div class="wrapper">
             <div class="grid">
                 <slot
-                    inline={{ scrollIntoView, context: 'always' }}
+                    inline={{ scrollIntoView, context: 'always', shouldScroll: true }}
                     decorator={{ component: ExamplesDecorator, recursive: false }} />
             </div>
         </div>
