@@ -13,6 +13,7 @@ export default {
   \\"id\\": \\"_default\\",
   \\"_regex\\": {},
   \\"_paramKeys\\": {},
+  \\"name\\": \\"\\",
   \\"file\\": {
     \\"path\\": \\"test/integration/routify/example/_module.svelte\\",
     \\"dir\\": \\"test/integration/routify/example\\",

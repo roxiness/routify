@@ -68,7 +68,7 @@ type AnchorLocation = import('../lib/runtime/decorators/AnchorDecorator').Locati
 /**
  * BUILDTIME
  */
-type ScrollContext = import('../lib/runtime/plugins/scroller/scroll').ScrollContext;
+type ScrollContext = import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext;
 /**
  * RUNTIME
  */
@@ -203,7 +203,6 @@ type RenderContext = {
     isVisible: import('svelte/store').Writable<boolean>;
     wasVisible: boolean;
     isInline: boolean;
-    lastActiveChild: RenderContext;
     elem: import('svelte/store').Writable<{
         parent: HTMLElement;
         anchor: HTMLElement;
@@ -449,4 +448,4 @@ type DeferredPromise<T> = Promise<T> & {
     resolve: (T: any) => void;
     reject: (T: any) => void;
 };
-type InlineCallback<T> = (context: any, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;
+type InlineCallback<T> = (context: ScrollContext, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;

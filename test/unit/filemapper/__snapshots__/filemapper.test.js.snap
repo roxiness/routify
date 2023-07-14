@@ -199,7 +199,7 @@ Object {
   "id": "_default",
   "meta": Object {},
   "module": "test/unit/filemapper/example/routes/_module.svelte",
-  "name": undefined,
+  "name": "",
   "rootName": "default",
 }
 `;
@@ -412,7 +412,7 @@ Object {
   "id": "_default",
   "meta": Object {},
   "module": undefined,
-  "name": undefined,
+  "name": "",
   "rootName": "default",
 }
 `;
@@ -590,7 +590,7 @@ Object {
   "id": "_default",
   "meta": Object {},
   "module": "test/unit/filemapper/example/routes/_module.svelte",
-  "name": undefined,
+  "name": "",
   "rootName": "default",
 }
 `;
@@ -774,7 +774,7 @@ Object {
   "id": "_default",
   "meta": Object {},
   "module": "test/unit/filemapper/example/routes/_module.svelte",
-  "name": undefined,
+  "name": "",
   "rootName": "default",
 }
 `;

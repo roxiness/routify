@@ -25,7 +25,7 @@
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} RoutifyContext
  * @typedef {import('../lib/runtime/decorators/AnchorDecorator').Location} AnchorLocation
- * @typedef {import('../lib/runtime/plugins/scroller/scroll').ScrollContext} ScrollContext
+ * @typedef {import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext} ScrollContext
  *
  *  BUILDTIME
  * @typedef {import('../lib/buildtime/plugins/filemapper/lib/File').File} RFile
@@ -104,7 +104,6 @@
  * @prop {import('svelte/store').Writable<boolean>} isVisible
  * @prop {Boolean} wasVisible
  * @prop {boolean} isInline
- * @prop {RenderContext} lastActiveChild
  * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
  * @prop {import('../lib/runtime/Route/Route').Route} route
  * @prop {import('../lib/runtime/Router/Router').Router} router
