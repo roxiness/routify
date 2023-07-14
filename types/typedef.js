@@ -360,6 +360,7 @@
  * @prop { InlineCallback<boolean> } shouldScroll return true to inline the child node
  * @prop { 'browser'|'ssr'|'always' } context
  * @prop { (elem: HTMLElement, instant: boolean) => void } scrollIntoView
+ * @prop { Object<string, string[]> } params
  */
 
 /**

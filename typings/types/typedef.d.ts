@@ -441,9 +441,12 @@ type Inline = {
     shouldScroll: InlineCallback<boolean>;
     context: 'browser' | 'ssr' | 'always';
     scrollIntoView: (elem: HTMLElement, instant: boolean) => void;
+    params: {
+        [x: string]: string[];
+    };
 };
 type DeferredPromise<T> = Promise<T> & {
     resolve: (T: any) => void;
     reject: (T: any) => void;
 };
-type InlineCallback<T> = (context: ScrollContext, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;
+type InlineCallback<T> = (context: any, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;
