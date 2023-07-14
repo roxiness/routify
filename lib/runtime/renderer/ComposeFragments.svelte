@@ -96,6 +96,32 @@
 
         const children = matches.length ? matches : [refNode]
 
+        /**
+         * @param {RNodeRuntime} node
+         * @param {Object.<string, string[]>} pool
+         */
+        const shiftParams = (node, pool) => {
+            const params = {}
+            node.paramKeys.forEach(key => {
+                // If the pool has a value for this parameter, use the value
+                // and remove it from the pool.
+                if (pool && key in pool) {
+                    params[key] = pool[key].shift()
+                }
+            })
+            return params
+        }
+
+        const clone = obj => JSON.parse(JSON.stringify(obj))
+        const paramsPool = clone(rawInlineInputFromSlot?.['params'] || {})
+
+        Object.entries(paramsPool).forEach(([key, values]) => {
+            const index = children.findIndex(node => node.paramKeys.includes(key))
+            const newChildren = new Array(values.length - 1).fill(children[index])
+            // insert the new children after the source
+            children.splice(index + 1, 0, ...newChildren)
+        })
+
         return children.map(node => ({
             anchorLocation: anchorLocation || 'parent',
             childFragments: writable(
@@ -104,7 +130,7 @@
                     : [],
             ),
             node,
-            fragment: new RouteFragment(route, node, null, {}),
+            fragment: new RouteFragment(route, node, null, shiftParams(node, paramsPool)),
             isActive: writable(false),
             isVisible: writable(false),
             wasVisible: false,
@@ -134,12 +160,24 @@
     let lastRebuildRoute = null
 
     /**
+     * check if fragments have the same node and all a params are in b.
+     * @param {RouteFragment} f fragment
+     * @returns {(c: RenderContext) => boolean}
+     */
+    const contextHasMatchingFragmentAndParams = f => c =>
+        f.node === c.node &&
+        Object.entries(f.params).every(([key, value]) => c.fragment.params[key] === value)
+    //
+    /**
      * @param {RouteFragment[]} fragments
      */
     const handlePageChange = fragments => {
         context.lastActiveChild = activeContext
         const [fragment, ...childFragments] = fragments
-        activeContext = childContexts.find(s => s.node === fragment?.node)
+        activeContext =
+            childContexts.find(contextHasMatchingFragmentAndParams(fragment)) ||
+            childContexts.find(s => s.node === fragment?.node)
+
         if (!activeContext) {
             // if we're rendering a node that didn't exist at this level before, we need to rebuild the child contexts
             // this happens when navigating in or out of a reset module
@@ -197,7 +235,7 @@
 </script>
 
 {#if !wait}
-    {#each childContexts as context (context.node.id)}
+    {#each childContexts as context (context)}
         <RenderFragment {context} {props} />
     {/each}
 {/if}
