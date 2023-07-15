@@ -52,12 +52,6 @@
     /** @type {ClickHandler}*/
     export let clickHandler = {}
 
-    const context = {
-        childFragments: writable([]),
-        decorators: [],
-        route: null,
-    }
-
     /** @type {RoutifyRuntimeOptions}*/
     const options = {
         instance,
@@ -78,8 +72,14 @@
         clickHandler,
     }
 
-    // todo move everything to init
-    if (!router) router = new Router(options)
+    const context = {
+        childFragments: writable([]),
+        decorators: [],
+        route: null,
+        router: router || new Router(options),
+    }
+    router = context.router
+
     router.onMount.run({ context, router })
     context.decorators = context.decorators.map(normalizeDecorator)
 
