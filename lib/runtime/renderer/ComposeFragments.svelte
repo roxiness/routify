@@ -8,7 +8,6 @@
     import {
         addFolderDecorator,
         buildChildContexts,
-        contextHasMatchingFragmentAndParams,
         findActiveChildContext,
         updateVisibility,
     } from './composeFragments.js'
