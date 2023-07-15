@@ -24,6 +24,7 @@
  * @typedef {import('../lib/runtime/Route/RouteFragment').RouteFragment} RouteFragment
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} RoutifyContext
+ * @typedef {import('../lib/runtime/renderer/RenderContext').RenderContext} RenderContext
  * @typedef {import('../lib/runtime/decorators/AnchorDecorator').Location} AnchorLocation
  * @typedef {import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext} ScrollContext
  *
@@ -90,30 +91,30 @@
  * @prop { ( getTitle: ()=>string, node: RNodeRuntime ) => string } transformNodeTitle
  */
 
-/******************
- * RENDER CONTEXT *
- ******************/
-/**
- * @typedef {Object} RenderContext
- * @prop {AnchorLocation} anchorLocation
- * @prop {import('svelte/store').Writable<RouteFragment[]>} childFragments
- * @prop {RNodeRuntime}  node
- * @prop {Object<string, any>} options
- * @prop {RouteFragment} fragment
- * @prop {import('svelte/store').Writable<boolean>} isActive
- * @prop {import('svelte/store').Writable<boolean>} isVisible
- * @prop {Boolean} wasVisible
- * @prop {boolean} isInline
- * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
- * @prop {import('../lib/runtime/Route/Route').Route} route
- * @prop {import('../lib/runtime/Router/Router').Router} router
- * @prop {RenderContext} parentContext
- * @prop {Decorator[]} decorators
- * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
- * @prop {scrollBoundary} scrollBoundary
- * @prop {DeferredPromise<void>} mounted
- * @prop {Inline} inline *
- */
+// /******************
+//  * RENDER CONTEXT *
+//  ******************/
+// /**
+//  * @typedef {Object} RenderContext
+//  * @prop {AnchorLocation} anchorLocation
+//  * @prop {import('svelte/store').Writable<RouteFragment[]>} childFragments
+//  * @prop {RNodeRuntime}  node
+//  * @prop {Object<string, any>} options
+//  * @prop {RouteFragment} fragment
+//  * @prop {import('svelte/store').Writable<boolean>} isActive
+//  * @prop {import('svelte/store').Writable<boolean>} isVisible
+//  * @prop {Boolean} wasVisible
+//  * @prop {boolean} isInline
+//  * @prop {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} elem
+//  * @prop {import('../lib/runtime/Route/Route').Route} route
+//  * @prop {import('../lib/runtime/Router/Router').Router} router
+//  * @prop {RenderContext} parentContext
+//  * @prop {Decorator[]} decorators
+//  * @prop {import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>} [onDestroy]
+//  * @prop {scrollBoundary} scrollBoundary
+//  * @prop {DeferredPromise<void>} mounted
+//  * @prop {Inline} inline *
+//  */
 
 /**
  * @typedef {(Partial<Decorator> & {component: SvelteComponentDev}) | SvelteComponentDev} DecoratorInput
@@ -386,3 +387,5 @@
 //  * @param {InlineCallback<T>} [defaultCb]
 //  * @returns {T}
 //  */
+
+/** @typedef {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} RenderContextOptions*/

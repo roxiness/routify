@@ -77,6 +77,8 @@
         decorators: [],
         route: null,
         router: router || new Router(options),
+        childContexts: writable([]),
+        activeChildContext: writable(null),
     }
     router = context.router
 

@@ -73,7 +73,7 @@ export function isActiveUrl(renderContext: RenderContext): (path: string, params
 }, options?: IsActiveOptions) => boolean;
 export function resolveNode(path: string): import("../Instance/RNodeRuntime.js").RNodeRuntime;
 export function traverseNode(node: RNodeRuntime, path: string, router: Router): RNodeRuntime;
-export const context: import("svelte/store").Readable<RenderContext>;
+export const context: import("svelte/store").Readable<import("../renderer/RenderContext.js").RenderContext>;
 export const node: import("svelte/store").Readable<import("../Instance/RNodeRuntime.js").RNodeRuntime>;
 export const meta: import("svelte/store").Readable<{
     [x: string]: any;

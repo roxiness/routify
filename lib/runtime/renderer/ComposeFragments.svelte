@@ -13,13 +13,11 @@
     } from './composeFragments.js'
 
     /** @type {RenderContext}*/
-    export let context = null
+    export let context
 
-    /** @type {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} */
+    /** @type {RenderContextOptions} */
     export let options
 
-    /** @type {RenderContext}*/
-    let activeChildContext
     const { childFragments, isActive } = context
     const { decorator, props } = options
 
@@ -30,52 +28,50 @@
 
     const folderDecoraterPromise = addFolderDecorator(newDecorators, context)
 
-    let childContexts = buildChildContexts(options, context, newDecorators)
+    context.childContexts.set(buildChildContexts(options, context, newDecorators))
+
+    const { childContexts } = context
 
     // if parent changes status to inactive, so does children
-    $: if (!$isActive) childContexts.forEach(cc => cc.isActive.set(false))
+    $: if (!$isActive) get(context.childContexts).forEach(cc => cc.isActive.set(false))
 
-    $: $childFragments.length &&
-        ({ activeChildContext, childContexts } = handlePageChange(
-            $childFragments,
-            childContexts,
-        ))
-    $: updateVisibility(childContexts, activeChildContext)
+    $: $childFragments.length && handlePageChange()
+    $: updateVisibility(context)
 
-    /**
-     * @param {RouteFragment[]} fragments
-     * @param {RenderContext[]} _childContexts
-     */
-    const handlePageChange = (fragments, _childContexts, rebuild) => {
-        const [fragment, ...childFragments] = fragments
-        const _activeChildContext = findActiveChildContext(_childContexts, fragment)
+    const handlePageChange = rebuild => {
+        const [fragment, ...childFragments] = get(context.childFragments)
+        const childContexts = get(context.childContexts)
+        const toBeActiveChildContext = findActiveChildContext(childContexts, fragment)
 
-        if (!_activeChildContext) {
-            if (rebuild) handleRebuildError(context, _childContexts)
+        if (!toBeActiveChildContext) {
+            if (rebuild) handleRebuildError(context, childContexts)
 
             // if we're rendering a node that didn't exist at this level before, we need to rebuild the child contexts
             // this happens when navigating in or out of a reset module
-            _childContexts = buildChildContexts(options, context, newDecorators)
+            context.childContexts.set(buildChildContexts(options, context, newDecorators))
 
-            return handlePageChange(fragments, _childContexts, true)
+            return handlePageChange(true)
         }
 
         // if we're traversing down the tree, we need to set all old child fragments to inactive
         const setInactive = cf => cf.renderContext.then(rc => rc.isActive.set(false))
         if (!childFragments.length)
-            get(_activeChildContext.childFragments).forEach(setInactive)
+            get(toBeActiveChildContext.childFragments).forEach(setInactive)
 
-        _activeChildContext.fragment = fragment
-        _activeChildContext.childFragments.set(childFragments)
-        _activeChildContext.route = fragments[0].route
-        fragment.renderContext.resolve(_activeChildContext)
+        toBeActiveChildContext.fragment = fragment
+        toBeActiveChildContext.childFragments.set(childFragments)
+        toBeActiveChildContext.route = context.route
+        fragment.renderContext.resolve(toBeActiveChildContext)
 
-        return { activeChildContext: _activeChildContext, childContexts: _childContexts }
+        context.lastActiveChildContext = get(context.activeChildContext)
+        context.activeChildContext.set(toBeActiveChildContext)
+        context.childContexts.set(childContexts)
+        console.log('handle page change context', context.node?.id, context)
     }
 </script>
 
 {#await folderDecoraterPromise then}
-    {#each childContexts as context (context)}
+    {#each $childContexts as context (context)}
         <RenderFragment {context} {props} />
     {/each}
 {/await}
