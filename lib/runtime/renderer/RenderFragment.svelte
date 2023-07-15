@@ -40,11 +40,9 @@
     $: if (isAnonFn(NodeComponent) && $isVisible)
         context.node.loadModule().then(r => (NodeComponent = r.default))
 
-    $: ({ params, load, route } = context.fragment)
+    $: ({ params, load } = context.fragment)
 
     $: compProps = { ...params, ...load?.props, ...props }
-    /** @type {RoutifyContext}*/
-    $: routifyContext = { ...context, load, route }
 </script>
 
 {#if $isVisible && !isAnonFn(NodeComponent)}
@@ -57,7 +55,7 @@
             <svelte:component
                 this={NodeComponent}
                 {...compProps}
-                context={routifyContext}
+                {context}
                 let:props
                 let:inline
                 let:multi

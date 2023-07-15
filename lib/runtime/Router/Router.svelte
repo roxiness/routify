@@ -7,10 +7,10 @@
         shouldIgnoreClick,
     } from '../utils/index.js'
     import Component from '../renderer/ComposeFragments.svelte'
-    import ScrollDecorator from '../plugins/scroller/ScrollDecorator.svelte'
-    import { get, writable } from 'svelte/store'
+    import { get } from 'svelte/store'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
     import { normalizeDecorator } from '../renderer/utils/normalizeDecorator.js'
+    import { RouterContext } from '../renderer/RenderContext.js'
 
     /** @type {Router} */
     export let router = null
@@ -72,15 +72,8 @@
         clickHandler,
     }
 
-    const context = {
-        childFragments: writable([]),
-        decorators: [],
-        route: null,
-        router: router || new Router(options),
-        childContexts: writable([]),
-        activeChildContext: writable(null),
-    }
-    router = context.router
+    router = router || new Router(options)
+    const context = new RouterContext({ router })
 
     router.onMount.run({ context, router })
     context.decorators = context.decorators.map(normalizeDecorator)
