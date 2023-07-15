@@ -1,451 +1,466 @@
 /**
  * COMMON
  */
-type RNode = import("../lib/common/RNode").RNode<any>;
+type RNode = import('../lib/common/RNode').RNode<any>
 /**
  * COMMON
  */
-type Routify = import("../lib/common/Routify").Routify<any>;
+type Routify = import('../lib/common/Routify').Routify<any>
 /**
  * COMMON
  */
 type RoutifyBaseOptions = {
-    Node: import("../lib/common/RNode").RNode<any>;
-};
+    Node: import('../lib/common/RNode').RNode<any>
+}
 /**
  * COMMON
  */
-type SvelteComponentDev = typeof import('svelte/internal').SvelteComponentDev;
+type SvelteComponentDev = typeof import('svelte/internal').SvelteComponentDev
 /**
  * <T>
  */
-type MaybeArray<T> = import('./utils').MaybeArray<T>;
+type MaybeArray<T> = import('./utils').MaybeArray<T>
 /**
  * <T>
  */
-type MaybePromise<T> = import('./utils').MaybePromise<T>;
+type MaybePromise<T> = import('./utils').MaybePromise<T>
 /**
  * RUNTIME
  */
-type scrollBoundary = HTMLElement | ((HTMLElement: any) => HTMLElement) | ((HTMLElement: any) => Promise<HTMLElement>);
+type scrollBoundary =
+    | HTMLElement
+    | ((HTMLElement: any) => HTMLElement)
+    | ((HTMLElement: any) => Promise<HTMLElement>)
 /**
  * RUNTIME
  */
 type RoutifyRuntimePayload = {
-    instance: RoutifyRuntime;
-};
+    instance: RoutifyRuntime
+}
 /**
  * RUNTIME
  */
-type RNodeRuntime = import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime;
+type RNodeRuntime = import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime
 /**
  * RUNTIME
  */
-type Route = import('../lib/runtime/Route/Route').Route;
+type Route = import('../lib/runtime/Route/Route').Route
 /**
  * RUNTIME
  */
-type Router = import('../lib/runtime/Router/Router').Router;
+type Router = import('../lib/runtime/Router/Router').Router
 /**
  * RUNTIME
  */
-type RouteFragment = import('../lib/runtime/Route/RouteFragment').RouteFragment;
+type RouteFragment = import('../lib/runtime/Route/RouteFragment').RouteFragment
 /**
  * RUNTIME
  */
-type RoutifyRuntime = import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime;
+type RoutifyRuntime = import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime
 /**
  * RUNTIME
  */
 type RoutifyContext = RenderContext & {
-    load: Partial<RoutifyLoadReturn>;
-    route: Route;
-};
+    load: Partial<RoutifyLoadReturn>
+    route: Route
+}
 /**
  * RUNTIME
  */
-type AnchorLocation = import('../lib/runtime/decorators/AnchorDecorator').Location;
+type AnchorLocation = import('../lib/runtime/decorators/AnchorDecorator').Location
 /**
  * BUILDTIME
  */
-type ScrollContext = import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext;
+type ScrollContext = import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext
 /**
  * RUNTIME
  */
-type RFile = import('../lib/buildtime/plugins/filemapper/lib/File').File;
+type RFile = import('../lib/buildtime/plugins/filemapper/lib/File').File
 /**
  * RUNTIME
  */
-type RoutifyBuildtime = import('../lib/buildtime/RoutifyBuildtime').RoutifyBuildtime;
+type RoutifyBuildtime = import('../lib/buildtime/RoutifyBuildtime').RoutifyBuildtime
 /**
  * RUNTIME
  */
-type RNodeBuildtime = import('../lib/buildtime/RNodeBuildtime').RNodeBuildtime;
+type RNodeBuildtime = import('../lib/buildtime/RNodeBuildtime').RNodeBuildtime
 /**
  * // todo tools should not be any
  */
 type RoutifyBuildtimePayload = {
-    instance: RoutifyBuildtime;
-    tools: any;
-};
+    instance: RoutifyBuildtime
+    tools: any
+}
 type RoutifyCallback<T> = (first: {
-    instance: import("../lib/common/Routify").Routify<any>;
-}) => T | Promise<T>;
+    instance: import('../lib/common/Routify').Routify<any>
+}) => T | Promise<T>
 type RoutifyBuildtimeOptions = {
-    Node: RNodeBuildtime;
+    Node: RNodeBuildtime
     /**
      * defaults to '.routify'
      */
-    routifyDir: string;
-    clearRoutifyDir: boolean;
-    ignoreMetaConflictWarnings: string[] | boolean;
+    routifyDir: string
+    clearRoutifyDir: boolean
+    ignoreMetaConflictWarnings: string[] | boolean
     filemapper: {
-        moduleFiles: string[];
-        resetFiles: string[];
-        fallbackFiles: string[];
-    };
+        moduleFiles: string[]
+        resetFiles: string[]
+        fallbackFiles: string[]
+    }
     /**
      * defaults to { default: 'src/routes' }
      */
-    routesDir: string | {
-        [x: string]: string;
-    };
+    routesDir:
+        | string
+        | {
+              [x: string]: string
+          }
     /**
      * defaults to ['.svelte', '.html', '.md', '.svx'],
      */
-    extensions: (string | RegExp)[];
-    plugins: string[] | any[];
+    extensions: (string | RegExp)[]
+    plugins: string[] | any[]
     /**
      * rebuild Routify routes on changes
      */
-    watch: boolean;
-};
+    watch: boolean
+}
 type RoutifyRuntimeOptions = {
     /**
      * instance to use. Uses global by default
      */
-    instance: RoutifyRuntime;
-    rootNode: RNodeRuntime;
+    instance: RoutifyRuntime
+    rootNode: RNodeRuntime
     /**
      * the routes tree
      */
-    routes: any;
+    routes: any
     /**
      * name of router - leave blank if only only one router is used
      */
-    name: string;
+    name: string
     /**
      * hook: transforms paths to and from router and browser
      */
-    urlRewrite: UrlRewrite | UrlRewrite[];
+    urlRewrite: UrlRewrite | UrlRewrite[]
     /**
      * where to store the URL state - browser by default
      */
-    urlReflector: typeof import("../lib/runtime/Router/urlReflectors/ReflectorBase.js")['BaseReflector'];
+    urlReflector: typeof import('../lib/runtime/Router/urlReflectors/ReflectorBase.js')['BaseReflector']
     /**
      * initial url - "/" by default
      */
-    url?: string | undefined;
+    url?: string | undefined
     /**
      * ignore clicks
      */
-    passthrough: boolean | Router;
+    passthrough: boolean | Router
     /**
      * hook: runs before each router initiation
      */
-    beforeRouterInit: MaybeArray<RouterInitCallback>;
+    beforeRouterInit: MaybeArray<RouterInitCallback>
     /**
      * hook: runs after each router initiation
      */
-    afterRouterInit: MaybeArray<RouterInitCallback>;
+    afterRouterInit: MaybeArray<RouterInitCallback>
     /**
      * hook: guard that runs before url changes
      */
-    beforeUrlChange: MaybeArray<BeforeUrlChangeCallback>;
+    beforeUrlChange: MaybeArray<BeforeUrlChangeCallback>
     /**
      * hook: runs after url has changed
      */
-    afterUrlChange: MaybeArray<AfterUrlChangeCallback>;
+    afterUrlChange: MaybeArray<AfterUrlChangeCallback>
     /**
      * hook: runs after a new route has been rendered
      */
-    afterRouteRendered: MaybeArray<AfterRouteRenderedCallback>;
+    afterRouteRendered: MaybeArray<AfterRouteRenderedCallback>
     /**
      * hook: runs after url has changed
      */
-    onUrlClick: MaybeArray<OnUrlClickCallback>;
+    onUrlClick: MaybeArray<OnUrlClickCallback>
     /**
      * hook: transform route fragments after navigation
      */
-    transformFragments: MaybeArray<TransformFragmentsCallback>;
+    transformFragments: MaybeArray<TransformFragmentsCallback>
     /**
      * hook: runs when the router is mounted
      */
-    onMount: MaybeArray<OnMountRouterCallback>;
+    onMount: MaybeArray<OnMountRouterCallback>
     /**
      * hook: runs before router is destroyed
      */
-    onDestroy: MaybeArray<OnDestroyRouterCallback>;
-    queryHandler: QueryHandler;
-    plugins: Partial<RoutifyRuntimeOptions>[];
-    clickHandler: ClickHandler;
-    transformNodeTitle: (getTitle: () => string, node: RNodeRuntime) => string;
-};
+    onDestroy: MaybeArray<OnDestroyRouterCallback>
+    queryHandler: QueryHandler
+    plugins: Partial<RoutifyRuntimeOptions>[]
+    clickHandler: ClickHandler
+    transformNodeTitle: (getTitle: () => string, node: RNodeRuntime) => string
+}
 type RenderContext = {
-    anchorLocation: AnchorLocation;
-    childFragments: import('svelte/store').Writable<RouteFragment[]>;
-    node: RNodeRuntime;
+    anchorLocation: AnchorLocation
+    childFragments: import('svelte/store').Writable<RouteFragment[]>
+    node: RNodeRuntime
     options: {
-        [x: string]: any;
-    };
-    fragment: RouteFragment;
-    isActive: import('svelte/store').Writable<boolean>;
-    isVisible: import('svelte/store').Writable<boolean>;
-    wasVisible: boolean;
-    isInline: boolean;
+        [x: string]: any
+    }
+    fragment: RouteFragment
+    isActive: import('svelte/store').Writable<boolean>
+    isVisible: import('svelte/store').Writable<boolean>
+    wasVisible: boolean
+    isInline: boolean
     elem: import('svelte/store').Writable<{
-        parent: HTMLElement;
-        anchor: HTMLElement;
-    }>;
-    route: import('../lib/runtime/Route/Route').Route;
-    router: import('../lib/runtime/Router/Router').Router;
-    parentContext: RenderContext;
-    decorators: Decorator[];
-    onDestroy?: import('hookar').CollectionSyncVoid<any> | import('hookar').CollectionAsyncVoid<any>;
-    scrollBoundary: scrollBoundary;
-    mounted: DeferredPromise<void>;
+        parent: HTMLElement
+        anchor: HTMLElement
+    }>
+    route: import('../lib/runtime/Route/Route').Route
+    router: import('../lib/runtime/Router/Router').Router
+    parentContext: RenderContext
+    decorators: Decorator[]
+    onDestroy?:
+        | import('hookar').CollectionSyncVoid<any>
+        | import('hookar').CollectionAsyncVoid<any>
+    scrollBoundary: scrollBoundary
+    mounted: DeferredPromise<void>
     /**
      * *
      */
-    inline: Inline;
-};
-type DecoratorInput = (Partial<Decorator> & {
-    component: SvelteComponentDev;
-}) | SvelteComponentDev;
+    inline: Inline
+}
+type DecoratorInput =
+    | (Partial<Decorator> & {
+          component: SvelteComponentDev
+      })
+    | SvelteComponentDev
 type Decorator = {
-    recursive?: boolean | undefined;
-    shouldRender?: (payload: DecoratorShouldRenderPayload) => boolean;
-    component: SvelteComponentDev;
-};
+    recursive?: boolean | undefined
+    shouldRender?: (payload: DecoratorShouldRenderPayload) => boolean
+    component: SvelteComponentDev
+}
 type DecoratorShouldRenderPayload = {
-    context: RenderContext;
+    context: RenderContext
     /**
      * ,
      */
-    root: boolean;
-    decorators: Decorator;
-};
+    root: boolean
+    decorators: Decorator
+}
 /**
  * <T>
  */
-type Readable<T> = import("svelte/store").Readable<any>;
-type RouteStore = import('../lib/runtime/utils/index.js').Getable<Route>;
-type RouterInitCallback = (arg0: {
-    router: Router;
-    firstInit: boolean;
-}) => any;
-type BeforeUrlChangeCallback = (arg0: {
-    route: Route;
-}) => any;
-type AfterUrlChangeCallback = (arg0: {
-    route: Route;
-    history: Route[];
-}) => any;
-type AfterRouteRenderedCallback = (arg0: {
-    route: Route;
-}) => void;
-type OnUrlClickCallback = (arg0: HTMLAnchorElement) => any;
-type TransformFragmentsCallback = (arg0: RouteFragment[]) => RouteFragment[];
+type Readable<T> = import('svelte/store').Readable<any>
+type RouteStore = import('../lib/runtime/utils/index.js').Getable<Route>
+type RouterInitCallback = (arg0: { router: Router; firstInit: boolean }) => any
+type BeforeUrlChangeCallback = (arg0: { route: Route }) => any
+type AfterUrlChangeCallback = (arg0: { route: Route; history: Route[] }) => any
+type AfterRouteRenderedCallback = (arg0: { route: Route }) => void
+type OnUrlClickCallback = (arg0: HTMLAnchorElement) => any
+type TransformFragmentsCallback = (arg0: RouteFragment[]) => RouteFragment[]
 type OnMountRouterCallback = (arg0: {
-    router: Router;
+    router: Router
     context: {
-        decorators: any[];
-    };
-}) => void;
-type OnDestroyRouterCallback = (arg0: {
-    router: Router;
-}) => void;
+        decorators: any[]
+    }
+}) => void
+type OnDestroyRouterCallback = (arg0: { router: Router }) => void
 type RoutifyExternalMetaHelper = {
-    instance: RoutifyRuntime;
+    instance: RoutifyRuntime
     /**
      * //todo
      */
-    options: any;
-    tempPath: string;
-};
-type RoutifyLoad = (context: RoutifyLoadContext) => MaybePromise<Partial<RoutifyLoadReturn> | null>;
+    options: any
+    tempPath: string
+}
+type RoutifyLoad = (
+    context: RoutifyLoadContext,
+) => MaybePromise<Partial<RoutifyLoadReturn> | null>
 type RoutifyLoadContext = {
-    route: Route;
-    url: import('../lib/runtime').Url;
-    prevRoute?: Route | undefined;
-    isNew: boolean;
-    fetch: UniversalFetch;
-};
+    route: Route
+    url: import('../lib/runtime').Url
+    prevRoute?: Route | undefined
+    isNew: boolean
+    fetch: UniversalFetch
+}
 type RoutifyLoadReturn = {
-    status: number;
-    error: string | Error;
-    redirect: string;
-    maxage: number;
-    props: object;
-};
+    status: number
+    error: string | Error
+    redirect: string
+    maxage: number
+    props: object
+}
 type RoutifyBuildtimeRuntimePlugin = {
     /**
      * example: '@roxi/routify/plugins/reset'
      */
-    path: string;
+    path: string
     /**
      * the imported name from the path, defaults to "default"
      */
-    importee: string;
+    importee: string
     /**
      * options passed to the runtime plugin
      */
-    options: object;
-};
-type RoutifyRuntimePlugin = Partial<RoutifyRuntimeOptions>;
-type RoutifyBuildtimePlugin = Partial<RoutifyBasePlugin & RoutifyBuildtimePluginType>;
+    options: object
+}
+type RoutifyRuntimePlugin = Partial<RoutifyRuntimeOptions>
+type RoutifyBuildtimePlugin = Partial<RoutifyBasePlugin & RoutifyBuildtimePluginType>
 type RoutifyBasePlugin = {
     /**
      * name of plugin
      */
-    name?: string | undefined;
+    name?: string | undefined
     /**
      * name of plugin(s) to run before
      */
-    before?: (string | string[]) | undefined;
+    before?: (string | string[]) | undefined
     /**
      * name of plugin(s) to run after
      */
-    after?: (string | string[]) | undefined;
+    after?: (string | string[]) | undefined
     /**
      * runs before "build"
      */
-    options: (arg0: Partial<RoutifyBuildtimeOptions>) => Partial<RoutifyBuildtimeOptions>;
-};
+    options: (arg0: Partial<RoutifyBuildtimeOptions>) => Partial<RoutifyBuildtimeOptions>
+}
 type RoutifyBuildtimePluginType = {
     /**
      * runs after "options"
      */
-    build?: ((arg0: RoutifyBuildtimePayload) => (Promise<any> | any)) | undefined;
-    path?: string | undefined;
-    meta?: RoutifyExternalMetaHelper | undefined;
+    build?: ((arg0: RoutifyBuildtimePayload) => Promise<any> | any) | undefined
+    path?: string | undefined
+    meta?: RoutifyExternalMetaHelper | undefined
     /**
      * provides context to *.meta.js files
      */
-    metaContext?: (context: MetaContext & {
-        [x: string]: any;
-    }) => MetaContext;
+    metaContext?: (
+        context: MetaContext & {
+            [x: string]: any
+        },
+    ) => MetaContext
     /**
      * transform output files
      */
-    transform?: (id: string, content: string, instance: RoutifyBuildtime) => string;
-    runtimePlugins: RoutifyBuildtimeRuntimePlugin[];
-};
-type MetaContextSplit = (value: any, name?: string | undefined) => any;
+    transform?: (id: string, content: string, instance: RoutifyBuildtime) => string
+    runtimePlugins: RoutifyBuildtimeRuntimePlugin[]
+}
+type MetaContextSplit = (value: any, name?: string | undefined) => any
 /**
  * Modify the context available to meta files
  */
 type MetaContext = {
-    instance: RoutifyBuildtime;
-    node: RNodeBuildtime;
-    options: Partial<RoutifyBuildtimeOptions>;
+    instance: RoutifyBuildtime
+    node: RNodeBuildtime
+    options: Partial<RoutifyBuildtimeOptions>
     /**
      * dynamically import the value
      */
-    split: MetaContextSplit;
+    split: MetaContextSplit
     /**
      * persist the return of a callback on disk. Return persisted data on subsequent calls
      */
-    persist: typeof import("persistable")['default']['call'];
+    persist: typeof import('persistable')['default']['call']
     /**
      * temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
      */
-    tempPath: string;
-};
-type UrlRewriteFn = (url: string, ctx: {
-    router: Router;
-}) => string;
+    tempPath: string
+}
+type UrlRewriteFn = (
+    url: string,
+    ctx: {
+        router: Router
+    },
+) => string
 type UrlRewrite = {
-    toInternal: UrlRewriteFn;
-    toExternal: UrlRewriteFn;
-};
+    toInternal: UrlRewriteFn
+    toExternal: UrlRewriteFn
+}
 type QueryHandler = {
-    parse: QueryHandlerParse;
-    stringify: QueryHandlerStringify;
-};
-type QueryHandlerParse = (search: string, route: Route) => {
-    [x: string]: string;
-};
-type QueryHandlerStringify = (search: {
-    [x: string]: string;
-}, route: Route) => string;
+    parse: QueryHandlerParse
+    stringify: QueryHandlerStringify
+}
+type QueryHandlerParse = (
+    search: string,
+    route: Route,
+) => {
+    [x: string]: string
+}
+type QueryHandlerStringify = (
+    search: {
+        [x: string]: string
+    },
+    route: Route,
+) => string
 type ClickHandler = {
-    callback?: (event: PointerEvent, url: string) => string | false;
-    elem?: HTMLElement | ((elem: HTMLElement) => HTMLElement);
-};
-type ComponentGuardFn = (route: Route) => any;
+    callback?: (event: PointerEvent, url: string) => string | false
+    elem?: HTMLElement | ((elem: HTMLElement) => HTMLElement)
+}
+type ComponentGuardFn = (route: Route) => any
 type ReservedCmpProps = {
-    guard?: ComponentGuardFn | undefined;
-    load?: RoutifyLoad | undefined;
-    default?: SvelteComponentDev | undefined;
-};
+    guard?: ComponentGuardFn | undefined
+    load?: RoutifyLoad | undefined
+    default?: SvelteComponentDev | undefined
+}
 type Module = ReservedCmpProps & {
-    [x: string]: any;
-};
-type LoadSvelteModule = () => (Promise<ReservedCmpProps>);
+    [x: string]: any
+}
+type LoadSvelteModule = () => Promise<ReservedCmpProps>
 type PathNode = {
-    urlFragment: string;
-    node: RNodeRuntime;
-};
-type UrlState = 'pushState' | 'replaceState' | 'popState';
+    urlFragment: string
+    node: RNodeRuntime
+}
+type UrlState = 'pushState' | 'replaceState' | 'popState'
 type FragmentContext = {
-    route: Route;
-    node: RNodeRuntime;
+    route: Route
+    node: RNodeRuntime
     /**
      * preload functionality for pages and modules
      */
-    load?: Function | undefined;
+    load?: Function | undefined
     localParams: {
-        [x: string]: any;
-    };
-};
+        [x: string]: any
+    }
+}
 type NodeTreeExport = {
-    id: string;
-    name?: string | undefined;
-    module: any;
-    rootName?: string | undefined;
-    file?: any | undefined;
-    children: NodeTreeExport[];
-};
+    id: string
+    name?: string | undefined
+    module: any
+    rootName?: string | undefined
+    file?: any | undefined
+    children: NodeTreeExport[]
+}
 type BrowserAdapter = {
     /**
      * Called by each router when the browser URL changes. Returns an internal URL for each respective router.
      */
-    toRouter: (browserUrl: string, router: Router) => string;
+    toRouter: (browserUrl: string, router: Router) => string
     /**
      * compiles all router URLS into a single URL for the browser.
      */
-    toBrowser: (routers: Router[]) => string;
-};
-type SvelteComponentTyped = import('svelte').SvelteComponentTyped;
-type InlineInput = Partial<Inline> | boolean;
+    toBrowser: (routers: Router[]) => string
+}
+type SvelteComponentTyped = import('svelte').SvelteComponentTyped
+type InlineInput = Partial<Inline> | boolean
 type Inline = {
     /**
      * return true to inline the child node
      */
-    shouldInline: (node: RNodeRuntime, context: RenderContext) => boolean;
+    isInline: (node: RNodeRuntime, context: RenderContext) => boolean
     /**
      * return true to inline the child node
      */
-    shouldScroll: InlineCallback<boolean>;
-    context: 'browser' | 'ssr' | 'always';
-    scrollIntoView: (elem: HTMLElement, instant: boolean) => void;
+    shouldScroll: InlineCallback<boolean>
+    context: 'browser' | 'ssr' | 'always'
+    scrollIntoView: (elem: HTMLElement, instant: boolean) => void
     params: {
-        [x: string]: string[];
-    };
-};
+        [x: string]: string[]
+    }
+}
 type DeferredPromise<T> = Promise<T> & {
-    resolve: (T: any) => void;
-    reject: (T: any) => void;
-};
-type InlineCallback<T> = (context: ScrollContext, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;
+    resolve: (T: any) => void
+    reject: (T: any) => void
+}
+type InlineCallback<T> = (
+    context: ScrollContext,
+    index: number,
+    allScrollContexts: ScrollContext[],
+    defaultCb?: InlineCallback<T>,
+) => T

@@ -355,7 +355,7 @@
  * @typedef { Partial<Inline> | boolean } InlineInput
  *
  * @typedef { object } Inline
- * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } shouldInline return true to inline the child node
+ * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } isInline return true to inline the child node
  * @prop { InlineCallback<boolean> } shouldScroll return true to inline the child node
  * @prop { 'browser'|'ssr'|'always' } context
  * @prop { (elem: HTMLElement, instant: boolean) => void } scrollIntoView
