@@ -2,6 +2,7 @@
     import { url } from '@roxi/routify'
     import Icons from './icons.svelte'
 
+    /** @type {RenderContext}*/
     export let context
 
     let isWideCard = false
@@ -41,7 +42,7 @@
             {@html context.node.meta._description}
         </p>
     </div>
-    <a href={$url(path)} class="fade-overlay-link">
+    <a href={$url(path, route?.params)} class="fade-overlay-link">
         <div class="fade-overlay" />
     </a>
 </div>
