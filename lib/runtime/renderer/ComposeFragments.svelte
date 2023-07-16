@@ -31,7 +31,7 @@
     const _handleChildren = childFragments => {
         const setInactive = cf => cf.renderContext.then(rc => rc.isActive.set(false))
 
-        if (childFragments.length) setActiveChildContext(context)
+        if (childFragments.length && context.route) setActiveChildContext(context)
         // if we're traversing down the tree, we need to set all old child fragments to inactive
         else childFragments.forEach(setInactive)
 
