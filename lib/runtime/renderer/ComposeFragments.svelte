@@ -1,15 +1,10 @@
 <script>
     import { get } from 'svelte/store'
-    import { RouteFragment } from '../Route/RouteFragment.js'
     import { pushToOrReplace } from '../utils/index.js'
     import RenderFragment from './RenderFragment.svelte'
     import { normalizeDecorator } from './utils/normalizeDecorator.js'
     import { handleRebuildError } from '../utils/messages.js'
-    import {
-        addFolderDecorator,
-        findActiveChildContext,
-        updateVisibility,
-    } from './composeFragments.js'
+    import { addFolderDecorator, findActiveChildContext } from './composeFragments.js'
 
     /** @type {RenderContext}*/
     export let context
@@ -40,7 +35,7 @@
         // if we're traversing down the tree, we need to set all old child fragments to inactive
         else childFragments.forEach(setInactive)
 
-        updateVisibility(context)
+        context.updateChildren()
     }
     const setActiveChildContext = (context, rebuild) => {
         const [fragment, ...childFragments] = get(context.childFragments)
