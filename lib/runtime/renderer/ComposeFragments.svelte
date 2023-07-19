@@ -20,7 +20,10 @@
         .filter(Boolean)
         .map(normalizeDecorator)
 
-    const folderDecoraterPromise = addFolderDecorator(newDecorators, context)
+    // addFolderDecorator returns void if decorator is sync, otherwise it returns a promise
+    let decoratorReady = !addFolderDecorator(newDecorators, context)?.['then'](
+        () => (decoratorReady = true),
+    )
 
     context.buildChildContexts(options, newDecorators)
 
@@ -60,8 +63,8 @@
     }
 </script>
 
-{#await folderDecoraterPromise then}
+{#if decoratorReady}
     {#each $childContexts as context (context)}
         <RenderFragment {context} {props} />
     {/each}
-{/await}
+{/if}
