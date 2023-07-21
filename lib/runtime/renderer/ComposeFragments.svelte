@@ -29,8 +29,6 @@
 
     const { childContexts } = context
 
-    $: _handleChildren($childFragments)
-
     const _handleChildren = childFragments => {
         const setInactive = cf => cf.renderContext.then(rc => rc.isActive.set(false))
 
@@ -61,6 +59,8 @@
 
         context.childContexts.set(childContexts)
     }
+
+    $: _handleChildren($childFragments)
 </script>
 
 {#if decoratorReady}
