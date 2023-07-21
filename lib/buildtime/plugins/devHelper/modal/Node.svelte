@@ -25,36 +25,3 @@
         </li>
     {/each}
 </ul>
-
-<style>
-    a {
-        text-decoration: none;
-        color: var(--color-grey-400);
-        font-weight: 500;
-    }
-    a:hover {
-        color: var(--color-grey-500);
-    }
-    ul {
-        padding-left: var(--size-2);
-    }
-    .node {
-        height: 24px;
-        width: 100%;
-        display: inline-block;
-    }
-    .info {
-        background: var(--color-grey-400);
-        border-radius: var(--radius-full);
-        width: 13px;
-        line-height: 13px;
-        text-align: center;
-        color: white;
-        display: inline-block;
-        font-weight: 700;
-        font-size: 12px;
-    }
-    .node:not(:hover) span.info {
-        /* display: none; */
-    }
-</style>

@@ -17,11 +17,3 @@
         <button on:click={reveal}>Routify Helper</button>
     {/if}
 </div>
-
-<style>
-    .modal {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-    }
-</style>
