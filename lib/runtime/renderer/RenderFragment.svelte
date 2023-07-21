@@ -37,6 +37,8 @@
         context.mounted.resolve(context)
     }
 
+    $: hasInlineChildren = context.node.children.some(child => child.meta.inline)
+
     $: if (isAnonFn(NodeComponent) && $isVisible)
         context.node.loadModule().then(r => (NodeComponent = r.default))
 
@@ -63,7 +65,7 @@
                 let:anchor
                 let:options
                 let:scrollBoundary
-                >{#if $childFragments.length || (inline && !inline?.single) || (multi && !multi?.single)}
+                >{#if $childFragments.length || ((hasInlineChildren || inline || multi) && !(inline || multi)?.single)}
                     <!-- CHILD PAGES -->
                     <Compose
                         options={{
