@@ -48,7 +48,7 @@
 </script>
 
 {#if $isVisible && !isAnonFn(NodeComponent)}
-    <!-- todo IMPORTANT display: contents in style will set bouningClient().top to 0 for all elements -->
+    <!-- todo IMPORTANT display: contents in style will set boundingClient().top to 0 for all elements -->
     <!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
     <DecoratorWrapper {context}>
