@@ -28,6 +28,7 @@
         },
         "./vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
         "./lib/extra/vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
+        "./lib/extra/express-plugin": "./lib/extra/express-plugin/index.js",
         "./lib/*": "./lib/*",
         "./lib/cmp/*": "./lib/cmp/*.js",
         "./typings/*": "./typings/*",
