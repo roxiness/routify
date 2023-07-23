@@ -9,6 +9,7 @@
 
     /** @type {RenderContext} */
     export let context
+    context // shut up warnings
 
     /** @type {HTMLElement} */
     let elem
