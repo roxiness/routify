@@ -52,12 +52,14 @@
  * @prop {RNodeBuildtime} Node
  * @prop {string} routifyDir defaults to '.routify'
  * @prop {boolean} clearRoutifyDir
+ * @prop {string} mainEntryPoint defaults to 'src/main.js'
+ * @prop {string} rootComponent defaults to 'src/App.svelte'
+ * @prop {string|Object<string,string>} routesDir defaults to { default: 'src/routes' }
  * @prop {string[]|boolean} ignoreMetaConflictWarnings
  * @prop {object} filemapper
  * @prop {string[]} filemapper.moduleFiles defaults to ['_module.svelte', '_reset.svelte']
  * @prop {string[]} filemapper.resetFiles defaults to ['_reset.svelte']
  * @prop {string[]} filemapper.fallbackFiles defaults to ['_reset.svelte']
- * @prop {string|Object<string,string>} routesDir defaults to { default: 'src/routes' }
  * @prop {(string|RegExp)[]} extensions defaults to ['.svelte', '.html', '.md', '.svx'],
  * @prop {string[]|Object[]} plugins
  * @prop {boolean} watch rebuild Routify routes on changes
