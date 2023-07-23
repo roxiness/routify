@@ -13,7 +13,9 @@ export class RoutifyRuntime extends Routify<typeof RNodeRuntime> {
     };
     options: any;
     global: import("../Global/Global.js").AppInstance;
-    log: import("consolite").ConsoliteLogger;
+    log: import("consolite").ConsoliteLogger<import("consolite").ExtendConsole, Console & {
+        [x: string]: Function;
+    }>;
 }
 import { RNodeRuntime } from "./RNodeRuntime.js";
 import { Routify } from "../../common/Routify.js";

@@ -1,28 +1,61 @@
-export class RenderContext {
+export class RouterContext {
+    /** @param {{router: Router}} params */
+    constructor({ router }: {
+        router: Router;
+    });
+    /** @type {import('svelte/store').Writable<RenderContext[]>} */
+    childContexts: import('svelte/store').Writable<RenderContext[]>;
+    /** @type {import('svelte/store').Writable<RouteFragment[]>} */
+    childFragments: import('svelte/store').Writable<RouteFragment[]>;
+    /** @type {import('svelte/store').Writable<RenderContext>} */
+    activeChildContext: import('svelte/store').Writable<RenderContext>;
+    /** @type {RenderContext} */
+    lastActiveChildContext: RenderContext;
+    /** @type {Decorator[]} */
+    decorators: Decorator[];
+    router: import("..").RouterClass;
+    route: import("../Route/Route").Route;
+    /**
+     * @param {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} options
+     *
+     * */
+    buildChildContexts(options: Partial<{
+        inline: InlineInput;
+        decorator: DecoratorInput;
+        props: any;
+        options: any;
+        anchor: AnchorLocation;
+        scrollBoundary: scrollBoundary;
+    }>, newDecorators: any): void;
+    updateChildren(): void;
+}
+export class RenderContext extends RouterContext {
     /**
      *
      * @param {{
      *   node: RNodeRuntime
      *   paramsPool: Object.<string, string[]>
      *   rawInlineInputFromSlot: InlineInput
-     *   parentContext: RenderContext
+     *   parentContext: RenderContext | RouterContext
      *   newDecorators: Decorator[]
      *   contextOptions: RenderContextOptions
      *   scrollBoundary: scrollBoundary
      *   anchorLocation: AnchorLocation
+     *   router?: Router
      * }} param0
      */
-    constructor({ node, paramsPool, rawInlineInputFromSlot, parentContext, newDecorators, contextOptions, scrollBoundary, anchorLocation, }: {
+    constructor({ node, paramsPool, rawInlineInputFromSlot, parentContext, newDecorators, contextOptions, scrollBoundary, anchorLocation, router, }: {
         node: RNodeRuntime;
         paramsPool: {
             [x: string]: string[];
         };
         rawInlineInputFromSlot: InlineInput;
-        parentContext: RenderContext;
+        parentContext: RenderContext | RouterContext;
         newDecorators: Decorator[];
         contextOptions: RenderContextOptions;
         scrollBoundary: scrollBoundary;
         anchorLocation: AnchorLocation;
+        router?: Router;
     });
     anchorLocation: string;
     /** @type {RNodeRuntime} */
@@ -38,21 +71,12 @@ export class RenderContext {
         parent: HTMLElement;
         anchor: HTMLElement;
     }>;
-    /** @type {Route} */
-    route: Route;
-    /** @type {import('svelte/store').Writable<RenderContext[]>} */
-    childContexts: import('svelte/store').Writable<RenderContext[]>;
-    /** @type {import('svelte/store').Writable<RenderContext>} */
-    activeChildContext: import('svelte/store').Writable<RenderContext>;
-    /** @type {RenderContext} */
-    lastActiveChildContext: RenderContext;
     onDestroy: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
     mounted: DeferredPromise<any>;
-    childFragments: import("svelte/store").Writable<RouteFragment[]>;
+    /** @type {RouterContext} */
+    routerContext: RouterContext;
     fragment: RouteFragment;
-    router: any;
     parentContext: RenderContext;
-    decorators: Decorator[];
     options: Partial<{
         inline: InlineInput;
         decorator: DecoratorInput;
@@ -62,6 +86,8 @@ export class RenderContext {
         scrollBoundary: scrollBoundary;
     }>;
     scrollBoundary: scrollBoundary;
-    updateVisibility(): void;
+    get parentOrRouterContext(): any;
+    setToActive(): void;
+    update(activeSiblingContext: any): void;
 }
 import { RouteFragment } from "../Route/RouteFragment";

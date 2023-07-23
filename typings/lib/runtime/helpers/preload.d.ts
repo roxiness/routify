@@ -1,5 +1,5 @@
-export function preloadUrl(urlOrOptions?: (string | string[] | PreloadOptions) | undefined): Promise<void[]>;
-export function preloadUrlFromUrlPairs(urlPairs: UrlPair[], routesMap?: RoutesMap | undefined): Promise<void>;
+export function preloadUrl(urlOrOptions?: (string | string[] | PreloadOptions) | undefined): Promise<any[][]>;
+export function preloadUrlFromUrlPairs(urlPairs: UrlPair[], routesMap?: RoutesMap | undefined): Promise<any[]>;
 export function getPrimaryUrl(urlPairs: UrlPair[]): string;
 export type UrlPair = [routerName: string, url: string];
 export type RoutesMap = {

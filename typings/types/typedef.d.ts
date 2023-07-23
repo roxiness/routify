@@ -102,17 +102,25 @@ type RoutifyBuildtimeOptions = {
      */
     routifyDir: string;
     clearRoutifyDir: boolean;
-    ignoreMetaConflictWarnings: string[] | boolean;
-    filemapper: {
-        moduleFiles: string[];
-        resetFiles: string[];
-        fallbackFiles: string[];
-    };
+    /**
+     * defaults to 'src/main.js'
+     */
+    mainEntryPoint: string;
+    /**
+     * defaults to 'src/App.svelte'
+     */
+    rootComponent: string;
     /**
      * defaults to { default: 'src/routes' }
      */
     routesDir: string | {
         [x: string]: string;
+    };
+    ignoreMetaConflictWarnings: string[] | boolean;
+    filemapper: {
+        moduleFiles: string[];
+        resetFiles: string[];
+        fallbackFiles: string[];
     };
     /**
      * defaults to ['.svelte', '.html', '.md', '.svx'],
