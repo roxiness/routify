@@ -6,6 +6,7 @@
     /** @type {RenderContext} */
     export let context
     export let isRoot
+    isRoot
 
     $: ({ route, router } = context)
     $: if (route && !route.state.dontScroll) {
