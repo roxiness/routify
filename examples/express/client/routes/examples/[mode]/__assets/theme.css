@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+
+@import './open-props/extra/normalize.css';
+@import './open-props/routify.index.css';
+@import './colors.css';
+
+.routify .example .frame {
+    margin-right: calc(-1 * (100vw - 100%));
+    background: var(--surface-1);
+}
+
+.routify {
+    position: fixed;
+    inset: 0;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+.routify .example.node-data-fetching:not(.active) .spinner-wrapper {
+    /* don't display the spinner when other examples are loading */
+    display: none;
+}
+
+.routify {
+    & p {
+        font-size: var(--font-size-4);
+        line-height: var(--font-lineheight-3);
+        margin-block: var(--size-3);
+    }
+
+    & svg {
+        color: var(--text-2);
+    }
+
+    & main {
+        max-width: min(1024px, 90%);
+        margin: 0 auto;
+    }
+
+    & .app > header {
+        position: sticky;
+        inset: 0;
+
+        background: var(--surface-2);
+
+        border: 1px solid hsl(var(--brand-hue) 10% 50% / 15%);
+        box-shadow: 0 2.8px 2.2px
+                hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 3%)),
+            0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 1%)),
+            0 12.5px 10px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 2%)),
+            0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 2%)),
+            0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + 3%)),
+            0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength));
+
+        & nav {
+            height: var(--nav-height);
+            max-width: min(1024px, 90%);
+            margin: auto;
+            display: flex;
+            align-items: center;
+            padding: var(--size-2) 0 var(--size-3);
+
+            & > .brand , & > .brand > * {
+                font-size: var(--font-size-6);
+                text-decoration: none;
+                color: var(--brand);
+            }
+            & .spacer {
+                flex-grow: 1;
+            }
+            & ul {
+                align-self: flex-end;
+                display: flex;
+                gap: var(--size-5);
+            }
+            & li {
+                padding-bottom: var(--size-1);
+                list-style: none;
+                & a {
+                    color: var(--text-2);
+                    text-decoration: none;
+                    font-size: var(--font-size-4);
+                    border-bottom: solid 3px transparent;
+                    .isActive & {
+                        border-color: var(--surface-4);
+                    }
+                }
+            }
+        }
+    }
+}

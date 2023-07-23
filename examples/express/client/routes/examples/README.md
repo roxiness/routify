@@ -1,0 +1,1 @@
+This folder can be freely deleted when you no longer need the examples.
