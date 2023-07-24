@@ -1,0 +1,18 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "./public/",
+  "origins": [
+    "http://localhost:3030",
+    "http://localhost:1337"
+  ],
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "sqlite": {
+    "client": "sqlite3",
+    "connection": "backend.sqlite",
+    "useNullAsDefault": true
+  }
+}

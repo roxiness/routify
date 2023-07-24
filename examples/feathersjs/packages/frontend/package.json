@@ -1,0 +1,20 @@
+{
+    "name": "starter-basic",
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "preview": "vite preview",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@roxi/routify": "^3.0.0-next.159",
+        "@sveltejs/vite-plugin-svelte": "^2.4.2",
+        "mdsvex": "^0.11.0",
+        "spank": "^2.0.0",
+        "svelte": "^4.0.5",
+        "vite": "^4.4.1",
+        "@feathersjs/socketio-client": "^5.0.8",
+        "postcss-nesting": "^11.3.0",
+        "socket.io-client": "^4.7.1"
+    }
+}
