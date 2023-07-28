@@ -16,6 +16,7 @@
 <!-- routify:meta bundle -->
 
 <div class="routify" color-scheme={theme}>
+    <!-- FULLSCREEN -->
     {#if $params.mode === 'full'}
         <div class="frame fullscreen">
             <slot />
@@ -27,6 +28,7 @@
             href={$url('$leaf', { mode: 'list' })}>
             <Icons icon="fullscreen-exit" /></a>
     {:else}
+        <!-- LIST -->
         <div class="wrapper">
             <div class="grid">
                 <slot
