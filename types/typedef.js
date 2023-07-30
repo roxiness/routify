@@ -391,19 +391,3 @@
 //  */
 
 /** @typedef {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} RenderContextOptions*/
-
-/**
- * @typedef {Object} RoutifyStarterManifest
- * @property {string} name
- * @property {string} description
- * @property {Object} test
- * @property {TestTemplate[]} test.tests
- *
- * @typedef {TestTemplateString | TestTemplateObject} TestTemplate
- *
- * @typedef {string} TestTemplateString
- *
- * @typedef {Object} TestTemplateObject
- * @property {string} page - the page to test
- * @property {string} contains - the string to look for in the page
- */

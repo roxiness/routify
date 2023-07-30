@@ -441,22 +441,3 @@ type RenderContextOptions = Partial<{
     anchor: AnchorLocation;
     scrollBoundary: scrollBoundary;
 }>;
-type RoutifyStarterManifest = {
-    name: string;
-    description: string;
-    test: {
-        tests: TestTemplate[];
-    };
-};
-type TestTemplate = TestTemplateString | TestTemplateObject;
-type TestTemplateString = string;
-type TestTemplateObject = {
-    /**
-     * - the page to test
-     */
-    page: string;
-    /**
-     * - the string to look for in the page
-     */
-    contains: string;
-};
