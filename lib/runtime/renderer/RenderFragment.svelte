@@ -6,7 +6,6 @@
     import { isAnonFn, setRoutifyFragmentContext, waitFor } from '../utils/index.js'
     /** @type {RenderContext} */
     export let context
-    export let props
     const { isVisible, childFragments } = context // grab the stores
     let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
     setRoutifyFragmentContext(context)
@@ -44,7 +43,7 @@
 
     $: ({ params, load } = context.fragment)
 
-    $: compProps = { ...params, ...load?.props, ...props }
+    $: compProps = { ...params, ...load?.props, ...context.props }
 </script>
 
 {#if $isVisible && !isAnonFn(NodeComponent)}
@@ -57,6 +56,7 @@
             <svelte:component
                 this={NodeComponent}
                 {...compProps}
+                {...context.props}
                 {context}
                 let:props
                 let:inline

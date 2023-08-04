@@ -13,7 +13,7 @@
     export let options
 
     const { childFragments } = context
-    const { decorator, props } = options
+    const { decorator } = options
 
     const recursiveDecorators = context.decorators.filter(deco => deco.recursive)
     const newDecorators = pushToOrReplace(recursiveDecorators, decorator)
@@ -65,6 +65,6 @@
 
 {#if decoratorReady}
     {#each $childContexts as context (context)}
-        <RenderFragment {context} {props} />
+        <RenderFragment {context} />
     {/each}
 {/if}
