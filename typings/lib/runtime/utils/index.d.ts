@@ -15,7 +15,9 @@ export function insertWildcards(str: string): string;
 export function fromEntries(iterable: any): any;
 export function populateUrl(path: string, params: {
     [x: string]: (string | string[]);
-}, route: Route): string;
+}, overloadStringifier: (obj: {
+    [x: string]: string;
+}) => string): string;
 export function urlFromAddress(): string;
 export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;

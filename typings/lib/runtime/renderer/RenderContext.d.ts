@@ -42,9 +42,10 @@ export class RenderContext extends RouterContext {
      *   scrollBoundary: scrollBoundary
      *   anchorLocation: AnchorLocation
      *   router?: Router
+     *   props: Object
      * }} param0
      */
-    constructor({ node, paramsPool, rawInlineInputFromSlot, parentContext, newDecorators, contextOptions, scrollBoundary, anchorLocation, router, }: {
+    constructor({ node, paramsPool, rawInlineInputFromSlot, parentContext, newDecorators, contextOptions, scrollBoundary, anchorLocation, router, props, }: {
         node: RNodeRuntime;
         paramsPool: {
             [x: string]: string[];
@@ -56,6 +57,7 @@ export class RenderContext extends RouterContext {
         scrollBoundary: scrollBoundary;
         anchorLocation: AnchorLocation;
         router?: Router;
+        props: any;
     });
     anchorLocation: string;
     /** @type {RNodeRuntime} */
@@ -75,7 +77,9 @@ export class RenderContext extends RouterContext {
     mounted: DeferredPromise<any>;
     /** @type {RouterContext} */
     routerContext: RouterContext;
+    props: any;
     fragment: RouteFragment;
+    params: import("svelte/store").Writable<{}>;
     parentContext: RenderContext;
     options: Partial<{
         inline: InlineInput;
@@ -89,5 +93,7 @@ export class RenderContext extends RouterContext {
     get parentOrRouterContext(): any;
     setToActive(): void;
     update(activeSiblingContext: any): void;
+    /** updates params with accumulated values, starting from the root context */
+    updateParams(): void;
 }
 import { RouteFragment } from "../Route/RouteFragment";

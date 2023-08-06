@@ -86,6 +86,7 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
         params: {};
         fragment: string;
     }[];
+    getChainToNode(node: any): any[];
     /** @returns {InstanceType['NodeConstructor']['prototype']} */
     toJSON(): InstanceType['NodeConstructor']['prototype'];
     /** @returns {string} */

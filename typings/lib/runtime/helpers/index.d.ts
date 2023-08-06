@@ -52,7 +52,7 @@ export const _url: Readable<Url>;
  * @type {Readable<Url>}
  */
 export const url: Readable<Url>;
-export function createUrl(router: Router, originNode: RNodeRuntime, activeRoute: Route): UrlFromString;
+export function createUrl(fragment: RouteFragment, router: any): UrlFromString;
 /**
  * @type {Readable<Object.<string, any>>}
  */

@@ -17,8 +17,9 @@ export class Route {
     mode: UrlState;
     state: any;
     hash: string;
+    search: string;
+    params: any;
     log: any;
-    get params(): any;
     get leaf(): RouteFragment;
     get isPendingOrPrefetch(): any;
     loadRoute(): Promise<boolean>;
@@ -40,6 +41,7 @@ export class Route {
     /**
      * creates fragments. A fragment is the section between each / in the URL
      */
-    _createFragments(): RouteFragment[];
+    _createFragments(pathname: any): RouteFragment[];
+    _createUrl(fragments: any): string;
 }
 import { RouteFragment } from "./RouteFragment.js";
