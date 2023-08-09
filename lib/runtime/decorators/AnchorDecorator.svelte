@@ -7,10 +7,6 @@
     /** @type {(parent: Node, anchor?: Node)=>any} */
     export let onMount = x => x
 
-    /** @type {RenderContext} */
-    export let context
-    context // shut up warnings
-
     /** @type {HTMLElement} */
     let elem
 
