@@ -94,7 +94,9 @@ Object {
         "path": "test/unit/filemapper/example/routes/index.svelte",
       },
       "id": "_default_index_svelte",
-      "meta": Object {},
+      "meta": Object {
+        "isDefault": true,
+      },
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
     },
@@ -138,7 +140,9 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               },
               "id": "_default_no_layouts_nested_index_svelte",
-              "meta": Object {},
+              "meta": Object {
+                "isDefault": true,
+              },
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
             },
@@ -689,7 +693,9 @@ Object {
         "path": "test/unit/filemapper/example/routes/index.svelte",
       },
       "id": "_default_index_svelte",
-      "meta": Object {},
+      "meta": Object {
+        "isDefault": true,
+      },
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
     },
@@ -733,7 +739,9 @@ Object {
                 "path": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               },
               "id": "_default_no_layouts_nested_index_svelte",
-              "meta": Object {},
+              "meta": Object {
+                "isDefault": true,
+              },
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
             },

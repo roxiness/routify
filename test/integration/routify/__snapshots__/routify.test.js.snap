@@ -115,7 +115,9 @@ export default {
       ]
     },
     {
-      \\"meta\\": {},
+      \\"meta\\": {
+        \\"isDefault\\": true
+      },
       \\"id\\": \\"_default_index_svelte\\",
       \\"_regex\\": {},
       \\"_paramKeys\\": {},
@@ -177,7 +179,9 @@ export default {
               \\"children\\": []
             },
             {
-              \\"meta\\": {},
+              \\"meta\\": {
+                \\"isDefault\\": true
+              },
               \\"id\\": \\"_default_no_layouts_nested_index_svelte\\",
               \\"_regex\\": {},
               \\"_paramKeys\\": {},
