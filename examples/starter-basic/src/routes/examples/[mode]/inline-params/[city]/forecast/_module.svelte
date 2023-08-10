@@ -1,15 +1,16 @@
 <script>
-    import { url, isActive, params } from '@roxi/routify'
+    import { url, isActiveFragment, params } from '@roxi/routify'
+    /** @type {RenderContext}*/
     export let context
 </script>
 
 <div class="span">
     <a
         href={$url('./hourly', { city: $params.city })}
-        class:active={$isActive('./hourly', { city: $params.city })}>Hourly</a>
+        class:active={$isActiveFragment('./hourly', { city: $params.city })}>Hourly</a>
     <a
         href={$url('./daily', { city: $params.city })}
-        class:active={$isActive('./daily', { city: $params.city })}>Daily</a>
+        class:active={$isActiveFragment('./daily', { city: $params.city })}>Daily</a>
 </div>
 
 <slot />
@@ -29,6 +30,9 @@
         color: var(--text-1);
         font-size: var(--font-size-4);
         opacity: 0.3;
+    }
+    .span a:hover {
+        opacity: 0.8;
     }
     .span a.active {
         opacity: 1;

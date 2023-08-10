@@ -1,29 +1,25 @@
 <script>
-    import { url, isActive } from '@roxi/routify'
-    export let context
-    export let weather
-    $: city = context.fragment.params.city
+    import { url, isActiveFragment } from '@roxi/routify'
+    export let context, city
 </script>
 
-<div class="entry card" class:active={$isActive('.', { city })}>
+<div class="entry card" class:active={$isActiveFragment('.', { city })}>
     <a class="city-name" href={$url('$leaf', { city })}>
         <h3>{city}</h3>
     </a>
 
     <div class="links">
-        <a href={$url('./index', { city })} class:active={$isActive('./index', { city })}
-            >Overview</a>
+        <a
+            href={$url('./index', { city })}
+            class:active={$isActiveFragment('./index', { city })}>Overview</a>
         <a
             href={$url('./forecast', { city })}
-            class:active={$isActive('./forecast', { city })}>Forecast</a>
-        <!-- <a
-            href={$url('./history', { city })}
-            class:active={$isActive('./history', { city })}>History</a> -->
+            class:active={$isActiveFragment('./forecast', { city })}>Forecast</a>
         <a
             href={$url('./alerts', { city })}
-            class:active={$isActive('./alerts', { city })}>Alerts</a>
+            class:active={$isActiveFragment('./alerts', { city })}>Alerts</a>
     </div>
-    <slot props={{ weather }} />
+    <slot />
 </div>
 
 <style>
@@ -61,9 +57,13 @@
         opacity: 0.5;
         text-decoration: none;
     }
+    .links a:hover {
+        opacity: 0.8;
+    }
     .links a.active {
         opacity: 1;
     }
+
     .card {
         background: var(--surface-2);
         box-shadow: var(--shadow-2);
