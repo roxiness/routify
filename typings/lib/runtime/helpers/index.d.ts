@@ -68,6 +68,9 @@ export const params: Readable<{
  *
  * @type {Readable<IsActive>} */
 export const isActive: Readable<IsActive>;
+export namespace isActiveFragment {
+    function subscribe(run: any, invalidate: any): import("svelte/store").Unsubscriber;
+}
 export function isActiveUrl(renderContext: RenderContext): (path: string, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;

@@ -91,6 +91,7 @@ export class RenderContext extends RouterContext {
     }>;
     scrollBoundary: scrollBoundary;
     get parentOrRouterContext(): any;
+    get ancestors(): RenderContext[];
     setToActive(): void;
     update(activeSiblingContext: any): void;
     /** updates params with accumulated values, starting from the root context */

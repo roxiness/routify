@@ -13,14 +13,7 @@ export class RouteFragment {
     /** @type {Partial<RoutifyLoadReturn>} */
     load: Partial<RoutifyLoadReturn>;
     urlFragment: string;
-    set params(arg: {});
-    get params(): {};
+    params: any;
     /** @type {DeferredPromise<RenderContext>} */
     renderContext: DeferredPromise<RenderContext>;
-    /**
-     * @type {Object.<string, string|string[]>}
-     **/
-    _params: {
-        [x: string]: string | string[];
-    };
 }

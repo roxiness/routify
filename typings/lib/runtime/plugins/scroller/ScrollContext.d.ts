@@ -13,6 +13,6 @@ export class ScrollContext {
     scrollTarget: HTMLElement;
     getBoundary(): Promise<HTMLElement>;
     init(): Promise<void>;
-    scrollToElem: string | true;
+    scrollToElem: any;
     handleScrollInstructions(): Promise<any>;
 }

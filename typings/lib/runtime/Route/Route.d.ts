@@ -12,14 +12,17 @@ export class Route {
     fragments: RouteFragment[];
     /** @type {RoutifyLoadReturn} */
     load: RoutifyLoadReturn;
+    sourceUrl: URL;
     router: import("../index.js").RouterClass;
-    url: string;
     mode: UrlState;
     state: any;
-    hash: string;
-    search: string;
     params: any;
+    url: string;
     log: any;
+    get fragmentParams(): any;
+    get queryParams(): {
+        [x: string]: string;
+    };
     get leaf(): RouteFragment;
     get isPendingOrPrefetch(): any;
     loadRoute(): Promise<boolean>;
@@ -42,6 +45,6 @@ export class Route {
      * creates fragments. A fragment is the section between each / in the URL
      */
     _createFragments(pathname: any): RouteFragment[];
-    _createUrl(fragments: any): string;
+    _createUrl(): string;
 }
 import { RouteFragment } from "./RouteFragment.js";
