@@ -1,5 +1,5 @@
 <script>
-    import { params, url } from '@roxi/routify'
+    import { url } from '@roxi/routify'
     import Icons from './__components/icons.svelte'
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
     import './__assets/theme.css'
@@ -8,16 +8,18 @@
     const scrollIntoView = (elem, instant) =>
         elem.scrollIntoView({ inline: 'center', behavior: instant ? 'auto' : 'smooth' })
     import ProgressBar from '../../../components/ProgressBar.svelte'
+    export let mode
 </script>
 
 <ProgressBar />
 
 <!-- routify:meta reset -->
 <!-- routify:meta bundle -->
+<!-- routify:meta isDefault={"mode": "list"} -->
 
 <div class="routify" color-scheme={theme}>
     <!-- FULLSCREEN -->
-    {#if $params.mode === 'full'}
+    {#if mode === 'full'}
         <div class="frame fullscreen">
             <slot />
         </div>
