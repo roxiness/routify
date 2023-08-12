@@ -18,6 +18,10 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     instance: InstanceType;
     name: string;
     module: string | ReservedCmpProps;
+    specificity: {
+        static: number;
+        dynamic: number;
+    };
     /** @param {InstanceType['NodeConstructor']['prototype']} child */
     appendChild(child: InstanceType['NodeConstructor']['prototype']): void;
     /**
@@ -36,6 +40,8 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     get isRoot(): boolean;
     /** @type {InstanceType['NodeType'][]} */
     get children(): InstanceType["NodeType"][];
+    get navigableChildren(): InstanceType["NodeType"][];
+    get linkableChildren(): InstanceType["NodeType"][];
     /** @returns {number} */
     get level(): number;
     /** @type {Object.<string,RegExp>} */

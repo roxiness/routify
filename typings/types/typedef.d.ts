@@ -126,7 +126,11 @@ type RoutifyBuildtimeOptions = {
      * defaults to ['.svelte', '.html', '.md', '.svx'],
      */
     extensions: (string | RegExp)[];
+    /**
+     * //  *
+     */
     plugins: string[] | any[];
+    beforeWrite: (instance: RoutifyBuildtime) => void;
     /**
      * rebuild Routify routes on changes
      */
