@@ -30,6 +30,7 @@
     const { childContexts } = context
 
     const _handleChildren = childFragments => {
+        context.router.log.verbose('handle children', childFragments) // ROUTIFY-DEV-ONLY
         const setInactive = cf => cf.renderContext.then(rc => rc.isActive.set(false))
 
         if (childFragments.length && context.route) setActiveChildContext(context)
