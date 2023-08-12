@@ -36,7 +36,7 @@
         context.mounted.resolve(context)
     }
 
-    $: hasInlineChildren = context.node.children.some(child => child.meta.inline)
+    $: hasInlineChildren = context.node.navigableChildren.some(child => child.meta.inline)
 
     $: if (isAnonFn(NodeComponent) && $isVisible)
         context.node.loadModule().then(r => (NodeComponent = r.default))
