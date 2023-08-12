@@ -34,6 +34,7 @@
 
     const childMounted = () => {
         context.mounted.resolve(context)
+        context.router.log.verbose('render', context.node.path, context) // ROUTIFY-DEV-ONLY
     }
 
     $: hasInlineChildren = context.node.navigableChildren.some(child => child.meta.inline)
@@ -52,10 +53,6 @@
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
     <DecoratorWrapper {context}>
         <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
-            <!-- ROUTIFY-DEV-ONLY-START -->
-            {context.router.log.verbose('render', context.node.path, context) || ''}
-            <!-- ROUTIFY-DEV-ONLY-END -->
-
             <!-- PAGE COMPONENT -->
             <svelte:component
                 this={NodeComponent}
