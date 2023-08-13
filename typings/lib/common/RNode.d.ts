@@ -18,10 +18,7 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     instance: InstanceType;
     name: string;
     module: string | ReservedCmpProps;
-    specificity: {
-        static: number;
-        dynamic: number;
-    };
+    specificity: number[];
     /** @param {InstanceType['NodeConstructor']['prototype']} child */
     appendChild(child: InstanceType['NodeConstructor']['prototype']): void;
     /**
@@ -48,7 +45,6 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     _regex: {
         [x: string]: RegExp;
     };
-    set regex(arg: RegExp);
     get regex(): RegExp;
     /**
      * @type {Object.<string, string[]>}
