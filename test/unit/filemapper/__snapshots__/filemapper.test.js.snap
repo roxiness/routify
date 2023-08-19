@@ -2,17 +2,9 @@
 
 exports[`test/unit/filemapper/filemapper.test.js/filemapper: 4.filemap-with-components 1`] = `
 Object {
-  "_paramKeys": Object {
-    "": Array [],
-  },
-  "_regex": Object {},
   "asyncModule": undefined,
   "children": Array [
     Object {
-      "_paramKeys": Object {
-        "admin": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -28,25 +20,11 @@ Object {
       },
       "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       "name": "admin",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "blog": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -63,18 +41,8 @@ Object {
           },
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
-          "specificity": Array [
-            0,
-            1,
-          ],
         },
         Object {
-          "_paramKeys": Object {
-            "prefixed[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -91,10 +59,6 @@ Object {
           },
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           "name": "prefixed[slug]",
-          "specificity": Array [
-            8,
-            1,
-          ],
         },
       ],
       "file": File {
@@ -108,16 +72,8 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "blog",
-      "specificity": Array [
-        4,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "index": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -133,30 +89,14 @@ Object {
       },
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "no-layouts": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "nested": Array [],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [
             Object {
-              "_paramKeys": Object {
-                "foo": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -170,16 +110,8 @@ Object {
               "meta": Object {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
-              "specificity": Array [
-                3,
-                0,
-              ],
             },
             Object {
-              "_paramKeys": Object {
-                "index": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -195,10 +127,6 @@ Object {
               },
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
-              "specificity": Array [
-                5,
-                0,
-              ],
             },
           ],
           "file": File {
@@ -212,10 +140,6 @@ Object {
           "meta": Object {},
           "module": false,
           "name": "nested",
-          "specificity": Array [
-            6,
-            0,
-          ],
         },
       ],
       "file": File {
@@ -229,18 +153,8 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "no-layouts",
-      "specificity": Array [
-        10,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "[...404]": Array [
-          "...404",
-        ],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -257,10 +171,6 @@ Object {
       },
       "module": "./.routify/components/[...404].svelte",
       "name": "[...404]",
-      "specificity": Array [
-        0,
-        1,
-      ],
     },
   ],
   "file": File {
@@ -275,26 +185,14 @@ Object {
   "module": "test/unit/filemapper/example/routes/_module.svelte",
   "name": "",
   "rootName": "default",
-  "specificity": Array [
-    0,
-    0,
-  ],
 }
 `;
 
 exports[`test/unit/filemapper/filemapper.test.js/files are mapped: 1.filemap-only 1`] = `
 Object {
-  "_paramKeys": Object {
-    "": Array [],
-  },
-  "_regex": Object {},
   "asyncModule": undefined,
   "children": Array [
     Object {
-      "_paramKeys": Object {
-        "_module": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -308,23 +206,11 @@ Object {
       "meta": Object {},
       "module": "test/unit/filemapper/example/routes/_module.svelte",
       "name": "_module",
-      "specificity": Array [
-        7,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "admin": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "_reset": Array [],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -338,10 +224,6 @@ Object {
           "meta": Object {},
           "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
           "name": "_reset",
-          "specificity": Array [
-            6,
-            0,
-          ],
         },
       ],
       "file": File {
@@ -355,25 +237,11 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "admin",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "blog": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -387,18 +255,8 @@ Object {
           "meta": Object {},
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
-          "specificity": Array [
-            0,
-            1,
-          ],
         },
         Object {
-          "_paramKeys": Object {
-            "prefixed[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -412,10 +270,6 @@ Object {
           "meta": Object {},
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           "name": "prefixed[slug]",
-          "specificity": Array [
-            8,
-            1,
-          ],
         },
       ],
       "file": File {
@@ -429,16 +283,8 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "blog",
-      "specificity": Array [
-        4,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "index": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -452,30 +298,14 @@ Object {
       "meta": Object {},
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "no-layouts": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "nested": Array [],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [
             Object {
-              "_paramKeys": Object {
-                "foo": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -489,16 +319,8 @@ Object {
               "meta": Object {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
-              "specificity": Array [
-                3,
-                0,
-              ],
             },
             Object {
-              "_paramKeys": Object {
-                "index": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -512,10 +334,6 @@ Object {
               "meta": Object {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
-              "specificity": Array [
-                5,
-                0,
-              ],
             },
           ],
           "file": File {
@@ -529,10 +347,6 @@ Object {
           "meta": Object {},
           "module": false,
           "name": "nested",
-          "specificity": Array [
-            6,
-            0,
-          ],
         },
       ],
       "file": File {
@@ -546,10 +360,6 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "no-layouts",
-      "specificity": Array [
-        10,
-        0,
-      ],
     },
   ],
   "file": File {
@@ -564,26 +374,14 @@ Object {
   "module": undefined,
   "name": "",
   "rootName": "default",
-  "specificity": Array [
-    0,
-    0,
-  ],
 }
 `;
 
 exports[`test/unit/filemapper/filemapper.test.js/modules are merged with parent node: 2.filemap-with-modules 1`] = `
 Object {
-  "_paramKeys": Object {
-    "": Array [],
-  },
-  "_regex": Object {},
   "asyncModule": undefined,
   "children": Array [
     Object {
-      "_paramKeys": Object {
-        "admin": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -597,25 +395,11 @@ Object {
       "meta": Object {},
       "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       "name": "admin",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "blog": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -629,18 +413,8 @@ Object {
           "meta": Object {},
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
-          "specificity": Array [
-            0,
-            1,
-          ],
         },
         Object {
-          "_paramKeys": Object {
-            "prefixed[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -654,10 +428,6 @@ Object {
           "meta": Object {},
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           "name": "prefixed[slug]",
-          "specificity": Array [
-            8,
-            1,
-          ],
         },
       ],
       "file": File {
@@ -671,16 +441,8 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "blog",
-      "specificity": Array [
-        4,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "index": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -694,30 +456,14 @@ Object {
       "meta": Object {},
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "no-layouts": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "nested": Array [],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [
             Object {
-              "_paramKeys": Object {
-                "foo": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -731,16 +477,8 @@ Object {
               "meta": Object {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
-              "specificity": Array [
-                3,
-                0,
-              ],
             },
             Object {
-              "_paramKeys": Object {
-                "index": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -754,10 +492,6 @@ Object {
               "meta": Object {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
-              "specificity": Array [
-                5,
-                0,
-              ],
             },
           ],
           "file": File {
@@ -771,10 +505,6 @@ Object {
           "meta": Object {},
           "module": false,
           "name": "nested",
-          "specificity": Array [
-            6,
-            0,
-          ],
         },
       ],
       "file": File {
@@ -788,10 +518,6 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "no-layouts",
-      "specificity": Array [
-        10,
-        0,
-      ],
     },
   ],
   "file": File {
@@ -806,26 +532,14 @@ Object {
   "module": "test/unit/filemapper/example/routes/_module.svelte",
   "name": "",
   "rootName": "default",
-  "specificity": Array [
-    0,
-    0,
-  ],
 }
 `;
 
 exports[`test/unit/filemapper/filemapper.test.js/options get added: 3.filemap-with-resets 1`] = `
 Object {
-  "_paramKeys": Object {
-    "": Array [],
-  },
-  "_regex": Object {},
   "asyncModule": undefined,
   "children": Array [
     Object {
-      "_paramKeys": Object {
-        "admin": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -841,25 +555,11 @@ Object {
       },
       "module": "test/unit/filemapper/example/routes/admin/_reset.svelte",
       "name": "admin",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "blog": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -876,18 +576,8 @@ Object {
           },
           "module": "test/unit/filemapper/example/routes/blog/[slug].svelte",
           "name": "[slug]",
-          "specificity": Array [
-            0,
-            1,
-          ],
         },
         Object {
-          "_paramKeys": Object {
-            "prefixed[slug]": Array [
-              "slug",
-            ],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [],
           "file": File {
@@ -904,10 +594,6 @@ Object {
           },
           "module": "test/unit/filemapper/example/routes/blog/prefixed[slug].svelte",
           "name": "prefixed[slug]",
-          "specificity": Array [
-            8,
-            1,
-          ],
         },
       ],
       "file": File {
@@ -921,16 +607,8 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "blog",
-      "specificity": Array [
-        4,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "index": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [],
       "file": File {
@@ -946,30 +624,14 @@ Object {
       },
       "module": "test/unit/filemapper/example/routes/index.svelte",
       "name": "index",
-      "specificity": Array [
-        5,
-        0,
-      ],
     },
     Object {
-      "_paramKeys": Object {
-        "no-layouts": Array [],
-      },
-      "_regex": Object {},
       "asyncModule": undefined,
       "children": Array [
         Object {
-          "_paramKeys": Object {
-            "nested": Array [],
-          },
-          "_regex": Object {},
           "asyncModule": undefined,
           "children": Array [
             Object {
-              "_paramKeys": Object {
-                "foo": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -983,16 +645,8 @@ Object {
               "meta": Object {},
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/foo.svelte",
               "name": "foo",
-              "specificity": Array [
-                3,
-                0,
-              ],
             },
             Object {
-              "_paramKeys": Object {
-                "index": Array [],
-              },
-              "_regex": Object {},
               "asyncModule": undefined,
               "children": Array [],
               "file": File {
@@ -1008,10 +662,6 @@ Object {
               },
               "module": "test/unit/filemapper/example/routes/no-layouts/nested/index.svelte",
               "name": "index",
-              "specificity": Array [
-                5,
-                0,
-              ],
             },
           ],
           "file": File {
@@ -1025,10 +675,6 @@ Object {
           "meta": Object {},
           "module": false,
           "name": "nested",
-          "specificity": Array [
-            6,
-            0,
-          ],
         },
       ],
       "file": File {
@@ -1042,10 +688,6 @@ Object {
       "meta": Object {},
       "module": false,
       "name": "no-layouts",
-      "specificity": Array [
-        10,
-        0,
-      ],
     },
   ],
   "file": File {
@@ -1060,9 +702,5 @@ Object {
   "module": "test/unit/filemapper/example/routes/_module.svelte",
   "name": "",
   "rootName": "default",
-  "specificity": Array [
-    0,
-    0,
-  ],
 }
 `;
