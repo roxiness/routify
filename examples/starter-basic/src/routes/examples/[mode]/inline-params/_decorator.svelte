@@ -8,7 +8,6 @@
     /** @type {RenderContext} */
     export let context
 
-    // context.props.weather = context.props.api[context.fragment.params.city]
     setContext('weather-api', api[context.fragment.params.city])
 </script>
 

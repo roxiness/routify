@@ -40,6 +40,8 @@
         margin-top: 48px;
         padding: 32px;
         background: var(--surface-2);
+        position: relative;
+        z-index: -1;
     }
     .features {
         border-right: solid 1px #ccc;

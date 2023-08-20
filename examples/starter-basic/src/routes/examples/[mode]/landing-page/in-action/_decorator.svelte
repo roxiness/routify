@@ -10,7 +10,6 @@
         width: 100%;
         padding: 0 20px;
         position: relative;
-        z-index: -1;
     }
     .example :global(svg) {
         width: 100%;
