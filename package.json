@@ -23,15 +23,14 @@
     "exports": {
         "./package.json": "./package.json",
         ".": {
-            "types": "index.d.ts",
-            "default": "./lib/runtime/index.js",
-            "svelte": "./lib/runtime/index.js"
+            "types": "./index.d.ts",
+            "svelte": "./lib/runtime/index.js",
+            "default": "./lib/runtime/index.js"
         },
         "./vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
         "./lib/extra/vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
         "./lib/extra/express-plugin": "./lib/extra/express-plugin/index.js",
         "./lib/*": "./lib/*",
-        "./lib/cmp/*": "./lib/cmp/*.js",
         "./typings/*": "./typings/*",
         "./plugins/*": "./plugins/*",
         "./tools": "./lib/extra/tools/index.js"
