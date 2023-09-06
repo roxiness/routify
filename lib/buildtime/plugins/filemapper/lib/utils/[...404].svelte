@@ -30,7 +30,7 @@
                     <code>[...404].svelte</code> file in the root of your project.
                 </li>
                 <li>
-                    You can copy the necessary file from <code
+                    You can copy this file from <code
                         >.routify/components/[...404].svelte</code
                     >.
                 </li>
