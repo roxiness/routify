@@ -1,0 +1,21 @@
+{
+  "name": "feathers-routify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd packages/client && npm run dev",
+    "dev:server": "cd packages/server && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jakobrosenberg@gmail.com",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
