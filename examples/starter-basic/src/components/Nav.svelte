@@ -12,7 +12,7 @@
 
 <ul>
     <!-- iterates over each child page -->
-    {#each $node.pages as childNode}
+    {#each $node.linkableChildren as childNode}
         <!-- if the child is active, adds the isActive class -->
         <li class:isActive={$isActive(childNode.path)}>
             <a href={$url(childNode.path)}>
