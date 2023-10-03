@@ -2,5 +2,8 @@
     "type": "module",
     "workspaces": [
         "**/app"
-    ]
+    ],
+    "scripts": {
+        "test": "probs an-app"
+    }
 }
