@@ -25,4 +25,7 @@
     :global(.example.node-landing-page .frame) {
         scroll-behavior: smooth;
     }
+    header {
+        z-index: 1;
+    }
 </style>

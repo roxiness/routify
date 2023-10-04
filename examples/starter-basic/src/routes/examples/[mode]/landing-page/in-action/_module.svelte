@@ -10,7 +10,7 @@
     Wondering how Inline Pages work in a real-world scenario? This page is built using
     inline pages. Every section is a separate page, and the navigation is handled by
     Routify. The result is a seamless browsing experience, with no page reloads or
-    interruptions. The tabbed window also uses inline pages.
+    interruptions. The tabbed window below also uses inline pages.
 </p>
 <p>
     The code for this page is available in the <code
@@ -41,7 +41,6 @@
         padding: 32px;
         background: var(--surface-2);
         position: relative;
-        z-index: -1;
     }
     .features {
         border-right: solid 1px #ccc;
