@@ -168,6 +168,7 @@ Object {
       "meta": Object {
         "dynamic": true,
         "dynamicSpread": true,
+        "order": false,
       },
       "module": "./.routify/components/[...404].svelte",
       "name": "[...404]",
