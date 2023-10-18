@@ -24,7 +24,7 @@ test('bundler writes files', async () => {
     await createBundles(Object.values(instance.rootNodes)[0], __dirname + '/temp')
 
     expect(
-        readFileSync(__dirname + '/temp/bundles/_default_admin-bundle.js', 'utf-8'),
+        readFileSync(__dirname + '/temp/bundles/bundle-_default_admin.js', 'utf-8'),
     ).toBe(
         "export * as _default_admin from '../../example/admin/_reset.svelte'" +
             "\nexport * as _default_admin_index_svelte from '../../example/admin/index.svelte'" +
@@ -40,8 +40,8 @@ test('bundled files have correct module', () => {
     )
 
     expect(adminImports).toEqual([
-        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin)::_EVAL',
-        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_index_svelte)::_EVAL',
-        '() => import("./bundles/_default_admin-bundle.js").then(r => r._default_admin_page_svelte)::_EVAL',
+        '() => import("./bundles/bundle-_default_admin.js").then(r => r._default_admin)::_EVAL',
+        '() => import("./bundles/bundle-_default_admin.js").then(r => r._default_admin_index_svelte)::_EVAL',
+        '() => import("./bundles/bundle-_default_admin.js").then(r => r._default_admin_page_svelte)::_EVAL',
     ])
 })

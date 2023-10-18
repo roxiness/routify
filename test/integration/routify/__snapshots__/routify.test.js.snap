@@ -37,7 +37,7 @@ export default {
         \\"ext\\": \\".svelte\\",
         \\"name\\": \\"_reset\\"
       },
-      \\"asyncModule\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin),
+      \\"asyncModule\\": () => import(\\"./bundles/bundle-_default_admin.js\\").then(r => r._default_admin),
       \\"children\\": [
         {
           \\"meta\\": {},
@@ -50,7 +50,7 @@ export default {
             \\"ext\\": \\".svelte\\",
             \\"name\\": \\"bundleme\\"
           },
-          \\"asyncModule\\": () => import(\\"./bundles/_default_admin-bundle.js\\").then(r => r._default_admin_bundleme_svelte),
+          \\"asyncModule\\": () => import(\\"./bundles/bundle-_default_admin.js\\").then(r => r._default_admin_bundleme_svelte),
           \\"children\\": []
         }
       ]

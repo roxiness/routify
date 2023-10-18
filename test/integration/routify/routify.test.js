@@ -20,7 +20,7 @@ test('can run routify with bundled plugins', async () => {
 
     expect(
         readFileSync(
-            resolve(__dirname, 'temp', '.routify', 'bundles', '_default_admin-bundle.js'),
+            resolve(__dirname, 'temp', '.routify', 'bundles', 'bundle-_default_admin.js'),
             'utf-8',
         ),
     ).toMatchSnapshot('bundles')
@@ -32,7 +32,7 @@ test('can transform output files', async () => {
         'temp',
         '.routify-transform',
         'bundles',
-        '_default_admin-bundle.js',
+        'bundle-_default_admin.js',
     )
 
     const baseInstance = new RoutifyBuildtime({
@@ -62,7 +62,7 @@ test('can transform output files', async () => {
 
     const filenames = ids.map(id => id.replace(/.+[\\/]/g, ''))
     const expectedFilenames = [
-        '_default_admin-bundle.js',
+        'bundle-_default_admin.js',
         'routes.default.js',
         'render.js',
         'routify-init.js',
