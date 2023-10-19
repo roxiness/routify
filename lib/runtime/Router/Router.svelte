@@ -73,6 +73,7 @@
     }
 
     router = router || new Router(options)
+    router._claimed = true
     const context = new RouterContext({ router })
 
     router.onMount.run({ context, router })
