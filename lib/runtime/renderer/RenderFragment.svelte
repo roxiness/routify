@@ -8,6 +8,7 @@
     export let context
     const { isVisible, childFragments } = context // grab the stores
     let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
+    let isMounted = false
     setRoutifyFragmentContext(context)
     /** @param {HTMLElement} elem */
     const updateRenderContext = (elem, newMeta) => {
@@ -32,7 +33,8 @@
         if (anchor) anchor = updateRenderContext(anchor, { anchor: context })
     }
 
-    const childMounted = () => {
+    const childMounted = _elem => {
+        isMounted = true
         context.mounted.resolve(context)
         context.router.log.verbose('render', context.node.path, context) // ROUTIFY-DEV-ONLY
     }
@@ -79,7 +81,9 @@
                         }}
                         {context} />
                 {/if}</svelte:component>
-            <div use:childMounted />
+            {#if !isMounted}
+                <div use:childMounted />
+            {/if}
         </AnchorDecorator>
     </DecoratorWrapper>
 {/if}
