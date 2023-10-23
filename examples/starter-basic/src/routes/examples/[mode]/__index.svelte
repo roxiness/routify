@@ -1,3 +1,0 @@
-<!-- routify:meta inline -->
-
-INDEX
