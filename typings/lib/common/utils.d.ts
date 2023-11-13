@@ -23,3 +23,8 @@ export function next<T extends import("svelte/store").Readable<V>, V>(store: T, 
 export function throttle(fn: any): Promise<void>;
 export function lazySet(store: any, value: any): any;
 export function jsonClone(obj: any): any;
+export function getCachedData<V>(callback: () => V, collection: any, id: any, store?: any): V;
+export function initializeCache(idGenerator: () => any, defaultContext: any): {
+    <T>(dataProducer: () => T, context: any): T;
+    storage: Map<any, any>;
+};

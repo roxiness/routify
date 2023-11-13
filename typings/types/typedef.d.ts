@@ -257,13 +257,15 @@ type RoutifyExternalMetaHelper = {
     options: any;
     tempPath: string;
 };
-type RoutifyLoad = (context: RoutifyLoadContext) => MaybePromise<Partial<RoutifyLoadReturn> | null>;
+type RoutifyLoad = RoutifyLoadAsync | RoutifyLoadSync;
+type RoutifyLoadSync = (context: RoutifyLoadContext) => Partial<RoutifyLoadReturn> | null;
+type RoutifyLoadAsync = (context: RoutifyLoadContext) => Promise<Partial<RoutifyLoadReturn> | null>;
 type RoutifyLoadContext = {
     route: Route;
     url: import('../lib/runtime').Url;
     prevRoute?: Route | undefined;
     isNew: boolean;
-    fetch: UniversalFetch;
+    fetch: typeof fetch;
 };
 type RoutifyLoadReturn = {
     status: number;

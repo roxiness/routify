@@ -18,7 +18,10 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     instance: InstanceType;
     name: string;
     module: string | ReservedCmpProps;
-    specificity: number[];
+    _cacheByName: {
+        <T>(dataProducer: () => T, context: any): T;
+        storage: Map<any, any>;
+    };
     /** @param {InstanceType['NodeConstructor']['prototype']} child */
     appendChild(child: InstanceType['NodeConstructor']['prototype']): void;
     /**
@@ -34,25 +37,19 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     get ancestors(): InstanceType["NodeConstructor"]["prototype"][];
     /** @type {InstanceType['NodeConstructor']['prototype']} */
     get root(): InstanceType["NodeConstructor"]["prototype"];
-    get isRoot(): boolean;
+    get isRoot(): any;
     /** @type {InstanceType['NodeType'][]} */
     get children(): InstanceType["NodeType"][];
     get navigableChildren(): InstanceType["NodeType"][];
     get linkableChildren(): InstanceType["NodeType"][];
     /** @returns {number} */
     get level(): number;
-    /** @type {Object.<string,RegExp>} */
-    _regex: {
-        [x: string]: RegExp;
-    };
+    _getRegex(): RegExp;
     get regex(): RegExp;
-    /**
-     * @type {Object.<string, string[]>}
-     * */
-    _paramKeys: {
-        [x: string]: string[];
-    };
+    _getParamKeys(): string[];
     get paramKeys(): string[];
+    _getSpecificity(): number[];
+    get specificity(): number[];
     /**
      * returns parameters for a given urlFragment
      * @param {string} urlFragment
@@ -73,6 +70,7 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
      * @param {object} [options]
      * @param {boolean} [options.allowDynamic=true]
      * @param {boolean} [options.includeIndex=true]
+     * @param {boolean} [options.navigableChildrenOnly=false]
      * @param {boolean} [options.silent=false] don't throw errors for 404s
      * @param {this} [options.rootNode]
      
@@ -80,6 +78,7 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     getChainTo(path: string, options?: {
         allowDynamic?: boolean;
         includeIndex?: boolean;
+        navigableChildrenOnly?: boolean;
         silent?: boolean;
         rootNode?: RNode<InstanceType>;
     }): {

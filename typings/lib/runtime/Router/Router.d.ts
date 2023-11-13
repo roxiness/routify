@@ -11,6 +11,7 @@ export class Router implements Readable<Router> {
     /** @type { RouteStore } */
     activeRoute: RouteStore;
     _urlReflector: any;
+    _claimed: boolean;
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
@@ -48,8 +49,8 @@ export class Router implements Readable<Router> {
      * function that resolves after the active route has changed
      * @returns {Promise<Route>} */
     ready: () => Promise<Route>;
-    /** @type {Route[]} */
-    history: Route[];
+    /** @type {Map<string, Route>} */
+    history: Map<string, Route>;
     parentCmpCtx: any;
     subscribe: (this: void, run: import("svelte/store").Subscriber<Router>, invalidate?: (value?: Router) => void) => import("svelte/store").Unsubscriber;
     triggerStore: () => void;

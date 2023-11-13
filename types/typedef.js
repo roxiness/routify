@@ -173,9 +173,15 @@
  * ROUTIFY LOAD CONTEXT *
  ********************************/
 /**
- * @callback RoutifyLoad
+ * @typedef {RoutifyLoadAsync | RoutifyLoadSync} RoutifyLoad
+ *
+ * @callback RoutifyLoadSync
  * @param {RoutifyLoadContext} context
- * @returns {MaybePromise<Partial<RoutifyLoadReturn>|null>}
+ * @returns {Partial<RoutifyLoadReturn>|null}
+ *
+ * @callback RoutifyLoadAsync
+ * @param {RoutifyLoadContext} context
+ * @returns {Promise<Partial<RoutifyLoadReturn>|null>}
  *
  *
  * @typedef {object} RoutifyLoadContext
@@ -183,7 +189,7 @@
  * @prop {import('../lib/runtime').Url} url
  * @prop {Route=} prevRoute
  * @prop {Boolean} isNew
- * @prop {UniversalFetch} fetch
+ * @prop {fetch} fetch
  *
  * @typedef {object} RoutifyLoadReturn
  * @prop {number} status

@@ -1,9 +1,11 @@
 export class AddressReflector extends BaseReflector {
-    absorb: () => Promise<boolean>;
+    absorb: () => void;
     _pushstateHandler: (data: any, title: any, url: any) => boolean;
     _replacestateHandler: (data: any, title: any, url: any) => boolean;
-    _popstateHandler: () => Promise<boolean>;
+    _popstateHandler: (event: any) => Promise<boolean>;
     hooks: any[];
-    reflect: () => boolean;
+    _reflect: () => void;
+    _getRouterUrl(): string;
+    _createState(): any;
 }
 import { BaseReflector } from "./ReflectorBase.js";
