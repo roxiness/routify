@@ -33,6 +33,7 @@
         "./lib/*": "./lib/*",
         "./typings/*": "./typings/*",
         "./plugins/*": "./plugins/*",
+        "./plugins": "./plugins/index",
         "./tools": "./lib/extra/tools/index.js"
     },
     "scripts": {
@@ -71,6 +72,7 @@
         "typescript": "^4.7.4"
     },
     "dependencies": {
+        "@sveltejs/vite-plugin-svelte": "^2.4.6",
         "cachewrap": "^0.0.1",
         "cheap-watch": "^1.0.4",
         "cheerio": "^1.0.0-rc.10",
@@ -78,7 +80,7 @@
         "configent": "^3.0.0-13",
         "consolite": "^0.3.12",
         "fs-extra": "^10.0.0",
-        "hookar": "^0.0.7-0",
+        "hookar": "^0.0.7",
         "kleur": "^4.1.4",
         "node-fetch": "^3.3.0",
         "persistable": "^0.1.2",
