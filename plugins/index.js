@@ -1,4 +1,4 @@
-import { i18nPlugin } from './i18n/index.js'
+import { flexMapsPlugin } from './flexMap/index.js'
 import indexByNamePlugin from './indexByName.js'
 
-export { i18nPlugin, indexByNamePlugin }
+export { flexMapsPlugin, indexByNamePlugin }
