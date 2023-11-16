@@ -57,6 +57,7 @@
  * @prop {string|Object<string,string>} routesDir defaults to { default: 'src/routes' }
  * @prop {string[]|boolean} ignoreMetaConflictWarnings
  * @prop {object} filemapper
+ * @prop {1|2|3|4|5} logLevel defaults to 3
  * @prop {string[]} filemapper.moduleFiles defaults to ['_module.svelte', '_reset.svelte']
  * @prop {string[]} filemapper.resetFiles defaults to ['_reset.svelte']
  * @prop {string[]} filemapper.fallbackFiles defaults to ['_reset.svelte']
