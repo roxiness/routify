@@ -232,6 +232,7 @@
  * @prop {(context:MetaContext & Object.<string,any>)=>MetaContext} [metaContext] provides context to *.meta.js files
  * @prop {(id:string, content:string, instance: RoutifyBuildtime) => string} [transform] transform output files
  * @prop {RoutifyBuildtimeRuntimePlugin[]} runtimePlugins
+ * @prop {string[]} reservedMetaKeys
  */
 
 /**

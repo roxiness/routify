@@ -10,6 +10,7 @@ const buildtimeInstance = new RoutifyBuildtime({
     routesDir: {
         default: __dirname + '/example',
     },
+    ignoreMetaConflictWarnings: true,
 })
 
 beforeAll(async () => {

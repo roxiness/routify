@@ -117,11 +117,23 @@ type RoutifyBuildtimeOptions = {
         [x: string]: string;
     };
     ignoreMetaConflictWarnings: string[] | boolean;
-    filemapper: {
-        moduleFiles: string[];
-        resetFiles: string[];
-        fallbackFiles: string[];
-    };
+    filemapper: object;
+    /**
+     * defaults to 3
+     */
+    logLevel: 1 | 2 | 3 | 4 | 5;
+    /**
+     * defaults to ['_module.svelte', '_reset.svelte']
+     */
+    moduleFiles: string[];
+    /**
+     * defaults to ['_reset.svelte']
+     */
+    resetFiles: string[];
+    /**
+     * defaults to ['_reset.svelte']
+     */
+    fallbackFiles: string[];
     /**
      * defaults to ['.svelte', '.html', '.md', '.svx'],
      */
@@ -326,6 +338,7 @@ type RoutifyBuildtimePluginType = {
      */
     transform?: (id: string, content: string, instance: RoutifyBuildtime) => string;
     runtimePlugins: RoutifyBuildtimeRuntimePlugin[];
+    reservedMetaKeys: string[];
 };
 type MetaContextSplit = (value: any, name?: string | undefined) => any;
 /**

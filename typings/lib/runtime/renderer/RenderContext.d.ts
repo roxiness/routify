@@ -13,8 +13,8 @@ export class RouterContext {
     lastActiveChildContext: RenderContext;
     /** @type {Decorator[]} */
     decorators: Decorator[];
-    router: import("..").RouterClass;
-    route: import("../Route/Route").Route;
+    router: import("../index.js").RouterClass;
+    route: import("../Route/Route.js").Route;
     /**
      * @param {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} options
      *
@@ -86,7 +86,7 @@ export class RenderContext extends RouterContext {
         decorator: DecoratorInput;
         props: any;
         options: any;
-        anchor: import("../decorators/AnchorDecorator").Location;
+        anchor: import("../decorators/AnchorDecorator.js").Location;
         scrollBoundary: scrollBoundary;
     }>;
     scrollBoundary: scrollBoundary;
@@ -97,4 +97,4 @@ export class RenderContext extends RouterContext {
     /** updates params with accumulated values, starting from the root context */
     updateParams(): void;
 }
-import { RouteFragment } from "../Route/RouteFragment";
+import { RouteFragment } from "../Route/RouteFragment.js";

@@ -15,6 +15,7 @@ const options = {
         moduleFiles: ['_module.svelte', '_reset.svelte'],
         resetFiles: ['_reset.svelte'],
     },
+    ignoreMetaConflictWarnings: true,
 }
 
 const instance = new RoutifyBuildtime(options)

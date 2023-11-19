@@ -14,7 +14,7 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
     rootNodes: {
         [x: string]: RNodeBuildtime;
     };
-    options: Partial<any>;
+    options: Partial<Partial<RoutifyBuildtimeOptions>>;
     build(trigger: any): Promise<void>;
     on: {
         buildStart: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
