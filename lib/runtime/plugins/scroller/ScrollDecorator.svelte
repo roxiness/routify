@@ -8,19 +8,24 @@
     export let isRoot
     isRoot
 
-    $: ({ route, router } = context)
-    $: if (route && !route.state.dontScroll) {
-        if (route.hash && route.leaf === context.fragment) {
-            scrollToContext(context)
-        } else if (
-            // The node is the leaf of the active route of the router.
-            (get(router.activeRoute).leaf.node === context.node ||
-                // the node and its ancestors are all active
-                getLineage(context).every(ctx => get(ctx.isActive))) &&
-            // don't scroll if the node context was already active
-            context !== context.parentContext?.lastActiveChildContext
-        )
-            scrollToContext(context)
+    const routeHasHashAndWeAreAtTheLeaf = route =>
+        route.hash && route.leaf === context.fragment
+
+    const contextLineageIsActive = () =>
+        getLineage(context).every(ctx => get(ctx.isActive))
+
+    const contextWasNotActive = () =>
+        context !== context.parentContext?.lastActiveChildContext
+
+    $: ({ route } = context)
+    $: if (
+        route &&
+        !route.state.dontScroll &&
+        (routeHasHashAndWeAreAtTheLeaf(route) ||
+            (contextLineageIsActive() && contextWasNotActive()))
+    ) {
+        console.log('scrolling to context', context.node.id || 'unnamed', context)
+        scrollToContext(context)
     }
 </script>
 
