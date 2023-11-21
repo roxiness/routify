@@ -18,4 +18,10 @@
         color: var(--text-2);
         position: absolute;
     }
+    * :global(div[data-routify-anchor-header]) {
+        position: absolute;
+        top: -130px;
+        left: 0;
+        width: 100%;
+    }
 </style>

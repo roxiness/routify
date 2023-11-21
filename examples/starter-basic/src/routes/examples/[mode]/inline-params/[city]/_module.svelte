@@ -1,6 +1,6 @@
 <script>
     import { url, isActiveFragment } from '@roxi/routify'
-    export let context, city
+    export let city
 </script>
 
 <div class="entry card" class:active={$isActiveFragment('.', { city })}>

@@ -24,15 +24,15 @@
         {/each}
     </div>
 
-    <div class="showcases-tabs-window">
+    <div class="showcases-tabs-window" data-routify-scroll-lock>
         <slot
+            anchor="header"
             inline={{
                 scrollIntoView: (elem, instant) => elem.scrollIntoViewIfNeeded(),
             }} />
     </div>
 </div>
 
-<!-- todo on leaving route, stamp it's url for later recovery, eg for multi  -->
 <style>
     .features-box {
         display: grid;

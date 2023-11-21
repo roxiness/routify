@@ -4,7 +4,6 @@
 </script>
 
 <script>
-    export let isRoot
     /** @type {RenderContext} */
     export let context
 

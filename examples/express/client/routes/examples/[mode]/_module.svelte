@@ -77,6 +77,7 @@
     .frame.fullscreen {
         --frame-height: 100vh;
         --frame-inner-height: calc(100vh);
+        min-height: 100%;
     }
     .wrapper {
         overflow-x: auto;
