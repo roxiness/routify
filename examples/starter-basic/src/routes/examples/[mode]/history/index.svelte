@@ -17,7 +17,7 @@
 
 <script>
     import { url } from '@roxi/routify'
-    export let count
+    export let count = 0
 </script>
 
 <div>
