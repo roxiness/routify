@@ -116,6 +116,9 @@
         if (shouldPrefetch) router.url.push(urlOrFalse, { prefetch: true, ...state })
     }
 
+    /**
+     * @param {MouseEvent|KeyboardEvent} event
+     */
     const handleClick = event => {
         if (shouldIgnoreClick(event)) return
 

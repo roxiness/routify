@@ -299,7 +299,7 @@
 
 /**
  * @typedef {object} ClickHandler
- * @prop {(event:PointerEvent, url:string)=>string|false =} callback
+ * @prop {(event:MouseEvent|KeyboardEvent, url:string)=>string|false =} callback
  * @prop {HTMLElement|((elem: HTMLElement)=>HTMLElement) =} elem
  */
 

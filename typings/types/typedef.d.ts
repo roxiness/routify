@@ -379,7 +379,7 @@ type QueryHandlerStringify = (search: {
     [x: string]: string;
 }, route: Route) => string;
 type ClickHandler = {
-    callback?: (event: PointerEvent, url: string) => string | false;
+    callback?: (event: MouseEvent | KeyboardEvent, url: string) => string | false;
     elem?: HTMLElement | ((elem: HTMLElement) => HTMLElement);
 };
 type ComponentGuardFn = (route: Route) => any;
