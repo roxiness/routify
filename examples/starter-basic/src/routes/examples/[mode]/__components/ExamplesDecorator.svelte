@@ -120,10 +120,6 @@
             opacity: 1;
         }
     }
-
-    p {
-        font-size: 1.5vw;
-    }
     h1 {
         text-transform: capitalize;
         margin-bottom: 1vw;
