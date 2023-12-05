@@ -25,6 +25,7 @@
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
  * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} RoutifyContext
  * @typedef {import('../lib/runtime/renderer/RenderContext').RenderContext} RenderContext
+ * @typedef {import('../lib/runtime/renderer/RenderContext').RouterContext} RouterContext
  * @typedef {import('../lib/runtime/decorators/AnchorDecorator').Location} AnchorLocation
  * @typedef {import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext} ScrollContext
  *
@@ -90,6 +91,7 @@
  * @prop { QueryHandler } queryHandler
  * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
  * @prop { ClickHandler } clickHandler
+ * @prop { AnchorLocation } anchor where to place the anchor element
  */
 
 // /******************

@@ -6,7 +6,7 @@
     import { handleRebuildError } from '../utils/messages.js'
     import { addFolderDecorator, findActiveChildContext } from './composeFragments.js'
 
-    /** @type {RenderContext}*/
+    /** @type {RenderContext|RouterContext}*/
     export let context
 
     /** @type {RenderContextOptions} */

@@ -1,8 +1,11 @@
 <script>
     import { onMount as _onMount } from 'svelte'
+    import { RenderContext } from '../renderer/RenderContext.js'
 
-    /** @type {import('./AnchorDecorator').Location}*/
-    export let location
+    /** @type {RouterContext|RenderContext} */
+    export let context
+
+    const location = context.anchorLocation
 
     /** @type {(parent: Node, anchor?: Node)=>any} */
     export let onMount = x => x
@@ -11,6 +14,12 @@
     let elem
 
     let mounted = false
+
+    // check if context is a routercontext
+    const name =
+        context instanceof RenderContext
+            ? context.node.name || 'unnamed'
+            : context.router.name || 'defaultRouter'
 
     /** @param {HTMLElement} elem */
     const nextValidSibling = elem => {
@@ -26,25 +35,47 @@
             : next
     }
 
+    const handlers = {
+        wrapper: elem => {
+            elem.dataset.routifyAnchorWrapper = name
+            onMount(elem)
+        },
+        parent: elem => {
+            elem.dataset.routifyAnchorParent = name
+            onMount(elem.parentElement)
+        },
+        header: elem => {
+            elem.dataset.routifyAnchorHeader = name
+            onMount(elem.parentElement, elem)
+        },
+        firstChild: elem => {
+            const nextSib = nextValidSibling(elem)
+            nextSib.dataset.routifyAnchorNextSibling = name
+            onMount(elem.parentElement, nextSib)
+        },
+        custom: elem => {
+            // @ts-ignore location is a function
+            const res = location(elem)
+            res.dataset.routifyAnchorCustom = name
+            onMount(elem.parentElement, res)
+        },
+    }
+
     _onMount(async () => {
         if (mounted) return
-        if (location === 'wrapper') onMount(elem)
-        else if (location === 'parent') onMount(elem.parentElement)
-        else if (location === 'header') onMount(elem.parentElement, elem)
-        else if (location === 'firstChild') {
-            const nextSib = nextValidSibling(elem)
-            onMount(elem.parentElement, nextSib)
-        } else throw new Error(`Incorrect location provided. Got ${location}`)
+        const handlerName = typeof location === 'function' ? 'custom' : location
+        const handler = handlers[handlerName]
+        handler(elem)
         mounted = true // only works if firstchild is synchronous
     })
 </script>
 
 {#if location === 'wrapper'}
-    <div data-routify-anchor-parent bind:this={elem} {...$$restProps}>
+    <div data-routify-anchor-wrapper={name} bind:this={elem} {...$$restProps}>
         <slot />
     </div>
 {:else if location === 'header'}
-    <div data-routify-anchor-header bind:this={elem} {...$$restProps} />
+    <div data-routify-anchor-header={name} bind:this={elem} {...$$restProps} />
     <slot />
 {:else}
     {#if !mounted}

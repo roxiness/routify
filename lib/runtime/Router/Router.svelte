@@ -52,7 +52,7 @@
     /** @type {ClickHandler}*/
     export let clickHandler = {}
 
-    /** @type {RoutifyRuntimeOptions}*/
+    /** @type {Partial<RoutifyRuntimeOptions>}*/
     const options = {
         instance,
         rootNode,
@@ -70,6 +70,7 @@
         plugins,
         queryHandler,
         clickHandler,
+        anchor,
     }
 
     router = router || new Router(options)
@@ -88,7 +89,10 @@
 
     /** @param {HTMLElement} elem */
     const initialize = elem => {
-        elem = anchor === 'parent' || anchor === 'wrapper' ? elem : elem.parentElement
+        elem =
+            router.anchor === 'parent' || router.anchor === 'wrapper'
+                ? elem
+                : elem.parentElement
         router.setParentElem(elem)
 
         // todo check that a router hasn't already been added to this element
@@ -135,7 +139,7 @@
     if (typeof window !== 'undefined') _onDestroy(() => router.destroy())
 </script>
 
-<AnchorDecorator onMount={initialize} style="display: contents" location={anchor}>
+<AnchorDecorator onMount={initialize} style="display: contents" {context}>
     {#if $activeRoute}
         <Component {context} options={{ decorator }} />
     {/if}

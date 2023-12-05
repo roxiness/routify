@@ -1,5 +1,7 @@
 export class RouterContext {
-    /** @param {{router: Router}} params */
+    /**
+     *  @param {{ router: Router }} params
+     **/
     constructor({ router }: {
         router: Router;
     });
@@ -13,6 +15,8 @@ export class RouterContext {
     lastActiveChildContext: RenderContext;
     /** @type {Decorator[]} */
     decorators: Decorator[];
+    /** @type {import('../decorators/AnchorDecorator').Location}*/
+    anchorLocation: import('../decorators/AnchorDecorator').Location;
     router: import("../index.js").RouterClass;
     route: import("../Route/Route.js").Route;
     /**
@@ -59,7 +63,6 @@ export class RenderContext extends RouterContext {
         router?: Router;
         props: any;
     });
-    anchorLocation: string;
     /** @type {RNodeRuntime} */
     node: RNodeRuntime;
     isActive: import("svelte/store").Writable<boolean>;
@@ -86,7 +89,7 @@ export class RenderContext extends RouterContext {
         decorator: DecoratorInput;
         props: any;
         options: any;
-        anchor: import("../decorators/AnchorDecorator.js").Location;
+        anchor: import("../decorators/AnchorDecorator").Location;
         scrollBoundary: scrollBoundary;
     }>;
     scrollBoundary: scrollBoundary;

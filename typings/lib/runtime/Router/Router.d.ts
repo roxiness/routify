@@ -61,6 +61,7 @@ export class Router implements Readable<Router> {
     init(input: Partial<RoutifyRuntimeOptions>): void;
     /** @type {Partial<import('./utils').RouterOptionsNormalized>} */
     options: Partial<import('./utils').RouterOptionsNormalized>;
+    anchor: import("../decorators/AnchorDecorator.js").Location;
     /** @type {RoutifyRuntime} */
     instance: RoutifyRuntime;
     name: any;

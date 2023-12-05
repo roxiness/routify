@@ -68,6 +68,10 @@ type RenderContext = import('../lib/runtime/renderer/RenderContext').RenderConte
 /**
  * RUNTIME
  */
+type RouterContext = import('../lib/runtime/renderer/RenderContext').RouterContext;
+/**
+ * RUNTIME
+ */
 type AnchorLocation = import('../lib/runtime/decorators/AnchorDecorator').Location;
 /**
  * BUILDTIME
@@ -209,6 +213,10 @@ type RoutifyRuntimeOptions = {
     queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
     clickHandler: ClickHandler;
+    /**
+     * where to place the anchor element
+     */
+    anchor: AnchorLocation;
 };
 type DecoratorInput = (Partial<Decorator> & {
     component: SvelteComponentDev;

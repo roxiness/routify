@@ -54,7 +54,7 @@
     <!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
     <DecoratorWrapper {context}>
-        <AnchorDecorator location={context.anchorLocation} onMount={initialize}>
+        <AnchorDecorator {context} onMount={initialize}>
             <!-- PAGE COMPONENT -->
             <svelte:component
                 this={NodeComponent}
