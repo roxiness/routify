@@ -195,10 +195,6 @@ type RoutifyRuntimeOptions = {
      */
     afterRouteRendered: MaybeArray<AfterRouteRenderedCallback>;
     /**
-     * hook: runs after url has changed
-     */
-    onUrlClick: MaybeArray<OnUrlClickCallback>;
-    /**
      * hook: transform route fragments after navigation
      */
     transformFragments: MaybeArray<TransformFragmentsCallback>;
@@ -213,7 +209,6 @@ type RoutifyRuntimeOptions = {
     queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
     clickHandler: ClickHandler;
-    transformNodeTitle: (getTitle: () => string, node: RNodeRuntime) => string;
 };
 type DecoratorInput = (Partial<Decorator> & {
     component: SvelteComponentDev;
