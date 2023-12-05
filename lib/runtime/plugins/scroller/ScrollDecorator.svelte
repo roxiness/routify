@@ -24,7 +24,8 @@
         (routeHasHashAndWeAreAtTheLeaf(route) ||
             (contextLineageIsActive() && contextWasNotActive()))
     ) {
-        console.log('scrolling to context', context.node.id || 'unnamed', context)
+        const { debug } = context.router.log // ROUTIFY-DEV-ONLY
+        debug('scrolling to context', context.node.id || 'unnamed', context) // ROUTIFY-DEV-ONLY
         scrollToContext(context)
     }
 </script>
