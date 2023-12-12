@@ -12,6 +12,8 @@
     export let url
 </script>
 
+<!-- routify:meta inline=false -->
+
 <!-- This file was created by Routify.
      To customize the error page, create a catchall page 
      in the root of your project. Eg. [...404].svelte -->
