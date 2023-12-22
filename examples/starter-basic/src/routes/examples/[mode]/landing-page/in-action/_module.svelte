@@ -5,17 +5,6 @@
 
 <!-- routify:meta inline -->
 
-<h2>Inline Pages in Action</h2>
-<p>
-    Wondering how Inline Pages work in a real-world scenario? This page is built using
-    inline pages. Every section is a separate page, and the navigation is handled by
-    Routify. The result is a seamless browsing experience, with no page reloads or
-    interruptions. The tabbed window below also uses inline pages.
-</p>
-<p>
-    The code for this page is available in the <code
-        >src/routes/examples/[mode]/landing-page</code> folder.
-</p>
 <div class="features-box">
     <div class="features">
         {#each $node.linkableChildren as node}
@@ -32,6 +21,10 @@
             }} />
     </div>
 </div>
+<p>
+    The code for this page is available in the <code
+        >src/routes/examples/[mode]/landing-page</code> folder.
+</p>
 
 <style>
     .features-box {
@@ -60,11 +53,16 @@
         font-weight: 500;
     }
     .showcases-tabs-window {
+        scroll-snap-type: x mandatory;
         display: flex;
-        overflow-x: hidden;
-        flex-wrap: nowrap;
+        overflow-x: scroll;
         scroll-behavior: smooth;
-        position: relative;
-        z-index: 0;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .showcases-tabs-window > :global(*) {
+        scroll-snap-align: start;
     }
 </style>
