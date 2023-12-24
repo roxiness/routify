@@ -5,7 +5,7 @@
 
 Create a new Routify project with
 
-    npx @roxi/routify@next create myapp
+    npm init routify@latest
 
 ## Using Routify
 
