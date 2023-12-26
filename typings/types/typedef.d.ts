@@ -445,6 +445,7 @@ type Inline = {
     params: {
         [x: string]: string[];
     };
+    wrapper: SvelteComponentDev | null;
 };
 type DeferredPromise<T> = Promise<T> & {
     resolve: (T: any) => void;

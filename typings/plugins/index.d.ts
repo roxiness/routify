@@ -1,3 +1,3 @@
 import { flexMapsPlugin } from "./flexMap/index.js";
-import indexByNamePlugin from "./indexByName.js";
-export { flexMapsPlugin, indexByNamePlugin };
+import indexByPrefixPlugin from "./indexByPrefix/index.js";
+export { flexMapsPlugin, indexByPrefixPlugin };

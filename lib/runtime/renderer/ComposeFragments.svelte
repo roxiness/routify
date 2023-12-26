@@ -2,9 +2,13 @@
     import { get } from 'svelte/store'
     import { pushToOrReplace } from '../utils/index.js'
     import RenderFragment from './RenderFragment.svelte'
-    import { normalizeDecorator } from './utils/normalizeDecorator.js'
+    import { normalizeDecorator, normalizeWrapper } from './utils/normalizeDecorator.js'
     import { handleRebuildError } from '../utils/messages.js'
-    import { addFolderDecorator, findActiveChildContext } from './composeFragments.js'
+    import {
+        addFolderDecorator,
+        addFolderWrapper,
+        findActiveChildContext,
+    } from './composeFragments.js'
 
     /** @type {RenderContext|RouterContext}*/
     export let context
@@ -14,16 +18,16 @@
 
     const { childFragments } = context
     const { decorator } = options
+    const inlineWrapper =
+        options.inline?.['wrapper'] && normalizeWrapper(options.inline['wrapper'])
 
     const recursiveDecorators = context.decorators.filter(deco => deco.recursive)
-    const newDecorators = pushToOrReplace(recursiveDecorators, decorator)
+    const newDecorators = pushToOrReplace(recursiveDecorators, [decorator, inlineWrapper])
         .filter(Boolean)
         .map(normalizeDecorator)
 
-    // addFolderDecorator returns void if decorator is sync, otherwise it returns a promise
-    let decoratorReady = !addFolderDecorator(newDecorators, context)?.['then'](
-        () => (decoratorReady = true),
-    )
+    addFolderDecorator(newDecorators, context)
+    addFolderWrapper(newDecorators, context)
 
     context.buildChildContexts(options, newDecorators)
 
@@ -64,8 +68,6 @@
     $: _handleChildren($childFragments)
 </script>
 
-{#if decoratorReady}
-    {#each $childContexts as context (context)}
-        <RenderFragment {context} />
-    {/each}
-{/if}
+{#each $childContexts as context (context)}
+    <RenderFragment {context} />
+{/each}

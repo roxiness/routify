@@ -371,6 +371,7 @@
  * @prop { 'browser'|'ssr'|'always' } context
  * @prop { (elem: HTMLElement, instant: boolean) => void } scrollIntoView
  * @prop { Object<string, string[]> } params
+ * @prop { SvelteComponentDev? } wrapper
  */
 
 /**

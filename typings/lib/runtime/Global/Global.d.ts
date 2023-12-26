@@ -9,6 +9,7 @@ export class AppInstance {
     /** @type {import('../helpers/preload.js').RoutesMap} */
     routeMaps: import('../helpers/preload.js').RoutesMap;
     browserAdapter: BrowserAdapter;
+    reset(): void;
     /** @param {Router} router */
     urlFromBrowser: (router: Router) => string;
     register(instance: any): AppInstance;
