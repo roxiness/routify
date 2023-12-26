@@ -76,6 +76,7 @@
     router = router || new Router(options)
     router._claimed = true
     const context = new RouterContext({ router })
+    router.context = context
 
     router.onMount.run({ context, router })
     context.decorators = context.decorators.map(normalizeDecorator)
