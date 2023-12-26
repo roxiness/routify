@@ -14,6 +14,8 @@ export class Router implements Readable<Router> {
     _claimed: boolean;
     /** @type {UrlRewrite[]} */
     urlRewrites: UrlRewrite[];
+    /** @type {RouterContext} */
+    context: RouterContext;
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
     beforeRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */

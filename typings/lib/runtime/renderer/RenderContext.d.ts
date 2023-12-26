@@ -17,6 +17,7 @@ export class RouterContext {
     decorators: Decorator[];
     /** @type {import('../decorators/AnchorDecorator').Location}*/
     anchorLocation: import('../decorators/AnchorDecorator').Location;
+    get descendants(): any;
     router: import("../index.js").RouterClass;
     route: import("../Route/Route.js").Route;
     /**
