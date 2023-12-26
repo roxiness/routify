@@ -1,4 +1,4 @@
 import { flexMapsPlugin } from './flexMap/index.js'
-import indexByNamePlugin from './indexByName.js'
+import indexByPrefixPlugin from './indexByPrefix/index.js'
 
-export { flexMapsPlugin, indexByNamePlugin }
+export { flexMapsPlugin, indexByPrefixPlugin }
