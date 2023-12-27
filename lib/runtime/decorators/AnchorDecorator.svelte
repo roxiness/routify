@@ -57,11 +57,16 @@
             // @ts-ignore location is a function
             const res = location(elem)
             res.dataset.routifyAnchorCustom = name
+            if (res.dataset.hasOwnProperty('routifyAnchorLocator')) {
+                const warn = `Selected anchor element is an anchor locator. Use '!elem.dataset.hasOwnProperty("routifyAnchorLocator")' to ensure a valid selection.`
+                ;(context['node'] || context.router).log.warn(warn)
+            }
+
             onMount(elem.parentElement, res)
         },
     }
 
-    _onMount(async () => {
+    _onMount(() => {
         if (mounted) return
         const handlerName = typeof location === 'function' ? 'custom' : location
         const handler = handlers[handlerName]
