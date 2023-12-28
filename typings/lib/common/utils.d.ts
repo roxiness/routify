@@ -20,7 +20,7 @@ export function addPropsToComp<Component extends typeof import("svelte/internal"
     [x: string]: any;
 }): Component;
 export function next<T extends import("svelte/store").Readable<V>, V>(store: T, wanted?: V | ((wanted: V) => boolean), strict?: boolean | undefined): Promise<V>;
-export function throttle(fn: any): Promise<void>;
+export function throttle(fn: any, hash: any): Promise<void>;
 export function lazySet(store: any, value: any): any;
 export function jsonClone(obj: any): any;
 export function getCachedData<V>(callback: () => V, collection: any, id: any, store?: any): V;
