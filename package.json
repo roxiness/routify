@@ -9,10 +9,13 @@
     "typesVersions": {
         "*": {
             "vite-plugin": [
-                "./lib/extra/vite-plugin/vite-plugin.d.ts"
+                "./typings/lib/extra/vite-plugin/vite-plugin.d.ts"
             ],
             "tools": [
                 "./typings/lib/extra/tools/ssr.d.ts"
+            ],
+            "helpers/ScrollHandler": [
+                "./typings/lib/runtime/helpers/dedicated/ScrollHandler/index.d.ts"
             ]
         }
     },
@@ -24,17 +27,26 @@
         "./package.json": "./package.json",
         ".": {
             "types": "./index.d.ts",
-            "svelte": "./lib/runtime/index.js",
             "default": "./lib/runtime/index.js"
         },
-        "./vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
+        "./vite-plugin": {
+            "types": "./typings/lib/extra/vite-plugin/vite-plugin.d.ts",
+            "default": "./lib/extra/vite-plugin/vite-plugin.js"
+        },
         "./lib/extra/vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
         "./lib/extra/express-plugin": "./lib/extra/express-plugin/index.js",
         "./lib/*": "./lib/*",
+        "./helpers/ScrollHandler": {
+            "types": "./typings/lib/runtime/helpers/dedicated/ScrollHandler/index.d.ts",
+            "default": "./lib/runtime/helpers/dedicated/ScrollHandler/index.js"
+        },
         "./typings/*": "./typings/*",
         "./plugins/*": "./plugins/*",
         "./plugins": "./plugins/index",
-        "./tools": "./lib/extra/tools/index.js"
+        "./tools": {
+            "default": "./lib/extra/tools/index.js",
+            "types": "./typings/lib/extra/tools/ssr.d.ts"
+        }
     },
     "scripts": {
         "build": "run-s build:*",
