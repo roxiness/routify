@@ -69,6 +69,10 @@
     _onMount(() => {
         if (mounted) return
         const handlerName = typeof location === 'function' ? 'custom' : location
+        if (!handlers[handlerName])
+            throw new Error(
+                `Anchor location "${handlerName}" is not valid. Wrapper options: 'wrapper', 'parent', 'header', 'firstChild', or a function that returns a valid element.`,
+            )
         const handler = handlers[handlerName]
         handler(elem)
         mounted = true // only works if firstchild is synchronous
