@@ -68,6 +68,6 @@
     $: _handleChildren($childFragments)
 </script>
 
-{#each $childContexts as context (context)}
+{#each $childContexts.filter(cc => get(cc.isVisible)) as context (context)}
     <RenderFragment {context} />
 {/each}

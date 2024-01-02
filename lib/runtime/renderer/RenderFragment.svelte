@@ -1,13 +1,12 @@
 <script>
     import Compose from './ComposeFragments.svelte'
     import DecoratorWrapper from './DecoratorWrapper.svelte'
-    import Noop from '../decorators/Noop.svelte'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
-    import { isAnonFn, setRoutifyFragmentContext, waitFor } from '../utils/index.js'
+    import { setRoutifyFragmentContext, waitFor } from '../utils/index.js'
+    import Noop from '../decorators/Noop.svelte'
     /** @type {RenderContext} */
     export let context
-    const { isVisible, childFragments } = context // grab the stores
-    let NodeComponent = context.node.module?.default || context.node.asyncModule || Noop
+
     let isMounted = false
     setRoutifyFragmentContext(context)
     /** @param {HTMLElement} elem */
@@ -39,25 +38,22 @@
         context.router.log.verbose('render', context.node.path, context) // ROUTIFY-DEV-ONLY
     }
 
+    $: ({ childFragments, fragment } = context) // grab the stores
+
     $: hasInlineChildren = context.node.navigableChildren.some(child => child.meta.inline)
 
-    $: if (isAnonFn(NodeComponent) && $isVisible)
-        context.node.loadModule().then(r => (NodeComponent = r.default))
-
-    $: ({ params, load } = context.fragment)
-
-    $: compProps = { ...params, ...load?.props, ...context.props }
+    $: compProps = { ...fragment.params, ...fragment.load?.props, ...context.props }
 </script>
 
-{#if $isVisible && !isAnonFn(NodeComponent)}
-    <!-- todo IMPORTANT display: contents in style will set boundingClient().top to 0 for all elements -->
-    <!-- DECORATOR COMPONENT
+<!-- todo IMPORTANT display: contents in style will set boundingClient().top to 0 for all elements -->
+<!-- DECORATOR COMPONENT
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
-    <DecoratorWrapper {context}>
+<svelte:component this={context.decorators.length ? DecoratorWrapper : Noop} {context}>
+    {#await context.node.loadModule() then}
         <AnchorDecorator {context} onMount={initialize}>
             <!-- PAGE COMPONENT -->
             <svelte:component
-                this={NodeComponent}
+                this={context.node.module.default}
                 {...compProps}
                 {...context.props}
                 {context}
@@ -85,8 +81,8 @@
                 <div use:childMounted />
             {/if}
         </AnchorDecorator>
-    </DecoratorWrapper>
-{/if}
+    {/await}
+</svelte:component>
 
 <!-- TODO if decorator is inside anchor, scrollIntoView doesn't work -->
 <!-- TODO if anchor is inside decorator, scrollToTop doesn't work -->

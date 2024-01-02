@@ -225,6 +225,7 @@ type Decorator = {
     recursive?: boolean | undefined;
     shouldRender?: (payload: DecoratorShouldRenderPayload) => boolean;
     component: SvelteComponentDev;
+    order: number;
 };
 type DecoratorShouldRenderPayload = {
     context: RenderContext;

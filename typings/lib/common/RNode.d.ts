@@ -88,6 +88,12 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
         fragment: string;
     }[];
     getChainToNode(node: any): any[];
+    /**
+     * Returns the isDefault child nodes recursively
+     * Example: /home -> /home/main -> /home/main/index
+     * @param {'children'|'navigableChildren'} childType
+     */
+    getDefaults(childType?: 'children' | 'navigableChildren'): any[];
     /** @returns {InstanceType['NodeConstructor']['prototype']} */
     toJSON(): InstanceType['NodeConstructor']['prototype'];
     /** @returns {string} */

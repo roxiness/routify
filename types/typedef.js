@@ -128,6 +128,7 @@
  * @prop {boolean=} recursive
  * @prop {(payload: DecoratorShouldRenderPayload)=>boolean=} shouldRender
  * @prop {SvelteComponentDev} component
+ * @prop {number} order
  */
 
 /**
