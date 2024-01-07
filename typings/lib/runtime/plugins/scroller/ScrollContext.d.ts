@@ -11,8 +11,9 @@ export class ScrollContext {
     isInstant: boolean;
     /** @type {HTMLElement} */
     scrollTarget: HTMLElement;
-    getBoundary(): Promise<HTMLElement>;
     init(): Promise<void>;
-    scrollToElem: any;
+    shouldScrollToElem: any;
+    boundary: HTMLElement;
+    getNearestBoundary(): Promise<HTMLElement>;
     handleScrollInstructions(): Promise<any>;
 }

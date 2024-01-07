@@ -1,5 +1,13 @@
 export * from "./preload.js";
-export function getMRCA(node1: RNodeRuntime, node2: RNodeRuntime): import("../Instance/RNodeRuntime.js").RNodeRuntime;
+export function getMRCA(node1: RNodeRuntime, node2: RNodeRuntime): {
+    mrca: import("../Instance/RNodeRuntime.js").RNodeRuntime;
+    index1: number;
+    index2: number;
+    lineage1: import("../Instance/RNodeRuntime.js").RNodeRuntime[];
+    lineage2: import("../Instance/RNodeRuntime.js").RNodeRuntime[];
+    descendants1: import("../Instance/RNodeRuntime.js").RNodeRuntime[];
+    descendants2: import("../Instance/RNodeRuntime.js").RNodeRuntime[];
+};
 export function getPath(node1: any, node2: any): string;
 /**
  * @callback Goto
@@ -89,6 +97,7 @@ export const pendingRoute: Readable<Route>;
 export const afterUrlChange: Readable<(arg0: AfterUrlChangeCallback) => any>;
 /**@type {Readable<function(BeforeUrlChangeCallback):any>} */
 export const beforeUrlChange: Readable<(arg0: BeforeUrlChangeCallback) => any>;
+export function getDirection(boundary?: RNodeRuntime | undefined, route?: Route | undefined): "next" | "prev" | "lower" | "first" | "last" | "same" | "higher" | "na";
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
 } | undefined, options?: Partial<$UrlOptions & RouteState> | undefined) => any;

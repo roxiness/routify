@@ -218,22 +218,23 @@ type RoutifyRuntimeOptions = {
      */
     anchor: AnchorLocation;
 };
-type DecoratorInput = (Partial<Decorator> & {
+type DecoratorInput<T> = (Partial<Decorator<T>> & {
     component: SvelteComponentDev;
 }) | SvelteComponentDev;
-type Decorator = {
+type Decorator<T> = {
     recursive?: boolean | undefined;
-    shouldRender?: (payload: DecoratorShouldRenderPayload) => boolean;
+    shouldRender?: (payload: any) => boolean;
     component: SvelteComponentDev;
     order: number;
+    props: T;
 };
-type DecoratorShouldRenderPayload = {
+type DecoratorShouldRenderPayload<T> = {
     context: RenderContext;
     /**
      * ,
      */
     root: boolean;
-    decorators: Decorator;
+    decorators: Decorator<T>;
 };
 /**
  * <T>

@@ -26,7 +26,7 @@ export class RouterContext {
      * */
     buildChildContexts(options: Partial<{
         inline: InlineInput;
-        decorator: DecoratorInput;
+        decorator: any;
         props: any;
         options: any;
         anchor: AnchorLocation;
@@ -87,7 +87,7 @@ export class RenderContext extends RouterContext {
     parentContext: RenderContext;
     options: Partial<{
         inline: InlineInput;
-        decorator: DecoratorInput;
+        decorator: any;
         props: any;
         options: any;
         anchor: import("../decorators/AnchorDecorator").Location;
@@ -96,6 +96,11 @@ export class RenderContext extends RouterContext {
     scrollBoundary: scrollBoundary;
     get parentOrRouterContext(): any;
     get ancestors(): RenderContext[];
+    /**
+     * Returns all the props of the context, including the ones from the parent contexts.
+     * @type {Object<string|number|symbol, any>}
+     */
+    get allProps(): any;
     setToActive(): void;
     update(activeSiblingContext: any): void;
     /** updates params with accumulated values, starting from the root context */

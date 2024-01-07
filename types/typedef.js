@@ -120,22 +120,26 @@
 //  */
 
 /**
- * @typedef {(Partial<Decorator> & {component: SvelteComponentDev}) | SvelteComponentDev} DecoratorInput
+ * @template T {Object<string|number|symbol, any>}
+ * @typedef {(Partial<Decorator<T>> & {component: SvelteComponentDev}) | SvelteComponentDev} DecoratorInput
  */
 
 /**
+ * @template T {Object<string|number|symbol, any>}
  * @typedef {Object} Decorator
  * @prop {boolean=} recursive
- * @prop {(payload: DecoratorShouldRenderPayload)=>boolean=} shouldRender
+ * @prop {(payload: DecoratorShouldRenderPayload<T>)=>boolean=} shouldRender
  * @prop {SvelteComponentDev} component
  * @prop {number} order
+ * @prop {T} props
  */
 
 /**
+ * @template T {Object<string|number|symbol, any>}
  * @typedef {Object} DecoratorShouldRenderPayload
  * @prop { RenderContext } context
  * @prop { boolean } root,
- * @prop { Decorator } decorators
+ * @prop { Decorator<T> } decorators
  */
 
 /**
