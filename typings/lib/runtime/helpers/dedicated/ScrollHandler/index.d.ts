@@ -14,7 +14,6 @@ export class BaseScrollHandler {
     lastRoute: Route;
     /** @type {HTMLElement[]} */
     elems: HTMLElement[];
-    cutoff: number;
     direction: any;
     id: symbol;
     coolOffTime: number;
@@ -52,6 +51,7 @@ export type ScrollHandlerOptions = {
     strategy: 'lowestAboveThreshold' | 'withinThreshold';
 };
 export type BaseScrollHandlerOptions = {
+    threshold: number;
     coolOffTime: number;
     throttleTime: number;
     getElems: (context: RouterContext | RenderContext) => HTMLElement[];

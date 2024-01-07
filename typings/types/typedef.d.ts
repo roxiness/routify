@@ -223,7 +223,7 @@ type DecoratorInput<T> = (Partial<Decorator<T>> & {
 }) | SvelteComponentDev;
 type Decorator<T> = {
     recursive?: boolean | undefined;
-    shouldRender?: (payload: any) => boolean;
+    shouldRender?: (payload: DecoratorShouldRenderPayload<T>) => boolean;
     component: SvelteComponentDev;
     order: number;
     props: T;
