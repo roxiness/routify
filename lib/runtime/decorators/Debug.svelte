@@ -1,5 +1,5 @@
 <script>
-    import { context } from '@roxi/routify'
+    import { context } from '../helpers'
     const { node, route } = $context
     const index = route.fragments.findIndex(fragment => fragment.node === node)
 </script>
