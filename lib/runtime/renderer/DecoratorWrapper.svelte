@@ -21,7 +21,11 @@
 
 <!-- we can't have a root if-condition as that breaks transitions with local directives -->
 
-<svelte:component this={decorator ? decorator.component : Noop} {context} {isRoot}>
+<svelte:component
+    this={decorator ? decorator.component : Noop}
+    {context}
+    {isRoot}
+    {...decorator.props}>
     {#if restOfDecorators.length}
         <svelte:self decorators={restOfDecorators} {context} isRoot={false}>
             <slot />
