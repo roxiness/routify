@@ -32,7 +32,7 @@
     {:else}
         <!-- LIST -->
         <div class="wrapper">
-            <div class="grid">
+            <div class="grid" data-routify-scroll-lock>
                 <slot
                     inline={{ scrollIntoView, context: 'always', shouldScroll: true }}
                     decorator={{ component: ExamplesDecorator, recursive: false }} />
