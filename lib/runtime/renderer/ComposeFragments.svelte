@@ -26,8 +26,12 @@
         .filter(Boolean)
         .map(normalizeDecorator)
 
-    addFolderDecorator(newDecorators, context)
-    addFolderWrapper(newDecorators, context)
+    let decoratorsReady = !addFolderDecorator(newDecorators, context)?.then(() => {
+        decoratorsReady = true
+    })
+    let wrappersReady = !addFolderWrapper(newDecorators, context)?.then(() => {
+        wrappersReady = true
+    })
 
     context.buildChildContexts(options, newDecorators)
 
@@ -68,6 +72,6 @@
     $: _handleChildren($childFragments)
 </script>
 
-{#each $childContexts.filter(cc => get(cc.isVisible)) as context (context)}
+{#each $childContexts.filter(cc => decoratorsReady && wrappersReady && get(cc.isVisible)) as context (context)}
     <RenderFragment {context} />
 {/each}
