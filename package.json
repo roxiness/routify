@@ -14,8 +14,8 @@
             "tools": [
                 "./typings/lib/extra/tools/ssr.d.ts"
             ],
-            "helpers/ScrollHandler": [
-                "./typings/lib/runtime/helpers/dedicated/ScrollHandler/index.d.ts"
+            "helpers/RouteOnScroll": [
+                "./typings/lib/runtime/helpers/dedicated/RouteOnScroll/index.d.ts"
             ],
             "decorators": [
                 "./typings/lib/runtime/decorators/index.d.ts"
@@ -39,9 +39,9 @@
         "./lib/extra/vite-plugin": "./lib/extra/vite-plugin/vite-plugin.js",
         "./lib/extra/express-plugin": "./lib/extra/express-plugin/index.js",
         "./lib/*": "./lib/*",
-        "./helpers/ScrollHandler": {
-            "types": "./typings/lib/runtime/helpers/dedicated/ScrollHandler/index.d.ts",
-            "default": "./lib/runtime/helpers/dedicated/ScrollHandler/index.js"
+        "./helpers/RouteOnScroll": {
+            "types": "./typings/lib/runtime/helpers/dedicated/RouteOnScroll/index.d.ts",
+            "default": "./lib/runtime/helpers/dedicated/RouteOnScroll/index.js"
         },
         "./decorators": {
             "default": "./lib/runtime/decorators/index.js",

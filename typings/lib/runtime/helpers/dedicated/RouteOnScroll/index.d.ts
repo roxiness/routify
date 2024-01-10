@@ -1,15 +1,15 @@
 export function getChildNodesElements(context?: (RouterContext | RenderContext) | undefined): HTMLElement[];
 export function getDescendantNodesElements(context?: (RouterContext | RenderContext) | undefined): HTMLElement[];
 /**
- * ScrollHandler detects when the user scrolls to a new inlined page and updates the router accordingly
+ * RouteOnScroll detects when the user scrolls to a new inlined page and updates the router accordingly
  *
  */
-export class BaseScrollHandler {
+export class BaseRouteOnScroll {
     /**
-     * ScrollHandler2 detects when the user scrolls to a new inlined page and updates the router accordingly
-     * @param {Partial<BaseScrollHandlerOptions>} options
+     * RouteOnScroll2 detects when the user scrolls to a new inlined page and updates the router accordingly
+     * @param {Partial<BaseRouteOnScrollOptions>} options
      * */
-    constructor(options?: Partial<BaseScrollHandlerOptions>);
+    constructor(options?: Partial<BaseRouteOnScrollOptions>);
     /** @type {Route} */
     lastRoute: Route;
     /** @type {HTMLElement[]} */
@@ -34,23 +34,23 @@ export class BaseScrollHandler {
     lastContext: import("../../../renderer/RenderContext.js").RenderContext | import("../../../renderer/RenderContext.js").RouterContext;
     subscribe(run: any): () => void;
 }
-export class ScrollHandler extends BaseScrollHandler {
+export class RouteOnScroll extends BaseRouteOnScroll {
     /**
-     * ScrollHandler detects when the user scrolls to a new inlined page and updates the router accordingly
-     * @param {Partial<BaseScrollHandlerOptions & ScrollHandlerOptions>} options
+     * RouteOnScroll detects when the user scrolls to a new inlined page and updates the router accordingly
+     * @param {Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>} options
      * */
-    constructor(options?: Partial<BaseScrollHandlerOptions & ScrollHandlerOptions>);
+    constructor(options?: Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>);
     threshold: number;
     direction: "both" | "vertical" | "horizontal";
     strategy: "lowestAboveThreshold" | "withinThreshold";
     findFocusedElement(elems: any): any;
 }
-export type ScrollHandlerOptions = {
+export type RouteOnScrollOptions = {
     threshold: number;
     direction: 'both' | 'vertical' | 'horizontal';
     strategy: 'lowestAboveThreshold' | 'withinThreshold';
 };
-export type BaseScrollHandlerOptions = {
+export type BaseRouteOnScrollOptions = {
     threshold: number;
     coolOffTime: number;
     throttleTime: number;
