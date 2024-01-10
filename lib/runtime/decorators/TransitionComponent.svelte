@@ -28,14 +28,14 @@
             transitionIn: fly,
             transitionOut: fly,
             inParams: { [ctx.axis]: ctx.rect.height, duration: 500 },
-            outParams: { [ctx.axis]: ctx.rect.height, duration: 500 },
+            outParams: { [ctx.axis]: -ctx.rect.height, duration: 500 },
         }),
         prev: ctx => {
             return {
                 transitionIn: fly,
                 transitionOut: fly,
                 inParams: { [ctx.axis]: -ctx.rect.height, duration: 500 },
-                outParams: { [ctx.axis]: -ctx.rect.height, duration: 500 },
+                outParams: { [ctx.axis]: ctx.rect.height, duration: 500 },
             }
         },
         higher: ctx => ({
@@ -55,21 +55,18 @@
         last: defaultTransitionCallback,
     }
 
-    $: _config = { ...defaultConfig, ...config }
-
-    $: {
-        const paramCallback = _config[getDirection()]
-        const directionParams = paramCallback({
-            ..._config,
-            wrapper,
-            rect: wrapper.getBoundingClientRect(),
-        })
-
+    const setParams = direction => {
+        const _config = { ...defaultConfig, ...config }
+        const paramCallback = _config[direction]
+        const rect = wrapper.getBoundingClientRect()
+        const directionParams = paramCallback({ ..._config, wrapper, rect })
         _inTransition = directionParams.transitionIn
         _outTransition = directionParams.transitionOut
         _inTransitionParams = directionParams.inParams
         _outTransitionParams = directionParams.outParams
     }
+
+    $: setParams($getDirection)
 </script>
 
 <!-- routify:meta recursive=false -->
@@ -87,5 +84,8 @@
     .routify_transition {
         grid-row: 1;
         grid-column: 1;
+        display: grid;
+        width: 100%;
+        height: 100%;
     }
 </style>

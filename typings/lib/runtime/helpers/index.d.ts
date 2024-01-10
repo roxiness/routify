@@ -97,7 +97,17 @@ export const pendingRoute: Readable<Route>;
 export const afterUrlChange: Readable<(arg0: AfterUrlChangeCallback) => any>;
 /**@type {Readable<function(BeforeUrlChangeCallback):any>} */
 export const beforeUrlChange: Readable<(arg0: BeforeUrlChangeCallback) => any>;
-export function getDirection(boundary?: RNodeRuntime | undefined, route?: Route | undefined): "next" | "prev" | "lower" | "first" | "last" | "same" | "higher" | "na";
+/**
+ * @callback getDirectionCB
+ * @param {RNodeRuntime=} boundary
+ * @param {Route=} newRoute
+ * @param {Route=} oldRoute
+ * @returns {'first'|'last'|'same'|'next'|'prev'|'higher'|'lower'|'na'}
+ */
+/**
+ * @type {getDirectionCB & Readable<ReturnType<getDirectionCB>>}
+ */
+export const getDirection: getDirectionCB & Readable<ReturnType<getDirectionCB>>;
 export type Goto = (path: string, userParams?: {
     [x: string]: string;
 } | undefined, options?: Partial<$UrlOptions & RouteState> | undefined) => any;
@@ -140,3 +150,4 @@ export type UrlFromString = (inputPath: string, userParams?: {
 export type IsActive = (path?: string | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
+export type getDirectionCB = (boundary?: RNodeRuntime | undefined, newRoute?: Route | undefined, oldRoute?: Route | undefined) => 'first' | 'last' | 'same' | 'next' | 'prev' | 'higher' | 'lower' | 'na';
