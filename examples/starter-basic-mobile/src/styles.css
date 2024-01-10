@@ -1,0 +1,29 @@
+/** 
+ *    Prevent rubberband effect when swiping out of bounds 
+ */
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/**
+ *    Scroll snap
+ */
+.scroll-snap {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+.scroll-snap > * {
+    scroll-snap-align: start;
+    flex: 0 0 100%;
+}
+
