@@ -11,9 +11,9 @@ html {
  *    Scroll snap
  */
 .scroll-snap {
-    display: flex;
-    height: 100%;
-    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
     overflow: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -24,6 +24,5 @@ html {
 }
 .scroll-snap > * {
     scroll-snap-align: start;
-    flex: 0 0 100%;
 }
 

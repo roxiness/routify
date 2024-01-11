@@ -97,7 +97,7 @@
 </article>
 
 <style>
-    pre {
-        white-space: pre-wrap;
+    code:has(pre) {
+        width: 100%;
     }
 </style>
