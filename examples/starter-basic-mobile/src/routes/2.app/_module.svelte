@@ -19,8 +19,8 @@
 
 <style>
     .app {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: 1fr auto;
         height: 100vh;
     }
 </style>
