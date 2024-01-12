@@ -9,7 +9,7 @@
 </script>
 
 <nav>
-    {#each $node.linkableChildren as { name, path, meta }}
+    {#each $node.linkableChildren as { name, path }}
         <a href={$url(path)} class:is-active={$isActive(path)} class="nav-button {name}">
             <i class="icon {icons[name]}" />
             <div class="text">
