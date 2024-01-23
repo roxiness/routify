@@ -57,10 +57,14 @@ type RoutifyRuntime = import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRu
 /**
  * RUNTIME
  */
-type RoutifyContext = RenderContext & {
+type DEPRECATED_RoutifyContext = RenderContext & {
     load: Partial<RoutifyLoadReturn>;
     route: Route;
 };
+/**
+ * RUNTIME
+ */
+type RoutifyContext = RenderContext;
 /**
  * RUNTIME
  */

@@ -23,7 +23,8 @@
  * @typedef {import('../lib/runtime/Router/Router').Router} Router
  * @typedef {import('../lib/runtime/Route/RouteFragment').RouteFragment} RouteFragment
  * @typedef {import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime} RoutifyRuntime
- * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} RoutifyContext
+ * @typedef {RenderContext & {load: Partial<RoutifyLoadReturn>, route:Route}} DEPRECATED_RoutifyContext
+ * @typedef {RenderContext} RoutifyContext
  * @typedef {import('../lib/runtime/renderer/RenderContext').RenderContext} RenderContext
  * @typedef {import('../lib/runtime/renderer/RenderContext').RouterContext} RouterContext
  * @typedef {import('../lib/runtime/decorators/AnchorDecorator').Location} AnchorLocation
