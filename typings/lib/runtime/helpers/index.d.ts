@@ -11,7 +11,7 @@ export function getMRCA(node1: RNodeRuntime, node2: RNodeRuntime): {
 export function getPath(node1: any, node2: any): string;
 /**
  * @callback Goto
- * @param {string} path relative, absolute or named URL
+ * @param {string|RNodeRuntime} pathOrNode relative, absolute or named URL
  * @param {Object.<string, string>=} userParams
  * @param {Partial<$UrlOptions & RouteState>=} options
  * @type {Readable<Goto>} */
@@ -47,7 +47,7 @@ export const goto: Readable<Goto>;
  */
 /**
  * @typedef {((
- *   inputPath: string,
+ *   pathOrNode: string|RNodeRuntime,
  *   userParams?: { [x: string]: string; },
  *   options?: Partial<$UrlOptions>
  * ) => string)} UrlFromString
@@ -69,7 +69,7 @@ export const params: Readable<{
 }>;
 /**
  * @callback IsActive
- * @param {String=} path
+ * @param {String|RNodeRuntime=} pathOrNode
  * @param {Object.<string,string>} [params]
  * @param {IsActiveOptions} [options]
  * @returns {Boolean}
@@ -79,7 +79,7 @@ export const isActive: Readable<IsActive>;
 export namespace isActiveFragment {
     function subscribe(run: any, invalidate: any): import("svelte/store").Unsubscriber;
 }
-export function isActiveUrl(renderContext: RenderContext): (path: string, params?: {
+export function isActiveUrl(renderContext: RenderContext): (pathOrNode: string | import("../Instance/RNodeRuntime.js").RNodeRuntime, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
 export function resolveNode(path: string): import("../Instance/RNodeRuntime.js").RNodeRuntime;
@@ -108,7 +108,7 @@ export const beforeUrlChange: Readable<(arg0: BeforeUrlChangeCallback) => any>;
  * @type {getDirectionCB & Readable<ReturnType<getDirectionCB>>}
  */
 export const getDirection: getDirectionCB & Readable<ReturnType<getDirectionCB>>;
-export type Goto = (path: string, userParams?: {
+export type Goto = (pathOrNode: string | RNodeRuntime, userParams?: {
     [x: string]: string;
 } | undefined, options?: Partial<$UrlOptions & RouteState> | undefined) => any;
 export type Readable<T> = import('svelte/store').Readable<T>;
@@ -144,10 +144,10 @@ export type RouteState = {
 export type Url = <T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
     [x: string]: string;
 }, options?: Partial<$UrlOptions>) => T extends HTMLAnchorElement ? void : string;
-export type UrlFromString = (inputPath: string, userParams?: {
+export type UrlFromString = (pathOrNode: string | RNodeRuntime, userParams?: {
     [x: string]: string;
 }, options?: Partial<$UrlOptions>) => string;
-export type IsActive = (path?: string | undefined, params?: {
+export type IsActive = (pathOrNode?: (string | RNodeRuntime) | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
 export type getDirectionCB = (boundary?: RNodeRuntime | undefined, newRoute?: Route | undefined, oldRoute?: Route | undefined) => 'first' | 'last' | 'same' | 'next' | 'prev' | 'higher' | 'lower' | 'na';
