@@ -60,7 +60,7 @@ export const _url: Readable<Url>;
  * @type {Readable<Url>}
  */
 export const url: Readable<Url>;
-export function createUrl(fragment: RouteFragment, router: any): UrlFromString;
+export function createUrl(fragment: RouteFragment, router: Router): UrlFromString;
 /**
  * @type {Readable<Object.<string, any>>}
  */

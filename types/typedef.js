@@ -405,4 +405,13 @@
 //  * @returns {T}
 //  */
 
-/** @typedef {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} RenderContextOptions*/
+/** @typedef {Partial<{inline: InlineInput, decorator:DecoratorInput<any>, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} RenderContextOptions*/
+
+/**
+ * @typedef {Object} TraverseOptions
+ * @property {boolean} [allowDynamic=true] allow traversing dynamic components (parameterized)
+ * @property {boolean} [includeIndex=true] include index components in the chain
+ * @property {boolean} [navigableChildrenOnly=false] only traverse children that are not marked as noRoute
+ * @property {boolean|'report'} [silent=false] false: throw errors for 404s, true: don't throw errors for 404s, 'report': log errors for 404s
+ * @property {RNode} [rootNode] the root node to start traversing from
+ */

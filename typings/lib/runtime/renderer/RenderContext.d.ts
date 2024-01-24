@@ -87,7 +87,7 @@ export class RenderContext extends RouterContext {
     parentContext: RenderContext;
     options: Partial<{
         inline: InlineInput;
-        decorator: any;
+        decorator: DecoratorInput<any>;
         props: any;
         options: any;
         anchor: import("../decorators/AnchorDecorator").Location;

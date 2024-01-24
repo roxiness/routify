@@ -460,9 +460,31 @@ type DeferredPromise<T> = Promise<T> & {
 type InlineCallback<T> = (context: ScrollContext, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;
 type RenderContextOptions = Partial<{
     inline: InlineInput;
-    decorator: DecoratorInput;
+    decorator: DecoratorInput<any>;
     props;
     options;
     anchor: AnchorLocation;
     scrollBoundary: scrollBoundary;
 }>;
+type TraverseOptions = {
+    /**
+     * allow traversing dynamic components (parameterized)
+     */
+    allowDynamic?: boolean;
+    /**
+     * include index components in the chain
+     */
+    includeIndex?: boolean;
+    /**
+     * only traverse children that are not marked as noRoute
+     */
+    navigableChildrenOnly?: boolean;
+    /**
+     * false: throw errors for 404s, true: don't throw errors for 404s, 'report': log errors for 404s
+     */
+    silent?: boolean | 'report';
+    /**
+     * the root node to start traversing from
+     */
+    rootNode?: import("../lib/common/RNode").RNode<any>;
+};

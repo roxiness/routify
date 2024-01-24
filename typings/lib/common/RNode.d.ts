@@ -58,30 +58,16 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
     /**
      * resolve a node relative to this node
      * @param {string} path
-     * @param {boolean} allowDynamic allow traversing dynamic components (parameterized)
-     * @param {boolean} includeIndex
-     * @param {boolean} silent don't throw errors for 404s
+     * @param {TraverseOptions} [options]
      * @returns {this}
      */
-    traverse(path: string, allowDynamic?: boolean, includeIndex?: boolean, silent?: boolean): this;
+    traverse(path: string, options?: TraverseOptions): this;
     /**
      * Returns an array of steps to reach a path. Each path contains a node and params
      * @param {string} path
-     * @param {object} [options]
-     * @param {boolean} [options.allowDynamic=true]
-     * @param {boolean} [options.includeIndex=true]
-     * @param {boolean} [options.navigableChildrenOnly=false]
-     * @param {boolean} [options.silent=false] don't throw errors for 404s
-     * @param {this} [options.rootNode]
-     
+     * @param {TraverseOptions} [options]
      */
-    getChainTo(path: string, options?: {
-        allowDynamic?: boolean;
-        includeIndex?: boolean;
-        navigableChildrenOnly?: boolean;
-        silent?: boolean;
-        rootNode?: RNode<InstanceType>;
-    }): {
+    getChainTo(path: string, options?: TraverseOptions): {
         node: InstanceType["NodeConstructor"]["prototype"];
         stepsToLeaf: string[];
         params: {};
