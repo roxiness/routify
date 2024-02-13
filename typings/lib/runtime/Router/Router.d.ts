@@ -96,7 +96,11 @@ export class Router implements Readable<Router> {
      */
     _setUrl(url: string, mode: UrlState, isInternal?: boolean, state?: any | undefined): Promise<true | false>;
     setActiveRoute(route: any): void;
-    get lastRoute(): Route;
+    /**
+     * The last route that was active, regardless of whether it precedes the current route in history
+     * @type {Route}
+     */
+    lastRoute: Route;
     destroy(): void;
     /** @type {BaseReflector} */
     get urlReflector(): BaseReflector;

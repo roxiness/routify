@@ -10,7 +10,9 @@ export default defineConfig({
 
     plugins: [
         routify({
-            ssr: { enable: !!production },
+            render: {
+                ssr: { enable: !!production },
+            },
             routesDir: {
                 nested: 'src/routes/__nestedRoutes',
             },

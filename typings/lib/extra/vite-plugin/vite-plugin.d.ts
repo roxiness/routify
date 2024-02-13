@@ -1,9 +1,9 @@
 /**
- * @param {Partial<VitePluginOptions>=} options
+ * @param {Partial<VitePluginOptionsInput>=} input
  */
-export default function RoutifyPlugin(options?: Partial<VitePluginOptions> | undefined): {
+export default function RoutifyPlugin(input?: Partial<VitePluginOptionsInput> | undefined): {
     name: string;
-    buildStart: () => Promise<any>;
+    buildStart: () => Promise<void>;
     config: (cfg: any) => {
         appType: any;
         server: {
@@ -18,6 +18,7 @@ export default function RoutifyPlugin(options?: Partial<VitePluginOptions> | und
         };
         envPrefix: string[];
     };
+    transformIndexHtml: (html: any) => any;
     configureServer: (server: any) => () => any;
     configurePreviewServer: (server: any) => () => void;
     closeBundle: () => Promise<void>;

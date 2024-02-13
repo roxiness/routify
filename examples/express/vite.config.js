@@ -13,7 +13,7 @@ export default defineConfig({
     build: { rollupOptions: { input: __dirname + '/index.html' } },
     plugins: [
         routify({
-            ssr: { enable: production },
+            render: { ssr: { enable: production } },
             routesDir: __dirname + '/client/routes',
             mainEntryPoint: __dirname + '/client/main.js',
             rootComponent: __dirname + '/client/App.svelte',

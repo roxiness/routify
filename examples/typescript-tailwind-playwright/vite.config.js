@@ -11,7 +11,9 @@ export default defineConfig({
     resolve: { alias: { '@': resolve('src') } },
     plugins: [
         routify({
-            ssr: { enable: false },
+            render: {
+                ssr: { enable: false },
+            },
         }),
         svelte({
             compilerOptions: {

@@ -11,7 +11,7 @@ export default defineConfig({
     clearScreen: false,
     resolve: { alias: { '@': resolve('src') } },
     plugins: [
-        routify({ ssr: { enable: production } }),
+        routify({ render: { ssr: { enable: production } } }),
         svelte({
             compilerOptions: {
                 dev: !production,
