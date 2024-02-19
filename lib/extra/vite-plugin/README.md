@@ -52,7 +52,7 @@ This plugin accepts all **Routify 3** options as well as the following specific 
 
 #### `ssr` (Object | Boolean)
 - Enables Server Side Rendering with optional configuration.
-- enable (Boolean): Enable SSR in development.
+- `enable` (Boolean): Enable SSR in development.
 - `type` ("cjs" | "esm"): Module type for SSR builds.
 
 #### `ssg` (Object | Boolean)
