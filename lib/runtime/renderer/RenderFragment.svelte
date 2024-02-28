@@ -50,37 +50,40 @@
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
 <svelte:component this={context.decorators.length ? DecoratorWrapper : Noop} {context}>
     {#await context.node.loadModule() then}
-        <AnchorDecorator {context} onMount={initialize}>
-            <!-- PAGE COMPONENT -->
-            <svelte:component
-                this={context.node.module.default}
-                {...compProps}
-                {...context.props}
-                {context}
-                let:props
-                let:inline
-                let:multi
-                let:decorator
-                let:anchor
-                let:options
-                let:scrollBoundary
-                >{#if $childFragments.length || ((hasInlineChildren || inline || multi) && !(inline || multi)?.single)}
-                    <!-- CHILD PAGES -->
-                    <Compose
-                        options={{
-                            inline: inline || multi,
-                            decorator,
-                            props,
-                            options,
-                            scrollBoundary,
-                            anchor: anchor || context.anchorLocation,
-                        }}
-                        {context} />
-                {/if}</svelte:component>
-            {#if !isMounted}
-                <div use:childMounted />
-            {/if}
-        </AnchorDecorator>
+        {#key fragment.node.meta['param-is-page'] && JSON.stringify(fragment.params)}
+            <!-- {#key fragment.node.meta['param-is-page'] && JSON.stringify(fragment.params)} -->
+            <AnchorDecorator {context} onMount={initialize}>
+                <!-- PAGE COMPONENT -->
+                <svelte:component
+                    this={context.node.module.default}
+                    {...compProps}
+                    {...context.props}
+                    {context}
+                    let:props
+                    let:inline
+                    let:multi
+                    let:decorator
+                    let:anchor
+                    let:options
+                    let:scrollBoundary
+                    >{#if $childFragments.length || ((hasInlineChildren || inline || multi) && !(inline || multi)?.single)}
+                        <!-- CHILD PAGES -->
+                        <Compose
+                            options={{
+                                inline: inline || multi,
+                                decorator,
+                                props,
+                                options,
+                                scrollBoundary,
+                                anchor: anchor || context.anchorLocation,
+                            }}
+                            {context} />
+                    {/if}</svelte:component>
+                {#if !isMounted}
+                    <div use:childMounted />
+                {/if}
+            </AnchorDecorator>
+        {/key}
     {/await}
 </svelte:component>
 
