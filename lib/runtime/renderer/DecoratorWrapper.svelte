@@ -25,7 +25,7 @@
     this={decorator ? decorator.component : Noop}
     {context}
     {isRoot}
-    {...decorator.props}>
+    {...decorator?.props}>
     {#if restOfDecorators.length}
         <svelte:self decorators={restOfDecorators} {context} isRoot={false}>
             <slot />
