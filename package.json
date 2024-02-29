@@ -23,6 +23,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "default": "./runtime/index.js",
+      "svelte": "./runtime/index.js"
+    }
+  },
   "dependencies": {
     "@roxi/ssr": "^0.2.1",
     "@types/node": "^12.20.52",
