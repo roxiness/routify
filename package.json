@@ -30,7 +30,8 @@
         "./package.json": "./package.json",
         ".": {
             "types": "./index.d.ts",
-            "default": "./lib/runtime/index.js"
+            "default": "./lib/runtime/index.js",
+            "svelte": "./lib/runtime/index.js"
         },
         "./vite-plugin": {
             "types": "./typings/lib/extra/vite-plugin/vite-plugin.d.ts",
