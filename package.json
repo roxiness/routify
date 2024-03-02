@@ -27,7 +27,9 @@
     ".": {
       "svelte": "./runtime/index.js",
       "default": "./runtime/index.js"
-    }
+    },
+    "./runtime/*": "./runtime/*",
+    "./hmr": "./hmr.js"
   },
   "dependencies": {
     "@roxi/ssr": "^0.2.1",
