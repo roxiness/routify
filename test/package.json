@@ -6,7 +6,7 @@
     "test:mock-api": "ava tests/mock-server/**"
   },
   "devDependencies": {
-    "ava": "^3.13.0",
+    "ava": "^5.2.0",
     "fs-extra": "^9.0.0",
     "node-fetch": "^2.6.7",
     "playwright": "^1.2.1",
