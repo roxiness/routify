@@ -53,6 +53,7 @@
         same: defaultTransitionCallback,
         first: defaultTransitionCallback,
         last: defaultTransitionCallback,
+        na: defaultTransitionCallback,
     }
 
     const setParams = direction => {
