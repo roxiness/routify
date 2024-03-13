@@ -214,6 +214,10 @@ type RoutifyRuntimeOptions = {
      * hook: runs before router is destroyed
      */
     onDestroy: MaybeArray<OnDestroyRouterCallback>;
+    /**
+     * how to handle trailing slashes, defaults to 'never'
+     */
+    trailingSlash: 'always' | 'never' | 'preserve' | 'contextual';
     queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
     clickHandler: ClickHandler;

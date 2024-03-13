@@ -89,6 +89,7 @@
  * @prop { MaybeArray<TransformFragmentsCallback> } transformFragments hook: transform route fragments after navigation
  * @prop { MaybeArray<OnMountRouterCallback> } onMount hook: runs when the router is mounted
  * @prop { MaybeArray<OnDestroyRouterCallback> } onDestroy hook: runs before router is destroyed
+ * @prop { 'always' | 'never' | 'preserve' | 'contextual' } trailingSlash how to handle trailing slashes, defaults to 'never'
  * @prop { QueryHandler } queryHandler
  * @prop { Partial<RoutifyRuntimeOptions>[] } plugins
  * @prop { ClickHandler } clickHandler
