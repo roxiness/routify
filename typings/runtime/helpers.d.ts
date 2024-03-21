@@ -75,17 +75,17 @@ export const context: import("svelte/store").Readable<{
 export const ready: import("svelte/store").Readable<() => void>;
 /**
  * @callback AfterPageLoadHelper
- * @param {(page?: ClientNodeApi) => void} callback
+ * @param {function} callback
  *
- * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<(page?: ClientNodeApi) => void>}} AfterPageLoadHelperStore
+ * @typedef {import('svelte/store').Readable<AfterPageLoadHelper> & {_hooks:Array<function>}} AfterPageLoadHelperStore
  * @type {AfterPageLoadHelperStore}
  */
 export const afterPageLoad: AfterPageLoadHelperStore;
 /**
  * @callback BeforeUrlChangeHelper
- * @param {(event?: PopStateEvent, route?: ClientNodeApi) => boolean} callback
+ * @param {function} callback
  *
- * @typedef {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<(event?: PopStateEvent, route?: ClientNodeApi) => boolean>}} BeforeUrlChangeHelperStore
+ * @typedef {import('svelte/store').Readable<BeforeUrlChangeHelper> & {_hooks:Array<function>}} BeforeUrlChangeHelperStore
  * @type {BeforeUrlChangeHelperStore}
  **/
 export const beforeUrlChange: BeforeUrlChangeHelperStore;
@@ -176,13 +176,13 @@ export type ContextHelperStore = import("svelte/store").Readable<{
 }>;
 export type ReadyHelper = () => void;
 export type ReadyHelperStore = import("svelte/store").Readable<() => void>;
-export type AfterPageLoadHelper = (callback: (page?: ClientNodeApi) => void) => any;
+export type AfterPageLoadHelper = (callback: Function) => any;
 export type AfterPageLoadHelperStore = import("svelte/store").Readable<AfterPageLoadHelper> & {
-    _hooks: Array<(page?: ClientNodeApi) => void>;
+    _hooks: Array<Function>;
 };
-export type BeforeUrlChangeHelper = (callback: (event?: PopStateEvent, route?: ClientNodeApi) => boolean) => any;
+export type BeforeUrlChangeHelper = (callback: Function) => any;
 export type BeforeUrlChangeHelperStore = import("svelte/store").Readable<BeforeUrlChangeHelper> & {
-    _hooks: Array<(event?: PopStateEvent, route?: ClientNodeApi) => boolean>;
+    _hooks: Array<Function>;
 };
 /**
  * We have to grab params and leftover from the context and not directly from the store.

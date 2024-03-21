@@ -25,6 +25,7 @@
   },
   "exports": {
     ".": {
+      "types": "./typings/runtime/index.d.ts",
       "svelte": "./runtime/index.js",
       "default": "./runtime/index.js"
     },
