@@ -106,6 +106,9 @@ export class Router implements Readable<Router> {
     get urlReflector(): BaseReflector;
     /** @param {typeof BaseReflector} UrlReflector */
     setUrlReflector(UrlReflector: typeof BaseReflector): void;
+    goBack(): void;
+    goForward(): void;
+    go(count: any): void;
 }
 export function createRouter(options: Partial<RoutifyRuntimeOptions>): Router;
 export type ParentCmpCtx = {
