@@ -30,6 +30,7 @@
       "default": "./runtime/index.js"
     },
     "./runtime/*": "./runtime/*",
+    "./plugins/*": "./plugins/*",
     "./hmr": "./hmr.js"
   },
   "dependencies": {
