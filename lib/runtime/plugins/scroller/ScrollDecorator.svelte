@@ -9,7 +9,7 @@
     isRoot
 
     const routeHasHashAndWeAreAtTheLeaf = route =>
-        route.hash && route.leaf === context.fragment
+        route.sourceUrl.hash && route.leaf === context.fragment
 
     const contextLineageIsActive = () =>
         getLineage(context).every(ctx => get(ctx.isActive))
