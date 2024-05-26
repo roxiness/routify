@@ -95,7 +95,12 @@ export class Router implements Readable<Router> {
      * @returns {Promise<true|false>}
      */
     _setUrl(url: string, mode: UrlState, isInternal?: boolean, state?: any | undefined): Promise<true | false>;
-    setActiveRoute(route: any): void;
+    /**
+     *
+     * @param {Route} route
+     * @param {Route} stackedRoute the route that was stacked in history with the same id
+     */
+    setActiveRoute(route: Route, stackedRoute: Route): void;
     /**
      * The last route that was active, regardless of whether it precedes the current route in history
      * @type {Route}

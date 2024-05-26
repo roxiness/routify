@@ -17,7 +17,10 @@ export function populateUrl(path: string, params: {
     [x: string]: (string | string[]);
 }, overloadStringifier: (obj: {
     [x: string]: string;
-}) => string): string;
+}) => string): {
+    path: string;
+    query: string;
+};
 export function urlFromAddress(): string;
 export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;

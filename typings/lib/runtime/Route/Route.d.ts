@@ -12,6 +12,10 @@ export class Route {
     fragments: RouteFragment[];
     /** @type {RoutifyLoadReturn} */
     load: RoutifyLoadReturn;
+    /** @type {Route} */
+    prevRoute: Route;
+    /** @type {Route} */
+    nextRoute: Route;
     sourceUrl: URL;
     router: import("../index.js").RouterClass;
     mode: UrlState;
