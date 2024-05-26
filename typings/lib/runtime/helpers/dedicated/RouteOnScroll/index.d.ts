@@ -6,15 +6,19 @@ export function getDescendantNodesElements(context?: (RouterContext | RenderCont
  */
 export class BaseRouteOnScroll {
     /**
-     * RouteOnScroll2 detects when the user scrolls to a new inlined page and updates the router accordingly
+     * RouteOnScroll detects when the user scrolls to a new inlined page and updates the router accordingly
+     * @param {import('../../index.js').Url} $url
      * @param {Partial<BaseRouteOnScrollOptions>} options
      * */
-    constructor(options?: Partial<BaseRouteOnScrollOptions>);
+    constructor($url: import('../../index.js').Url, options?: Partial<BaseRouteOnScrollOptions>);
     /** @type {Route} */
     lastRoute: Route;
     /** @type {HTMLElement[]} */
     elems: HTMLElement[];
     direction: any;
+    /** @type {HTMLElement} */
+    boundaryElem: HTMLElement;
+    $url: import("../../index.js").Url;
     id: symbol;
     coolOffTime: number;
     throttleTime: number;
@@ -37,12 +41,14 @@ export class BaseRouteOnScroll {
 export class RouteOnScroll extends BaseRouteOnScroll {
     /**
      * RouteOnScroll detects when the user scrolls to a new inlined page and updates the router accordingly
+     * @param {import('../../index.js').Url} $url
      * @param {Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>} options
      * */
-    constructor(options?: Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>);
+    constructor($url: import('../../index.js').Url, options?: Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>);
     threshold: number;
     direction: "both" | "vertical" | "horizontal";
     strategy: "lowestAboveThreshold" | "withinThreshold";
+    getElementPos(element: any): any;
     findFocusedElement(elems: any): any;
 }
 export type RouteOnScrollOptions = {
