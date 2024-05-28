@@ -1,5 +1,5 @@
 <script>
-    import Carousel from '@roxi/routify/Carousel'
+    import Carousel from '@roxi/routify/components/Carousel.svelte'
     import Navigation from './__components/Navigation.svelte'
 </script>
 

@@ -1,10 +1,13 @@
 <script>
-    import { url } from '../index.js'
-    import { RouteOnScroll } from './RouteOnScroll/index.js'
+    /**
+     * Carousel component
+     * @description A component that allows you to scroll through a node's inlined children
+     */
+
+    import { RouteOnScroll } from '@roxi/routify/helpers/RouteOnScroll'
     /** @type {ConstructorParameters<typeof RouteOnScroll>['0']}*/
     export let options = { direction: 'horizontal' }
 
-    // const routeOnScroll = new RouteOnScroll($url, {
     const routeOnScroll = new RouteOnScroll({
         scrollEvent: 'scroll', // or "scrollend"
         threshold: 100, // don't trigger until we're within 100px of the page
