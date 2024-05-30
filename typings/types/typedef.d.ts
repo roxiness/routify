@@ -27,7 +27,7 @@ type MaybePromise<T> = import('./utils').MaybePromise<T>;
 /**
  * RUNTIME
  */
-type scrollBoundary = HTMLElement | ((HTMLElement: any) => HTMLElement) | ((HTMLElement: any) => Promise<HTMLElement>);
+type scrollBoundary = HTMLElement | ((HTMLElement) => HTMLElement) | ((HTMLElement) => Promise<HTMLElement>);
 /**
  * RUNTIME
  */
@@ -231,7 +231,7 @@ type DecoratorInput<T> = (Partial<Decorator<T>> & {
 }) | SvelteComponentDev;
 type Decorator<T> = {
     recursive?: boolean | undefined;
-    shouldRender?: (payload: DecoratorShouldRenderPayload<T>) => boolean;
+    shouldRender?: ((payload: DecoratorShouldRenderPayload<T>) => boolean) | undefined;
     component: SvelteComponentDev;
     order: number;
     props: T;
@@ -392,8 +392,8 @@ type QueryHandlerStringify = (search: {
     [x: string]: string;
 }, route: Route) => string;
 type ClickHandler = {
-    callback?: (event: MouseEvent | KeyboardEvent, url: string) => string | false;
-    elem?: HTMLElement | ((elem: HTMLElement) => HTMLElement);
+    callback?: ((event: MouseEvent | KeyboardEvent, url: string) => string | false) | undefined;
+    elem?: (HTMLElement | ((elem: HTMLElement) => HTMLElement)) | undefined;
 };
 type ComponentGuardFn = (route: Route) => any;
 type ReservedCmpProps = {
@@ -451,15 +451,15 @@ type Inline = {
      */
     shouldScroll: InlineCallback<boolean>;
     context: 'browser' | 'ssr' | 'always';
-    scrollIntoView: (elem: HTMLElement, instant: boolean) => void;
+    scrollIntoView: (elem: HTMLElement, instant: boolean, options: any) => void;
     params: {
         [x: string]: string[];
     };
     wrapper: SvelteComponentDev | null;
 };
 type DeferredPromise<T> = Promise<T> & {
-    resolve: (T: any) => void;
-    reject: (T: any) => void;
+    resolve: (T) => void;
+    reject: (T) => void;
 };
 type InlineCallback<T> = (context: ScrollContext, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;
 type RenderContextOptions = Partial<{

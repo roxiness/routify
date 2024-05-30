@@ -6,5 +6,5 @@ export function addFolderDecorator(decorators: Decorator<any>[], context: Render
 export function addFolderWrapper(decorators: Decorator<any>[], context: RenderContext | RouterContext): void | Promise<void>;
 export function defaultscrollBoundary(ownContext: any): any;
 export function findActiveChildContext(childContexts: RenderContext[], fragment: RouteFragment): RenderContext;
-import { RouteFragment } from "../Route/RouteFragment.js";
-import { RenderContext } from "./RenderContext.js";
+import { RouteFragment } from '../Route/RouteFragment.js';
+import { RenderContext } from './RenderContext.js';

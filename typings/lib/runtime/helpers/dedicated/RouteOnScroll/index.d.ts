@@ -7,10 +7,9 @@ export function getDescendantNodesElements(context?: (RouterContext | RenderCont
 export class BaseRouteOnScroll {
     /**
      * RouteOnScroll detects when the user scrolls to a new inlined page and updates the router accordingly
-     * @param {import('../../index.js').Url} $url
      * @param {Partial<BaseRouteOnScrollOptions>} options
      * */
-    constructor($url: import('../../index.js').Url, options?: Partial<BaseRouteOnScrollOptions>);
+    constructor(options?: Partial<BaseRouteOnScrollOptions>);
     /** @type {Route} */
     lastRoute: Route;
     /** @type {HTMLElement[]} */
@@ -18,8 +17,8 @@ export class BaseRouteOnScroll {
     direction: any;
     /** @type {HTMLElement} */
     boundaryElem: HTMLElement;
-    $url: import("../../index.js").Url;
     id: symbol;
+    $url: import("../../index.js").Url;
     coolOffTime: number;
     throttleTime: number;
     getElems: (context: import("../../../renderer/RenderContext.js").RenderContext | import("../../../renderer/RenderContext.js").RouterContext) => HTMLElement[];
@@ -41,10 +40,9 @@ export class BaseRouteOnScroll {
 export class RouteOnScroll extends BaseRouteOnScroll {
     /**
      * RouteOnScroll detects when the user scrolls to a new inlined page and updates the router accordingly
-     * @param {import('../../index.js').Url} $url
      * @param {Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>} options
      * */
-    constructor($url: import('../../index.js').Url, options?: Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>);
+    constructor(options?: Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>);
     threshold: number;
     direction: "both" | "vertical" | "horizontal";
     strategy: "lowestAboveThreshold" | "withinThreshold";
@@ -64,4 +62,8 @@ export type BaseRouteOnScrollOptions = {
     context: RouterContext | RenderContext;
     findFocusedElement: (elems: HTMLElement[]) => HTMLElement;
     scrollEvent: 'scroll' | 'scrollend';
+    /**
+     * urlHelper
+     */
+    $url: import('../../index.js').Url;
 };

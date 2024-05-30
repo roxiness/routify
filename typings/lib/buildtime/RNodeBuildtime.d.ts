@@ -13,5 +13,5 @@ export class RNodeBuildtime extends RNode<RoutifyBuildtime> {
     /** @type {String} */
     asyncModule: string;
 }
-import { RoutifyBuildtime } from "./RoutifyBuildtime.js";
-import { RNode } from "../common/RNode.js";
+import { RoutifyBuildtime } from './RoutifyBuildtime.js';
+import { RNode } from '../common/RNode.js';
