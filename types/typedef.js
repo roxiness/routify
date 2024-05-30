@@ -376,7 +376,7 @@
  * @prop { (node: RNodeRuntime, context: RenderContext)=>boolean } isInline return true to inline the child node
  * @prop { InlineCallback<boolean> } shouldScroll return true to inline the child node
  * @prop { 'browser'|'ssr'|'always' } context
- * @prop { (elem: HTMLElement, instant: boolean) => void } scrollIntoView
+ * @prop { (elem: HTMLElement, instant: boolean, options: any) => void } scrollIntoView
  * @prop { Object<string, string[]> } params
  * @prop { SvelteComponentDev? } wrapper
  */
