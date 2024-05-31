@@ -65,7 +65,7 @@
                     let:decorator
                     let:anchor
                     let:options
-                    let:scrollBoundary
+                    let:scrollLock
                     >{#if $childFragments.length || ((hasInlineChildren || inline || multi) && !(inline || multi)?.single)}
                         <!-- CHILD PAGES -->
                         <Compose
@@ -74,7 +74,7 @@
                                 decorator,
                                 props,
                                 options,
-                                scrollBoundary,
+                                scrollLock,
                                 anchor: anchor || context.anchorLocation,
                             }}
                             {context} />
