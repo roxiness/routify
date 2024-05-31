@@ -21,11 +21,11 @@ export class BaseRouteOnScroll {
     $url: import("../../index.js").Url;
     coolOffTime: number;
     throttleTime: number;
-    getElems: (context: import("../../../renderer/RenderContext.js").RenderContext | import("../../../renderer/RenderContext.js").RouterContext) => HTMLElement[];
+    getElems: (context: import("../../../../../typings/lib/runtime/renderer/RenderContext.js").RenderContext | import("../../../../../typings/lib/runtime/renderer/RenderContext.js").RouterContext) => HTMLElement[];
     onScrollIsActive: boolean;
     stopPersistent: () => any;
     listenForScroll: boolean;
-    context: import("../../../renderer/RenderContext.js").RenderContext | import("../../../renderer/RenderContext.js").RouterContext;
+    context: import("../../../../../typings/lib/runtime/renderer/RenderContext.js").RenderContext | import("../../../../../typings/lib/runtime/renderer/RenderContext.js").RouterContext;
     /**
      * @param HTMLElement[]
      * @returns {HTMLElement}
@@ -34,7 +34,7 @@ export class BaseRouteOnScroll {
     scrollEvent: "scroll" | "scrollend";
     onScrollThrottled(): void;
     onScroll(): void;
-    lastContext: import("../../../renderer/RenderContext.js").RenderContext | import("../../../renderer/RenderContext.js").RouterContext;
+    lastContext: import("../../../../../typings/lib/runtime/renderer/RenderContext.js").RenderContext | import("../../../../../typings/lib/runtime/renderer/RenderContext.js").RouterContext;
     subscribe(run: any): () => void;
 }
 export class RouteOnScroll extends BaseRouteOnScroll {

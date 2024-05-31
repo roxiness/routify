@@ -1,1 +1,1 @@
-export function createRoot404(rootNode: import("../../../../../common/RNode.js").RNode<any>, routifyDir: any): void;
+export function createRoot404(rootNode: import("../../../../../../typings/lib/common/RNode.js").RNode<any>, routifyDir: any): void;
