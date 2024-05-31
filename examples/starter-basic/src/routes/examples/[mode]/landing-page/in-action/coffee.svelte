@@ -1,3 +1,4 @@
+<!-- routify:meta inline -->
 <!-- routify:meta isDefault -->
 
 <h3>Coffee</h3>

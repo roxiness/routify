@@ -1,6 +1,7 @@
 <!-- routify:meta order=3 -->
 <script>
     import { url, isActive, node } from '@roxi/routify'
+    import Carousel from '@roxi/routify/components/Carousel.svelte'
 </script>
 
 <!-- routify:meta inline -->
@@ -13,12 +14,10 @@
         {/each}
     </div>
 
-    <div class="showcases-tabs-window" data-routify-scroll-lock>
-        <slot
-            anchor="header"
-            inline={{
-                scrollIntoView: (elem, instant) => elem.scrollIntoViewIfNeeded(),
-            }} />
+    <div class="showcases-tabs-window">
+        <Carousel>
+            <slot />
+        </Carousel>
     </div>
 </div>
 <p>
@@ -51,18 +50,5 @@
         font-size: larger;
         text-decoration: none;
         font-weight: 500;
-    }
-    .showcases-tabs-window {
-        scroll-snap-type: x mandatory;
-        display: flex;
-        overflow-x: scroll;
-        scroll-behavior: smooth;
-        scrollbar-width: none;
-        &::-webkit-scrollbar {
-            display: none;
-        }
-    }
-    .showcases-tabs-window > :global(*) {
-        scroll-snap-align: start;
     }
 </style>

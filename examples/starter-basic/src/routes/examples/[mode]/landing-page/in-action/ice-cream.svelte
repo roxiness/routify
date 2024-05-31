@@ -1,3 +1,5 @@
+<!-- routify:meta inline -->
+
 <h3>Ice Cream</h3>
 
 <svg

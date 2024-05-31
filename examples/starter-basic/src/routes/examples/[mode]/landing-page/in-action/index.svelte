@@ -1,5 +1,6 @@
 <!-- routify:meta order=-1 -->
 <!-- routify:meta title="In Action" -->
+<!-- routify:meta inline -->
 
 <h2>Inline Pages in Action</h2>
 <p>
