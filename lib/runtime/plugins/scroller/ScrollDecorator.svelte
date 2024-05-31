@@ -1,6 +1,6 @@
 <script>
     import { get } from 'svelte/store'
-    import { scrollToContext } from './scroll.js'
+    import { scrollQueue } from './ScrollQueue.js'
     import { getLineage } from '../../renderer/utils/index.js'
 
     /** @type {RenderContext} */
@@ -27,7 +27,7 @@
     ) {
         const { debug } = context.router.log // ROUTIFY-DEV-ONLY
         debug('scrolling to context', context.node.id || 'unnamed', context) // ROUTIFY-DEV-ONLY
-        scrollToContext(context)
+        scrollQueue.push(context)
     }
 </script>
 
