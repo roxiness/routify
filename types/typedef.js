@@ -16,7 +16,7 @@
 
 /**
  * RUNTIME
- * @typedef { HTMLElement | ((HTMLElement) => HTMLElement) | ((HTMLElement) => Promise<HTMLElement>) } scrollBoundary
+ * @typedef { HTMLElement | ((HTMLElement) => HTMLElement) | ((HTMLElement) => Promise<HTMLElement>) } scrollLock
  * @typedef {{instance: RoutifyRuntime}} RoutifyRuntimePayload
  * @typedef {import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime} RNodeRuntime
  * @typedef {import('../lib/runtime/Route/Route').Route} Route
@@ -406,7 +406,7 @@
 //  * @returns {T}
 //  */
 
-/** @typedef {Partial<{inline: InlineInput, decorator:DecoratorInput<any>, props, options, anchor: AnchorLocation, scrollBoundary: scrollBoundary}>} RenderContextOptions*/
+/** @typedef {Partial<{inline: InlineInput, decorator:DecoratorInput<any>, props, options, anchor: AnchorLocation, scrollLock: scrollLock}>} RenderContextOptions*/
 
 /**
  * @typedef {Object} TraverseOptions

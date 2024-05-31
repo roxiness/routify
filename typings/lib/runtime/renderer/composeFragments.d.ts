@@ -4,7 +4,7 @@ export function nodeIsIndexed(node: RNodeRuntime): boolean;
 export function fetchIndexNode(node: RNodeRuntime): import("../../../typings/lib/runtime/Instance/RNodeRuntime.js").RNodeRuntime;
 export function addFolderDecorator(decorators: Decorator<any>[], context: RenderContext | RouterContext): void | Promise<void>;
 export function addFolderWrapper(decorators: Decorator<any>[], context: RenderContext | RouterContext): void | Promise<void>;
-export function defaultScrollLock(ownContext: any, _: any, scrollContext: any): any[];
+export function defaultScrollLock(renderContext: RenderContext, scrollTarget: HTMLElement, scrollContext: ScrollContext): any[];
 export function findActiveChildContext(childContexts: RenderContext[], fragment: RouteFragment): RenderContext;
 import { RouteFragment } from '../Route/RouteFragment.js';
 import { RenderContext } from './RenderContext.js';
