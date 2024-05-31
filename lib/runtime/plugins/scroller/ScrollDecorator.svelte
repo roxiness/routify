@@ -14,15 +14,16 @@
     const contextLineageIsActive = () =>
         getLineage(context).every(ctx => get(ctx.isActive))
 
-    const contextWasNotActive = () =>
-        context !== context.parentContext?.lastActiveChildContext
+    const contextWasActive = () =>
+        context.parentContext?.lastActiveChildContext === context ||
+        (context.node.isRoot && context.route.prevRoute)
 
     $: ({ route } = context)
     $: if (
         route &&
         !route.state.dontScroll &&
         (routeHasHashAndWeAreAtTheLeaf(route) ||
-            (contextLineageIsActive() && contextWasNotActive()))
+            (contextLineageIsActive() && !contextWasActive()))
     ) {
         const { debug } = context.router.log // ROUTIFY-DEV-ONLY
         debug('scrolling to context', context.node.id || 'unnamed', context) // ROUTIFY-DEV-ONLY
