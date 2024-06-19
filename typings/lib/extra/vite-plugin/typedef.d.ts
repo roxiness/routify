@@ -36,6 +36,7 @@ type VitePluginSpecificOptions = {
      */
     forceLogging: boolean;
     render: VitePluginSpecificOptionsRender;
+    outDir: string;
 };
 type VitePluginSpecificOptionsInput = {
     /**
