@@ -34,6 +34,7 @@ export default {
         if (!options.features.includes('components')) {
             // remove components folder
             await rm(`${options.projectDir}/src/components`, { recursive: true })
+            await rm(`${options.projectDir}/src/routes/_module.svelte`)
         }
     },
 }
