@@ -15,6 +15,14 @@
 
     /** @type {RenderContextOptions} */
     export let options
+    let oldOptions = null
+    let optionsChangeCounter = 1
+    $: {
+        const jsonOptions = JSON.stringify(options)
+        optionsChangeCounter =
+            jsonOptions !== oldOptions ? optionsChangeCounter + 1 : optionsChangeCounter
+        oldOptions = jsonOptions
+    }
 
     const { childFragments } = context
     const { decorator } = options
@@ -32,8 +40,9 @@
     let wrappersReady = !addFolderWrapper(newDecorators, context)?.then(() => {
         wrappersReady = true
     })
+    $: if (optionsChangeCounter) buildChildContexts()
 
-    context.buildChildContexts(options, newDecorators)
+    const buildChildContexts = () => context.buildChildContexts(options, newDecorators)
 
     const { childContexts } = context
 
@@ -69,7 +78,7 @@
         context.childContexts.set(childContexts)
     }
 
-    $: _handleChildren($childFragments)
+    $: _handleChildren(optionsChangeCounter && $childFragments)
 </script>
 
 {#each $childContexts.filter(cc => decoratorsReady && wrappersReady && get(cc.isVisible)) as context (context)}
