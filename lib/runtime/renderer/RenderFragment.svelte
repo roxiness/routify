@@ -57,7 +57,6 @@
                 <svelte:component
                     this={context.node.module.default}
                     {...compProps}
-                    {...context.props}
                     {context}
                     let:props
                     let:inline
