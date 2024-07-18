@@ -6,7 +6,7 @@
         resolveIfAnonFn,
         shouldIgnoreClick,
     } from '../utils/index.js'
-    import Component from '../renderer/ComposeFragments.svelte'
+    import ComposeFragments from '../renderer/ComposeFragments.svelte'
     import { get } from 'svelte/store'
     import AnchorDecorator from '../decorators/AnchorDecorator.svelte'
     import { normalizeDecorator } from '../renderer/utils/normalizeDecorator.js'
@@ -51,6 +51,8 @@
     export let anchor = 'wrapper'
     /** @type {ClickHandler}*/
     export let clickHandler = {}
+
+    export let props = {}
 
     /** @type {Partial<RoutifyRuntimeOptions>}*/
     const options = {
@@ -142,6 +144,6 @@
 
 <AnchorDecorator onMount={initialize} style="display: contents" {context}>
     {#if $activeRoute}
-        <Component {context} options={{ decorator }} />
+        <ComposeFragments {context} options={{ decorator, props }} />
     {/if}
 </AnchorDecorator>
