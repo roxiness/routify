@@ -31,7 +31,9 @@
     },
     "./runtime/*": "./runtime/*",
     "./plugins/*": "./plugins/*",
-    "./hmr": "./hmr.js"
+    "./hmr": "./hmr.js",
+    "./lib/utils/config": "./lib/utils/config.js"
+
   },
   "dependencies": {
     "@roxi/ssr": "^0.2.1",
