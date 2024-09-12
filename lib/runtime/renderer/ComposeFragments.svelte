@@ -15,10 +15,12 @@
 
     /** @type {RenderContextOptions} */
     export let options
+
     let oldOptions = null
     let optionsChangeCounter = 1
     $: {
-        const jsonOptions = JSON.stringify(options)
+        const { props: _props, ...optionsWithoutProps } = options
+        const jsonOptions = JSON.stringify(optionsWithoutProps)
         optionsChangeCounter =
             jsonOptions !== oldOptions ? optionsChangeCounter + 1 : optionsChangeCounter
         oldOptions = jsonOptions
