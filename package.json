@@ -8,6 +8,12 @@
     "types": "index.d.ts",
     "typesVersions": {
         "*": {
+            "plugins": [
+                "./typings/plugins/index.d.ts"
+            ],
+            "plugins/*": [
+                "./typings/plugins/*"
+            ],
             "vite-plugin": [
                 "./typings/lib/extra/vite-plugin/vite-plugin.d.ts"
             ],
@@ -53,7 +59,10 @@
         },
         "./typings/*": "./typings/*",
         "./plugins/*": "./plugins/*",
-        "./plugins": "./plugins/index",
+        "./plugins": {
+            "default": "./plugins/index",
+            "types": "./typings/plugins/index.d.ts"
+        },
         "./tools": {
             "default": "./lib/extra/tools/index.js",
             "types": "./typings/lib/extra/tools/ssr.d.ts"
