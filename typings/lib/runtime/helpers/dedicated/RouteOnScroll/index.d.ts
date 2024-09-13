@@ -45,14 +45,49 @@ export class RouteOnScroll extends BaseRouteOnScroll {
     constructor(options?: Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>);
     threshold: number;
     direction: "both" | "vertical" | "horizontal";
-    strategy: "lowestAboveThreshold" | "withinThreshold";
-    getElementPos(element: any): any;
+    strategy: "closest" | "lowestAboveThreshold" | "withinThreshold";
+    boundaryAnchorX: "center" | "left" | "right";
+    boundaryAnchorY: "center" | "top" | "bottom";
+    targetAnchorX: "center" | "left" | "right";
+    targetAnchorY: "center" | "top" | "bottom";
+    /**
+     * @param {HTMLElement} element
+     */
+    getElementPos(element: HTMLElement, xPos?: string, yPos?: string): any[];
     findFocusedElement(elems: any): any;
 }
 export type RouteOnScrollOptions = {
+    /**
+     * - The threshold at which the strategy is triggered.
+     */
     threshold: number;
+    /**
+     * - Defines the scroll direction to be monitored.
+     */
     direction: 'both' | 'vertical' | 'horizontal';
-    strategy: 'lowestAboveThreshold' | 'withinThreshold';
+    /**
+     * -
+     * - 'lowestAboveThreshold': Selects the item just above the threshold.
+     * - 'withinThreshold': Selects any item within the threshold range.
+     * - 'closest': Selects the item closest to the boundary anchor, regardless of position.
+     */
+    strategy: 'lowestAboveThreshold' | 'withinThreshold' | 'closest';
+    /**
+     * - X anchor point for boundary alignment.
+     */
+    boundaryAnchorX: 'left' | 'center' | 'right';
+    /**
+     * - Y anchor point for boundary alignment.
+     */
+    boundaryAnchorY: 'top' | 'center' | 'bottom';
+    /**
+     * - X anchor point for target alignment.
+     */
+    targetAnchorX: 'left' | 'center' | 'right';
+    /**
+     * - Y anchor point for target alignment.
+     */
+    targetAnchorY: 'top' | 'center' | 'bottom';
 };
 export type BaseRouteOnScrollOptions = {
     threshold: number;
