@@ -30,7 +30,7 @@
  * @example
  * const routifyConfig = {
  *   plugins: [
- *     i18nPlugin({
+ *     flexMapsPlugin({
  *       variationsMap: {
  *         default: ['en-us,en','en', 'de'],
  *         widget: ['en', 'de'],
@@ -104,16 +104,19 @@ function flexMapsNormalize(options) {
 
                             if (node.name.endsWith(`.${priority}`)) {
                                 const newName = node.name.replace(`.${priority}`, '')
-
-                                // remove old node
+                                /** @type {RNodeBuildtime} */
+                                let targetNode
                                 try {
-                                    node.parent.traverse(`./${newName}`).remove()
+                                    if (newName === '_module') targetNode = node.parent
+                                    else targetNode = node.parent.traverse(`./${newName}`)
                                 } catch (e) {
                                     if (e.message.match('could not travel to'))
                                         missingBaseComponentWarning(node, newName, ctx)
                                 }
-
-                                node.name = newName
+                                Object.keys(node).forEach(key => {
+                                    if (key !== 'name') targetNode[key] = node[key]
+                                })
+                                node.remove()
                             }
                         })
                     })
