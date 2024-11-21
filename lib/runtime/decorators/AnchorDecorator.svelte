@@ -84,17 +84,21 @@
         <slot />
     </div>
 {:else if location === 'header'}
-    <div data-routify-anchor-header={name} bind:this={elem} {...$$restProps} />
+    <div data-routify-anchor-header={name} bind:this={elem} {...$$restProps}>
+        <!-- routify anchor header -->
+    </div>
     <slot />
 {:else}
     {#if !mounted}
-        <div
-            data-routify-anchor-locator
-            class="anchor"
-            bind:this={elem}
-            {...$$restProps} />
+        <div data-routify-anchor-locator class="anchor" bind:this={elem} {...$$restProps}>
+            <!-- routify anchor locator -->
+        </div>
     {/if}
     <slot />
 
-    {#if !mounted} <div class="anchor-backstop" data-routify-anchor-backstop /> {/if}
+    {#if !mounted}
+        <div class="anchor-backstop" data-routify-anchor-backstop>
+            <!-- routify anchor backstop -->
+        </div>
+    {/if}
 {/if}

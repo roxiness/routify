@@ -79,7 +79,9 @@
                             {context} />
                     {/if}</svelte:component>
                 {#if !isMounted}
-                    <div use:childMounted />
+                    <div use:childMounted>
+                        <!-- routify child mounted -->
+                    </div>
                 {/if}
             </AnchorDecorator>
         {/key}
