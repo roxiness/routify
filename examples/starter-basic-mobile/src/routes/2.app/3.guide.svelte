@@ -17,8 +17,25 @@
 
 <article>
     <h3>Swipe navigation</h3>
-    <h5>To enable swipe navigation:</h5>
+    <p>
+        Swipe navigation can easily be implemented by importing the Carousel component and
+        inlining the pages that are swipe-able.
+    </p>
     <ol>
+        <li>
+            <details>
+                <summary>Add the Carousel component to the parent module</summary>
+                <code>
+                    <pre>&lt;script&gt;
+    import Carousel from &#39;@roxi/routify/components/Carousel.svelte&#39;
+&lt;/script&gt;
+
+&lt;Carousel&gt;
+    &lt;slot /&gt;
+&lt;/Carousel&gt;</pre>
+                </code>
+            </details>
+        </li>
         <li>
             <details>
                 <summary
@@ -26,36 +43,55 @@
                 <code><pre>&lt;!-- routify:meta inline --&gt;</pre></code>
             </details>
         </li>
-        <li>
-            <details>
-                <summary>
-                    Detect scroll events with <strong>RouteOnScroll</strong>
-                </summary>
-                <code>
-                    <pre>&lt;div class=&quot;app&quot;&gt;
+    </ol>
+
+    <br />
+    <p>
+        Alternatively, swipe-able pages can also be done achieved manually without the
+        Carousel component.
+    </p>
+
+    <details>
+        <summary>Manual swipe navigation</summary>
+
+        <ol>
+            <li>
+                <details>
+                    <summary
+                        ><strong>Inline</strong> the pages that should be swipable</summary>
+                    <code><pre>&lt;!-- routify:meta inline --&gt;</pre></code>
+                </details>
+            </li>
+            <li>
+                <details>
+                    <summary>
+                        Detect scroll events with <strong>RouteOnScroll</strong>
+                    </summary>
+                    <code>
+                        <pre>&lt;div class=&quot;app&quot;&gt;
     &lt;main class=&quot;scroll-snap&quot; data-routify-scroll-lock use:$routeOnScroll&gt;
         &lt;slot /&gt;
     &lt;/main&gt;
     &lt;Navigation /&gt;
 &lt;/div&gt;</pre>
-                </code>
-                <h5>Explanations</h5>
-                <p>
-                    <code>data-routify-scroll-lock</code> prevents propagation of scroll instructions
-                    past this element.
-                </p>
-                <p>
-                    <code>use:$routeOnScroll</code> updates the route when the scroll position
-                    changes.
-                </p>
-            </details>
-        </li>
-        <li>
-            <details>
-                <summary>Make pages snapable with CSS</summary>
+                    </code>
+                    <h5>Explanations</h5>
+                    <p>
+                        <code>data-routify-scroll-lock</code> prevents propagation of scroll
+                        instructions past this element.
+                    </p>
+                    <p>
+                        <code>use:$routeOnScroll</code> updates the route when the scroll position
+                        changes.
+                    </p>
+                </details>
+            </li>
+            <li>
+                <details>
+                    <summary>Make pages snapable with CSS</summary>
 
-                <code>
-                    <pre>.scroll-snap &#123;
+                    <code>
+                        <pre>.scroll-snap &#123;
     display: flex;
     height: 100%;
     width: 100%;
@@ -71,29 +107,30 @@
     scroll-snap-align: start;
     flex: 0 0 100%;
 &#125;</pre>
-                </code>
-                <h5>Explanations</h5>
-                <p>
-                    <code>scroll-snap-type: x mandatory;</code> enables horizontal swiping.
-                </p>
-                <p>
-                    <code>scroll-snap-align: start;</code> makes sure the page snaps to the
-                    left side of the screen.
-                </p>
-                <p>
-                    <code>scroll-behavior: smooth;</code> enables smooth scrolling.
-                </p>
-                <p>
-                    <code>scrollbar-width: none;</code> hides the scrollbar.
-                </p>
-                <p>
-                    <code
-                        >&#123;::-webkit-scrollbar &#123; display: none; &#125; &#125;</code>
-                    hides the scrollbar on webkit browsers.
-                </p>
-            </details>
-        </li>
-    </ol>
+                    </code>
+                    <h5>Explanations</h5>
+                    <p>
+                        <code>scroll-snap-type: x mandatory;</code> enables horizontal swiping.
+                    </p>
+                    <p>
+                        <code>scroll-snap-align: start;</code> makes sure the page snaps to
+                        the left side of the screen.
+                    </p>
+                    <p>
+                        <code>scroll-behavior: smooth;</code> enables smooth scrolling.
+                    </p>
+                    <p>
+                        <code>scrollbar-width: none;</code> hides the scrollbar.
+                    </p>
+                    <p>
+                        <code
+                            >&#123;::-webkit-scrollbar &#123; display: none; &#125; &#125;</code>
+                        hides the scrollbar on webkit browsers.
+                    </p>
+                </details>
+            </li>
+        </ol>
+    </details>
 </article>
 
 <style>
