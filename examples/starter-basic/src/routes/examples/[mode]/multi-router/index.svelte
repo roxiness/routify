@@ -4,10 +4,10 @@
 </script>
 
 <div data-routify-scroll-lock>
-    <Router {rootNode} />
-    <Router {rootNode} />
-    <Router {rootNode} />
-    <Router {rootNode} />
+    <Router {rootNode} name="1" />
+    <Router {rootNode} name="2" />
+    <Router {rootNode} name="3" />
+    <Router {rootNode} name="4" />
 </div>
 
 <style>

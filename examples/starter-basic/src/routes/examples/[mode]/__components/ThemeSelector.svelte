@@ -1,7 +1,7 @@
 <script>
     const themes = ['auto', 'light', 'dark', 'dim', 'grape', 'choco']
 
-    export let theme = 'auto'
+    export let theme
 </script>
 
 <div class="theme-picker" tabindex="-1">

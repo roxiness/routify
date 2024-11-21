@@ -4,7 +4,7 @@
     import ExamplesDecorator from './__components/ExamplesDecorator.svelte'
     import './__assets/theme.css'
     import ThemeSelector from './__components/ThemeSelector.svelte'
-    let theme
+    let theme = 'auto'
     const scrollIntoView = (elem, instant) =>
         elem.scrollIntoView({ inline: 'center', behavior: instant ? 'auto' : 'smooth' })
     import ProgressBar from '../../../components/ProgressBar.svelte'
