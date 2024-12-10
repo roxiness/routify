@@ -79,6 +79,7 @@
     router._claimed = true
     const context = new RouterContext({ router })
     router.context = context
+    context.anchorLocation = anchor
 
     router.onMount.run({ context, router })
     context.decorators = context.decorators.map(normalizeDecorator)

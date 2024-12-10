@@ -36,23 +36,39 @@
     }
 
     const handlers = {
+        /**
+         * Wraps an anchor element around the node
+         */
         wrapper: elem => {
             elem.dataset.routifyAnchorWrapper = name
             onMount(elem)
         },
+        /**
+         * Uses the parent element as the node's anchor
+         * Note that if multiple nodes use the same parent, they will share the same anchor
+         */
         parent: elem => {
             elem.dataset.routifyAnchorParent = name
             onMount(elem.parentElement)
         },
+        /**
+         * Creates an anchor element before the node
+         */
         header: elem => {
             elem.dataset.routifyAnchorHeader = name
             onMount(elem.parentElement, elem)
         },
+        /**
+         * Uses the first element of the node as the anchor
+         */
         firstChild: elem => {
             const nextSib = nextValidSibling(elem)
             nextSib.dataset.routifyAnchorNextSibling = name
             onMount(elem.parentElement, nextSib)
         },
+        /**
+         * Uses a custom function to determine the anchor
+         */
         custom: elem => {
             // @ts-ignore location is a function
             const res = location(elem)
