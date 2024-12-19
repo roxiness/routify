@@ -2,18 +2,19 @@ export class ScrollContext {
     /**
      * @param {RenderContext} context
      */
-    constructor(context: RenderContext)
+    constructor(context: RenderContext);
     /** @type {HTMLElement} */
-    elem: HTMLElement
+    elem: HTMLElement;
     /** @type {RenderContext} */
-    ctx: RenderContext
+    ctx: RenderContext;
     /** @type {boolean} */
-    isInstant: boolean
+    isInstant: boolean;
     /** @type {HTMLElement} */
-    scrollTarget: HTMLElement
-    init(): Promise<void>
-    isInlineOrHash: true | HTMLElement
-    boundary: HTMLElement
-    getNearestScrollLock(): Promise<HTMLElement>
-    handleScrollInstructions(): Promise<any>
+    scrollTarget: HTMLElement;
+    route: import("../../Route/Route.js").Route;
+    init(): Promise<void>;
+    hashElem: HTMLElement;
+    scrollLock: HTMLElement;
+    getNearestScrollLock(): Promise<HTMLElement>;
+    handleScrollInstructions(): Promise<any>;
 }

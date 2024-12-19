@@ -25,4 +25,4 @@ export class ScrollQueue {
     processInlineAndHashQueue(scrollContexts: ScrollContext[]): Promise<void>;
 }
 export const scrollQueue: ScrollQueue;
-import { ScrollContext } from './ScrollContext';
+import { ScrollContext } from './ScrollContext.js';

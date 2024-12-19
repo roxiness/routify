@@ -8,4 +8,4 @@ export class AddressReflector extends BaseReflector {
     _getRouterUrl(): string;
     _createState(): any;
 }
-import { BaseReflector } from "./ReflectorBase.js";
+import { BaseReflector } from './ReflectorBase.js';

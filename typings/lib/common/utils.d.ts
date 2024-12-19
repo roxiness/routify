@@ -13,9 +13,9 @@ export function deepAssign<T extends {}, T2 extends {}>(receiver: T, ...sources:
 export function sortPlugins(plugins: RoutifyBuildtimePlugin[]): RoutifyBuildtimePlugin[];
 export function isObjectOrArray(v: any): boolean;
 export function normalizePlugins(plugins: RoutifyBuildtimePlugin[]): RoutifyBuildtimePlugin[];
-export function mockRoutes<T extends import("../../typings/lib/buildtime/RoutifyBuildtime").RoutifyBuildtime | import("../../typings/lib/runtime/Instance/RoutifyRuntime").RoutifyRuntime>(instance: T, routes: {
+export function mockRoutes<T extends import("../buildtime/RoutifyBuildtime").RoutifyBuildtime | import("../runtime/Instance/RoutifyRuntime").RoutifyRuntime>(instance: T, routes: {
     [x: string]: any;
-}): import("../../typings/lib/buildtime/RNodeBuildtime").RNodeBuildtime | import("../../typings/lib/runtime/Instance/RNodeRuntime").RNodeRuntime;
+}): import("../buildtime/RNodeBuildtime").RNodeBuildtime | import("../runtime/Instance/RNodeRuntime").RNodeRuntime;
 export function addPropsToComp<Component extends typeof import("svelte/internal").SvelteComponentDev>(Comp: Component, props: {
     [x: string]: any;
 }): Component;

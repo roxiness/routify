@@ -27,7 +27,7 @@ type MaybePromise<T> = import('./utils').MaybePromise<T>;
 /**
  * RUNTIME
  */
-type scrollBoundary = HTMLElement | ((HTMLElement) => HTMLElement) | ((HTMLElement) => Promise<HTMLElement>);
+type scrollLock = HTMLElement | ((HTMLElement) => HTMLElement) | ((HTMLElement) => Promise<HTMLElement>);
 /**
  * RUNTIME
  */
@@ -100,6 +100,10 @@ type RoutifyBuildtimePayload = {
     instance: RoutifyBuildtime;
     tools: any;
 };
+/**
+ * RUNTIME
+ */
+type ThemeConfig = import('../lib/buildtime/plugins/themes/utils.js').ThemeUserConfig;
 type RoutifyCallback<T> = (first: {
     instance: import("../lib/common/Routify").Routify<any>;
 }) => T | Promise<T>;
@@ -151,6 +155,7 @@ type RoutifyBuildtimeOptions = {
      * rebuild Routify routes on changes
      */
     watch: boolean;
+    themes: ThemeConfig;
 };
 type RoutifyRuntimeOptions = {
     /**
@@ -468,7 +473,7 @@ type RenderContextOptions = Partial<{
     props;
     options;
     anchor: AnchorLocation;
-    scrollBoundary: scrollBoundary;
+    scrollLock: scrollLock;
 }>;
 type TraverseOptions = {
     /**

@@ -136,17 +136,17 @@ export type $UrlOptions = {
      */
     mode: 'push' | 'replace';
 };
-export type RouteState = {
-    [x: string]: any;
-    dontscroll?: boolean;
-    dontsmoothscroll?: boolean;
-};
+export type RouteState = Partial<{
+    dontscroll: boolean;
+    dontsmoothscroll: boolean;
+    [key: string]: any;
+}>;
 export type Url = <T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
     [x: string]: string;
 }, options?: Partial<$UrlOptions>) => T extends HTMLAnchorElement ? void : string;
-export type UrlFromString = (pathOrNode: string | RNodeRuntime, userParams?: {
+export type UrlFromString = ((pathOrNode: string | RNodeRuntime, userParams?: {
     [x: string]: string;
-}, options?: Partial<$UrlOptions>) => string;
+}, options?: Partial<$UrlOptions>) => string);
 export type IsActive = (pathOrNode?: (string | RNodeRuntime) | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;

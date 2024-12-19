@@ -22,6 +22,7 @@ export class Route {
     state: any;
     params: any;
     url: string;
+    rendered: Promise<import("../renderer/RenderContext.js").RenderContext[]>;
     log: any;
     get fragmentParams(): any;
     get queryParams(): {
@@ -34,13 +35,14 @@ export class Route {
      * converts async module functions to sync functions
      */
     loadComponents(): Promise<boolean>;
-    runPreloads(): Promise<boolean | Route>;
+    runPreloads(): Promise<boolean | this>;
     runBeforeUrlChangeHooks(): Promise<any>;
     get meta(): {};
     /**
      * @param {RNodeRuntime} node the node that corresponds to the fragment
      * @param {String=} urlFragment a fragment of the url (fragments = url.split('/'))
      * @param {Object<string, any>=} params
+     * @returns {RouteFragment}
      */
     createFragment(node: RNodeRuntime, urlFragment?: string | undefined, params?: {
         [x: string]: any;
@@ -51,4 +53,4 @@ export class Route {
     _createFragments(pathname: any): RouteFragment[];
     _createUrl(): string;
 }
-import { RouteFragment } from "./RouteFragment.js";
+import { RouteFragment } from './RouteFragment.js';

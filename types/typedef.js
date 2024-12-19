@@ -35,6 +35,7 @@
  * @typedef {import('../lib/buildtime/RoutifyBuildtime').RoutifyBuildtime} RoutifyBuildtime
  * @typedef {import('../lib/buildtime/RNodeBuildtime').RNodeBuildtime} RNodeBuildtime
  * @typedef {{instance: RoutifyBuildtime, tools: any}} RoutifyBuildtimePayload // todo tools should not be any
+ * @typedef {import('../lib/buildtime/plugins/themes/utils.js').ThemeUserConfig} ThemeConfig
  *
  */
 
@@ -66,6 +67,7 @@
  * @prop {(string|RegExp)[]} extensions defaults to ['.svelte', '.html', '.md', '.svx'],
  * @prop {string[]|Object[]} plugins
  * @prop {boolean} watch rebuild Routify routes on changes
+ * @prop {ThemeConfig} themes
  */
 
 /*******************

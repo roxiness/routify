@@ -39,9 +39,9 @@ export class RNodeRuntime extends RNode<RoutifyRuntime> {
     /**
      * @param {object} snapshotRoot
      */
-    importTree: (snapshotRoot: object) => RNodeRuntime;
+    importTree: (snapshotRoot: object) => this;
     get _fallback(): any;
 }
-import { RoutifyRuntime } from "./RoutifyRuntime.js";
-import { RNode } from "../../common/RNode.js";
-import Node from "*.svelte";
+import { RoutifyRuntime } from './RoutifyRuntime.js';
+import { RNode } from '../../common/RNode.js';
+import Node from './Node.svelte';

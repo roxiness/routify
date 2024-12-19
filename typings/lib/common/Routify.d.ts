@@ -1,9 +1,7 @@
 /**
  * @template {typeof RNode<any>} NodeConstructor
  */
-export class Routify<NodeConstructor extends {
-    new (name: string, module: string | ReservedCmpProps, instance: any): RNode<any>;
-}> {
+export class Routify<NodeConstructor extends typeof RNode<any>> {
     /** @type {typeof RNode<any>} */
     NodeConstructor: typeof RNode<any>;
     /** @type {NodeConstructor['prototype']} */
@@ -20,9 +18,9 @@ export class Routify<NodeConstructor extends {
      * @param {any|string=} module svelte component
      * @returns {this['NodeType']}
      */
-    createNode(name?: string | undefined, module?: (any | string) | undefined): NodeConstructor["prototype"];
+    createNode(name?: string | undefined, module?: (any | string) | undefined): this['NodeType'];
 }
-import { RNode } from "./RNode.js";
+import { RNode } from './RNode.js';
 declare var NodeConstructor: typeof RNode<any>;
-import { UrlParamUtils } from "../runtime/Instance/UrlParamUtils.js";
+import { UrlParamUtils } from '../runtime/Instance/UrlParamUtils.js';
 export {};

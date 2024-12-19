@@ -54,7 +54,10 @@ export class Router implements Readable<Router> {
     /** @type {Map<string, Route>} */
     history: Map<string, Route>;
     parentCmpCtx: any;
-    subscribe: (this: void, run: import("svelte/store").Subscriber<Router>, invalidate?: (value?: Router) => void) => import("svelte/store").Unsubscriber;
+    /** @type {RoutifyRuntime} */
+    instance: RoutifyRuntime;
+    log: any;
+    subscribe: (this: void, run: import("svelte/store").Subscriber<this>, invalidate?: (value?: this) => void) => import("svelte/store").Unsubscriber;
     triggerStore: () => void;
     params: import("svelte/store").Readable<any>;
     /**
@@ -64,10 +67,7 @@ export class Router implements Readable<Router> {
     /** @type {Partial<import('./utils').RouterOptionsNormalized>} */
     options: Partial<import('./utils').RouterOptionsNormalized>;
     anchor: import("../decorators/AnchorDecorator.js").Location;
-    /** @type {RoutifyRuntime} */
-    instance: RoutifyRuntime;
     name: any;
-    log: any;
     passthrough: any;
     /** @type {RNodeRuntime} */
     rootNode: RNodeRuntime;
@@ -122,6 +122,7 @@ export type ParentCmpCtx = {
     localParams: any;
     options: any;
 };
-import { Route } from "../Route/Route.js";
-import { RoutifyRuntime } from "../Instance/RoutifyRuntime.js";
-import { BaseReflector } from "./urlReflectors/ReflectorBase.js";
+import { Route } from '../Route/Route.js';
+import { RoutifyRuntime } from '../Instance/RoutifyRuntime.js';
+import { RNodeRuntime } from '../Instance/RNodeRuntime.js';
+import { BaseReflector } from './urlReflectors/ReflectorBase.js';

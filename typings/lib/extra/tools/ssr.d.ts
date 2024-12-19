@@ -17,4 +17,3 @@ export function renderModule(module: (SvelteComponentDev | {
     };
     redirect: string;
 }>;
-import { SvelteComponentDev } from "svelte/types/runtime/internal/dev.js";

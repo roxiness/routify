@@ -17,5 +17,5 @@ export class RoutifyRuntime extends Routify<typeof RNodeRuntime> {
         [x: string]: Function;
     }>;
 }
-import { RNodeRuntime } from "./RNodeRuntime.js";
-import { Routify } from "../../common/Routify.js";
+import { RNodeRuntime } from './RNodeRuntime.js';
+import { Routify } from '../../common/Routify.js';

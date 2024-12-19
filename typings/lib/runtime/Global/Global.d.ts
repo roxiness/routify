@@ -12,6 +12,6 @@ export class AppInstance {
     reset(): void;
     /** @param {Router} router */
     urlFromBrowser: (router: Router) => string;
-    register(instance: any): AppInstance;
+    register(instance: any): this;
 }
 export const appInstance: AppInstance;

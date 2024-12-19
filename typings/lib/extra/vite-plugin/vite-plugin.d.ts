@@ -14,7 +14,7 @@ export default function RoutifyPlugin(input?: Partial<VitePluginOptionsInput> | 
         };
         build: {
             ssr: any;
-            outDir: any;
+            outDir: string;
         };
         envPrefix: string[];
     };
