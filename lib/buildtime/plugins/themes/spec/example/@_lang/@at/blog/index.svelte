@@ -1,0 +1,1 @@
+@at/blog/index
