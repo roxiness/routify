@@ -54,18 +54,18 @@
             "default": "./lib/runtime/helpers/dedicated/RouteOnScroll/index.js"
         },
         "./decorators": {
-            "default": "./lib/runtime/decorators/index.js",
-            "types": "./typings/lib/runtime/decorators/index.d.ts"
+            "types": "./typings/lib/runtime/decorators/index.d.ts",
+            "default": "./lib/runtime/decorators/index.js"
         },
         "./typings/*": "./typings/*",
         "./plugins/*": "./plugins/*",
         "./plugins": {
-            "default": "./plugins/index",
-            "types": "./typings/plugins/index.d.ts"
+            "types": "./typings/plugins/index.d.ts",
+            "default": "./plugins/index"
         },
         "./tools": {
-            "default": "./lib/extra/tools/index.js",
-            "types": "./typings/lib/extra/tools/ssr.d.ts"
+            "types": "./typings/lib/extra/tools/ssr.d.ts",
+            "default": "./lib/extra/tools/index.js"
         },
         "./components/*": "./lib/runtime/components/*"
     },
