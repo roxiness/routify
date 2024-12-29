@@ -105,7 +105,6 @@
         "typescript": "^5.4.5"
     },
     "dependencies": {
-        "@roxi/routify": "file:.",
         "@sveltejs/vite-plugin-svelte": "^2.4.6",
         "cachewrap": "^0.0.1",
         "cheap-watch": "^1.0.4",
@@ -119,12 +118,13 @@
         "node-fetch": "^3.3.0",
         "persistable": "^0.1.2",
         "prompts": "^2.4.2",
-        "scroll-into-view-if-needed": "^3.1.0",
-        "svelte": "^3.46.1"
+        "scroll-into-view-if-needed": "^3.1.0"
     },
     "peerDependencies": {
         "spank": "^2.0.0",
-        "vite": "^3.2.4 || ^4.0.0 || ^5.0.0 || ^6.0.0"
+        "vite": "^3.2.4 || ^4.0.0 || ^5.0.0 || ^6.0.0",
+        "@roxi/routify": "^3.0.0-next.0",
+        "svelte": "^3.0.0 || ^4.0.0 || ^5.0.0"
     },
     "peerDependenciesMeta": {
         "vite": {
