@@ -1,13 +1,13 @@
 <script>
     import { Router, node } from '@roxi/routify'
-    const rootNode = $node.traverse('../_card')
+    const routes = $node.traverse('../_card')
 </script>
 
 <div data-routify-scroll-lock>
-    <Router {rootNode} name="1" />
-    <Router {rootNode} name="2" />
-    <Router {rootNode} name="3" />
-    <Router {rootNode} name="4" />
+    <Router {routes} name="1" />
+    <Router {routes} name="2" />
+    <Router {routes} name="3" />
+    <Router {routes} name="4" />
 </div>
 
 <style>
