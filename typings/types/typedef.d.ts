@@ -10,24 +10,24 @@ type Routify = import("../lib/common/Routify").Routify<any>;
  * COMMON
  */
 type RoutifyBaseOptions = {
-    Node: import("../lib/common/RNode").RNode<any>;
+    Node: RNode;
 };
 /**
  * COMMON
  */
-type SvelteComponentDev = typeof import('svelte/internal').SvelteComponentDev;
+type SvelteComponentDev = typeof import("svelte/internal").SvelteComponentDev;
 /**
  * <T>
  */
-type MaybeArray<T> = import('./utils').MaybeArray<T>;
+type MaybeArray<T> = import("./utils").MaybeArray<T>;
 /**
  * <T>
  */
-type MaybePromise<T> = import('./utils').MaybePromise<T>;
+type MaybePromise<T> = import("./utils").MaybePromise<T>;
 /**
  * RUNTIME
  */
-type scrollLock = HTMLElement | ((HTMLElement) => HTMLElement) | ((HTMLElement) => Promise<HTMLElement>);
+type scrollLock = HTMLElement | ((HTMLElement: any) => HTMLElement) | ((HTMLElement: any) => Promise<HTMLElement>);
 /**
  * RUNTIME
  */
@@ -37,23 +37,23 @@ type RoutifyRuntimePayload = {
 /**
  * RUNTIME
  */
-type RNodeRuntime = import('../lib/runtime/Instance/RNodeRuntime').RNodeRuntime;
+type RNodeRuntime = import("../lib/runtime/Instance/RNodeRuntime").RNodeRuntime;
 /**
  * RUNTIME
  */
-type Route = import('../lib/runtime/Route/Route').Route;
+type Route = import("../lib/runtime/Route/Route").Route;
 /**
  * RUNTIME
  */
-type Router = import('../lib/runtime/Router/Router').Router;
+type Router = import("../lib/runtime/Router/Router").Router;
 /**
  * RUNTIME
  */
-type RouteFragment = import('../lib/runtime/Route/RouteFragment').RouteFragment;
+type RouteFragment = import("../lib/runtime/Route/RouteFragment").RouteFragment;
 /**
  * RUNTIME
  */
-type RoutifyRuntime = import('../lib/runtime/Instance/RoutifyRuntime').RoutifyRuntime;
+type RoutifyRuntime = import("../lib/runtime/Instance/RoutifyRuntime").RoutifyRuntime;
 /**
  * RUNTIME
  */
@@ -68,31 +68,31 @@ type RoutifyContext = RenderContext;
 /**
  * RUNTIME
  */
-type RenderContext = import('../lib/runtime/renderer/RenderContext').RenderContext;
+type RenderContext = import("../lib/runtime/renderer/RenderContext").RenderContext;
 /**
  * RUNTIME
  */
-type RouterContext = import('../lib/runtime/renderer/RenderContext').RouterContext;
+type RouterContext = import("../lib/runtime/renderer/RenderContext").RouterContext;
 /**
  * RUNTIME
  */
-type AnchorLocation = import('../lib/runtime/decorators/AnchorDecorator').Location;
+type AnchorLocation = import("../lib/runtime/decorators/AnchorDecorator").Location;
 /**
  * BUILDTIME
  */
-type ScrollContext = import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext;
+type ScrollContext = import("../lib/runtime/plugins/scroller/ScrollContext").ScrollContext;
 /**
  * RUNTIME
  */
-type RFile = import('../lib/buildtime/plugins/filemapper/lib/File').File;
+type RFile = import("../lib/buildtime/plugins/filemapper/lib/File").File;
 /**
  * RUNTIME
  */
-type RoutifyBuildtime = import('../lib/buildtime/RoutifyBuildtime').RoutifyBuildtime;
+type RoutifyBuildtime = import("../lib/buildtime/RoutifyBuildtime").RoutifyBuildtime;
 /**
  * RUNTIME
  */
-type RNodeBuildtime = import('../lib/buildtime/RNodeBuildtime').RNodeBuildtime;
+type RNodeBuildtime = import("../lib/buildtime/RNodeBuildtime").RNodeBuildtime;
 /**
  * // todo tools should not be any
  */
@@ -103,9 +103,9 @@ type RoutifyBuildtimePayload = {
 /**
  * RUNTIME
  */
-type ThemeConfig = import('../lib/buildtime/plugins/themes/utils.js').ThemeUserConfig;
+type ThemeConfig = import("../lib/buildtime/plugins/themes/utils.js").ThemeUserConfig;
 type RoutifyCallback<T> = (first: {
-    instance: import("../lib/common/Routify").Routify<any>;
+    instance: Routify;
 }) => T | Promise<T>;
 type RoutifyBuildtimeOptions = {
     Node: RNodeBuildtime;
@@ -152,6 +152,10 @@ type RoutifyBuildtimeOptions = {
     extensions: (string | RegExp)[];
     plugins: string[] | any[];
     /**
+     * defaults to 4
+     */
+    svelteApi: 4 | 5;
+    /**
      * rebuild Routify routes on changes
      */
     watch: boolean;
@@ -178,7 +182,7 @@ type RoutifyRuntimeOptions = {
     /**
      * where to store the URL state - browser by default
      */
-    urlReflector: typeof import("../lib/runtime/Router/urlReflectors/ReflectorBase.js")['BaseReflector'];
+    urlReflector: typeof import("../lib/runtime/Router/urlReflectors/ReflectorBase.js")["BaseReflector"];
     /**
      * initial url - "/" by default
      */
@@ -222,7 +226,7 @@ type RoutifyRuntimeOptions = {
     /**
      * how to handle trailing slashes, defaults to 'never'
      */
-    trailingSlash: 'always' | 'never' | 'preserve' | 'contextual';
+    trailingSlash: "always" | "never" | "preserve" | "contextual";
     queryHandler: QueryHandler;
     plugins: Partial<RoutifyRuntimeOptions>[];
     clickHandler: ClickHandler;
@@ -253,7 +257,7 @@ type DecoratorShouldRenderPayload<T> = {
  * <T>
  */
 type Readable<T> = import("svelte/store").Readable<any>;
-type RouteStore = import('../lib/runtime/utils/index.js').Getable<Route>;
+type RouteStore = import("../lib/runtime/utils/index.js").Getable<Route>;
 type RouterInitCallback = (arg0: {
     router: Router;
     firstInit: boolean;
@@ -292,7 +296,7 @@ type RoutifyLoadSync = (context: RoutifyLoadContext) => Partial<RoutifyLoadRetur
 type RoutifyLoadAsync = (context: RoutifyLoadContext) => Promise<Partial<RoutifyLoadReturn> | null>;
 type RoutifyLoadContext = {
     route: Route;
-    url: import('../lib/runtime').Url;
+    url: import("../lib/runtime").Url;
     prevRoute?: Route | undefined;
     isNew: boolean;
     fetch: typeof fetch;
@@ -373,7 +377,7 @@ type MetaContext = {
     /**
      * persist the return of a callback on disk. Return persisted data on subsequent calls
      */
-    persist: typeof import("persistable")['default']['call'];
+    persist: typeof import("persistable")["default"]["call"];
     /**
      * temporary path for the respective file, eg. ./.routify/cached/src/routes/index.svelte/
      */
@@ -414,7 +418,7 @@ type PathNode = {
     urlFragment: string;
     node: RNodeRuntime;
 };
-type UrlState = 'pushState' | 'replaceState' | 'popState';
+type UrlState = "pushState" | "replaceState" | "popState";
 type FragmentContext = {
     route: Route;
     node: RNodeRuntime;
@@ -444,7 +448,7 @@ type BrowserAdapter = {
      */
     toBrowser: (routers: Router[]) => string;
 };
-type SvelteComponentTyped = import('svelte').SvelteComponentTyped;
+type SvelteComponentTyped = import("svelte").SvelteComponentTyped;
 type InlineInput = Partial<Inline> | boolean;
 type Inline = {
     /**
@@ -455,7 +459,7 @@ type Inline = {
      * return true to inline the child node
      */
     shouldScroll: InlineCallback<boolean>;
-    context: 'browser' | 'ssr' | 'always';
+    context: "browser" | "ssr" | "always";
     scrollIntoView: (elem: HTMLElement, instant: boolean, options: any) => void;
     params: {
         [x: string]: string[];
@@ -463,15 +467,15 @@ type Inline = {
     wrapper: SvelteComponentDev | null;
 };
 type DeferredPromise<T> = Promise<T> & {
-    resolve: (T) => void;
-    reject: (T) => void;
+    resolve: (T: any) => void;
+    reject: (T: any) => void;
 };
 type InlineCallback<T> = (context: ScrollContext, index: number, allScrollContexts: ScrollContext[], defaultCb?: InlineCallback<T>) => T;
 type RenderContextOptions = Partial<{
     inline: InlineInput;
     decorator: DecoratorInput<any>;
-    props;
-    options;
+    props: any;
+    options: any;
     anchor: AnchorLocation;
     scrollLock: scrollLock;
 }>;
@@ -491,9 +495,9 @@ type TraverseOptions = {
     /**
      * false: throw errors for 404s, true: don't throw errors for 404s, 'report': log errors for 404s
      */
-    silent?: boolean | 'report';
+    silent?: boolean | "report";
     /**
      * the root node to start traversing from
      */
-    rootNode?: import("../lib/common/RNode").RNode<any>;
+    rootNode?: RNode;
 };

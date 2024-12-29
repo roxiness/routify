@@ -14,7 +14,7 @@ export function getUrlFromEvent(event: any): {
 export function insertWildcards(str: string): string;
 export function fromEntries(iterable: any): any;
 export function populateUrl(path: string, params: {
-    [x: string]: (string | string[]);
+    [x: string]: string | string[];
 }, overloadStringifier: (obj: {
     [x: string]: string;
 }) => string): {
@@ -25,19 +25,19 @@ export function urlFromAddress(): string;
 export function autoIncrementer(storeObj?: {}, name?: string): any;
 export function distinctBy<T>(prop: string): (arg0: T, arg1: number, arg2: T[]) => boolean;
 export namespace contexts {
-    const router: import("../index.js").RouterClass;
-    const fragment: import("../renderer/RenderContext.js").RenderContext;
+    const router: Router;
+    const fragment: RenderContext;
 }
-export function getable<T>(value: T, start?: import("svelte/store").StartStopNotifier<T>): Getable<T>;
+export function getable<T>(value: T, start?: import("svelte/store").StartStopNotifier<T> | undefined): Getable<T>;
 export function identicalRoutes(...routes: Route[]): string;
 export function clone<T>(obj: T, ...rest: any[]): T;
 export function isAnonFn(input: any): boolean;
-export function resolveIfAnonFn<T, P>(subject: T | ((...P: any[]) => T) | ((...P: any[]) => Promise<T>), params?: P[]): T;
+export function resolveIfAnonFn<T, P>(subject: T | ((...P: any) => T) | ((...P: any) => Promise<T>), params?: P[] | undefined): T;
 export function resolveIfHasCallback(subject: any, params: any, field?: string): any;
 export function pushToOrReplace(arr: any[], input: any): any[];
 export function waitFor<T>(store: import("svelte/store").Writable<T>, cb: (T: any) => boolean): Promise<T>;
 export function createDeferredPromise<T>(): DeferredPromise<T>;
 export function forceSingleSlash(str: string): string;
-export type Getable<T> = import('svelte/store').Writable<T> & {
+export type Getable<T> = import("svelte/store").Writable<T> & {
     get: () => T;
 };

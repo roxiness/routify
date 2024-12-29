@@ -21,7 +21,7 @@ export class BaseRouteOnScroll {
     $url: import("../../index.js").Url;
     coolOffTime: number;
     throttleTime: number;
-    getElems: (context: import("../../../renderer/RenderContext.js").RenderContext | import("../../../renderer/RenderContext.js").RouterContext) => HTMLElement[];
+    getElems: (context: RouterContext | RenderContext) => HTMLElement[];
     onScrollIsActive: boolean;
     stopPersistent: () => any;
     listenForScroll: boolean;
@@ -64,30 +64,30 @@ export type RouteOnScrollOptions = {
     /**
      * - Defines the scroll direction to be monitored.
      */
-    direction: 'both' | 'vertical' | 'horizontal';
+    direction: "both" | "vertical" | "horizontal";
     /**
      * -
      * - 'lowestAboveThreshold': Selects the item just above the threshold.
      * - 'withinThreshold': Selects any item within the threshold range.
      * - 'closest': Selects the item closest to the boundary anchor, regardless of position.
      */
-    strategy: 'lowestAboveThreshold' | 'withinThreshold' | 'closest';
+    strategy: "lowestAboveThreshold" | "withinThreshold" | "closest";
     /**
      * - X anchor point for boundary alignment.
      */
-    boundaryAnchorX: 'left' | 'center' | 'right';
+    boundaryAnchorX: "left" | "center" | "right";
     /**
      * - Y anchor point for boundary alignment.
      */
-    boundaryAnchorY: 'top' | 'center' | 'bottom';
+    boundaryAnchorY: "top" | "center" | "bottom";
     /**
      * - X anchor point for target alignment.
      */
-    targetAnchorX: 'left' | 'center' | 'right';
+    targetAnchorX: "left" | "center" | "right";
     /**
      * - Y anchor point for target alignment.
      */
-    targetAnchorY: 'top' | 'center' | 'bottom';
+    targetAnchorY: "top" | "center" | "bottom";
 };
 export type BaseRouteOnScrollOptions = {
     threshold: number;
@@ -96,9 +96,9 @@ export type BaseRouteOnScrollOptions = {
     getElems: (context: RouterContext | RenderContext) => HTMLElement[];
     context: RouterContext | RenderContext;
     findFocusedElement: (elems: HTMLElement[]) => HTMLElement;
-    scrollEvent: 'scroll' | 'scrollend';
+    scrollEvent: "scroll" | "scrollend";
     /**
      * urlHelper
      */
-    $url: import('../../index.js').Url;
+    $url: import("../../index.js").Url;
 };

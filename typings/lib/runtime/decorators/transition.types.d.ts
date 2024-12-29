@@ -1,5 +1,5 @@
 export type TransitionConfig = {
-    axis: 'x' | 'y';
+    axis: "x" | "y";
     default: TransitionCallback;
     next: TransitionCallback;
     prev: TransitionCallback;
@@ -16,8 +16,8 @@ export type TransitionCallbackCtx = {
     config: TransitionConfig;
 };
 export type Transition = {
-    transitionIn: import('svelte/transition').TransitionConfig;
-    transitionOut: import('svelte/transition').TransitionConfig;
+    transitionIn: import("svelte/transition").TransitionConfig;
+    transitionOut: import("svelte/transition").TransitionConfig;
     inParams: any;
     outParams: any;
 };

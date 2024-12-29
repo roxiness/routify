@@ -6,17 +6,17 @@ export class RouterContext {
         router: Router;
     });
     /** @type {import('svelte/store').Writable<RenderContext[]>} */
-    childContexts: import('svelte/store').Writable<RenderContext[]>;
+    childContexts: import("svelte/store").Writable<RenderContext[]>;
     /** @type {import('svelte/store').Writable<RouteFragment[]>} */
-    childFragments: import('svelte/store').Writable<RouteFragment[]>;
+    childFragments: import("svelte/store").Writable<RouteFragment[]>;
     /** @type {import('svelte/store').Writable<RenderContext>} */
-    activeChildContext: import('svelte/store').Writable<RenderContext>;
+    activeChildContext: import("svelte/store").Writable<RenderContext>;
     /** @type {RenderContext} */
     lastActiveChildContext: RenderContext;
     /** @type {Decorator[]} */
     decorators: Decorator[];
     /** @type {import('../decorators/AnchorDecorator').Location}*/
-    anchorLocation: import('../decorators/AnchorDecorator').Location;
+    anchorLocation: import("../decorators/AnchorDecorator").Location;
     get descendants(): any;
     router: import("../index.js").RouterClass;
     route: import("../Route/Route.js").Route;
@@ -27,8 +27,8 @@ export class RouterContext {
     buildChildContexts(options: Partial<{
         inline: InlineInput;
         decorator: DecoratorInput;
-        props;
-        options;
+        props: any;
+        options: any;
         anchor: AnchorLocation;
         scrollLock: scrollLock;
     }>, newDecorators: any): void;
@@ -73,7 +73,7 @@ export class RenderContext extends RouterContext {
     /** @type {Inline} */
     inline: Inline;
     /** @type {import('svelte/store').Writable<{ parent: HTMLElement, anchor: HTMLElement }>} */
-    elem: import('svelte/store').Writable<{
+    elem: import("svelte/store").Writable<{
         parent: HTMLElement;
         anchor: HTMLElement;
     }>;
@@ -90,11 +90,11 @@ export class RenderContext extends RouterContext {
         decorator: DecoratorInput<any>;
         props: any;
         options: any;
-        anchor: import("../decorators/AnchorDecorator").Location;
+        anchor: AnchorLocation;
         scrollLock: scrollLock;
     }>;
     scrollLock: scrollLock;
-    get parentOrRouterContext(): any;
+    get parentOrRouterContext(): RouterContext;
     get ancestors(): RenderContext[];
     /**
      * Returns all the props of the context, including the ones from the parent contexts.

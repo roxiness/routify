@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export class File {
     constructor(path: any);
     path: string;

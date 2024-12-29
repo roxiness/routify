@@ -1,4 +1,3 @@
-/// <reference types="svelte/types/runtime/ambient.js" />
 /**
  * @extends {RNode<RoutifyRuntime>}
  */

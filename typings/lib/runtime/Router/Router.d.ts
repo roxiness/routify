@@ -17,20 +17,20 @@ export class Router implements Readable<Router> {
     /** @type {RouterContext} */
     context: RouterContext;
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
-    beforeRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
+    beforeRouterInit: import("hookar").HooksCollection<RouterInitCallback>;
     /** @type { import('hookar').HooksCollection<RouterInitCallback> } */
-    afterRouterInit: import('hookar').HooksCollection<RouterInitCallback>;
+    afterRouterInit: import("hookar").HooksCollection<RouterInitCallback>;
     /** @type { import('hookar').HooksCollection<BeforeUrlChangeCallback> } */
-    beforeUrlChange: import('hookar').HooksCollection<BeforeUrlChangeCallback>;
+    beforeUrlChange: import("hookar").HooksCollection<BeforeUrlChangeCallback>;
     /** @type { import('hookar').HooksCollection<AfterUrlChangeCallback> } */
-    afterUrlChange: import('hookar').HooksCollection<AfterUrlChangeCallback>;
+    afterUrlChange: import("hookar").HooksCollection<AfterUrlChangeCallback>;
     /** @type { import('hookar').HooksCollection<AfterRouteRenderedCallback> } */
-    afterRouteRendered: import('hookar').HooksCollection<AfterRouteRenderedCallback>;
+    afterRouteRendered: import("hookar").HooksCollection<AfterRouteRenderedCallback>;
     /** @type { import('hookar').HooksCollection<TransformFragmentsCallback> } */
-    transformFragments: import('hookar').HooksCollection<TransformFragmentsCallback>;
+    transformFragments: import("hookar").HooksCollection<TransformFragmentsCallback>;
     onMount: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
     /** @type { import('hookar').HooksCollection<OnDestroyRouterCallback> } */
-    onDestroy: import('hookar').HooksCollection<OnDestroyRouterCallback>;
+    onDestroy: import("hookar").HooksCollection<OnDestroyRouterCallback>;
     parentElem: any;
     /** @type {QueryHandler} */
     queryHandler: QueryHandler;
@@ -57,7 +57,7 @@ export class Router implements Readable<Router> {
     /** @type {RoutifyRuntime} */
     instance: RoutifyRuntime;
     log: any;
-    subscribe: (this: void, run: import("svelte/store").Subscriber<this>, invalidate?: (value?: this) => void) => import("svelte/store").Unsubscriber;
+    subscribe: (this: void, run: import("svelte/store").Subscriber<this>, invalidate?: import("svelte/store").Invalidator<this>) => import("svelte/store").Unsubscriber;
     triggerStore: () => void;
     params: import("svelte/store").Readable<any>;
     /**
@@ -65,7 +65,7 @@ export class Router implements Readable<Router> {
      */
     init(input: Partial<RoutifyRuntimeOptions>): void;
     /** @type {Partial<import('./utils').RouterOptionsNormalized>} */
-    options: Partial<import('./utils').RouterOptionsNormalized>;
+    options: Partial<import("./utils").RouterOptionsNormalized>;
     anchor: import("../decorators/AnchorDecorator.js").Location;
     name: any;
     passthrough: any;

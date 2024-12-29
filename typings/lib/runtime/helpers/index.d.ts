@@ -111,7 +111,7 @@ export const getDirection: getDirectionCB & Readable<ReturnType<getDirectionCB>>
 export type Goto = (pathOrNode: string | RNodeRuntime, userParams?: {
     [x: string]: string;
 } | undefined, options?: Partial<$UrlOptions & RouteState> | undefined) => any;
-export type Readable<T> = import('svelte/store').Readable<T>;
+export type Readable<T> = import("svelte/store").Readable<T>;
 export type IsActiveOptions = {
     /**
      * return true if descendant is active
@@ -134,20 +134,20 @@ export type $UrlOptions = {
     /**
      * push to or replace in navigation history
      */
-    mode: 'push' | 'replace';
+    mode: "push" | "replace";
 };
 export type RouteState = Partial<{
     dontscroll: boolean;
     dontsmoothscroll: boolean;
     [key: string]: any;
 }>;
-export type Url = <T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
+export type Url = (<T extends string | HTMLAnchorElement>(inputPath: T, userParams?: {
     [x: string]: string;
-}, options?: Partial<$UrlOptions>) => T extends HTMLAnchorElement ? void : string;
+}, options?: Partial<$UrlOptions>) => T extends HTMLAnchorElement ? void : string);
 export type UrlFromString = ((pathOrNode: string | RNodeRuntime, userParams?: {
     [x: string]: string;
 }, options?: Partial<$UrlOptions>) => string);
 export type IsActive = (pathOrNode?: (string | RNodeRuntime) | undefined, params?: {
     [x: string]: string;
 }, options?: IsActiveOptions) => boolean;
-export type getDirectionCB = (boundary?: RNodeRuntime | undefined, newRoute?: Route | undefined, oldRoute?: Route | undefined) => 'first' | 'last' | 'same' | 'next' | 'prev' | 'higher' | 'lower' | 'na';
+export type getDirectionCB = (boundary?: RNodeRuntime | undefined, newRoute?: Route | undefined, oldRoute?: Route | undefined) => "first" | "last" | "same" | "next" | "prev" | "higher" | "lower" | "na";

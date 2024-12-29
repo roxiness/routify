@@ -7,7 +7,7 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
      */
     constructor(name: string, module: ReservedCmpProps | string, instance: InstanceType);
     /** @type {InstanceType['NodeType']} */
-    parent: InstanceType['NodeType'];
+    parent: InstanceType["NodeType"];
     /** @type {Object.<string, any>} */
     meta: {
         [x: string]: any;
@@ -23,7 +23,7 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
         storage: Map<any, any>;
     };
     /** @param {InstanceType['NodeConstructor']['prototype']} child */
-    appendChild(child: InstanceType['NodeConstructor']['prototype']): void;
+    appendChild(child: InstanceType["NodeConstructor"]["prototype"]): void;
     /**
      * Creates a new child node
      * Same as `node.appendChild(instance.createNode('my-node'))`
@@ -81,9 +81,9 @@ export class RNode<InstanceType extends import("./Routify").Routify<any>> {
      * Example: /home -> /home/main -> /home/main/index
      * @param {'children'|'navigableChildren'} childType
      */
-    getDefaults(childType?: 'children' | 'navigableChildren'): any[];
+    getDefaults(childType?: "children" | "navigableChildren"): any[];
     /** @returns {InstanceType['NodeConstructor']['prototype']} */
-    toJSON(): InstanceType['NodeConstructor']['prototype'];
+    toJSON(): InstanceType["NodeConstructor"]["prototype"];
     /** @returns {string} */
     get path(): string;
 }

@@ -3,4 +3,4 @@ export function transition(config?: Partial<TransitionConfig>, decorator?: Parti
 }>>>): Decorator<Partial<{
     config: Partial<TransitionConfig>;
 }>>;
-export type TransitionConfig = import('./transition.types.js').TransitionConfig;
+export type TransitionConfig = import("./transition.types.js").TransitionConfig;

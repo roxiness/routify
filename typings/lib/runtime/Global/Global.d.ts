@@ -5,9 +5,9 @@ export class AppInstance {
         [x: string]: Function;
     }>;
     /** @type {Router[]} */
-    get routers(): import("../index.js").RouterClass[];
+    get routers(): Router[];
     /** @type {import('../helpers/preload.js').RoutesMap} */
-    routeMaps: import('../helpers/preload.js').RoutesMap;
+    routeMaps: import("../helpers/preload.js").RoutesMap;
     browserAdapter: BrowserAdapter;
     reset(): void;
     /** @param {Router} router */

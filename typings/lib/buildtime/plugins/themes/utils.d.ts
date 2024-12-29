@@ -45,7 +45,7 @@ export type ThemeUserPresetObject = {
      */
     rootNodes?: string[];
 };
-export type ThemeUserPreset = (string | string[])[] | ThemeUserPresetObject;
+export type ThemeUserPreset = ThemeUserHierarchy | ThemeUserPresetObject;
 export type ThemePreset = {
     /**
      * - The normalized hierarchy for themes.

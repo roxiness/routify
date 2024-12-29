@@ -8,7 +8,12 @@ export default defineConfig({
     clearScreen: false,
 
     plugins: [
-        routify({}),
+        routify({
+            render: {
+                ssg: !!production,
+                ssr: !!production,
+            },
+        }),
         svelte({
             compilerOptions: {
                 dev: !production,
