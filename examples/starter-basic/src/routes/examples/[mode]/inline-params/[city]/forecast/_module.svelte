@@ -1,7 +1,5 @@
 <script>
     import { url, isActiveFragment, params } from '@roxi/routify'
-    /** @type {RenderContext}*/
-    export let context
 </script>
 
 <div class="span">
