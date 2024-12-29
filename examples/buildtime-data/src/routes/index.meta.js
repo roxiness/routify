@@ -25,7 +25,8 @@ import axios from 'axios'
  */
 export default async ({ split }) => {
     // fetch luke skywalker data
-    const luke = (await axios.get('https://swapi.dev/api/people/1/')).data
+    const luke = (await axios.get('https://swapi.tech/api/people/1/')).data.result
+        .properties
     const { name, gender, ...rest } = luke
 
     return {
