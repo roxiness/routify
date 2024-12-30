@@ -8,7 +8,7 @@
 
         return {
             props: {
-                luke: await fetch('https://swapi.dev/api/people/1').then(res =>
+                luke: await fetch('https://swapi.tech/api/people/1/').then(res =>
                     res.json(),
                 ),
             },
