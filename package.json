@@ -99,7 +99,7 @@
         "rollup": "^3.3.0",
         "rollup-plugin-svelte": "^7.1.0",
         "semantic-release": "^17.4.7",
-        "spank": "^2.1.0",
+        "spank": "^2.2.0",
         "spassr": "^2.6.0",
         "svelte-esm-loader": "^0.0.3",
         "tree-kill": "^1.2.2",
