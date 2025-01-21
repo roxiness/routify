@@ -1,4 +1,5 @@
 {
+    "name": "routify-starter-buildtime-data",
     "type": "module",
     "scripts": {
         "build": "vite build",
