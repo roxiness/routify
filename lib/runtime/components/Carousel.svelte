@@ -4,7 +4,7 @@
      * @description A component that allows you to scroll through a node's inlined children
      */
 
-    import { RouteOnScroll } from '@roxi/routify/helpers/RouteOnScroll'
+    import { RouteOnScroll } from '../helpers/dedicated/RouteOnScroll/index.js'
     /** @type {ConstructorParameters<typeof RouteOnScroll>['0']}*/
     export let options = { direction: 'horizontal' }
 
