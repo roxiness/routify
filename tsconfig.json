@@ -11,7 +11,12 @@
         "emitDeclarationOnly": true,
         "allowSyntheticDefaultImports": true
     },
-    "include": ["lib/**/*.js", "types/**/*.js", "plugins/**/*.js", "node_modules/probs"],
+    "include": [
+        "types/**/*.js",
+         "lib/**/*.js",
+         "plugins/**/*.js",
+         "node_modules/probs"
+        ],
     "exclude": [
         "**/tmp/*",
         "**/.history/*",
@@ -19,6 +24,7 @@
         "examples",
         "site",
         "jest.config.js",
-        "lib/extra/vite-plugin/assets"
+        "lib/extra/vite-plugin/assets",
+        "typings"
     ]
 }
