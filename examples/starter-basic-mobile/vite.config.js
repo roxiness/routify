@@ -14,7 +14,6 @@ export default defineConfig({
     resolve: { alias: { '@': resolve('src') } },
     plugins: [
         routify({
-            ssr: { enable: false },
             plugins: [indexByPrefixPlugin()],
             // devHelper: !production,
         }),
