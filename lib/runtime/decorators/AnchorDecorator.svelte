@@ -10,6 +10,8 @@
     /** @type {(parent: Node, anchor?: Node)=>any} */
     export let onMount = x => x
 
+    const isSpa = !import.meta.env.ROUTIFY_SSR_ENABLE
+
     /** @type {HTMLElement} */
     let elem
 
@@ -106,14 +108,14 @@
     <slot />
 {:else}
     <!-- parent, firstChild or custom -->
-    {#if !mounted}
+    {#if !mounted && isSpa}
         <div data-routify-anchor-locator class="anchor" bind:this={elem} {...$$restProps}>
             <!-- routify anchor locator -->
         </div>
     {/if}
     <slot />
 
-    {#if !mounted}
+    {#if !mounted && isSpa}
         <div class="anchor-backstop" data-routify-anchor-backstop>
             <!-- routify anchor backstop -->
         </div>
