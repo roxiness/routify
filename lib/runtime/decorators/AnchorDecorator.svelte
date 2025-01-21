@@ -105,6 +105,7 @@
     </div>
     <slot />
 {:else}
+    <!-- parent, firstChild or custom -->
     {#if !mounted}
         <div data-routify-anchor-locator class="anchor" bind:this={elem} {...$$restProps}>
             <!-- routify anchor locator -->
