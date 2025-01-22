@@ -1,4 +1,4 @@
 export default {
-    name: 'starter-basic-mobile',
+    name: 'starter-mobile',
     description: 'A Routify starter for mobile devices.',
 }
