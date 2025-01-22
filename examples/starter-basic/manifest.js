@@ -1,7 +1,7 @@
 import { writeFile, rm } from 'fs/promises'
 
 export default {
-    name: 'starter-basic',
+    name: 'starter',
     description: 'A basic Routify starter template',
     test: {
         tests: [{ page: '/', contains: 'Welcome to Your New Routify 3 Project!' }],
