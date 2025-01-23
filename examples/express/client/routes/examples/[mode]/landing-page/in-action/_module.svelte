@@ -18,7 +18,7 @@
 </p>
 <div class="features-box">
     <div class="features">
-        {#each $node.pages as node}
+        {#each $node.linkableChildren as node}
             <a href={$url(node.path)} class:isActive={$isActive(node.path)}
                 >{node.title}</a>
         {/each}
