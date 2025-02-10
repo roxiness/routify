@@ -51,6 +51,7 @@ export class Router implements Readable<Router> {
      * function that resolves after the active route has changed
      * @returns {Promise<Route>} */
     ready: () => Promise<Route>;
+    rendered: () => Promise<void>;
     /** @type {Map<string, Route>} */
     history: Map<string, Route>;
     parentCmpCtx: any;

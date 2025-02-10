@@ -1,4 +1,3 @@
-export function dynamicImport(specifier: any): Promise<any>;
 export function renderModule(module: (SvelteComponentDev | {
     default: SvelteComponentDev;
 }) & {

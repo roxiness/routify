@@ -17,6 +17,9 @@ export default function RoutifyPlugin(input?: Partial<VitePluginOptionsInput> | 
             outDir: string;
         };
         envPrefix: string[];
+        define: {
+            'import.meta.env.ROUTIFY_SSR_ENABLE': string;
+        };
     };
     transformIndexHtml: (html: any) => any;
     configureServer: (server: any) => () => any;
