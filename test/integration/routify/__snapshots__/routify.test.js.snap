@@ -8,7 +8,7 @@ export * as _default_admin_bundleme_svelte from '../../../example/admin/bundleme
 exports[`test/integration/routify/routify.test.js/can run routify with bundled plugins: routify 1`] = `
 "
 
-export default {
+export const routes = {
   \\"meta\\": {},
   \\"id\\": \\"_default\\",
   \\"name\\": \\"\\",
@@ -199,7 +199,8 @@ export default {
       \\"children\\": []
     }
   ]
-}"
+}
+export default routes"
 `;
 
 exports[`test/integration/routify/routify.test.js/can transform output files: routify-transform 1`] = `
