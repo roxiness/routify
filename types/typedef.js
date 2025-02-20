@@ -197,10 +197,11 @@
  *
  * @typedef {object} RoutifyLoadContext
  * @prop {Route} route
- * @prop {import('../lib/runtime').Url} url
+ * @prop {import('../lib/runtime').UrlFromString} url
  * @prop {Route=} prevRoute
  * @prop {Boolean} isNew
  * @prop {fetch} fetch
+ * @prop {RouteFragment} fragment
  *
  * @typedef {object} RoutifyLoadReturn
  * @prop {number} status

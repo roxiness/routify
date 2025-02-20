@@ -296,10 +296,11 @@ type RoutifyLoadSync = (context: RoutifyLoadContext) => Partial<RoutifyLoadRetur
 type RoutifyLoadAsync = (context: RoutifyLoadContext) => Promise<Partial<RoutifyLoadReturn> | null>;
 type RoutifyLoadContext = {
     route: Route;
-    url: import("../lib/runtime").Url;
+    url: import("../lib/runtime").UrlFromString;
     prevRoute?: Route | undefined;
     isNew: boolean;
     fetch: typeof fetch;
+    fragment: RouteFragment;
 };
 type RoutifyLoadReturn = {
     status: number;
