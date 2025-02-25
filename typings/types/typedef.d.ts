@@ -150,6 +150,9 @@ type RoutifyBuildtimeOptions = {
      * defaults to ['.svelte', '.html', '.md', '.svx'],
      */
     extensions: (string | RegExp)[];
+    sitemap: {
+        filter: (nodes: RNodeBuildtime[]) => RNodeBuildtime[];
+    };
     plugins: string[] | any[];
     /**
      * defaults to 4

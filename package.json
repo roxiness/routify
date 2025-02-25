@@ -103,7 +103,7 @@
         "spassr": "^2.6.0",
         "svelte-esm-loader": "^0.0.3",
         "tree-kill": "^1.2.2",
-        "typescript": "^5.4.5"
+        "typescript": "^5.7.3"
     },
     "dependencies": {
         "cachewrap": "^0.0.1",
@@ -126,6 +126,9 @@
         "@roxi/routify": "^3.0.0-next.0",
         "svelte": "^3.0.0 || ^4.0.0 || ^5.0.0",
         "@sveltejs/vite-plugin-svelte": "^2.4.6 || ^3.0.0 || ^4.0.0 || ^5.0.0"
+    },
+    "resolutions": {
+        "@roxi/routify": "file:./"
     },
     "peerDependenciesMeta": {
         "vite": {

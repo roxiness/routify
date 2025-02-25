@@ -4,5 +4,5 @@ export type Options = {
     /**
      * Vite config
      */
-    viteServerConfig?: any;
+    viteServerConfig?: import("vite").InlineConfig;
 };

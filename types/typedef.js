@@ -65,6 +65,8 @@
  * @prop {string[]} filemapper.resetFiles defaults to ['_reset.svelte']
  * @prop {string[]} filemapper.fallbackFiles defaults to ['_reset.svelte']
  * @prop {(string|RegExp)[]} extensions defaults to ['.svelte', '.html', '.md', '.svx'],
+ * @prop {Object} sitemap
+ * @prop {(nodes:RNodeBuildtime[])=>RNodeBuildtime[]} sitemap.filter
  * @prop {string[]|Object[]} plugins
  * @prop {4|5} svelteApi defaults to 4
  * @prop {boolean} watch rebuild Routify routes on changes

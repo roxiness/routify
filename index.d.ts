@@ -2,4 +2,4 @@
 /// <reference path="./typings/types/utils.d.ts" />
 /// <reference path="./typings/lib/extra/vite-plugin/typedef.d.ts" />
 
-export * from './typings/lib/runtime/index.d.ts'
+export type * from './typings/lib/runtime/index'
