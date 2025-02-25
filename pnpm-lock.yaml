@@ -4,13 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@roxi/routify': file:./
+
 importers:
 
   .:
     dependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.0
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: 'file:'
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.6 || ^3.0.0 || ^4.0.0 || ^5.0.0
         version: 2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -112,14 +115,14 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       typescript:
-        specifier: ^5.4.5
+        specifier: ^5.7.3
         version: 5.7.3
 
   examples/buildtime-data:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^1.0.0-next.13
         version: 1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))
@@ -139,8 +142,8 @@ importers:
   examples/experiment:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@2.9.18(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@2.9.18(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@2.9.18(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@2.9.18(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^1.0.0-next.13
         version: 1.4.0(svelte@3.59.2)(vite@2.9.18(sass@1.83.4))
@@ -157,8 +160,8 @@ importers:
   examples/express:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.176
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
         version: 2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -199,8 +202,8 @@ importers:
   examples/kitchensink:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
         version: 2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -220,8 +223,8 @@ importers:
   examples/multi-router:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
         version: 2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -238,8 +241,8 @@ importers:
   examples/portfolio:
     dependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.53
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@5.0.3(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@5.0.3(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
       axios:
         specifier: ^0.24.0
         version: 0.24.0
@@ -264,8 +267,8 @@ importers:
         version: 11.3.0(postcss@8.5.1)
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.253
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.0.0
         version: 3.1.2(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4))
@@ -289,8 +292,8 @@ importers:
         version: 11.3.0(postcss@8.5.1)
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.205
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
         version: 2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -310,8 +313,8 @@ importers:
   examples/starter-old:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
         version: 2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -331,8 +334,8 @@ importers:
   examples/starter-svelte-5:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.245
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.0
         version: 5.0.3(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
@@ -346,8 +349,8 @@ importers:
   examples/starter-ts:
     devDependencies:
       '@roxi/routify':
-        specifier: 3.0.0-next.142
-        version: 3.0.0-next.142(spank@2.2.0)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.0.0
         version: 2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -373,8 +376,8 @@ importers:
   examples/starter-vitest:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^1.0.0-next.13
         version: 1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))
@@ -397,8 +400,8 @@ importers:
   examples/subpath:
     devDependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
         version: 2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -415,8 +418,8 @@ importers:
   examples/sveltekit:
     dependencies:
       '@roxi/routify':
-        specifier: ^3.0.0-next.1
-        version: 3.0.0-next.254(@sveltejs/vite-plugin-svelte@5.0.3(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@5.0.3(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))
     devDependencies:
       '@sveltejs/kit':
         specifier: next
@@ -428,8 +431,8 @@ importers:
   examples/typescript-tailwind:
     devDependencies:
       '@roxi/routify':
-        specifier: 3.0.0-next.142
-        version: 3.0.0-next.142(spank@2.2.0)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.0.0
         version: 2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -467,8 +470,8 @@ importers:
   examples/typescript-tailwind-cypress:
     devDependencies:
       '@roxi/routify':
-        specifier: 3.0.0-next.142
-        version: 3.0.0-next.142(spank@2.2.0)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.0.0
         version: 2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -512,8 +515,8 @@ importers:
         specifier: ^1.30.0
         version: 1.50.1
       '@roxi/routify':
-        specifier: 3.0.0-next.142
-        version: 3.0.0-next.142(spank@2.2.0)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+        specifier: file:../..
+        version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.0.0
         version: 2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
@@ -1633,20 +1636,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@roxi/routify@3.0.0-next.142':
-    resolution: {integrity: sha512-uLjdWhcn4Q6kQ+ssIaHV3iYns8685JWOsKe/VK89kFmobPozLxmvypPHHmwD25A/gTve1709RTUzV1mxqQDbVw==}
-    hasBin: true
-    peerDependencies:
-      spank: ^2.0.0-13
-      vite: ^3.2.4 || ^4.0.0
-    peerDependenciesMeta:
-      spank:
-        optional: true
-      vite:
-        optional: true
-
-  '@roxi/routify@3.0.0-next.254':
-    resolution: {integrity: sha512-8RrV8fQS8opC6vZEVgd8GB8hZDxs6bQGMQr4Kr06KkS7jjlrt4+yNI4e8fCPzgLDbz14Gjl36oFOpTPXolSuvw==}
+  '@roxi/routify@file:':
+    resolution: {directory: '', type: directory}
     hasBin: true
     peerDependencies:
       '@sveltejs/vite-plugin-svelte': ^2.4.6 || ^3.0.0 || ^4.0.0 || ^5.0.0
@@ -2505,9 +2496,6 @@ packages:
 
   console-control-strings@1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
-
-  consolite@0.2.10:
-    resolution: {integrity: sha512-F2Y/nAypbftxyGLJGwC3MvxaBKetWETssn7N84sReMEBHhqlrdwb3IHrqauad6vUY5xkU/RI1KMNs/2gIQgJmA==}
 
   consolite@0.3.12:
     resolution: {integrity: sha512-bll77gpKp234MGTBctDzayyUpuRH3RR0OlUa4sAzpifuTS+6X8WoyS2gm/udVYoPLBzt10Q8W91NcQYXBNULoA==}
@@ -7830,25 +7818,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.34.0':
     optional: true
 
-  '@roxi/routify@3.0.0-next.142(spank@2.2.0)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))':
-    dependencies:
-      cachewrap: 0.0.1
-      cheap-watch: 1.0.4
-      cheerio: 1.0.0
-      commander: 7.2.0
-      configent: 3.0.0-14
-      consolite: 0.2.10
-      fs-extra: 10.1.0
-      hookar: 0.0.7
-      kleur: 4.1.5
-      persistable: 0.1.2
-      prompts: 2.4.2
-      svelte: 3.59.2
-    optionalDependencies:
-      spank: 2.2.0
-      vite: 4.5.9(@types/node@22.13.0)(sass@1.83.4)
-
-  '@roxi/routify@3.0.0-next.254(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@2.9.18(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@2.9.18(sass@1.83.4))':
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@2.9.18(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@2.9.18(sass@1.83.4))':
     dependencies:
       cachewrap: 0.0.1
       cheap-watch: 1.0.4
@@ -7869,7 +7839,7 @@ snapshots:
       spank: 2.2.0
       vite: 2.9.18(sass@1.83.4)
 
-  '@roxi/routify@3.0.0-next.254(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))':
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@1.4.0(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@3.2.11(@types/node@22.13.0)(sass@1.83.4))':
     dependencies:
       cachewrap: 0.0.1
       cheap-watch: 1.0.4
@@ -7890,7 +7860,28 @@ snapshots:
       spank: 2.2.0
       vite: 3.2.11(@types/node@22.13.0)(sass@1.83.4)
 
-  '@roxi/routify@3.0.0-next.254(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))':
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))':
+    dependencies:
+      cachewrap: 0.0.1
+      cheap-watch: 1.0.4
+      cheerio: 1.0.0
+      commander: 7.2.0
+      configent: 3.0.0-14
+      consolite: 0.3.12
+      fs-extra: 10.1.0
+      hookar: 0.0.7
+      kleur: 4.1.5
+      node-fetch: 3.3.2
+      persistable: 0.1.2
+      prompts: 2.4.2
+      scroll-into-view-if-needed: 3.1.0
+      svelte: 3.59.2
+    optionalDependencies:
+      '@sveltejs/vite-plugin-svelte': 2.5.3(svelte@3.59.2)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))
+      spank: 2.2.0
+      vite: 4.5.9(@types/node@22.13.0)(sass@1.83.4)
+
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@4.5.9(@types/node@22.13.0)(sass@1.83.4))':
     dependencies:
       cachewrap: 0.0.1
       cheap-watch: 1.0.4
@@ -7911,7 +7902,7 @@ snapshots:
       spank: 2.2.0
       vite: 4.5.9(@types/node@22.13.0)(sass@1.83.4)
 
-  '@roxi/routify@3.0.0-next.254(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4))':
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4)))(spank@2.2.0)(svelte@4.2.19)(vite@5.4.14(@types/node@22.13.0)(sass@1.83.4))':
     dependencies:
       cachewrap: 0.0.1
       cheap-watch: 1.0.4
@@ -7932,7 +7923,7 @@ snapshots:
       spank: 2.2.0
       vite: 5.4.14(@types/node@22.13.0)(sass@1.83.4)
 
-  '@roxi/routify@3.0.0-next.254(@sveltejs/vite-plugin-svelte@5.0.3(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@5.0.3(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@3.59.2)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
     dependencies:
       cachewrap: 0.0.1
       cheap-watch: 1.0.4
@@ -7953,7 +7944,7 @@ snapshots:
       spank: 2.2.0
       vite: 6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)
 
-  '@roxi/routify@3.0.0-next.254(@sveltejs/vite-plugin-svelte@5.0.3(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@5.0.3(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@4.2.19)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
     dependencies:
       cachewrap: 0.0.1
       cheap-watch: 1.0.4
@@ -7974,7 +7965,7 @@ snapshots:
       spank: 2.2.0
       vite: 6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)
 
-  '@roxi/routify@3.0.0-next.254(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
+  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0)))(spank@2.2.0)(svelte@5.19.6)(vite@6.0.11(@types/node@22.13.0)(jiti@1.21.7)(sass@1.83.4)(yaml@2.7.0))':
     dependencies:
       cachewrap: 0.0.1
       cheap-watch: 1.0.4
@@ -9151,8 +9142,6 @@ snapshots:
       esm: 3.2.25
 
   console-control-strings@1.1.0: {}
-
-  consolite@0.2.10: {}
 
   consolite@0.3.12: {}
 
