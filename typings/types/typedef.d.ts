@@ -151,7 +151,7 @@ type RoutifyBuildtimeOptions = {
      */
     extensions: (string | RegExp)[];
     sitemap: {
-        filter: (nodes: RNodeBuildtime[]) => RNodeBuildtime[];
+        generate?: ((nodes: RNodeBuildtime[]) => string) | undefined;
     };
     plugins: string[] | any[];
     /**
