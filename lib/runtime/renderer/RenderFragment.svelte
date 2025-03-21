@@ -7,6 +7,7 @@
     /** @type {RenderContext} */
     export let context
 
+    const isCsr = typeof window !== 'undefined'
     let isMounted = false
     setRoutifyFragmentContext(context)
     /** @param {HTMLElement} elem */
@@ -78,7 +79,7 @@
                             }}
                             {context} />
                     {/if}</svelte:component>
-                {#if !isMounted}
+                {#if !isMounted && isCsr}
                     <div use:childMounted>
                         <!-- routify child mounted -->
                     </div>
