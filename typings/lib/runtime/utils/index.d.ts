@@ -1,5 +1,5 @@
 export * from "./logger.js";
-export function getRoutifyFragmentContext(): any;
+export function getRoutifyFragmentContext(suppress: any): any;
 export function getRoutifyFragmentContextMaybe(): any;
 export function setRoutifyFragmentContext(value: any): any;
 export function isDescendantElem(parent: any): (elem: any) => boolean;

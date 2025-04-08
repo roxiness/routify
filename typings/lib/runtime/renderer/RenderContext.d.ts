@@ -94,6 +94,7 @@ export class RenderContext extends RouterContext {
         scrollLock: scrollLock;
     }>;
     scrollLock: scrollLock;
+    _resetCounter: import("svelte/store").Writable<number>;
     get parentOrRouterContext(): RouterContext;
     get ancestors(): RenderContext[];
     /**
@@ -101,6 +102,7 @@ export class RenderContext extends RouterContext {
      * @type {Object<string|number|symbol, any>}
      */
     get allProps(): any;
+    reset(): void;
     setToActive(): void;
     update(activeSiblingContext: any): void;
     /** updates params with accumulated values, starting from the root context */

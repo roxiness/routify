@@ -51,7 +51,7 @@ export const goto: Readable<Goto>;
  * @type {Readable<Url>}
  */
 export const url: Readable<Url>;
-export function getCreateUrl(fragment: RouteFragment): UrlFromString;
+export function getCreateUrl(fragment: RouteFragment, router: any): UrlFromString;
 /**
  * @type {Readable<Object.<string, any>>}
  */

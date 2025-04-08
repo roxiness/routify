@@ -30,6 +30,7 @@ export class Route {
     };
     get leaf(): RouteFragment;
     get isPendingOrPrefetch(): any;
+    get isActive(): boolean;
     loadRoute(): Promise<boolean>;
     /**
      * converts async module functions to sync functions
