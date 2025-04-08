@@ -39,7 +39,7 @@
         context.router.log.verbose('render', context.node.path, context) // ROUTIFY-DEV-ONLY
     }
 
-    $: ({ childFragments, fragment } = context) // grab the stores
+    $: ({ childFragments, fragment, _resetCounter } = context) // grab the stores
 
     $: hasInlineChildren = context.node.navigableChildren.some(child => child.meta.inline)
 
@@ -51,8 +51,7 @@
         we don't need to pass props as we provided them with "attachProps" in Component.svelte -->
 <svelte:component this={context.decorators.length ? DecoratorWrapper : Noop} {context}>
     {#await context.node.loadModule() then}
-        {#key fragment.node.meta['param-is-page'] && JSON.stringify(fragment.params)}
-            <!-- {#key fragment.node.meta['param-is-page'] && JSON.stringify(fragment.params)} -->
+        {#key (fragment.node.meta['param-is-page'] && JSON.stringify(fragment.params)) + $_resetCounter.toString()}
             <AnchorDecorator {context} onMount={initialize}>
                 <!-- PAGE COMPONENT -->
                 <svelte:component
