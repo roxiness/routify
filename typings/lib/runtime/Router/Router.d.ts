@@ -110,8 +110,10 @@ export class Router implements Readable<Router> {
     destroy(): void;
     /** @type {BaseReflector} */
     get urlReflector(): BaseReflector;
-    /** @param {typeof BaseReflector} UrlReflector */
-    setUrlReflector(UrlReflector: typeof BaseReflector): void;
+    /**
+     * @param {typeof BaseReflector | [typeof BaseReflector, any]} ReflectorInput
+     */
+    setUrlReflector(ReflectorInput: typeof BaseReflector | [typeof BaseReflector, any]): void;
     goBack(): void;
     goForward(): void;
     go(count: any): void;

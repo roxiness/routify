@@ -78,9 +78,13 @@ type RouterContext = import("../lib/runtime/renderer/RenderContext").RouterConte
  */
 type AnchorLocation = import("../lib/runtime/decorators/AnchorDecorator").Location;
 /**
- * BUILDTIME
+ * RUNTIME
  */
 type ScrollContext = import("../lib/runtime/plugins/scroller/ScrollContext").ScrollContext;
+/**
+ * BUILDTIME
+ */
+type BaseReflector = typeof import("../lib/runtime/Router/urlReflectors/ReflectorBase.js")["BaseReflector"];
 /**
  * RUNTIME
  */
@@ -185,7 +189,7 @@ type RoutifyRuntimeOptions = {
     /**
      * where to store the URL state - browser by default
      */
-    urlReflector: typeof import("../lib/runtime/Router/urlReflectors/ReflectorBase.js")["BaseReflector"];
+    urlReflector: BaseReflector | [BaseReflector, any];
     /**
      * initial url - "/" by default
      */

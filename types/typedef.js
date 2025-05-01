@@ -29,6 +29,7 @@
  * @typedef {import('../lib/runtime/renderer/RenderContext').RouterContext} RouterContext
  * @typedef {import('../lib/runtime/decorators/AnchorDecorator').Location} AnchorLocation
  * @typedef {import('../lib/runtime/plugins/scroller/ScrollContext').ScrollContext} ScrollContext
+ * @typedef {import('../lib/runtime/Router/urlReflectors/ReflectorBase.js')['BaseReflector']} BaseReflector
  *
  *  BUILDTIME
  * @typedef {import('../lib/buildtime/plugins/filemapper/lib/File').File} RFile
@@ -83,7 +84,7 @@
  * @prop { any } routes the routes tree
  * @prop { string } name name of router - leave blank if only only one router is used
  * @prop { UrlRewrite|UrlRewrite[] } urlRewrite hook: transforms paths to and from router and browser
- * @prop { import('../lib/runtime/Router/urlReflectors/ReflectorBase.js')['BaseReflector'] } urlReflector where to store the URL state - browser by default
+ * @prop { BaseReflector | [BaseReflector, any] } urlReflector where to store the URL state - browser by default
  * @prop { string= } url initial url - "/" by default
  * @prop { Boolean| Router } passthrough ignore clicks
  * @prop { MaybeArray<RouterInitCallback> } beforeRouterInit hook: runs before each router initiation
