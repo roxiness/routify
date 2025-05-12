@@ -105,6 +105,7 @@
         "typescript": "^5.7.3"
     },
     "dependencies": {
+        "dotenv-expand": "^12.0.2",
         "cachewrap": "^0.0.1",
         "cheap-watch": "^1.0.4",
         "cheerio": "^1.0.0",

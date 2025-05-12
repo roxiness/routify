@@ -270,8 +270,8 @@ importers:
         version: 11.3.0(postcss@8.5.3)
     devDependencies:
       '@roxi/routify':
-        specifier: file:../..
-        version: file:(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.15(@types/node@22.13.14)(sass@1.86.0)))(dotenv-expand@10.0.0)(spank@2.2.0)(svelte@4.2.19)(vite@5.4.15(@types/node@22.13.14)(sass@1.86.0))
+        specifier: ^3.0.0-next.265
+        version: link:../..
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.0.0
         version: 3.1.2(svelte@4.2.19)(vite@5.4.15(@types/node@22.13.14)(sass@1.86.0))
@@ -8008,28 +8008,6 @@ snapshots:
       '@sveltejs/vite-plugin-svelte': 2.5.3(svelte@4.2.19)(vite@4.5.10(@types/node@22.13.14)(sass@1.86.0))
       spank: 2.2.0
       vite: 4.5.10(@types/node@22.13.14)(sass@1.86.0)
-
-  '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.15(@types/node@22.13.14)(sass@1.86.0)))(dotenv-expand@10.0.0)(spank@2.2.0)(svelte@4.2.19)(vite@5.4.15(@types/node@22.13.14)(sass@1.86.0))':
-    dependencies:
-      cachewrap: 0.0.1
-      cheap-watch: 1.0.4
-      cheerio: 1.0.0
-      commander: 7.2.0
-      configent: 3.0.0-14
-      consolite: 0.3.12
-      dotenv-expand: 10.0.0
-      fs-extra: 10.1.0
-      hookar: 0.0.7
-      kleur: 4.1.5
-      node-fetch: 3.3.2
-      persistable: 0.1.2
-      prompts: 2.4.2
-      scroll-into-view-if-needed: 3.1.0
-      svelte: 4.2.19
-    optionalDependencies:
-      '@sveltejs/vite-plugin-svelte': 3.1.2(svelte@4.2.19)(vite@5.4.15(@types/node@22.13.14)(sass@1.86.0))
-      spank: 2.2.0
-      vite: 5.4.15(@types/node@22.13.14)(sass@1.86.0)
 
   '@roxi/routify@file:(@sveltejs/vite-plugin-svelte@5.0.3(svelte@3.59.2)(vite@6.2.3(@types/node@22.13.14)(jiti@1.21.7)(sass@1.86.0)(yaml@2.7.0)))(dotenv-expand@10.0.0)(spank@2.2.0)(svelte@3.59.2)(vite@6.2.3(@types/node@22.13.14)(jiti@1.21.7)(sass@1.86.0)(yaml@2.7.0))':
     dependencies:
