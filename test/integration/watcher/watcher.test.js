@@ -43,7 +43,7 @@ test('detects removed files', async () => {
 })
 
 test('detects renamed files', async () => {
-    writeFileSync(filepath, '<!-- hello -->')
+    writeFileSync(filepath, '<!-- hello again -->')
     await new Promise(resolve => instance.on.buildComplete(resolve))
     expect(Object.values(instance.rootNodes)[0].descendants.length).toBe(4)
     fse.renameSync(filepath, renamedFilepath)
