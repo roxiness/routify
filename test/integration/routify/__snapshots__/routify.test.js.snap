@@ -6,7 +6,8 @@ export * as _default_admin_bundleme_svelte from '../../../example/admin/bundleme
 `;
 
 exports[`test/integration/routify/routify.test.js/can run routify with bundled plugins: routify 1`] = `
-"
+"// @ts-nocheck
+
 
 export const routes = {
   \\"meta\\": {},
