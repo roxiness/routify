@@ -1,5 +1,5 @@
 <script>
-    import { Router } from './Router.js'
+    import { createRouter, Router } from './Router.js'
     import { onDestroy as _onDestroy } from 'svelte'
     import {
         getUrlFromEvent,
@@ -75,7 +75,7 @@
         anchor,
     }
 
-    router = router || new Router(options)
+    router = router || createRouter(options)
     router._claimed = true
     const context = new RouterContext({ router })
     router.context = context
