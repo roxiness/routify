@@ -8,9 +8,13 @@
     export let context
     decorators = decorators || context.decorators
 
-    let [decorator, ...restOfDecorators] = [...decorators].sort(
+    const sortedDecorators = [...decorators].sort(
         (a, b) => (a.order || 0) - (b.order || 0),
     )
+
+    // sveltejs+vite-plugin-svelte won't let us do spread operators
+    let decorator = sortedDecorators[0]
+    let restOfDecorators = sortedDecorators.slice(1)
 
     while (decorator && !decorator?.shouldRender({ context, isRoot, decorators }))
         [decorator, ...restOfDecorators] = [...restOfDecorators]
