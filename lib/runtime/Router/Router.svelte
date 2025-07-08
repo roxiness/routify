@@ -89,7 +89,7 @@
     $: context.childFragments.set($activeRoute?.fragments || [])
     $: context.route = $activeRoute
 
-    $: router.log.debug('before render', get(context.childFragments)) // ROUTIFY-DEV-ONLY
+    $: router.log?.debug('before render', get(context.childFragments)) // ROUTIFY-DEV-ONLY
 
     /** @param {HTMLElement} elem */
     const initialize = elem => {
