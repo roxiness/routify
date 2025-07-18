@@ -7,13 +7,6 @@ const production = process.env.NODE_ENV === 'production'
 export default defineConfig({
     resolve: { conditions: ['browser'] },
     clearScreen: false,
-    test: {
-        environment: 'jsdom',
-        globals: true,
-        server: {
-            deps: { inline: ['@roxi/routify'] },
-        },
-    },
     plugins: [
         routify({
             render: {

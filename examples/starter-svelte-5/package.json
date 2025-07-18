@@ -4,14 +4,12 @@
     "scripts": {
         "build": "vite build",
         "preview": "vite preview",
-        "dev": "vite",
-        "test": "vitest"
+        "dev": "vite"
     },
     "devDependencies": {
         "@roxi/routify": "^3.0.0-next.289",
         "@sveltejs/vite-plugin-svelte": "^5.0.0",
         "svelte": "^5.0.0",
-        "vite": "^6.0.0",
-        "vitest": "^3.2.4"
+        "vite": "^6.0.0"
     }
 }
