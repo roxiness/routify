@@ -6,6 +6,19 @@
     "svelte": "lib/runtime/index.js",
     "type": "module",
     "types": "index.d.ts",
+    "keywords": [
+        "svelte",
+        "router",
+        "routing",
+        "framework",
+        "file-based",
+        "vite",
+        "ssr",
+        "spa",
+        "ssg",
+        "sveltekit",
+        "svelte-router"
+    ],
     "typesVersions": {
         "*": {
             "plugins": [

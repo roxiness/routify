@@ -1,5 +1,6 @@
 # Routify 3
 
+[Routify.dev](https://routify.dev/)
 
 ## Install
 
@@ -22,4 +23,3 @@ Basic
 <Router {routes} />
 ```
 
-[Docs](https://v3.routify.dev/)
