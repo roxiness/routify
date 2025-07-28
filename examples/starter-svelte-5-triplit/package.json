@@ -7,7 +7,7 @@
         "dev": "vite"
     },
     "devDependencies": {
-        "@roxi/routify": "^3.0.0-next.245",
+        "@roxi/routify": "^3.5.1",
         "@sveltejs/vite-plugin-svelte": "^5.0.0",
         "@triplit/client": "^1.0.24",
         "@triplit/svelte": "^1.0.24",

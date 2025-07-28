@@ -8,7 +8,7 @@
         "svelte-check": "svelte-check"
     },
     "devDependencies": {
-        "@roxi/routify": "3.0.0-next.142",
+        "@roxi/routify": "3.5.1",
         "@sveltejs/vite-plugin-svelte": "^2.0.0",
         "@tsconfig/svelte": "^5.0.0",
         "svelte": "^3.55.1",
