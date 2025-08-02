@@ -15,7 +15,7 @@ importers:
         specifier: 'file:'
         version: file:(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.19)(vite@4.5.10(@types/node@22.13.14)(sass@1.86.0)))(dotenv-expand@12.0.2)(spank@2.2.0)(svelte@4.2.19)(vite@4.5.10(@types/node@22.13.14)(sass@1.86.0))
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^2.4.6 || ^3.0.0 || ^4.0.0 || ^5.0.0
+        specifier: ^2.4.6 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 2.5.3(svelte@4.2.19)(vite@4.5.10(@types/node@22.13.14)(sass@1.86.0))
       cachewrap:
         specifier: ^0.0.1
@@ -30,8 +30,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       configent:
-        specifier: ^3.0.0-13
-        version: 3.0.0-14
+        specifier: ^3.0.0
+        version: 3.0.0
       consolite:
         specifier: ^0.3.12
         version: 0.3.12
@@ -1816,7 +1816,7 @@ packages:
     resolution: {directory: '', type: directory}
     hasBin: true
     peerDependencies:
-      '@sveltejs/vite-plugin-svelte': ^2.4.6 || ^3.0.0 || ^4.0.0 || ^5.0.0
+      '@sveltejs/vite-plugin-svelte': ^2.4.6 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
       dotenv-expand: ^8.0.0 || ^9.0.0 || ^10.0.0
       spank: ^2.0.0
       svelte: ^3.0.0 || ^4.0.0 || ^5.0.0
@@ -2708,6 +2708,9 @@ packages:
 
   configent@2.2.0:
     resolution: {integrity: sha512-yIN6zfOWk2nycNJ2JFNiWEai0oiqAhISIht8+pbEBP8bdcpwoQ74AhCZPbUv9aRVJwo7wh1MbCBDUV44UJa7Kw==}
+
+  configent@3.0.0:
+    resolution: {integrity: sha512-rRHuq5ZP/J57RkD/ZKQypK+h//ocfKgddfyaKPRa8D4BjIX5egnbcGSUv173+LPhVGGc+gDotqf08muw3EdujA==}
 
   configent@3.0.0-14:
     resolution: {integrity: sha512-IKzrqrAIWvZ17j0VZkWIz7KGm8KWu2jW6XgRCfJbWgYWk2XS9qPjynjjSMbIT7zox2l6Njd3NbRq9dkv1gk3zQ==}
@@ -8160,7 +8163,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -8182,7 +8185,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -8204,7 +8207,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -8226,7 +8229,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -8248,7 +8251,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -8270,7 +8273,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -8292,7 +8295,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -8314,7 +8317,7 @@ snapshots:
       cheap-watch: 1.0.4
       cheerio: 1.0.0
       commander: 7.2.0
-      configent: 3.0.0-14
+      configent: 3.0.0
       consolite: 0.3.12
       dotenv-expand: 12.0.2
       fs-extra: 10.1.0
@@ -9527,6 +9530,11 @@ snapshots:
   configent@2.2.0:
     dependencies:
       dotenv: 8.6.0
+
+  configent@3.0.0:
+    dependencies:
+      dotenv: 16.4.7
+      esm: 3.2.25
 
   configent@3.0.0-14:
     dependencies:
