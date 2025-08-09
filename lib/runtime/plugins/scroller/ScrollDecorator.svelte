@@ -26,7 +26,7 @@
             (contextLineageIsActive() && !contextWasActive()))
     ) {
         const { debug } = context.router.log // ROUTIFY-DEV-ONLY
-        debug('scrolling to context', context.node.id || 'unnamed', context) // ROUTIFY-DEV-ONLY
+        debug('scrollQueue.push', context.node.id || 'unnamed', context) // ROUTIFY-DEV-ONLY
         scrollQueue.push(context)
     }
 </script>
