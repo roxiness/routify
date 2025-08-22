@@ -118,7 +118,7 @@ export class Router implements Readable<Router> {
     goForward(): void;
     go(count: any): void;
 }
-export function createRouter(options: Partial<RoutifyRuntimeOptions>): Router;
+export function createRouter(input: Partial<RoutifyRuntimeOptions>): Router;
 export type ParentCmpCtx = {
     route: Route;
     node: RNodeRuntime;

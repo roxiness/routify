@@ -12,9 +12,10 @@ export class ScrollQueue {
     push(renderContext: RenderContext): Promise<void>;
     /**
      * Processes the queue of elements and callbacks to execute them sequentially.
+     * @param {Route} route - The route for which the scroll queue should be processed.
      * @return {Promise<void>} A promise that resolves when the entire queue has been processed.
      */
-    processQueue(): Promise<void>;
+    processQueue(route: Route): Promise<void>;
     /**
      * @param {ScrollContext[]} scrollContexts
      */

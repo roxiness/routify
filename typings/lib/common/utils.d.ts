@@ -28,3 +28,9 @@ export function initializeCache(idGenerator: () => any, defaultContext: any): {
     <T>(dataProducer: () => T, context: any): T;
     storage: Map<any, any>;
 };
+export function writableWithGetter(initialValue: any): {
+    subscribe: (this: void, run: import("svelte/store").Subscriber<any>, invalidate?: import("svelte/store").Invalidator<any>) => import("svelte/store").Unsubscriber;
+    set: (this: void, value: any) => void;
+    update: (this: void, updater: import("svelte/store").Updater<any>) => void;
+    get: () => any;
+};

@@ -25,5 +25,8 @@ export default function RoutifyPlugin(input?: Partial<VitePluginOptionsInput> | 
     configureServer: (server: any) => () => any;
     configurePreviewServer: (server: any) => () => void;
     closeBundle: () => Promise<void>;
-    transform: (str: any, id: any) => Promise<any>;
+    transform: (str: any, id: any) => Promise<{
+        code: any;
+        map: any;
+    }>;
 };

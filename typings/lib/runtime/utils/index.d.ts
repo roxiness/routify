@@ -16,7 +16,7 @@ export function fromEntries(iterable: any): any;
 export function populateUrl(path: string, params: {
     [x: string]: string | string[];
 }, overloadStringifier: (obj: {
-    [x: string]: string;
+    [x: string]: any;
 }) => string): {
     path: string;
     query: string;

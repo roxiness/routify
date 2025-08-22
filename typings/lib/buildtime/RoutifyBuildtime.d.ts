@@ -15,7 +15,6 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
         [x: string]: RNodeBuildtime;
     };
     options: Partial<Partial<RoutifyBuildtimeOptions>>;
-    build(trigger: any): Promise<void>;
     on: {
         buildStart: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
         buildComplete: import("hookar").CollectionSyncVoid<any> | import("hookar").CollectionAsyncVoid<any>;
@@ -33,6 +32,8 @@ export class RoutifyBuildtime extends Routify<typeof RNodeBuildtime> {
     writeFile(id: string, content: string, options?: {
         cwd?: string;
     }): Promise<void>;
+    _build(trigger: any): Promise<void>;
+    build(trigger: any): Promise<void>;
     start(): Promise<void>;
 }
 export type RoutifyOptions = {

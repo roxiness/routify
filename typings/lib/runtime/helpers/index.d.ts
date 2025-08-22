@@ -51,13 +51,27 @@ export const goto: Readable<Goto>;
  * @type {Readable<Url>}
  */
 export const url: Readable<Url>;
-export function getCreateUrl(fragment: RouteFragment, router: any): UrlFromString;
+export function getCreateUrl(router: Router, fragment?: RouteFragment | undefined): UrlFromString;
 /**
  * @type {Readable<Object.<string, any>>}
  */
 export const params: Readable<{
     [x: string]: any;
 }>;
+/**
+ * @type {Readable<(params: Object.<string, any>) => void>}
+ */
+export const setParams: Readable<(params: {
+    [x: string]: any;
+}) => void>;
+/**
+ * @type {Readable<(callback: (params: Object.<string, any>) => Object.<string, any>) => void>}
+ */
+export const updateParams: Readable<(callback: (params: {
+    [x: string]: any;
+}) => {
+    [x: string]: any;
+}) => void>;
 /**
  * @callback IsActive
  * @param {String|RNodeRuntime=} pathOrNode

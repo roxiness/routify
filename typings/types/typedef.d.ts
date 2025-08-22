@@ -82,6 +82,7 @@ type AnchorLocation = import("../lib/runtime/decorators/AnchorDecorator").Locati
  */
 type ScrollContext = import("../lib/runtime/plugins/scroller/ScrollContext").ScrollContext;
 /**
+ *
  * BUILDTIME
  */
 type BaseReflector = typeof import("../lib/runtime/Router/urlReflectors/ReflectorBase.js")["BaseReflector"];

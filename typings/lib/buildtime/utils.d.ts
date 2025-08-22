@@ -1,4 +1,11 @@
 export function getSvelteVersion(): any;
+/**
+ * Debounce per key
+ * @param {string} key
+ * @param {number} delay
+ * @param {Function} fn
+ */
+export function debounce(key: string, delay: number, fn: Function): void;
 export function relativeUnix(path: any, path2: any): string;
 export function createDirname(meta: any): string;
 export function stringifyWithEscape(obj: any): string;
