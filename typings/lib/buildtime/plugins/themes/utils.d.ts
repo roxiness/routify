@@ -1,23 +1,7 @@
 export function normalizePreset(preset: any, defaultPreset: any): any;
 export function normalizeConfig(config: ThemeUserConfig, rootNodes: {
     [x: string]: any;
-}): {
-    /**
-     * - The user-defined theme presets.
-     */
-    presets: {
-        [x: string]: ThemeUserPreset;
-    };
-    /**
-     * - Optional. Additional themes to merge with presets.
-     */
-    defaults: Partial<ThemeConfigDefaults> | {
-        file: string;
-        app: string;
-        namespaces: RegExp[];
-        rootNodes: any[];
-    };
-};
+}): ThemeConfig;
 export function coerceArray(value: any): any[];
 export function arraysAreEqual(a: any, b: any): any;
 /**

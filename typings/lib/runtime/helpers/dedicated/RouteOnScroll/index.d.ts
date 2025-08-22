@@ -45,11 +45,11 @@ export class RouteOnScroll extends BaseRouteOnScroll {
     constructor(options?: Partial<BaseRouteOnScrollOptions & RouteOnScrollOptions>);
     threshold: number;
     direction: "both" | "vertical" | "horizontal";
-    strategy: "closest" | "lowestAboveThreshold" | "withinThreshold";
-    boundaryAnchorX: "center" | "left" | "right";
-    boundaryAnchorY: "center" | "top" | "bottom";
-    targetAnchorX: "center" | "left" | "right";
-    targetAnchorY: "center" | "top" | "bottom";
+    strategy: "lowestAboveThreshold" | "withinThreshold" | "closest";
+    boundaryAnchorX: "left" | "center" | "right";
+    boundaryAnchorY: "top" | "center" | "bottom";
+    targetAnchorX: "left" | "center" | "right";
+    targetAnchorY: "top" | "center" | "bottom";
     /**
      * @param {HTMLElement} element
      */

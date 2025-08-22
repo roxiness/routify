@@ -16,7 +16,7 @@ export function normalizePlugins(plugins: RoutifyBuildtimePlugin[]): RoutifyBuil
 export function mockRoutes<T extends RoutifyBuildtime | RoutifyRuntime>(instance: T, routes: {
     [x: string]: any;
 }): import("../buildtime/RNodeBuildtime").RNodeBuildtime | import("../runtime/Instance/RNodeRuntime").RNodeRuntime;
-export function addPropsToComp<Component extends typeof import("svelte/internal").SvelteComponentDev>(Comp: Component, props: {
+export function addPropsToComp<Component extends typeof import("svelte").SvelteComponent>(Comp: Component, props: {
     [x: string]: any;
 }): Component;
 export function next<T extends import("svelte/store").Readable<V>, V>(store: T, wanted?: (((wanted: V) => boolean) | V) | undefined, strict?: boolean | undefined): Promise<V>;

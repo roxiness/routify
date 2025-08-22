@@ -13,20 +13,20 @@ export class RouterContext {
     activeChildContext: import("svelte/store").Writable<RenderContext>;
     /** @type {RenderContext} */
     lastActiveChildContext: RenderContext;
-    /** @type {Decorator[]} */
-    decorators: Decorator[];
+    /** @type {Decorator<any>[]} */
+    decorators: Decorator<any>[];
     /** @type {import('../decorators/AnchorDecorator').Location}*/
     anchorLocation: import("../decorators/AnchorDecorator").Location;
     get descendants(): any;
     router: import("../index.js").RouterClass;
     route: import("../Route/Route.js").Route;
     /**
-     * @param {Partial<{inline: InlineInput, decorator:DecoratorInput, props, options, anchor: AnchorLocation, scrollLock: scrollLock}>} options
+     * @param {Partial<{inline: InlineInput, decorator:DecoratorInput<any>, props, options, anchor: AnchorLocation, scrollLock: scrollLock}>} options
      *
      * */
     buildChildContexts(options: Partial<{
         inline: InlineInput;
-        decorator: DecoratorInput;
+        decorator: DecoratorInput<any>;
         props: any;
         options: any;
         anchor: AnchorLocation;
@@ -42,7 +42,7 @@ export class RenderContext extends RouterContext {
      *   paramsPool: Object.<string, string[]>
      *   rawInlineInputFromSlot: InlineInput
      *   parentContext: RenderContext | RouterContext
-     *   newDecorators: Decorator[]
+     *   newDecorators: Decorator<any>[]
      *   contextOptions: RenderContextOptions
      *   scrollLock: scrollLock
      *   anchorLocation: AnchorLocation
@@ -57,7 +57,7 @@ export class RenderContext extends RouterContext {
         };
         rawInlineInputFromSlot: InlineInput;
         parentContext: RenderContext | RouterContext;
-        newDecorators: Decorator[];
+        newDecorators: Decorator<any>[];
         contextOptions: RenderContextOptions;
         scrollLock: scrollLock;
         anchorLocation: AnchorLocation;

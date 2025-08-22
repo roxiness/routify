@@ -9,22 +9,26 @@
         "target": "ES2017",
         "declarationDir": "typings",
         "emitDeclarationOnly": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "types": ["probs"]
     },
     "include": [
         "types/**/*.js",
          "lib/**/*.js",
-         "plugins/**/*.js",
-         "node_modules/probs"
+         "plugins/**/*.js"
         ],
     "exclude": [
         "**/tmp/*",
         "**/.history/*",
-        "test",
         "examples",
         "site",
         "jest.config.js",
         "lib/extra/vite-plugin/assets",
-        "typings"
+        "typings",
+        "**/test/**",
+        "**/spec/**",
+        "**/*.spec.*",
+        "**/*.test.*"
     ]
 }

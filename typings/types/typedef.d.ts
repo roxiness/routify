@@ -15,7 +15,7 @@ type RoutifyBaseOptions = {
 /**
  * COMMON
  */
-type SvelteComponentDev = typeof import("svelte/internal").SvelteComponentDev;
+type SvelteComponentDev = typeof import("svelte").SvelteComponent;
 /**
  * <T>
  */
@@ -130,9 +130,11 @@ type RoutifyBuildtimeOptions = {
     /**
      * defaults to { default: 'src/routes' }
      */
-    routesDir: string | {
+    routesDir: string | ({
+        default: string;
+    } & {
         [x: string]: string;
-    };
+    });
     ignoreMetaConflictWarnings: string[] | boolean;
     filemapper: object;
     /**

@@ -3,7 +3,7 @@
  * @typedef {import('../lib/common/RNode').RNode} RNode
  * @typedef {import('../lib/common/Routify').Routify} Routify
  * @typedef {{Node: RNode}} RoutifyBaseOptions
- * @typedef {typeof import('svelte/internal').SvelteComponentDev } SvelteComponentDev
+ * @typedef {typeof import('svelte').SvelteComponent} SvelteComponentDev
  */
 /**
  * @template T
@@ -58,7 +58,7 @@
  * @prop {boolean} clearRoutifyDir
  * @prop {string} mainEntryPoint defaults to 'src/main.js'
  * @prop {string} rootComponent defaults to 'src/App.svelte'
- * @prop {string|Object<string,string>} routesDir defaults to { default: 'src/routes' }
+ * @prop {string|({default: string} & Object<string,string>)} routesDir defaults to { default: 'src/routes' }
  * @prop {string[]|boolean} ignoreMetaConflictWarnings
  * @prop {object} filemapper
  * @prop {1|2|3|4|5} logLevel defaults to 3
