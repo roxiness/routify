@@ -85,6 +85,7 @@
     },
     "author": "jakobrosenberg@gmail.com",
     "license": "MIT",
+    "repository": "github:roxiness/routify",
     "devDependencies": {
         "@rollup/plugin-commonjs": "^23.0.2",
         "@rollup/plugin-node-resolve": "^15.0.1",
