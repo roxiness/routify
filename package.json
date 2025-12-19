@@ -33,7 +33,6 @@
     "./plugins/*": "./plugins/*",
     "./hmr": "./hmr.js",
     "./lib/utils/config": "./lib/utils/config.js"
-
   },
   "dependencies": {
     "@roxi/ssr": "^0.2.1",
@@ -42,7 +41,6 @@
     "cheap-watch": "^1.0.4",
     "commander": "^7.2.0",
     "configent": "^2.2.0",
-    "esm": "^3.2.25",
     "fs-extra": "^9.1.0",
     "log-symbols": "^3.0.0",
     "picomatch": "^2.3.1",
