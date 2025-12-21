@@ -32,6 +32,7 @@ jobs:
       with:
         node-version: 20
         registry-url: 'https://registry.npmjs.org'
+    - run: npm install -g npm@latest
     - uses: cycjimmy/semantic-release-action@v4
       with:
         semantic_version: 24
