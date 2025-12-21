@@ -22,6 +22,15 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
 
+      - name: NPM auth preflight
+        run: |
+          node -v
+          npm -v
+          npm config get registry
+          npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - uses: cycjimmy/semantic-release-action@v4
         with:
           semantic_version: 24
