@@ -1,25 +1,20 @@
-# Routify 3
+<div align="center">
+    <img src="routify.png" alt="routify" width="512" /><br>
+    <img src="https://badgen.net/npm/v/@roxi/routify" alt="Badge" />
+</div>
 
-
-## Install
+# Install
 
 Create a new Routify project with
 
     npm init routify@latest
 
-## Using Routify
+# Documentation
 
-#### Creating a router
+[routify.dev](https://routify.dev/guide/introduction)
 
-Basic
+# Support
 
-```html
-<script>
-    import { Router } from '@roxi/routify'
-    import routes from '../.routify/routes.default.js'
-</script>
+-   Please feel free to open an [issue](https://github.com/roxiness/routify/issues/new/choose) or a [pull request](https://github.com/roxiness/routify/fork). All feedback is welcome!
 
-<Router {routes} />
-```
-
-[Docs](https://v3.routify.dev/)
+-   You can join the [Routify Discord](https://discord.gg/ntKJD5B)

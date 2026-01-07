@@ -1,17 +1,3 @@
-# Running tests
+If you want to contribute, join us on the Discord channel and let's figure it out!
 
-### test with Jest and Prettier
-```
-npm run test
-```
-
-### test with Jest only
-```
-npm run test
-```
-
-### test specific project or test in watch mode
-*See jest.config.js for projects*
-```
-npm run test:jest -- --watch --testMatch **/filemapper-overlay.test.js --selectProjects unit
-```
+Later on we will have more extensive contributing guidelines.
