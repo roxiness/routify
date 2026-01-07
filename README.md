@@ -11,7 +11,7 @@ Create a new Routify project with
 
 # Documentation
 
-[routify.dev](https://routify.dev/guide/introduction)
+[routify.dev](https://routify.dev)
 
 # Support
 
